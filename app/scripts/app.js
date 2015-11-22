@@ -12,22 +12,27 @@ angular.module('eracordUiApp.controller', []);
 angular.module('eracordUiApp.directives', []);
 angular.module('eracordUiApp.filters', []);
 angular.module('eracordUiApp.routes', []);
+angular.module('eracordUiApp.services', []);
 
 angular
   .module('eracordUiApp', [
-    'eracordUiApp.controller',
-    'eracordUiApp.directives',
     'eracordUiApp.filters',
-    'eracordUiApp.routes',
+    'eracordUiApp.services',
     'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngRoute',
+    'eracordUiApp.routes',
     'ngSanitize',
     'ngTouch',
     'flash',
     'Devise',
-    'restangular'
+    'restangular',
+    'ngCookies',
+    'ui.bootstrap',
+    'smart-table',
+    'eracordUiApp.controller',
+    'eracordUiApp.directives'
   ])
 
   .config(function ($routeProvider, RestangularProvider, AuthProvider) {
@@ -37,6 +42,15 @@ angular
     // Intercept 401 Unauthorized everywhere
     // Enables `devise:unauthorized` interceptor
     RestangularProvider.setBaseUrl('/api');
+    RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+      var extractedData;
+      if (operation === "getList") {
+        extractedData = data.organisations;
+      } else {
+        extractedData = data;
+      }
+      return extractedData;
+    });
 
     $routeProvider
       .when('/', {

@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('MainCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', function ($rootScope, $scope, Flash, $location, Auth) {
+  .controller('ExamsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', function ($rootScope, $scope, Flash, $location, Auth, Restangular) {
 
     var message = '<strong>Well done!</strong> You successfully read this important alert message.';
 
@@ -16,12 +16,9 @@ angular.module('eracordUiApp.controller')
       $location.path('/user/sign_in');
       return true;
     }
-    
+    var exams = Restangular.all("exams").getList();
     Flash.create('success', message, 'custom-class');
     
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+
   }]);
+

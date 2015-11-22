@@ -3,7 +3,7 @@ var app;
 
 app = angular.module('eracordUiApp.controller');
 
-app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $window, Auth, Flash, Restangular) {
+app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $window, Auth, Flash, Restangular, $cookieStore) {
   var clearUserInformation, directAccessRoutes, i, len, path;
   $scope.userAlertCount = 0;
   $scope.alertsVisible = false;
@@ -22,11 +22,12 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $windo
       return;
     }
   }
-  if ($window.localStorage.currentUser == null) {
+  if ($cookieStore.get('currentUser') == null) {
     $location.path('/user/sign_in');
   }
 
   if ($location.path() !== '/user/sign_in') {
+    Auth._currentUser = $cookieStore.get('currentUser');
     Auth.currentUser().then(function(user) {
       return $scope.currentUser = user;
     });
@@ -34,7 +35,7 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $windo
 
 
   clearUserInformation = function() {
-    $window.localStorage.clear();
+    $cookieStore.remove('currentUser')
     return $scope.currentUser = {};
   };
   $scope.doLogout = function(flash) {
@@ -51,17 +52,19 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $windo
   };
 
 
-  return $rootScope.$on('auth:unauthorized', function(loopPrevention) {
+  return $rootScope.$on('devise:unauthorized', function(loopPrevention) {
+
     if (loopPrevention == null) {
       loopPrevention = false;
     }
     console.log('asdasdads');
     $scope.doLogout(false);
     if (loopPrevention) {
-      if ($window.localStorage.currentUser == null) {
+      if ($cookieStore.get('currentUser') == null) {
         return;
       }
       clearUserInformation();
+      console.log('!!!!!!!!!!!!!');
       //Flash.clear();
       //return Flash.alert('Session error. Please log in again.').andRedirectTo('/user/sign_in');
     }

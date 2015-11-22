@@ -1,0 +1,21 @@
+<div style="margin-top:20px;margin-bottom:20px;">
+  <table st-table="rowCollection" class="table">
+    <thead>
+      <tr>
+	<th></th>
+	<th st-sort="firstName">Name</th>
+	<th st-sort="lastName">Stream</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in cources">
+	<td cs-select="row"></td>
+	<td>{{row.name}}</td>
+	<td>{{row.stream}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="btn btn-success" ng-click="saveList();"> Save </button>
+  <a ng-href="#/manage_organisation" class="btn btn-default"> Cancel </a>
+</div>
+

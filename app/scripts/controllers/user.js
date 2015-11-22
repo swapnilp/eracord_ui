@@ -8,13 +8,13 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('UserCtrl',['$scope', 'Flash', 'Auth', '$location', function ($scope, Flash, Auth, $location) {
-    var message = '<strong>You are not sign in!</strong> Please Sign in.';
-    Flash.create('success', message, 'alert-warning');
+  .controller('UserCtrl',['$scope', 'Flash', 'Auth', '$location', '$cookieStore', function ($scope, Flash, Auth, $location, $cookieStore) {
+    //var message = '<strong>You are not sign in!</strong> Please Sign in.';
+    //Flash.create('success', message, 'alert-warning');
     
     if(Auth.isAuthenticated()){
       Flash.create('success', 'You are already signed in', 'alert-success');
-      //$location.path('/');
+      $location.path('/');
     }
 
 
@@ -25,17 +25,20 @@ angular.module('eracordUiApp.controller')
         password: $scope.vm.password
       };
       var config = {
-            headers: {
-                'X-HTTP-Method-Override': 'POST'
-            }
-        };
+        headers: {
+          'X-HTTP-Method-Override': 'POST'
+        }
+      };
       
       Auth.login(credentials, config).then(function(user) {
-	$scope.currentUser.email = user.email
-        //$scope.currentUser.token = user.token
+	$scope.currentUser.email = user.email;
+        $scope.currentUser.token = user.token;
+	$cookieStore.put('currentUser', user);
+	console.log(user);
       	Flash.create('success', 'Login Success', 'alert-success');
 	$location.path('/');
       }, function(error) {
+	$cookieStore.remove('currentUser');
         Flash.create('success', 'Unauthorized', 'alert-danger');
       });
       

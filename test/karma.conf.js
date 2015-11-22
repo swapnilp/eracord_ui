@@ -37,6 +37,7 @@ module.exports = function(config) {
       'bower_components/angular-flash-alert/dist/angular-flash.js',
       'bower_components/angular-cookie/angular-cookie.js',
       'bower_components/ng-token-auth/dist/ng-token-auth.js',
+      'bower_components/angular-smart-table/dist/smart-table.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",
