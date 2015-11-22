@@ -31,6 +31,7 @@ angular
     'ngCookies',
     'ui.bootstrap',
     'smart-table',
+    'toggle-switch',
     'eracordUiApp.controller',
     'eracordUiApp.directives'
   ])

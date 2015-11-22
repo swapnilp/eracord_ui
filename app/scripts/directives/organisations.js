@@ -31,17 +31,13 @@ app.directive('organisationClarks', function($timeout, Restangular, $location) {
       $scope.manageRoles = function(user){
 	$location.path("/organisations/users/"+user.id+"/manage_roles");
       };
-      
-      $scope.disableUser = function(user){
-	base_organisation.customGET("users/"+user.id+"/roles");
-	console.log(user);
+
+      $scope.toggleEnableUser = function(user){
+	base_organisation.customGET("users/"+user.id+"/toggleEnable", {enabled: user.is_enable});
       };
     }]
   };
 });
-
-
-
 
 
 app.directive('csSelect', function () {
