@@ -16,7 +16,7 @@ angular.module('eracordUiApp.controller')
     
     if($location.path() === '/remaining_organisation_courses') {
       var cources = Restangular.all("/remaining_cources");
-	cources.getList().then(function(organisation){
+      cources.getList().then(function(organisation){
 	$scope.cources = organisation;
       });
       

@@ -3,7 +3,7 @@ var app;
 
 app = angular.module('eracordUiApp.directives');
 
-app.directive('organisationCources', function($timeout, Restangular) {
+app.directive('organisationCources', function(Restangular) {
   return {
     restrict: 'AE',
     transclude: true,
@@ -17,7 +17,7 @@ app.directive('organisationCources', function($timeout, Restangular) {
 });
 
 
-app.directive('organisationClarks', function($timeout, Restangular, $location) {
+app.directive('organisationClarks', function(Restangular, $location) {
   return {
     restrict: 'AE',
     transclude: true,
@@ -85,7 +85,7 @@ app.directive('roleSelect', function () {
       
       scope.toggleCheckbox = function(){
 	scope.value = !scope.value;
-      }
+      };
       
     }
   };

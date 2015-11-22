@@ -17,6 +17,6 @@ app.config(function($routeProvider) {
     .when('/organisations/users/:user_id/manage_roles', {
       templateUrl: 'views/organisations/manage_user_roles.html',
       controller: 'OrganisationsCtrl'
-    });;
+    });
 });
 
