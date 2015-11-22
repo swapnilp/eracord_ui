@@ -1,0 +1,8 @@
+<div style="margin:20px 0;" class="userRoles">
+  <div ng-repeat="(key, value) in roles">
+    <span role-select key="key" value="value"></span>
+  </div>
+  <br />
+  <button class="btn btn-primary" ng-click="saveRoles();">Save Roles</button>
+  <a ng-href="#/manage_organisation" class="btn btn-default">Cancel</a>
+</div>

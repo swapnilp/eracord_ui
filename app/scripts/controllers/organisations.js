@@ -8,10 +8,12 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('OrganisationsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', function ($rootScope, $scope, Flash, $location, Auth, Restangular) {
+  .controller('OrganisationsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams) {
 
     var message = '<strong>Well done!</strong> You successfully read this important alert message.';
+    
 
+    
     if($location.path() === '/remaining_organisation_courses') {
       var cources = Restangular.all("/remaining_cources");
 	cources.getList().then(function(organisation){
@@ -26,6 +28,26 @@ angular.module('eracordUiApp.controller')
 	    $location.path('/manage_organisation');
 	  }
 	})
+      }
+    }
+
+    if($location.path() === "/organisations/users/"+$routeParams.user_id+"/manage_roles") {
+      var base_organisation = Restangular.all("organisations");
+      base_organisation.customGET("users/"+$routeParams.user_id+"/get_roles").then(function(data){
+	$scope.roles = data.data;
+	$scope.user_id = $routeParams.user_id;
+      })
+
+      $scope.saveRoles = function(user_id){
+	//$('.userRoles input:')
+	var roles = $('.userRoles input:checked').map(
+	  function () {return $(this).data('key');}).get().join(",");
+	base_organisation.customPOST({roles: roles, user_id: $scope.user_id}, 'users/' + $scope.user_id + '/update_roles', {})
+	  .then(function(data){
+	    if(data.success){
+	      $location.path('/manage_organisation');
+	    }
+	  })
       }
     }
     

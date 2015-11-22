@@ -13,6 +13,10 @@ app.config(function($routeProvider) {
     .when('/remaining_organisation_courses', {
       templateUrl: 'views/organisations/remaining_courses.html',
       controller: 'OrganisationsCtrl'
-    });
+    })
+    .when('/organisations/users/:user_id/manage_roles', {
+      templateUrl: 'views/organisations/manage_user_roles.html',
+      controller: 'OrganisationsCtrl'
+    });;
 });
 

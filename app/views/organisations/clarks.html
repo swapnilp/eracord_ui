@@ -1,0 +1,23 @@
+<div style="margin-top:20px;">
+  <a href="#/remaining_organisation_courses" class="btn btn-success"> Add Course</a>
+  <table st-table="rowCollection" class="table">
+    <thead>
+      <tr>
+	<th st-sort="firstName">Email</th>
+	<th st-sort="lastName">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in clarks">
+	<td>{{row.email}}</td>
+	<td>
+	  <button class="btn btn-primary" ng-click="manageRoles(row);">Manage Roles</button>
+	  <a href="" class="btn btn-primary">Change Password</a>
+	  <button class="btn btn-primary" ng-click="disableUser(row);">Disable User</button>
+	  <button class="btn btn-primary">Delete User</button>
+	</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

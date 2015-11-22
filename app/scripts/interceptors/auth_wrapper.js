@@ -3,14 +3,14 @@ var app;
 
 app = angular.module('eracordUiApp.services');
 
-app.factory('authWrapper', function($rootScope, $q, $window, Flash, $cookieStore) {
+app.factory('authWrapper', function($rootScope, $q, $window, Flash, $cookieStore, $location) {
   return {
     request: function(config) {
       var user;
       if (config.headers === null) {
         config.headers = {};
       }
-      if ($cookieStore.get('currentUser') !== null) {
+      if ($cookieStore.get('currentUser') !== undefined) {
         user = $cookieStore.get('currentUser'); //JSON.parse($window.localStorage.currentUser);
         config.headers.Authorization = "Bearer " + user.token;
       }
@@ -21,15 +21,13 @@ app.factory('authWrapper', function($rootScope, $q, $window, Flash, $cookieStore
       switch (rejection.status) {
         case 401:
           message = rejection.data.message || 'Your session has expired. Please log in again.';
-          if (rejection.config.url.search(/sign_in/) !== -1) {
-            //Flash.alert(message).andRefresh();
-          } else {
-            //Flash.setMsg('alert', message);
-            $rootScope.$emit('auth:unauthorized', rejection.config.url.search(/sign_out/) !== -1);
-          }
+          $location.path("/");
           break;
         case 403:
           //Flash.alert('You are not authorized to perform this action.').andRedirectTo('/');
+	  break;
+	case 500:
+	  console.log('asdasdasdad');
       }
       return $q.reject(rejection);
     }
