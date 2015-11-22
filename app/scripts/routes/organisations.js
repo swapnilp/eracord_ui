@@ -17,6 +17,12 @@ app.config(function($routeProvider) {
     .when('/organisations/users/:user_id/manage_roles', {
       templateUrl: 'views/organisations/manage_user_roles.html',
       controller: 'OrganisationsCtrl'
+    })
+    .when('/add_organisation_clark', {
+      templateUrl: 'views/organisations/new_organisation_clark.html',
+      controller: 'OrganisationsCtrl'
     });
+
+
 });
 
