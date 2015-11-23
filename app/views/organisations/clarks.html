@@ -12,7 +12,7 @@
 	<td>{{row.email}}</td>
 	<td>
 	  <button class="btn btn-primary left mLeft10" ng-click="manageRoles(row);">Manage Roles</button>
-	  <a href="" class="btn btn-primary left mLeft10">Change Password</a>
+	  <a href="#/organisation/users/{{row.id}}/change_password" class="btn btn-primary left mLeft10">Change Password</a>
 	  <toggle-switch class="left mLeft10"
 	     ng-model="row.is_enable"
 	     knob-label="ENABLE" ng-click="toggleEnableUser(row)">

@@ -51,10 +51,41 @@ angular.module('eracordUiApp.controller')
       };
     }
 
+    if($location.path() === "/organisation/users/" + $routeParams.user_id + "/change_password") {
+      var base_organisation = Restangular.all("organisations");
+      base_organisation.customGET("/users/"+ $routeParams.user_id + "/get_email").then(function(data){
+	if(data.success){
+	  $scope.email = data.email;
+	}else{
+	  $location.path('/manage_organisation');
+	}
+      });
+
+      $scope.updateClarkPassword = function(){
+	base_organisation.customPOST({clark: $scope.vm.user, email: $scope.email}, "/users/"+$routeParams.user_id+"/update_clark_password", {}).then(function(data){
+	  if(data.success){
+	    $location.path('/manage_organisation');
+	  }else{
+	    Flash.create('warning', "Please try again", 'alert-danger');
+	  }
+	});
+      }
+    }
+
     if($location.path() === "/add_organisation_clark") {
       var base_organisation = Restangular.all("organisations");
       $scope.registerUser = function(){
-	//base_organisation.customPOST({roles: roles, user_id: $scope.user_id}, 'users/' + $scope.user_id + '/update_roles', {})
+	$scope.vm.dataLoading = true;
+	$scope.vm.user.role = 'clark';
+	base_organisation.customPOST({clark: $scope.vm.user}, 'users/create_organisation_clark', {}).then(function(data){
+	  if(data.success){
+	    $location.path('/manage_organisation');
+	  }else{
+	    $scope.vm.dataLoading = false;
+	    Flash.create('warning', data.message, 'alert-danger');
+	  }
+	});
+	
       }
     }
     
