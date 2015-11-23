@@ -95,6 +95,16 @@ angular.module('eracordUiApp.controller')
 	$scope.standards = data.organisations;
 	$scope.name = _.map($scope.standards, function(obj){ return obj.name + '-' + obj.stream }).join(', ');
       });
+
+      $scope.registerOrganisation = function(){
+	base_organisation.customPOST({organisation: $scope.vm.org}, "sub_organisation/launch_organisation", {}).then(function(data){
+	  if(data.success) {
+	    $location.path('/manage_organisation');
+	  }else {
+	    Flash.create('warning', "Sub Organisation is not created", 'alert-danger');
+	  }
+	});
+      }
     }
     
     if(!Auth.isAuthenticated()){

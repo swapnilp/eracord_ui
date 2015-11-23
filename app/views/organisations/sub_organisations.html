@@ -1,0 +1,27 @@
+<div style="margin-top:20px;">
+  <table st-table="rowCollection" class="table">
+    <thead>
+      <tr>
+	<th st-sort="Name">Name</th>
+	<th st-sort="Email">Email</th>
+	<th st-sort="Mobile">Mobile</th>
+	<th st-sort="Standards">Standards</th>
+	<th st-sort="Actions">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in sub_organisations">
+	<td>{{row.name}}</td>
+	<td>{{row.email}}</td>
+	<td>{{row.mobile}}</td>
+	<td>
+	  {{row.standards}}
+	</td>
+	<td>
+	  <a class="btn btn-link" ng-click="pullBackSubOrganisation(row);">Pull Back</a>
+	</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

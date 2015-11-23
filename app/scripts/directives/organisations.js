@@ -7,21 +7,27 @@ app.directive('organisationCources', function(Restangular) {
   return {
     restrict: 'AE',
     transclude: true,
+    //scope: true,
     templateUrl: 'views/organisations/cources.html',
-    controller: ['$scope', 'Restangular', 'Flash', '$location', function($scope, Restangular, Flash, $location){
-      $scope.cources = [];
-      Restangular.all("/organisation_cources").getList().then(function(organisations){
-	$scope.cources = organisations;
-      });
+    controller: ['$scope', 'Restangular', 'Flash', '$location', function(scope, Restangular, Flash, $location){
+      scope.cources = [];
+
+      scope.loadCources = function(){
+	Restangular.all("/organisation_cources").getList().then(function(organisations){
+	  scope.cources = organisations;
+	});
+      };
+
+      scope.loadCources();
       
-      $scope.launchSubOrganisation = function(){
+      scope.launchSubOrganisation = function(){
 	var standards = $('.organisationCoursesTable input:checked').map(
 	  function () {return $(this).data('key');}).get().join(",");
 	$location.path("/organisation/standards/" + standards + "/launch_sub_organisation");
       };
 
-      $scope.isLaunchEnable = function (){
-	var isSelected = _.pluck($scope.cources, 'is_selected');
+      scope.isLaunchEnable = function (){
+	var isSelected = _.pluck(scope.cources, 'is_selected');
         return _.contains(isSelected, true);
       };
       
@@ -34,27 +40,28 @@ app.directive('organisationClarks', function(Restangular, $location, Flash) {
   return {
     restrict: 'AE',
     transclude: true,
+    scope: true,
     templateUrl: 'views/organisations/clarks.html',
-    controller: ['$scope', 'Restangular', '$window', function($scope, Restangular, $window){
+    controller: ['$scope', 'Restangular', '$window', function(scope, Restangular, $window){
       var base_organisation = Restangular.all("organisations");
       base_organisation.customGET('get_clarks').then(function(data){
-	$scope.clarks = data.data;
+	scope.clarks = data.data;
       });
 
-      $scope.manageRoles = function(user){
+      scope.manageRoles = function(user){
 	$location.path("/organisations/users/"+user.id+"/manage_roles");
       };
 
-      $scope.toggleEnableUser = function(user){
+      scope.toggleEnableUser = function(user){
 	base_organisation.customGET("users/"+user.id+"/toggleEnable", {enabled: user.is_enable});
       };
 
-      $scope.deleteClark = function(user) {
+      scope.deleteClark = function(user) {
 	if($window.confirm('Are you sure?')){
 	  base_organisation.one('clarks', user.id).remove().then(function(data){
 	    if(data.success){
-	      $scope.clarks = _.reject($scope.clarks, function(obj){return obj.id == user.id});
-	    }else{
+	      scope.clarks = _.reject(scope.clarks, function(obj){return obj.id == user.id});
+	    }else {
 	      Flash.create('warning', "Some thing went wrong", 'alert-danger');
 	    }
 	  });
@@ -63,6 +70,35 @@ app.directive('organisationClarks', function(Restangular, $location, Flash) {
     }]
   };
 });
+
+app.directive('organisationSubOrganisations', function(Restangular, $location, Flash) {
+  return {
+    restrict: 'AE',
+    transclude: true,
+    scope: true,
+    templateUrl: 'views/organisations/sub_organisations.html',
+    controller: ['$scope', 'Restangular', '$window', function(scope, Restangular, $window){
+      var base_organisation = Restangular.all("organisations");
+      scope.loadSubOrganisation = function(){
+	base_organisation.customGET('get_sub_organisations').then(function(data){
+	  scope.sub_organisations = data.organisations;
+	});
+      };
+      scope.loadSubOrganisation();
+      scope.pullBackSubOrganisation = function(sub_organisation) {
+	base_organisation.one('sub_organisations', sub_organisation.id).remove().then(function(data){
+	  if(data.success) {
+	    scope.loadCources();
+	    scope.loadSubOrganisation();
+	  }else {
+	    Flash.create('warning', "Some thing went wrong", 'alert-danger');
+	  }
+	})
+      }
+    }]
+  };
+});
+    
 
 
 app.directive('csSelect', function () {
