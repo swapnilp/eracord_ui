@@ -9,7 +9,7 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $windo
   $scope.alertsVisible = false;
 
 
-  if ($scope.currentUser == null) {
+  if ($scope.currentUser === null) {
     $scope.currentUser = {};
   }
   $scope.goBack = function() {
@@ -22,24 +22,24 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $windo
       return;
     }
   }
-  if ($cookieStore.get('currentUser') == null) {
+  if ($cookieStore.get('currentUser') === null) {
     $location.path('/user/sign_in');
   }
 
   if ($location.path() !== '/user/sign_in') {
     Auth._currentUser = $cookieStore.get('currentUser');
     Auth.currentUser().then(function(user) {
-      return $scope.currentUser = user;
+      $scope.currentUser = user;
     });
   }
 
 
   clearUserInformation = function() {
-    $cookieStore.remove('currentUser')
+    $cookieStore.remove('currentUser');
     return $scope.currentUser = {};
   };
   $scope.doLogout = function(flash) {
-    if (flash == null) {
+    if (flash === null) {
       flash = true;
     }
     return Auth.logout().then(function() {
@@ -54,17 +54,16 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $windo
 
   return $rootScope.$on('devise:unauthorized', function(loopPrevention) {
 
-    if (loopPrevention == null) {
+    if (loopPrevention === null) {
       loopPrevention = false;
     }
     console.log('asdasdads');
     $scope.doLogout(false);
     if (loopPrevention) {
-      if ($cookieStore.get('currentUser') == null) {
+      if ($cookieStore.get('currentUser') === null) {
         return;
       }
       clearUserInformation();
-      console.log('!!!!!!!!!!!!!');
       //Flash.clear();
       //return Flash.alert('Session error. Please log in again.').andRedirectTo('/user/sign_in');
     }

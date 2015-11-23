@@ -27,8 +27,8 @@ angular.module('eracordUiApp.controller')
 	  if(data.success){
 	    $location.path('/manage_organisation');
 	  }
-	})
-      }
+	});
+      };
     }
 
     if($location.path() === "/organisations/users/"+$routeParams.user_id+"/manage_roles") {
@@ -36,7 +36,7 @@ angular.module('eracordUiApp.controller')
       base_organisation.customGET("users/"+$routeParams.user_id+"/get_roles").then(function(data){
 	$scope.roles = data.data;
 	$scope.user_id = $routeParams.user_id;
-      })
+      });
 
       $scope.saveRoles = function(user_id){
 	//$('.userRoles input:')
@@ -47,7 +47,14 @@ angular.module('eracordUiApp.controller')
 	    if(data.success){
 	      $location.path('/manage_organisation');
 	    }
-	  })
+	  });
+      };
+    }
+
+    if($location.path() === "/add_organisation_clark") {
+      var base_organisation = Restangular.all("organisations");
+      $scope.registerUser = function(){
+	//base_organisation.customPOST({roles: roles, user_id: $scope.user_id}, 'users/' + $scope.user_id + '/update_roles', {})
       }
     }
     
