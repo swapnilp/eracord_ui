@@ -34,7 +34,6 @@ angular.module('eracordUiApp.controller')
 	$scope.currentUser.email = user.email;
         $scope.currentUser.token = user.token;
 	$cookieStore.put('currentUser', user);
-	console.log(user);
       	Flash.create('success', 'Login Success', 'alert-success');
 	$location.path('/');
       }, function(error) {

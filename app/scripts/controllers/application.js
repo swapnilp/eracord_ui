@@ -9,7 +9,8 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $windo
   $scope.alertsVisible = false;
 
 
-  if ($scope.currentUser === null) {
+  
+  if ($scope.currentUser === undefined) {
     $scope.currentUser = {};
   }
   $scope.goBack = function() {

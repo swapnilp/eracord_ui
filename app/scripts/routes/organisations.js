@@ -27,7 +27,5 @@ app.config(function($routeProvider) {
       controller: 'OrganisationsCtrl'
     });
 
-
-
 });
 

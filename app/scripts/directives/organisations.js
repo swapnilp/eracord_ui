@@ -8,21 +8,27 @@ app.directive('organisationCources', function(Restangular) {
     restrict: 'AE',
     transclude: true,
     templateUrl: 'views/organisations/cources.html',
-    controller: ['$scope', 'Restangular', function($scope, Restangular){
+    controller: ['$scope', 'Restangular', 'Flash', function($scope, Restangular, Flash){
       Restangular.all("/organisation_cources").getList().then(function(organisation){
 	$scope.cources = organisation;
       });
+      
+      $scope.launchSubOrganisation = function(){
+	var standards = $('.organisationCoursesTable input:checked').map(
+	  function () {return $(this).data('key');}).get().join(",");
+	console.log(standards);
+      };
     }]
   };
 });
 
 
-app.directive('organisationClarks', function(Restangular, $location) {
+app.directive('organisationClarks', function(Restangular, $location, Flash) {
   return {
     restrict: 'AE',
     transclude: true,
     templateUrl: 'views/organisations/clarks.html',
-    controller: ['$scope', 'Restangular', function($scope, Restangular){
+    controller: ['$scope', 'Restangular', '$window', function($scope, Restangular, $window){
       var base_organisation = Restangular.all("organisations");
       base_organisation.customGET('get_clarks').then(function(data){
 	$scope.clarks = data.data;
@@ -35,6 +41,18 @@ app.directive('organisationClarks', function(Restangular, $location) {
       $scope.toggleEnableUser = function(user){
 	base_organisation.customGET("users/"+user.id+"/toggleEnable", {enabled: user.is_enable});
       };
+
+      $scope.deleteClark = function(user) {
+	if($window.confirm('Are you sure?')){
+	  base_organisation.one('clarks', user.id).remove().then(function(data){
+	    if(data.success){
+	      $scope.clarks = _.reject($scope.clarks, function(obj){return obj.id == user.id});
+	    }else{
+	      Flash.create('warning', "Some thing went wrong", 'alert-danger');
+	    }
+	  });
+	}
+      };
     }]
   };
 });
@@ -43,7 +61,7 @@ app.directive('organisationClarks', function(Restangular, $location) {
 app.directive('csSelect', function () {
   return {
     require: '^stTable',
-    template: '<input type="checkbox"/>',
+    template: '<input type="checkbox" data-key="{{row.standard_id}}"/>',
     scope: {
       row: '=csSelect'
     },
