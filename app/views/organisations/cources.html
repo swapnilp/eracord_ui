@@ -12,7 +12,8 @@
     </thead>
     <tbody>
       <tr ng-repeat="row in cources">
-	<td cs-select="row"></td>
+	<td cs-select="row" ng-if="!row.actions"></td>
+	<td ng-if="row.actions"></td>
 	<td>{{row.name}}</td>
 	<td>{{row.assign_to}}</td>
 	<td></td>
@@ -21,5 +22,5 @@
     </tbody>
   </table>
 
-  <button class="btn btn-success" ng-click="launchSubOrganisation()"> Launch Sub Organisation</button>
+  <button class="btn btn-success" ng-click="launchSubOrganisation()" ng-disabled="!isLaunchEnable()"> Launch Sub Organisation</button>
 </div>

@@ -88,6 +88,14 @@ angular.module('eracordUiApp.controller')
 	
       }
     }
+
+    if($location.path() === "/organisation/standards/" + $routeParams.standard_ids + "/launch_sub_organisation"){
+      var base_organisation = Restangular.all("organisations");
+      base_organisation.customGET('get_standards', {standards: $routeParams.standard_ids}).then(function(data){
+	$scope.standards = data.organisations;
+	$scope.name = _.map($scope.standards, function(obj){ return obj.name + '-' + obj.stream }).join(', ');
+      });
+    }
     
     if(!Auth.isAuthenticated()){
       $location.path('/user/sign_in');

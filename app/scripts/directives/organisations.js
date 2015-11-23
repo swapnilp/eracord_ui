@@ -8,16 +8,23 @@ app.directive('organisationCources', function(Restangular) {
     restrict: 'AE',
     transclude: true,
     templateUrl: 'views/organisations/cources.html',
-    controller: ['$scope', 'Restangular', 'Flash', function($scope, Restangular, Flash){
-      Restangular.all("/organisation_cources").getList().then(function(organisation){
-	$scope.cources = organisation;
+    controller: ['$scope', 'Restangular', 'Flash', '$location', function($scope, Restangular, Flash, $location){
+      $scope.cources = [];
+      Restangular.all("/organisation_cources").getList().then(function(organisations){
+	$scope.cources = organisations;
       });
       
       $scope.launchSubOrganisation = function(){
 	var standards = $('.organisationCoursesTable input:checked').map(
 	  function () {return $(this).data('key');}).get().join(",");
-	console.log(standards);
+	$location.path("/organisation/standards/" + standards + "/launch_sub_organisation");
       };
+
+      $scope.isLaunchEnable = function (){
+	var isSelected = _.pluck($scope.cources, 'is_selected');
+        return _.contains(isSelected, true);
+      };
+      
     }]
   };
 });
@@ -61,7 +68,7 @@ app.directive('organisationClarks', function(Restangular, $location, Flash) {
 app.directive('csSelect', function () {
   return {
     require: '^stTable',
-    template: '<input type="checkbox" data-key="{{row.standard_id}}"/>',
+    template: '<input ng-model="row.is_selected" type="checkbox" data-key="{{row.standard_id}}"/>',
     scope: {
       row: '=csSelect'
     },
