@@ -97,7 +97,8 @@ angular.module('eracordUiApp.controller')
       });
 
       $scope.registerOrganisation = function(){
-	base_organisation.customPOST({organisation: $scope.vm.org}, "sub_organisation/launch_organisation", {}).then(function(data){
+	var std_ids = _.pluck($scope.standards, 'id').join(',');
+	base_organisation.customPOST({organisation: $scope.vm.org, standard_ids: std_ids}, "sub_organisation/launch_organisation", {}).then(function(data){
 	  if(data.success) {
 	    $location.path('/manage_organisation');
 	  }else {

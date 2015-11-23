@@ -15,7 +15,7 @@
 	<td>{{row.email}}</td>
 	<td>{{row.mobile}}</td>
 	<td>
-	  {{row.standards}}
+	  <span ng-bind-html="row.standards"></span>
 	</td>
 	<td>
 	  <a class="btn btn-link" ng-click="pullBackSubOrganisation(row);">Pull Back</a>
