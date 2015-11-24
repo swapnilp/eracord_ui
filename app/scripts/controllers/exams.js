@@ -40,6 +40,9 @@ angular.module('eracordUiApp.controller')
 	
       });
 
+      if($location.path() === "/classes/"+$routeParams.class_id+"/exams/"+ $routeParams.exam_id+"/show") {
+      }
+
       $scope.openCalendar = function(e) {
         e.preventDefault();
         e.stopPropagation();
