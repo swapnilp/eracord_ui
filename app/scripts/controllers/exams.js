@@ -18,8 +18,10 @@ angular.module('eracordUiApp.controller')
     };
     
     if($location.path() === '/exams') {
-      var exams = Restangular.all("exams").getList();
-      Flash.create('success', message, 'custom-class');
+      var exams = Restangular.all("exams")
+      exams.getList().then(function(data){
+	$scope.exams = data;
+      });
       
     };
     
