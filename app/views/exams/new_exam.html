@@ -1,7 +1,7 @@
 
 <div class="col-md-6 col-md-offset-0">
   <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
-  <form name="form" ng-submit="login()" role="form">
+  <form name="form" ng-submit="createExam()" role="form">
     <div class="form-group">
       <label for="class">Class</label>
       <br />
@@ -36,12 +36,11 @@
 	 angular-multi-select
 	 helper-elements="noreset nofilter"
 	 input-model="subjects"
-	 output-model="selectedSubjects"
+	 output-model="selectedSubject"
 	 item-label="<[ std_name ]>"
 	 button-template="angular-multi-select-btn-data.htm"
 	 button-label="<[ std_name ]>"
-	 button-label-separator='[" & ", " & "]'
-	 tick-property="checked"
+	 tick-property="ticked"
 	 selection-mode="single"
 	 >
       </div>
@@ -53,15 +52,19 @@
     </div>
     <div class="form-group" ng-class="{ 'has-error': form.marks.$dirty && form.marks.$error.required }">
       <label for="marks">Marks</label>
-      <input type="text" name="marks" id="marks" class="form-control" ng-model="vm.marks" required />
+      <input type="text" name="marks" id="marks" class="form-control" ng-model="vm.marks" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required />
       <span ng-show="form.marks.$dirty && form.marks.$error.required" class="help-block">Marks are required</span>
     </div>
-    <div class="form-group">
+    <div class="form-group" ng-class="{ 'has-error': form.exam_date.$dirty && form.exam_date.$error.required }">
       <label for="exam_date">Exam Date</label>
+      <p class="input-group">
+	<input type="text" class="form-control" datetime-picker="dd/MM/yyyy HH:mm" ng-model="vm.exam_date" is-open="isOpen" ng-click="openCalendar($event, prop);" ng-focus="openCalendar($event, prop);" readonly required/>
+      </p>
+      <span ng-show="form.marks.$dirty && form.marks.$error.required" class="help-block">Exam Date is required</span>
     </div>
     <div class="form-group">
       <label for="duration">Duration</label>
-      <input type="text" name="duration" id="duration" class="form-control" ng-model="vm.duration" />
+      <input type="text" name="duration" id="duration" class="form-control" ng-model="vm.duration" onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
     </div>
     <div class="form-group">
       <label for="exam_type">Exam Type</label>

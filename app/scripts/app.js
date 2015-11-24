@@ -30,6 +30,7 @@ angular
     'restangular',
     'ngCookies',
     'ui.bootstrap',
+    'ui.bootstrap.datetimepicker',
     'smart-table',
     'toggle-switch',
     'angular-multi-select',
