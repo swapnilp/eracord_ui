@@ -10,13 +10,14 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/angular-flash-alert/dist/angular-flash.css" />
     <link rel="stylesheet" href="bower_components/angular-toggle-switch/angular-toggle-switch.css" />
+    <link rel="stylesheet" href="bower_components/angular-multi-select-alexandernst/dist/angular-multi-select.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="eracordUiApp">
+  <body ng-app="eracordUiApp" angular-multi-select-mouse-trap angular-multi-select-key-trap>
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -65,6 +66,8 @@
     <script src="bower_components/ng-token-auth/dist/ng-token-auth.js"></script>
     <script src="bower_components/angular-smart-table/dist/smart-table.js"></script>
     <script src="bower_components/angular-toggle-switch/angular-toggle-switch.js"></script>
+    <script src="bower_components/angular-filter/dist/angular-filter.js"></script>
+    <script src="bower_components/angular-multi-select-alexandernst/dist/angular-multi-select.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -76,6 +79,7 @@
 	<script src="scripts/controllers/application.js"></script>
 	<script src="scripts/controllers/exams.js"></script>
 	<script src="scripts/controllers/organisations.js"></script>
+	<script src="scripts/controllers/admin_desk.js"></script>
         <script src="scripts/controllers/about.js"></script>
 
 
@@ -83,6 +87,7 @@
 
 	<script src="scripts/routes/exams.js"></script>
 	<script src="scripts/routes/organisations.js"></script>
+	<script src="scripts/routes/admin_desk.js"></script>
 
 	<script src="scripts/directives/organisations.js"></script>
         <!-- endbuild -->

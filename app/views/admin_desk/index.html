@@ -1,0 +1,36 @@
+<div style="margin:20px 0;">
+  <a href="#/remaining_organisation_courses" class="btn btn-success"> Add Course</a>
+  <table st-table="rowCollection" class="table organisationCoursesTable">
+    <thead>
+      <tr>
+	<th st-sort="firstName">Name</th>
+	<th st-sort="lastName">Divisions</th>
+	<th st-sort="birthDate">Fill Daily Catlog</th>
+	<th st-sort="balance">Create Exam</th>	
+	<th st-sort="balance">Create Grouped Exams</th>
+	<th st-sort="balance">Remaining Activities</th>
+	<th st-sort="balance">Get Report</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in jkci_classes">
+	<td>{{row.class_name}}</td>
+	<td>{{row.divisions}}</td>
+	<td>
+	  <a>Fill Catlog</a>
+	</td>
+	<td>
+	  <a ng-href="#/classes/{{row.id}}/exams/new">Create Exam</a>
+	</td>
+	<td>
+	  <a ng-href="#/classes/{{row.id}}/exams/new">Create Group Exam</a>
+	</td>
+	<td>{{row.remaining_activity}}</td>
+	<td>
+	  <a>Get Report</a>
+	</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

@@ -1,0 +1,94 @@
+
+<div class="col-md-6 col-md-offset-0">
+  <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
+  <form name="form" ng-submit="login()" role="form">
+    <div class="form-group">
+      <label for="class">Class</label>
+      <br />
+      <span>{{class_name}}</span>
+      <span ng-show="form.organisation.$dirty && form.organisation.$error.required" class="help-block">Oganisation ID is required</span>
+    </div>
+    <div class="form-group">
+      <label for="class">Divisions</label>
+      <div
+	 angular-multi-select
+	 helper-elements="noreset nofilter"
+	 input-model="divisions"
+	 output-model="selectedDivisions"
+	 item-label="<[ name ]>"
+	 button-template="angular-multi-select-btn-data.htm"
+	 button-label="<[ name ]>"
+	 button-label-separator='[" & ", " & "]'
+	 tick-property="checked"
+	 class="col-md-12"
+	 >
+      </div>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name" class="form-control" ng-model="vm.name" required />
+      <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Name is required</span>
+    </div>
+    <div class="form-group">
+      <label for="subject">Subject</label>
+      <br />
+      <div
+	 angular-multi-select
+	 helper-elements="noreset nofilter"
+	 input-model="subjects"
+	 output-model="selectedSubjects"
+	 item-label="<[ std_name ]>"
+	 button-template="angular-multi-select-btn-data.htm"
+	 button-label="<[ std_name ]>"
+	 button-label-separator='[" & ", " & "]'
+	 tick-property="checked"
+	 selection-mode="single"
+	 >
+      </div>
+      
+    </div>
+    <div class="form-group">
+      <label for="conducted_by">Conducted By</label>
+      <input type="text" name="conducted_by" id="conducted_by" class="form-control" ng-model="vm.conducted_by"/>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': form.marks.$dirty && form.marks.$error.required }">
+      <label for="marks">Marks</label>
+      <input type="text" name="marks" id="marks" class="form-control" ng-model="vm.marks" required />
+      <span ng-show="form.marks.$dirty && form.marks.$error.required" class="help-block">Marks are required</span>
+    </div>
+    <div class="form-group">
+      <label for="exam_date">Exam Date</label>
+    </div>
+    <div class="form-group">
+      <label for="duration">Duration</label>
+      <input type="text" name="duration" id="duration" class="form-control" ng-model="vm.duration" />
+    </div>
+    <div class="form-group">
+      <label for="exam_type">Exam Type</label>
+      <br />
+      <div
+	 angular-multi-select
+	 helper-elements="noreset nofilter"
+	 input-model="examTypes"
+	 output-model="selectedExamType"
+	 item-label="<[ name ]>"
+	 button-template="angular-multi-select-btn-data.htm"
+	 button-label="<[ name ]>"
+	 button-label-separator='[" & ", " & "]'
+	 selection-mode="single"
+	 tick-property="ticked"
+	 >
+      </div>
+      <span ng-show="form.exam_type.$dirty && form.exam_type.$error.required" class="help-block">Exam Type is required</span>
+    </div>
+    <div class="form-group">
+      <label for="remark">Remark</label>
+      <input type="text" name="remark" id="remark" class="form-control" ng-model="vm.remark" />
+    </div>
+    
+    <div class="form-actions">
+      <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Create Exam</button>
+      <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+    </div>
+  </form>
+</div>

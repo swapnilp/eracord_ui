@@ -13,8 +13,8 @@ app.directive('organisationCources', function(Restangular) {
       scope.cources = [];
 
       scope.loadCources = function(){
-	Restangular.all("/organisation_cources").getList().then(function(organisations){
-	  scope.cources = organisations;
+	Restangular.all("/organisation_cources").getList().then(function(data){
+	  scope.cources = data;
 	});
       };
 

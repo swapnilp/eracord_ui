@@ -32,6 +32,7 @@ angular
     'ui.bootstrap',
     'smart-table',
     'toggle-switch',
+    'angular-multi-select',
     'eracordUiApp.controller',
     'eracordUiApp.directives'
   ])
@@ -46,7 +47,7 @@ angular
     RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
       var extractedData;
       if (operation === "getList") {
-        extractedData = data.organisations;
+        extractedData = data.body;
       } else {
         extractedData = data;
       }
