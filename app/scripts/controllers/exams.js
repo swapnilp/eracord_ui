@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('ExamsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload) {
+  .controller('ExamsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window) {
 
     var message = '<strong>Well done!</strong> You successfully read this important alert message.';
 
@@ -18,7 +18,7 @@ angular.module('eracordUiApp.controller')
     };
     
     if($location.path() === '/exams') {
-      var exams = Restangular.all("exams")
+      var exams = Restangular.all("exams");
       exams.getList().then(function(data){
 	$scope.exams = data;
       });
@@ -60,6 +60,7 @@ angular.module('eracordUiApp.controller')
 	$scope.vm.sub_classes = _.pluck($scope.selectedDivisions, "id").join(',');
 	$scope.vm.jkci_class_id = $routeParams.class_id;
 	jkci_classes.customPOST({exam: $scope.vm}, "/"+$routeParams.class_id+"/exams", {}).then(function(data){
+	  
 	  if(data.success) {
 	    Flash.create('success', "Exam has been created", 'alert-success');
 	    $location.path("/admin_desk");
@@ -72,6 +73,8 @@ angular.module('eracordUiApp.controller')
     
 
     if($location.path() === "/classes/"+$routeParams.class_id+"/exams/"+ $routeParams.exam_id+"/show") {
+      $scope.requestLoading = false;
+      $scope.class_id = $routeParams.class_id;
       var jkci_classes = Restangular.all("jkci_classes");
       $scope.uploadingFile = false;
       $scope.uploadingMessage = "Uploading";
@@ -79,14 +82,14 @@ angular.module('eracordUiApp.controller')
       jkci_classes.customGET("/"+$routeParams.class_id+"/exams/"+$routeParams.exam_id).then(function(data){
 	$scope.exam = data.exam;
       });
-
       
       $scope.$watch('file', function(newVal){
 	if(newVal){
 	  $scope.uploadingFile = false;
 	  $scope.fileName  = newVal.name;
 	}
-      })
+      });
+
       $scope.submit = function() {
 	if ($scope.file) {
 	  $scope.uploadingFile = true;
@@ -95,14 +98,48 @@ angular.module('eracordUiApp.controller')
           $scope.upload($scope.file);
 	}
       };
+
+      $scope.verifyExam = function(exam) {
+	if($window.confirm('Are you sure?')){
+	  $scope.requestLoading = true;
+	  jkci_classes.customGET("/"+$routeParams.class_id+"/exams/"+$routeParams.exam_id+"/verify_exam").then(function(data){
+	    $scope.requestLoading = false;
+	    if(data.success) {
+	      $scope.exam.create_verification = true;
+	    }
+	  });
+	}
+      };
+
+      $scope.conductExam = function(exam) {	
+	if($window.confirm('Are you sure?')){
+	  $scope.requestLoading = true;
+	  jkci_classes.customGET("/"+$routeParams.class_id+"/exams/"+$routeParams.exam_id+"/exam_conducted").then(function(data){
+	    $scope.requestLoading = false;
+	    if(data.success) {
+	      $scope.exam.create_verification = true;
+	    }
+	  });
+	}
+      };
+
+      $scope.deleteExam = function(exam){
+	$scope.exam.verify_result = !$scope.exam.verify_result;
+      };
+
+      $scope.editExam = function(exam){
+
+      };
+      
       
       // upload on file select or drop
       $scope.upload = function (file) {
+	$scope.requestLoading = true;
         Upload.upload({
           url: "api/jkci_classes/" + $routeParams.class_id + "/exams/" + $routeParams.exam_id + "/upload_paper",
           data: {file: file, 'exam_id': $routeParams.exam_id}
         }).then(function (resp) {
-	  console.log(resp);
+	  $scope.requestLoading = false;
 	  if(resp.data.success) {
 	    $scope.uploadMeaasgeClass = "alert-success";
 	    $scope.uploadingMessage = "Completed Successfully";
@@ -112,12 +149,12 @@ angular.module('eracordUiApp.controller')
 	  }
           console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
         }, function (resp) {
-	  console.log(resp);
+	  $scope.requestLoading = false;
 	  $scope.uploadingFile = false;
-          console.log('Error status: ' + resp.status);
         }, function (evt) {
-            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-          console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+	  $scope.requestLoading = false;
+          var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+
         });
       };
     }
