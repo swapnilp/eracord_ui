@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('ExamsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams) {
+  .controller('ExamsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload) {
 
     var message = '<strong>Well done!</strong> You successfully read this important alert message.';
 
@@ -39,9 +39,6 @@ angular.module('eracordUiApp.controller')
 	}
 	
       });
-
-      if($location.path() === "/classes/"+$routeParams.class_id+"/exams/"+ $routeParams.exam_id+"/show") {
-      }
 
       $scope.openCalendar = function(e) {
         e.preventDefault();
@@ -74,5 +71,57 @@ angular.module('eracordUiApp.controller')
     };
     
 
+    if($location.path() === "/classes/"+$routeParams.class_id+"/exams/"+ $routeParams.exam_id+"/show") {
+      var jkci_classes = Restangular.all("jkci_classes");
+      $scope.uploadingFile = false;
+      $scope.uploadingMessage = "Uploading";
+      $scope.uploadMeaasgeClass = "alert-warning";
+      jkci_classes.customGET("/"+$routeParams.class_id+"/exams/"+$routeParams.exam_id).then(function(data){
+	$scope.exam = data.exam;
+      });
+
+      
+      $scope.$watch('file', function(newVal){
+	if(newVal){
+	  $scope.uploadingFile = false;
+	  $scope.fileName  = newVal.name;
+	}
+      })
+      $scope.submit = function() {
+	if ($scope.file) {
+	  $scope.uploadingFile = true;
+	  $scope.uploadMeaasgeClass = "alert-warning";
+	  $scope.uploadingMessage = "Uploading";
+          $scope.upload($scope.file);
+	}
+      };
+      
+      // upload on file select or drop
+      $scope.upload = function (file) {
+        Upload.upload({
+          url: "api/jkci_classes/" + $routeParams.class_id + "/exams/" + $routeParams.exam_id + "/upload_paper",
+          data: {file: file, 'exam_id': $routeParams.exam_id}
+        }).then(function (resp) {
+	  console.log(resp);
+	  if(resp.data.success) {
+	    $scope.uploadMeaasgeClass = "alert-success";
+	    $scope.uploadingMessage = "Completed Successfully";
+	  }else {
+	    $scope.uploadMeaasgeClass = "alert-danger";
+	    $scope.uploadingMessage = resp.data.message;
+	  }
+          console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+        }, function (resp) {
+	  console.log(resp);
+	  $scope.uploadingFile = false;
+          console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+          console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        });
+      };
+    }
+    
+    
   }]);
 

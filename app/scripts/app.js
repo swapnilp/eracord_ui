@@ -34,6 +34,7 @@ angular
     'smart-table',
     'toggle-switch',
     'angular-multi-select',
+    'ngFileUpload',
     'eracordUiApp.controller',
     'eracordUiApp.directives'
   ])
