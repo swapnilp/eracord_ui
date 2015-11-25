@@ -34,6 +34,14 @@
     <span class="col-sm-6 paddingTop10">{{exam.is_completed || false}}</span>
   </div>
   <div class="col-sm-12 textLeft">
+    <span class="col-sm-2"><h5>Papers</h5></span>
+    <span class="col-sm-6 paddingTop10">
+      <span ng-repeat="paper in exam.documents">
+	<a href="{{paper.url}}" target="_blank">{{paper.name}}</a>
+      </span>
+    </span>
+  </div>
+  <div class="col-sm-12 textLeft">
     <span class="col-sm-2"><h5>Upload paper</h5></span>
     <span class="col-sm-6 paddingTop10">
       <form name="form">
