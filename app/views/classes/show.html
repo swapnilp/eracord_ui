@@ -1,0 +1,55 @@
+<div class="container" style="margin:20px 0;">
+  <div class="col-sm-12 textLeft">
+    <div class="col-sm-12 textLeft">
+      <h2>Class</h2>
+    </div>
+    <div class="col-sm-12 textLeft">
+      <span class="col-sm-2"><h5>Class Name</h5></span>
+      <span class="col-sm-6 paddingTop10">{{class.class_name}}</span>
+    </div>
+    <div class="col-sm-12 textLeft">
+      <span class="col-sm-2"><h5>Subjects</h5></span>
+      <span class="col-sm-6 paddingTop10">{{class.subjects}}</span>
+    </div>
+    <div class="col-sm-12 textLeft">
+      <span class="col-sm-2"><h5>Daily Absenty Sms Enable</h5></span>
+      <toggle-switch class="left mLeft10"
+		     ng-model="class.enable_class_sms"
+		     knob-label="ENABLE" ng-click="toggleClassAbsentSms()">
+      </toggle-switch>
+    </div>
+    <div class="col-sm-12 textLeft">
+      <span class="col-sm-2"><h5>Exam Sms Enable</h5></span>
+      <toggle-switch class="left mLeft10"
+		     ng-model="class.enable_exam_sms"
+		     knob-label="ENABLE" ng-click="toggleExamClassSms()">
+      </toggle-switch>
+    </div>
+    <div class="col-sm-12 textLeft">
+      <span class="col-sm-2"><h5>Download Syllabus</h5></span>
+      <span class="col-sm-6 paddingTop10">
+	<a class="btn btn-primary btn-sm" target="_blank" href="/class/20/download_class_syllabus.pdf">Download Syllabus</a> &nbsp;&nbsp;&nbsp;
+      </span>
+    </div>
+    <div class="col-sm-12 textLeft">
+      <span class="col-sm-2"><h5>Download Catlog</h5></span>
+      <span class="col-sm-6 paddingTop10">
+	<a class="btn btn-primary btn-sm" target="_blank" href="/class/20/download_class_catlog.pdf">Download Catlog</a>
+      </span>
+    </div>
+    <div class="col-sm-12 textLeft">
+      <span class="col-sm-2"><h5>Download Student List</h5></span>
+      <span class="col-sm-6 paddingTop10">
+	<a class="btn btn-primary btn-sm" target="_blank" href="/class/20/download_class_student_list.pdf">Download Student List</a>
+      </span>
+    </div>
+    <div class="col-sm-12 textLeft paddingTop10">
+      <div class="col-sm-12 textLeft paddingTop10">
+	<a href="#/classes/{{class.id}}/exams/new" class="btn btn-primary">Create Exam</a>
+	<button class="btn btn-primary">Assign Student</button>
+	<button class="btn btn-primary">Manage Roll Number</button>
+	<button class="btn btn-primary">Create Division</button>
+      </div>
+    </div>
+  </div>
+</div>
