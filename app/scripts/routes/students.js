@@ -1,0 +1,20 @@
+'use strict';
+var app;
+
+app = angular.module('eracordUiApp.routes');
+
+app.config(function($routeProvider) {
+  $routeProvider
+    .when('/students', {
+      templateUrl: 'views/students/index.html',
+      controller: 'StudentsCtrl',
+      controllerAs: 'students'
+    })
+    .when('/students/new', {
+      templateUrl: 'views/students/new.html',
+      controller: 'StudentsCtrl',
+      controllerAs: 'students'
+    });
+    
+});
+

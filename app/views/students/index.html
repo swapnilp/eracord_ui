@@ -1,0 +1,33 @@
+<div style="margin:20px 0;">
+  <a href="#/students/new" class="btn btn-success"> New Student</a>
+  <table st-table="rowCollection" class="table organisationCoursesTable">
+    <thead>
+      <tr>
+	<th st-sort="firstName">Index</th>
+	<th st-sort="lastName">Name</th>
+	<th st-sort="balance">Batch</th>
+	<th st-sort="balance">Standard</th>
+	<th st-sort="balance">Parent Name</th>
+	<th st-sort="balance">Parent Mobile</th>
+	<th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in exams">
+	<td>{{row.name}}</td>
+	<td>{{row.marks}}</td>
+	<td>{{row.exam_date}}</td>
+	<td>{{row.subject}}</td>
+	<td>{{row.exam_type}}</td>
+	<td>{{row.status}}</td>
+	<td>{{row.published_date}}</td>
+	<td>{{row.ignored}}</td>
+	<td>
+	  <a href="#/classes/{{row.jkci_class_id}}/exams/{{row.id}}/show">Show</a>
+	</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+

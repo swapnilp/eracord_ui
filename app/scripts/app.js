@@ -35,6 +35,7 @@ angular
     'toggle-switch',
     'angular-multi-select',
     'ngFileUpload',
+    'checklist-model',
     'eracordUiApp.controller',
     'eracordUiApp.directives'
   ])
