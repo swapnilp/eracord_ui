@@ -1,11 +1,17 @@
 <div style="margin:20px 0;">
   Filter Student <input ng-model="search"> 
   <button ng-if="!addMarksFlag && publishEnable && remainingLength == 0" class="btn btn-primary">Publish Exam</button>
+  <span ng-if="!addMarksFlag">
+    <button class="btn btn-primary" ng-click="saveAbsenty()">Save</button>
+    <button class="btn btn-primary" ng-click="addMarks()">Add Marks</button>
+  </span>
+  <span ng-if="addMarksFlag">
+    <button class="btn btn-primary" ng-click="saveMarks()">Save Marks</button>
+    <button class="btn btn-primary" ng-click="cancelAddMarks()">Cancel</button>
+  </span>
+  
   <div ng-if="!addMarksFlag">
-    <h2>Remaining Students 
-      <button class="btn btn-primary" ng-click="saveAbsenty()">Save</button>
-      <button class="btn btn-primary" ng-click="addMarks()">Add Marks</button>
-    </h2>
+    <h2>Remaining Students</h2>
     <table st-table="rowCollection" class="table organisationCoursesTable">
       <thead>
 	<tr>
@@ -98,10 +104,7 @@
     </table>
   </div>
   <div ng-if="addMarksFlag">
-    <h2>Remaining Students 
-      <button class="btn btn-primary" ng-click="saveMarks()">Save Marks</button>
-      <button class="btn btn-primary" ng-click="cancelAddMarks()">Cancel</button>
-    </h2>
+    <h2>Remaining Students</h2>
     <table st-table="rowCollection" class="table organisationCoursesTable">
       <thead>
 	<tr>
