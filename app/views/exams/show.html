@@ -71,8 +71,12 @@
       <a href="#/exams" class="btn btn-default" ng-disabled="requestLoading">Back</a>
     </div>
   </div>
-  <div class="col-sm-12 textLeft" ng-if="exam.is_completed">
+  <div class="col-sm-12 textLeft" ng-if="exam.is_completed && exam.is_result_decleared == null">
     <exam-catlog exam="exam" class-id="{{class_id}}">
     </exam-catlog>
+  </div>
+  <div class="col-sm-12 textLeft" ng-if="exam.is_completed && exam.is_result_decleared">
+    <exam-results exam="exam" class-id="{{class_id}}">
+    </exam-results>
   </div>
 </div>

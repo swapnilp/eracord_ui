@@ -1,6 +1,14 @@
 <div style="margin:20px 0;">
   Filter Student <input ng-model="search"> 
-  <button ng-if="!addMarksFlag && publishEnable && remainingLength == 0" class="btn btn-primary">Publish Exam</button>
+  <button ng-if="!addMarksFlag && publishEnable && remainingLength == 0 && exam.verify_result && exam.verify_absenty" class="btn btn-primary" ng-click="publishExam()">
+    Publish Exam
+  </button>
+  <button class="btn btn-primary" ng-if="!exam.verify_result" ng-click="verifyResult();">
+    Verify Result
+  </button>
+  <button class="btn btn-primary" ng-if="!exam.verify_absenty" ng-click="verifyAbsenty();">
+    Verify Absenty
+  </button>
   <span ng-if="!addMarksFlag">
     <button class="btn btn-primary" ng-click="saveAbsenty()">Save</button>
     <button class="btn btn-primary" ng-click="addMarks()">Add Marks</button>
@@ -140,7 +148,7 @@
 	  <td>{{row.student}}</td>
 	  <td>{{row.p_mobile}}</td>
 	  <td><input tept="text" ng-model="row.marks"></td>
-	  <td><button class="btn btn-link" ng-click="row.marks = null"> Remove</button></td>
+	  <td><button class="btn btn-link" ng-click="removeMarks(row);"> Remove</button></td>
 	</tr>
       </tbody>
     </table>

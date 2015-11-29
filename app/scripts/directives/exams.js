@@ -30,12 +30,18 @@ app.directive('examCatlog', function(Restangular) {
       };
       
       scope.saveTempMarks = function(catlog){
-	if(catlog.temp_marks !== '') {
+	console.log(catlog.temp_marks);
+	if(catlog.temp_marks !== '' && catlog.temp_marks !== undefined) {
 	  catlog.marks = catlog.temp_marks;
 	}else{
 	  catlog.marks = null;
 	}
 	scope.publishEnable = false;
+      };
+
+      scope.removeMarks = function(catlog) {
+	catlog.marks = null;
+	catlog.temp_marks = null;
       };
 
       scope.saveMarks = function() {
@@ -46,6 +52,7 @@ app.directive('examCatlog', function(Restangular) {
 	var marks = _.object(_.map(validMarks, function(obj){return [obj.id, obj.marks]}));
 	jkci_classes.one("exams", scope.exam.id).customPOST({students_results: marks}, "add_exam_results", {}).then(function(data){
 	  if(data.success) {
+	    scope.exam.verify_result = false;
 	    scope.cancelAddMarks();
 	  } else {
 	    scope.cancelAddMarks();
@@ -53,8 +60,7 @@ app.directive('examCatlog', function(Restangular) {
 	  scope.publishEnable = true;
 	  scope.remainingLength = remainingStudentsFilter(scope.examCatlogs).length;
 	});
-	
-      }
+      };
       
       scope.addMarks = function() {
 	scope.addMarksFlag = true;
@@ -65,7 +71,7 @@ app.directive('examCatlog', function(Restangular) {
 	scope.addMarksFlag = false;
 	scope.loadCatlog();
 	scope.publishEnable = true;
-      }
+      };
 
       scope.ignoreStudent = function(catlog) {
 	catlog.is_ingored = true;
@@ -75,14 +81,41 @@ app.directive('examCatlog', function(Restangular) {
       scope.removeIgnored = function(catlog) {
 	catlog.is_ingored = null;
 	scope.publishEnable = false;
-      }
+      };
 
       scope.removeAbsent = function(catlog) {
 	if(catlog.absent_sms_sent === false) {
 	  catlog.is_present = null;
 	  scope.publishEnable = false;
 	}
+      };
 
+      scope.verifyResult = function(){
+	jkci_classes.one("exams", scope.exam.id).customPOST({}, "verify_exam_result").then(function(data){
+	  if(data.success){
+	    scope.exam.verify_result = true;
+	  }else{
+	    scope.exam.verify_result = false;
+	  }
+	});
+      };
+      
+      scope.verifyAbsenty = function(){
+	jkci_classes.one("exams", scope.exam.id).customPOST({}, "verify_exam_absenty").then(function(data){
+	  if(data.success){
+	    scope.exam.verify_absenty = true;
+	  }else{
+	    scope.exam.verify_absenty = false;
+	  }
+	});
+      };
+
+      scope.publishExam = function() {
+	jkci_classes.one("exams", scope.exam.id).customPOST({}, "publish_exam_result").then(function(data){
+	  if(data.success){
+	    scope.exam.is_result_decleared = true;
+	  }
+	});
       };
 
       scope.saveAbsenty = function() {
@@ -92,15 +125,32 @@ app.directive('examCatlog', function(Restangular) {
 	ignoredStudents.push(0);
 	console.log(ignoredStudents);
 	jkci_classes.one("exams", scope.exam.id).customPOST({students_ids: absentStudents, ignoredStudents: ignoredStudents}, "add_absunt_students").then(function(data){
+	  scope.exam.verify_absenty = false;
 	  scope.examCatlogs = data.catlogs;
 	});
 	scope.publishEnable = true;
 	scope.remainingLength = remainingStudentsFilter(scope.examCatlogs).length;
-      }
+      };
       scope.loadCatlog();
     }]
   }
 });
+//end of exam catlog directive
+
+app.directive('examResults', function(Restangular) {
+  return {
+    restrict: 'AE',
+    transclude: true,
+    templateUrl: 'views/exams/exam_results.html',
+    scope: {
+      exam: '=',
+      classId: '@'
+    },
+    controller: ['$scope', 'Restangular', 'Flash', '$location',  '$window', 'remainingStudentsFilter', function(scope, Restangular, Flash, $location, $window, remainingStudentsFilter){
+    }]
+  }
+});
+
     
 app.directive('validNumber', function() {
   return {
