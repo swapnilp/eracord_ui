@@ -47,6 +47,7 @@ angular
     // Intercept 401 Unauthorized everywhere
     // Enables `devise:unauthorized` interceptor
     RestangularProvider.setBaseUrl('/api');
+    RestangularProvider.setRequestSuffix('.json');
     RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
       var extractedData;
       if (operation === "getList") {

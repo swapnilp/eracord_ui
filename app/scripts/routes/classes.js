@@ -14,6 +14,11 @@ app.config(function($routeProvider) {
       templateUrl: 'views/classes/show.html',
       controller: 'ClassesCtrl',
       controllerAs: 'classes'
+    })
+    .when('/classes/:class_id/assign_students', {
+      templateUrl: 'views/classes/assign_students.html',
+      controller: 'ClassesCtrl',
+      controllerAs: 'classes'
     });
 });
 

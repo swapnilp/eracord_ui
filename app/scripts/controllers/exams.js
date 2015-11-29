@@ -117,7 +117,7 @@ angular.module('eracordUiApp.controller')
 	  jkci_classes.customGET("/"+$routeParams.class_id+"/exams/"+$routeParams.exam_id+"/exam_conducted").then(function(data){
 	    $scope.requestLoading = false;
 	    if(data.success) {
-	      $scope.exam.create_verification = true;
+	      $scope.exam.is_completed = true;
 	    }
 	  });
 	}

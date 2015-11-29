@@ -10,7 +10,7 @@
   <div class="col-sm-12 textLeft">
     <span class="col-sm-2"><h5>Class</h5> </span>
     <span class="col-sm-6 paddingTop10">
-        <a href="/jkci_classes/21">{{exam.jkci_class}}</a>
+        <a href="#/classes/{{class_id}}">{{exam.jkci_class}}</a>
     </span>
   </div>
   <div class="col-sm-12 textLeft">
@@ -56,7 +56,7 @@
   </div>
   <div class="col-sm-12 textLeft">
     <div class="col-sm-12 paddingTop10" style="">
-      <span>
+      <span ng-show="!exam.is_completed">
 	<button class="btn btn-primary" ng-click="editExam(exam)" ng-disabled="requestLoading">Edit</button>
       </span>
       <span ng-show="!exam.create_verification">

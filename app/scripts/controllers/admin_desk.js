@@ -21,7 +21,6 @@ angular.module('eracordUiApp.controller')
       var jkci_classes = Restangular.all("jkci_classes");
       jkci_classes.getList().then(function(data){
 	$scope.jkci_classes = data;
-	console.log(data);
       })
     };
 

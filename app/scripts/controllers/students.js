@@ -10,8 +10,6 @@
 angular.module('eracordUiApp.controller')
   .controller('StudentsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window) {
 
-    var message = '<strong>Well done!</strong> You successfully read this important alert message.';
-
     if(!Auth.isAuthenticated()){
       $location.path('/user/sign_in');
       return true;
@@ -19,9 +17,9 @@ angular.module('eracordUiApp.controller')
     
     if($location.path() === '/students') {
       var students = Restangular.all("students");
-      //students.getList().then(function(data){
-	//$scope.students = data;
-      //});
+      students.getList().then(function(data){
+	$scope.students = data;
+      });
     };
 
     if($location.path() === '/students/new'){
@@ -41,11 +39,15 @@ angular.module('eracordUiApp.controller')
 	})
       }
       
-      
       $scope.registerStudent = function(){
 	$scope.vm.user.o_subjects = $scope.optionalSubjects;
-	console.log($scope.optionalSubjects);
-	console.log($scope.vm.user);
+	students.post($scope.vm.user).then(function(data) {
+	  if(data.success) {
+	    $location.path("/students");
+	  }else {
+	    Flash.create('warning', data.message, 'alert-danger');
+	  }
+	})
       }
       
     }

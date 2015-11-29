@@ -14,6 +14,11 @@ app.config(function($routeProvider) {
       templateUrl: 'views/students/new.html',
       controller: 'StudentsCtrl',
       controllerAs: 'students'
+    })
+    .when('/students/:student_id/show', {
+      templateUrl: 'views/students/show.html',
+      controller: 'StudentsCtrl',
+      controllerAs: 'students'
     });
     
 });

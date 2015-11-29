@@ -46,10 +46,37 @@
     <div class="col-sm-12 textLeft paddingTop10">
       <div class="col-sm-12 textLeft paddingTop10">
 	<a href="#/classes/{{class.id}}/exams/new" class="btn btn-primary">Create Exam</a>
-	<button class="btn btn-primary">Assign Student</button>
+	<a href="#/classes/{{class.id}}/assign_students" class="btn btn-primary">Assign Student</a>
 	<button class="btn btn-primary">Manage Roll Number</button>
 	<button class="btn btn-primary">Create Division</button>
+	<a href="#/admin_desk" class="btn btn-default">Back</a>
       </div>
+    </div>
+    <div class="col-sm-12 textLeft paddingTop20">
+      <uib-tabset justified="true">
+	<uib-tab>
+	  <uib-tab-heading><i class="icon-bell"></i> Students</uib-tab-heading>
+	  <div class-students class-id="{{class_id}}"></div>
+	</uib-tab>
+	<uib-tab>
+	  <uib-tab-heading><i class="icon-bell"></i> Exams</uib-tab-heading>
+	  <div>
+	    
+	  </div>
+	</uib-tab>
+	<uib-tab>
+	  <uib-tab-heading><i class="icon-bell"></i> Divisions</uib-tab-heading>
+	  <div>
+	    <div organisation-sub-organisationsasd></div>
+	  </div>
+	</uib-tab>
+	<uib-tab>
+	  <uib-tab-heading><i class="icon-bell"></i> Notifications</uib-tab-heading>
+	  <div>
+	    <div organisation-sub-organisationsasd></div>
+	  </div>
+	</uib-tab>
+      </uib-tabset>
     </div>
   </div>
 </div>
