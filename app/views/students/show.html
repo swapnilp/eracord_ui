@@ -1,55 +1,55 @@
 <div class="container">
   <div class="col-sm-12 textLeft">
-    <div class="studentShow col-sm-6">
+    <div class="studentShow col-sm-12">
       <p>&nbsp;</p>
       <div class="col-sm-12">
 	<h5>
-	  <small class="col-sm-4">Name :</small> 
-	  <span style="font-size:20px;">swapnil pp</span>
+	  <small class="col-sm-2">Name :</small> 
+	  <span style="font-size:20px;">{{student.name}}</span>
 	</h5>
       </div>
       <div class="col-sm-12">
 	<h5>
-	  <small class="col-sm-4">Mobile :</small> 
-	  <span style="font-size:20px;">9850840777</span>
+	  <small class="col-sm-2">Mobile :</small> 
+	  <span style="font-size:20px;">{{student.mobile}}</span>
 	</h5>
       </div>
       <div class="col-sm-12">
 	<h5>
-	  <small class="col-sm-4">Parent Name:</small> 
-	  <span style="font-size:20px;">jk</span>
+	  <small class="col-sm-2">Parent Name:</small> 
+	  <span style="font-size:20px;">{{student.parent_name}}</span>
 	</h5>
       </div>
       <div class="col-sm-12">
 	<h5>
-	  <small class="col-sm-4">Parent Mobile :</small> 
-	  <span style="font-size:20px;">9850840777</span>
+	  <small class="col-sm-2">Parent Mobile :</small> 
+	  <span style="font-size:20px;">{{student.p_mobile}}</span>
 	</h5>
       </div>
       <div class="col-sm-12">
 	<h5>
-	  <small class="col-sm-4">Subjects :</small> 
-	  <span style="font-size:20px;">Physics  |  Chem  |  Bio</span>
+	  <small class="col-sm-2">Subjects :</small> 
+	  <span style="font-size:14px;">{{student.subjects}}</span>
 	</h5>
       </div>
       <div class="col-sm-12">
 	<h5>
-	  <small class="col-sm-4">Download Progress Report :</small> 
+	  <small class="col-sm-2">Download Progress Report :</small> 
 	  <span style="font-size:20px;">
-	    <a class="btn btn-primary btn-sm" target="_blank" href="/student/10/download_report.pdf">Download Report</a>
+	    <a class="btn btn-primary btn-sm" target="_blank" href="/student/{{student.id}}/download_report.pdf">Download Report</a>
 	  </span>
 	</h5>
       </div>
     </div>
-    <div class="userLoginDiv col-sm-6">
-      
-    </div>
     <div class="col-sm-12 left">
-
-      <a class="btn btn-primary" href="/students/10/edit">Edit</a>
-      <a class="btn btn btn-default" onclick="return confirm('Are you sure?')" href="/student/10/disable_student_sms">Disable Sms</a>
-      <a class="btn btn btn-default" onclick="return confirm('Are you sure?')" href="/student/10/disable_student">Disable Student</a>
-      <a class="btn btn-default" href="#/students">Back</a>
+      <a class="btn btn-primary" href="#/students/{{student.id}}/edit">Edit</a>
+      <button class="btn btn btn-default"  href="/student/10/disable_student_sms">Disable Sms</button>
+      <button class="btn btn btn-default" onclick="return confirm('Are you sure?')" href="/student/10/disable_student">
+	Disable Student
+      </button>
+      <a class="btn btn-default" href="#/students">
+	Back
+      </a>
     </div>
   </div>
 </div>

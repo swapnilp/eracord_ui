@@ -1,5 +1,6 @@
 <div style="margin:20px 0;">
-  <a href="#/students/new" class="btn btn-success"> New Student</a>
+  <a href="#/classes/{{classId}}/students/new" class="btn btn-success" ng-if="classId"> New Student</a>
+  <a href="#/students/new" class="btn btn-success" ng-if="!classId"> New Student</a>
   <input type="text" ng-model="filterStudent.name">
   <table st-table="rowCollection" class="table organisationCoursesTable">
     <thead>

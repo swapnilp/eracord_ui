@@ -1,5 +1,5 @@
 <div style="margin:20px 0;">
-  <a href="#/classes/{{classId}}/exams/{{exam.id}}/new_grouped_exams" class="btn btn-primary">Add Exam</a>
+  <a href="#/classes/{{classId}}/exams/{{exam.id}}/new_grouped_exams" class="btn btn-primary" ng-if="!exam.create_verification">Add Exam</a>
   <table st-table="rowCollection" class="table organisationCoursesTable">
     <thead>
       <tr>
