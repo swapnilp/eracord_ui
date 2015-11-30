@@ -46,11 +46,11 @@
       </div>
       
     </div>
-    <div class="form-group">
+    <div class="form-group" ng-if="!isGroup">
       <label for="conducted_by">Conducted By</label>
       <input type="text" name="conducted_by" id="conducted_by" class="form-control" ng-model="vm.conducted_by"/>
     </div>
-    <div class="form-group" ng-class="{ 'has-error': form.marks.$dirty && form.marks.$error.required }">
+    <div class="form-group" ng-class="{ 'has-error': form.marks.$dirty && form.marks.$error.required }" ng-if="!isGroup">
       <label for="marks">Marks</label>
       <input type="text" name="marks" id="marks" class="form-control" ng-model="vm.marks" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required />
       <span ng-show="form.marks.$dirty && form.marks.$error.required" class="help-block">Marks are required</span>
@@ -62,11 +62,11 @@
       </p>
       <span ng-show="form.marks.$dirty && form.marks.$error.required" class="help-block">Exam Date is required</span>
     </div>
-    <div class="form-group">
+    <div class="form-group" ng-if="!isGroup">
       <label for="duration">Duration</label>
       <input type="text" name="duration" id="duration" class="form-control" ng-model="vm.duration" onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
     </div>
-    <div class="form-group">
+    <div class="form-group" ng-show="!isGroup">
       <label for="exam_type">Exam Type</label>
       <br />
       <div
@@ -82,6 +82,7 @@
 	 tick-property="ticked"
 	 >
       </div>
+
       <span ng-show="form.exam_type.$dirty && form.exam_type.$error.required" class="help-block">Exam Type is required</span>
     </div>
     <div class="form-group">
@@ -92,7 +93,8 @@
     <div class="form-actions">
       <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Create Exam</button>
       <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-      <a href="#/admin_desk" class="btn btn-default">Back</a>
+      <a href="#/classes/{{classId}}/exams/{{parentExamId}}/show" class="btn btn-default" ng-if="inGroup">Back</a>
+      <a href="#/admin_desk" class="btn btn-default" ng-if="!inGroup">Back</a>
     </div>
   </form>
 </div>

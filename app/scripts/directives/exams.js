@@ -30,7 +30,6 @@ app.directive('examCatlog', function(Restangular) {
       };
       
       scope.saveTempMarks = function(catlog){
-	console.log(catlog.temp_marks);
 	if(catlog.temp_marks !== '' && catlog.temp_marks !== undefined) {
 	  catlog.marks = catlog.temp_marks;
 	}else{
@@ -123,7 +122,6 @@ app.directive('examCatlog', function(Restangular) {
 	var ignoredStudents = _.pluck(_.where(scope.examCatlogs, {is_ingored: true}), 'student_id');
 	absentStudents.push(0);
 	ignoredStudents.push(0);
-	console.log(ignoredStudents);
 	jkci_classes.one("exams", scope.exam.id).customPOST({students_ids: absentStudents, ignoredStudents: ignoredStudents}, "add_absunt_students").then(function(data){
 	  scope.exam.verify_absenty = false;
 	  scope.examCatlogs = data.catlogs;
@@ -147,6 +145,38 @@ app.directive('examResults', function(Restangular) {
       classId: '@'
     },
     controller: ['$scope', 'Restangular', 'Flash', '$location',  '$window', 'remainingStudentsFilter', function(scope, Restangular, Flash, $location, $window, remainingStudentsFilter){
+      var jkci_classes = Restangular.one("jkci_classes", scope.classId);
+      scope.loadCatlog = function(){
+
+	jkci_classes.one("exams", scope.exam.id).customGET("get_catlogs").then(function(data){
+	  scope.examCatlogs = data.catlogs;
+	})
+      };
+      scope.loadCatlog();
+    }]
+  }
+});
+// end of exam result directives
+
+app.directive('newGroupExam', function(Restangular) {
+  return {
+    restrict: 'AE',
+    transclude: true,
+    templateUrl: 'views/exams/grouped_exams.html',
+    scope: {
+      exam: '=',
+      classId: '@'
+    },
+    controller: ['$scope', 'Restangular', 'Flash', '$location',  '$window', 'remainingStudentsFilter', function(scope, Restangular, Flash, $location, $window, remainingStudentsFilter){
+      
+      var jkci_classes = Restangular.one("jkci_classes", scope.classId);
+      
+      scope.loadExams = function(){
+	jkci_classes.one("exams", scope.exam.id).customGET("get_descendants").then(function(data){
+	  scope.exams = data.body;
+	})
+      };
+      scope.loadExams();
     }]
   }
 });

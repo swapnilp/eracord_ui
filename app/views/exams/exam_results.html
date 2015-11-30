@@ -1,1 +1,26 @@
-asdasd
+<div style="margin:20px 0;">
+  Filter Student <input ng-model="search"> 
+  <h2>Results</h2>
+  <table st-table="rowCollection" class="table organisationCoursesTable">
+    <thead>
+      <tr>
+	<th st-sort="firstName">Index</th>
+	<th st-sort="lastName">student</th>
+	<th st-sort="birthDate">p_mobile</th>
+	<th st-sort="balance">Marks</th>
+	<th st-sort="balance">Is Present</th>
+	<th st-sort="balance">Ignored</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in examCatlogs| filter:search">
+	<td>{{$index + 1}}</td>
+	<td>{{row.student}}</td>
+	<td>{{row.p_mobile}}</td>
+	<td>{{row.marks}}</td>
+	<td>{{row.is_present}}</td>
+	<td>{{row.is_ingored || false}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

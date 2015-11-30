@@ -62,21 +62,30 @@
       <span ng-show="!exam.create_verification">
 	<button class="btn btn-primary" ng-click="verifyExam(exam)" ng-disabled="requestLoading">Verify Exam</button>
       </span>
-      <span ng-show="exam.create_verification && !exam.is_completed">
+      <span ng-show="exam.create_verification && !exam.is_completed && !exam.is_group">
 	<button class="btn btn-primary" ng-click="conductExam(exam);" ng-disabled="requestLoading">Conduct Exam</button>
       </span>
       <span ng-show="!exam.is_completed">
 	<button class="btn btn-primary" ng-click="deleteExam(exam);" ng-disabled="requestLoading">Remove Exam</button>
       </span>
-      <a href="#/exams" class="btn btn-default" ng-disabled="requestLoading">Back</a>
+      <span ng-if="!exam.root">
+	<a href="#/classes/{{class_id}}/exams/{{exam.root_id}}/show" class="btn btn-default">Back</a>
+      </span>
+      <span ng-if="exam.root">
+	<a href="#/exams" class="btn btn-default" ng-disabled="requestLoading">Back</a>
+      </span>
     </div>
   </div>
-  <div class="col-sm-12 textLeft" ng-if="exam.is_completed && exam.is_result_decleared == null">
+  <div class="col-sm-12 textLeft" ng-if="exam.is_completed && exam.is_result_decleared == null  && !exam.is_group">
     <exam-catlog exam="exam" class-id="{{class_id}}">
     </exam-catlog>
   </div>
-  <div class="col-sm-12 textLeft" ng-if="exam.is_completed && exam.is_result_decleared">
+  <div class="col-sm-12 textLeft" ng-if="exam.is_completed && exam.is_result_decleared  && !exam.is_group">
     <exam-results exam="exam" class-id="{{class_id}}">
     </exam-results>
+  </div>
+  <div class="col-sm-12 textLeft" ng-if="exam.is_group">
+    <new-group-exam exam="exam" class-id="{{class_id}}">
+    </new-group-exam>
   </div>
 </div>
