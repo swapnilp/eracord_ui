@@ -8,12 +8,15 @@ app.directive('classStudents', function(Restangular) {
     restrict: 'AE',
     transclude: true,
     scope: {
-      classId: '@'
+      classId: '@',
+      classStudentsTab: '@'
     },
     templateUrl: 'views/students/index.html',
     controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', function(scope, Restangular, Flash, $location, $window){
       scope.cources = [];
 
+      scope.studentLoaded = false;
+      
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       scope.isRemove = true;
       scope.loadCources = function() {
@@ -32,10 +35,78 @@ app.directive('classStudents', function(Restangular) {
 	  });
 	}
       }
-
-      scope.loadCources();
       
+      scope.$watch('classStudentsTab', function(){
+	if(scope.classStudentsTab === 'true' && scope.studentLoaded == false){
+	  scope.loadCources();
+	  scope.studentLoaded = true;
+	}
+      });
+
     }]
   };
 });
 
+app.directive('classExams', function(Restangular) {
+  return {
+    restrict: 'AE',
+    transclude: true,
+    scope: {
+      classId: '@',
+      classExamsTab: '@'
+    },
+    templateUrl: 'views/exams/index.html',
+    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', function(scope, Restangular, Flash, $location, $window){
+
+      scope.examsLoaded = false;
+      
+      var jkci_classes = Restangular.one("jkci_classes", scope.classId);
+      scope.isRemove = true;
+      scope.loadClassExams = function() {
+	jkci_classes.customGET("exams").then(function(data){
+	  scope.exams = data.body;
+	});
+      };
+
+      scope.$watch('classExamsTab', function(){
+	if(scope.classExamsTab === 'true' && scope.examsLoaded == false){
+	  scope.loadClassExams();
+	  scope.examsLoaded = true;
+	}
+      });
+
+    }]
+  };
+});
+
+app.directive('classDailyTeaches', function(Restangular) {
+  return {
+    restrict: 'AE',
+    transclude: true,
+    scope: {
+      classId: '@',
+      classDtpTab: '@'
+    },
+    templateUrl: 'views/daily_catlogs/index.html',
+    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', function(scope, Restangular, Flash, $location, $window){
+      var dailyCatlogLoaded = false;
+      var jkci_classes = Restangular.one("jkci_classes", scope.classId);
+      
+      scope.loadDailyCatlog = function() {
+	jkci_classes.customGET('daily_teachs').then(function(data){
+	  if(data.success) {
+	    scope.dtps = data.daily_teaching_points;
+	  }else {
+	  }
+	});
+      };
+
+      scope.$watch('classDtpTab', function(){
+	if(scope.classDtpTab === 'true' && dailyCatlogLoaded === false){
+	  scope.loadDailyCatlog();
+	  scope.dailyCatlogLoaded = true;
+	}
+      });
+    }]
+  }
+});

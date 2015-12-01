@@ -1,0 +1,64 @@
+
+<div class="col-md-6 col-md-offset-0">
+  <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
+  <form name="form" ng-submit="registorDailyTeaches()" role="form">
+    <div class="form-group">
+      <label for="class">Class</label>
+      <br />
+      <span>{{class_name}}</span>
+      <span ng-show="form.organisation.$dirty && form.organisation.$error.required" class="help-block">Oganisation ID is required</span>
+    </div>
+    <div class="form-group">
+      <label for="class">Divisions</label>
+      <br />
+      <div
+	 angular-multi-select
+	 helper-elements="noreset nofilter"
+	 input-model="divisions"
+	 output-model="selectedDivisions"
+	 item-label="<[ name ]>"
+	 button-template="angular-multi-select-btn-data.htm"
+	 button-label="<[ name ]>"
+	 button-label-separator='[" & ", " & "]'
+	 tick-property="ticked"
+	 >
+      </div>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': form.date.$dirty && form.date.$error.required }">
+      <label for="date">Date</label>
+      <p class="input-group">
+	<input type="text" class="form-control" datetime-picker="dd/MM/yyyy HH:mm" ng-model="vm.daily_teachs.date" is-open="isOpen" ng-click="openCalendar($event, prop);" ng-focus="openCalendar($event, prop);" readonly required/>
+      </p>
+      <span ng-show="form.marks.$dirty && form.marks.$error.required" class="help-block">Exam Date is required</span>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': form.subject_id.$dirty && form.subject_id.$error.required }">
+      <label for="subject_id">Subject</label>
+      <select class="form-control ng-touched" ng-model="vm.daily_teachs.subject_id" ng-change="getChapters()" ng-options="subject.id as subject.std_name for subject in subjects"  required>
+      </select>
+      <span ng-show="form.subject_id.$dirty && form.subject_id.$error.required" class="help-block">Subject is required</span>
+    </div>
+    
+    <div class="form-group" ng-class="{ 'has-error': form.chapter_id.$dirty && form.chapter_id.$error.required }">
+      <label for="chapter_id">Chapter</label>
+      <select class="form-control ng-touched" ng-model="vm.daily_teachs.chapter_id" ng-change="getChaptersPoints()" ng-options="chapter.id as chapter.name for chapter in chapters"  required>
+      </select>
+      <span ng-show="form.chapter_id.$dirty && form.chapter_id.$error.required" class="help-block">Chapter is required</span>
+    </div>
+    
+    <div class="form-group" ng-class="{ 'has-error': form.chapter_id.$dirty && form.chapter_id.$error.required }">
+      <label for="chapters_point_id">Points</label>
+      <label ng-repeat="point in points">
+	<input type="checkbox" checklist-model="selectedPoints" checklist-value="point.id"> {{point.name}} <br />
+      </label>
+    </div>
+    
+    
+    
+    <div class="form-actions">
+      <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Save</button>
+      <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+      <a href="#/classes/{{classId}}/exams/{{parentExamId}}/show" class="btn btn-default" ng-if="inGroup">Back</a>
+      <a href="#/admin_desk" class="btn btn-default" ng-if="!inGroup">Back</a>
+    </div>
+  </form>
+</div>

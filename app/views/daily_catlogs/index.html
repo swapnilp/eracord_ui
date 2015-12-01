@@ -1,0 +1,28 @@
+<div style="margin:20px 0;">
+  <table st-table="rowCollection" class="table dailyTeachesTable">
+    <thead>
+      <tr>
+	<th st-sort="firstName">Subject</th>
+	<th st-sort="lastName">Date</th>
+	<th st-sort="birthDate">Chapter</th>
+	<th st-sort="balance">Points</th>	
+	<th st-sort="balance">Absents</th>
+	<th st-sort="balance">Sms Send</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in dtps">
+	<td>{{row.subject}}</td>
+	<td>{{row.date}}</td>
+	<td>{{row.chapter}}</td>
+	<td>{{row.points}}</td>
+	<td>{{row.absents}}</td>
+	<td>
+	  <a href="", class="btn btn-primary">Show</a>
+	</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+

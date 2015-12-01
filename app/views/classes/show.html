@@ -45,6 +45,7 @@
     </div>
     <div class="col-sm-12 textLeft paddingTop10">
       <div class="col-sm-12 textLeft paddingTop10">
+	<a href="#/classes/{{class.id}}/daily_catlogs/new" class="btn btn-primary">Create Daily Catlog</a>
 	<a href="#/classes/{{class.id}}/exams/new" class="btn btn-primary">Create Exam</a>
 	<a href="#/classes/{{class.id}}/assign_students" class="btn btn-primary">Assign Student</a>
 	<button class="btn btn-primary">Manage Roll Number</button>
@@ -54,17 +55,23 @@
     </div>
     <div class="col-sm-12 textLeft paddingTop20">
       <uib-tabset justified="true">
-	<uib-tab>
+	<uib-tab ng-attr-active="classStudentTab">
 	  <uib-tab-heading><i class="icon-bell"></i> Students</uib-tab-heading>
-	  <div class-students class-id="{{class_id}}"></div>
+	  <div class-students class-id="{{class_id}}" class-students-tab="{{classStudentTab}}"></div>
 	</uib-tab>
-	<uib-tab>
+	<uib-tab ng-attr-active="classExamsTab">
 	  <uib-tab-heading><i class="icon-bell"></i> Exams</uib-tab-heading>
 	  <div>
-	    
+	    <div class-exams class-id="{{class_id}}" class-exams-tab="{{classExamsTab}}"></div>
 	  </div>
 	</uib-tab>
-	<uib-tab>
+	<uib-tab ng-attr-active="classDtpTab">
+	  <uib-tab-heading><i class="icon-bell"></i> Daily Teaches</uib-tab-heading>
+	  <div>
+	    <div class-daily-teaches class-id="{{class_id}}" class-dtp-tab="{{classDtpTab}}"></div>
+	  </div>
+	</uib-tab>
+	<uib-tab >
 	  <uib-tab-heading><i class="icon-bell"></i> Divisions</uib-tab-heading>
 	  <div>
 	    <div organisation-sub-organisationsasd></div>
