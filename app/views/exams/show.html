@@ -57,7 +57,7 @@
   <div class="col-sm-12 textLeft">
     <div class="col-sm-12 paddingTop10" style="">
       <span ng-show="!exam.is_completed">
-	<button class="btn btn-primary" ng-click="editExam(exam)" ng-disabled="requestLoading">Edit</button>
+	<a href="#/classes/{{class_id}}/exams/{{exam.id}}/edit" class="btn btn-primary" ng-disabled="requestLoading">Edit</a>
       </span>
       <span ng-show="!exam.create_verification">
 	<button class="btn btn-primary" ng-click="verifyExam(exam)" ng-disabled="requestLoading">Verify Exam</button>

@@ -20,6 +20,11 @@ app.config(function($routeProvider) {
       controller: 'ExamsCtrl',
       controllerAs: 'exams'
     })
+    .when('/classes/:class_id/exams/:exam_id/edit', {
+      templateUrl: 'views/exams/new_exam.html',
+      controller: 'ExamsCtrl',
+      controllerAs: 'exams'
+    })
     .when('/classes/:class_id/exams/:exam_id/new_grouped_exams', {
       templateUrl: 'views/exams/new_exam.html',
       controller: 'ExamsCtrl',

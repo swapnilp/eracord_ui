@@ -184,14 +184,9 @@ angular.module('eracordUiApp.controller')
       };
 
       $scope.deleteExam = function(exam){
-	$scope.exam.verify_result = !$scope.exam.verify_result;
+	//$scope.exam.verify_result = !$scope.exam.verify_result;
       };
 
-      $scope.editExam = function(exam){
-
-      };
-      
-      
       // upload on file select or drop
       $scope.upload = function (file) {
 	$scope.requestLoading = true;
@@ -217,7 +212,63 @@ angular.module('eracordUiApp.controller')
 
         });
       };
-    }
+    };
+    //end of show path
+
+    if($location.path() === "/classes/"+$routeParams.class_id+"/exams/"+ $routeParams.exam_id+"/edit") {
+      var jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
+      $scope.isOpen = false; //for calender 
+      //$scope.isGroup = $routeParams.isGroup || false;
+
+      $scope.openCalendar = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $scope.isOpen = true;
+      };
+
+      jkci_classes.one("exams", $routeParams.exam_id).customGET("edit").then(function(data){
+	if(data.success){
+	  $scope.vm = data.exam;
+	  //$scope.class_name = data.data.class_exam_data.class_name;
+	  $scope.divisions = data.sub_classes;
+	  $scope.isGroup = data.exam.is_group;
+	  $scope.subjects = data.subjects;
+	  
+	  $scope.examTypes= [{name: "Subjective", ticked: (data.exam.exam_type === "Subjective")}, {name: "Objective", ticked: (data.exam.exam_type !== "Subjective")}];
+	}else{
+	  $location.path("/admin_desk");
+	}
+      });
+
+      $scope.createExam = function(){
+	if(!$scope.isGroup){
+	  if(_.size($scope.selectedSubject) === 0){
+	    Flash.create('warning', "Subject must be present", 'alert-danger');
+	    return true;
+	  };
+	  
+	  if(_.size($scope.selectedExamType) === 0){
+	    Flash.create('warning', "Subject Type must be present", 'alert-danger');
+	    return true;
+	  }
+	  
+	  $scope.vm.subject_id = $scope.selectedSubject[0].id;
+	  $scope.vm.exam_type = $scope.selectedExamType[0].name;
+	}
+	
+	$scope.vm.sub_classes = _.pluck($scope.selectedDivisions, "id").join(',');
+	$scope.vm.jkci_class_id = $routeParams.class_id;
+	$scope.vm.is_group = $scope.isGroup;
+	jkci_classes.one("exams", $routeParams.exam_id).customPOST({exam: $scope.vm},"update").then(function(data){
+	  if(data.success) {
+	    $location.path("/classes/"+$routeParams.class_id+"/exams/"+data.id+"/show");
+	  }else {
+	    Flash.create('warning', "Something went wrong", 'alert-warning');
+	  }
+	});
+      }
+      
+    };
     
     
   }]);
