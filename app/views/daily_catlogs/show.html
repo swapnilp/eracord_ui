@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="col-sm-12">
+    
+    <div class="textLeft">
+      <h3 style="margin-top:5px;">Class: <small><a href="/jkci_classes/{{class_id}}">{{daily_teache.jkci_class}}</a></small></h3>
+    </div>
+    <div class="textLeft">
+      <h3>Date: &nbsp;
+	<small style="font-size:18px;" class="dailyTeachDate">  
+	  {{daily_teache.date}}
+	</small>
+      </h3>
+    </div>
+    <div class="textLeft">
+      <h3>Subjects: &nbsp;
+	<small style="font-size:18px;" class="dailyTeachDate">  
+	  {{daily_teache.subject}}
+	</small>
+      </h3>
+    </div>
+    <div class="textLeft">
+      <h3>Chapter: &nbsp;
+	<small style="font-size:18px;" class="dailyTeachDate">  
+	  {{daily_teache.chapter}}
+	</small>
+      </h3>
+    </div>
+    <div class="textLeft">
+      <h3>points: &nbsp;
+	<small style="font-size:18px;" class="dailyTeachDate">  
+	  {{daily_teache.points}}
+	</small>
+      </h3>
+    </div>
+    <div class="textLeft" style="margin-top:20px;">
+      <a class="btn btn-default" href="#/classes/{{class_id}}/daily_catlogs/{{daily_teache.id}}/edit">Edit</a>
+      <a class="btn btn-default" href="#/classes/{{class_id}}">Back</a>
+    </div>
+    <div class="textLeft">
+      <class-daily-teaches-catlogs daily-teaches-id="{{daily_teache.id}}" class_id="{{class_id}}" is-verify_absenty="daily_teache.verify_absenty"></class-daily-teaches-catlogs>
+    </div>
+  </div>
+</div>

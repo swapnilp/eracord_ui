@@ -44,6 +44,7 @@ module.exports = function(config) {
       'bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.min.js',
       'bower_components/ng-file-upload/ng-file-upload.js',
       'bower_components/checklist-model/checklist-model.js',
+      'bower_components/angular-utils-pagination/dirPagination.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

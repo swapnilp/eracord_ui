@@ -14,6 +14,16 @@ app.config(function($routeProvider) {
       templateUrl: 'views/daily_catlogs/new.html',
       controller: 'DailyCatlogsCtrl',
       controllerAs: 'dailyCatlogs'
+    })
+    .when('/classes/:class_id/daily_catlogs/:dtp_id/show', {
+      templateUrl: 'views/daily_catlogs/show.html',
+      controller: 'DailyCatlogsCtrl',
+      controllerAs: 'dailyCatlogs'
+    })
+    .when('/classes/:class_id/daily_catlogs/:dtp_id/edit', {
+      templateUrl: 'views/daily_catlogs/new.html',
+      controller: 'DailyCatlogsCtrl',
+      controllerAs: 'dailyCatlogs'
     });
 });
 

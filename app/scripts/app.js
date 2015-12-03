@@ -36,6 +36,7 @@ angular
     'angular-multi-select',
     'ngFileUpload',
     'checklist-model',
+    'angularUtils.directives.dirPagination',
     'eracordUiApp.controller',
     'eracordUiApp.directives'
   ])
@@ -50,8 +51,13 @@ angular
     RestangularProvider.setRequestSuffix('.json');
     RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
       var extractedData;
+      var count
       if (operation === "getList") {
-        extractedData = data.body;
+	if(data.count){
+          extractedData = [data.body, data.count];
+	}else {
+	   extractedData = data.body;
+	}
       } else {
         extractedData = data;
       }

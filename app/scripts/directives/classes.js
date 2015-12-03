@@ -59,18 +59,33 @@ app.directive('classExams', function(Restangular) {
     controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', function(scope, Restangular, Flash, $location, $window){
 
       scope.examsLoaded = false;
-      
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
+      scope.totalExams = 0;
+      
+      scope.pagination = {
+        current: 1
+      };
+      
+      var getResultsPage = function(pageNumber) {
+	jkci_classes.customGET("exams" ,{page: pageNumber}).then(function(data){
+	  scope.exams = data.body;
+	  scope.totalExams = data.count;
+	});
+
+      };
+      
+      scope.pageChanged = function(newPage) {
+        getResultsPage(newPage);
+      };
+      
       scope.isRemove = true;
       scope.loadClassExams = function() {
-	jkci_classes.customGET("exams").then(function(data){
-	  scope.exams = data.body;
-	});
+	
       };
 
       scope.$watch('classExamsTab', function(){
 	if(scope.classExamsTab === 'true' && scope.examsLoaded == false){
-	  scope.loadClassExams();
+	  getResultsPage(1);
 	  scope.examsLoaded = true;
 	}
       });

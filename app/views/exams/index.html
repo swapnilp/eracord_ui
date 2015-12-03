@@ -14,7 +14,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="row in exams">
+      <tr dir-paginate="row in exams | itemsPerPage: 10" total-items="totalExams" current-page="pagination.current">
 	<td>{{row.name}}</td>
 	<td>{{row.marks}}</td>
 	<td>{{row.exam_date}}</td>
@@ -29,6 +29,6 @@
       </tr>
     </tbody>
   </table>
-
+  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
 </div>
 

@@ -19,9 +19,23 @@ angular.module('eracordUiApp.controller')
     
     if($location.path() === '/exams') {
       var exams = Restangular.all("exams");
-      exams.getList().then(function(data){
-	$scope.exams = data;
-      });
+      $scope.totalExams = 0;
+      $scope.pagination = {
+        current: 1
+      };
+      
+      var getResultsPage = function(pageNumber) {
+	exams.getList({page: pageNumber}).then(function(data){
+	  $scope.exams = data[0];
+	  $scope.totalExams = data[1];
+	});
+      };
+      
+      $scope.pageChanged = function(newPage) {
+        getResultsPage(newPage);
+      };
+      
+      getResultsPage(1);
       
     };
     
