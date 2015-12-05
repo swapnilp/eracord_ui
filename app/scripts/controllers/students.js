@@ -17,6 +17,7 @@ angular.module('eracordUiApp.controller')
     
     if($location.path() === '/students') {
       var students = Restangular.all("students");
+
       students.getList().then(function(data){
 	$scope.students = data;
       });

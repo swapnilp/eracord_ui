@@ -16,9 +16,9 @@ app.directive('classStudents', function(Restangular) {
       scope.cources = [];
 
       scope.studentLoaded = false;
-      
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       scope.isRemove = true;
+
       scope.loadCources = function() {
 	jkci_classes.customGET("students").then(function(data){
 	  scope.students = data.students;

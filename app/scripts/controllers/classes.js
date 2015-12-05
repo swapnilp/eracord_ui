@@ -73,6 +73,27 @@ angular.module('eracordUiApp.controller')
       }
     };
     // end of class assign student if path
+
+    if($location.path() === "/classes/"+$routeParams.class_id+"/manage_student_subjects") {
+      var jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
+      $scope.classId = $routeParams.class_id;
+      jkci_classes.customGET("manage_student_subject").then(function(data){
+	if(data.success) {
+	  $scope.jk_class = data.jkci_class;
+	  $scope.students = data.students;
+	  $scope.subjects = data.subjects;
+	}
+      });
+
+      $scope.saveStudentSubjects = function(){
+	jkci_classes.customPOST({students: $scope.students}, "save_student_subjects").then(function(data){
+	  if(data.success) {
+	    $location.path("/classes/"+ $scope.classId);
+	  } else {
+	  }
+	});
+      };
+    }
     
   }]);
 

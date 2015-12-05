@@ -1,0 +1,34 @@
+<div class="container" style="margin: 20px 0;">
+  <div class="col-sm-12 textLeft">
+    <h2>
+      Manage {{jk_class.name}}'s students optional subjects <br>
+      <small><span ng-repeat="subject in subjects"> {{subject.name}} </span> optional subjects for {{jk_class.name}} class</small>
+    </h2>
+    <table class="table table-hover studentsTable highlight table-striped">
+      <thead>
+	<tr>
+	  <th>Roll Number</th>
+	  <th>Name</th>
+	  <th>Subjects</th>
+	</tr>
+      </thead>
+      <tbody><tr class="studentSubjects" data-student-id="7">
+	<tr class="studentSubjects" ng-repeat="student in students" >
+	  <td>
+	  {{student.roll_number}}  
+	  </td>
+	  <td>
+	    {{student.name}}
+	  </td>
+	  <td>
+	    <label ng-repeat="subject in subjects">
+	      <input type="checkbox" checklist-model="student.o_subjects" checklist-value="subject.id"> {{subject.name}} <br />
+	    </label>
+	  </td>
+	</tr>
+      </tbody>
+    </table>
+    <button class="btn btn-primary" ng-click="saveStudentSubjects();">Save</button>
+    <a class="btn btn-default" href="#/classes/{{classId}}">Cancel</a>
+  </div>
+</div>

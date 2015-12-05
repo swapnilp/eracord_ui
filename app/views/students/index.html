@@ -1,6 +1,7 @@
 <div style="margin:20px 0;">
-  <a href="#/classes/{{classId}}/students/new" class="btn btn-success" ng-if="classId"> New Student</a>
-  <a href="#/students/new" class="btn btn-success" ng-if="!classId"> New Student</a>
+  <a href="#/classes/{{classId}}/students/new" class="btn btn-primary" ng-if="classId"> New Student</a>
+  <a href="#/students/new" class="btn btn-primary" ng-if="!classId"> New Student</a>
+  <a href="#/classes/{{classId}}/manage_student_subjects" class="btn btn-primary" ng-if="classId">manage_student_subjects</a>
   <input type="text" ng-model="filterStudent.name">
   <table st-table="rowCollection" class="table organisationCoursesTable">
     <thead>
@@ -11,6 +12,7 @@
 	<th st-sort="balance">Standard</th>
 	<th st-sort="balance">Parent Name</th>
 	<th st-sort="balance">Parent Mobile</th>
+	<th st-sort="balance" ng-if="!isRemove">Classes</th>
 	<th></th>
 	<th ng-if="isRemove">Remove</th>
       </tr>
@@ -23,6 +25,7 @@
 	<td>{{row.standard}}</td>
 	<td>{{row.parent_name}}</td>
 	<td>{{row.p_mobile}}</td>
+	<td ng-if="!isRemove">{{row.class_names}}</td>
 	<td>
 	  <a href="#/students/{{row.id}}/show" class="btn btn-link">Show</a>
 	</td>

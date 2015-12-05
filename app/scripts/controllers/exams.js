@@ -16,7 +16,7 @@ angular.module('eracordUiApp.controller')
       $location.path('/user/sign_in');
       return true;
     };
-    
+
     if($location.path() === '/exams') {
       var exams = Restangular.all("exams");
       $scope.totalExams = 0;
