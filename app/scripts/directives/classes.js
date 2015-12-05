@@ -118,18 +118,28 @@ app.directive('classDailyTeaches', function(Restangular) {
       var dailyCatlogLoaded = false;
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       
-      scope.loadDailyCatlog = function() {
-	jkci_classes.customGET('daily_teachs').then(function(data){
+      scope.totalDtps = 0;
+      scope.pagination = {
+        current: 1
+      };
+      
+      var getResultsPage = function(pageNumber) {
+	jkci_classes.customGET('daily_teachs', {page: pageNumber}).then(function(data){
 	  if(data.success) {
 	    scope.dtps = data.daily_teaching_points;
+	    scope.totalDtps = data.count;
 	  }else {
 	  }
 	});
       };
-
+      
+      scope.pageChanged = function(newPage) {
+        getResultsPage(newPage);
+      };
+      
       scope.$watch('classDtpTab', function(){
 	if(scope.classDtpTab === 'true' && dailyCatlogLoaded === false){
-	  scope.loadDailyCatlog();
+	  getResultsPage(1);
 	  scope.dailyCatlogLoaded = true;
 	}
       });

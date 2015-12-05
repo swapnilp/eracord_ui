@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="row in dtps">
+      <tr dir-paginate="row in dtps | itemsPerPage: 10" total-items="totalDtps" current-page="pagination.current" pagination-id="dtpsPagi">
 	<td>{{row.subject}}</td>
 	<td>{{row.date}}</td>
 	<td>{{row.chapter}}</td>
@@ -23,6 +23,6 @@
       </tr>
     </tbody>
   </table>
-
+  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)" pagination-id="dtpsPagi"></dir-pagination-controls>
 </div>
 

@@ -19,6 +19,7 @@ angular.module('eracordUiApp.controller')
     
     if($location.path() === "/daily_catlogs") {
       var dtps = Restangular.all("daily_teachs");
+      
       dtps.getList().then(function(data){
 	
       });
