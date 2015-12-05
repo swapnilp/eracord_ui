@@ -38,7 +38,7 @@
       <span ng-show="form.subject_id.$dirty && form.subject_id.$error.required" class="help-block">Subject is required</span>
     </div>
     
-    <div class="form-group" ng-class="{ 'has-error': form.subject_id.$dirty && form.subject_id.$error.required }" ng-if="isNew">
+    <div class="form-group" ng-class="{ 'has-error': form.subject_id.$dirty && form.subject_id.$error.required }" ng-if="!isNew">
       <label for="subject_id">Subject</label>
     </div>
     

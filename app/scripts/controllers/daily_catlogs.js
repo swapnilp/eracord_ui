@@ -30,6 +30,7 @@ angular.module('eracordUiApp.controller')
       $scope.isNew = true;
       $scope.isOpen = false; //for calender 
       $scope.selectedPoints = [];
+      $scope.vm = {};
 
       $scope.openCalendar = function(e) {
         e.preventDefault();
@@ -44,6 +45,7 @@ angular.module('eracordUiApp.controller')
       });
 
       $scope.getChapters = function(){
+	
 	var subject_id = $scope.vm.daily_teachs.subject_id;
 	jkci_classes.customGET("get_chapters", {subject_id: subject_id}).then(function(data){
 	  if(data.success) {
