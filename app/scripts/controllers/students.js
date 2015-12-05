@@ -18,9 +18,24 @@ angular.module('eracordUiApp.controller')
     if($location.path() === '/students') {
       var students = Restangular.all("students");
 
-      students.getList().then(function(data){
-	$scope.students = data;
-      });
+      $scope.totalStudents = 0;
+      
+      $scope.pagination = {
+        current: 1
+      };
+
+      var getResultsPage = function(pageNumber) {
+	students.getList({page: pageNumber}).then(function(data){
+	  $scope.students = data[0];
+	  $scope.totalStudents = data[1];
+	});
+      };
+      
+      $scope.pageChanged = function(newPage) {
+        getResultsPage(newPage);
+      };
+
+      getResultsPage(1);
     };
 
     if($location.path() === '/students/new' || $location.path() === "/classes/" + $routeParams.class_id + "/students/new"){

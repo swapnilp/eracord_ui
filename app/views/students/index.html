@@ -18,7 +18,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="row in students | toArray:false| filter:filterStudent">
+      <tr dir-paginate="row in students | toArray:false| filter:filterStudent | itemsPerPage: 10" total-items="totalStudents" current-page="pagination.current" pagination-id="student">
 	<td>{{$index+1}}</td>
 	<td>{{row.name}}</td>
 	<td>{{row.batch}}</td>
@@ -35,6 +35,6 @@
       </tr>
     </tbody>
   </table>
-
+  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)" pagination-id="student"></dir-pagination-controls>
 </div>
 

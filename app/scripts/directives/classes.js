@@ -14,16 +14,27 @@ app.directive('classStudents', function(Restangular) {
     templateUrl: 'views/students/index.html',
     controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', function(scope, Restangular, Flash, $location, $window){
       scope.cources = [];
-
+      
       scope.studentLoaded = false;
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       scope.isRemove = true;
+      scope.totalStudents = 0;
+      
+      scope.pagination = {
+        current: 1
+      };
 
-      scope.loadCources = function() {
-	jkci_classes.customGET("students").then(function(data){
+      var getResultsPage = function(pageNumber) {
+	jkci_classes.customGET("students", {page: pageNumber}).then(function(data){
 	  scope.students = data.students;
+	  scope.totalStudents = data.count;
 	});
       };
+      
+      scope.pageChanged = function(newPage) {
+        getResultsPage(newPage);
+      };
+      
 
       scope.removeStudent = function(student) {
 	if($window.confirm('Are you sure?')){
@@ -38,7 +49,7 @@ app.directive('classStudents', function(Restangular) {
       
       scope.$watch('classStudentsTab', function(){
 	if(scope.classStudentsTab === 'true' && scope.studentLoaded == false){
-	  scope.loadCources();
+	  getResultsPage(1);
 	  scope.studentLoaded = true;
 	}
       });
