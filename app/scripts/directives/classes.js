@@ -146,3 +146,45 @@ app.directive('classDailyTeaches', function(Restangular) {
     }]
   }
 });
+
+app.directive('classNotifications', function(Restangular) {
+  return {
+    restrict: 'AE',
+    transclude: true,
+    scope: {
+      classId: '@',
+      classNotificationTab: '@'
+    },
+    templateUrl: 'views/classes/notifications.html',
+    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', function(scope, Restangular, Flash, $location, $window){
+      var dailyCatlogLoaded = false;
+      var jkci_classes = Restangular.one("jkci_classes", scope.classId);
+      
+      scope.totalNotifications = 0;
+      scope.pagination = {
+        current: 1
+      };
+      
+      var getResultsPage = function(pageNumber) {
+	jkci_classes.customGET('get_notifications', {page: pageNumber}).then(function(data){
+	  if(data.success) {
+	    scope.notifications = data.notifications;
+	    scope.totalNotifications = data.count;
+	  }else {
+	  }
+	});
+      };
+      
+      scope.pageChanged = function(newPage) {
+        getResultsPage(newPage);
+      };
+      
+      scope.$watch('classNotificationTab', function(){
+	if(scope.classNotificationTab === 'true' && dailyCatlogLoaded === false){
+	  getResultsPage(1);
+	  scope.dailyCatlogLoaded = true;
+	}
+      });
+    }]
+  }
+});
