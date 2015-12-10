@@ -24,6 +24,11 @@ app.config(function($routeProvider) {
       templateUrl: 'views/classes/manage_student_subjects.html',
       controller: 'ClassesCtrl',
       controllerAs: 'classes'
+    })
+    .when('/classes/:class_id/manage_student_rollnumber', {
+      templateUrl: 'views/classes/manage_student_rollnumber.html',
+      controller: 'ClassesCtrl',
+      controllerAs: 'classes'
     });
 });
 

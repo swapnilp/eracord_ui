@@ -1,0 +1,23 @@
+<div style="margin:20px 0;">
+  <table st-table="rowCollection" class="table organisationCoursesTable">
+    <thead>
+      <tr>
+	<th st-sort="firstName">Name</th>
+	<th st-sort="lastName">Marks</th>
+	<th st-sort="lastName">Students</th>
+	<th st-sort="balance">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in divisions">
+	<td>{{row.id}}</td>
+	<td>{{row.name}}</td>
+	<td>{{row.students_count}}</td>
+	<td>
+	  <a href="#/classes/{{classId}}/divisions/{{row.id}}">Show</a>
+	</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

@@ -93,8 +93,37 @@ angular.module('eracordUiApp.controller')
 	  }
 	});
       };
-    }
-    
+    };
+
+    if($location.path() === "/classes/"+$routeParams.class_id+"/manage_student_rollnumber") {
+      var jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
+      $scope.classId = $routeParams.class_id;
+      jkci_classes.customGET("manage_roll_number").then(function(data){
+	if(data.success) {
+	  $scope.jk_class = data.jkci_class;
+	  $scope.students = data.students;
+	  $scope.subjects = data.subjects;
+	}
+      });
+      
+      $scope.saveRollNumber = function() {
+	var rollNumbers = _.map(_.compact(_.pluck($scope.students, 'roll_number')), function(roll){ return ""+ roll;});
+	var uniqRollNumbers = _.uniq(rollNumbers);
+
+	if(rollNumbers.length === uniqRollNumbers.length){
+	  jkci_classes.customPOST({roll_number: $scope.students}, "save_roll_number", {}).then(function(data){
+	    if(data.success) {
+	      $location.path("/classes/"+$scope.classId);
+	    }else {
+	    }
+	  });
+	}else {
+	}
+      }
+    };
+
+    //end of manage roll number
+
   }]);
 
 

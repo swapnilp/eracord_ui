@@ -48,8 +48,8 @@
 	<a href="#/classes/{{class.id}}/daily_catlogs/new" class="btn btn-primary">Create Daily Catlog</a>
 	<a href="#/classes/{{class.id}}/exams/new" class="btn btn-primary">Create Exam</a>
 	<a href="#/classes/{{class.id}}/assign_students" class="btn btn-primary" is-role-visible='["admin"]'>Assign Student</a>
-	<button class="btn btn-primary">Manage Roll Number</button>
-	<button class="btn btn-primary">Create Division</button>
+	<a href="#/classes/{{class.id}}/manage_student_rollnumber" class="btn btn-primary">Manage Roll Number</a>
+	<a href="#/classes/{{class.id}}/divisions/new" class="btn btn-primary">Create Division</a>
 	<a href="#/admin_desk" class="btn btn-default">Back</a>
       </div>
     </div>
@@ -71,10 +71,10 @@
 	    <div class-daily-teaches class-id="{{class_id}}" class-dtp-tab="{{classDtpTab}}"></div>
 	  </div>
 	</uib-tab>
-	<uib-tab >
+	<uib-tab ng-attr-active="classDivisionTab">
 	  <uib-tab-heading><i class="icon-bell"></i> Divisions</uib-tab-heading>
 	  <div>
-	    <div organisation-sub-organisationsasd></div>
+	    <div class-divisions class-id="{{class_id}}" class-division-tab="{{classDivisionTab}}"></div>
 	  </div>
 	</uib-tab>
 	<uib-tab>
