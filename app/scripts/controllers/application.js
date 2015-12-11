@@ -13,9 +13,11 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $windo
   if ($scope.currentUser === undefined) {
     $scope.currentUser = {};
   }
+
   $scope.goBack = function() {
     return window.history.back();
   };
+  
   directAccessRoutes = ['/forgot-password/?', '/unlock-account/?', '/users/invitation/accept/?', '/users/password/edit/?', '/users/unlock/?'];
   for (i = 0, len = directAccessRoutes.length; i < len; i++) {
     path = directAccessRoutes[i];

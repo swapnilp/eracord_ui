@@ -13,7 +13,7 @@ app.filter('remainingStudents', function() {
 
     // Using the angular.forEach method, go through the array of data and perform the operation of figuring out if the language is statically or dynamically typed.
     angular.forEach(input, function(student) {
-      if (student.is_present == null && student.is_ingored == null && student.marks === null) {
+      if (student.is_present === null && student.is_ingored === null && student.marks === null) {
         out.push(student);
       }
       

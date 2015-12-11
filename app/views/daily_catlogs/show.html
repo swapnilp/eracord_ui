@@ -33,8 +33,8 @@
       </h3>
     </div>
     <div class="textLeft" style="margin-top:20px;">
-      <a class="btn btn-default" href="#/classes/{{class_id}}/daily_catlogs/{{daily_teache.id}}/edit">Edit</a>
-      <a class="btn btn-default" href="#/classes/{{class_id}}">Back</a>
+      <a class="btn btn-primary" href="#/classes/{{class_id}}/daily_catlogs/{{daily_teache.id}}/edit">Edit</a>
+      <button class="btn btn-default" ng-click="goBack();">Back</button>
     </div>
     <div class="textLeft">
       <class-daily-teaches-catlogs daily-teaches-id="{{daily_teache.id}}" class_id="{{class_id}}" is-verify_absenty="daily_teache.verify_absenty"></class-daily-teaches-catlogs>

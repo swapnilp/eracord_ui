@@ -40,7 +40,11 @@ app.directive('examCatlog', function(Restangular) {
 
       scope.removeMarks = function(catlog) {
 	catlog.marks = null;
+	catlog.is_present = null;
 	catlog.temp_marks = null;
+	if(!scope.addMarksFlag) {
+	  jkci_classes.one("exams", scope.exam.id).customPOST({exam_catlog_id: catlog.id}, "remove_exam_result", {});
+	}
       };
 
       scope.saveMarks = function() {
