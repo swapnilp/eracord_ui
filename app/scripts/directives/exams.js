@@ -184,7 +184,41 @@ app.directive('newGroupExam', function(Restangular) {
     }]
   }
 });
+//End of new group exams
 
+app.directive('groupedExamReports', function(Restangular) {
+  return {
+    restrict: 'AE',
+    transclude: true,
+    templateUrl: 'views/exams/grouped_exams_reports.html',
+    scope: {
+      exam: '=',
+      classId: '@',
+      groupedExamReportTab: '@'
+    },
+    controller: ['$scope', 'Restangular', 'Flash', '$location',  '$window', 'remainingStudentsFilter', function(scope, Restangular, Flash, $location, $window, remainingStudentsFilter){
+      var jkci_classes = Restangular.one("jkci_classes", scope.classId);
+      scope.reportLoaded = false;
+
+      scope.loadCatlog = function(){
+	jkci_classes.one("exams", scope.exam.id).customGET("group_exam_report").then(function(data){
+	  scope.tableHead = data.table_head;
+	  scope.tableData = data.table_data;
+	})
+      };
+
+      scope.$watch('groupedExamReportTab', function(){
+	if(scope.groupedExamReportTab === 'true' && scope.reportLoaded == false){
+	  scope.loadCatlog();
+	  scope.reportLoaded = true;
+	}
+      });
+
+
+    }]
+  }
+});
+// end of group exams report
     
 app.directive('validNumber', function() {
   return {

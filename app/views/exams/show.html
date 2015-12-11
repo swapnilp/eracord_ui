@@ -59,7 +59,7 @@
       <span ng-show="!exam.create_verification">
 	<a href="#/classes/{{class_id}}/exams/{{exam.id}}/edit" class="btn btn-primary" ng-disabled="requestLoading">Edit</a>
       </span>
-      <span ng-show="!exam.create_verification">
+      <span ng-show="!exam.create_verification" ng-if="exam.root">
 	<button class="btn btn-primary" ng-click="verifyExam(exam)" ng-disabled="requestLoading">Verify Exam</button>
       </span>
       <span ng-show="exam.create_verification && !exam.is_completed && !exam.is_group">
