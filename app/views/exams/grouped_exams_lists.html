@@ -1,0 +1,31 @@
+<a href="#/classes/{{classId}}/exams/{{exam.id}}/new_grouped_exams" class="btn btn-primary" ng-if="!exam.create_verification">Add Exam</a>
+<table st-table="rowCollection" class="table organisationCoursesTable">
+  <thead>
+    <tr>
+      <th st-sort="firstName">Name</th>
+      <th st-sort="lastName">Marks</th>
+      <th st-sort="birthDate">Date</th>
+      <th st-sort="balance">Subject</th>	
+      <th st-sort="balance">Type</th>
+      <th st-sort="balance">Status</th>
+      <th st-sort="balance">Published Date</th>
+      <th st-sort="balance">Ignored</th>
+      <th st-sort="balance">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="row in exams">
+      <td>{{row.name}}</td>
+      <td>{{row.marks}}</td>
+      <td>{{row.exam_date}}</td>
+      <td>{{row.subject}}</td>
+      <td>{{row.exam_type}}</td>
+      <td>{{row.status}}</td>
+      <td>{{row.published_date}}</td>
+      <td>{{row.ignored}}</td>
+      <td>
+	<a href="#/classes/{{row.jkci_class_id}}/exams/{{row.id}}/show">Show</a>
+      </td>
+      </tr>
+  </tbody>
+</table>
