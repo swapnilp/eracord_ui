@@ -9,7 +9,7 @@
   <table st-table="rowCollection" class="table organisationCoursesTable">
     <thead>
       <tr>
-	<th st-sort="firstName">Index</th>
+	<th st-sort="firstName">Number</th>
 	<th st-sort="lastName">Name</th>
 	<th st-sort="balance">Batch</th>
 	<th st-sort="balance">Standard</th>
@@ -22,7 +22,7 @@
     </thead>
     <tbody>
       <tr dir-paginate="row in students | toArray:false| filter:filterStudent | itemsPerPage: 10" total-items="totalStudents" current-page="pagination.current" pagination-id="student">
-	<td>{{$index+1}}</td>
+	<td><span ng-if="showRollNumber">{{ row.roll_number}}</span><span ng-if="!showRollNumber">{{$index+1}}</span></td>
 	<td>{{row.name}}</td>
 	<td>{{row.batch}}</td>
 	<td>{{row.standard}}</td>

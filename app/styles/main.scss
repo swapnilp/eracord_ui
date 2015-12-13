@@ -128,3 +128,22 @@ body {
     width: 100%;
   }
 }
+
+.classExamsTable tr.created:hover{
+  background: #E6AEAE;
+}
+
+.classExamsTable tr.verified{
+  color: #035827; 
+}
+
+.classExamsTable tr.published:hover{
+  background: #035827;
+  color:#FFF;
+}
+
+.classExamsTable tr.over_due:hover{
+  background: #960000;
+  color:#FFF;
+}
+

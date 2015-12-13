@@ -1,5 +1,5 @@
 <div style="margin:20px 0;">
-  <table st-table="rowCollection" class="table organisationCoursesTable">
+  <table st-table="rowCollection" class="table classExamsTable">
     <thead>
       <tr>
 	<th st-sort="firstName">Name</th>
@@ -14,7 +14,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr dir-paginate="row in exams | itemsPerPage: 10" total-items="totalExams" current-page="pagination.current">
+      <tr dir-paginate="row in exams | itemsPerPage: 10" total-items="totalExams" current-page="pagination.current" ng-class="{created: row.status == 'Created', verified: row.status == 'Verified', conducted: row.status == 'Conducted', published: row.status == 'Published', over_due: row.status == 'Pass date'}">
 	<td>{{row.name}}</td>
 	<td>{{row.marks}}</td>
 	<td>{{row.exam_date}}</td>

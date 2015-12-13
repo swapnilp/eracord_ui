@@ -123,7 +123,7 @@ angular.module('eracordUiApp.controller')
 	$scope.vm.daily_teachs.chapters_point_id = $scope.selectedPoints.join(',');
 	jkci_classes.one("daily_teachs", $routeParams.dtp_id).customPOST({daily_teaching_point: $scope.vm.daily_teachs}, "update").then(function(data){
 	  if(data.success) {
-	    $location.path("/classes/"+scope.classId).replace();
+	    $location.path("/classes/"+$scope.classId).replace();
 	  }else {
 	  }
 	});

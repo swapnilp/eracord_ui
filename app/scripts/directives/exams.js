@@ -43,7 +43,13 @@ app.directive('examCatlog', function(Restangular) {
 	catlog.is_present = null;
 	catlog.temp_marks = null;
 	if(!scope.addMarksFlag) {
-	  jkci_classes.one("exams", scope.exam.id).customPOST({exam_catlog_id: catlog.id}, "remove_exam_result", {});
+	  jkci_classes.one("exams", scope.exam.id).customPOST({exam_catlog_id: catlog.id}, "remove_exam_result", {}).then(function(data) {
+	    if(data.success){
+	      scope.exam.verify_result = false;
+	    } else{
+	      
+	    }
+	  });
 	}
       };
 

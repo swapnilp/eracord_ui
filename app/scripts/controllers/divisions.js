@@ -66,7 +66,7 @@ angular.module('eracordUiApp.controller')
       $scope.saveStudentList = function(){
 	jkci_classes.one("sub_classes", $scope.divisionId).customPOST({students: $scope.studentList.join(',')}, "add_students").then(function(data){
 	  if(data.success) {
-	    $location.path("/classes/"+$routeParams.class_id+"/divisions/"+$scope.divisionId);
+	    $location.path("/classes/"+$routeParams.class_id+"/divisions/"+$scope.divisionId).replace();
 	  } else {
 	    Flash.create('warning', "Please try again", 'alert-danger');
 	  }

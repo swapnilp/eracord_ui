@@ -14,6 +14,7 @@ app.directive('classStudents', function(Restangular) {
     templateUrl: 'views/students/index.html',
     controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', function(scope, Restangular, Flash, $location, $window){
       scope.cources = [];
+      scope.showRollNumber = true;
       
       scope.studentLoaded = false;
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
