@@ -109,7 +109,6 @@ angular.module('eracordUiApp.controller')
 	  $scope.initl = data.student.initl;
 	  $scope.gender = data.student.gender;
 	  $scope.optionalSubjects = data.o_subjects;
-	  console.log($scope.vm.user);
 	  //$scope.optionalSubjects = data.student.
 	}
       });
