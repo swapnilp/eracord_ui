@@ -16,18 +16,20 @@ angular.module('eracordUiApp.controller')
     
     if($location.path() === '/remaining_organisation_courses') {
       var cources = Restangular.all("/remaining_cources");
-      cources.getList().then(function(organisation){
-	$scope.cources = organisation;
+      cources.getList().then(function(data){
+	$scope.cources = data;
       });
       
       $scope.saveList = function() {
 	var a = _.where($scope.cources, {is_selected: true});
 	//console.log(_.pluck(a, 'id'));
-	Restangular.all("organisations").customGET('add_standards', {ids: _.pluck(a, 'id')}).then(function(data){
-	  if(data.success){
-	    $location.path('/manage_organisation').replace();
-	  }
-	});
+	if(a.size > 0){
+	  Restangular.all("organisations").customGET('add_standards', {ids: _.pluck(a, 'id')}).then(function(data){
+	    if(data.success){
+	      $location.path('/manage_organisation').replace();
+	    }
+	  });
+	};
       };
     }
 
