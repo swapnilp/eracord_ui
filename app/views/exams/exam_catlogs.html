@@ -3,10 +3,10 @@
   <button ng-if="!addMarksFlag && publishEnable && remainingLength == 0 && exam.verify_result && exam.verify_absenty" class="btn btn-primary" ng-click="publishExam()">
     Publish Exam
   </button>
-  <button class="btn btn-primary" ng-if="!exam.verify_result" ng-click="verifyResult();">
+  <button class="btn btn-primary" ng-if="!exam.verify_result && !addMarksFlag" ng-click="verifyResult();">
     Verify Result
   </button>
-  <button class="btn btn-primary" ng-if="!exam.verify_absenty" ng-click="verifyAbsenty();">
+  <button class="btn btn-primary" ng-if="!exam.verify_absenty && !addMarksFlag" ng-click="verifyAbsenty();">
     Verify Absenty
   </button>
   <span ng-if="!addMarksFlag">

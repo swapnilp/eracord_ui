@@ -65,7 +65,7 @@ angular.module('eracordUiApp.controller')
       $scope.saveStudentList = function(){
 	jkci_classes.customPOST({students_ids: $scope.studentList}, "manage_students").then(function(data){
 	  if(data.success) {
-	    $location.path("/classes/"+$routeParams.class_id);
+	    $location.path("/classes/"+$routeParams.class_id).replace();
 	  } else {
 	    Flash.create('warning', "Please try again", 'alert-danger');
 	  }
@@ -88,7 +88,7 @@ angular.module('eracordUiApp.controller')
       $scope.saveStudentSubjects = function(){
 	jkci_classes.customPOST({students: $scope.students}, "save_student_subjects").then(function(data){
 	  if(data.success) {
-	    $location.path("/classes/"+ $scope.classId);
+	    $location.path("/classes/"+ $scope.classId).replace();
 	  } else {
 	  }
 	});
@@ -113,7 +113,7 @@ angular.module('eracordUiApp.controller')
 	if(rollNumbers.length === uniqRollNumbers.length){
 	  jkci_classes.customPOST({roll_number: $scope.students}, "save_roll_number", {}).then(function(data){
 	    if(data.success) {
-	      $location.path("/classes/"+$scope.classId);
+	      $location.path("/classes/"+$scope.classId).replace();
 	    }else {
 	    }
 	  });

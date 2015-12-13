@@ -69,7 +69,7 @@ angular.module('eracordUiApp.controller')
 	}
 	students.post($scope.vm.user).then(function(data) {
 	  if(data.success) {
-	    $location.path("/students");
+	    $location.path("/students").replace();
 	  }else {
 	    Flash.create('warning', data.message, 'alert-danger');
 	  }
@@ -121,7 +121,7 @@ angular.module('eracordUiApp.controller')
 
 	student.customPOST({student: $scope.vm.user, o_subjects: $scope.vm.o_subjects}, "update", {}).then(function(data){
 	  if(data.success) {
-	    $location.path("/students/"+$scope.student_id+"/show");
+	    $location.path("/students/"+$scope.student_id+"/show").replace();
 	  }else {
 	  }
 	});

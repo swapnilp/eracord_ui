@@ -85,7 +85,7 @@ angular.module('eracordUiApp.controller')
 	  
 	  if(data.success) {
 	    Flash.create('success', "Exam has been created", 'alert-success');
-	    $location.path("/classes/"+$routeParams.class_id+"/exams/"+data.id+"/show");
+	    $location.path("/classes/"+$routeParams.class_id+"/exams/"+data.id+"/show").replace();
 	  }else {
 	    Flash.create('warning', "Something went wrong", 'alert-warning');
 	  }
@@ -136,7 +136,7 @@ angular.module('eracordUiApp.controller')
 	jkci_classes.one("exams", $routeParams.exam_id).customPOST({exam: $scope.vm}, "exams", {}).then(function(data){
 	  if(data.success) {
 	    Flash.create('success', "Exam has been created", 'alert-success');
-	    $location.path("/classes/"+$routeParams.class_id+"/exams/"+data.id+"/show");
+	    $location.path("/classes/"+$routeParams.class_id+"/exams/"+data.id+"/show").replace();
 	  }else {
 	    Flash.create('warning', "Something went wrong", 'alert-warning');
 	  }
@@ -275,7 +275,7 @@ angular.module('eracordUiApp.controller')
 	$scope.vm.is_group = $scope.isGroup;
 	jkci_classes.one("exams", $routeParams.exam_id).customPOST({exam: $scope.vm},"update").then(function(data){
 	  if(data.success) {
-	    $location.path("/classes/"+$routeParams.class_id+"/exams/"+data.id+"/show");
+	    $location.path("/classes/"+$routeParams.class_id+"/exams/"+data.id+"/show").replace();
 	  }else {
 	    Flash.create('warning', "Something went wrong", 'alert-warning');
 	  }

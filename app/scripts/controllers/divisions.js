@@ -27,7 +27,7 @@ angular.module('eracordUiApp.controller')
       $scope.registerDivision = function(){
 	jkci_classes.customPOST({sub_class: $scope.vm.sub_class}, "sub_classes").then(function(data) {
 	  if(data.success) {
-	    $location.path("/classes/"+$scope.classId);
+	    $location.path("/classes/"+$scope.classId).replace();
 	  }else {
 	    
 	  }

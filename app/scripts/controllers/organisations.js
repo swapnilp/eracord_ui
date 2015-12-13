@@ -25,7 +25,7 @@ angular.module('eracordUiApp.controller')
 	//console.log(_.pluck(a, 'id'));
 	Restangular.all("organisations").customGET('add_standards', {ids: _.pluck(a, 'id')}).then(function(data){
 	  if(data.success){
-	    $location.path('/manage_organisation');
+	    $location.path('/manage_organisation').replace();
 	  }
 	});
       };
@@ -45,7 +45,7 @@ angular.module('eracordUiApp.controller')
 	base_organisation.customPOST({roles: roles, user_id: $scope.user_id}, 'users/' + $scope.user_id + '/update_roles', {})
 	  .then(function(data){
 	    if(data.success){
-	      $location.path('/manage_organisation');
+	      $location.path('/manage_organisation').replace();
 	    }
 	  });
       };
@@ -100,7 +100,7 @@ angular.module('eracordUiApp.controller')
 	var std_ids = _.pluck($scope.standards, 'id').join(',');
 	base_organisation.customPOST({organisation: $scope.vm.org, standard_ids: std_ids}, "sub_organisation/launch_organisation", {}).then(function(data){
 	  if(data.success) {
-	    $location.path('/manage_organisation');
+	    $location.path('/manage_organisation').replace();
 	  }else {
 	    Flash.create('warning', "Sub Organisation is not created", 'alert-danger');
 	  }
