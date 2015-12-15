@@ -24,7 +24,15 @@ angular.module('eracordUiApp.controller')
       })
     };
 
+    $scope.load_unassigned_classes = function(){
+      var unassigned_jkci_classes = Restangular.all("get_unassigned_classes");
+      unassigned_jkci_classes.getList().then(function(data){
+	$scope.us_jkci_classes = data;
+      })
+    };
+
     $scope.load_desk_classes();
+    $scope.load_unassigned_classes();
     
 
   }]);

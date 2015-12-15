@@ -8,6 +8,7 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $windo
   $scope.userAlertCount = 0;
   $scope.alertsVisible = false;
 
+  $scope.hostUrl = "http://localhost:3000";
 
   
   if ($scope.currentUser === undefined) {
