@@ -47,6 +47,15 @@ angular.module('eracordUiApp.controller')
 	}else {
 	}
       });
+
+      $scope.deleteDivision = function() {
+	jkci_classes.one("sub_classes", $scope.divisionId).remove().then(function(data) {
+	 if(data.success) {
+	   $location.path("/classes/"+$routeParams.class_id).replace();
+	 }else {
+	 } 
+	});
+      }
     };
 
     if($location.path() === "/classes/"+$routeParams.class_id+"/divisions/"+$routeParams.division_id+"/assign_students") {

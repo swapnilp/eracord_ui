@@ -1,7 +1,7 @@
 <div class="container">
   <div class="col-sm-12 textLeft">
     <h2>Sub Class For {{division.class_name}}</h2>
-    <div class="studentShow">
+    <div class="studentShow" style="margin:20px 0;">
       <p>&nbsp;</p>
       <div class="col-sm-12">
 	<h5>
@@ -12,6 +12,7 @@
     </div>
     <div class="col-sm-12">
       <button class="btn btn-default" ng-click="goBack();">Back</button>
+      <button class="btn btn-primary" ng-click="deleteDivision();">Delete</button>
       <a class="btn btn-primary" href="#/classes/{{classId}}/divisions/{{divisionId}}/assign_students">Assign Students</a>
     </div>
   </div>

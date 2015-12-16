@@ -67,7 +67,7 @@ angular.module('eracordUiApp.controller')
 	if($scope.classStudents){
 	  $scope.vm.user.standard_id = $scope.standards[0].id;
 	}
-	students.post($scope.vm.user).then(function(data) {
+	students.post($scope.vm.user, {class_id: $routeParams.class_id}).then(function(data) {
 	  if(data.success) {
 	    $location.path("/students").replace();
 	  }else {
