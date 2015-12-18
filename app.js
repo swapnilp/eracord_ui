@@ -8,7 +8,7 @@ morgan = require('morgan');
 
 request = require('request');
 
-env = process.env.NODE_ENV || 'development';
+env = process.env.NODE_ENV || 'production';
 
 if (env === 'development') {
   app.use(morgan('dev'));
@@ -31,4 +31,4 @@ app.get('/[^\.]+$', function(req, res) {
   return res.set('Content-Type', 'text/html').sendfile(__dirname + "/dist/index.html");
 });
 
-app.listen(process.env.PORT || 3001);
+app.listen(process.env.PORT || 5000);
