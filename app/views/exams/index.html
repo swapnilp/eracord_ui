@@ -10,6 +10,7 @@
 	<th st-sort="balance">Status</th>
 	<th st-sort="balance">Published Date</th>
 	<th st-sort="balance">Ignored</th>
+	<th st-sort="balance">Point Linked</th>
 	<th st-sort="balance">Actions</th>
       </tr>
     </thead>
@@ -23,6 +24,14 @@
 	<td>{{row.status}}</td>
 	<td>{{row.published_date}}</td>
 	<td>{{row.ignored}}</td>
+	<td>
+	  <span ng-if="!row.is_point_added && !row.is_group && row.status !== 'Created'">
+	    <a href="#/classes/{{row.jkci_class_id}}/exams/{{row.id}}/show">Linked Points</a>
+	  </span>
+	  <span ng-if="row.is_point_added">
+	    true
+	  </span>
+	</td>
 	<td>
 	  <a href="#/classes/{{row.jkci_class_id}}/exams/{{row.id}}/show">Show</a>
 	</td>
