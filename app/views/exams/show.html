@@ -72,6 +72,9 @@
       <span ng-show="exam.create_verification && !exam.is_point_added">
 	<a href="#/classes/{{exam.jkci_class_id}}/exams/{{exam.id}}/manage_points" class="btn btn-primary">Add Points</a>
       </span>
+      <span ng-show="exam.create_verification && exam.is_point_added">
+	<a href="#/classes/{{exam.jkci_class_id}}/exams/{{exam.id}}/manage_points" class="btn btn-primary">Manage Points</a>
+      </span>
     </div>
   </div>
   <div class="col-sm-12 textLeft" ng-if="exam.is_completed && exam.is_result_decleared == null  && !exam.is_group">
