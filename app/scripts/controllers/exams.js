@@ -240,6 +240,9 @@ angular.module('eracordUiApp.controller')
       jkci_class.one("exams", $scope.examId).customGET("manage_points").then(function(data){
 	if(data.success) {
 	  $scope.chapters = data.chapters;
+	  $scope.selectedChapters = data.selected_chapters;
+	  $scope.chaptersPoints = data.points;
+	  $scope.selectedPoints = data.selected_points;
 	}else{
 	}
       });
