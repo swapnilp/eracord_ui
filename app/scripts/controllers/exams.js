@@ -229,6 +229,48 @@ angular.module('eracordUiApp.controller')
     };
     //end of show path
 
+    if($location.path() === "/classes/"+$routeParams.class_id+"/exams/"+ $routeParams.exam_id+"/manage_points") {
+      $scope.requestLoading = false;
+      $scope.selectedChapters = [];
+      $scope.selectedPoints = [];
+      $scope.chaptersPoints = [];
+      $scope.class_id = $routeParams.class_id;
+      $scope.examId = $routeParams.exam_id;
+      var jkci_class = Restangular.one("jkci_classes", $scope.class_id);
+      jkci_class.one("exams", $scope.examId).customGET("manage_points").then(function(data){
+	if(data.success) {
+	  $scope.chapters = data.chapters;
+	}else{
+	}
+      });
+      
+      
+      $scope.getPoints = function(){
+	if($scope.selectedChapters.length > 0){
+	  jkci_class.one("exams", $scope.examId).customGET("get_chapters_points", {chapter_ids: ""+$scope.selectedChapters}).then(function(data){
+	    if(data.success) {
+	      $scope.chaptersPoints = data.points;
+	    }else{
+	    }
+	  });
+	}else{
+	  $scope.chaptersPoints = [];
+	}
+      };
+      
+      $scope.saveExamPoints = function() {
+	if($scope.selectedPoints.length > 0){
+	  jkci_class.one("exams", $scope.examId).customPOST({point_ids: ""+$scope.selectedPoints}, "save_exam_points", {}).then(function(data){
+	    if(data.success) {
+	      $location.path("/classes/"+$scope.class_id+"/exams/"+$scope.examId+"/show").replace();
+	    }else{
+	    }
+	  });
+	}
+      };
+    }
+    //end of manage_points path
+
     if($location.path() === "/classes/"+$routeParams.class_id+"/exams/"+ $routeParams.exam_id+"/edit") {
       var jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
       $scope.isOpen = false; //for calender 
