@@ -23,7 +23,7 @@ app.factory('authWrapper', function($rootScope, $q, $window, Flash, $cookieStore
 	  $cookieStore.remove('currentUser');
           message = rejection.data.message || 'Your session has expired. Please log in again.';
           $location.path("#/user/sign_in");
-          break;
+        break;
         case 403:
           //Flash.alert('You are not authorized to perform this action.').andRedirectTo('/');
 	  break;

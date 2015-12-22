@@ -18,6 +18,10 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $windo
   $scope.goBack = function() {
     return window.history.back();
   };
+
+  $scope.reloadPage = function() {
+    $window.location.reload();
+  }
   
   directAccessRoutes = ['/forgot-password/?', '/unlock-account/?', '/users/invitation/accept/?', '/users/password/edit/?', '/users/unlock/?'];
   for (i = 0, len = directAccessRoutes.length; i < len; i++) {
