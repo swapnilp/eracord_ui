@@ -46,27 +46,21 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $windo
     $cookieStore.remove('currentUser');
     return $scope.currentUser = {};
   };
-  $scope.doLogout = function(flash) {
-    if (flash === null) {
-      flash = true;
-    }
-    return Auth.logout().then(function() {
+
+  $scope.doLogout = function() {
+    Auth.logout().then(function() {
       clearUserInformation();
-      //if (flash) {
-      //  Flash.setMsg('notice', 'You have been logged out.');
-      //}
       return $location.path('/user/sign_in');
     });
   };
 
 
-  return $rootScope.$on('devise:unauthorized', function(loopPrevention) {
+  $rootScope.$on('devise:unauthorized', function(loopPrevention) {
 
     if (loopPrevention === null) {
       loopPrevention = false;
     }
-    console.log('asdasdads');
-    $scope.doLogout(false);
+    $scope.doLogout();
     if (loopPrevention) {
       if ($cookieStore.get('currentUser') === null) {
         return;

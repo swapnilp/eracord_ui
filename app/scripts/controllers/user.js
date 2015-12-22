@@ -48,7 +48,7 @@ angular.module('eracordUiApp.controller')
           $scope.currentUser.token = user.token;
 	  $cookieStore.put('currentUser', user);
       	  Flash.create('success', 'Login Success', 'alert-success');
-	  $location.path('/');
+	  $location.path('/admin_desk');
 	} else {
 	  $scope.multipleOrganisations = true;
 	  $scope.organisations = user.organisations;

@@ -23,6 +23,9 @@
 	  <li><a ng-href="#/students">Students</a></li>
           <li><a ng-href="#/">Contact</a></li>
         </ul>
+	<ul class="nav navbar-nav pull-right" ng-if="currentUser.email">
+          <li><a class="btn btn-link" ng-click="doLogout();">Logout</a></li>
+	</ul>
       </div>
     </div>
   </div>
