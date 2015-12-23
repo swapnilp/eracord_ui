@@ -75,6 +75,11 @@ angular
         controller: 'UserCtrl',
         controllerAs: 'about'
       })
+      .when('/user/forgot_password', {
+        templateUrl: 'views/users/forgot_password.html',
+        controller: 'UserCtrl',
+        controllerAs: 'about'
+      })
       .otherwise({
         redirectTo: '/'
       });

@@ -30,11 +30,12 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $windo
       return;
     }
   }
+  
   if ($cookieStore.get('currentUser') === null) {
     $location.path('/user/sign_in');
   }
   
-  if ($location.path() !== '/user/sign_in') {
+  if ($location.path() !== '/user/sign_in' || $location.path() !== '/user/forgot_password') {
     Auth._currentUser = $cookieStore.get('currentUser');
     Auth.currentUser().then(function(user) {
       $scope.currentUser = user;
