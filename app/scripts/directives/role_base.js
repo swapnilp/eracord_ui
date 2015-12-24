@@ -7,17 +7,23 @@ app.directive('isRoleVisible', function(Restangular) {
   return {
     restrict: 'AE',
     scope: {
-      roles: '=isRoleVisible'
+      roles: '=isRoleVisible',
+      email: '='
     },
     controller: ['$scope', '$cookieStore', function(scope, $cookieStore){
       var roles = [];
-      if ($cookieStore.get('currentUser') === null) {
-	$location.path('/user/sign_in');
-      }else{
-	roles = $cookieStore.get('currentUser').roles.split(',');
-      }
+
+      
+      var getRoles = function(){
+	if ($cookieStore.get('currentUser') !== undefined) {
+	  roles = $cookieStore.get('currentUser').roles.split(',');
+	}else{
+	  roles = [];
+	}
+      };
 
       scope.checkRole = function(){
+	getRoles();
 	if(_.contains(roles, "admin")){
 	  return 1;
 	}
@@ -25,9 +31,13 @@ app.directive('isRoleVisible', function(Restangular) {
       }
      }],
     link: function(scope, element, attrs) {
-      if(scope.checkRole() == 0) {
-	element.remove();
-      }
+      scope.$watch('email', function(){
+	if(scope.checkRole() == 0) {
+	  element.hide();
+	} else {
+	  element.show();
+	}
+      });
     }
   }
 });

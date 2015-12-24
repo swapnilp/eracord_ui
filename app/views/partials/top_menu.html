@@ -19,7 +19,7 @@
           <li class="active"><a href="#/">Home</a></li>
 	  <li><a ng-href="#/admin_desk">Admin Desk</a></li>
           <li><a ng-href="#/exams">Exams</a></li>
-	  <li><a ng-href="#/manage_organisation">Manage Organisation</a></li>
+	  <li is-role-visible='["organisation"]' email="currentUser.email"><a ng-href="#/manage_organisation">Manage Organisation</a></li>
 	  <li><a ng-href="#/students">Students</a></li>
           <li><a ng-href="#/">Contact</a></li>
         </ul>
