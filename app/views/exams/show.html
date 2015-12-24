@@ -69,10 +69,10 @@
 	<button class="btn btn-primary" ng-click="deleteExam(exam);" ng-disabled="requestLoading">Remove Exam</button>
       </span>
       <button ng-click="goBack();" class="btn btn-default">Back</button>
-      <span ng-show="exam.create_verification && !exam.is_point_added">
+      <span ng-show="exam.create_verification && !exam.is_point_added && !exam.is_group">
 	<a href="#/classes/{{exam.jkci_class_id}}/exams/{{exam.id}}/manage_points" class="btn btn-primary">Add Points</a>
       </span>
-      <span ng-show="exam.create_verification && exam.is_point_added">
+      <span ng-show="exam.create_verification && exam.is_point_added && !exam.is_group">
 	<a href="#/classes/{{exam.jkci_class_id}}/exams/{{exam.id}}/manage_points" class="btn btn-primary">Manage Points</a>
       </span>
     </div>
