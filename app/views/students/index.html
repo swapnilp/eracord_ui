@@ -1,8 +1,12 @@
 <div style="margin:20px 0;">
   <span ng-if="!showOptions">
-    <a href="#/classes/{{classId}}/students/new" class="btn btn-primary" ng-if="classId"> New Student</a>
-    <a href="#/students/new" class="btn btn-primary" ng-if="!classId"> New Student</a>
-    <a href="#/classes/{{classId}}/manage_student_subjects" class="btn btn-primary" ng-if="classId">manage_student_subjects</a>
+    <span is-role-visible='["add_student"]' email="currentUser.email">
+      <a href="#/classes/{{classId}}/students/new" class="btn btn-primary" ng-if="classId"> New Student</a>
+      <a href="#/students/new" class="btn btn-primary" ng-if="!classId"> New Student</a>
+    </span>
+    <span is-role-visible='["manage_student_subject"]' email="currentUser.email">
+      <a href="#/classes/{{classId}}/manage_student_subjects" class="btn btn-primary" ng-if="classId">manage_student_subjects</a>
+    </span>
   </span>
   <input type="text" ng-model="filterStudent.name">
 

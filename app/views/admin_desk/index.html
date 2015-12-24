@@ -16,13 +16,19 @@
 	<td><a href="#/classes/{{row.id}}">{{row.class_name}}</a></td>
 	<td>{{row.divisions}}</td>
 	<td>
-	  <a ng-href="#/classes/{{row.id}}/daily_catlogs/new">Fill Catlog</a>
+	  <span is-role-visible='["create_daily_teach"]' email="currentUser.email">
+	    <a ng-href="#/classes/{{row.id}}/daily_catlogs/new">Fill Catlog</a>
+	  </span>
 	</td>
 	<td>
-	  <a ng-href="#/classes/{{row.id}}/exams/new">Create Exam</a>
+	  <span is-role-visible='["create_exam"]' email="currentUser.email">
+	    <a ng-href="#/classes/{{row.id}}/exams/new">Create Exam</a>
+	  </span>
 	</td>
 	<td>
-	  <a ng-href="#/classes/{{row.id}}/exams/new?&isGroup=true">Create Group Exam</a>
+	  <span is-role-visible='["create_exam"]' email="currentUser.email">
+	    <a ng-href="#/classes/{{row.id}}/exams/new?&isGroup=true">Create Group Exam</a>
+	  </span>
 	</td>
 	<td>{{row.remaining_activity}}</td>
 	<td>

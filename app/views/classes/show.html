@@ -45,10 +45,18 @@
     </div>
     <div class="col-sm-12 textLeft paddingTop10">
       <div class="col-sm-12 textLeft paddingTop10">
-	<a href="#/classes/{{class.id}}/daily_catlogs/new" class="btn btn-primary">Create Daily Catlog</a>
-	<a href="#/classes/{{class.id}}/exams/new" class="btn btn-primary">Create Exam</a>
-	<a href="#/classes/{{class.id}}/assign_students" class="btn btn-primary" is-role-visible='["admin"]'>Assign Student</a>
-	<a href="#/classes/{{class.id}}/manage_student_rollnumber" class="btn btn-primary">Manage Roll Number</a>
+	<span is-role-visible='["create_daily_teach"]' email="currentUser.email">
+	  <a href="#/classes/{{class.id}}/daily_catlogs/new" class="btn btn-primary">Create Daily Catlog</a>
+	</span>
+	<span is-role-visible='["create_exam"]' email="currentUser.email">
+	  <a href="#/classes/{{class.id}}/exams/new" class="btn btn-primary">Create Exam</a>
+	</span>
+	<span is-role-visible='["manage_class_student"]' email="currentUser.email">
+	  <a href="#/classes/{{class.id}}/assign_students" class="btn btn-primary">Assign Student</a>
+	</span>
+	<span is-role-visible='["manage_roll_number"]' email="currentUser.email">
+	  <a href="#/classes/{{class.id}}/manage_student_rollnumber" class="btn btn-primary">Manage Roll Number</a>
+	</span>
 	<a href="#/classes/{{class.id}}/divisions/new" class="btn btn-primary">Create Division</a>
 	<button class="btn btn-default" ng-click="goBack();">Back</button>
       </div>
