@@ -17,7 +17,7 @@ angular.module('eracordUiApp.controller')
       return true;
     }
     
-    Flash.create('success', message, 'custom-class');
+    //Flash.create('success', message, 'custom-class');
     
     this.awesomeThings = [
       'HTML5 Boilerplate',

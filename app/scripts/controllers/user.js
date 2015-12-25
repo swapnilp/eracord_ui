@@ -11,16 +11,23 @@ angular.module('eracordUiApp.controller')
   .controller('UserCtrl',['$scope', 'Flash', 'Auth', '$location', '$cookieStore', 'Restangular', function ($scope, Flash, Auth, $location, $cookieStore, Restangular) {
     //var message = '<strong>You are not sign in!</strong> Please Sign in.';
     //Flash.create('success', message, 'alert-warning');
+
+
     
     if($location.path() === '/user/sign_in') {
-
       $scope.multipleOrganisations = false;
       $scope.vm = {};
       $scope.vmorg = {};
       
       if(Auth.isAuthenticated()){
-	Flash.create('success', 'You are already signed in', 'alert-success');
-	$location.path('/');
+
+	if($cookieStore.get('currentUser') === undefined) {
+	  $scope.currentUser = {};
+	  Auth._currentUser = {};
+	}else{
+	  Flash.create('success', 'You are already signed in', 'alert-success');
+	  $location.path('/');
+	}
       }
       
       
@@ -81,5 +88,17 @@ angular.module('eracordUiApp.controller')
 	})
       }
     }
+
+    if($location.path() === '/user/change_password') {
+
+      $scope.vm = {};
+
+      $scope.updatePassword = function() {
+	Restangular.all("").customPUT({user: $scope.vm}, "users").then(function(data){
+	});
+      }
+    }
+
+    // end of change password 
     
   }]);

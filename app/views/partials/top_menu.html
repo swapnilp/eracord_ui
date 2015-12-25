@@ -25,7 +25,7 @@
         </ul>
 	<ul class="nav navbar-nav pull-right" ng-if="currentUser.email">
 	  <li>
-	    <a class="btn btn-link">{{currentUser.email}}</a>
+	    <a class="btn btn-link" href="#/user/change_password">{{currentUser.email}}</a>
 	  </li>
           <li><a class="btn btn-link" ng-click="doLogout();">Logout</a></li>
 	</ul>
