@@ -32,7 +32,9 @@ angular.module('eracordUiApp.controller')
       $scope.isOpen = false; //for calender 
       $scope.selectedPoints = [];
       $scope.vm = {};
-
+      var date = new Date();
+      $scope.max_date = ""+ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ (date.getDate()+1);
+      
       $scope.openCalendar = function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -62,6 +64,7 @@ angular.module('eracordUiApp.controller')
 	Restangular.one("chapters", chapter_id).customGET('get_points').then(function(data){
 	  if(data.success) {
 	    $scope.points = data.points;
+	    $scope.selectedPoints = [];
 	  }else {
 	  }
 	});
@@ -94,6 +97,8 @@ angular.module('eracordUiApp.controller')
       $scope.classId = $routeParams.class_id;
       
       $scope.vm = {};
+      $scope.selectedPoints = [];
+      
       var jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
       
       jkci_classes.one("daily_teachs", $routeParams.dtp_id).customGET("edit").then(function(data){
@@ -113,6 +118,7 @@ angular.module('eracordUiApp.controller')
 	Restangular.one("chapters", chapter_id).customGET('get_points').then(function(data){
 	  if(data.success) {
 	    $scope.points = data.points;
+	    $scope.selectedPoints = [];
 	  }else {
 	  }
 	});

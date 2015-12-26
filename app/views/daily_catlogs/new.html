@@ -27,7 +27,7 @@
     <div class="form-group" ng-class="{ 'has-error': form.date.$dirty && form.date.$error.required }">
       <label for="date">Date</label>
       <p class="input-group">
-	<input type="text" class="form-control" datetime-picker="dd/MM/yyyy HH:mm" ng-model="vm.daily_teachs.date" is-open="isOpen" ng-click="openCalendar($event, prop);" ng-focus="openCalendar($event, prop);" readonly required/>
+	<input type="text" class="form-control" max-date="'{{max_date}}'" datetime-picker="dd/MM/yyyy HH:mm" ng-model="vm.daily_teachs.date" is-open="isOpen" ng-click="openCalendar($event, prop);" ng-focus="openCalendar($event, prop);" readonly required/>
       </p>
       <span ng-show="form.marks.$dirty && form.marks.$error.required" class="help-block">Exam Date is required</span>
     </div>
