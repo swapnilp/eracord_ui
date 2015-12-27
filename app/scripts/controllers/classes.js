@@ -21,14 +21,35 @@ angular.module('eracordUiApp.controller')
     if($location.path() === "/classes/"+$routeParams.class_id) {
       var jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
       $scope.class_id = $routeParams.class_id;
+      $scope.classExamsTab = $scope.classDtpTab = $scope.classDivisionTab = $scope.classNotificationTab = $scope.classStudentTab = false;
+
+      
+      var loadTabs = function(selectTab){
+	if(selectTab == 'exams') {
+	  $scope.classExamsTab = true;
+	} else if(selectTab == 'daily_teaches') {
+	  $scope.classDtpTab = true;
+	} else if( selectTab == 'divisions' ) {
+	  $scope.classDivisionTab = true;
+	} else if(selectTab == 'notifications') {
+	  $scope.classNotificationTab = true;
+	} else {
+	  $scope.classStudentTab = true;
+	}
+	
+      }
+
+
+      
       jkci_classes.get().then(function(data){
 	if(data.success) {
 	  $scope.class = data.jkci_class;
+	  loadTabs($routeParams.tab);
 	} else {
 	  $location.path("#/admin_desk");
 	}
       });
-
+      
       $scope.toggleClassAbsentSms = function() {
 	jkci_classes.customGET("toggle_class_sms", {value: $scope.class.enable_class_sms}).then(function(data){
 	  if(data.success) {

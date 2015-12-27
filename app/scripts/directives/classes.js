@@ -12,7 +12,7 @@ app.directive('classStudents', function(Restangular) {
       classStudentsTab: '@'
     },
     templateUrl: 'views/students/index.html',
-    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', function(scope, Restangular, Flash, $location, $window){
+    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', function(scope, Restangular, Flash, $location, $window, $routeParams){
       scope.cources = [];
       scope.showRollNumber = true;
       
@@ -22,7 +22,7 @@ app.directive('classStudents', function(Restangular) {
       scope.totalStudents = 0;
       
       scope.pagination = {
-        current: 1
+        current: $routeParams.page || 1
       };
 
       var getResultsPage = function(pageNumber) {
@@ -50,7 +50,7 @@ app.directive('classStudents', function(Restangular) {
       
       scope.$watch('classStudentsTab', function(){
 	if(scope.classStudentsTab === 'true' && scope.studentLoaded == false){
-	  getResultsPage(1);
+	  getResultsPage($routeParams.page || 1);
 	  scope.studentLoaded = true;
 	}
       });
@@ -68,14 +68,14 @@ app.directive('classExams', function(Restangular) {
       classExamsTab: '@'
     },
     templateUrl: 'views/exams/index.html',
-    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', function(scope, Restangular, Flash, $location, $window){
+    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', function(scope, Restangular, Flash, $location, $window, $routeParams){
 
       scope.examsLoaded = false;
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       scope.totalExams = 0;
       
       scope.pagination = {
-        current: 1
+        current: $routeParams.page || 1
       };
       
       var getResultsPage = function(pageNumber) {
@@ -97,7 +97,7 @@ app.directive('classExams', function(Restangular) {
 
       scope.$watch('classExamsTab', function(){
 	if(scope.classExamsTab === 'true' && scope.examsLoaded == false){
-	  getResultsPage(1);
+	  getResultsPage($routeParams.page || 1);
 	  scope.examsLoaded = true;
 	}
       });
@@ -115,13 +115,13 @@ app.directive('classDailyTeaches', function(Restangular) {
       classDtpTab: '@'
     },
     templateUrl: 'views/daily_catlogs/index.html',
-    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', function(scope, Restangular, Flash, $location, $window){
+    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', function(scope, Restangular, Flash, $location, $window, $routeParams){
       var dailyCatlogLoaded = false;
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       
       scope.totalDtps = 0;
       scope.pagination = {
-        current: 1
+        current: $routeParams.page || 1
       };
       
       var getResultsPage = function(pageNumber) {
@@ -140,7 +140,7 @@ app.directive('classDailyTeaches', function(Restangular) {
       
       scope.$watch('classDtpTab', function(){
 	if(scope.classDtpTab === 'true' && dailyCatlogLoaded === false){
-	  getResultsPage(1);
+	  getResultsPage($routeParams.page || 1);
 	  scope.dailyCatlogLoaded = true;
 	}
       });
@@ -157,13 +157,13 @@ app.directive('classNotifications', function(Restangular) {
       classNotificationTab: '@'
     },
     templateUrl: 'views/classes/notifications.html',
-    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', function(scope, Restangular, Flash, $location, $window){
+    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', function(scope, Restangular, Flash, $location, $window, $routeParams){
       var dailyCatlogLoaded = false;
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       
       scope.totalNotifications = 0;
       scope.pagination = {
-        current: 1
+        current: $routeParams.page || 1
       };
       
       var getResultsPage = function(pageNumber) {
@@ -182,7 +182,7 @@ app.directive('classNotifications', function(Restangular) {
       
       scope.$watch('classNotificationTab', function(){
 	if(scope.classNotificationTab === 'true' && dailyCatlogLoaded === false){
-	  getResultsPage(1);
+	  getResultsPage($routeParams.page || 1);
 	  scope.dailyCatlogLoaded = true;
 	}
       });
