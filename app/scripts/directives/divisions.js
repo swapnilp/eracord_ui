@@ -10,7 +10,8 @@ app.directive('classDivisions', function(Restangular) {
     transclude: true,
     scope: {
       classId: '@',
-      classDivisionTab: '@'
+      classDivisionTab: '@',
+      updateUrl: '&'
     },
     templateUrl: 'views/divisions/index.html',
     controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', function(scope, Restangular, Flash, $location, $window){
@@ -27,6 +28,9 @@ app.directive('classDivisions', function(Restangular) {
       }
       
       scope.$watch('classDivisionTab', function(){
+	if(scope.classDivisionTab === 'true') {
+	  scope.updateUrl({tabName: 'divisions'});
+	}
 	if(scope.classDivisionTab === 'true' && classDivisionLoaded === false){
 	  loadDivisions();
 	  scope.classDivisionLoaded = true;

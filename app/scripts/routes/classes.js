@@ -13,7 +13,8 @@ app.config(function($routeProvider) {
     .when('/classes/:class_id', {
       templateUrl: 'views/classes/show.html',
       controller: 'ClassesCtrl',
-      controllerAs: 'classes'
+      controllerAs: 'classes',
+      reloadOnSearch: false
     })
     .when('/classes/:class_id/assign_students', {
       templateUrl: 'views/classes/assign_students.html',

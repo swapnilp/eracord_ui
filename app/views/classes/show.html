@@ -63,32 +63,32 @@
     </div>
     <div class="col-sm-12 textLeft paddingTop20">
       <uib-tabset justified="true">
-	<uib-tab ng-attr-active="classStudentTab">
+	<uib-tab ng-attr-active="classStudentTab" ng-click="updateTabParams('students')">
 	  <uib-tab-heading><i class="icon-bell"></i> Students</uib-tab-heading>
-	  <div class-students class-id="{{class_id}}" class-students-tab="{{classStudentTab}}"></div>
+	  <div class-students class-id="{{class_id}}" class-students-tab="{{classStudentTab}}" update-url="updateTabParams(tabName)"></div>
 	</uib-tab>
 	<uib-tab ng-attr-active="classExamsTab">
 	  <uib-tab-heading><i class="icon-bell"></i> Exams</uib-tab-heading>
 	  <div>
-	    <div class-exams class-id="{{class_id}}" class-exams-tab="{{classExamsTab}}"></div>
+	    <div class-exams class-id="{{class_id}}" class-exams-tab="{{classExamsTab}}" update-url="updateTabParams(tabName)"></div>
 	  </div>
 	</uib-tab>
 	<uib-tab ng-attr-active="classDtpTab">
 	  <uib-tab-heading><i class="icon-bell"></i> Daily Teaches</uib-tab-heading>
 	  <div>
-	    <div class-daily-teaches class-id="{{class_id}}" class-dtp-tab="{{classDtpTab}}"></div>
+	    <div class-daily-teaches class-id="{{class_id}}" class-dtp-tab="{{classDtpTab}}" update-url="updateTabParams(tabName)"></div>
 	  </div>
 	</uib-tab>
 	<uib-tab ng-attr-active="classDivisionTab">
 	  <uib-tab-heading><i class="icon-bell"></i> Divisions</uib-tab-heading>
 	  <div>
-	    <div class-divisions class-id="{{class_id}}" class-division-tab="{{classDivisionTab}}"></div>
+	    <div class-divisions class-id="{{class_id}}" class-division-tab="{{classDivisionTab}}" update-url="updateTabParams(tabName)"></div>
 	  </div>
 	</uib-tab>
-	<uib-tab ng-attr-active="classNotificationTab">
+	<uib-tab ng-attr-active="classNotificationTab" >
 	  <uib-tab-heading><i class="icon-bell"></i> Notifications</uib-tab-heading>
 	  <div>
-	    <div class-notifications class-id="{{class_id}}" class-notification-tab="{{classNotificationTab}}"></div>
+	    <div class-notifications class-id="{{class_id}}" class-notification-tab="{{classNotificationTab}}" update-url="updateTabParams(tabName)"></div>
 	  </div>
 	</uib-tab>
       </uib-tabset>

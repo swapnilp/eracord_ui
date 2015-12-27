@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('ClassesCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window) {
+  .controller('ClassesCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$route', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window, $route) {
 
     var message = '<strong>Well done!</strong> You successfully read this important alert message.';
 
@@ -36,9 +36,11 @@ angular.module('eracordUiApp.controller')
 	} else {
 	  $scope.classStudentTab = true;
 	}
-	
       }
 
+      $scope.updateTabParams = function(tabName){
+	$route.updateParams({ tab: tabName, page: null});
+      }
 
       
       jkci_classes.get().then(function(data){
