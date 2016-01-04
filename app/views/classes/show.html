@@ -58,6 +58,12 @@
 	  <a href="#/classes/{{class.id}}/manage_student_rollnumber" class="btn btn-primary">Manage Roll Number</a>
 	</span>
 	<a href="#/classes/{{class.id}}/divisions/new" class="btn btn-primary">Create Division</a>
+	<span ng-if="!class.has_time_table">
+	  <a href="#/classes/{{class.id}}/time_tables/new" class="btn btn-primary">Create Timetable</a>
+	</span>
+	<span ng-if="class.has_time_table">
+	  <a href="#/classes/{{class.id}}/manage_time_tables" class="btn btn-primary">Manage Timetable</a>
+	</span>
 	<button class="btn btn-default" ng-click="goBack();">Back</button>
       </div>
     </div>

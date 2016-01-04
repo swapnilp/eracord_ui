@@ -8,25 +8,17 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('DailyCatlogsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window) {
+  .controller('DailyCatlogsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams) {
 
-    var message = '<strong>Well done!</strong> You successfully read this important alert message.';
+    var jkci_classes;
     
     if(!Auth.isAuthenticated()){
       $location.path('/user/sign_in');
       return true;
-    };
-    
-    if($location.path() === "/daily_catlogs") {
-      var dtps = Restangular.all("daily_teachs");
-      
-      dtps.getList().then(function(data){
-	
-      });
     }
-
+    
     if($location.path() === "/classes/"+$routeParams.class_id+"/daily_catlogs/new") {
-      var jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
+      jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
       $scope.classId = $routeParams.class_id;
       $scope.isNew = true;
       $scope.isOpen = false; //for calender 
@@ -56,7 +48,7 @@ angular.module('eracordUiApp.controller')
 	  }else {
 	  }
 	});
-      }
+      };
 
 
       $scope.getChaptersPoints = function(){
@@ -79,17 +71,17 @@ angular.module('eracordUiApp.controller')
 	  }else {
 	  }
 	});
-      }
-    };	
+      };
+    }	
 
     if($location.path() === "/classes/"+$routeParams.class_id+"/daily_catlogs/"+$routeParams.dtp_id+"/show") {
-      var jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
+      jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
       $scope.class_id = $routeParams.class_id;
       
       jkci_classes.one("daily_teachs", $routeParams.dtp_id).get().then(function(data){
 	$scope.daily_teache = data.daily_teaching_point;
       });
-    };
+    }
 
     //end of show path
     
@@ -99,7 +91,7 @@ angular.module('eracordUiApp.controller')
       $scope.vm = {};
       $scope.selectedPoints = [];
       
-      var jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
+      jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
       
       jkci_classes.one("daily_teachs", $routeParams.dtp_id).customGET("edit").then(function(data){
 	if(data.success) {
@@ -133,9 +125,8 @@ angular.module('eracordUiApp.controller')
 	  }else {
 	  }
 	});
-      }
-      
-    };
+      };
+    }
     
   }]);
 

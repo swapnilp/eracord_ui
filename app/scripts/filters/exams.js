@@ -19,7 +19,7 @@ app.filter('remainingStudents', function() {
       
     });
     return out;
-  }
+  };
 });
 
 app.filter('absentStudents', function() {
@@ -31,13 +31,13 @@ app.filter('absentStudents', function() {
 
     // Using the angular.forEach method, go through the array of data and perform the operation of figuring out if the language is statically or dynamically typed.
     angular.forEach(input, function(student) {
-      if (student.is_present == false && student.is_ingored == null && student.marks === null) {
+      if (student.is_present === false && student.is_ingored === null && student.marks === null) {
         out.push(student);
       }
       
     });
     return out;
-  }
+  };
 });
 
 app.filter('ignoredStudents', function() {
@@ -49,13 +49,13 @@ app.filter('ignoredStudents', function() {
 
     // Using the angular.forEach method, go through the array of data and perform the operation of figuring out if the language is statically or dynamically typed.
     angular.forEach(input, function(student) {
-      if (student.is_present == null &&  student.is_ingored == true && student.marks === null) {
+      if (student.is_present === null &&  student.is_ingored === true && student.marks === null) {
         out.push(student);
       }
       
     });
     return out;
-  }
+  };
 });
 
 
@@ -74,5 +74,5 @@ app.filter('resultedStudents', function() {
       
     });
     return out;
-  }
+  };
 });

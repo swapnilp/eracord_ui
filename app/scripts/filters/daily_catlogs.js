@@ -19,7 +19,7 @@ app.filter('remainingClassStudents', function() {
       
     });
     return out;
-  }
+  };
 });
 
 app.filter('absentClassStudents', function() {
@@ -31,11 +31,11 @@ app.filter('absentClassStudents', function() {
 
     // Using the angular.forEach method, go through the array of data and perform the operation of figuring out if the language is statically or dynamically typed.
     angular.forEach(input, function(student) {
-      if (student.is_present == false) {
+      if (student.is_present === false) {
         out.push(student);
       }
       
     });
     return out;
-  }
+  }; 
 });

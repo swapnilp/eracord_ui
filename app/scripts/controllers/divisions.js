@@ -8,17 +8,17 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('DivisionsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window) {
+  .controller('DivisionsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams) {
     
-    var message = '<strong>Well done!</strong> You successfully read this important alert message.';
+    var jkci_classes;
     
     if(!Auth.isAuthenticated()){
       $location.path('/user/sign_in');
       return true;
-    };
+    }
 
     if($location.path() === "/classes/"+$routeParams.class_id+"/divisions/new") {
-      var jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
+      jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
       $scope.classId = $routeParams.class_id;
       jkci_classes.get().then(function(data){
 	$scope.classes = data.jkci_class;
@@ -32,14 +32,13 @@ angular.module('eracordUiApp.controller')
 	    
 	  }
 	});
-      }
-      
-    };
+      };
+    }
 
     if($location.path() === "/classes/"+$routeParams.class_id+"/divisions/"+$routeParams.division_id) {
       $scope.classId = $routeParams.class_id;
       $scope.divisionId = $routeParams.division_id;
-      var jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
+      jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
       
       jkci_classes.one("sub_classes", $scope.divisionId).get().then(function(data) {
 	if(data.success) {
@@ -55,12 +54,12 @@ angular.module('eracordUiApp.controller')
 	 }else {
 	 } 
 	});
-      }
-    };
+      };
+    }
 
     if($location.path() === "/classes/"+$routeParams.class_id+"/divisions/"+$routeParams.division_id+"/assign_students") {
       $scope.divisionId = $routeParams.division_id;
-      var jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
+      jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
       $scope.studentList = [];
       $scope.class_id = $routeParams.class_id;
       
@@ -81,6 +80,6 @@ angular.module('eracordUiApp.controller')
 	  }
 	});
       };
-    };
+    }
     // end of class assign student if path
   }]);

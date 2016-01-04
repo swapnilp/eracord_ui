@@ -37,7 +37,7 @@
     <span class="col-sm-2"><h5>Papers</h5></span>
     <span class="col-sm-6 paddingTop10">
       <span ng-repeat="paper in exam.documents">
-	<a href="{{paper.url}}" target="_blank">{{paper.name}}</a>
+	<a href="{{paper}}" target="_blank">{{paper}}</a>
       </span>
     </span>
   </div>
@@ -46,8 +46,7 @@
     <span class="col-sm-6 paddingTop10">
       <form name="form">
 	<div class="btn btn-primary" ngf-select ng-model="file" name="file" ngf-pattern="'.pdf,.jpg,video/*'"
-	     accept=".pdf,.jpg,video/*" ngf-max-size="20MB" ngf-min-height="100" 
-	     ngf-resize="{width: 100, height: 100}">Select File</div>
+	     accept=".pdf,.jpg,video/*" ngf-max-size="20MB">Select File</div>
 	<span>{{fileName}}</span>
 	<span ng-class="uploadMeaasgeClass" ng-if="uploadingFile">{{uploadingMessage}}</span>
 	<button type="submit" ng-click="submit()" ng-if="!uploadingFile" class="btn btn-default" ng-disabled="requestLoading">Upload</button>

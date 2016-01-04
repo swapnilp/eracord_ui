@@ -9,6 +9,6 @@ app.config(function($routeProvider) {
       templateUrl: 'views/users/edit.html',
       controller: 'UserCtrl',
       controllerAs: 'users'
-    })
+    });
 });
 

@@ -10,37 +10,35 @@
 angular.module('eracordUiApp.controller')
   .controller('ClassesCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$route', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window, $route) {
 
-    var message = '<strong>Well done!</strong> You successfully read this important alert message.';
 
     if(!Auth.isAuthenticated()){
       $location.path('/user/sign_in');
       return true;
-    };
-    
+    }
+    var jkci_classes;
     
     if($location.path() === "/classes/"+$routeParams.class_id) {
-      var jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
+      jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
       $scope.class_id = $routeParams.class_id;
       $scope.classExamsTab = $scope.classDtpTab = $scope.classDivisionTab = $scope.classNotificationTab = $scope.classStudentTab = false;
 
-      
       var loadTabs = function(selectTab){
-	if(selectTab == 'exams') {
+	if(selectTab === 'exams') {
 	  $scope.classExamsTab = true;
-	} else if(selectTab == 'daily_teaches') {
+	} else if(selectTab === 'daily_teaches') {
 	  $scope.classDtpTab = true;
-	} else if( selectTab == 'divisions' ) {
+	} else if( selectTab === 'divisions' ) {
 	  $scope.classDivisionTab = true;
-	} else if(selectTab == 'notifications') {
+	} else if(selectTab === 'notifications') {
 	  $scope.classNotificationTab = true;
 	} else {
 	  $scope.classStudentTab = true;
 	}
-      }
+      };
 
       $scope.updateTabParams = function(tabName){
 	$route.updateParams({ tab: tabName, page: null});
-      }
+      };
 
       
       jkci_classes.get().then(function(data){
@@ -59,7 +57,7 @@ angular.module('eracordUiApp.controller')
 	    $scope.class.enable_class_sms = !$scope.class.enable_class_sms;
 	  }
 	});
-      }
+      };
 
       $scope.toggleExamClassSms = function() {
 	jkci_classes.customGET("toggle_exam_sms", {value: $scope.class.enable_exam_sms}).then(function(data){
@@ -68,12 +66,12 @@ angular.module('eracordUiApp.controller')
 	    $scope.class.enable_exam_sms = !$scope.class.enable_exam_sms;
 	  }
 	});
-      }
-    };
+      };
+    }
     // end of class show if path
 
     if($location.path() === "/classes/"+$routeParams.class_id+"/assign_students") {
-      var jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
+      jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
       $scope.studentList = [];
       $scope.class_id = $routeParams.class_id;
       
@@ -93,12 +91,12 @@ angular.module('eracordUiApp.controller')
 	    Flash.create('warning', "Please try again", 'alert-danger');
 	  }
 	});
-      }
-    };
+      };
+    }
     // end of class assign student if path
 
     if($location.path() === "/classes/"+$routeParams.class_id+"/manage_student_subjects") {
-      var jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
+      jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
       $scope.classId = $routeParams.class_id;
       jkci_classes.customGET("manage_student_subject").then(function(data){
 	if(data.success) {
@@ -116,10 +114,10 @@ angular.module('eracordUiApp.controller')
 	  }
 	});
       };
-    };
+    }
 
     if($location.path() === "/classes/"+$routeParams.class_id+"/manage_student_rollnumber") {
-      var jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
+      jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
       $scope.classId = $routeParams.class_id;
       jkci_classes.customGET("manage_roll_number").then(function(data){
 	if(data.success) {
@@ -142,8 +140,8 @@ angular.module('eracordUiApp.controller')
 	  });
 	}else {
 	}
-      }
-    };
+      };
+    }
 
     //end of manage roll number
 

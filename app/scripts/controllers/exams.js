@@ -8,21 +8,19 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('ExamsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window) {
+  .controller('ExamsCtrl',['$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', function ( $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window) {
 
-    var message = '<strong>Well done!</strong> You successfully read this important alert message.';
-
+    var jkci_classes;
+    var jkci_class;
     if(!Auth.isAuthenticated()){
       $location.path('/user/sign_in');
       return true;
-    };
+    }
 
     if($location.path() === '/exams') {
       var exams = Restangular.all("exams");
       $scope.totalExams = 0;
-      $scope.pagination = {
-        current: 1
-      };
+      $scope.pagination = {current: 1};
       
       var getResultsPage = function(pageNumber) {
 	exams.getList({page: pageNumber}).then(function(data){
@@ -34,13 +32,11 @@ angular.module('eracordUiApp.controller')
       $scope.pageChanged = function(newPage) {
         getResultsPage(newPage);
       };
-      
       getResultsPage(1);
-      
-    };
+    }
     
     if($location.path() === "/classes/"+$routeParams.class_id+"/exams/new") {
-      var jkci_classes = Restangular.all("jkci_classes");
+      jkci_classes = Restangular.all("jkci_classes");
       $scope.isOpen = false; //for calender 
       $scope.isGroup = $routeParams.isGroup || false;
       
@@ -67,7 +63,7 @@ angular.module('eracordUiApp.controller')
 	  if(_.size($scope.selectedSubject) === 0){
 	    Flash.create('warning', "Subject must be present", 'alert-danger');
 	    return true;
-	  };
+	  }
 	  
 	  if(_.size($scope.selectedExamType) === 0){
 	    Flash.create('warning', "Subject Type must be present", 'alert-danger');
@@ -91,10 +87,10 @@ angular.module('eracordUiApp.controller')
 	  }
 	});
       };
-    };
+    }
 
     if($location.path() ===  "/classes/"+$routeParams.class_id+"/exams/"+$routeParams.exam_id+"/new_grouped_exams") {
-      var jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
+      jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
       $scope.isOpen = false; //for calender 
       $scope.isGroup = false;
       $scope.inGroup = true;
@@ -123,7 +119,7 @@ angular.module('eracordUiApp.controller')
 	if(_.size($scope.selectedSubject) === 0){
 	  Flash.create('warning', "Subject must be present", 'alert-danger');
 	  return true;
-	};
+	}
 	if(_.size($scope.selectedExamType) === 0){
 	  Flash.create('warning', "Subject Type must be present", 'alert-danger');
 	  return true;
@@ -148,8 +144,9 @@ angular.module('eracordUiApp.controller')
     if($location.path() === "/classes/"+$routeParams.class_id+"/exams/"+ $routeParams.exam_id+"/show") {
       $scope.requestLoading = false;
       $scope.class_id = $routeParams.class_id;
+      $scope.file = null;
       
-      var jkci_classes = Restangular.all("jkci_classes");
+      jkci_classes = Restangular.all("jkci_classes");
       $scope.uploadingFile = false;
       $scope.uploadingMessage = "Uploading";
       $scope.uploadMeaasgeClass = "alert-warning";
@@ -222,11 +219,10 @@ angular.module('eracordUiApp.controller')
 	  $scope.uploadingFile = false;
         }, function (evt) {
 	  $scope.requestLoading = false;
-          var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-
+          //var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
         });
       };
-    };
+    }
     //end of show path
 
     if($location.path() === "/classes/"+$routeParams.class_id+"/exams/"+ $routeParams.exam_id+"/manage_points") {
@@ -236,7 +232,8 @@ angular.module('eracordUiApp.controller')
       $scope.chaptersPoints = [];
       $scope.class_id = $routeParams.class_id;
       $scope.examId = $routeParams.exam_id;
-      var jkci_class = Restangular.one("jkci_classes", $scope.class_id);
+      jkci_class = Restangular.one("jkci_classes", $scope.class_id);
+      
       jkci_class.one("exams", $scope.examId).customGET("manage_points").then(function(data){
 	if(data.success) {
 	  $scope.chapters = data.chapters;
@@ -275,7 +272,7 @@ angular.module('eracordUiApp.controller')
     //end of manage_points path
 
     if($location.path() === "/classes/"+$routeParams.class_id+"/exams/"+ $routeParams.exam_id+"/edit") {
-      var jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
+      jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
       $scope.isOpen = false; //for calender 
       //$scope.isGroup = $routeParams.isGroup || false;
 
@@ -304,7 +301,7 @@ angular.module('eracordUiApp.controller')
 	  if(_.size($scope.selectedSubject) === 0){
 	    Flash.create('warning', "Subject must be present", 'alert-danger');
 	    return true;
-	  };
+	  }
 	  
 	  if(_.size($scope.selectedExamType) === 0){
 	    Flash.create('warning', "Subject Type must be present", 'alert-danger');
@@ -325,10 +322,7 @@ angular.module('eracordUiApp.controller')
 	    Flash.create('warning', "Something went wrong", 'alert-warning');
 	  }
 	});
-      }
-      
-    };
-    
-    
+      };
+    }
   }]);
 

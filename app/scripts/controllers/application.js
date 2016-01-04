@@ -21,7 +21,7 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $windo
 
   $scope.reloadPage = function() {
     $window.location.reload();
-  }
+  };
   
   directAccessRoutes = ['/forgot-password/?', '/unlock-account/?', '/users/invitation/accept/?', '/users/password/edit/?', '/users/unlock/?'];
   for (i = 0, len = directAccessRoutes.length; i < len; i++) {
@@ -45,7 +45,8 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $windo
 
   clearUserInformation = function() {
     $cookieStore.remove('currentUser');
-    return $scope.currentUser = {};
+    $scope.currentUser = {};
+    return $scope.currentUser;
   };
 
   $scope.doLogout = function() {

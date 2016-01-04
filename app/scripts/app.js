@@ -51,7 +51,6 @@ angular
     RestangularProvider.setRequestSuffix('.json');
     RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
       var extractedData;
-      var count
       if (operation === "getList") {
 	if(data.count){
           extractedData = [data.body, data.count];

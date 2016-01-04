@@ -157,3 +157,42 @@ body {
 .datetime-picker-dropdown > li.date-picker-menu div > table .btn-default {
   border: 0;
 }
+
+
+.border {
+  border: 1px solid;
+}
+.timeSlot{
+  height:20px;
+
+  margin-top:1px;
+  display: -webkit-box;
+  text-align: -webkit-center;
+
+  .slot2 {
+    width:50%;
+  }
+  
+  .slot3 {
+    width:33%;
+  }
+
+  .slot1 {
+    width:100%;
+  }
+  
+  .height10 {
+    height:10px;
+  }
+  .mTop10 {
+    margin-top:10px;
+  }
+}
+
+.textCenter {
+  text-align: -webkit-center;
+}
+
+.padding0 {
+  padding: 0;
+}

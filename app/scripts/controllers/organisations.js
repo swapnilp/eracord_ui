@@ -9,11 +9,9 @@
  */
 angular.module('eracordUiApp.controller')
   .controller('OrganisationsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams) {
-
-    var message = '<strong>Well done!</strong> You successfully read this important alert message.';
     
+    var base_organisation;
 
-    
     if($location.path() === '/remaining_organisation_courses') {
       var cources = Restangular.all("/remaining_cources");
       cources.getList().then(function(data){
@@ -29,12 +27,12 @@ angular.module('eracordUiApp.controller')
 	      $location.path('/manage_organisation').replace();
 	    }
 	  });
-	};
+	}
       };
     }
 
     if($location.path() === "/organisations/users/"+$routeParams.user_id+"/manage_roles") {
-      var base_organisation = Restangular.all("organisations");
+      base_organisation = Restangular.all("organisations");
       base_organisation.customGET("users/"+$routeParams.user_id+"/get_roles").then(function(data){
 	$scope.roles = data.data;
 	$scope.user_id = $routeParams.user_id;
@@ -54,7 +52,7 @@ angular.module('eracordUiApp.controller')
     }
 
     if($location.path() === "/organisation/users/" + $routeParams.user_id + "/change_password") {
-      var base_organisation = Restangular.all("organisations");
+      base_organisation = Restangular.all("organisations");
       base_organisation.customGET("/users/"+ $routeParams.user_id + "/get_email").then(function(data){
 	if(data.success){
 	  $scope.email = data.email;
@@ -71,11 +69,11 @@ angular.module('eracordUiApp.controller')
 	    Flash.create('warning', "Please try again", 'alert-danger');
 	  }
 	});
-      }
+      };
     }
 
     if($location.path() === "/add_organisation_clark") {
-      var base_organisation = Restangular.all("organisations");
+      base_organisation = Restangular.all("organisations");
       $scope.registerUser = function(){
 	$scope.vm.dataLoading = true;
 	$scope.vm.user.role = 'clark';
@@ -87,12 +85,11 @@ angular.module('eracordUiApp.controller')
 	    Flash.create('warning', data.message, 'alert-danger');
 	  }
 	});
-	
-      }
+      };
     }
 
     if($location.path() === "/organisation/standards/" + $routeParams.standard_ids + "/launch_sub_organisation"){
-      var base_organisation = Restangular.all("organisations");
+      base_organisation = Restangular.all("organisations");
       base_organisation.customGET('get_standards', {standards: $routeParams.standard_ids}).then(function(data){
 	$scope.standards = data.organisations;
 	$scope.name = _.map($scope.standards, function(obj){ return obj.name + '-' + obj.stream }).join(', ');
@@ -107,7 +104,7 @@ angular.module('eracordUiApp.controller')
 	    Flash.create('warning', "Sub Organisation is not created", 'alert-danger');
 	  }
 	});
-      }
+      };
     }
     
     if(!Auth.isAuthenticated()){
