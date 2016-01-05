@@ -163,7 +163,7 @@ body {
   border: 1px solid;
 }
 .timeSlot{
-  height:20px;
+  height:30px;
 
   margin-top:1px;
   display: -webkit-box;
@@ -181,11 +181,15 @@ body {
     width:100%;
   }
   
+  .slot4 {
+    width:25%;
+  }
+  
   .height10 {
-    height:10px;
+    height:15px;
   }
   .mTop10 {
-    margin-top:10px;
+    margin-top:15px;
   }
 }
 
@@ -195,4 +199,14 @@ body {
 
 .padding0 {
   padding: 0;
+}
+
+.timeTableSubjects {
+  margin: 10px 0;
+  
+  span {
+    padding: 10px;
+    margin: 0px 5px;
+    border: 1px solid;
+  }
 }

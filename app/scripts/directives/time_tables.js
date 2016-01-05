@@ -28,7 +28,8 @@ app.directive('daySlots', function() {
       events: '=',
       timeSlots: "=",
       selectedSlot: "=",
-      showSlotForm: '='
+      showSlotForm: '=',
+      cwday: '='
     },
     templateUrl: 'views/time_tables/day_slots.html',
     controller: ['$scope',function(scope){
@@ -46,7 +47,7 @@ app.directive('daySlots', function() {
 
       var createEventSlot = function() {
 	_.map(scope.timeSlots, function(slot){
-	  scope.timeEvents[slot] = _.filter(scope.events, function(event) { return  (Math.trunc(event.start_time) <= slot && Math.ceil(event.end_time) >= slot)});
+	  scope.timeEvents[slot] = _.filter(scope.events, function(event) { return  (Math.trunc(event.start_time) <= slot && Math.ceil(event.end_time) >= slot && event.cwday === scope.cwday)});
 	});
       };
       
@@ -57,7 +58,7 @@ app.directive('daySlots', function() {
       
       scope.$watch('events', function(){
 	createEventSlot();
-      })
+      }, true)
       
       
     }]

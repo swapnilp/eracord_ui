@@ -21,55 +21,83 @@
   
   <div class="col-sm-12 textLeft alert alert-success" ng-if="selectedSlot">
     you selected {{selectedSlot.name}} - {{selectedSlot.start_time}} to {{selectedSlot.end_time}}
-    <button class="btn btn-link">Edit</button>
+    <button class="btn btn-link" ng-click="editTimeTableSlot(selectedSlot);">Edit</button>
     <button ng-click="deleteSlot(selectedSlot);" class="btn btn-link">Delete</button>
     <button ng-click="nullSelect();" class="btn btn-link">Cancel</button>
   </div>
   
   
-  <div class="col-sm-12 textLeft " ng-show="showSlotForm">
-    <div class="col-md-6 col-md-offset-0">
+  <div class="col-sm-6 textLeft alert alert-success" ng-show="showSlotForm">
+    <div class="col-md-12 col-md-offset-0">
       <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
       <form name="form" ng-submit="registorTimeTableSlot()" role="form">
 
-	<div class="form-group" ng-class="{ 'has-error': form.type.$dirty && form.type.$error.required }">
-	  <label for="type">Type</label>
-	  <select class="form-control ng-touched" ng-model="vm.type" ng-options="values for values in ['Class', 'Break', 'Exam']" required>
+	<div class="form-group" ng-class="{ 'has-error': form.cwday.$dirty && form.cwday.$error.required }">
+	  <label for="cwday">Day</label>
+	  <select class="form-control ng-touched" ng-model="vm.cwday" ng-options="k as v for (k, v) in days" required>
 	  </select>
-	  <span ng-show="form.type.$dirty && form.type.$error.required" class="help-block">Type is required</span>
+	  <span ng-show="form.cwday.$dirty && form.cwday.$error.required" class="help-block">Type is required</span>
+	</div>
+	
+	<div class="form-group" ng-class="{ 'has-error': form.slot_type.$dirty && form.slot_type.$error.required }">
+	  <label for="slot_type">Type</label>
+	  <select class="form-control ng-touched" ng-model="vm.slot_type" ng-options="values for values in ['Class', 'Break', 'Exam']" required>
+	  </select>
+	  <span ng-show="form.slot_type.$dirty && form.slot_type.$error.required" class="help-block">Type is required</span>
+	</div>
+
+	<div class="form-group" ng-class="{ 'has-error': form.subject_id.$dirty && form.subject_id.$error.required }" ng-if="vm.slot_type === 'Class'">
+	  <label for="subject_id">Subject</label>
+	  <select class="form-control ng-touched" ng-model="vm.subject_id" ng-options="values.id as values.name for values in subjects" required>
+	  </select>
+	  <span ng-show="form.subject_id.$dirty && form.subject_id.$error.required" class="help-block">Subject is required</span>
 	</div>
 	
 	<div class="form-group" ng-class="{ 'has-error': form.start_time.$dirty && form.start_time.$error.required }">
+	  <label for="start_time">Start Time</label>
 	  <p class="input-group">
-	    <input type="text" class="form-control" datetime-picker="HH:mm" ng-model="start_time" is-open="isOpen" ng-click="openCalendar($event, prop);"  readonly required/>
+	    <input type="text" class="form-control" datetime-picker="HH:mm" ng-model="start_time" is-open="isOpen" ng-click="openCalendar($event, prop);" enable-date="false" readonly required/>
 	  </p>
 	  <span ng-show="form.start_time.$dirty && form.start_time.$error.required" class="help-block">Start Time is required</span>
 	</div>
 	
+	<div class="form-group" ng-class="{ 'has-error': form.end_time.$dirty && form.end_time.$error.required }">
+	  <label for="end_time">End Time</label>
+	  <p class="input-group">
+	    <input type="text" class="form-control" datetime-picker="HH:mm" ng-model="end_time" is-open="isOpenEndDate" ng-click="openEndCalendar($event, prop);" enable-date="false"  readonly required/>
+	  </p>
+	  <span class="alert alert-warning">End Time must be greater then start Time</span>
+	  <span ng-show="form.end_time.$dirty && form.end_time.$error.required" class="help-block">End Time is required</span>
+	</div>
 	
 	<div class="form-actions">
-	  <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Save</button>
+	  <button type="submit" ng-disabled="(form.$invalid || vm.dataLoading) || (end_time < start_time) " class="btn btn-primary">Save</button>
 	  <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-	  <button class="btn btn-default" ng-click="cancelTimeTableSlotManage();">Back</button>
+	  <a class="btn btn-default" ng-click="cancelTimeTableSlotManage();">Back</a>
 	</div>
       </form>
     </div>
     
   </div>
   <div class="col-sm-12 textLeft">
+    <div class="timeTableSubjects">
+      <span ng-repeat="subject in subjects" ng-style='{"background-color": subject.color, "color": subject.text_color }'>
+	{{subject.name}}
+      </span>
+    </div>
     <div dispaly-times time-slots="timeSlots" class="left col-md-1 textCenter" >
     </div>
-    <div day-slots day="Monday" events="events" time-slots="timeSlots" selected-slot="selectedSlot" show-slot-form="showSlotForm" class="left col-lg-1 textCenter padding0">
+    <div day-slots day="Monday" events="events" time-slots="timeSlots" selected-slot="selectedSlot" show-slot-form="showSlotForm" class="left col-lg-1 textCenter padding0" cwday="1">
     </div>
-    <div day-slots day="Tuesday" events="events" time-slots="timeSlots" selected-slot="selectedSlot" show-slot-form="showSlotForm" class="left col-lg-1 textCenter padding0">
+    <div day-slots day="Tuesday" events="events" time-slots="timeSlots" selected-slot="selectedSlot" show-slot-form="showSlotForm" class="left col-lg-1 textCenter padding0" cwday="2">
     </div>
-    <div day-slots day="Wednesday" events="events" time-slots="timeSlots" selected-slot="selectedSlot" show-slot-form="showSlotForm" class="left col-lg-1 textCenter padding0">
+    <div day-slots day="Wednesday" events="events" time-slots="timeSlots" selected-slot="selectedSlot" show-slot-form="showSlotForm" class="left col-lg-1 textCenter padding0" cwday="3">
     </div>
-    <div day-slots day="Thusday" events="events" time-slots="timeSlots" selected-slot="selectedSlot" show-slot-form="showSlotForm" class="left col-lg-1 textCenter padding0">
+    <div day-slots day="Thusday" events="events" time-slots="timeSlots" selected-slot="selectedSlot" show-slot-form="showSlotForm" class="left col-lg-1 textCenter padding0" cwday="4">
     </div>
-    <div day-slots day="Friday" events="events" time-slots="timeSlots" selected-slot="selectedSlot" show-slot-form="showSlotForm" class="left col-lg-1 textCenter padding0">
+    <div day-slots day="Friday" events="events" time-slots="timeSlots" selected-slot="selectedSlot" show-slot-form="showSlotForm" class="left col-lg-1 textCenter padding0" cwday="5">
     </div>
-    <div day-slots day="Saturday" events="events" time-slots="timeSlots" selected-slot="selectedSlot" show-slot-form="showSlotForm" class="left col-lg-1 textCenter padding0">
+    <div day-slots day="Saturday" events="events" time-slots="timeSlots" selected-slot="selectedSlot" show-slot-form="showSlotForm" class="left col-lg-1 textCenter padding0" cwday="6">
     </div>
   </div>
 </div>

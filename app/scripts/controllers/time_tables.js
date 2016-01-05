@@ -26,10 +26,9 @@ angular.module('eracordUiApp.controller')
       $scope.openCalendar = function(e) {
         e.preventDefault();
         e.stopPropagation();
-        $scope.isOpen = true;
+	$scope.isOpen = true;
       };
 
-      
       jkci_classes.get().then(function(data){
 	$scope.classes = data.jkci_class;
       });
@@ -57,10 +56,23 @@ angular.module('eracordUiApp.controller')
       $scope.showSlotForm = false;
       $scope.vm = {};
       $scope.isOpen = false;
+      $scope.isOpenEndDate = false
+      $scope.days = {
+	1: 'Monday',
+	2: 'Tuesday',
+	3: 'Wednesday',
+	4: 'Thusday',
+	5: 'Friday',
+	6: 'Saturday'
+      };
+      $scope.events = [];
+      
       
       jkci_classes.customGET('get_timetable').then(function(data){
 	if(data.success){
 	  $scope.time_table = data.time_table;
+	  $scope.subjects = data.subjects;
+	  $scope.events = data.slots;
 	} else {
 	}
       });
@@ -71,9 +83,32 @@ angular.module('eracordUiApp.controller')
         e.stopPropagation();
         $scope.isOpen = true;
       };
+
+      $scope.openEndCalendar = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $scope.isOpenEndDate = true;
+      };
       
       $scope.deleteSlot = function(slot) {
-	$scope.events = _.reject($scope.events, function(d){ return d.id === slot.id; });
+	var time_table_rec = Restangular.one("time_tables", $scope.time_table.id);
+	time_table_rec.one("time_table_classes", slot.id).remove().then(function(data){
+	  if(data.success) {
+	    $scope.events = _.reject($scope.events, function(d){ return d.id === slot.id; });
+	    $scope.selectedSlot = null;
+	  } else {
+	  }
+	});
+      };
+
+      $scope.editTimeTableSlot= function(selectedSlot) {
+	$scope.vm.id = selectedSlot.id;
+	$scope.vm.subject_id = selectedSlot.subject_id;
+	$scope.vm.cwday = ""+selectedSlot.cwday;
+	$scope.vm.slot_type = selectedSlot.slot_type;
+	$scope.start_time = new Date("3/3/1016 "+ (""+selectedSlot.start_time).replace(".", ":"));
+	$scope.end_time = new Date("3/3/1016 "+ (""+selectedSlot.end_time).replace(".", ":"));
+	$scope.showSlotForm = true;
 	$scope.selectedSlot = null;
       };
       
@@ -81,51 +116,49 @@ angular.module('eracordUiApp.controller')
       $scope.createTimeTableSlot = function() {
 	$scope.vm = {};
 	$scope.showSlotForm = true;
+	$scope.end_time = null;
+	$scope.start_time = null;
 	$scope.selectedSlot = null;
       };
       
       $scope.cancelTimeTableSlotManage = function() {
 	$scope.vm = {};
 	$scope.showSlotForm = false;
+	$scope.end_time = null;
+	$scope.start_time = null;
 	$scope.selectedSlot = null;
       };
       
       $scope.nullSelect = function() {
 	$scope.selectedSlot = null;
-      }
+      };
 
       $scope.registorTimeTableSlot = function() {
+	$scope.vm.time_table_id = $scope.time_table.id;
 	$scope.vm.start_time = $filter('date')($scope.start_time, "HH:mm");
-	console.log($scope.vm);
-      }
-      
-      $scope.events = [
-	{id: 1,
-	   start_time: 1,
-	   end_time: 3,
-	   color: 'red',
-	   name: 'physics'
-	},
-	{id: 2,
-	   start_time: 1.30,
-	   end_time: 3,
-	   color: 'green',
-	   name: 'Chem'
-	},
-	{id: 3,
-	   start_time: 6,
-	   end_time: 8,
-	   color: 'blue',
-	   name: "Bio"
-	},
-	{id: 4,
-	   start_time: 1.5,
-	   end_time: 7.5,
-	   color: 'yellow',
-	   name: "Maths"
+	$scope.vm.end_time = $filter('date')($scope.end_time, "HH:mm");
+	var millisecondsPerHour = 1000 * 60;
+	$scope.vm.durations = Math.round(($scope.end_time - $scope.start_time)/millisecondsPerHour);
+	if($scope.vm.slot_type !== 'Class') {
+	  $scope.vm.subject_id = null;
 	}
-      ];
-      
+	var time_tables = Restangular.one("time_tables", $scope.time_table.id);
+	if($scope.vm.id){
+	  time_tables.customPUT({time_table_class: $scope.vm}, "time_table_classes/"+ $scope.vm.id, {}).then(function(data) {
+	    if(data.success) {
+	      $scope.events = _.reject($scope.events, function(d){ return d.id === $scope.vm.id; });
+	      $scope.events.push(data.slot);
+	      $scope.cancelTimeTableSlotManage();
+	    } else {
+	    }
+	  });
+	} else {
+	  time_tables.customPOST({time_table_class: $scope.vm}, "time_table_classes", {}).then(function(data) {
+	    $scope.events.push(data.slot);
+	    $scope.cancelTimeTableSlotManage();
+	  });
+	}
+      };
     };
     // end of calender manage path
   }]);
