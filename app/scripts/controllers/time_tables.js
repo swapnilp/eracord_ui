@@ -67,15 +67,25 @@ angular.module('eracordUiApp.controller')
       };
       $scope.events = [];
       
+      var calculateTimeSlotes = function() {
+	if($scope.events.length > 1){
+	  var min_time = Math.trunc(_.min(_.pluck($scope.events, 'start_time')));
+	  var max_time = Math.ceil(_.max(_.pluck($scope.events, 'end_time')));
+	  $scope.timeSlots = _.range(min_time, max_time+1);
+	}
+      };
       
       jkci_classes.customGET('get_timetable').then(function(data){
 	if(data.success){
 	  $scope.time_table = data.time_table;
 	  $scope.subjects = data.subjects;
 	  $scope.events = data.slots;
+	  calculateTimeSlotes();
 	} else {
 	}
       });
+
+      
 
       
       $scope.openCalendar = function(e) {
@@ -96,6 +106,7 @@ angular.module('eracordUiApp.controller')
 	  if(data.success) {
 	    $scope.events = _.reject($scope.events, function(d){ return d.id === slot.id; });
 	    $scope.selectedSlot = null;
+	    calculateTimeSlotes();
 	  } else {
 	  }
 	});
@@ -110,6 +121,7 @@ angular.module('eracordUiApp.controller')
 	$scope.end_time = new Date("3/3/1016 "+ (""+selectedSlot.end_time).replace(".", ":"));
 	$scope.showSlotForm = true;
 	$scope.selectedSlot = null;
+	calculateTimeSlotes();
       };
       
       
@@ -149,6 +161,7 @@ angular.module('eracordUiApp.controller')
 	      $scope.events = _.reject($scope.events, function(d){ return d.id === $scope.vm.id; });
 	      $scope.events.push(data.slot);
 	      $scope.cancelTimeTableSlotManage();
+	      calculateTimeSlotes();
 	    } else {
 	    }
 	  });
@@ -156,6 +169,7 @@ angular.module('eracordUiApp.controller')
 	  time_tables.customPOST({time_table_class: $scope.vm}, "time_table_classes", {}).then(function(data) {
 	    $scope.events.push(data.slot);
 	    $scope.cancelTimeTableSlotManage();
+	    calculateTimeSlotes();
 	  });
 	}
       };
