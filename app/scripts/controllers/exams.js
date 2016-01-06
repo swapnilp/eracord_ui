@@ -145,6 +145,7 @@ angular.module('eracordUiApp.controller')
       $scope.requestLoading = false;
       $scope.class_id = $routeParams.class_id;
       $scope.file = null;
+      $scope.fileName = "";
       
       jkci_classes = Restangular.all("jkci_classes");
       $scope.uploadingFile = false;
@@ -154,12 +155,13 @@ angular.module('eracordUiApp.controller')
 	$scope.exam = data.exam;
       });
       
-      $scope.$watch('file', function(newVal){
+      $scope.selectUploadFile = function(newVal){
 	if(newVal){
+	  $scope.file = newVal;
 	  $scope.uploadingFile = false;
 	  $scope.fileName  = newVal.name;
 	}
-      });
+      };
 
       $scope.submit = function() {
 	if ($scope.file) {
@@ -209,6 +211,8 @@ angular.module('eracordUiApp.controller')
 	  if(resp.data.success) {
 	    $scope.uploadMeaasgeClass = "alert-success";
 	    $scope.uploadingMessage = "Completed Successfully";
+	    $scope.fileName = "";
+	    $scope.file = null;
 	  }else {
 	    $scope.uploadMeaasgeClass = "alert-danger";
 	    $scope.uploadingMessage = resp.data.message;

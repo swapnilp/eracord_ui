@@ -68,7 +68,7 @@ angular.module('eracordUiApp.controller')
       $scope.events = [];
       
       var calculateTimeSlotes = function() {
-	if($scope.events.length > 1){
+	if($scope.events.length > 0){
 	  var min_time = Math.trunc(_.min(_.pluck($scope.events, 'start_time')));
 	  var max_time = Math.ceil(_.max(_.pluck($scope.events, 'end_time')));
 	  $scope.timeSlots = _.range(min_time, max_time+1);

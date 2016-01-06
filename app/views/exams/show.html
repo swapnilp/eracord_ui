@@ -46,7 +46,7 @@
     <span class="col-sm-6 paddingTop10">
       <form name="form">
 	<div class="btn btn-primary" ngf-select ng-model="file" name="file" ngf-pattern="'.pdf,.jpg,video/*'"
-	     accept=".pdf,.jpg,video/*" ngf-max-size="20MB">Select File</div>
+	     accept=".pdf,.jpg,video/*" ngf-max-size="20MB" ng-change="selectUploadFile(file);">Select File</div>
 	<span>{{fileName}}</span>
 	<span ng-class="uploadMeaasgeClass" ng-if="uploadingFile">{{uploadingMessage}}</span>
 	<button type="submit" ng-click="submit()" ng-if="!uploadingFile" class="btn btn-default" ng-disabled="requestLoading">Upload</button>
