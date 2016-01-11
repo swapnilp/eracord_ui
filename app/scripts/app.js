@@ -29,6 +29,7 @@ angular
     'Devise',
     'restangular',
     'ngCookies',
+    'ui.calendar',
     'ui.bootstrap',
     'ui.bootstrap.datetimepicker',
     'smart-table',

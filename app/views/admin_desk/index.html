@@ -1,3 +1,5 @@
+
+
 <div style="margin:20px 0;">
   <table st-table="rowCollection" class="table organisationCoursesTable">
     <thead>
@@ -64,5 +66,17 @@
   <div >
     <h2>Time Tables</h2>
     
+    <label>
+      <input type="checkbox" ng-model="calenderExamSelect" ng-change="reloadCalenderEvent();">
+      Exams
+    </label>
+    <label>
+      <input type="checkbox" ng-model="calenderCatlogSelect">
+      Catlog
+    </label>
+    <div class="pull-right" ng-show="loadCalenderEvent">
+      <i class="fa fa-refresh fa-spin fa-5x"></i>
+    </div>
+    <div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources" calendar="myCalendar"></div> 
   </div>
 </div>
