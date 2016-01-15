@@ -71,10 +71,10 @@
       Exams
     </label>
     <label>
-      <input type="checkbox" ng-model="calenderCatlogSelect">
+      <input type="checkbox" ng-model="calenderCatlogSelect" ng-change="reloadCalenderEvent();">
       Catlog
     </label>
-    <div class="pull-right" ng-show="loadCalenderEvent">
+    <div class="pull-right" ng-show="loadCalenderEvent && loadCalenderTimeTableEvent">
       <i class="fa fa-refresh fa-spin fa-5x"></i>
     </div>
     <div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources" calendar="myCalendar"></div> 

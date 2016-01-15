@@ -19,6 +19,7 @@ angular.module('eracordUiApp.controller')
     $scope.calenderExamSelect = true;
     $scope.calenderCatlogSelect = false;
     $scope.loadCalenderEvent = false;
+    $scope.loadCalenderTimeTableEvent = false;
 
     /* add custom event*/
     var addExamEvent = function(event) {
@@ -28,6 +29,15 @@ angular.module('eracordUiApp.controller')
         start: new Date(event.start),
         end: new Date(event.end),
 	url: event.url
+      });
+    };
+
+    var addTimeTableEvent = function(type, title, cwday) {
+      $scope.events.push({
+	type: type,
+        title: title,
+	dow: cwday,
+	allDay: true
       });
     };
 
@@ -55,6 +65,22 @@ angular.module('eracordUiApp.controller')
 	}
       });
     };
+
+    $scope.load_calender_time_table = function(start, end) {
+
+      var time_table = Restangular.all("time_tables").customGET("calender_index").then(function(data) {
+	if(data.success) {
+	  var time_table_slot = null;
+	  for(var i=1; i< 8;i += 1) {
+	    time_table_slot = _.where(data.time_table_classes, {cwday: i});
+	    if(time_table_slot.length > 0) {
+	      addTimeTableEvent('time_table', _.pluck(time_table_slot, 'name').join(','), [i]);
+	    }
+	  }
+	  $scope.loadCalenderTimeTableEvent = false;
+	}
+      });
+    };
     
     $scope.calendarView = 'month';
     $scope.calendarDate = new Date();
@@ -77,6 +103,16 @@ angular.module('eracordUiApp.controller')
 	$scope.loadCalenderEvent = false;
       }
     };
+
+    $scope.timeTableEvents = function(start, end, timezone, callback) {
+      $scope.loadCalenderTimeTableEvent = true;
+      if($scope.calenderCatlogSelect) {
+	$scope.load_calender_time_table(start, end);
+	//$scope.load_calender_exams(start.format("DD/MM/YYYY"), end.format("DD/MM/YYYY"));
+      } else {
+	$scope.loadCalenderTimeTableEvent = false;
+      }
+    }
     
     /* event source that calls a function on every view switch */
     $scope.eventsF = function (start, end, timezone, callback) {
@@ -161,7 +197,7 @@ angular.module('eracordUiApp.controller')
     };
 
     /* event sources array*/
-    $scope.eventSources = [$scope.events, $scope.examEvents];
+    $scope.eventSources = [$scope.events, $scope.examEvents, $scope.timeTableEvents];
     
     
   }]);
