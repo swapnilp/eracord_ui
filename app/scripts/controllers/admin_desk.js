@@ -87,8 +87,7 @@ angular.module('eracordUiApp.controller')
               title: off_class.name,
 	      start: date,
 	      allDay: true,
-	      className: ['bg-red-danger'],
-	      url: "#/classes/1/daily_catlogs/new?&subject_id="+off_class.subject_id+"&date="+date.getFullYear()+"-"+date.getMonth()+1+"-"+date.getDate()
+	      className: ['bg-red-danger']
 	    });
 	  });
 	  $scope.loadCalenderEvent = false;
