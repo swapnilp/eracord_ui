@@ -20,25 +20,7 @@ angular.module('eracordUiApp.controller')
     $scope.loadCalenderEvent = false;
 
     /* add custom event*/
-    var addExamEvent = function(event) {
-      $scope.events.push({
-	type: event.type,
-        title: event.title,
-        start: new Date(event.start),
-        end: new Date(event.end),
-	url: event.url
-      });
-    };
-
-    var addTimeTableEvent = function(type, title, cwday) {
-      $scope.events.push({
-	type: type,
-        title: title,
-	dow: cwday,
-	allDay: true
-      });
-    };
-
+    
     var addOffClassEvent = function(type, title, date) {
       $scope.events.push({
 	type: type,
@@ -63,47 +45,70 @@ angular.module('eracordUiApp.controller')
       });
     };
 
-    var load_calender_exams = function(start, end) {
+    var load_calender_exams = function(start, end, callback) {
+      var examEvents = [];
       Restangular.all("exams").customGET("calender_index", {start: start, end: end}).then(function(data) {
 	if(data.success) {
+	  
 	  _.each(data.exams, function(exam){
-	    addExamEvent(exam);
+	    //addExamEvent(exam);
+	    examEvents.push({
+	      type: exam.type,
+              title: exam.title,
+              start: new Date(exam.start),
+              end: new Date(exam.end),
+	      url: exam.url
+	    });
 	  });
 	  $scope.loadCalenderEvent = false;
-	}
-      });
-    };
-
-    var load_calender_time_table = function(start, end) {
-      Restangular.all("time_tables").customGET("calender_index").then(function(data) {
-	if(data.success) {
-	  var time_table_slot = null;
-	  for(var i=1; i< 8;i += 1) {
-	    time_table_slot = _.where(data.time_table_classes, {cwday: i});
-	    if(time_table_slot.length > 0) {
-	      addTimeTableEvent('time_table', _.pluck(time_table_slot, 'name').join(','), [i]);
-	    }
-	  }
-	  $scope.loadCalenderEvent = false;
+	  callback(examEvents);
 	}
       });
     };
     
-     var load_calender_off_class = function(start, end) {
+    var load_calender_time_table = function(start, end, callback) {
+      Restangular.all("time_tables").customGET("calender_index").then(function(data) {
+	if(data.success) {
+	  var timeTableEvents = [];
+	  var time_table_slot = null;
+	  for(var i=1; i< 8;i += 1) {
+	    time_table_slot = _.where(data.time_table_classes, {cwday: i});
+	    if(time_table_slot.length > 0) {
+	      timeTableEvents.push({
+		type: 'time_table',
+		title: _.pluck(time_table_slot, 'name').join(','),
+		dow: [i],
+		allDay: true
+	      });
+	    }
+	  }
+	  $scope.loadCalenderEvent = false;
+	  callback(timeTableEvents);
+	}
+      });
+    };
+    
+     var load_calender_off_class = function(start, end, callback) {
+       var offClassEvents = [];
       Restangular.all("off_classes").customGET("calender_index").then(function(data) {
 	if(data.success) {
 	  _.each(data.off_classes, function(off_class){
-	    addOffClassEvent('off class', off_class.name, off_class.date);
+	    offClassEvents.push({
+	      type: 'off class',
+              title: off_class.name,
+	      start: new Date(off_class.date),
+	      allDay: true,
+	      className: ['bg-red-danger']
+	    });
 	  });
 	  $scope.loadCalenderEvent = false;
+	  callback(offClassEvents);
 	}
       });
     };
     
     load_desk_classes();
     load_unassigned_classes();
-
-    //@@@@@@@@@@@@@@
 
     
     $scope.reloadCalenderEvent = function(selectedType) {
@@ -113,15 +118,14 @@ angular.module('eracordUiApp.controller')
 
     $scope.loadEvents = function(start, end, timezone, callback) {
       $scope.loadCalenderEvent = true;
-      //$scope.events =[{__id: 1}];
+      var events = [];
       if($scope.selectedCalenderType === 'exams') {
-	load_calender_exams(start.format("DD/MM/YYYY"), end.format("DD/MM/YYYY"));
+	load_calender_exams(start.format("DD/MM/YYYY"), end.format("DD/MM/YYYY"), callback);
       }else if ($scope.selectedCalenderType === 'time_table'){
-	load_calender_time_table(start, end);
+	load_calender_time_table(start, end, callback);
       }else if($scope.selectedCalenderType === 'off_class'){
-	load_calender_off_class(start, end);
+	load_calender_off_class(start, end, callback);
       }
-      console.log($scope.events);
     };
     
 
