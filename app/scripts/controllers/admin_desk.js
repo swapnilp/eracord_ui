@@ -19,18 +19,6 @@ angular.module('eracordUiApp.controller')
     $scope.selectedCalenderType = 'exams';
     $scope.loadCalenderEvent = false;
 
-    /* add custom event*/
-    
-    var addOffClassEvent = function(type, title, date) {
-      $scope.events.push({
-	type: type,
-        title: title,
-	start: new Date(date),
-	allDay: true,
-	className: ['bg-red-danger']
-      });
-    };
-
     var load_desk_classes = function(){
       var jkci_classes = Restangular.all("jkci_classes");
       jkci_classes.getList().then(function(data){
@@ -92,13 +80,15 @@ angular.module('eracordUiApp.controller')
        var offClassEvents = [];
       Restangular.all("off_classes").customGET("calender_index").then(function(data) {
 	if(data.success) {
-	  _.each(data.off_classes, function(off_class){
+	  _.each(data.off_classes, function(off_class) {
+	    var date = new Date(off_class.date);
 	    offClassEvents.push({
 	      type: 'off class',
               title: off_class.name,
-	      start: new Date(off_class.date),
+	      start: date,
 	      allDay: true,
-	      className: ['bg-red-danger']
+	      className: ['bg-red-danger'],
+	      url: "#/classes/1/daily_catlogs/new?&subject_id="+off_class.subject_id+"&date="+date.getFullYear()+"-"+date.getMonth()+1+"-"+date.getDate()
 	    });
 	  });
 	  $scope.loadCalenderEvent = false;

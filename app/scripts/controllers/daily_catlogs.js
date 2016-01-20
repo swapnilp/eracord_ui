@@ -75,14 +75,16 @@ angular.module('eracordUiApp.controller')
       };
       
       $scope.registorDailyTeaches = function(){
-	$scope.vm.daily_teachs.sub_classes = _.pluck($scope.selectedDivisions, "id").join(',');
-	$scope.vm.daily_teachs.chapters_point_id = $scope.selectedPoints.join(',');
-	jkci_classes.customPOST({daily_teaching_point: $scope.vm.daily_teachs}, "daily_teachs").then(function(data){
-	  if(data.success) {
-	    $location.path("/classes/"+data.class_id).replace();
-	  }else {
-	  }
-	});
+	if(!$scope.form.$invalid) {
+	  $scope.vm.daily_teachs.sub_classes = _.pluck($scope.selectedDivisions, "id").join(',');
+	  $scope.vm.daily_teachs.chapters_point_id = $scope.selectedPoints.join(',');
+	  jkci_classes.customPOST({daily_teaching_point: $scope.vm.daily_teachs}, "daily_teachs").then(function(data){
+	    if(data.success) {
+	      $location.path("/classes/"+data.class_id).replace();
+	    }else {
+	    }
+	  });
+	}
       };
     }	
 
