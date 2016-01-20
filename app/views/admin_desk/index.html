@@ -66,15 +66,12 @@
   <div >
     <h2>Time Tables</h2>
     
-    <label>
-      <input type="checkbox" ng-model="calenderExamSelect" ng-change="reloadCalenderEvent();">
-      Exams
+    <label class="btn active btn-default" ng-repeat="calenderType in ['exams', 'time_table', 'off_class']">
+      <input name="cssPre" id="css1" type="radio" ng-value="calenderType" ng-model="selectedCalenderType" ng-click="reloadCalenderEvent(calenderType);">
+      {{calenderType}}
     </label>
-    <label>
-      <input type="checkbox" ng-model="calenderCatlogSelect" ng-change="reloadCalenderEvent();">
-      Catlog
-    </label>
-    <div class="pull-right" ng-show="loadCalenderEvent && loadCalenderTimeTableEvent">
+    <br /><br />
+    <div class="pull-right" ng-show="loadCalenderEvent">
       <i class="fa fa-refresh fa-spin fa-5x"></i>
     </div>
     <div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources" calendar="myCalendar"></div> 
