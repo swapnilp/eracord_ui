@@ -24,8 +24,9 @@ angular.module('eracordUiApp.controller')
       $scope.isOpen = false; //for calender 
       $scope.selectedPoints = [];
       $scope.vm = {};
+      $scope.vm.daily_teachs = {};
       var date = new Date();
-      $scope.max_date = ""+ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ (date.getDate()+1);
+      $scope.max_date = ""+ date.getFullYear()+"/"+(date.getMonth()+1)+"/"+ (date.getDate()+1);
       
       $scope.openCalendar = function(e) {
         e.preventDefault();
@@ -33,14 +34,7 @@ angular.module('eracordUiApp.controller')
         $scope.isOpen = true;
       };
       
-      jkci_classes.customGET('get_exam_info').then(function(data) {
-	$scope.class_name = data.data.class_exam_data.class_name;
-	$scope.divisions = data.data.class_exam_data.sub_classes;
-	$scope.subjects = data.data.class_exam_data.subjects;
-      });
-
       $scope.getChapters = function(){
-	
 	var subject_id = $scope.vm.daily_teachs.subject_id;
 	jkci_classes.customGET("get_chapters", {subject_id: subject_id}).then(function(data){
 	  if(data.success) {
@@ -49,7 +43,25 @@ angular.module('eracordUiApp.controller')
 	  }
 	});
       };
-
+      
+      jkci_classes.customGET('get_exam_info').then(function(data) {
+	$scope.class_name = data.data.class_exam_data.class_name;
+	$scope.divisions = data.data.class_exam_data.sub_classes;
+	$scope.subjects = data.data.class_exam_data.subjects;
+      });
+      
+      if($routeParams.subject_id) {
+	$scope.vm.daily_teachs.subject_id = parseInt($routeParams.subject_id);
+	$scope.getChapters();
+      }
+      
+      if($routeParams.date) {
+	if(new Date($routeParams.date) < new Date){
+	  $scope.vm.daily_teachs.date = new Date($routeParams.date);
+	} else {
+	  $scope.vm.daily_teachs.date = new Date;
+	}
+      }
 
       $scope.getChaptersPoints = function(){
 	var chapter_id = $scope.vm.daily_teachs.chapter_id;
