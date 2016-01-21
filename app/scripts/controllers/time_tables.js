@@ -57,6 +57,7 @@ angular.module('eracordUiApp.controller')
       $scope.vm = {};
       $scope.isOpen = false;
       $scope.isOpenEndDate = false
+      $scope.sub_classes = [];
       $scope.days = {
 	1: 'Monday',
 	2: 'Tuesday',
@@ -80,6 +81,7 @@ angular.module('eracordUiApp.controller')
 	  $scope.time_table = data.time_table;
 	  $scope.subjects = data.subjects;
 	  $scope.events = data.slots;
+	  $scope.sub_classes = data.sub_classes;
 	  calculateTimeSlotes();
 	} else {
 	}
@@ -117,6 +119,7 @@ angular.module('eracordUiApp.controller')
 	$scope.vm.subject_id = selectedSlot.subject_id;
 	$scope.vm.cwday = ""+selectedSlot.cwday;
 	$scope.vm.slot_type = selectedSlot.slot_type;
+	$scope.vm.sub_class_id = selectedSlot.sub_class_id;
 	$scope.start_time = new Date("3/3/1016 "+ (""+selectedSlot.start_time).replace(".", ":"));
 	$scope.end_time = new Date("3/3/1016 "+ (""+selectedSlot.end_time).replace(".", ":"));
 	$scope.showSlotForm = true;

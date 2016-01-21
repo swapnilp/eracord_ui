@@ -38,6 +38,15 @@
 	  </select>
 	  <span ng-show="form.cwday.$dirty && form.cwday.$error.required" class="help-block">Type is required</span>
 	</div>
+
+	<div class="form-group" ng-class="{ 'has-error': form.cwday.$dirty && form.cwday.$error.required }">
+	  <label for="cwday">Division</label>
+	  <select class="form-control ng-touched" ng-model="vm.sub_class_id" ng-options="sub_class.id as sub_class.name for sub_class in sub_classes" >
+	  </select>
+	  <span ng-show="form.cwday.$dirty && form.cwday.$error.required" class="help-block">Type is required</span>
+	</div>
+
+	
 	
 	<div class="form-group" ng-class="{ 'has-error': form.slot_type.$dirty && form.slot_type.$error.required }">
 	  <label for="slot_type">Type</label>
