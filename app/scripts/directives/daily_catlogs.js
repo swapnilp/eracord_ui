@@ -38,7 +38,7 @@ app.directive('classDailyTeachesCatlogs', function(Restangular) {
       };
 
       scope.saveAbsenty = function() {
-	var absentStudents = _.pluck(_.where(scope.dtpCatlogs, {is_present: false}), 'student_id');
+	var absentStudents = _.pluck(_.where(scope.dtpCatlogs, {is_present: false}), 'id');
 	absentStudents.push(0);
 	jkci_classes.one("daily_teachs", scope.dailyTeachesId).customPOST({students: absentStudents}, "fill_catlog", {})
 	  .then(function(data){
