@@ -25,7 +25,7 @@ angular.module('eracordUiApp.controller')
       };
 
       var getResultsPage = function(pageNumber) {
-	students.getList({page: pageNumber}).then(function(data){
+	students.getList({page: pageNumber, search: $scope.filterStudent}).then(function(data){
 	  $scope.students = data[0];
 	  $scope.totalStudents = data[1];
 	});

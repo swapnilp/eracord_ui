@@ -30,6 +30,11 @@ app.config(function($routeProvider) {
       templateUrl: 'views/classes/manage_student_rollnumber.html',
       controller: 'ClassesCtrl',
       controllerAs: 'classes'
+    })
+    .when('/classes/:class_id/get_batch', {
+      templateUrl: 'views/classes/get_batch.html',
+      controller: 'ClassesCtrl',
+      controllerAs: 'classes'
     });
 });
 

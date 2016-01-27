@@ -143,6 +143,43 @@ angular.module('eracordUiApp.controller')
       };
     }
 
+    if($location.path() === "/classes/"+$routeParams.class_id+"/get_batch") {
+      $scope.withStudent = false;
+      $scope.students = [];
+      $scope.studentList =[];
+      
+      jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
+      
+      jkci_classes.customGET('get_batch').then(function(data){
+	if(data.success) {
+	  $scope.class = data.jkci_class;
+	  $scope.standards = data.standards;
+	} else {
+	  $location.path("#/classes/"+$routeParams.class_id);
+	}
+      });
+      
+      $scope.getStudents = function(){
+	if($scope.withStudent){
+	  jkci_classes.customGET('students').then(function(data){
+	    if(data.success) {
+	      $scope.students = data.students;
+	    }
+	  });
+	}else{
+	  $scope.students = [];
+	}
+      };
+
+      $scope.upgradeBatch = function(){
+	if($scope.standard_id){
+	  jkci_classes.customPOST({student_list: $scope.studentList, standard_id: $scope.standard_id}, 'upgrade_batch', {}).then(function(data){
+	  });
+	}
+      }
+      
+    }
+
     //end of manage roll number
 
   }]);

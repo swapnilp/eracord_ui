@@ -27,7 +27,7 @@ app.directive('classStudents', function(Restangular) {
       };
 
       var getResultsPage = function(pageNumber) {
-	jkci_classes.customGET("students", {page: pageNumber}).then(function(data){
+	jkci_classes.customGET("students", {page: pageNumber, search: scope.filterStudent}).then(function(data){
 	  scope.students = data.students;
 	  scope.totalStudents = data.count;
 	});

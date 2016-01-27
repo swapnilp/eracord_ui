@@ -1,0 +1,44 @@
+<div class="container" style="margin:20px 0;">
+  <div class="col-sm-12 textLeft">
+    <div class="col-sm-12 textLeft">
+      <h2>Class</h2>
+    </div>
+    <div class="col-sm-12 textLeft">
+      <span class="col-sm-2"><h5>Class Name</h5></span>
+      <span class="col-sm-6 paddingTop10">{{class.class_name}}</span>
+    </div>
+    <div class="col-sm-12 textLeft">
+      <span class="col-sm-2"><h5>Batch</h5></span>
+      <span class="col-sm-6 paddingTop10">{{class.batch}}</span>
+    </div>
+    <div class="col-sm-12 textLeft">
+      <span class="col-sm-2"><h5>Standard</h5></span>
+      <div class="col-sm-3">
+	<select class="form-control ng-touched " ng-model="standard_id" ng-options="std.id as std.name for std in standards"></select>
+      </div>
+    </div>
+    <div class="col-sm-12 textLeft paddingTop10">
+      <h3>Upgrade Batch with Students or without students</h3>
+      <label class="btn active btn-default">
+	<input name="cssPre" id="css1" type="radio" ng-value="true" ng-model="withStudent" ng-click="getStudents();">
+	With Student
+      </label>
+      <label class="btn active btn-default">
+	<input name="cssPre" id="css1" type="radio" ng-value="false" ng-model="withStudent" ng-click="getStudents();">
+	Without Student
+      </label>
+    </div>
+    <div class="col-sm-12 textLeft paddingTop10 remainingStudentsList">
+      <label ng-repeat="student in students">
+	<input type="checkbox" checklist-model="studentList" checklist-value="student.id"> {{student.name}} - {{student.p_mobile}}
+      </label>
+    </div>
+    <div class="col-sm-12 textLeft paddingTop10">
+      <span is-role-visible='["upgrade_batch"]' email="currentUser.email">
+	<button class="btn btn-primary" ng-click="upgradeBatch()" ng-disabled="!standard_id">Upgrade Batch</button>
+      </span>
+      <button class="btn btn-default" ng-click="goBack();">Back</button>
+    </div>
+  </div>
+</div>
+
