@@ -3,10 +3,12 @@ var app;
 
 app = angular.module('eracordUiApp.controller');
 
-app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $window, Auth, Flash, Restangular, $cookieStore) {
+app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $routeParams, $window, Auth, Flash, Restangular, $cookieStore) {
   var clearUserInformation, directAccessRoutes, i, len, path;
   $scope.userAlertCount = 0;
   $scope.alertsVisible = false;
+  
+  $scope.topMenu = "home";
 
   $scope.hostUrl = "http://localhost:3000";
 
@@ -70,6 +72,24 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $windo
       clearUserInformation();
       //Flash.clear();
       //return Flash.alert('Session error. Please log in again.').andRedirectTo('/user/sign_in');
+    }
+  });
+
+  $scope.$on('$routeChangeStart', function(next, current) { 
+    if($location.path().search("/classes") >= 0 || $location.path().search("/admin_desk") >= 0){
+      $scope.topMenu = "admin_desk";
+    }
+    if($location.path().search("^/exams") >= 0 ){
+      $scope.topMenu = "exams";
+    }
+    if($location.path().search("^/manage_organisation") >= 0 ){
+      $scope.topMenu = "manage_organisation";
+    }
+    if($location.path().search("^/students") >= 0 ){
+      $scope.topMenu = "students";
+    }
+    if($location.path() === "/"){
+      $scope.topMenu = "home";
     }
   });
 });

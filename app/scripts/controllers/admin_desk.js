@@ -160,6 +160,5 @@ angular.module('eracordUiApp.controller')
     /* event sources array*/
     $scope.eventSources = [$scope.events, $scope.loadEvents]
     
-    
   }]);
 
