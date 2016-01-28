@@ -181,6 +181,16 @@ angular.module('eracordUiApp.controller')
 
     if($location.path() === "/classes/"+$routeParams.class_id+"/manage_class") {
       $scope.class_id = $routeParams.class_id;
+      
+      jkci_classes = Restangular.one("jkci_classes", $scope.class_id);
+      
+      jkci_classes.get().then(function(data){
+	if(data.success) {
+	  $scope.class = data.jkci_class;
+	} else {
+	  $location.path("#/admin_desk");
+	}
+      });
     }
     //end of manage Class
     

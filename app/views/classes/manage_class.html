@@ -18,9 +18,10 @@
 	<div class-time-table class-id="{{class_id}}" class-time-table-tab="{{classTimeTableTab}}" update-url="updateTabParams(tabName)"></div>
       </div>
     </uib-tab>
-    <uib-tab ng-attr-active="classNotificationTab" >
+    <uib-tab ng-attr-active="classNotificationTab" ng-if="class.has_upgrade_batch">
       <uib-tab-heading><i class="icon-bell"></i> Upgrade batch</uib-tab-heading>
-      <div>
+      <div style="margin:20px 0;">
+	<h3>Please click upgrade batch</h3>
 	<span is-role-visible='["upgrade_batch"]' email="currentUser.email" ng-if="class.has_upgrade_batch">
 	  <a href="#/classes/{{class.id}}/get_batch" class="btn btn-primary">Upgrade Batch</a>
 	</span>
