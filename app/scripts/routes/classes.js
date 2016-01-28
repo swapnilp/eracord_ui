@@ -35,6 +35,11 @@ app.config(function($routeProvider) {
       templateUrl: 'views/classes/get_batch.html',
       controller: 'ClassesCtrl',
       controllerAs: 'classes'
+    })
+    .when('/classes/:class_id/manage_class', {
+      templateUrl: 'views/classes/manage_class.html',
+      controller: 'ClassesCtrl',
+      controllerAs: 'classes'
     });
 });
 

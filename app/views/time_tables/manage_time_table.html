@@ -3,20 +3,9 @@
     <div class="col-sm-12 textLeft">
       <h2>TimeTable</h2>
     </div>
-    <div class="col-sm-12 textLeft">
-      <span class="col-sm-2"><h5>Class Name</h5></span>
-      <span class="col-sm-6 paddingTop10">{{time_table.class_name}}</span>
-    </div>
-    <div class="col-sm-12 textLeft">
-      <span class="col-sm-2"><h5>Start Time</h5></span>
-      <span class="col-sm-6 paddingTop10">{{time_table.start_time}}</span>
-    </div>
-    <div class="col-sm-12 textLeft">
-    </div>
   </div>
   <div class="col-sm-12 textLeft" style="margin:10px 0;">
     <button class="btn btn-primary" ng-click="createTimeTableSlot();"> Create Slot</button>
-    <a class="btn btn-default" ng-click="goBack();">Back</a>
   </div>
   
   <div class="col-sm-12 textLeft alert alert-success" ng-if="selectedSlot">

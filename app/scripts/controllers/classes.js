@@ -16,7 +16,7 @@ angular.module('eracordUiApp.controller')
       return true;
     }
     var jkci_classes;
-    
+
     if($location.path() === "/classes/"+$routeParams.class_id) {
       jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
       $scope.class_id = $routeParams.class_id;
@@ -27,8 +27,6 @@ angular.module('eracordUiApp.controller')
 	  $scope.classExamsTab = true;
 	} else if(selectTab === 'daily_teaches') {
 	  $scope.classDtpTab = true;
-	} else if( selectTab === 'divisions' ) {
-	  $scope.classDivisionTab = true;
 	} else if(selectTab === 'notifications') {
 	  $scope.classNotificationTab = true;
 	} else {
@@ -40,7 +38,6 @@ angular.module('eracordUiApp.controller')
 	$route.updateParams({ tab: tabName, page: null});
       };
 
-      
       jkci_classes.get().then(function(data){
 	if(data.success) {
 	  $scope.class = data.jkci_class;
@@ -86,7 +83,7 @@ angular.module('eracordUiApp.controller')
       $scope.saveStudentList = function(){
 	jkci_classes.customPOST({students_ids: $scope.studentList}, "manage_students").then(function(data){
 	  if(data.success) {
-	    $location.path("/classes/"+$routeParams.class_id).replace();
+	    $location.path("/classes/"+$routeParams.class_id+"/manage_class").replace();
 	  } else {
 	    Flash.create('warning', "Please try again", 'alert-danger');
 	  }
@@ -182,6 +179,11 @@ angular.module('eracordUiApp.controller')
 
     //end of manage roll number
 
+    if($location.path() === "/classes/"+$routeParams.class_id+"/manage_class") {
+      $scope.class_id = $routeParams.class_id;
+    }
+    //end of manage Class
+    
   }]);
 
 

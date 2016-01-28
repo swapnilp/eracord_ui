@@ -1,0 +1,30 @@
+<h2>Manage class</h2>
+<button class="btn btn-default" ng-click="goBack();">Back</button>
+<div class="col-sm-12 textLeft paddingTop20">
+  <uib-tabset justified="true">
+    <uib-tab ng-attr-active="classStudentTab">
+      <uib-tab-heading><i class="icon-bell"></i> Students</uib-tab-heading>
+      <div class-students class-id="{{class_id}}" class-students-tab="{{classStudentTab}}" update-url="updateTabParams(tabName)" is-remove="true"></div>
+    </uib-tab>
+    <uib-tab ng-attr-active="classDivisionTab">
+      <uib-tab-heading><i class="icon-bell"></i> Divisions</uib-tab-heading>
+      <div>
+	<div class-divisions class-id="{{class_id}}" class-division-tab="{{classDivisionTab}}" update-url="updateTabParams(tabName)"></div>
+      </div>
+    </uib-tab>
+    <uib-tab ng-attr-active="classTimeTableTab">
+      <uib-tab-heading><i class="icon-bell"></i> TimeTable</uib-tab-heading>
+      <div>
+	<div class-time-table class-id="{{class_id}}" class-time-table-tab="{{classTimeTableTab}}" update-url="updateTabParams(tabName)"></div>
+      </div>
+    </uib-tab>
+    <uib-tab ng-attr-active="classNotificationTab" >
+      <uib-tab-heading><i class="icon-bell"></i> Upgrade batch</uib-tab-heading>
+      <div>
+	<span is-role-visible='["upgrade_batch"]' email="currentUser.email" ng-if="class.has_upgrade_batch">
+	  <a href="#/classes/{{class.id}}/get_batch" class="btn btn-primary">Upgrade Batch</a>
+	</span>
+      </div>
+    </uib-tab>
+  </uib-tabset>
+</div>
