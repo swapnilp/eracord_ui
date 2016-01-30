@@ -66,7 +66,7 @@ app.directive('divisionStudents', function(Restangular) {
 
       scope.removeStudent = function(student) {
 	if($window.confirm('Are you sure?')){
-	  jkci_classes.one("sub_classes", scope.divisionId).customDELETE('remove_student', {student_id: student.id}).then(function(data){
+	  jkci_classes.one("sub_classes", scope.divisionId).one('remove_student', student.id).remove().then(function(data){
 	    if(data.success) {
 	      scope.students = _.reject(scope.students, function(obj){return obj.id == student.id});
 	    }else {

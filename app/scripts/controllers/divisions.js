@@ -27,7 +27,7 @@ angular.module('eracordUiApp.controller')
       $scope.registerDivision = function(){
 	jkci_classes.customPOST({sub_class: $scope.vm.sub_class}, "sub_classes").then(function(data) {
 	  if(data.success) {
-	    $location.path("/classes/"+$scope.classId).replace();
+	    $location.path("/classes/"+$scope.classId+"/manage_class").replace();
 	  }else {
 	    
 	  }
@@ -50,7 +50,7 @@ angular.module('eracordUiApp.controller')
       $scope.deleteDivision = function() {
 	jkci_classes.one("sub_classes", $scope.divisionId).remove().then(function(data) {
 	 if(data.success) {
-	   $location.path("/classes/"+$routeParams.class_id).replace();
+	   $location.path("/classes/"+$routeParams.class_id+"/manage_class").replace();
 	 }else {
 	 } 
 	});
@@ -67,7 +67,7 @@ angular.module('eracordUiApp.controller')
 	if(data.success) {
 	  $scope.remainingStudents = data.students;
 	}else {
-	  $location.path("/classes/"+$routeParams.class_id);
+	  $location.path("/classes/"+$routeParams.class_id+"/manage_class");
 	}
       });
 

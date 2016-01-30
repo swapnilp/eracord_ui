@@ -16,6 +16,7 @@ app.directive('examCatlog', function(Restangular) {
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       scope.addMarksFlag = false;
       scope.publishEnable = true;
+      scope.savedAlert = false;
       
       scope.loadCatlog = function(){
 	jkci_classes.one("exams", scope.exam.id).customGET("get_catlogs").then(function(data){
@@ -27,6 +28,23 @@ app.directive('examCatlog', function(Restangular) {
       scope.absentStudent = function(catlog) {
 	catlog.is_present = false;
 	scope.publishEnable = false;
+	jkci_classes.one("exams", scope.exam.id).customPOST({catlog_id: catlog.id }, "add_absunt_student").then(function(data){
+	  scope.exam.verify_absenty = false;
+	  scope.savedAlert = true;
+	});
+	scope.remainingLength = remainingStudentsFilter(scope.examCatlogs).length;
+      };
+
+      scope.removeAbsent = function(catlog) {
+	if(catlog.absent_sms_sent === false) {
+	  catlog.is_present = null;
+	  scope.publishEnable = false;
+	  jkci_classes.one("exams", scope.exam.id).customPOST({catlog_id: catlog.id }, "remove_absunt_student").then(function(data){
+	    scope.exam.verify_absenty = false;
+	    scope.savedAlert = true;
+	  });
+	  scope.remainingLength = 1;//remainingStudentsFilter(scope.examCatlogs).length;
+	}
       };
       
       scope.saveTempMarks = function(catlog){
@@ -92,17 +110,14 @@ app.directive('examCatlog', function(Restangular) {
 	scope.publishEnable = false;
       };
 
-      scope.removeAbsent = function(catlog) {
-	if(catlog.absent_sms_sent === false) {
-	  catlog.is_present = null;
-	  scope.publishEnable = false;
-	}
-      };
+      
 
       scope.verifyResult = function(){
 	jkci_classes.one("exams", scope.exam.id).customPOST({}, "verify_exam_result").then(function(data){
 	  if(data.success){
 	    scope.exam.verify_result = true;
+	    scope.remainingLength = remainingStudentsFilter(scope.examCatlogs).length;
+	    scope.publishEnable = true;
 	  }else{
 	    scope.exam.verify_result = false;
 	  }
@@ -113,6 +128,8 @@ app.directive('examCatlog', function(Restangular) {
 	jkci_classes.one("exams", scope.exam.id).customPOST({}, "verify_exam_absenty").then(function(data){
 	  if(data.success){
 	    scope.exam.verify_absenty = true;
+	    scope.remainingLength = remainingStudentsFilter(scope.examCatlogs).length;
+	    scope.publishEnable = true;
 	  }else{
 	    scope.exam.verify_absenty = false;
 	  }

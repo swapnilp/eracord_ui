@@ -12,7 +12,7 @@ angular.module('eracordUiApp.controller')
 
 
     if(!Auth.isAuthenticated()){
-      $location.path('/user/sign_in');
+      $location.path('/user/sign_in').replace();
       return true;
     }
     

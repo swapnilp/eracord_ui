@@ -11,7 +11,7 @@ angular.module('eracordUiApp.controller')
   .controller('StudentsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window) {
 
     if(!Auth.isAuthenticated()){
-      $location.path('/user/sign_in');
+      $location.path('/user/sign_in').replace();
       return true;
     };
     
@@ -69,7 +69,12 @@ angular.module('eracordUiApp.controller')
 	}
 	students.post($scope.vm.user, {class_id: $routeParams.class_id}).then(function(data) {
 	  if(data.success) {
-	    $location.path("/students").replace();
+	    if($scope.classStudents) {
+	      $location.path("/classes/"+$routeParams.class_id+"/manage_class").replace();
+	    } else {
+	      $location.path("/students").replace();
+	    }
+	    
 	  }else {
 	    Flash.create('warning', data.message, 'alert-danger');
 	  }

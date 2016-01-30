@@ -22,7 +22,8 @@
   <table st-table="rowCollection" class="table organisationCoursesTable">
     <thead>
       <tr>
-	<th st-sort="firstName">Number</th>
+	<th st-sort="firstName" ng-if="!isRollNumber">Number</th>
+	<th st-sort="firstName" ng-if="isRollNumber">Roll Number</th>
 	<th st-sort="lastName">Name</th>
 	<th st-sort="balance">Batch</th>
 	<th st-sort="balance">Standard</th>

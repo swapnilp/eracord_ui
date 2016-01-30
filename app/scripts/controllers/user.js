@@ -65,7 +65,8 @@ angular.module('eracordUiApp.controller')
 	  }
 	}, function(error) {
 	  $cookieStore.remove('currentUser');
-          Flash.create('success', 'Unauthorized', 'alert-danger');
+          Flash.create('success', 'Please Enter valid credentials', 'alert-danger');
+	  $scope.vm.password = "";
 	});
 	
 	
@@ -80,7 +81,7 @@ angular.module('eracordUiApp.controller')
       $scope.submitForgotPassword = function() {
 	Restangular.all("users").customPOST({user: {email: $scope.vm.email}}, "reset_password",{}).then(function(data){
 	  if(data) {
-	    Flash.create('success', 'Please check your email', 'alert-success');
+	    Flash.create('success', 'Reset password link sent to your email', 'alert-success');
 	    $location.path("#/user/sign_in").replace();
 	  } else {
 	  }

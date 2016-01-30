@@ -9,13 +9,15 @@
   <button class="btn btn-primary" ng-if="!exam.verify_absenty && !addMarksFlag" ng-click="verifyAbsenty();">
     Verify Absenty
   </button>
-  <span ng-if="!addMarksFlag">
-    <button class="btn btn-primary" ng-click="saveAbsenty()">Save</button>
+  <span ng-if="!addMarksFlag && remainingLength > 0">
     <button class="btn btn-primary" ng-click="addMarks()">Add Marks</button>
   </span>
   <span ng-if="addMarksFlag">
     <button class="btn btn-primary" ng-click="saveMarks()">Save Marks</button>
     <button class="btn btn-primary" ng-click="cancelAddMarks()">Cancel</button>
+  </span>
+  <span ng-if="savedAlert">
+    Saved
   </span>
   
   <div ng-if="!addMarksFlag">

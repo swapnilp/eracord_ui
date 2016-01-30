@@ -131,7 +131,7 @@ angular.module('eracordUiApp.controller')
 	if(rollNumbers.length === uniqRollNumbers.length){
 	  jkci_classes.customPOST({roll_number: $scope.students}, "save_roll_number", {}).then(function(data){
 	    if(data.success) {
-	      $location.path("/classes/"+$scope.classId).replace();
+	      $location.path("/classes/"+$routeParams.class_id+"/manage_class").replace();
 	    }else {
 	    }
 	  });

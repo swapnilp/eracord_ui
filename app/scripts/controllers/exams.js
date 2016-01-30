@@ -13,7 +13,7 @@ angular.module('eracordUiApp.controller')
     var jkci_classes;
     var jkci_class;
     if(!Auth.isAuthenticated()){
-      $location.path('/user/sign_in');
+      $location.path('/user/sign_in').replace();
       return true;
     }
 

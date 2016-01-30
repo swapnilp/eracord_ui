@@ -11,7 +11,7 @@ angular.module('eracordUiApp.controller')
   .controller('AdminDeskCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular','$compile', 'uiCalendarConfig' , function ($rootScope, $scope, Flash, $location, Auth, Restangular, $compile, uiCalendarConfig) {
 
     if(!Auth.isAuthenticated()){
-      $location.path('/user/sign_in');
+      $location.path('/user/sign_in').replace();
       return true;
     }
 
