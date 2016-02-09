@@ -376,3 +376,56 @@ app.directive('classTimeTable', function(Restangular) {
     }]
   };
 });
+//end of timetable
+
+app.directive('classDuplicateStudents', function(Restangular) {
+  return {
+    restrict: 'AE',
+    transclude: true,
+    scope: {
+      classId: '@',
+      classStudentVerificationTab: '@',
+      updateUrl: '&',
+      changeDuplicateRemaining: '&',
+      recheckStudents: '&'
+    },
+    templateUrl: 'views/classes/duplicate_students.html',
+    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', '$route', function(scope, Restangular, Flash, $location, $window, $routeParams, $route){
+
+      var jkci_classes = Restangular.one("jkci_classes", scope.classId);
+
+      var getResultsPage = function() {
+	jkci_classes.customGET("check_verify_students").then(function(data){
+	  if(data.success) {
+	    scope.students = data.class_students;
+	    var remaining_students = _.where(scope.students, {is_duplicate: true, is_duplicate_accepted: false}).length;
+	    scope.changeDuplicateRemaining({remainingValue: remaining_students});
+	  }
+	});
+      };
+      
+      scope.recheckStudents({theDirFn: getResultsPage});
+      
+      scope.acceptStudent = function(row) {
+	row.is_duplicate_accepted = true;
+	jkci_classes.customPOST({student_id: row.student_id},"accept_duplicate_student", {}).then(function(data){
+	  if(!data.success) {
+	    row.is_duplicate_accepted = false;
+	  } else {
+	    var remaining_students = _.where(scope.students, {is_duplicate: true, is_duplicate_accepted: false}).length;
+	    scope.changeDuplicateRemaining({remainingValue: remaining_students});
+	  }
+	});
+      };
+      
+      scope.$watch('classStudentVerificationTab', function(){
+	if(scope.classStudentVerificationTab === 'true') {
+	  getResultsPage();
+	  //scope.updateUrl({tabName: 'students'});
+	}
+      });
+
+    }]
+  };
+});
+// end of class student verifications

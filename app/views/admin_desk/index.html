@@ -18,17 +18,20 @@
 	<td><a href="#/classes/{{row.id}}">{{row.class_name}}</a></td>
 	<td>{{row.divisions}}</td>
 	<td>
-	  <span is-role-visible='["create_daily_teach"]' email="currentUser.email">
+	  <span is-role-visible='["create_daily_teach"]' email="currentUser.email" ng-if="row.is_student_verified">
 	    <a ng-href="#/classes/{{row.id}}/daily_catlogs/new">Fill Catlog</a>
+	  </span>
+	  <span ng-if="!row.is_student_verified">
+	    <a ng-href="#/classes/{{row.id}}/manage_class?&verify=true">Verify students</a>
 	  </span>
 	</td>
 	<td>
-	  <span is-role-visible='["create_exam"]' email="currentUser.email">
+	  <span is-role-visible='["create_exam"]' email="currentUser.email" ng-if="row.is_student_verified">
 	    <a ng-href="#/classes/{{row.id}}/exams/new">Create Exam</a>
 	  </span>
 	</td>
 	<td>
-	  <span is-role-visible='["create_exam"]' email="currentUser.email">
+	  <span is-role-visible='["create_exam"]' email="currentUser.email" ng-if="row.is_student_verified">
 	    <a ng-href="#/classes/{{row.id}}/exams/new?&isGroup=true">Create Group Exam</a>
 	  </span>
 	</td>

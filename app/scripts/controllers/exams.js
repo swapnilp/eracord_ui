@@ -259,6 +259,7 @@ angular.module('eracordUiApp.controller')
 	  });
 	}else{
 	  $scope.chaptersPoints = [];
+	  $scope.selectedPoints = [];
 	}
       };
       

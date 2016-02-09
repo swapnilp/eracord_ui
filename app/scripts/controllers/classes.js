@@ -40,6 +40,7 @@ angular.module('eracordUiApp.controller')
 
       jkci_classes.get().then(function(data){
 	if(data.success) {
+	  $scope.has_manage_class = data.has_manage_class;
 	  $scope.class = data.jkci_class;
 	  loadTabs($routeParams.tab);
 	} else {
@@ -181,16 +182,43 @@ angular.module('eracordUiApp.controller')
 
     if($location.path() === "/classes/"+$routeParams.class_id+"/manage_class") {
       $scope.class_id = $routeParams.class_id;
-      
       jkci_classes = Restangular.one("jkci_classes", $scope.class_id);
+      $scope.remainingDuplicateCount = 0;
+      if($routeParams.verify) {
+	$scope.classStudentVerificationTab = true;
+      }
       
       jkci_classes.get().then(function(data){
 	if(data.success) {
-	  $scope.class = data.jkci_class;
+	  $scope.jk_class = data.jkci_class;
 	} else {
 	  $location.path("#/admin_desk");
 	}
       });
+
+      $scope.changeDuplicateRemaining = function(remainingDuplicateCount) {
+	$scope.remainingDuplicateCount = remainingDuplicateCount;
+      };
+
+      $scope.recheckDuplicateStudent = function() {
+	jkci_classes.customPOST({},"recheck_duplicate_student", {}).then(function(data) {
+	  if(data.success) {
+	    $scope.theDirFn();
+	  }
+	});
+      };
+
+      $scope.dirRecheckStudents = function(theDirFn) {
+	$scope.theDirFn = theDirFn;
+      }
+
+      $scope.verifyDuplicateStudent = function() {
+	jkci_classes.customPOST({},"verify_students", {}).then(function(data) {
+	  if(data.success) {
+	    $location.path("/classes/"+$routeParams.class_id).replace();
+	  }
+	});
+      };
     }
     //end of manage Class
     

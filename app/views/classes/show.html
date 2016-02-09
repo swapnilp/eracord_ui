@@ -45,16 +45,19 @@
     </div>
     <div class="col-sm-12 textLeft paddingTop10">
       <div class="col-sm-12 textLeft paddingTop10">
-	<span is-role-visible='["create_daily_teach"]' email="currentUser.email">
+	<span is-role-visible='["create_daily_teach"]' email="currentUser.email" ng-if="class.is_student_verified">
 	  <a href="#/classes/{{class.id}}/daily_catlogs/new" class="btn btn-primary">Create Daily Catlog</a>
 	</span>
-	<span is-role-visible='["create_exam"]' email="currentUser.email">
+	<span is-role-visible='["create_exam"]' email="currentUser.email" ng-if="class.is_student_verified">
 	  <a href="#/classes/{{class.id}}/exams/new" class="btn btn-primary">Create Exam</a>
 	</span>
-	<span is-role-visible='["manage_class_student"]' email="currentUser.email">
+	<span is-role-visible='["create_exam"]' email="currentUser.email" ng-if="!class.is_student_verified">
+	  <a href="#/classes/{{class.id}}/manage_class?&verify=true" class="btn btn-primary">Verify students</a>
+	</span>
+	<span is-role-visible='["manage_class_student"]' email="currentUser.email" ng-if="has_manage_class">
 	  <a href="#/classes/{{class.id}}/manage_class" class="btn btn-primary">Manage Class</a>
 	</span>
-	<button class="btn btn-default" ng-click="goBack();">Back</button>
+	<a class="btn btn-default" href="#/admin_desk">Back</a>
       </div>
     </div>
     <div class="col-sm-12 textLeft paddingTop20">

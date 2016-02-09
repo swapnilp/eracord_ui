@@ -26,7 +26,7 @@ angular.module('eracordUiApp.controller')
       $scope.vm = {};
       $scope.vm.daily_teachs = {};
       var date = new Date();
-      $scope.max_date = ""+ date.getFullYear()+"/"+(date.getMonth()+1)+"/"+ (date.getDate()+1);
+      $scope.maxDate = ""+ date.getFullYear()+"/"+(date.getMonth()+1)+"/"+ (date.getDate()+1);
       
       $scope.openCalendar = function(e) {
         e.preventDefault();
