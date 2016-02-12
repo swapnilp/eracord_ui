@@ -152,3 +152,42 @@ app.directive('roleSelect', function () {
   };
 });
 
+app.directive('organisationClasses', function(Restangular) {
+  return {
+    restrict: 'AE',
+    transclude: true,
+    scope: {
+      organisationClassesTab: "@",
+      hostUrl: '@'
+    },
+    templateUrl: 'views/organisations/classes.html',
+    controller: ['$scope', 'Restangular', 'Flash', '$location', function(scope, Restangular, Flash, $location){
+      scope.classes = [];
+      scope.organisationClassesLoded = false;
+      
+      scope.loadClasses = function(){
+	Restangular.all("/organisations").customGET('get_classes').then(function(data){
+	  if(data.success){
+	    scope.classes = data.classes;
+	    scope.other_classes = data.other_classes;
+	  }
+      	});
+      };
+
+      scope.makeActiveClass = function(classId) {
+	Restangular.one("jkci_classes", classId).customPOST({}, 'make_active_class', {}).then(function(data){
+	  if(data.success) {
+	    scope.classes = data.classes;
+	  }
+	});
+      };
+      
+      scope.$watch('organisationClassesTab', function(){
+	if(scope.organisationClassesTab === 'true' && scope.organisationClassesLoded === false){
+	  scope.loadClasses();
+	  scope.organisationClassesLoded = true;
+	}
+      })
+    }]
+  };
+});

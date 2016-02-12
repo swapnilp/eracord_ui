@@ -4,6 +4,10 @@
       <uib-tab-heading><i class="icon-bell"></i> Cources</uib-tab-heading>
       <div organisation-cources></div>
     </uib-tab>
+    <uib-tab ng-attr-active="organisationClassesTab">
+      <uib-tab-heading><i class="icon-bell"></i> All Classes</uib-tab-heading>
+      <div organisation-classes organisation-classes-tab="{{organisationClassesTab}}" host-url="{{hostUrl}}"></div>
+    </uib-tab>
     <uib-tab>
       <uib-tab-heading><i class="icon-bell"></i> Users</uib-tab-heading>
       <div>

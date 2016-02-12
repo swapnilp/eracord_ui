@@ -44,7 +44,7 @@
       </span>
     </div>
     <div class="col-sm-12 textLeft paddingTop10">
-      <div class="col-sm-12 textLeft paddingTop10">
+      <div class="col-sm-12 textLeft paddingTop10" ng-if="class.is_current_active">
 	<span is-role-visible='["create_daily_teach"]' email="currentUser.email" ng-if="class.is_student_verified">
 	  <a href="#/classes/{{class.id}}/daily_catlogs/new" class="btn btn-primary">Create Daily Catlog</a>
 	</span>

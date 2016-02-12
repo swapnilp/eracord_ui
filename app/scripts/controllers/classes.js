@@ -171,8 +171,16 @@ angular.module('eracordUiApp.controller')
 
       $scope.upgradeBatch = function(){
 	if($scope.standard_id){
-	  jkci_classes.customPOST({student_list: $scope.studentList, standard_id: $scope.standard_id}, 'upgrade_batch', {}).then(function(data){
-	  });
+	  jkci_classes.customPOST({student_list: $scope.studentList, standard_id: $scope.standard_id}, 'upgrade_batch', {}).
+	    then(function(data){
+	      if(data.success) {
+		if(data.is_same_organisation) {
+		  $location.path("/classes/"+data.id).replace();
+		}else {
+		  $location.path("/admin_desk").replace();
+		}
+	      }
+	    });
 	}
       }
       

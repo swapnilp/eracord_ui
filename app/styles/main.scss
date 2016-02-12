@@ -221,3 +221,25 @@ body {
 .paddingRight0 {
   padding-right: 0;
 }
+
+
+.organisationClass {
+  height: 150px;
+  padding:10px 5px;
+
+  .wrapper{
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    border: 1px solid red;
+  }
+
+  .rightMenu {
+    float: right;
+  }  
+}
+.organisationClass.active {
+  .wrapper{
+    border: 1px solid green;
+  }  
+}

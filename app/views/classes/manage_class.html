@@ -2,7 +2,7 @@
 <a class="btn btn-default" href="#/classes/{{class_id}}">Back</a>
 <div class="col-sm-12 textLeft paddingTop20">
   <uib-tabset justified="true">
-    <uib-tab ng-attr-active="classStudentVerificationTab" ng-if="!jk_class.is_student_verified">
+    <uib-tab ng-attr-active="classStudentVerificationTab" >
       <uib-tab-heading><i class="icon-bell"></i> Verify Students</uib-tab-heading>
       <div style="margin:20px 0;">
 	<h3>Please verify student</h3>
@@ -27,12 +27,12 @@
 	<div class-time-table class-id="{{class_id}}" class-time-table-tab="{{classTimeTableTab}}" update-url="updateTabParams(tabName)"></div>
       </div>
     </uib-tab>
-    <uib-tab ng-attr-active="classNotificationTab" ng-if="class.has_upgrade_batch">
+    <uib-tab ng-attr-active="classNotificationTab" ng-if="jk_class.has_upgrade_batch">
       <uib-tab-heading><i class="icon-bell"></i> Upgrade batch</uib-tab-heading>
       <div style="margin:20px 0;">
 	<h3>Please click upgrade batch</h3>
-	<span is-role-visible='["upgrade_batch"]' email="currentUser.email" ng-if="class.has_upgrade_batch">
-	  <a href="#/classes/{{class.id}}/get_batch" class="btn btn-primary">Upgrade Batch</a>
+	<span is-role-visible='["upgrade_batch"]' email="currentUser.email" ng-if="jk_class.has_upgrade_batch">
+	  <a href="#/classes/{{jk_class.id}}/get_batch" class="btn btn-primary">Upgrade Batch</a>
 	</span>
       </div>
     </uib-tab>
