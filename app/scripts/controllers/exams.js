@@ -21,9 +21,18 @@ angular.module('eracordUiApp.controller')
       var exams = Restangular.all("exams");
       $scope.totalExams = 0;
       $scope.pagination = {current: 1};
+
+      var getFilterData = function() {
+	exams.customGET('get_filter_data').then(function(data){
+	  if(data.success) {
+	    $scope.standards = data.standards;
+	    $scope.batches = data.batches;
+	  }
+	});
+      };
       
       var getResultsPage = function(pageNumber) {
-	exams.getList({page: pageNumber}).then(function(data){
+	exams.getList({page: pageNumber, standard_id: $scope.filterStandard, batch_id: $scope.filterBatch}).then(function(data){
 	  $scope.exams = data[0];
 	  $scope.totalExams = data[1];
 	});
@@ -32,6 +41,7 @@ angular.module('eracordUiApp.controller')
       $scope.pageChanged = function(newPage) {
         getResultsPage(newPage);
       };
+      getFilterData();
       getResultsPage(1);
     }
     

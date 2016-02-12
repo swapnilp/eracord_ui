@@ -1,4 +1,17 @@
 <div style="margin:20px 0;">
+  <div class="examFilterDiv col-sm-12 paddingLeft0"> 
+    <div class="col-sm-3 paddingLeft0">
+      <label for="standard_id">Batch</label>
+      <select class="form-control ng-touched" ng-model="filterBatch" ng-options="std.id as std.name for std in batches"></select>
+    </div>
+    <div class="col-sm-3 paddingLeft0">
+      <label for="standard_id">Standard</label>
+      <select class="form-control ng-touched" ng-model="filterStandard" ng-options="std.id as std.name for std in standards"></select>
+    </div>
+    <div class="col-sm-3 paddingLeft0">
+      <button class="btn btn-primary" style="margin-top:23px;" ng-click="pageChanged(1);">Filter</button>
+    </div>
+  </div>
   <table st-table="rowCollection" class="table classExamsTable">
     <thead>
       <tr>
