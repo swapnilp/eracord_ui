@@ -1,5 +1,5 @@
 <div style="margin:20px 0;">
-  <div class="examFilterDiv col-sm-12 paddingLeft0"> 
+  <div class="examFilterDiv col-sm-12 padding0" ng-if="showFilter"> 
     <div class="col-sm-3 paddingLeft0">
       <label for="standard_id">Batch</label>
       <select class="form-control ng-touched" ng-model="filterBatch" ng-options="std.id as std.name for std in batches"></select>
@@ -11,11 +11,11 @@
     <div class="col-sm-3 paddingLeft0">
       <button class="btn btn-primary" style="margin-top:23px;" ng-click="pageChanged(1);">Filter</button>
     </div>
-    <div class="col-sm-12 paddingLeft0" style="margin-top:20px;" >
+    <div class="col-sm-12 padding0" style="margin-top:20px;" ng-show="length > 0">
       <div class="alert alert-warning">Total Exams are - {{totalExams}}</div>
     </div>
   </div>
-  <table st-table="rowCollection" class="table classExamsTable">
+  <table st-table="rowCollection" class="table classExamsTable col-sm-12" ng-show="length > 0">
     <thead>
       <tr>
 	<th st-sort="firstName">Name</th>
@@ -52,6 +52,11 @@
       </tr>
     </tbody>
   </table>
-  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)" class="col-sm-12" ng-show="length > 0"></dir-pagination-controls>
+  <div ng-show="length == 0" class="col-sm-12 padding0" style="margin-top:20px;">
+    <div class="alert alert-warning">
+      No Data available
+    </div>
+  </div>
 </div>
 

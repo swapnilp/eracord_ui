@@ -185,7 +185,7 @@ app.directive('organisationClasses', function(Restangular) {
       scope.$watch('organisationClassesTab', function(){
 	if(scope.organisationClassesTab === 'true' && scope.organisationClassesLoded === false){
 	  scope.loadClasses();
-	  scope.organisationClassesLoded = true;
+	  //scope.organisationClassesLoded = true;
 	}
       })
     }]

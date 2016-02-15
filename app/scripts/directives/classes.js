@@ -91,6 +91,7 @@ app.directive('classExams', function(Restangular) {
 	jkci_classes.customGET("exams" ,{page: pageNumber}).then(function(data){
 	  scope.exams = data.body;
 	  scope.totalExams = data.count;
+	  scope.length = data.count;
 	});
 
       };

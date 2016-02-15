@@ -51,7 +51,7 @@
 	<span is-role-visible='["create_exam"]' email="currentUser.email" ng-if="class.is_student_verified">
 	  <a href="#/classes/{{class.id}}/exams/new" class="btn btn-primary">Create Exam</a>
 	</span>
-	<span is-role-visible='["create_exam"]' email="currentUser.email" ng-if="!class.is_student_verified">
+	<span is-role-visible='["create_exam"]' email="currentUser.email" ng-if="!class.is_student_verified && has_manage_class">
 	  <a href="#/classes/{{class.id}}/manage_class?&verify=true" class="btn btn-primary">Verify students</a>
 	</span>
 	<span is-role-visible='["manage_class_student"]' email="currentUser.email" ng-if="has_manage_class">
