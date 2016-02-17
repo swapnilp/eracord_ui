@@ -100,8 +100,8 @@ angular.module('eracordUiApp.controller')
 	base_organisation.customPOST({organisation: $scope.vm.org, standard_ids: std_ids}, "sub_organisation/launch_organisation", {}).then(function(data){
 	  if(data.success) {
 	    $location.path('/manage_organisation').replace();
-	  }else {
-	    Flash.create('warning', "Sub Organisation is not created", 'alert-danger');
+	  } else {
+	    Flash.create('warning', data.message, 'alert-danger');
 	  }
 	});
       };
