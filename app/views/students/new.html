@@ -1,5 +1,5 @@
 <div class="col-md-6 col-md-offset-3">
-  <h2>New User</h2>
+  <h2>{{text}} User</h2>
   <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
   <form name="form" ng-submit="registerStudent()" role="form">
     <div class="form-group">
@@ -8,7 +8,7 @@
       </select>
     </div>
     <div class="form-group" ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }">
-      <label for="first_name">First Name *</label>
+      <label for="first_name" class="textRed">First Name *</label>
       <input type="text" name="first_name" id="first_name" class="form-control" ng-model="vm.user.first_name" required />
       <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Email is required</span>
     </div>
@@ -17,7 +17,7 @@
       <input type="text" name="middle_name" id="middle_name" class="form-control" ng-model="vm.user.middle_name" />
     </div>
     <div class="form-group" ng-class="{ 'has-error': form.last_name.$dirty && form.last_name.$error.required }">
-      <label for="last_name">last_name *</label>
+      <label for="last_name" class="textRed">last_name *</label>
       <input type="text" name="last_name" id="last_name" class="form-control" ng-model="vm.user.last_name" required />
       <span ng-show="form.last_name.$dirty && form.last_name.$error.required" class="help-block">Last Name is required</span>
     </div>
@@ -27,22 +27,23 @@
       </select>
     </div>
     <div class="form-group" ng-class="{ 'has-error': form.batch_id.$dirty && form.batch_id.$error.required }">
-      <label for="batch_id">Batch *</label>
+      <label for="batch_id" class="textRed">Batch *</label>
       <select class="form-control ng-touched" ng-model="vm.user.batch_id" ng-options="batch.id as batch.name for batch in batches"  required>
       </select>
       <span ng-show="form.batch_id.$dirty && form.batch_id.$error.required" class="help-block">Batch must be present</span>
     </div>
     <div class="form-group" ng-class="{ 'has-error': form.standard_id.$dirty && form.standard_id.$error.required }" ng-if="!classStudents">
-      <label for="standard_id">Standard *</label>
+      <label for="standard_id" class="textRed">Standard *</label>
       <select class="form-control ng-touched" ng-model="vm.user.standard_id" ng-change="selectOptionalSubject()" ng-options="std.id as std.name for std in standards" required></select>
       <span ng-show="form.standard_id.$dirty && form.standard_id.$error.required" class="help-block">Standard must be present</span>
     </div>
     <div class="form-group" ng-if="classStudents">
-      <label for="standard_id">Standard *</label> <br />
+      <label for="standard_id" class="textRed">Standard *</label> <br />
       <span>{{standards[0].name}}</span>
     </div>
     <div class="form-group">
       <label for="oSubjects">Optional Subject </label>
+      <br />
       <label ng-repeat="subject in oSubjects">
 	<input type="checkbox" checklist-model="optionalSubjects" checklist-value="subject.id"> {{subject.std_name}} <br />
       </label>
@@ -52,23 +53,23 @@
       <input type="text" name="email" id="email" class="form-control" ng-model="vm.user.email" />
     </div>
     <div class="form-group">
-      <label for="mobile">Mobile *</label>
-      <input type="text" name="mobile" id="mobile" class="form-control" ng-model="vm.user.mobile"  ng-minlength="10"  ng-maxlength="10" placeholder="must be present in 10 digit" onkeypress="return event.charCode >= 48 && event.charCode <= 57"/>
+      <label for="mobile" class="textRed">Mobile *</label>
+      <input type="text" name="mobile" id="mobile" class="form-control" ng-model="vm.user.mobile"  ng-minlength="10"  ng-maxlength="10" placeholder="must be present in 10 digit" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0"/>
       <div ng-show="form.mobile.$error.minlength || form.mobile.$error.maxlength">
-	<span>Must be a valid 10 digit phone number</span>
+	<span class="bg-danger">Must be a valid 10 digit phone number</span>
       </div>
     </div>
     <div class="form-group" ng-class="{ 'has-error': form.parent_name.$dirty && form.parent_name.$error.required }">
-      <label for="parent_name">Parent Name *</label>
+      <label for="parent_name" class="textRed">Parent Name *</label>
       <input type="text" name="parent_name" id="parent_name" class="form-control" ng-model="vm.user.parent_name" required />
       <span ng-show="form.parent_name.$dirty && form.parent_name.$error.required" class="help-block">Parent name is required</span>
     </div>
     <div class="form-group" ng-class="{ 'has-error': form.p_mobile.$dirty && form.p_mobile.$error.required }">
-      <label for="p_mobile">Parent Mobile *</label>
-      <input type="text" name="p_mobile" id="p_mobile" class="form-control" ng-model="vm.user.p_mobile" ng-minlength="10"  ng-maxlength="10" placeholder="must be present in 10 digit" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required />
+      <label for="p_mobile" class="textRed">Parent Mobile *</label>
+      <input type="text" name="p_mobile" id="p_mobile" class="form-control" ng-model="vm.user.p_mobile" ng-minlength="10"  ng-maxlength="10" placeholder="must be present in 10 digit" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0" required />
       <span ng-show="form.p_mobile.$dirty && form.p_mobile.$error.required" class="help-block">Parent mobile is required</span>
       <div ng-show="form.p_mobile.$error.minlength || form.p_mobile.$error.maxlength">
-	<span>Must be a valid 10 digit phone number</span>
+	<span class="bg-danger">Must be a valid 10 digit phone number</span>
       </div>
     </div>
     <div class="form-group">
@@ -80,7 +81,7 @@
       <input type="text" name="rank" id="rank" class="form-control" ng-model="vm.user.rank" />
     </div>
     <div class="form-actions" style="padding-bottom:20px;">
-      <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Register</button>
+      <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">{{text === 'New' ? 'Save': 'Update'}}</button>
       <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
       <a ng-click="goBack();" class="btn btn-default">Cancel</a>
     </div>

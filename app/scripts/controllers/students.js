@@ -33,6 +33,7 @@ angular.module('eracordUiApp.controller')
       
       $scope.pageChanged = function(newPage) {
         getResultsPage(newPage);
+	$location.hash('bottom');
       };
 
       getResultsPage(1);
@@ -45,6 +46,7 @@ angular.module('eracordUiApp.controller')
       $scope.optionalSubjects = [];
       $scope.classStudents = !_.isUndefined($routeParams.class_id);
       $scope.vm = {};
+      $scope.text = "New";
 
       students.customGET("new", {class_id: $routeParams.class_id}).then(function(data){
 	$scope.standards = data.standards;
@@ -97,6 +99,7 @@ angular.module('eracordUiApp.controller')
       $scope.student_id = $routeParams.student_id;
       var student = Restangular.one("students", $routeParams.student_id);
       $scope.vm = {};
+      $scope.text = "Edit";
 
       $scope.selectOptionalSubject = function(){
 	Restangular.one("standards", $scope.vm.user.standard_id).customGET("optional_subjects").then(function(data){

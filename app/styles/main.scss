@@ -256,3 +256,15 @@ select:-moz-focusring {
     color: transparent;
     text-shadow: 0 0 0 #000;
 }
+
+.textRed {
+  color: red;
+}
+
+.pagination > li > a, .pagination > li > span {
+  outline: 0;
+}
+
+a:focus {
+  outline: 0;
+}
