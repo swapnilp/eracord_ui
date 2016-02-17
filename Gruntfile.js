@@ -81,7 +81,7 @@ module.exports = function (grunt) {
       proxies: [
         {
 	  context: '/api',
-          host: 'http://54.152.43.153',
+          host: 'http://54.152.133.36',
           port: 3000,
 	  https: false,
           xforward: false,
@@ -441,7 +441,12 @@ module.exports = function (grunt) {
           cwd: '.',
           src: 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*',
           dest: '<%= yeoman.dist %>'
-        }]
+        }, {
+	    expand: true,
+	    cwd: 'bower_components/font-awesome/',
+	    src: 'fonts/*',
+	    dest: '<%= yeoman.dist %>'
+	}]
       },
       styles: {
         expand: true,

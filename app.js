@@ -20,7 +20,7 @@ app.use('/', express["static"](__dirname + "/dist"));
 
 app.all('/api/*', function(appRequest, appResponse) {
   var apiHost, apiPath, apiPort, apiRequestUrl;
-  apiHost = process.env.API_HOST || 'http://54.152.43.153';
+  apiHost = process.env.API_HOST || 'http://54.152.133.36';
   apiPort = process.env.API_PORT || 3000;
   apiPath = appRequest.originalUrl.slice(4);
   apiRequestUrl = apiHost + ":" + apiPort + apiPath;
