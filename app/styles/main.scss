@@ -247,3 +247,12 @@ body {
 .paddingLeft0 {
   padding-left:0;
 }
+
+.navbar-default .navbar-nav > li > a {
+  outline: 0;
+}
+
+select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+}
