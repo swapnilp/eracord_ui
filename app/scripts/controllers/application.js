@@ -7,7 +7,7 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
   var clearUserInformation, directAccessRoutes, i, len, path;
   $scope.userAlertCount = 0;
   $scope.alertsVisible = false;
-  
+  $scope.firstLoad = false;
   $scope.topMenu = "home";
 
 
@@ -102,5 +102,5 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
       $scope.topMenu = "home";
     }
   });
-});
 
+});
