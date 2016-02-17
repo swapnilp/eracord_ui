@@ -38,6 +38,12 @@
         "dist/css/bootstrap.css",
         "dist/js/bootstrap.js"
       ]
+    },
+    "font-awesome": {
+      "main": [
+	"less/font-awesome.less",
+	"css/font-awesome.css"
+      ]
     }
   }
 }
