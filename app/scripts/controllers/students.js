@@ -33,7 +33,6 @@ angular.module('eracordUiApp.controller')
       
       $scope.pageChanged = function(newPage) {
         getResultsPage(newPage);
-	$location.hash('bottom');
       };
 
       getResultsPage(1);

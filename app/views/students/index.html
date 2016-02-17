@@ -36,7 +36,7 @@
     </thead>
     <tbody>
       <tr dir-paginate="row in students | toArray:false| filter:filterStudent | itemsPerPage: 10" total-items="totalStudents" current-page="pagination.current" pagination-id="student">
-	<td><span ng-if="showRollNumber">{{ row.roll_number}}</span><span ng-if="!showRollNumber">{{$index+1}}</span></td>
+	<td><span ng-if="showRollNumber">{{ row.roll_number}}</span><span ng-if="!showRollNumber">{{ $index+1 + ((pagination.current - 1) * 10)}}</span></td>
 	<td>{{row.name}}</td>
 	<td>{{row.batch}}</td>
 	<td>{{row.standard}}</td>
