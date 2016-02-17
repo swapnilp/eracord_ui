@@ -3,7 +3,7 @@
   <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
   <form name="form" ng-submit="register()" role="form">
     <div class="form-group" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
-      <label for="name">Name *</label>
+      <label for="name" class="bg-danger">Name *</label>
       <input type="text" name="name" id="name" class="form-control" ng-model="vm.name" required />
       <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">Name is required</span>
     </div>
@@ -14,17 +14,17 @@
     </div>
 
     <div class="form-group" ng-class="{ 'has-error': form.mobile.$dirty && form.mobile.$error.required }">
-      <label for="mobile">Mobile *</label>
-      <input type="text" name="mobile" id="mobile" class="form-control" ng-model="vm.mobile" ng-minlength="10"  ng-maxlength="10" placeholder="must be present in 10 digit" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required />
+      <label for="mobile" class="bg-danger">Mobile *</label>
+      <input type="text" name="mobile" id="mobile" class="form-control" ng-model="vm.mobile" ng-minlength="10"  ng-maxlength="10" placeholder="must be present in 10 digit" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 0" required />
       <span ng-show="form.mobile.$dirty && form.mobile.$error.required" class="help-block">Mobile is required</span>
       <div ng-show="form.mobile.$error.minlength || form.mobile.$error.maxlength">
-	<span>Must be a valid 10 digit phone number</span>
+	<span class="bg-danger">Must be a valid 10 digit phone number</span>
       </div>
     </div>
     
     <div class="form-group">
       <label for="initl">Reason</label>
-      <select class="form-control ng-touched" ng-model="vm.reason" style="" ng-options="values for values in reasons" >
+      <select class="form-control ng-touched no-textshadow" ng-model="vm.reason" style="" ng-options="values for values in reasons" >
       </select>
     </div>
     
