@@ -19,7 +19,7 @@
           <li ng-class="{active: topMenu==='home'}"><a href="#/">Home</a></li>
 	  <li ng-class="{active: topMenu==='admin_desk'}" ng-click="changeLocation('admin_desk');"><a ng-href="#/admin_desk">Admin Desk</a></li>
           <li ng-class="{active: topMenu==='exams'}"><a ng-href="#/exams">Exams</a></li>
-	  <li is-role-visible='["is_manage_organiser"]' email="currentUser.email" ng-class="{active: topMenu==='manage_organisation'}">
+	  <li is-role-visible='["manage_organiser"]' email="currentUser.email" ng-class="{active: topMenu==='manage_organisation'}">
 	    <a ng-href="#/manage_organisation">Manage Organisation</a>
 	  </li>
 	  <li ng-class="{active: topMenu==='students'}"><a ng-href="#/students">Students</a></li>
