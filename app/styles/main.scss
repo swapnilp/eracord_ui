@@ -150,9 +150,7 @@ body {
 }
 
 .alert.alert-dismissible.alertIn {
-  position: fixed;
-  width: 100%;
-  top: 38px;
+  display: inline-block;
 }
 
 
@@ -289,4 +287,22 @@ a:focus {
 @-moz-keyframes spinm {
     from { -moz-transform: rotate(0deg);}
     to { -moz-transform: rotate(360deg);}
+}
+
+.flashAlert {
+  text-align:center;
+  position: fixed;
+  width: 100%;
+  top: 53px;
+}
+ 
+.flashAlert > div {
+  text-align:left;
+  border-radius: 40px;
+  padding: 10px 15px;
+  min-width:20%;
+}
+
+.alert-dismissable .close, .alert-dismissible .close {
+  right: -9px;
 }
