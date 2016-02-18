@@ -53,7 +53,7 @@
       </form>
     </span>
   </div>
-  <div class="col-sm-12 textLeft">
+  <div class="col-sm-12 textLeft" ng-if="exam">
     <div class="col-sm-12 paddingTop10" style="">
       <span ng-show="!exam.create_verification">
 	<a href="#/classes/{{class_id}}/exams/{{exam.id}}/edit" class="btn btn-primary" ng-disabled="requestLoading">Edit</a>
@@ -76,15 +76,15 @@
       </span>
     </div>
   </div>
-  <div class="col-sm-12 textLeft" ng-if="exam.is_completed && exam.is_result_decleared == null  && !exam.is_group">
+  <div class="col-sm-12 textLeft" ng-if="exam && exam.is_completed && exam.is_result_decleared == null  && !exam.is_group">
     <exam-catlog exam="exam" class-id="{{class_id}}">
     </exam-catlog>
   </div>
-  <div class="col-sm-12 textLeft" ng-if="exam.is_completed && exam.is_result_decleared  && !exam.is_group">
+  <div class="col-sm-12 textLeft" ng-if="exam && exam.is_completed && exam.is_result_decleared  && !exam.is_group">
     <exam-results exam="exam" class-id="{{class_id}}">
     </exam-results>
   </div>
-  <div class="col-sm-12 textLeft" ng-if="exam.is_group">
+  <div class="col-sm-12 textLeft" ng-if="exam && exam.is_group">
     <new-group-exam exam="exam" class-id="{{class_id}}">
     </new-group-exam>
   </div>
