@@ -159,7 +159,7 @@ angular.module('eracordUiApp.controller')
       
       $scope.getStudents = function(){
 	if($scope.withStudent){
-	  jkci_classes.customGET('students').then(function(data){
+	  jkci_classes.customGET('students', {withoutPage: true}).then(function(data){
 	    if(data.success) {
 	      $scope.students = data.students;
 	    }

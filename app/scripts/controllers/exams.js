@@ -22,6 +22,7 @@ angular.module('eracordUiApp.controller')
       $scope.totalExams = 0;
       $scope.pagination = {current: 1};
       $scope.showFilter = true;
+      $scope.filterExam = {};
 
       var getFilterData = function() {
 	exams.customGET('get_filter_data').then(function(data){
@@ -33,7 +34,7 @@ angular.module('eracordUiApp.controller')
       };
       
       var getResultsPage = function(pageNumber) {
-	exams.getList({page: pageNumber, standard_id: $scope.filterStandard, batch_id: $scope.filterBatch}).then(function(data){
+	exams.getList({page: pageNumber, filter: $scope.filterExam}).then(function(data){
 	  $scope.exams = data[0];
 	  $scope.totalExams = data[1];
 	  $scope.length = data.length;

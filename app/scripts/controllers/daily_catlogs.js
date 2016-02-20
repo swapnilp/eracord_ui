@@ -80,7 +80,7 @@ angular.module('eracordUiApp.controller')
 	  $scope.vm.daily_teachs.chapters_point_id = $scope.selectedPoints.join(',');
 	  jkci_classes.customPOST({daily_teaching_point: $scope.vm.daily_teachs}, "daily_teachs").then(function(data){
 	    if(data.success) {
-	      $location.path("/classes/"+data.class_id).replace();
+	      $location.path("/classes/"+data.class_id+"/daily_catlogs/"+data.dtp_id+"/show").replace();
 	    }else {
 	    }
 	  });
@@ -114,6 +114,7 @@ angular.module('eracordUiApp.controller')
 	  $scope.chapters = data.chapters;
 	  $scope.points = data.chapters_points;
 	  $scope.selectedPoints = $scope.vm.daily_teachs.chapters_point_id;
+	  $scope.class_name = $scope.vm.daily_teachs.jkci_class;
 	} else {
 	  
 	}

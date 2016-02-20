@@ -33,18 +33,21 @@
     </div>
     <div class="form-group" ng-class="{ 'has-error': form.subject_id.$dirty && form.subject_id.$error.required }" ng-if="isNew">
       <label for="subject_id">Subject</label>
-      <select class="form-control ng-touched" ng-model="vm.daily_teachs.subject_id" ng-change="getChapters()" ng-options="subject.id as subject.std_name for subject in subjects"  required>
+      <select class="form-control ng-touched" ng-model="vm.daily_teachs.subject_id" ng-change="getChapters()" ng-options="subject.id as subject.std_name for subject in subjects" required>
+	<option value="" class="hide">Select Subject</option>
       </select>
       <span ng-show="form.subject_id.$dirty && form.subject_id.$error.required" class="help-block">Subject is required</span>
     </div>
     
     <div class="form-group" ng-class="{ 'has-error': form.subject_id.$dirty && form.subject_id.$error.required }" ng-if="!isNew">
-      <label for="subject_id">Subject</label>
+      <label for="subject_id">Subject</label> <br />
+      <span>{{vm.daily_teachs.subject}}</span>
     </div>
     
     <div class="form-group" ng-class="{ 'has-error': form.chapter_id.$dirty && form.chapter_id.$error.required }">
       <label for="chapter_id">Chapter</label>
       <select class="form-control ng-touched" ng-model="vm.daily_teachs.chapter_id" ng-change="getChaptersPoints()" ng-options="chapter.id as chapter.name for chapter in chapters"  required>
+	<option value="" class="hide">Select Chapter</option>
       </select>
       <span ng-show="form.chapter_id.$dirty && form.chapter_id.$error.required" class="help-block">Chapter is required</span>
     </div>
