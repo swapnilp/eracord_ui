@@ -67,6 +67,7 @@ angular.module('eracordUiApp.controller')
 	$scope.vm.user.gender = $scope.gender;
 	if($scope.classStudents){
 	  $scope.vm.user.standard_id = $scope.standards[0].id;
+	  $scope.vm.user.batch_id = $scope.batches[0].id;
 	}
 	students.post($scope.vm.user, {class_id: $routeParams.class_id}).then(function(data) {
 	  if(data.success) {

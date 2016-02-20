@@ -8,9 +8,10 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('AdminDeskCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular','$compile', 'uiCalendarConfig' , function ($rootScope, $scope, Flash, $location, Auth, Restangular, $compile, uiCalendarConfig) {
+  .controller('AdminDeskCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular','$compile', 'uiCalendarConfig', '$cookieStore' , function ($rootScope, $scope, Flash, $location, Auth, Restangular, $compile, uiCalendarConfig, $cookieStore) {
 
     if(!Auth.isAuthenticated()){
+      $scope.eventSources = [];
       $location.path('/user/sign_in').replace();
       return true;
     }
@@ -18,6 +19,7 @@ angular.module('eracordUiApp.controller')
     $scope.events= [];
     $scope.selectedCalenderType = 'exams';
     $scope.loadCalenderEvent = false;
+    $scope.organisationName = $cookieStore.get('currentUser').name;
 
     var load_desk_classes = function(){
       var jkci_classes = Restangular.all("jkci_classes");

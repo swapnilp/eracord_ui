@@ -26,7 +26,7 @@
       <select class="form-control ng-touched" ng-model="gender" ng-options="values for values in ['Male', 'Female']" >
       </select>
     </div>
-    <div class="form-group" ng-class="{ 'has-error': form.batch_id.$dirty && form.batch_id.$error.required }">
+    <div class="form-group" ng-class="{ 'has-error': form.batch_id.$dirty && form.batch_id.$error.required }" ng-if="!classStudents">
       <label for="batch_id">Batch <span class="textRed"> *</span></label>
       <select class="form-control ng-touched" ng-model="vm.user.batch_id" ng-options="batch.id as batch.name for batch in batches"  required>
       </select>
@@ -38,7 +38,7 @@
       <span ng-show="form.standard_id.$dirty && form.standard_id.$error.required" class="help-block">Standard must be present</span>
     </div>
     <div class="form-group" ng-if="classStudents">
-      <label for="standard_id">Standard <span class="textRed"> *</span></label> <br />
+      <label for="standard_id">Standard</label> <br />
       <span>{{standards[0].name}}</span>
     </div>
     <div class="form-group">

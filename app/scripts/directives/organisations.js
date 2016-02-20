@@ -191,3 +191,44 @@ app.directive('organisationClasses', function(Restangular) {
     }]
   };
 });
+//end of organisation classes
+
+app.directive('organisationStandards', function(Restangular) {
+  return {
+    restrict: 'AE',
+    transclude: true,
+    scope: {
+      organisationStandardTab: "@",
+      hostUrl: '@'
+    },
+    templateUrl: 'views/organisations/organisation_standards.html',
+    controller: ['$scope', 'Restangular', 'Flash', '$location', '$cookieStore', function(scope, Restangular, Flash, $location, $cookieStore){
+      scope.classes = [];
+      scope.organisation_id = $cookieStore.get('currentUser').organisation_id;
+      
+      scope.loadOrganisationStandards = function(){
+	Restangular.all("/organisations").customGET('organisation_standards').then(function(data){
+	  if(data.success){
+	    scope.organisation_standards = data.organisation_standards;
+	  }
+      	});
+      };
+
+      scope.removeOrganisaitonStandard = function(standard, org_id) {
+	Restangular.all("/organisations").customPOST({standard_id: standard.id, organisation_id: org_id}, 'remove_standard_from_organisation', {}).then(function(data){
+	  if(data.success) { 
+	    standard.organisaitons = _.reject(standard.organisaitons, function(obj){return obj.organisation_id == org_id});
+	  }
+	})	
+      }
+
+      scope.$watch('organisationStandardTab', function(){
+	if(scope.organisationStandardTab === 'true'){
+	  scope.loadOrganisationStandards();
+	  //scope.organisationClassesLoded = true;
+	}
+      })
+    }]
+  };
+});
+// end of organisation Standards
