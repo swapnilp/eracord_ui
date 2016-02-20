@@ -56,7 +56,7 @@
       <label for="mobile">Mobile <span class="textRed"> *</span></label>
       <input type="text" name="mobile" id="mobile" class="form-control" ng-model="vm.user.mobile"  ng-minlength="10"  ng-maxlength="10" placeholder="must be present in 10 digit" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0"/>
       <div ng-show="form.mobile.$error.minlength || form.mobile.$error.maxlength">
-	<span class="bg-danger">Must be a valid 10 digit phone number</span>
+	<span class="textRed">Must be a valid 10 digit phone number</span>
       </div>
     </div>
     <div class="form-group" ng-class="{ 'has-error': form.parent_name.$dirty && form.parent_name.$error.required }">
@@ -69,7 +69,7 @@
       <input type="text" name="p_mobile" id="p_mobile" class="form-control" ng-model="vm.user.p_mobile" ng-minlength="10"  ng-maxlength="10" placeholder="must be present in 10 digit" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0" required />
       <span ng-show="form.p_mobile.$dirty && form.p_mobile.$error.required" class="help-block">Parent mobile is required</span>
       <div ng-show="form.p_mobile.$error.minlength || form.p_mobile.$error.maxlength">
-	<span class="bg-danger">Must be a valid 10 digit phone number</span>
+	<span class="textRed">Must be a valid 10 digit phone number</span>
       </div>
     </div>
     <div class="form-group">
