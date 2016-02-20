@@ -20,8 +20,8 @@ angular.module('eracordUiApp.controller')
       
       $scope.saveList = function() {
 	var a = _.where($scope.cources, {is_selected: true});
-	//console.log(_.pluck(a, 'id'));
-	if(a.size > 0){
+	
+	if(a.length > 0){
 	  Restangular.all("organisations").customGET('add_standards', {ids: _.pluck(a, 'id')}).then(function(data){
 	    if(data.success){
 	      $location.path('/manage_organisation').replace();
