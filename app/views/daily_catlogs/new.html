@@ -8,7 +8,7 @@
       <span>{{class_name}}</span>
       <span ng-show="form.organisation.$dirty && form.organisation.$error.required" class="help-block">Oganisation ID is required</span>
     </div>
-    <div class="form-group" ng-show="isNew">
+    <div class="form-group" ng-show="isNew" ng-if="divisions.lenght > 0">
       <label for="class">Divisions</label>
       <br />
       <div
@@ -25,14 +25,14 @@
       </div>
     </div>
     <div class="form-group" ng-class="{ 'has-error': form.date.$dirty && form.date.$error.required }">
-      <label for="date">Date</label>
+      <label for="date">Date <span class="textRed"> *</span></label>
       <p class="input-group">
 	<input type="text" class="form-control" max="maxDate" datetime-picker="dd/MM/yyyy HH:mm" ng-model="vm.daily_teachs.date" is-open="isOpen" ng-click="openCalendar($event, prop);" ng-focus="openCalendar($event, prop);" readonly required/>
       </p>
       <span ng-show="form.marks.$dirty && form.marks.$error.required" class="help-block">Exam Date is required</span>
     </div>
     <div class="form-group" ng-class="{ 'has-error': form.subject_id.$dirty && form.subject_id.$error.required }" ng-if="isNew">
-      <label for="subject_id">Subject</label>
+      <label for="subject_id">Subject <span class="textRed"> *</span></label>
       <select class="form-control ng-touched" ng-model="vm.daily_teachs.subject_id" ng-change="getChapters()" ng-options="subject.id as subject.std_name for subject in subjects" required>
 	<option value="" class="hide">Select Subject</option>
       </select>
@@ -45,7 +45,7 @@
     </div>
     
     <div class="form-group" ng-class="{ 'has-error': form.chapter_id.$dirty && form.chapter_id.$error.required }">
-      <label for="chapter_id">Chapter</label>
+      <label for="chapter_id">Chapter <span class="textRed"> *</span></label>
       <select class="form-control ng-touched" ng-model="vm.daily_teachs.chapter_id" ng-change="getChaptersPoints()" ng-options="chapter.id as chapter.name for chapter in chapters"  required>
 	<option value="" class="hide">Select Chapter</option>
       </select>
