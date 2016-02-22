@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('ExamsCtrl',['$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', function ( $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window) {
+  .controller('ExamsCtrl',['$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '_', function ( $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window, _) {
 
     var jkci_classes;
     var jkci_class;
@@ -86,8 +86,9 @@ angular.module('eracordUiApp.controller')
 	  $scope.vm.subject_id = $scope.selectedSubject[0].id;
 	  $scope.vm.exam_type = $scope.selectedExamType[0].name;
 	}
-	
-	$scope.vm.sub_classes = _.pluck($scope.selectedDivisions, "id").join(',');
+	if($scope.selectedDivisions){
+	  $scope.vm.sub_classes = _.pluck($scope.selectedDivisions, "id").join(',');
+	}
 	$scope.vm.jkci_class_id = $routeParams.class_id;
 	$scope.vm.is_group = $scope.isGroup;
 	jkci_classes.customPOST({exam: $scope.vm}, "/"+$routeParams.class_id+"/exams", {}).then(function(data){
