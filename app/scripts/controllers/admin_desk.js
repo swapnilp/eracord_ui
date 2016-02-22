@@ -42,13 +42,23 @@ angular.module('eracordUiApp.controller')
 	  
 	  _.each(data.exams, function(exam){
 	    //addExamEvent(exam);
-	    examEvents.push({
-	      type: exam.type,
-              title: exam.title,
-              start: new Date(exam.start),
-              end: new Date(exam.end),
-	      url: exam.url
-	    });
+	    if(exam.selfOrg){
+	      examEvents.push({
+		type: exam.type,
+		title: exam.title,
+		start: new Date(exam.start),
+		end: new Date(exam.end),
+		url: exam.url
+	      });
+	    }else {
+	      examEvents.push({
+		type: exam.type,
+		title: exam.title,
+		start: new Date(exam.start),
+		end: new Date(exam.end),
+		className: ['bg-info-black']
+	      });
+	    }
 	  });
 	  $scope.loadCalenderEvent = false;
 	  callback(examEvents);
@@ -138,7 +148,7 @@ angular.module('eracordUiApp.controller')
 
      /* Render Tooltip */
     $scope.eventRender = function( event, element, view ) { 
-        element.attr({'uib-tooltip': event.title,
+        element.attr({'uib-tooltip': event.type,
                      'tooltip-append-to-body': true});
         $compile(element)($scope);
     };
