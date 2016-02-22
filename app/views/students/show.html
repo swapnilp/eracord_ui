@@ -42,14 +42,23 @@
       </div>
     </div>
     <div class="col-sm-12 left">
-      <a class="btn btn-primary" href="#/students/{{student.id}}/edit">Edit</a>
-      <button class="btn btn btn-default"  href="/student/10/disable_student_sms">Disable Sms</button>
-      <button class="btn btn btn-default" onclick="return confirm('Are you sure?')" href="/student/10/disable_student">
-	Disable Student
-      </button>
-      <button class="btn btn-default" ng-click="goBack();">
-	Back
-      </button>
+      <div class="left">
+	<a class="btn btn-primary" href="#/students/{{student.id}}/edit">Edit</a>
+      </div>
+      <div class="left mRight10">
+      <toggle-switch class="mLeft10"
+		     ng-model="student.enable_sms"
+		     knob-label="SMS" ng-click="toggleStudentSms()">
+      </toggle-switch>
+      </div>
+      <div class="left">
+	<button class="btn btn btn-default" onclick="return confirm('Are you sure?')" href="/student/10/disable_student">
+	  Disable Student
+	</button>
+	<button class="btn btn-default" ng-click="goBack();">
+	  Back
+	</button>
+      </div>
     </div>
   </div>
 </div>

@@ -92,6 +92,12 @@ angular.module('eracordUiApp.controller')
 	  $scope.student = data.body.student;
 	}
       });
+
+      $scope.toggleStudentSms = function() {
+	student.customPOST({enable_sms: $scope.student.enable_sms}, "toggle_sms", {}).then(function(data){
+	  $scope.student.enable_sms = data.enable_sms; 
+	});
+      };
     };
     // end of show path
     

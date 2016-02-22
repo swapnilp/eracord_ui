@@ -29,6 +29,7 @@
 	<th st-sort="balance">Standard</th>
 	<th st-sort="balance">Parent Name</th>
 	<th st-sort="balance">Parent Mobile</th>
+	<th st-sort="balance">Enable Sms</th>
 	<th st-sort="balance" ng-if="!isRemove">Classes</th>
 	<th></th>
 	<th ng-if="isRemove">Remove</th>
@@ -42,6 +43,7 @@
 	<td>{{row.standard}}</td>
 	<td>{{row.parent_name}}</td>
 	<td>{{row.p_mobile}}</td>
+	<td>{{row.enable_sms}}</td>
 	<td ng-if="!isRemove">{{row.class_names}}</td>
 	<td>
 	  <a href="#/students/{{row.id}}/show" class="btn btn-link">Show</a>
