@@ -45,11 +45,11 @@
       <div class="left">
 	<a class="btn btn-primary" href="#/students/{{student.id}}/edit">Edit</a>
       </div>
-      <div class="left mRight10">
-      <toggle-switch class="mLeft10"
-		     ng-model="student.enable_sms"
-		     knob-label="SMS" ng-click="toggleStudentSms()">
-      </toggle-switch>
+      <div class="left mRight10"  is-role-visible='["toggle_student_sms"]' email="currentUser.email">
+	<toggle-switch class="mLeft10"
+		       ng-model="student.enable_sms"
+		       knob-label="SMS" ng-click="toggleStudentSms()">
+	</toggle-switch>
       </div>
       <div class="left">
 	<button class="btn btn btn-default" onclick="return confirm('Are you sure?')" href="/student/10/disable_student">

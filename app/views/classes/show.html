@@ -46,7 +46,6 @@
     <div class="col-sm-12 textLeft paddingTop10">
       <div class="col-sm-12 textLeft paddingTop10" ng-if="class.is_current_active">
 	<span is-role-visible='["create_daily_teach"]' email="currentUser.email">
-	  
 	  <a class="btn btn-primary" ng-disabled="!class.is_student_verified" uib-tooltip="Please Verify Students" ng-if="!class.is_student_verified"> Create Daily Catlog</a>
 	  <a href="#/classes/{{class.id}}/daily_catlogs/new" class="btn btn-primary" ng-if="class.is_student_verified"> Create Daily Catlog</a>
 	</span>
