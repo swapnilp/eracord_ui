@@ -22,6 +22,10 @@ app.config(function($routeProvider) {
       templateUrl: 'views/organisations/new_organisation_clark.html',
       controller: 'OrganisationsCtrl'
     })
+    .when('/edit_organisation', {
+      templateUrl: 'views/organisations/edit_organisation.html',
+      controller: 'OrganisationsCtrl'
+    })
     .when('/organisation/users/:user_id/change_password', {
       templateUrl: 'views/organisations/change_clark_password.html',
       controller: 'OrganisationsCtrl'

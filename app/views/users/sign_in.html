@@ -11,7 +11,7 @@
       <label for="password">Password <span class="textRed">*</span></label>
       <input type="password" name="password" id="password" class="form-control" ng-model="vm.password" required />
       <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
-        </div>
+    </div>
     <div class="form-actions">
       <a href="#/user/forgot_password">Forgot password ?</a><br/><br/>
       <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Login</button>

@@ -91,11 +91,18 @@ angular.module('eracordUiApp.controller')
     }
 
     if($location.path() === '/user/change_password') {
-
+      
       $scope.vm = {};
 
       $scope.updatePassword = function() {
 	Restangular.all("").customPUT({user: $scope.vm}, "users").then(function(data){
+	  if(data.success){
+	    Flash.create('success', "Password has been changed", 'alert-success');
+	    $location.path("/admin_desk").replace();
+	  }else{
+	    Flash.create('warning', data.message, 'alert-danger');
+	    $scope.vm = {};
+	  }
 	});
       }
     }

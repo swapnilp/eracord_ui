@@ -3,6 +3,31 @@ var app;
 
 app = angular.module('eracordUiApp.directives');
 
+app.directive('organisationProfile', function(Restangular) {
+  return {
+    restrict: 'AE',
+    transclude: true,
+    //scope: true,
+    templateUrl: 'views/organisations/profile.html',
+    controller: ['$scope', 'Restangular', 'Flash', '$location', function(scope, Restangular, Flash, $location){
+
+      scope.loadProfile = function(){
+	Restangular.all("").customGET("/organisation_profile").then(function(data){
+	  if(data.success) {
+	    scope.organisation = data.organisation;
+	  } else {
+	    $location.path('/admin_desk').replace();
+	  }
+	});
+      };
+
+      scope.loadProfile();
+      
+    }]
+  };
+});
+//end organisation profile
+
 app.directive('organisationCources', function(Restangular) {
   return {
     restrict: 'AE',

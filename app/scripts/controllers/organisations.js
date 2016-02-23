@@ -9,6 +9,11 @@
  */
 angular.module('eracordUiApp.controller')
   .controller('OrganisationsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams) {
+
+    if(!Auth.isAuthenticated()){
+      $location.path('/user/sign_in');
+      return true;
+    }
     
     var base_organisation;
 
@@ -107,9 +112,32 @@ angular.module('eracordUiApp.controller')
       };
     }
     
-    if(!Auth.isAuthenticated()){
-      $location.path('/user/sign_in');
-      return true;
+    
+
+    if($location.path() === '/edit_organisation') {
+      $scope.vm = {};
+      Restangular.all("").customGET("organisation_edit").then(function(data){
+	if(data.success) {
+	  $scope.vm = data.organisation;
+	} else {
+	  $location.path('/admin_desk').replace();
+	}
+      });
+
+      $scope.updateOrganisation = function() {
+	Restangular.all("").customPOST({organisation: $scope.vm}, "update_organisation", {}).then(function(data){
+	  if(data.success) {
+	    $location.path('/manage_organisation').replace();
+	  }else {
+	    if(data.message == "Unauthorised"){
+	      $location.path('/admin_desk').replace();
+	    }else{
+	      $scope.vm.password = "";
+	    }
+	  }
+	});
+      };
+      
     }
     //var exams = Restangular.all("exams").getList();
     //Flash.create('success', message, 'custom-class');

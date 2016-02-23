@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="col-sm-12 textLeft paddingLeft0">
+    <span class="col-sm-2"><h5>Name</h5> </span>
+    <span class="col-sm-6 paddingTop10">{{organisation.name}}</span>
+  </div>
+
+  <div class="col-sm-12 textLeft paddingLeft0">
+    <span class="col-sm-2"><h5>Email</h5> </span>
+    <span class="col-sm-6 paddingTop10">{{organisation.email}}</span>
+  </div>
+
+  <div class="col-sm-12 textLeft paddingLeft0">
+    <span class="col-sm-2"><h5>mobile</h5> </span>
+    <span class="col-sm-6 paddingTop10">{{organisation.mobile}}</span>
+  </div>
+  
+  <div class="col-sm-12 textLeft paddingLeft0">
+    <span class="col-sm-2"><h5>Sms</h5> </span>
+    <span class="col-sm-6 paddingTop10">{{organisation.is_send_message}}<span ng-if="organisation.is_send_message != 'Enabled'" class="alert alert-warning marginLeft10">Need to contact Eracord Admin</span></span>
+
+  </div>
+  <div class="col-sm-12 textLeft paddingLeft0">
+    <a href="#/edit_organisation" class="btn btn-primary">Edit</a>
+  </div>
+</div>
+      

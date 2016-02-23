@@ -10,7 +10,7 @@
             <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Email is required</span>
         </div>
 	<div class="form-group" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
-          <label for="name">Name</label>
+          <label for="name">Stream Name <small>(like science, Arts, Junior, senior)</small></label>
           <input type="text" name="name" id="name" class="form-control" ng-model="vm.org.name" placeholder="Must be present" required />
           <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">Name is required</span>
         </div>

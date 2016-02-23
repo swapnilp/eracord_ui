@@ -83,7 +83,7 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
     if($location.path().search("^/exams") >= 0 ){
       $scope.topMenu = "exams";
     }
-    if($location.path().search("^/manage_organisation") >= 0 ){
+    if($location.path().search("^/manage_organisation") >= 0 || $location.path().search("^/edit_organisation") >= 0){
       $scope.topMenu = "manage_organisation";
     }
     if($location.path().search("^/students") >= 0 ){
