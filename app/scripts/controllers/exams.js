@@ -332,8 +332,9 @@ angular.module('eracordUiApp.controller')
 	  $scope.vm.subject_id = $scope.selectedSubject[0].id;
 	  $scope.vm.exam_type = $scope.selectedExamType[0].name;
 	}
-	
-	$scope.vm.sub_classes = _.pluck($scope.selectedDivisions, "id").join(',');
+	if($scope.selectedDivisions) {
+	  $scope.vm.sub_classes = _.pluck($scope.selectedDivisions, "id").join(',');
+	}
 	$scope.vm.jkci_class_id = $routeParams.class_id;
 	$scope.vm.is_group = $scope.isGroup;
 	jkci_classes.one("exams", $routeParams.exam_id).customPOST({exam: $scope.vm},"update").then(function(data){
