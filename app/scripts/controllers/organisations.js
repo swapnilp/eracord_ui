@@ -112,8 +112,6 @@ angular.module('eracordUiApp.controller')
       };
     }
     
-    
-
     if($location.path() === '/edit_organisation') {
       $scope.vm = {};
       Restangular.all("").customGET("organisation_edit").then(function(data){
@@ -137,7 +135,12 @@ angular.module('eracordUiApp.controller')
 	  }
 	});
       };
-      
+    }
+
+    if($location.path() === '/manage_organisation') {
+      if($routeParams.standards_manage) {
+	$scope.organisationStandardTab = true;
+      }
     }
     //var exams = Restangular.all("exams").getList();
     //Flash.create('success', message, 'custom-class');

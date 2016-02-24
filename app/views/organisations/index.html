@@ -1,8 +1,9 @@
 <div>
   <uib-tabset justified="true">
     <uib-tab>
-      <uib-tab-heading><i class="icon-bell"></i> Cources</uib-tab-heading>
+      <uib-tab-heading><i class="icon-bell"></i> Profile</uib-tab-heading>
       <div organisation-profile></div>
+      <h2>Courses</h2>
       <div organisation-cources></div>
     </uib-tab>
     <uib-tab ng-attr-active="organisationClassesTab">
@@ -10,7 +11,7 @@
       <div organisation-classes organisation-classes-tab="{{organisationClassesTab}}" host-url="{{hostUrl}}"></div>
     </uib-tab>
     <uib-tab>
-      <uib-tab-heading><i class="icon-bell"></i> Users</uib-tab-heading>
+      <uib-tab-heading><i class="icon-bell"></i> Users / Clark</uib-tab-heading>
       <div>
 	<div organisation-clarks></div>
       </div>
