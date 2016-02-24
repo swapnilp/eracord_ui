@@ -2,12 +2,12 @@
   <table st-table="rowCollection" class="table groupExamReportTable">
     <thead>
       <tr>
-	<th ng-repeat="th in tableHead">{{th}}</th>
+	<th ng-repeat="th in tableHead track by $index">{{th}}</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="trs in tableData">
-	<td ng-repeat="td in trs">{{td}}</td>
+      <tr ng-repeat="trs in tableData track by $index">
+	<td ng-repeat="td in trs track by $index">{{td}}</td>
       </tr>
     </tbody>
   </table>
