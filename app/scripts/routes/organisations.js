@@ -33,6 +33,10 @@ app.config(function($routeProvider) {
     .when('/organisation/standards/:standard_ids/launch_sub_organisation', {
       templateUrl: 'views/organisations/launch_sub_organisation.html',
       controller: 'OrganisationsCtrl'
+    })
+    .when("/organisaiton/standards/:id/assign_organisation", {
+      templateUrl: 'views/organisations/remaining_standards_organisation.html',
+      controller: 'OrganisationsCtrl'
     });
 
 });
