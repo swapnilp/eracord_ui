@@ -214,6 +214,14 @@ angular.module('eracordUiApp.controller')
 
       $scope.deleteExam = function(exam){
 	//$scope.exam.verify_result = !$scope.exam.verify_result;
+	Restangular.one("jkci_classes", $routeParams.class_id).one("exams", $routeParams.exam_id).remove().then(function(data) {
+	  if(data.success) {
+	    $location.path(data.backUrl).replace();
+	  }else {
+	    Flash.create('warning', "Not saved", 'alert-danger');
+	  }
+	  
+	});
       };
 
       // upload on file select or drop
