@@ -48,7 +48,7 @@ app.directive('organisationCources', function(Restangular) {
       scope.launchSubOrganisation = function(){
 	var standards = $('.organisationCoursesTable input:checked').map(
 	  function () {return $(this).data('key');}).get().join(",");
-	$location.path("/organisation/standards/" + standards + "/launch_sub_organisation");
+	$location.path("/organisation/standards/" + standards + "/launch_sub_organisation").replace();
       };
 
       scope.isLaunchEnable = function (){

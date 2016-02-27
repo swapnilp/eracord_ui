@@ -97,6 +97,9 @@ angular.module('eracordUiApp.controller')
       base_organisation = Restangular.all("organisations");
       base_organisation.customGET('get_standards', {standards: $routeParams.standard_ids}).then(function(data){
 	$scope.standards = data.organisations;
+	if($scope.standards.length == 0){
+	  $location.path('/manage_organisation').replace();
+	}
 	$scope.name = _.map($scope.standards, function(obj){ return obj.name + '-' + obj.stream }).join(', ');
       });
 

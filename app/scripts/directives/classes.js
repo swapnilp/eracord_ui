@@ -12,10 +12,11 @@ app.directive('classStudents', function(Restangular) {
       classStudentsTab: '@',
       updateUrl: '&',
       isRemove: '@',
-      showOptions: '@'
+      showOptions: '@',
+      hostUrl: '@'
     },
     templateUrl: 'views/students/index.html',
-    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', '$route', function(scope, Restangular, Flash, $location, $window, $routeParams, $route){
+    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', '$route', 'Upload', function(scope, Restangular, Flash, $location, $window, $routeParams, $route, Upload){
       scope.cources = [];
       scope.showRollNumber = true;
       scope.isRollNumber = true;
@@ -28,6 +29,52 @@ app.directive('classStudents', function(Restangular) {
       scope.pagination = {
         current: $routeParams.page || 1
       };
+
+      scope.selectUploadFile = function(newVal){
+	if(newVal){
+	  scope.file = newVal;
+	  scope.uploadingFile = false;
+	  scope.fileName  = newVal.name;
+	}
+      };
+
+      scope.submit = function() {
+	if (scope.file) {
+	  scope.uploadingFile = true;
+	  scope.uploadMeaasgeClass = "alert-warning";
+	  scope.uploadingMessage = "Uploading";
+          scope.upload(scope.file);
+	}
+      };
+
+
+      scope.upload = function (file) {
+	scope.requestLoading = true;
+        Upload.upload({
+          url: "api/jkci_classes/" + $routeParams.class_id + "/import_students_excel",
+          data: {file: file, 'exam_id': $routeParams.exam_id}
+        }).then(function (resp) {
+	  scope.requestLoading = false;
+	  if(resp.data.success) {
+	    scope.uploadMeaasgeClass = "alert-success";
+	    scope.uploadingMessage = "Completed Successfully";
+	    scope.fileName = "";
+	    scope.file = null;
+	    getResultsPage(1);
+	  }else {
+	    scope.uploadMeaasgeClass = "alert-danger";
+	    scope.uploadingMessage = resp.data.message;
+	  }
+          console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+        }, function (resp) {
+	  scope.requestLoading = false;
+	  scope.uploadingFile = false;
+        }, function (evt) {
+	  scope.requestLoading = false;
+          //var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        });
+      };
+
 
       var getResultsPage = function(pageNumber) {
 	jkci_classes.customGET("students", {page: pageNumber, search: scope.filterStudent}).then(function(data){

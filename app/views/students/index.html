@@ -13,6 +13,18 @@
       <a href="#/classes/{{classId}}/students/new" class="btn btn-primary" ng-if="classId"> New Student</a>
       <a href="#/students/new" class="btn btn-primary" ng-if="!classId"> New Student</a>
     </span>
+    <span ng-if="classId">
+      <a href="{{hostUrl}}/classes/{{classId}}/download_excel.xlsx" class="btn btn-primary" ng-if="classId" target="_blank"> Download Students or excel format</a>
+    </span>
+    <span class=" paddingTop10 " style="display:block;" ng-if="classId">
+      <form name="form">
+	<div class="btn btn-primary" ngf-select ng-model="file" name="file" ngf-pattern="'.xlsx,.xls'"
+	     accept=".xlsx,.xls" ngf-max-size="20MB" ng-change="selectUploadFile(file);">Select File</div>
+	<span>{{fileName}}</span>
+	<span ng-class="uploadMeaasgeClass" ng-if="uploadingFile">{{uploadingMessage}}</span>
+	<button type="submit" ng-click="submit()" ng-if="!uploadingFile" class="btn btn-default" ng-disabled="requestLoading">Upload</button>
+      </form>
+    </span>
   </span>
   <div>
     <br />
