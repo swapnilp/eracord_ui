@@ -60,7 +60,7 @@ app.directive('classStudents', function(Restangular) {
 	    scope.uploadingMessage = "Completed Successfully";
 	    scope.fileName = "";
 	    scope.file = null;
-	    getResultsPage(1);
+	    $location.path("/classes/"+ $routeParams.class_id+"/manage_student_subjects").replace();
 	  }else {
 	    scope.uploadMeaasgeClass = "alert-danger";
 	    scope.uploadingMessage = resp.data.message;
@@ -68,9 +68,12 @@ app.directive('classStudents', function(Restangular) {
           console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
         }, function (resp) {
 	  scope.requestLoading = false;
-	  scope.uploadingFile = false;
+	  scope.uploadMeaasgeClass = "alert-danger";
+	  scope.uploadingMessage = "Please check file data and reupload it";
+	  //scope.uploadingFile = false;
         }, function (evt) {
 	  scope.requestLoading = false;
+	  
           //var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
         });
       };
