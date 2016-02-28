@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('UserCtrl',['$scope', 'Flash', 'Auth', '$location', '$cookieStore', 'Restangular', function ($scope, Flash, Auth, $location, $cookieStore, Restangular) {
+  .controller('UserCtrl',['$rootScope', '$scope', 'Flash', 'Auth', '$location', '$cookieStore', 'Restangular', function ($rootScope, $scope, Flash, Auth, $location, $cookieStore, Restangular) {
     //var message = '<strong>You are not sign in!</strong> Please Sign in.';
     //Flash.create('success', message, 'alert-warning');
 
@@ -22,7 +22,7 @@ angular.module('eracordUiApp.controller')
       if(Auth.isAuthenticated()){
 
 	if($cookieStore.get('currentUser') === undefined) {
-	  $scope.currentUser = {};
+	  $rootScope.currentUser = {};
 	  Auth._currentUser = {};
 	}else{
 	  Flash.create('success', 'You are already signed in', 'alert-success');
@@ -53,8 +53,8 @@ angular.module('eracordUiApp.controller')
 	
 	Auth.login(credentials, config).then(function(user) {
 	  if(user.success){
-	    $scope.currentUser.email = user.email;
-            $scope.currentUser.token = user.token;
+	    $rootScope.currentUser.email = user.email;
+            $rootScope.currentUser.token = user.token;
 	    $cookieStore.put('currentUser', user);
       	    Flash.create('success', 'Login Success', 'alert-success');
 	    $location.path('/admin_desk');

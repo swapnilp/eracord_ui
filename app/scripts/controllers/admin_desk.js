@@ -19,7 +19,15 @@ angular.module('eracordUiApp.controller')
     $scope.events= [];
     $scope.selectedCalenderType = 'exams';
     $scope.loadCalenderEvent = false;
-    $scope.organisationName = $cookieStore.get('currentUser').name;
+    
+    if ($cookieStore.get('currentUser') === undefined) {
+      $scope.eventSources = [];
+      $location.path('/user/sign_in').replace();
+      return true;
+    } else {
+      $scope.organisationName = $cookieStore.get('currentUser').name;
+    }
+
 
     var load_desk_classes = function(){
       var jkci_classes = Restangular.all("jkci_classes");

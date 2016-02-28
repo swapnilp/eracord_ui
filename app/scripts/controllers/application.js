@@ -11,11 +11,12 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
   $scope.topMenu = "home";
 
 
-  $scope.hostUrl = "http://localhost:3000";
+  //$scope.hostUrl = "http://localhost:3000";
   //$scope.hostUrl = "http://54.152.133.36:3000/";
-  
-  if ($scope.currentUser === undefined) {
-    $scope.currentUser = {};
+  $scope.hostUrl = "http://192.168.0.100:3000/";  
+
+  if ($rootScope.currentUser === undefined) {
+    $rootScope.currentUser = {};
   }
 
   $scope.goBack = function() {
@@ -41,15 +42,15 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
   if ($location.path() !== '/user/sign_in' || $location.path() !== '/user/forgot_password') {
     Auth._currentUser = $cookieStore.get('currentUser');
     Auth.currentUser().then(function(user) {
-      $scope.currentUser = user;
+      $rootScope.currentUser = user;
     });
   }
 
 
   clearUserInformation = function() {
     $cookieStore.remove('currentUser');
-    $scope.currentUser = {};
-    return $scope.currentUser;
+    $rootScope.currentUser = {};
+    return $rootScope.currentUser;
   };
 
   $scope.doLogout = function() {

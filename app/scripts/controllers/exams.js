@@ -8,11 +8,17 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('ExamsCtrl',['$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '_', function ( $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window, _) {
+  .controller('ExamsCtrl',['$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '_', '$cookieStore', function ( $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window, _, $cookieStore) {
 
     var jkci_classes;
     var jkci_class;
     if(!Auth.isAuthenticated()){
+      $location.path('/user/sign_in').replace();
+      return true;
+    }
+
+    if ($cookieStore.get('currentUser') === undefined) {
+      $scope.eventSources = [];
       $location.path('/user/sign_in').replace();
       return true;
     }

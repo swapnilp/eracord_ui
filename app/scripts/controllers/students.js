@@ -8,12 +8,18 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('StudentsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window) {
+  .controller('StudentsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$cookieStore', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window, $cookieStore) {
 
     if(!Auth.isAuthenticated()){
       $location.path('/user/sign_in').replace();
       return true;
     };
+    
+    if ($cookieStore.get('currentUser') === undefined) {
+      $scope.eventSources = [];
+      $location.path('/user/sign_in').replace();
+      return true;
+    }
     
     if($location.path() === '/students') {
       var students = Restangular.all("students");

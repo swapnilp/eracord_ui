@@ -30,6 +30,10 @@
     <br />
     Filter : <input type="text" ng-model="filterStudent" ng-change="pageChanged(1);">
   </div>
+  <br />
+  <div class="alert alert-warning">
+    Total Students are - {{totalStudents}}
+  </div>
 
   <table st-table="rowCollection" class="table organisationCoursesTable">
     <thead>
