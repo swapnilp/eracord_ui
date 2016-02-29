@@ -22,12 +22,13 @@ app.factory('authWrapper', function($rootScope, $q, $window, Flash, $cookieStore
         case 401:
 	  $cookieStore.remove('currentUser');
 	  $rootScope.currentUser = {};
-	  message = 'Your session has expired. Please log in again.';
+	  message = 'Please log in.';
           $location.path("/user/sign_in");
 	  Flash.create('warning', message, 'alert-danger');
         break;
         case 403:
-          //Flash.alert('You are not authorized to perform this action.').andRedirectTo('/');
+	  Flash.create('warning', 'You are not authorized to perform this action.', 'alert-danger');
+	  $location.path("/admin_desk");
 	  break;
 	case 500:
 	  console.log('asdasdasdad');
