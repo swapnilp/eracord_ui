@@ -44,7 +44,7 @@ angular.module('eracordUiApp.controller')
 	});
       };
       
-      jkci_classes.customGET('get_exam_info').then(function(data) {
+      jkci_classes.customGET('get_dtp_info').then(function(data) {
 	$scope.class_name = data.data.class_exam_data.class_name;
 	$scope.divisions = data.data.class_exam_data.sub_classes;
 	$scope.subjects = data.data.class_exam_data.subjects;

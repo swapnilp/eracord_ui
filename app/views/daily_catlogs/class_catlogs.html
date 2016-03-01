@@ -1,14 +1,11 @@
 <div style="margin:20px 0;">
   Filter Student <input ng-model="search"> 
-  <button ng-if="!addMarksFlag && publishEnable && remainingLength == 0 && exam.verify_result && exam.verify_absenty" class="btn btn-primary" ng-click="publishAbsenty()">
-    Publish Absenty
-  </button>
   <button class="btn btn-primary" ng-if="!isVerifyAbsenty" ng-click="verifyAbsenty();">
     Verify Absenty
   </button>
-  <span ng-if="absentyChangeFlag">
-    <button class="btn btn-primary" ng-click="saveAbsenty()">Save</button>
-  </span>
+  <button class="btn btn-primary" ng-if="isVerifyAbsenty && !isSmsSent && enableSms" ng-click="publishAbsenty()">
+    Send Sms
+  </button>
   
   <div ng-if="!addMarksFlag">
     <h2>Students</h2>
@@ -27,7 +24,7 @@
 	  <td>{{row.name}}</td>
 	  <td>{{row.p_mobile}}</td>
 	  <td>
-	    <button class="btn btn-primary" ng-click="absentStudent(row);">add Absent</button>
+	    <button class="btn btn-primary" ng-click="absentStudent(row);" ng-if="!isSmsSent">add Absent</button>
 	  </td>
 	</tr>
       </tbody>
@@ -47,10 +44,10 @@
       <tbody>
 	<tr ng-repeat="row in dtpCatlogs| filter:search | absentClassStudents">
 	  <td>{{$index + 1}}</td>
-	  <td>{{row.student}}</td>
+	  <td>{{row.name}}</td>
 	  <td>{{row.p_mobile}}</td>
 	  <td>
-	    <button class="btn btn-link" ng-click="removeAbsent(row);" ng-if="!row.sms_sent"> Remove</button>
+	    <button class="btn btn-link" ng-click="removeAbsent(row);" ng-if="!row.sms_sent && !isSmsSent"> Remove</button>
 	  </td>
 	</tr>
       </tbody>

@@ -2,7 +2,7 @@
   <div class="col-sm-12">
     
     <div class="textLeft">
-      <h3 style="margin-top:5px;">Class: <small><a href="/jkci_classes/{{class_id}}">{{daily_teache.jkci_class}}</a></small></h3>
+      <h3 style="margin-top:5px;">Class: <small><a href="#/classes/{{class_id}}">{{daily_teache.jkci_class}}</a></small></h3>
     </div>
     <div class="textLeft">
       <h3>Date: &nbsp;
@@ -33,11 +33,13 @@
       </h3>
     </div>
     <div class="textLeft" style="margin-top:20px;">
-      <a class="btn btn-primary" href="#/classes/{{class_id}}/daily_catlogs/{{daily_teache.id}}/edit">Edit</a>
+      <span is-role-visible='["create_daily_teach"]' email="currentUser.email">
+	<a class="btn btn-primary" href="#/classes/{{class_id}}/daily_catlogs/{{daily_teache.id}}/edit">Edit</a>
+      </span>
       <button class="btn btn-default" ng-click="goBack();">Back</button>
     </div>
     <div class="textLeft">
-      <class-daily-teaches-catlogs daily-teaches-id="{{daily_teache.id}}" class_id="{{class_id}}" is-verify_absenty="daily_teache.verify_absenty"></class-daily-teaches-catlogs>
+      <class-daily-teaches-catlogs daily-teaches-id="{{daily_teache.id}}" class_id="{{class_id}}" is-verify_absenty="daily_teache.verify_absenty" is-sms-sent="daily_teache.is_sms_sent" enable-sms="daily_teache.enable_sms"></class-daily-teaches-catlogs>
     </div>
   </div>
 </div>

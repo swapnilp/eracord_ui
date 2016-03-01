@@ -10,14 +10,16 @@ app.directive('classDailyTeachesCatlogs', function(Restangular) {
     scope: {
       classId: '@',
       dailyTeachesId: '@',
-      isVerifyAbsenty: '='
+      isVerifyAbsenty: '=',
+      isSmsSent: '=',
+      enableSms: '='
+      
     },
     templateUrl: 'views/daily_catlogs/class_catlogs.html',
     controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', function(scope, Restangular, Flash, $location, $window){
       
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       scope.publishEnable = true;
-      scope.absentyChangeFlag = false;
             
       scope.loadCatlog = function(){
 	jkci_classes.one("daily_teachs", scope.dailyTeachesId).customGET("get_catlogs").then(function(data){
@@ -28,35 +30,43 @@ app.directive('classDailyTeachesCatlogs', function(Restangular) {
       };
 
       scope.absentStudent = function(catlog) {
-	catlog.is_present = false;
-	scope.absentyChangeFlag = true;
-      };
-
-      scope.removeAbsent = function(catlog) {
-	catlog.is_present = null;
-	scope.absentyChangeFlag = true;
-      };
-
-      scope.saveAbsenty = function() {
-	var absentStudents = _.pluck(_.where(scope.dtpCatlogs, {is_present: false}), 'id');
-	absentStudents.push(0);
-	jkci_classes.one("daily_teachs", scope.dailyTeachesId).customPOST({students: absentStudents}, "fill_catlog", {})
+	jkci_classes.one("daily_teachs", scope.dailyTeachesId).customPOST({student: catlog.id}, "add_absent_student", {})
 	  .then(function(data){
 	    if(data.success){
-	      scope.absentyChangeFlag = false;
 	      scope.isVerifyAbsenty = false;
+	      catlog.is_present = false;
 	    }
 	  });
       };
 
+      scope.removeAbsent = function(catlog) {
+	jkci_classes.one("daily_teachs", scope.dailyTeachesId).customPOST({student: catlog.id}, "remove_absent_student", {})
+	  .then(function(data){
+	    if(data.success){
+	      scope.isVerifyAbsenty = false;
+	      catlog.is_present = null;
+	    }
+	  });
+      };
+
+      scope.publishAbsenty = function() {
+	jkci_classes.one("daily_teachs", scope.dailyTeachesId).customPOST({}, "publish_absenty", {})
+	  .then(function(data){
+	    if(data.success) {
+	      scope.isSmsSent = true;
+	    }
+	  });
+      };
+      
       scope.verifyAbsenty = function() {
 	jkci_classes.one("daily_teachs", scope.dailyTeachesId).customGET("class_absent_verification").then(function(data) {
 	  if(data.success) {
 	    scope.isVerifyAbsenty = true;
+	    scope.isSmsSent = false;
 	  }else {
 	  }
 	});
-      }
+      };
       
       scope.$watch('dailyTeachesId', function(){
 	if(!isEmpty(scope.dailyTeachesId)){

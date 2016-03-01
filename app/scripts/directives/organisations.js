@@ -162,7 +162,7 @@ app.directive('roleSelect', function () {
   return {
     restrict: 'AE',
     transclude: true,
-    template: '<div ng-click="toggleCheckbox();"><input type="checkbox" ng-model="value" data-key="{{key}}"/>&nbsp;{{key}}</div>',
+    template: '<div><span ng-click="toggleCheckbox();"><input type="checkbox" ng-model="value" data-key="{{key}}" />&nbsp;{{key}}</span></div>',
     scope: {
       key: '=',
       value: '='
