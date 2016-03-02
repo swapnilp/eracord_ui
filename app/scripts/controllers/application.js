@@ -11,8 +11,8 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
   $scope.topMenu = "home";
 
 
-  //$scope.hostUrl = "http://localhost:3000";
-  $scope.hostUrl = "http://54.152.133.36:3000/";
+  $scope.hostUrl = "http://localhost:3000";
+  //$scope.hostUrl = "http://54.152.133.36:3000/";
   //$scope.hostUrl = "http://192.168.0.100:3000/";  
 
   if ($rootScope.currentUser === undefined) {
