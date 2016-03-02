@@ -19,6 +19,7 @@ angular.module('eracordUiApp.controller')
     $scope.events= [];
     $scope.selectedCalenderType = 'exams';
     $scope.loadCalenderEvent = false;
+    $scope.standardCalenderFilter = null;
     
     if ($cookieStore.get('currentUser') === undefined) {
       $scope.eventSources = [];
@@ -36,6 +37,13 @@ angular.module('eracordUiApp.controller')
       });
     };
 
+    var load_standards = function() {
+      Restangular.all("organisation_cources").getList().then(function(data) {
+	$scope.org_standards = data;
+      });
+    }
+    
+
     var load_unassigned_classes = function(){
       var unassigned_jkci_classes = Restangular.all("get_unassigned_classes");
       unassigned_jkci_classes.getList().then(function(data){
@@ -45,7 +53,7 @@ angular.module('eracordUiApp.controller')
 
     var load_calender_exams = function(start, end, callback) {
       var examEvents = [];
-      Restangular.all("exams").customGET("calender_index", {start: start, end: end}).then(function(data) {
+      Restangular.all("exams").customGET("calender_index", {start: start, end: end, standard: $scope.standardCalenderFilter}).then(function(data) {
 	if(data.success) {
 	  
 	  _.each(data.exams, function(exam){
@@ -75,7 +83,7 @@ angular.module('eracordUiApp.controller')
     };
     
     var load_calender_time_table = function(start, end, callback) {
-      Restangular.all("time_tables").customGET("calender_index").then(function(data) {
+      Restangular.all("time_tables").customGET("calender_index", { standard: $scope.standardCalenderFilter}).then(function(data) {
 	if(data.success) {
 	  var timeTableEvents = [];
 	  var time_table_slot = null;
@@ -98,7 +106,7 @@ angular.module('eracordUiApp.controller')
     
      var load_calender_off_class = function(start, end, callback) {
        var offClassEvents = [];
-      Restangular.all("off_classes").customGET("calender_index").then(function(data) {
+      Restangular.all("off_classes").customGET("calender_index", {start: start, end: end, standard: $scope.standardCalenderFilter}).then(function(data) {
 	if(data.success) {
 	  _.each(data.off_classes, function(off_class) {
 	    var date = new Date(off_class.date);
@@ -117,11 +125,16 @@ angular.module('eracordUiApp.controller')
     };
     
     load_desk_classes();
+    load_standards();
     load_unassigned_classes();
 
     
     $scope.reloadCalenderEvent = function(selectedType) {
       $scope.selectedCalenderType = selectedType;
+      uiCalendarConfig.calendars['myCalendar'].fullCalendar('refetchEvents');
+    };
+
+    $scope.filterCalander = function() {
       uiCalendarConfig.calendars['myCalendar'].fullCalendar('refetchEvents');
     };
 
