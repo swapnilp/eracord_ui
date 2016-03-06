@@ -480,3 +480,45 @@ app.directive('classDuplicateStudents', function(Restangular) {
   };
 });
 // end of class student verifications
+
+
+app.directive('classCatlogs', function(Restangular) {
+  return {
+    restrict: 'AE',
+    transclude: true,
+    scope: {
+      classId: '@',
+      classCatlogTab: '@',
+      updateUrl: '&'
+    },
+    templateUrl: 'views/classes/presenty_catlog.html',
+    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', '$route', function(scope, Restangular, Flash, $location, $window, $routeParams, $route){
+      var classCatlogLoaded = false;
+      var jkci_classes = Restangular.one("jkci_classes", scope.classId);
+      
+      
+      var getResultsPage = function() {
+	//jkci_classes.customGET('get_notifications', {page: pageNumber}).then(function(data){
+	//  if(data.success) {
+	//    scope.notifications = data.notifications;
+	//    scope.totalNotifications = data.count;
+	//  }else {
+	//  }
+	//});
+      };
+      
+      
+      scope.$watch('classCatlogTab', function(){
+	if(scope.classCatlogTab === 'true') {
+	  scope.updateUrl({tabName: 'class_catlogs'});
+	}
+	
+	if(scope.classCatlogTab === 'true' && classCatlogLoaded === false){
+	  getResultsPage();
+	  scope.classCatlogLoaded = true;
+	}
+      });
+    }]
+  }
+});
+// end of notifications

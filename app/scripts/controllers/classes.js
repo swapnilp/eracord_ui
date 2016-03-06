@@ -20,7 +20,7 @@ angular.module('eracordUiApp.controller')
     if($location.path() === "/classes/"+$routeParams.class_id) {
       jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
       $scope.class_id = $routeParams.class_id;
-      $scope.classExamsTab = $scope.classDtpTab = $scope.classDivisionTab = $scope.classNotificationTab = $scope.classStudentTab = false;
+      $scope.classExamsTab = $scope.classDtpTab = $scope.classDivisionTab = $scope.classNotificationTab = $scope.classStudentTab= $scope.classCatlogTab = false;
 
       var loadTabs = function(selectTab){
 	if(selectTab === 'exams') {
@@ -29,6 +29,8 @@ angular.module('eracordUiApp.controller')
 	  $scope.classDtpTab = true;
 	} else if(selectTab === 'notifications') {
 	  $scope.classNotificationTab = true;
+	} else if(selectTab === 'class_catlogs') {
+	  $scope.classCatlogTab = true;
 	} else {
 	  $scope.classStudentTab = true;
 	}
