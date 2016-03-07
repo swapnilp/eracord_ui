@@ -494,10 +494,13 @@ app.directive('classCatlogs', function(Restangular) {
     templateUrl: 'views/classes/presenty_catlog.html',
     controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', '$route', function(scope, Restangular, Flash, $location, $window, $routeParams, $route){
       scope.classCatlogLoaded = false;
+      scope.isOpen = false;
+      scope.isOpenEnd = false;
       scope.selectedCatlogFilter = 'class_catlogs';
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       
       scope.getResultsPage = function(filterValue) {
+	scope.headers = scope.catlogs = [];
 	scope.selectedCatlogFilter = filterValue;
 	jkci_classes.customGET('presenty_catlog', {filter: filterValue}).then(function(data){
 	  if(data.success) {
@@ -505,6 +508,18 @@ app.directive('classCatlogs', function(Restangular) {
 	    scope.catlogs = data.catlogs[1];
 	  }
 	});
+      };
+
+      scope.openCalendar = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        scope.isOpen = true;
+      };
+
+      scope.openCalendarEnd = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        scope.isOpenEnd = true;
       };
       
       

@@ -6,6 +6,22 @@
       {{catlogFilter}}
     </label>
   </div>
+  <div class="col-md-8 padding0">
+    <strong  class="">
+      Download Excel Report
+      <br />
+      Start Date 
+      <p class="input-group">
+	<input type="text" class="form-control" datetime-picker="dd/MM/yyyy" ng-model="start_date" is-open="isOpen" ng-click="openCalendar($event, prop);" ng-focus="openCalendar($event, prop);" enable-time="false" readonly required/>
+      </p>
+      End Date
+      <p class="input-group">
+	<input type="text" class="form-control" datetime-picker="dd/MM/yyyy" ng-model="end_date" is-open="isOpenEnd" ng-click="openCalendarEnd($event, prop);" ng-focus="openCalendarEnd($event, prop);" enable-time="false" readonly required/>
+      </p>
+      <br />
+      <a class="btn btn-primary">Download</a>
+    </strong>
+  </div>
 </div>
 <div class="col-md-12 table-responsive"  style="min-height:200px;margin-top:20px;">
   <table st-table="rowCollection" class="table" border="1">
