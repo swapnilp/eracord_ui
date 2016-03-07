@@ -1,1 +1,21 @@
-asdasdasd
+<div>
+  <h5>Filter</h5>
+  <div class="col-md-4 padding0">
+    <label class="btn active btn-default" ng-repeat="catlogFilter in ['class_catlogs', 'exams']">
+      <input name="cssPre" id="css1" type="radio" ng-value="catlogFilter" ng-model="selectedCatlogFilter" ng-click="getResultsPage(catlogFilter);">
+      {{catlogFilter}}
+    </label>
+  </div>
+</div>
+<div class="col-md-12 table-responsive"  style="min-height:200px;margin-top:20px;">
+  <table st-table="rowCollection" class="table" border="1">
+    <tr>
+      <th ng-repeat="header in headers" ng-class="{rotate: header !== 'name'}"><div><span>{{header}}</span></div></th>
+    </tr>
+    <tr ng-repeat="catlog in catlogs" style="margin-top:10px;">
+      <td ng-repeat="td in catlog track by $index" ng-class="{warning: td ===  'a'}">
+	{{td}}
+      </td>
+    </tr>
+  </table>
+</div>

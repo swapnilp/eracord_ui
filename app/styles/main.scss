@@ -345,3 +345,21 @@ a:focus {
   background-color: #fff;
   border-color: #ccc;
 }
+
+th.rotate {
+  /* Something you can count on */
+  height: 80px;
+  white-space: nowrap;
+}
+
+th.rotate > div {
+  transform: 
+    /* Magic Numbers */
+    translate(-4px, 54px)
+    /* 45 is really 360 - 45 */
+    rotate(279deg);
+  width: 10px;
+}
+th.rotate > div > span {
+  border-bottom: 1px solid #ccc;
+}

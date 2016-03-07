@@ -493,18 +493,18 @@ app.directive('classCatlogs', function(Restangular) {
     },
     templateUrl: 'views/classes/presenty_catlog.html',
     controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', '$route', function(scope, Restangular, Flash, $location, $window, $routeParams, $route){
-      var classCatlogLoaded = false;
+      scope.classCatlogLoaded = false;
+      scope.selectedCatlogFilter = 'class_catlogs';
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       
-      
-      var getResultsPage = function() {
-	//jkci_classes.customGET('get_notifications', {page: pageNumber}).then(function(data){
-	//  if(data.success) {
-	//    scope.notifications = data.notifications;
-	//    scope.totalNotifications = data.count;
-	//  }else {
-	//  }
-	//});
+      scope.getResultsPage = function(filterValue) {
+	scope.selectedCatlogFilter = filterValue;
+	jkci_classes.customGET('presenty_catlog', {filter: filterValue}).then(function(data){
+	  if(data.success) {
+	    scope.headers = data.catlogs[0]
+	    scope.catlogs = data.catlogs[1];
+	  }
+	});
       };
       
       
@@ -513,12 +513,12 @@ app.directive('classCatlogs', function(Restangular) {
 	  scope.updateUrl({tabName: 'class_catlogs'});
 	}
 	
-	if(scope.classCatlogTab === 'true' && classCatlogLoaded === false){
-	  getResultsPage();
+	if(scope.classCatlogTab === 'true' && scope.classCatlogLoaded === false){
+	  scope.getResultsPage(scope.selectedCatlogFilter);
 	  scope.classCatlogLoaded = true;
 	}
       });
     }]
   }
 });
-// end of notifications
+// end of class Catlog presenty
