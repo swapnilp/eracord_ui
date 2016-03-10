@@ -489,7 +489,8 @@ app.directive('classCatlogs', function(Restangular) {
     scope: {
       classId: '@',
       classCatlogTab: '@',
-      updateUrl: '&'
+      updateUrl: '&',
+      hostUrl: '@'
     },
     templateUrl: 'views/classes/presenty_catlog.html',
     controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', '$route', function(scope, Restangular, Flash, $location, $window, $routeParams, $route){

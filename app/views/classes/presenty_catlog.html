@@ -19,7 +19,7 @@
 	<input type="text" class="form-control" datetime-picker="dd/MM/yyyy" ng-model="end_date" is-open="isOpenEnd" ng-click="openCalendarEnd($event, prop);" ng-focus="openCalendarEnd($event, prop);" enable-time="false" readonly required/>
       </p>
       <br />
-      <a class="btn btn-primary">Download</a>
+      <a href="{{hostUrl}}/jkci_classes/{{classId}}/download_presenty_catlog.xlsx?&start_date={{start_date}}&end_date={{end_date}}&filter={{selectedCatlogFilter}}" class="btn btn-primary">Download</a>
     </strong>
   </div>
 </div>
