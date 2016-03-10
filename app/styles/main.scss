@@ -348,14 +348,14 @@ a:focus {
 
 th.rotate {
   /* Something you can count on */
-  height: 80px;
+  height: 49px;
   white-space: nowrap;
 }
 
 th.rotate > div {
   transform: 
     /* Magic Numbers */
-    translate(-4px, 54px)
+    translate(-4px, 21px)
     /* 45 is really 360 - 45 */
     rotate(279deg);
   width: 10px;
