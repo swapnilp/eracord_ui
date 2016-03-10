@@ -20,6 +20,8 @@ angular.module('eracordUiApp.controller')
       $location.path('/user/sign_in').replace();
       return true;
     }
+
+    $scope.token = $cookieStore.get('currentUser').token;
     
     if($location.path() === '/students') {
       var students = Restangular.all("students");
