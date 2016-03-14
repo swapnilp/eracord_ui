@@ -16,7 +16,7 @@
 	  <span ng-repeat="org in standard.organisaitons" class="standardOrganisationBtn">{{org.organisation_name}} <i class="fa fa-times" ng-if="org.organisation_id !== organisation_id && !org.is_assigned_to_other && !org.is_parent_organisation" ng-click="removeOrganisaitonStandard(standard, org.organisation_id);"></i></span>
 	</td>
 	<td>
-	  <a href="#/organisaiton/standards/{{standard.id}}/assign_organisation"class="btn btn-default">Add Organisaiton</a>
+	  <a href="#/organisation/standards/{{standard.id}}/assign_organisation"class="btn btn-default">Add Organisaiton</a>
 	</td>
       </tr>
     </tbody>

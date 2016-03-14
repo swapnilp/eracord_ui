@@ -34,7 +34,7 @@ app.config(function($routeProvider) {
       templateUrl: 'views/organisations/launch_sub_organisation.html',
       controller: 'OrganisationsCtrl'
     })
-    .when("/organisaiton/standards/:id/assign_organisation", {
+    .when("/organisation/standards/:id/assign_organisation", {
       templateUrl: 'views/organisations/remaining_standards_organisation.html',
       controller: 'OrganisationsCtrl'
     });

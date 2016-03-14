@@ -114,6 +114,28 @@ angular.module('eracordUiApp.controller')
 	});
       };
     }
+
+    if($location.path() === "/organisation/standards/" + $routeParams.id + "/assign_organisation"){
+      $scope.sub_organisations = [];
+      base_organisation = Restangular.all("organisations");
+      base_organisation.one('standard', $routeParams.id).customGET('remaining_organisations').then(function(data){
+      	if(data.success) {
+	  $scope.sub_organisations = data.body;
+	}
+      });
+      
+      $scope.registerOrganisation = function(){
+      	var std_ids = _.pluck($scope.standards, 'id').join(',');
+      	base_organisation.customPOST({organisation: $scope.vm.org, standard_ids: std_ids}, "sub_organisation/launch_organisation", {}).then(function(data){
+      	  if(data.success) {
+      	    $location.path('/manage_organisation').replace();
+      	  } else {
+      	    Flash.create('warning', data.message, 'alert-danger');
+      	  }
+      	});
+      };
+    }
+    //end assign standards
     
     if($location.path() === '/edit_organisation') {
       $scope.vm = {};
