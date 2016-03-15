@@ -1,15 +1,15 @@
 <div class="col-md-6 col-md-offset-3 ">
   <h2>Add Organisation to standards</h2>
-  <form name="form" ng-submit="registorForm()" role="form">
+  <form name="form" ng-submit="registorOrganisation()" role="form">
     <div class="form-group">
       <label for="initl">Organisation</label>
-      <select class="form-control ng-touched" ng-model="organisation" style="" ng-options="sub_organisation.id as sub_organisation.name for sub_organisation in sub_organisations" required>
+      <select class="form-control ng-touched" ng-model="vm.new_organisation" style="" ng-options="sub_organisation.id as sub_organisation.name for sub_organisation in sub_organisations" required>
 	<option value="" class="hide">Select Organisation</option>
       </select>
     </div>
     <div class="form-group">
       <label for="initl">Role</label>
-      <select class="form-control ng-touched" ng-model="role" style="" ng-options="values for values in ['Observer', 'Handler']" required>
+      <select class="form-control ng-touched" ng-model="vm.role" style="" ng-options="values for values in ['Observer', 'Handler']" required>
 	<option value="" class="hide">Select Role</option>
       </select>
     </div>
