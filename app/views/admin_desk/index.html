@@ -77,7 +77,7 @@
       </label>
     </div>
     <div class="col-md-3 padding0">
-      <select class="form-control ng-touched " ng-model="standardCalenderFilter" ng-options="standard.id as standard.name for standard in org_standards" ng-change="filterCalander()">
+      <select class="form-control ng-touched " ng-model="standardCalenderFilter" ng-options="standard.standard_id as standard.name for standard in org_standards" ng-change="filterCalander()">
 	<option value="" >All Standards</option>
       </select>
     </div>
