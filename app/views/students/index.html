@@ -14,7 +14,7 @@
       <a href="#/students/new" class="btn btn-primary" ng-if="!classId"> New Student</a>
     </span>
     <span ng-if="classId">
-      <a href="{{hostUrl}}/classes/{{classId}}/download_excel.xlsx" class="btn btn-primary" ng-if="classId" target="_blank"> Download Students or excel format</a>
+      <a href="{{hostUrl}}/classes/{{classId}}/download_excel.xlsx?&authorization_token={{token}}" class="btn btn-primary" ng-if="classId" target="_blank"> Download Students or excel format</a>
     </span>
     <span class=" paddingTop10 " style="display:block;" ng-if="classId">
       <form name="form">

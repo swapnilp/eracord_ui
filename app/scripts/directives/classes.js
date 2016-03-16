@@ -16,13 +16,14 @@ app.directive('classStudents', function(Restangular) {
       hostUrl: '@'
     },
     templateUrl: 'views/students/index.html',
-    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', '$route', 'Upload', function(scope, Restangular, Flash, $location, $window, $routeParams, $route, Upload){
+    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', '$route', 'Upload', '$cookieStore', function(scope, Restangular, Flash, $location, $window, $routeParams, $route, Upload, $cookieStore){
       scope.cources = [];
       scope.showRollNumber = true;
       scope.isRollNumber = true;
       
       scope.studentLoaded = false;
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
+      scope.token = $cookieStore.get('currentUser').token;
 
       scope.totalStudents = 0;
       
