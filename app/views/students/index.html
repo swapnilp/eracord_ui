@@ -11,7 +11,6 @@
     </span>
     <span is-role-visible='["add_student"]' email="currentUser.email">
       <a href="#/classes/{{classId}}/students/new" class="btn btn-primary" ng-if="classId"> New Student</a>
-      <a href="#/students/new" class="btn btn-primary" ng-if="!classId"> New Student</a>
     </span>
     <span ng-if="classId">
       <a href="{{hostUrl}}/classes/{{classId}}/download_excel.xlsx?&authorization_token={{token}}" class="btn btn-primary" ng-if="classId" target="_blank"> Download Students or excel format</a>
@@ -26,9 +25,9 @@
       </form>
     </span>
   </span>
-  <div>
+  <div >
     <br />
-    Filter : <input type="text" ng-model="filterStudent" dl-key-code="pageChanged(1);" code="13" placeholder="Type word and enter">
+    Filter : <input type="text" ng-model="filterStudent" dl-key-code="pageChanged(1);" code="13" placeholder="Type name or mobile and  enter" style="width:230px;">
   </div>
   <br />
   <div class="alert alert-warning">
