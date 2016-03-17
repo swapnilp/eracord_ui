@@ -28,7 +28,7 @@
   </span>
   <div>
     <br />
-    Filter : <input type="text" ng-model="filterStudent" ng-change="pageChanged(1);">
+    Filter : <input type="text" ng-model="filterStudent" dl-key-code="pageChanged(1);" code="13" placeholder="Type word and enter">
   </div>
   <br />
   <div class="alert alert-warning">
@@ -52,7 +52,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr dir-paginate="row in students | toArray:false| filter:filterStudent | itemsPerPage: 10" total-items="totalStudents" current-page="pagination.current" pagination-id="student">
+      <tr dir-paginate="row in students | toArray:false | itemsPerPage: 10" total-items="totalStudents" current-page="pagination.current" pagination-id="student">
 	<td><span ng-if="showRollNumber">{{ row.roll_number}}</span><span ng-if="!showRollNumber">{{ $index+1 + ((pagination.current - 1) * 10)}}</span></td>
 	<td>{{row.name}}</td>
 	<td>{{row.batch}}</td>
