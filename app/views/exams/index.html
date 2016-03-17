@@ -49,15 +49,22 @@
 	<td>{{row.status}}</td>
 	<td>{{row.published_date}}</td>
 	<td>
-	  <span ng-if="!row.is_point_added && !row.is_group && row.status !== 'Created'">
-	    <a href="#/classes/{{row.jkci_class_id}}/exams/{{row.id}}/manage_points">Linked Points</a>
+	  <span ng-if="row.self_organisation">
+	    <span ng-if="!row.is_point_added && !row.is_group && row.status !== 'Created'">
+	      <a href="#/classes/{{row.jkci_class_id}}/exams/{{row.id}}/manage_points">Linked Points</a>
+	    </span>
+	    <span ng-if="row.is_point_added">
+	      true
+	    </span>
 	  </span>
-	  <span ng-if="row.is_point_added">
-	    true
+	  <span ng-if="!row.self_organisation">
+	    {{row.is_point_added == true ? 'Linked' : 'No'}}
 	  </span>
 	</td>
 	<td>
-	  <a href="#/classes/{{row.jkci_class_id}}/exams/{{row.id}}/show">Show</a>
+	  <span ng-if="row.self_organisation">
+	    <a href="#/classes/{{row.jkci_class_id}}/exams/{{row.id}}/show">Show</a>
+	  </span>
 	</td>
       </tr>
     </tbody>

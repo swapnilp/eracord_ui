@@ -7,7 +7,7 @@
 	<th st-sort="birthDate">Chapter</th>
 	<th st-sort="balance">Points</th>	
 	<th st-sort="balance">Absents</th>
-	<th st-sort="balance">Sms Send</th>
+	<th st-sort="balance">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -18,7 +18,9 @@
 	<td>{{row.points}}</td>
 	<td>{{row.absents}}</td>
 	<td>
-	  <a href="#/classes/{{classId}}/daily_catlogs/{{row.id}}/show", class="btn btn-primary">Show</a>
+	  <span ng-if="row.self_organisation">
+	    <a href="#/classes/{{classId}}/daily_catlogs/{{row.id}}/show", class="btn btn-primary">Show</a>
+	  </span>
 	</td>
       </tr>
     </tbody>
