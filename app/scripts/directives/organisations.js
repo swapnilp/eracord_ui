@@ -207,6 +207,14 @@ app.directive('organisationClasses', function(Restangular) {
 	});
       };
       
+      scope.makeDeactiveClass = function(classId) {
+	Restangular.one("jkci_classes", classId).customPOST({}, 'make_deactive_class', {}).then(function(data){
+	  if(data.success) {
+	    scope.classes = data.classes;
+	  }
+	});
+      };
+      
       scope.$watch('organisationClassesTab', function(){
 	if(scope.organisationClassesTab === 'true' && scope.organisationClassesLoded === false){
 	  scope.loadClasses();

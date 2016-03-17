@@ -12,7 +12,8 @@
 	Total Students {{jk_class.students_count}}
 	<br/>
 	<a class="btn btn-primary" href="#/classes/{{jk_class.id}}">Show</a>
-	<button class="btn btn-danger" ng-click="makeActiveClass(jk_class.id)" ng-if="!jk_class.is_current_active">Make Active</button>
+	<button class="btn btn-warning" ng-click="makeActiveClass(jk_class.id)" ng-if="!jk_class.is_current_active">Make Active</button>
+	<button class="btn btn-danger" ng-click="makeDeactiveClass(jk_class.id)" ng-if="jk_class.is_current_active">Make Deactive</button>
       </div>
     </div>
     <h3 class="col-sm-12">Assigned To others</h3>
