@@ -3,19 +3,19 @@
     <div class="col-sm-2 paddingLeft0">
       <label for="standard_id">Batch</label>
       <select class="form-control ng-touched" ng-model="filterExam.filterBatch" ng-options="std.id as std.name for std in batches">
-	<option value="" class="hide">Select Batch</option>
+	<option value="" >Select Batch</option>
       </select>
     </div>
     <div class="col-sm-2 paddingLeft0">
       <label for="standard_id">Standard</label>
       <select class="form-control ng-touched" ng-model="filterExam.filterStandard" ng-options="std.id as std.name for std in standards">
-	<option value="" class="hide">Select Standard</option>
+	<option value="">All Standards</option>
       </select>
     </div>
     <div class="col-sm-2 paddingLeft0">
       <label for="exam_type">Type</label>
       <select class="form-control ng-touched" ng-model="filterExam.filterExamType" ng-options="values for values in ['Single', 'Grouped']">
-	<option value="" class="hide">Select Type</option>
+	<option value="">All  Types</option>
       </select>
     </div>
     <div class="col-sm-2 paddingLeft0">
