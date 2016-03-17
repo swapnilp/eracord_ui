@@ -6,7 +6,7 @@
     <thead>
       <tr>
 	<th st-sort="firstName">Name</th>
-	<th st-sort="lastName">Divisions</th>
+	<th st-sort="lastName">Students</th>
 	<th st-sort="birthDate">Fill Daily Catlog</th>
 	<th st-sort="balance">Create Exam</th>	
 	<th st-sort="balance">Create Grouped Exams</th>
@@ -17,7 +17,7 @@
     <tbody>
       <tr ng-repeat="row in jkci_classes">
 	<td><a href="#/classes/{{row.id}}">{{row.class_name}}</a></td>
-	<td>{{row.divisions}}</td>
+	<td>{{row.students}}</td>
 	<td>
 	  <span is-role-visible='["create_daily_teach"]' email="currentUser.email" ng-if="row.is_student_verified">
 	    <a ng-href="#/classes/{{row.id}}/daily_catlogs/new">Fill Catlog</a>
