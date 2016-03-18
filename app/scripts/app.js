@@ -47,7 +47,7 @@ angular
     AuthProvider.loginPath('/api/users/sign_in.json');
     AuthProvider.logoutPath('/api/users/sign_out.json');
     
-    ChartJsProvider.setOptions({ colors : [ '#803690', '#00ADF9', '#DCDCDC', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'] });
+    ChartJsProvider.setOptions({ colors : [ '#803690', '#00ADF9', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'] });
     
     // Intercept 401 Unauthorized everywhere
     // Enables `devise:unauthorized` interceptor
