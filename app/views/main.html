@@ -17,9 +17,10 @@
     </canvas> 
   </div>
   <div class="col-md-6">    
-    <canvas id="radar" class="chart chart-radar"
-	    chart-data="data" chart-labels="labels" chart-colours="[ '#803690', '#00ADF9', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360']">
-    </canvas>     
+    <canvas id="pie" class="chart chart-pie"
+	    chart-data="sum_data" chart-labels="series">
+    </canvas> 
+    
   </div>
   <div class="col-md-12">
     <p>
@@ -32,9 +33,9 @@
       </canvas> 
     </div>
     <div class="col-md-6">    
-      <canvas id="radar" class="chart chart-radar"
-	      chart-data="exam_data" chart-labels="exam_labels" chart-colours="[ '#803690', '#00ADF9', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360']">
-      </canvas>     
+      <canvas id="pie" class="chart chart-pie"
+	      chart-data="exam_sum_data" chart-labels="exam_series">
+      </canvas> 
     </div>
   </div>
 </div>

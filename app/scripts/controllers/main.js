@@ -26,6 +26,7 @@ angular.module('eracordUiApp.controller')
     $scope.exam_labels = $scope.labels = [];
     $scope.exam_series = $scope.series = [];
     $scope.exam_data = $scope.data = [];
+    $scope.exam_sum_data = $scope.sum_data = [];
     
     var loadData = function(){
       Restangular.all("organisations").customGET('absenty_graph_report').then(function(data){
@@ -33,6 +34,7 @@ angular.module('eracordUiApp.controller')
 	  $scope.labels = data.headers;
 	  $scope.series = $scope.series = data.labels;
 	  $scope.data = data.data;
+	  $scope.sum_data = data.sum_data;
 	}
       });  
       Restangular.all("organisations").customGET('exams_graph_report').then(function(data){
@@ -40,6 +42,7 @@ angular.module('eracordUiApp.controller')
 	  $scope.exam_labels = data.headers;
 	  $scope.exam_series = $scope.series = data.labels;
 	  $scope.exam_data = data.data;
+	  $scope.exam_sum_data = data.sum_data;
 	}
       });  
     };
