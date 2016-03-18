@@ -1,23 +1,40 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
-</div>
-
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
+<div class="jumbotron col-md-12">
+  <h2>eraCord</h2>
   <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
+    Class presenty chart
   </p>
-
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
-
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
+  <div class="col-md-6">
+    <div class="col-md-12 padding0">
+      <label class="btn active btn-default pull-right" ng-repeat="chartType in ['monthly', 'weekly', 'daily']">
+	<input name="cssPre" id="css1" type="radio" ng-value="selectedChartType" ng-model="selectedChartType" ng-click="reloadLineChart(chartType);">
+	{{chartType}}
+      </label>
+    </div>
+    <br /><br />
+    <canvas id="line" class="chart chart-line" chart-data="data"
+	    chart-labels="labels" chart-legend="true" chart-series="series"
+	    chart-click="onClick" >
+    </canvas> 
+  </div>
+  <div class="col-md-6">    
+    <canvas id="radar" class="chart chart-radar"
+	    chart-data="data" chart-labels="labels">
+    </canvas>     
+  </div>
+  <div class="col-md-12">
+    <p>
+      Exams chart
+    </p>
+    <div class="col-md-6">
+      <canvas id="line" class="chart chart-line" chart-data="exam_data"
+	      chart-labels="exam_labels" chart-legend="true" chart-series="exam_series"
+	      chart-click="onClick" >
+      </canvas> 
+    </div>
+    <div class="col-md-6">    
+      <canvas id="radar" class="chart chart-radar"
+	      chart-data="exam_data" chart-labels="exam_labels">
+      </canvas>     
+    </div>
+  </div>
 </div>
