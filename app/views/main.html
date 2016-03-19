@@ -1,33 +1,38 @@
-<div class="jumbotron col-md-12">
-  <h2>eraCord</h2>
+<div class=" col-md-12">
+  <h2 class="text-center">eraCord</h2>
+  <p class="text-center">
+    A graphical representation is a visual display of data and statistical results. It is often more effective than presenting data in tabular form.
+  </p>
   <div class="col-md-12 padding0">
     <label class="btn active btn-default pull-right" ng-repeat="chartType in ['month', 'week', 'day']">
       <input name="cssPre" id="css1" type="radio" ng-value="selectedChartType" ng-model="selectedChartType" ng-click="reloadReport(chartType);">
       {{chartType}}
     </label>
   </div>
-  <p>
-    Class presenty chart
-  </p>
-  <div class="col-md-6">
+  <br /><br />
+  <div class="col-md-12 jumbotron">
     <p>
-      {{selectedChartType}} report
+      Class presenty chart
     </p>
-    <canvas id="line" class="chart chart-line" chart-data="data"
-	    chart-labels="labels" chart-legend="true" chart-series="series"
-	    chart-click="onClick" chart-colours="[ '#803690', '#00ADF9', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360']">
-    </canvas> 
+    <div class="col-md-6">
+      <p>
+	{{selectedChartType}} report
+      </p>
+      <canvas id="line" class="chart chart-line" chart-data="data"
+	      chart-labels="labels" chart-legend="true" chart-series="series"
+	      chart-click="onClick" chart-colours="[ '#803690', '#00ADF9', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360']">
+      </canvas> 
+    </div>
+    <div class="col-md-6">    
+      <p>
+	Total
+      </p>
+      <canvas id="pie" class="chart chart-pie"
+	      chart-data="sum_data" chart-labels="series">
+      </canvas> 
+    </div>
   </div>
-  <div class="col-md-6">    
-    <p>
-      Total
-    </p>
-    <canvas id="pie" class="chart chart-pie"
-	    chart-data="sum_data" chart-labels="series">
-    </canvas> 
-    
-  </div>
-  <div class="col-md-12">
+  <div class="col-md-12 jumbotron">
     <p>
       Exams chart
     </p>
@@ -49,7 +54,7 @@
       </canvas> 
     </div>
   </div>
-  <div class="col-md-12">
+  <div class="col-md-12 jumbotron">
     <p>
       OffClass chart
     </p>
