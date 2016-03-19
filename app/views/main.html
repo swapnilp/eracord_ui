@@ -1,22 +1,27 @@
 <div class="jumbotron col-md-12">
   <h2>eraCord</h2>
+  <div class="col-md-12 padding0">
+    <label class="btn active btn-default pull-right" ng-repeat="chartType in ['month', 'week', 'day']">
+      <input name="cssPre" id="css1" type="radio" ng-value="selectedChartType" ng-model="selectedChartType" ng-click="reloadReport(chartType);">
+      {{chartType}}
+    </label>
+  </div>
   <p>
     Class presenty chart
   </p>
   <div class="col-md-6">
-    <div class="col-md-12 padding0">
-      <label class="btn active btn-default pull-right" ng-repeat="chartType in ['monthly', 'weekly', 'daily']">
-	<input name="cssPre" id="css1" type="radio" ng-value="selectedChartType" ng-model="selectedChartType" ng-click="reloadLineChart(chartType);">
-	{{chartType}}
-      </label>
-    </div>
-    <br /><br />
+    <p>
+      {{selectedChartType}} report
+    </p>
     <canvas id="line" class="chart chart-line" chart-data="data"
 	    chart-labels="labels" chart-legend="true" chart-series="series"
 	    chart-click="onClick" chart-colours="[ '#803690', '#00ADF9', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360']">
     </canvas> 
   </div>
   <div class="col-md-6">    
+    <p>
+      Total
+    </p>
     <canvas id="pie" class="chart chart-pie"
 	    chart-data="sum_data" chart-labels="series">
     </canvas> 
@@ -27,14 +32,42 @@
       Exams chart
     </p>
     <div class="col-md-6">
+      <p>
+	{{selectedChartType}} report
+      </p>
       <canvas id="line" class="chart chart-line" chart-data="exam_data"
 	      chart-labels="exam_labels" chart-legend="true" chart-series="exam_series"
 	      chart-click="onClick" chart-colours="[ '#803690', '#00ADF9', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360']">
       </canvas> 
     </div>
-    <div class="col-md-6">    
+    <div class="col-md-6">
+      <p>
+	Total
+      </p>
       <canvas id="pie" class="chart chart-pie"
 	      chart-data="exam_sum_data" chart-labels="exam_series">
+      </canvas> 
+    </div>
+  </div>
+  <div class="col-md-12">
+    <p>
+      OffClass chart
+    </p>
+    <div class="col-md-6">
+      <p>
+	{{selectedChartType}} report
+      </p>
+      <canvas id="line" class="chart chart-line" chart-data="off_class_data"
+	      chart-labels="off_class_labels" chart-legend="true" chart-series="off_class_series"
+	      chart-click="onClick" chart-colours="[ '#803690', '#00ADF9', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360']">
+      </canvas> 
+    </div>
+    <div class="col-md-6">    
+      <p>
+	Total
+      </p>
+      <canvas id="pie" class="chart chart-pie"
+	      chart-data="off_class_sum_data" chart-labels="off_class_series">
       </canvas> 
     </div>
   </div>
