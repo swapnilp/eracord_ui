@@ -45,16 +45,18 @@
     </div>
     <div class="col-sm-12 textLeft paddingTop10">
       <div class="col-sm-12 textLeft paddingTop10" ng-if="class.is_current_active">
-	<span is-role-visible='["create_daily_teach"]' email="currentUser.email">
-	  <a class="btn btn-primary" ng-disabled="!class.is_student_verified" uib-tooltip="Please Verify Students" ng-if="!class.is_student_verified"> Create Daily Catlog</a>
-	  <a href="#/classes/{{class.id}}/daily_catlogs/new" class="btn btn-primary" ng-if="class.is_student_verified"> Create Daily Catlog</a>
-	</span>
-	<span is-role-visible='["create_exam"]' email="currentUser.email">
-	  <a class="btn btn-primary" ng-disabled="!class.is_student_verified" uib-tooltip="Please Verify Students" ng-if="!class.is_student_verified">Create Exam</a>
-	  <a href="#/classes/{{class.id}}/exams/new" class="btn btn-primary" ng-if="class.is_student_verified">Create Exam</a>
-	</span>
-	<span is-role-visible='["manage_class_student"]' email="currentUser.email" ng-if="has_manage_class">
-	  <a href="#/classes/{{class.id}}/manage_class" class="btn btn-primary">Manage Class</a>
+	<span ng-if="class.self_organisation">
+	  <span is-role-visible='["create_daily_teach"]' email="currentUser.email">
+	    <a class="btn btn-primary" ng-disabled="!class.is_student_verified" uib-tooltip="Please Verify Students" ng-if="!class.is_student_verified"> Create Daily Catlog</a>
+	    <a href="#/classes/{{class.id}}/daily_catlogs/new" class="btn btn-primary" ng-if="class.is_student_verified"> Create Daily Catlog</a>
+	  </span>
+	  <span is-role-visible='["create_exam"]' email="currentUser.email">
+	    <a class="btn btn-primary" ng-disabled="!class.is_student_verified" uib-tooltip="Please Verify Students" ng-if="!class.is_student_verified">Create Exam</a>
+	    <a href="#/classes/{{class.id}}/exams/new" class="btn btn-primary" ng-if="class.is_student_verified">Create Exam</a>
+	  </span>
+	  <span is-role-visible='["manage_class_student"]' email="currentUser.email" ng-if="has_manage_class">
+	    <a href="#/classes/{{class.id}}/manage_class" class="btn btn-primary">Manage Class</a>
+	  </span>
 	</span>
 	<a class="btn btn-default" href="#/admin_desk">Back</a>
       </div>

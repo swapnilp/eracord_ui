@@ -494,12 +494,14 @@ app.directive('classCatlogs', function(Restangular) {
       hostUrl: '@'
     },
     templateUrl: 'views/classes/presenty_catlog.html',
-    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', '$route', function(scope, Restangular, Flash, $location, $window, $routeParams, $route){
+    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', '$route', '$cookieStore', function(scope, Restangular, Flash, $location, $window, $routeParams, $route, $cookieStore){
       scope.classCatlogLoaded = false;
       scope.isOpen = false;
       scope.isOpenEnd = false;
       scope.selectedCatlogFilter = 'class_catlogs';
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
+      
+      scope.token = $cookieStore.get('currentUser').token;
       
       scope.getResultsPage = function(filterValue) {
 	scope.headers = scope.catlogs = [];

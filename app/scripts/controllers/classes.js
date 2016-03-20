@@ -44,6 +44,7 @@ angular.module('eracordUiApp.controller')
 	if(data.success) {
 	  $scope.has_manage_class = data.has_manage_class;
 	  $scope.class = data.jkci_class;
+	  $scope.class.self_organisation = data.self_organisation;
 	  loadTabs($routeParams.tab);
 	} else {
 	  $location.path("#/admin_desk");
