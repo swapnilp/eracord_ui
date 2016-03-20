@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('ClassesCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$route', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window, $route) {
+  .controller('ClassesCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$route', '$cookieStore', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window, $route, $cookieStore) {
 
 
     if(!Auth.isAuthenticated()){
@@ -21,6 +21,7 @@ angular.module('eracordUiApp.controller')
       jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
       $scope.class_id = $routeParams.class_id;
       $scope.classExamsTab = $scope.classDtpTab = $scope.classDivisionTab = $scope.classNotificationTab = $scope.classStudentTab= $scope.classCatlogTab = false;
+      $scope.token = $cookieStore.get('currentUser').token;
 
       var loadTabs = function(selectTab){
 	if(selectTab === 'exams') {
