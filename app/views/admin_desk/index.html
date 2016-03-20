@@ -11,7 +11,6 @@
 	<th st-sort="balance">Create Exam</th>	
 	<th st-sort="balance">Create Grouped Exams</th>
 	<th st-sort="balance">Remaining Activities</th>
-	<th st-sort="balance">Get Report</th>
       </tr>
     </thead>
     <tbody>
@@ -38,7 +37,7 @@
 	</td>
 	<td>{{row.remaining_activity}}</td>
 	<td>
-	  <a href="{{hostUrl}}/sub_organisation/{{row.organisation_id}}/class/{{row.id}}/get_report.pdf" target="_blank">Get Report</a>
+	  
 	</td>
       </tr>
     </tbody>
@@ -51,7 +50,6 @@
 	  <th st-sort="firstName">Sub Organisation</th>
 	  <th>Email</th>
 	  <th>Mobile</th>
-	  <th st-sort="balance">Get Report</th>
 	</tr>
       </thead>
       <tbody>
@@ -60,9 +58,6 @@
 	  <td>{{row.organisation_name}}</td>
 	  <td>{{row.email}}</td>
 	  <td>{{row.mobile}}</td>
-	  <td>
-	    <a href="{{hostUrl}}/sub_organisation/{{row.organisation_id}}/class/{{row.id}}/get_report.pdf" target="_blank">Get Report</a>
-	  </td>
 	</tr>
       </tbody>
     </table>

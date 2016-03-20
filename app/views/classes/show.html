@@ -43,6 +43,13 @@
 	<a class="btn btn-primary btn-sm" target="_blank" href="{{hostUrl}}/class/{{class.id}}/download_class_student_list.pdf?&authorization_token={{token}}">Download Student List</a>
       </span>
     </div>
+    <div class="col-sm-12 textLeft">
+      <span class="col-sm-2"><h5>Get report</h5></span>
+      <span class="col-sm-6 paddingTop10">
+	<a class="btn btn-primary btn-sm" href="{{hostUrl}}/sub_organisation/{{class.organisation_id}}/class/{{class.id}}/get_report.pdf?&authorization_token={{token}}" target="_blank">Get Report</a>
+      </span>
+    </div>
+
     <div class="col-sm-12 textLeft paddingTop10">
       <div class="col-sm-12 textLeft paddingTop10" ng-if="class.is_current_active">
 	<span ng-if="class.self_organisation">
