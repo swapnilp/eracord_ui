@@ -49,19 +49,28 @@ app.directive('divisionStudents', function(Restangular) {
       divisionId: '@'
     },
     templateUrl: 'views/students/index.html',
-    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', function(scope, Restangular, Flash, $location, $window){
+    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', function(scope, Restangular, Flash, $location, $window, $routeParams){
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       scope.showOptions = true;
       scope.isRemove = true;
       
-      var loadStudents = function() {
-	jkci_classes.one("sub_classes", scope.divisionId).customGET("students").then(function(data){
+      var getResultsPage = function(pageNumber) {
+	jkci_classes.one("sub_classes", scope.divisionId).customGET("students", {page: pageNumber, search: scope.filterStudent}).then(function(data){
 	  if(data.success) {
 	    scope.students = data.students;
+	    scope.totalStudents = data.count;
 	  } else {
 	  }
 	  
 	});
+      };
+      
+      scope.pagination = {
+        current: $routeParams.page || 1
+      };
+      
+      scope.pageChanged = function(newPage) {
+        getResultsPage(newPage);
       };
 
       scope.removeStudent = function(student) {
@@ -75,7 +84,8 @@ app.directive('divisionStudents', function(Restangular) {
 	}
       }
       
-      loadStudents();
+      getResultsPage(1);
+
     }]
   }
 });

@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('DivisionsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams) {
+  .controller('DivisionsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', '$window', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, $window) {
     
     var jkci_classes;
     
@@ -27,7 +27,7 @@ angular.module('eracordUiApp.controller')
       $scope.registerDivision = function(){
 	jkci_classes.customPOST({sub_class: $scope.vm.sub_class}, "sub_classes").then(function(data) {
 	  if(data.success) {
-	    $location.path("/classes/"+$scope.classId+"/manage_class").replace();
+	    $location.path("/classes/"+$scope.classId+"/divisions/"+ data.id).replace();
 	  }else {
 	    
 	  }
@@ -48,12 +48,14 @@ angular.module('eracordUiApp.controller')
       });
 
       $scope.deleteDivision = function() {
-	jkci_classes.one("sub_classes", $scope.divisionId).remove().then(function(data) {
-	 if(data.success) {
-	   $location.path("/classes/"+$routeParams.class_id+"/manage_class").replace();
-	 }else {
-	 } 
-	});
+	if($window.confirm('Are you sure?')){
+	  jkci_classes.one("sub_classes", $scope.divisionId).remove().then(function(data) {
+	    if(data.success) {
+	      $location.path("/classes/"+$routeParams.class_id+"/manage_class").replace();
+	    }else {
+	    } 
+	  });
+	}
       };
     }
 
