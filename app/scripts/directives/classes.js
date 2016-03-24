@@ -130,16 +130,22 @@ app.directive('classExams', function(Restangular) {
     controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', '$route', function(scope, Restangular, Flash, $location, $window, $routeParams, $route){
 
       scope.examsLoaded = false;
+      scope.showFilter = true;
+      scope.showClassFilter = false;
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       scope.totalExams = 0;
+      scope.filterExam = {};
       
       scope.pagination = {
         current: $routeParams.page || 1
       };
       
-      var getResultsPage = function(pageNumber) {
+      var getResultsPage = function(pageNumber, checkFilter) {
 	//$route.updateParams({ page: pageNumber});
-	jkci_classes.customGET("exams" ,{page: pageNumber}).then(function(data){
+	if(!checkFilter && _.size(scope.filterExam) === 0) {
+	  return true;
+	}
+	jkci_classes.customGET("exams" ,{page: pageNumber, filter: scope.filterExam}).then(function(data){
 	  scope.exams = data.body;
 	  scope.totalExams = data.count;
 	  scope.length = data.count;
@@ -147,8 +153,9 @@ app.directive('classExams', function(Restangular) {
 
       };
       
-      scope.pageChanged = function(newPage) {
-        getResultsPage(newPage);
+      scope.pageChanged = function(newPage, checkFilter) {
+        getResultsPage(newPage, checkFilter);
+	scope.pagination = {current: newPage};
       };
       
       scope.isRemove = true;
@@ -161,7 +168,7 @@ app.directive('classExams', function(Restangular) {
 	  scope.updateUrl({tabName: 'exams'});
 	}
 	if(scope.classExamsTab === 'true' && scope.examsLoaded == false){
-	  getResultsPage($routeParams.page || 1);
+	  getResultsPage($routeParams.page || 1, true);
 	  scope.examsLoaded = true;
 	}
       });
