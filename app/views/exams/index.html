@@ -19,6 +19,12 @@
       </select>
     </div>
     <div class="col-sm-2 paddingLeft0">
+      <label for="exam_type">Status</label>
+      <select class="form-control ng-touched" ng-model="filterExam.filterExamStatus" ng-options="values for values in ['Published', 'Conducted', 'Verified', 'Created']">
+	<option value="">All</option>
+      </select>
+    </div>
+    <div class="col-sm-2 paddingLeft0">
       <button class="btn btn-primary" style="margin-top:23px;" ng-click="pageChanged(1);">Filter</button>
     </div>
     <div class="col-sm-12 padding0" style="margin-top:20px;" ng-show="length > 0">
