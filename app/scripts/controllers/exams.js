@@ -58,12 +58,12 @@ angular.module('eracordUiApp.controller')
 	  $scope.exams = data[0];
 	  $scope.totalExams = data[1];
 	  $scope.length = data.length;
+	  $scope.pagination = {current: pageNumber || 1};
 	});
       };
       
       $scope.pageChanged = function(newPage, checkFilter) {
         getResultsPage(newPage, checkFilter);
-	$scope.pagination = {current: newPage};
       };
       getFilterData();
       getResultsPage(1, true);

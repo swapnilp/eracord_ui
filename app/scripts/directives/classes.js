@@ -162,13 +162,13 @@ app.directive('classExams', function(Restangular) {
 	  scope.exams = data.body;
 	  scope.totalExams = data.count;
 	  scope.length = data.count;
+	  scope.pagination = {current: pageNumber || 1};
 	});
 
       };
       
       scope.pageChanged = function(newPage, checkFilter) {
         getResultsPage(newPage, checkFilter);
-	scope.pagination = {current: newPage};
       };
       
       scope.isRemove = true;
