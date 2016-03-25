@@ -49,13 +49,13 @@ angular.module('eracordUiApp.controller')
       };
       
       var getResultsPage = function(pageNumber, checkFilter) {
-	$scope.requestLoading = true;
 	if(!checkFilter && _.size($scope.filterExam) === 0) {
 	  return true;
 	}
 	if(_.size($scope.filterExam) >  0) {
 	  $scope.showResetFilter = true;
 	}
+	$scope.requestLoading = true;
 	exams.getList({page: pageNumber, filter: $scope.filterExam}).then(function(data){
 	  $scope.exams = data[0];
 	  $scope.totalExams = data[1];

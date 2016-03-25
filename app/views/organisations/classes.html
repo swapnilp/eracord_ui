@@ -1,5 +1,6 @@
 <div class="container">
-  <div class="col-sm-12 textLeft">
+  <div request-loading is-loading="requestLoading"></div>
+  <div class="col-sm-12 textLeft" ng-show="!requestLoading">
     <div class="col-sm-4 organisationClass" ng-repeat="jk_class in classes" ng-class="{active: jk_class.is_current_active}">
       <div class="wrapper">
 	<div class="rightMenu">

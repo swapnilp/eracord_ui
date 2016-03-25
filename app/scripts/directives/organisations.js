@@ -36,10 +36,13 @@ app.directive('organisationCources', function(Restangular) {
     templateUrl: 'views/organisations/cources.html',
     controller: ['$scope', 'Restangular', 'Flash', '$location', function(scope, Restangular, Flash, $location){
       scope.cources = [];
-
+      scope.requestLoading = true;
+      
       scope.loadCources = function(){
+	scope.requestLoading = true;
 	Restangular.all("/organisation_cources").getList().then(function(data){
 	  scope.cources = data;
+	  scope.requestLoading = false;
 	});
       };
 
@@ -69,8 +72,11 @@ app.directive('organisationClarks', function(Restangular, $location, Flash) {
     templateUrl: 'views/organisations/clarks.html',
     controller: ['$scope', 'Restangular', '$window', function(scope, Restangular, $window){
       var base_organisation = Restangular.all("organisations");
+      scope.requestLoading = true;
+      
       base_organisation.customGET('get_clarks').then(function(data){
 	scope.clarks = data.data;
+	scope.requestLoading = false;
       });
 
       scope.manageRoles = function(user){
@@ -189,12 +195,15 @@ app.directive('organisationClasses', function(Restangular) {
     controller: ['$scope', 'Restangular', 'Flash', '$location', function(scope, Restangular, Flash, $location){
       scope.classes = [];
       scope.organisationClassesLoded = false;
+      scope.requestLoading = true;
       
       scope.loadClasses = function(){
+	scope.requestLoading = true;
 	Restangular.all("/organisations").customGET('get_classes').then(function(data){
 	  if(data.success){
 	    scope.classes = data.classes;
 	    scope.other_classes = data.other_classes;
+	    scope.requestLoading = false;
 	  }
       	});
       };
@@ -238,11 +247,14 @@ app.directive('organisationStandards', function(Restangular) {
     controller: ['$scope', 'Restangular', 'Flash', '$location', '$cookieStore', function(scope, Restangular, Flash, $location, $cookieStore){
       scope.classes = [];
       scope.organisation_id = $cookieStore.get('currentUser').organisation_id;
+      scope.requestLoading = true;
       
       scope.loadOrganisationStandards = function(){
+	scope.requestLoading = true;
 	Restangular.all("/organisations").customGET('organisation_standards').then(function(data){
 	  if(data.success){
 	    scope.organisation_standards = data.organisation_standards;
+	    scope.requestLoading = false;
 	  }
       	});
       };

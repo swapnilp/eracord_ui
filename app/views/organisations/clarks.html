@@ -1,6 +1,7 @@
 <div style="margin-top:20px;">
   <a href="#/add_organisation_clark" class="btn btn-success"> New User</a>
-  <table st-table="rowCollection" class="table">
+  <div request-loading is-loading="requestLoading"></div>
+  <table st-table="rowCollection" class="table" ng-show="!requestLoading">
     <thead>
       <tr>
 	<th st-sort="firstName">Email</th>

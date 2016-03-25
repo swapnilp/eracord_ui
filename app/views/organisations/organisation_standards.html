@@ -1,5 +1,6 @@
 <div style="margin-top:20px;">
-  <table st-table="rowCollection" class="table">
+  <div request-loading is-loading="requestLoading"></div>
+  <table st-table="rowCollection" class="table" ng-show="!requestLoading">
     <thead>
       <tr>
 	<th st-sort="firstName">id</th>

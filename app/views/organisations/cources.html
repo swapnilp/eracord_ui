@@ -1,6 +1,8 @@
 <div style="margin:20px 0;">
   <a href="#/remaining_organisation_courses" class="btn btn-success"> Add Course</a>
-  <table st-table="rowCollection" class="table organisationCoursesTable">
+  
+  <div request-loading is-loading="requestLoading" style="display:flex;"></div>
+  <table st-table="rowCollection" class="table organisationCoursesTable" ng-show="!requestLoading">
     <thead>
       <tr>
 	<th></th>

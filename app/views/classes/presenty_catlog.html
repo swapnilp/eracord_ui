@@ -24,7 +24,8 @@
   </div>
 </div>
 <div class="col-md-12 table-responsive"  style="min-height:200px;margin-top:20px;">
-  <table st-table="rowCollection" class="table" border="1">
+  <div request-loading is-loading="requestLoading"></div>
+  <table st-table="rowCollection" class="table" border="1" ng-show="!requestLoading">
     <tr>
       <th ng-repeat="header in headers" ng-class="{rotate: header !== 'name'}"><div><span>{{header}}</span></div></th>
     </tr>

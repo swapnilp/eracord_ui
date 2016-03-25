@@ -155,13 +155,13 @@ app.directive('classExams', function(Restangular) {
       
       var getResultsPage = function(pageNumber, checkFilter) {
 	//$route.updateParams({ page: pageNumber});
-	scope.requestLoading = true;
 	if(!checkFilter && _.size(scope.filterExam) === 0) {
 	  return true;
 	}
 	if(_.size(scope.filterExam) >  0) {
 	  scope.showResetFilter = true;
 	}
+	scope.requestLoading = true;
 	jkci_classes.customGET("exams" ,{page: pageNumber, filter: scope.filterExam}).then(function(data){
 	  scope.exams = data.body;
 	  scope.totalExams = data.count;
@@ -212,13 +212,17 @@ app.directive('classDailyTeaches', function(Restangular) {
       scope.pagination = {
         current: $routeParams.page || 1
       };
+      scope.requestLoading = true;
+
       
       var getResultsPage = function(pageNumber) {
+	scope.requestLoading = true;
 	jkci_classes.customGET('daily_teachs', {page: pageNumber}).then(function(data){
 	  if(data.success) {
 	    scope.dtps = data.daily_teaching_points;
 	    scope.totalDtps = data.count;
 	    //$route.updateParams({ page: pageNumber});
+	    scope.requestLoading = false;
 	  }else {
 	  }
 	});
@@ -527,17 +531,21 @@ app.directive('classCatlogs', function(Restangular) {
       scope.isOpen = false;
       scope.isOpenEnd = false;
       scope.selectedCatlogFilter = 'class_catlogs';
+      scope.requestLoading = true;
+      
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       
       scope.token = $cookieStore.get('currentUser').token;
       
       scope.getResultsPage = function(filterValue) {
+	scope.requestLoading = true;
 	scope.headers = scope.catlogs = [];
 	scope.selectedCatlogFilter = filterValue;
 	jkci_classes.customGET('presenty_catlog', {filter: filterValue}).then(function(data){
 	  if(data.success) {
 	    scope.headers = data.catlogs[0]
 	    scope.catlogs = data.catlogs[1];
+	    scope.requestLoading = false;
 	  }
 	});
       };
