@@ -29,6 +29,7 @@ angular.module('eracordUiApp.controller')
       $scope.pagination = {current: 1};
       $scope.showFilter = true;
       $scope.showClassFilter = true;
+      $scope.showResetFilter = false;
       $scope.filterExam = {};
 
       var getFilterData = function() {
@@ -40,9 +41,18 @@ angular.module('eracordUiApp.controller')
 	});
       };
       
+      $scope.resetFilter = function() {
+	$scope.filterExam = {};
+	$scope.showResetFilter = false;
+	getResultsPage(1, true);
+      };
+      
       var getResultsPage = function(pageNumber, checkFilter) {
 	if(!checkFilter && _.size($scope.filterExam) === 0) {
 	  return true;
+	}
+	if(_.size($scope.filterExam) >  0) {
+	  $scope.showResetFilter = true;
 	}
 	exams.getList({page: pageNumber, filter: $scope.filterExam}).then(function(data){
 	  $scope.exams = data[0];

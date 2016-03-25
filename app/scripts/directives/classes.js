@@ -84,6 +84,9 @@ app.directive('classStudents', function(Restangular) {
 	jkci_classes.customGET("students", {page: pageNumber, search: scope.filterStudent}).then(function(data){
 	  scope.students = data.students;
 	  scope.totalStudents = data.count;
+	  scope.pagination = {
+            current: pageNumber || 1
+	  };
 	});
       };
       
@@ -134,16 +137,26 @@ app.directive('classExams', function(Restangular) {
       scope.showClassFilter = false;
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       scope.totalExams = 0;
+      scope.showResetFilter = false;
       scope.filterExam = {};
       
       scope.pagination = {
         current: $routeParams.page || 1
       };
       
+      scope.resetFilter = function() {
+	scope.filterExam = {};
+	scope.showResetFilter = false;
+	getResultsPage(1, true);
+      };
+      
       var getResultsPage = function(pageNumber, checkFilter) {
 	//$route.updateParams({ page: pageNumber});
 	if(!checkFilter && _.size(scope.filterExam) === 0) {
 	  return true;
+	}
+	if(_.size(scope.filterExam) >  0) {
+	  scope.showResetFilter = true;
 	}
 	jkci_classes.customGET("exams" ,{page: pageNumber, filter: scope.filterExam}).then(function(data){
 	  scope.exams = data.body;

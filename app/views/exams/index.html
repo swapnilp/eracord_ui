@@ -26,6 +26,7 @@
     </div>
     <div class="col-sm-2 paddingLeft0">
       <button class="btn btn-primary" style="margin-top:23px;" ng-click="pageChanged(1, false);">Filter</button>
+      <button class="btn btn-primary" style="margin-top:23px;" ng-click="resetFilter();" ng-show="showResetFilter">Reset</button>
     </div>
     <div class="col-sm-12 padding0" style="margin-top:20px;" ng-show="length > 0">
       <div class="alert alert-warning">Total Exams are - {{totalExams}} </div>
