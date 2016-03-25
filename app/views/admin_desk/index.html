@@ -2,7 +2,8 @@
 
 <div style="margin:20px 0;">
   <h2>Welcome to {{organisationName}}</h2>
-  <table st-table="rowCollection" class="table organisationCoursesTable">
+  <div request-loading is-loading="requestLoading"></div>
+  <table st-table="rowCollection" class="table organisationCoursesTable" ng-show="!requestLoading">
     <thead>
       <tr>
 	<th st-sort="firstName">Name</th>

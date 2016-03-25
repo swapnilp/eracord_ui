@@ -20,3 +20,16 @@ app.directive('dlKeyCode', function() {
     }
   };
 });
+
+
+app.directive('requestLoading', function() {
+  return {
+    restrict: 'AE',
+    transclude: true,
+    templateUrl: 'views/exams/exam_catlogs.html',
+    scope: {
+      isLoading: '='
+    },
+    templateUrl: 'views/partials/loading.html'
+  };
+});

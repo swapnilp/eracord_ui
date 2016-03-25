@@ -27,18 +27,21 @@ angular.module('eracordUiApp.controller')
       var students = Restangular.all("students");
 
       $scope.totalStudents = 0;
+      $scope.requestLoading = true;
       
       $scope.pagination = {
         current: 1
       };
 
       var getResultsPage = function(pageNumber) {
+	$scope.requestLoading = true;
 	students.getList({page: pageNumber, search: $scope.filterStudent}).then(function(data){
 	  $scope.students = data[0];
 	  $scope.totalStudents = data[1];
 	  $scope.pagination = {
             current: pageNumber || 1
 	  };
+	  $scope.requestLoading = false;
 	});
       };
       

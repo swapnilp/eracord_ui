@@ -32,7 +32,8 @@
       <div class="alert alert-warning">Total Exams are - {{totalExams}} </div>
     </div>
   </div>
-  <table st-table="rowCollection" class="table classExamsTable col-sm-12" ng-show="length > 0">
+  <div request-loading is-loading="requestLoading"></div>
+  <table st-table="rowCollection" class="table classExamsTable col-sm-12" ng-show="length > 0 && !requestLoading">
     <thead>
       <tr>
 	<th st-sort="firstName">Name</th>

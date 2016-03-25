@@ -20,6 +20,7 @@ angular.module('eracordUiApp.controller')
     $scope.selectedCalenderType = 'exams';
     $scope.loadCalenderEvent = false;
     $scope.standardCalenderFilter = null;
+    $scope.requestLoading = true;
     
     if ($cookieStore.get('currentUser') === undefined) {
       $scope.eventSources = [];
@@ -34,6 +35,7 @@ angular.module('eracordUiApp.controller')
       var jkci_classes = Restangular.all("jkci_classes");
       jkci_classes.getList().then(function(data){
 	$scope.jkci_classes = data;
+	$scope.requestLoading = false;
       });
     };
 

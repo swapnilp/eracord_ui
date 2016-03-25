@@ -20,7 +20,7 @@ app.directive('classStudents', function(Restangular) {
       scope.cources = [];
       scope.showRollNumber = true;
       scope.isRollNumber = true;
-      
+      scope.requestLoading = true;
       scope.studentLoaded = false;
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       scope.token = $cookieStore.get('currentUser').token;
@@ -81,12 +81,14 @@ app.directive('classStudents', function(Restangular) {
 
 
       var getResultsPage = function(pageNumber) {
+	scope.requestLoading = true;
 	jkci_classes.customGET("students", {page: pageNumber, search: scope.filterStudent}).then(function(data){
 	  scope.students = data.students;
 	  scope.totalStudents = data.count;
 	  scope.pagination = {
             current: pageNumber || 1
 	  };
+	  scope.requestLoading = false;
 	});
       };
       
@@ -138,6 +140,7 @@ app.directive('classExams', function(Restangular) {
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       scope.totalExams = 0;
       scope.showResetFilter = false;
+      scope.requestLoading = true;
       scope.filterExam = {};
       
       scope.pagination = {
@@ -152,6 +155,7 @@ app.directive('classExams', function(Restangular) {
       
       var getResultsPage = function(pageNumber, checkFilter) {
 	//$route.updateParams({ page: pageNumber});
+	scope.requestLoading = true;
 	if(!checkFilter && _.size(scope.filterExam) === 0) {
 	  return true;
 	}
@@ -163,6 +167,7 @@ app.directive('classExams', function(Restangular) {
 	  scope.totalExams = data.count;
 	  scope.length = data.count;
 	  scope.pagination = {current: pageNumber || 1};
+	  scope.requestLoading = false;
 	});
 
       };
@@ -465,13 +470,16 @@ app.directive('classDuplicateStudents', function(Restangular) {
     controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', '$route', function(scope, Restangular, Flash, $location, $window, $routeParams, $route){
 
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
+      scope.requestLoading = true;
 
       var getResultsPage = function() {
+	scope.requestLoading = true;
 	jkci_classes.customGET("check_verify_students").then(function(data){
 	  if(data.success) {
 	    scope.students = data.class_students;
 	    var remaining_students = _.where(scope.students, {is_duplicate: true, is_duplicate_accepted: false}).length;
 	    scope.changeDuplicateRemaining({remainingValue: remaining_students});
+	    scope.requestLoading = false;
 	  }
 	});
       };
