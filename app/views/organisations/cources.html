@@ -2,7 +2,10 @@
   <a href="#/remaining_organisation_courses" class="btn btn-success"> Add Course</a>
   
   <div request-loading is-loading="requestLoading" style="display:flex;"></div>
-  <table st-table="rowCollection" class="table organisationCoursesTable" ng-show="!requestLoading">
+  <div class="alert alert-warning" style="margin-top:20px;" ng-if="!requestLoading && cources.length ===  0">
+    No courses added.<a href="#/remaining_organisation_courses"> Add courses</a>  for managing organisation.
+  </div>
+  <table st-table="rowCollection" class="table organisationCoursesTable" ng-show="!requestLoading && cources.length > 0 ">
     <thead>
       <tr>
 	<th></th>
@@ -13,18 +16,25 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="row in cources">
-	<td cs-select="row" ng-if="!row.actions"></td>
-	<td ng-if="row.actions"></td>
+      <tr ng-repeat="row in cources" ng-class="{danger: !row.is_active}">
+	<td cs-select="row" ng-if="!row.actions && row.is_active"></td>
+	<td ng-if="row.actions || !row.is_active"></td>
 	<td>{{row.name}}</td>
 	<td>{{row.assign_to}}</td>
-	<td></td>
+	<td>
+	  <span ng-if="row.is_root && row.is_active">
+	    <button class="btn btn-link" ng-click="disableStandard(row);">Disable standard</button>
+	  </span>
+	  <span ng-if="row.is_root && !row.is_active">
+	    <button class="btn btn-link" ng-click="enableStandard(row);">Enable standard</button>
+	  </span>
+	</td>
 	<td>{{row.last_login}} <span ng-if="row.last_login">ago</span></td>
       </tr>
     </tbody>
   </table>
-  <div class="alert alert-warning">
-    You can assign standards to others for handle it. 
+  <div class="alert alert-warning" ng-if="cources.length > 0">
+    Assign standards to others for handle it. 
   </div>
-  <button class="btn btn-success" ng-click="launchSubOrganisation()" ng-disabled="!isLaunchEnable()"> Assign It </button>
+  <button class="btn btn-success" ng-click="launchSubOrganisation()" ng-disabled="!isLaunchEnable()" ng-if="cources.length > 0"> Assign It </button>
 </div>

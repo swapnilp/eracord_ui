@@ -1,6 +1,9 @@
 <div style="margin-top:20px;">
+  <div class="alert alert-warning" style="margin-top:20px;" ng-if="organisation_standards.length === 0">
+    No data found
+  </div>
   <div request-loading is-loading="requestLoading"></div>
-  <table st-table="rowCollection" class="table" ng-show="!requestLoading">
+  <table st-table="rowCollection" class="table" ng-show="!requestLoading && organisation_standards.length > 0">
     <thead>
       <tr>
 	<th st-sort="firstName">id</th>

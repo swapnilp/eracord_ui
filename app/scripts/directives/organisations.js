@@ -38,11 +38,29 @@ app.directive('organisationCources', function(Restangular) {
       scope.cources = [];
       scope.requestLoading = true;
       
+      var base_organisation = Restangular.all("organisations");
+      
       scope.loadCources = function(){
 	scope.requestLoading = true;
 	Restangular.all("/organisation_cources").getList().then(function(data){
 	  scope.cources = data;
 	  scope.requestLoading = false;
+	});
+      };
+
+      scope.disableStandard = function(row) {
+	base_organisation.customGET("standard/"+row.standard_id+"/disable_standard").then(function(data){
+	  if(data.success) {
+	    row.is_active = false;
+	  }
+	});
+      };
+
+      scope.enableStandard = function(row) {
+	base_organisation.customGET("standard/"+row.standard_id+"/enable_standard").then(function(data){
+	  if(data.success) {
+	    row.is_active = true;
+	  }
 	});
       };
 
@@ -193,9 +211,10 @@ app.directive('organisationClasses', function(Restangular) {
     },
     templateUrl: 'views/organisations/classes.html',
     controller: ['$scope', 'Restangular', 'Flash', '$location', function(scope, Restangular, Flash, $location){
-      scope.classes = [];
+      scope.classes = scope.other_classes = [];
       scope.organisationClassesLoded = false;
       scope.requestLoading = true;
+      scope.noData = false;
       
       scope.loadClasses = function(){
 	scope.requestLoading = true;
@@ -204,6 +223,9 @@ app.directive('organisationClasses', function(Restangular) {
 	    scope.classes = data.classes;
 	    scope.other_classes = data.other_classes;
 	    scope.requestLoading = false;
+	    if(scope.classes.length === 0 && scope.other_classes.length === 0) {
+	      scope.noData = true;
+	    }
 	  }
       	});
       };

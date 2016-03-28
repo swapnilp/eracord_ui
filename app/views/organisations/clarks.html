@@ -1,7 +1,10 @@
 <div style="margin-top:20px;">
   <a href="#/add_organisation_clark" class="btn btn-success"> New User</a>
+  <div class="alert alert-warning" style="margin-top:20px;" ng-if="clarks.length === 0">
+    No data found
+  </div>
   <div request-loading is-loading="requestLoading"></div>
-  <table st-table="rowCollection" class="table" ng-show="!requestLoading">
+  <table st-table="rowCollection" class="table" ng-show="!requestLoading && clarks.length > 0">
     <thead>
       <tr>
 	<th st-sort="firstName">Email</th>

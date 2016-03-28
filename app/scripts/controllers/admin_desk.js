@@ -21,6 +21,9 @@ angular.module('eracordUiApp.controller')
     $scope.loadCalenderEvent = false;
     $scope.standardCalenderFilter = null;
     $scope.requestLoading = true;
+    $scope.noData = true;
+    $scope.jkci_classes = [];
+    $scope.us_jkci_classes = [];
     
     if ($cookieStore.get('currentUser') === undefined) {
       $scope.eventSources = [];
@@ -41,7 +44,10 @@ angular.module('eracordUiApp.controller')
 
     var load_standards = function() {
       Restangular.all("organisation_cources").getList().then(function(data) {
-	$scope.org_standards = data;
+	$scope.org_standards = _.filter(data, function(num){ return num.is_active; });
+	if($scope.org_standards.length > 0) {
+	  $scope.noData = false;
+	}
       });
     }
     
@@ -50,6 +56,9 @@ angular.module('eracordUiApp.controller')
       var unassigned_jkci_classes = Restangular.all("get_unassigned_classes");
       unassigned_jkci_classes.getList().then(function(data){
 	$scope.us_jkci_classes = data;
+	if($scope.us_jkci_classes.length > 0) {
+	  $scope.noData = false;
+	}
       });
     };
 

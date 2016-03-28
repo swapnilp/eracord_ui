@@ -37,7 +37,7 @@ angular.module('eracordUiApp.controller')
 	$scope.requestLoading = true;
 	students.getList({page: pageNumber, search: $scope.filterStudent}).then(function(data){
 	  $scope.students = data[0];
-	  $scope.totalStudents = data[1];
+	  $scope.totalStudents = data[1] || 0;
 	  $scope.pagination = {
             current: pageNumber || 1
 	  };

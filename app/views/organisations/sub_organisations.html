@@ -1,5 +1,9 @@
 <div style="margin-top:20px;">
-  <table st-table="rowCollection" class="table">
+  <div class="alert alert-warning" style="margin-top:20px;" ng-if="sub_organisations.length === 0">
+    No data found
+  </div>
+  
+  <table st-table="rowCollection" class="table" ng-if="sub_organisations.length > 0">
     <thead>
       <tr>
 	<th st-sort="Name">Name</th>

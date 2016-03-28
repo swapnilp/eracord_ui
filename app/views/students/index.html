@@ -25,16 +25,21 @@
       </form>
     </span>
   </span>
-  <div >
-    <br />
+  <div class="examFilterDiv col-sm-12 "> 
     Filter : <input type="text" ng-model="filterStudent" dl-key-code="pageChanged(1);" code="13" placeholder="Type name or mobile and  enter" style="width:230px;">
+      <button class="btn btn-primary" ng-click="pageChanged(1);">Filter</button>
   </div>
-  <br />
-  <div class="alert alert-warning">
-    Total Students are - {{totalStudents}}
+  <br /><br /><br />
+  <div class="alert alert-warning col-sm-12">
+    <span ng-if="totalStudents > 0">
+      Total Students are - {{totalStudents}}
+    </span>
+    <span ng-if="totalStudents === 0">
+      No data found
+    </span>
   </div>
   <div request-loading is-loading="requestLoading"></div>
-  <table st-table="rowCollection" class="table organisationCoursesTable" ng-show="!requestLoading">
+  <table st-table="rowCollection" class="table organisationCoursesTable" ng-show="!requestLoading && totalStudents > 0">
     <thead>
       <tr>
 	<th st-sort="firstName" ng-if="!isRollNumber">Number</th>
