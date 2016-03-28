@@ -211,7 +211,7 @@ app.directive('organisationClasses', function(Restangular) {
     },
     templateUrl: 'views/organisations/classes.html',
     controller: ['$scope', 'Restangular', 'Flash', '$location', function(scope, Restangular, Flash, $location){
-      scope.classes = scope.other_classes = [];
+      scope.m_classes = scope.other_classes = [];
       scope.organisationClassesLoded = false;
       scope.requestLoading = true;
       scope.noData = false;
@@ -220,7 +220,7 @@ app.directive('organisationClasses', function(Restangular) {
 	scope.requestLoading = true;
 	Restangular.all("/organisations").customGET('get_classes').then(function(data){
 	  if(data.success){
-	    scope.classes = data.classes;
+	    scope.m_classes = data.classes;
 	    scope.other_classes = data.other_classes;
 	    scope.requestLoading = false;
 	    if(scope.classes.length === 0 && scope.other_classes.length === 0) {
@@ -233,7 +233,7 @@ app.directive('organisationClasses', function(Restangular) {
       scope.makeActiveClass = function(classId) {
 	Restangular.one("jkci_classes", classId).customPOST({}, 'make_active_class', {}).then(function(data){
 	  if(data.success) {
-	    scope.classes = data.classes;
+	    scope.m_classes = data.classes;
 	  }
 	});
       };
@@ -241,13 +241,13 @@ app.directive('organisationClasses', function(Restangular) {
       scope.makeDeactiveClass = function(classId) {
 	Restangular.one("jkci_classes", classId).customPOST({}, 'make_deactive_class', {}).then(function(data){
 	  if(data.success) {
-	    scope.classes = data.classes;
+	    scope.m_classes = data.classes;
 	  }
 	});
       };
       
       scope.$watch('organisationClassesTab', function(){
-	if(scope.organisationClassesTab === 'true' && scope.organisationClassesLoded === false){
+	if(scope.organisationClassesTab === 'true'){
 	  scope.loadClasses();
 	  //scope.organisationClassesLoded = true;
 	}
