@@ -30,6 +30,9 @@ app.factory('authWrapper', function($rootScope, $q, $window, Flash, $cookieStore
 	  Flash.create('warning', 'You are not authorized to perform this action.', 'alert-danger');
 	  $location.path("/admin_desk");
 	  break;
+	case 404:
+	  Flash.create('warning', 'Record not found.', 'alert-danger');
+	  break;
 	case 500:
 	  console.log('asdasdasdad');
       }

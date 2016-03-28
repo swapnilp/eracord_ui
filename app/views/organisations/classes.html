@@ -1,9 +1,9 @@
 <div class="container">
-  <div class="alert alert-warning" style="margin-top:20px;" ng-if="noData">
+  <div class="alert alert-warning" style="margin-top:20px;" ng-if="m_classes.length === 0 && other_classes.length === 0">
     No data found
   </div>
   <div request-loading is-loading="requestLoading"></div>
-  <div class="col-sm-12 textLeft" ng-show="!requestLoading && !noData">
+  <div class="col-sm-12 textLeft" ng-show="!requestLoading">
     <div class="col-sm-4 organisationClass" ng-repeat="jk_class in m_classes" ng-class="{active: jk_class.is_current_active}">
       <div class="wrapper">
 	<div class="rightMenu">

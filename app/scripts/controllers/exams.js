@@ -193,6 +193,8 @@ angular.module('eracordUiApp.controller')
       $scope.uploadMeaasgeClass = "alert-warning";
       jkci_classes.customGET("/"+$routeParams.class_id+"/exams/"+$routeParams.exam_id).then(function(data){
 	$scope.exam = data.exam;
+      }, function(res){
+	$location.path('/admin_desk').replace();
       });
       
       $scope.selectUploadFile = function(newVal){

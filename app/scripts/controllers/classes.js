@@ -48,8 +48,10 @@ angular.module('eracordUiApp.controller')
 	  $scope.class.self_organisation = data.self_organisation;
 	  loadTabs($routeParams.tab);
 	} else {
-	  $location.path("#/admin_desk");
+	  $location.path("/admin_desk").replace();
 	}
+      }, function(res){
+	$location.path("/admin_desk").replace();
       });
       
       $scope.toggleClassAbsentSms = function() {
@@ -157,7 +159,7 @@ angular.module('eracordUiApp.controller')
 	  $scope.class = data.jkci_class;
 	  $scope.standards = data.standards;
 	} else {
-	  $location.path("#/classes/"+$routeParams.class_id);
+	  $location.path("/classes/"+$routeParams.class_id);
 	}
       });
       
@@ -204,7 +206,7 @@ angular.module('eracordUiApp.controller')
 	if(data.success) {
 	  $scope.jk_class = data.jkci_class;
 	} else {
-	  $location.path("#/admin_desk");
+	  $location.path("/admin_desk");
 	}
       });
 

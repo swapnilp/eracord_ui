@@ -11,7 +11,7 @@
 angular.module('eracordUiApp.controller')
   .controller('ContactCtrl',['$scope', 'Flash', 'Auth', '$location', 'Restangular', function ($scope, Flash, Auth, $location, Restangular) {
     
-    $scope.reasons = ["Need Eracord Account", "Join You", "Fetching problem with eracord", "Not able to login", "Got Error", "Other"];
+    $scope.reasons = ["Need Eracord Account", "Join You", 'Enable Sms', "Fetching problem with eracord", "Not able to login", "Got Error", "Other"];
 
     $scope.vm = {};
 

@@ -214,7 +214,6 @@ app.directive('organisationClasses', function(Restangular) {
       scope.m_classes = scope.other_classes = [];
       scope.organisationClassesLoded = false;
       scope.requestLoading = true;
-      scope.noData = false;
       
       scope.loadClasses = function(){
 	scope.requestLoading = true;
@@ -223,9 +222,6 @@ app.directive('organisationClasses', function(Restangular) {
 	    scope.m_classes = data.classes;
 	    scope.other_classes = data.other_classes;
 	    scope.requestLoading = false;
-	    if(scope.classes.length === 0 && scope.other_classes.length === 0) {
-	      scope.noData = true;
-	    }
 	  }
       	});
       };

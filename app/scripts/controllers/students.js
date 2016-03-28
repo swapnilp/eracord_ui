@@ -26,7 +26,6 @@ angular.module('eracordUiApp.controller')
     if($location.path() === '/students') {
       var students = Restangular.all("students");
 
-      $scope.totalStudents = 0;
       $scope.requestLoading = true;
       
       $scope.pagination = {
