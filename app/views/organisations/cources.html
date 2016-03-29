@@ -19,8 +19,25 @@
       <tr ng-repeat="row in cources" ng-class="{danger: !row.is_active}">
 	<td cs-select="row" ng-if="!row.actions && row.is_active"></td>
 	<td ng-if="row.actions || !row.is_active"></td>
-	<td>{{row.name}}</td>
-	<td>{{row.assign_to}}</td>
+	<td>
+	  {{row.name}}
+	</td>
+	<td>
+	  {{row.assign_to}}
+	  <span uib-dropdown ng-if="row.assign_to !== ''">
+	    <a  id="simple-dropdown" uib-dropdown-toggle >
+	      <i class="fa fa-info-circle"></i>
+	    </a>
+	    <ul uib-dropdown-menu aria-labelledby="simple-dropdown" class="padding5">
+	      <li>
+		Email - {{row.assigned_org_info.email}}
+	      </li>
+	      <li>
+		Mobile - {{row.assigned_org_info.mobile}}
+	      </li>
+	    </ul>
+	  </span>
+	</td>
 	<td>
 	  <span ng-if="row.is_root && row.is_active">
 	    <button class="btn btn-link" ng-click="disableStandard(row);">Disable standard</button>
