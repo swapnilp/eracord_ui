@@ -363,8 +363,9 @@ app.directive('classTimeTable', function(Restangular) {
 	scope.vm.cwday = ""+selectedSlot.cwday;
 	scope.vm.slot_type = selectedSlot.slot_type;
 	scope.vm.sub_class_id = selectedSlot.sub_class_id;
-	scope.start_time = new Date("3/3/1016 "+ (""+selectedSlot.start_time).replace(".", ":"));
-	scope.end_time = new Date("3/3/1016 "+ (""+selectedSlot.end_time).replace(".", ":"));
+	console.log(selectedSlot.start_time);
+	scope.start_time = new Date("3/3/2016 "+ (""+parseFloat(selectedSlot.start_time).toFixed(2)).replace(".", ":"));
+	scope.end_time = new Date("3/3/2016 "+ (""+parseFloat(selectedSlot.end_time).toFixed(2)).replace(".", ":"));
 	scope.showSlotForm = true;
 	scope.selectedSlot = null;
 	calculateTimeSlotes();

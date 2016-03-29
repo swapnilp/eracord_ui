@@ -34,8 +34,6 @@
 	  </select>
 	  <span ng-show="form.cwday.$dirty && form.cwday.$error.required" class="help-block">Type is required</span>
 	</div>
-
-	
 	
 	<div class="form-group" ng-class="{ 'has-error': form.slot_type.$dirty && form.slot_type.$error.required }">
 	  <label for="slot_type">Type</label>
@@ -67,7 +65,10 @@
 	  <span class="alert alert-warning">End Time must be greater then start Time</span>
 	  <span ng-show="form.end_time.$dirty && form.end_time.$error.required" class="help-block">End Time is required</span>
 	</div>
-	
+	<div class="form-group">
+	  <label for="class_room">Class Room</label>
+	  <input type="text" name="class_room" id="class_room" class="form-control" ng-model="vm.class_room" />
+	</div>
 	<div class="form-actions">
 	  <button type="submit" ng-disabled="(form.$invalid || vm.dataLoading) || (end_time < start_time) " class="btn btn-primary">Save</button>
 	  <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
