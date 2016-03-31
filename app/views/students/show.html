@@ -62,9 +62,15 @@
     </div>
   </div>
   <div class="col-sm-12 textLeft">
+    <div class=" padding0 pull-left">
+      <label class="btn active btn-default" ng-repeat="graphType in ['all', 'subject_wise']">
+	<input name="cssPre1" id="css2" type="radio" ng-value="graphType" ng-model="selectedGraphType" ng-click="loadGraphByType(graphType);">
+	{{graphType}}
+      </label>
+    </div>
     <div class=" padding0 pull-right">
       <label class="btn active btn-default" ng-repeat="timeZone in ['day', 'week', 'month']">
-	<input name="cssPre" id="css1" type="radio" ng-value="timeZone" ng-model="selectedTimeZone" ng-click="loadGraph(timeZone);">
+	<input name="cssPre" id="css1" type="radio" ng-value="timeZone" ng-model="selectedTimeZone" ng-click="loadGraphByTime(timeZone);">
 	{{timeZone}}
       </label>
     </div>

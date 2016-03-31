@@ -104,6 +104,8 @@ angular.module('eracordUiApp.controller')
       $scope.series = ['Time'];
       $scope.data = [];
       $scope.selectedTimeZone = 'month';
+      $scope.selectedGraphType = 'all';
+      
       
       student.get().then(function(data){
 	if(data.success) {
@@ -111,15 +113,24 @@ angular.module('eracordUiApp.controller')
 	}
       });
 
-      $scope.loadGraph = function(timeZone) {
-	student.customGET("get_graph_data", {time_zone: timeZone}).then(function(data){
+      var loadGraph = function() {
+	student.customGET("get_graph_data", {time_zone: $scope.selectedTimeZone, type: $scope.selectedGraphType}).then(function(data){
 	  if(data.success){
-
 	    $scope.labels = data.keys;
 	    $scope.data = [data.values];
 	  }
 	});
       }
+
+      $scope.loadGraphByType = function(type) {
+	$scope.selectedGraphType = type;
+	loadGraph();
+      };
+      
+      $scope.loadGraphByTime = function(time) {
+	$scope.selectedTimeZone = time;
+	loadGraph();
+      };
 
       $scope.toggleStudentSms = function() {
 	student.customPOST({enable_sms: $scope.student.enable_sms}, "toggle_sms", {}).then(function(data){
@@ -127,7 +138,7 @@ angular.module('eracordUiApp.controller')
 	});
       };
       
-      $scope.loadGraph('month');
+      loadGraph();
       
       $scope.onClick = function (points, evt) {
 	console.log(points, evt);
