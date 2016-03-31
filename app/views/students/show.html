@@ -62,6 +62,12 @@
     </div>
   </div>
   <div class="col-sm-12 textLeft">
+    <div class=" padding0 pull-right">
+      <label class="btn active btn-default" ng-repeat="timeZone in ['day', 'week', 'month']">
+	<input name="cssPre" id="css1" type="radio" ng-value="timeZone" ng-model="selectedTimeZone" ng-click="loadGraph(timeZone);">
+	{{timeZone}}
+      </label>
+    </div>
     <canvas id="line" class="chart chart-line" chart-data="data"
 	    chart-labels="labels" chart-legend="true" chart-series="series"
 	    chart-click="onClick" >

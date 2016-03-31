@@ -100,24 +100,35 @@ angular.module('eracordUiApp.controller')
 
     if($location.path() === "/students/" + $routeParams.student_id + "/show"){
       var student = Restangular.one("students", $routeParams.student_id);
+      $scope.labels = [];
+      $scope.series = ['Time'];
+      $scope.data = [];
+      $scope.selectedTimeZone = 'month';
+      
       student.get().then(function(data){
 	if(data.success) {
 	  $scope.student = data.body.student;
 	}
       });
 
+      $scope.loadGraph = function(timeZone) {
+	student.customGET("get_graph_data", {time_zone: timeZone}).then(function(data){
+	  if(data.success){
+
+	    $scope.labels = data.keys;
+	    $scope.data = [data.values];
+	  }
+	});
+      }
+
       $scope.toggleStudentSms = function() {
 	student.customPOST({enable_sms: $scope.student.enable_sms}, "toggle_sms", {}).then(function(data){
 	  $scope.student.enable_sms = data.enable_sms; 
 	});
       };
-
-      $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-      $scope.series = ['Series A', 'Series B'];
-      $scope.data = [
-	[65, 59, 80, 81, 56, 55, 40],
-	[28, 48, 40, 19, 86, 27, 90]
-      ];
+      
+      $scope.loadGraph('month');
+      
       $scope.onClick = function (points, evt) {
 	console.log(points, evt);
       };
