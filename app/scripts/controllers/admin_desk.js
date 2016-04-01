@@ -29,9 +29,7 @@ angular.module('eracordUiApp.controller')
       $scope.eventSources = [];
       $location.path('/user/sign_in').replace();
       return true;
-    } else {
-      $scope.organisationName = $cookieStore.get('currentUser').name;
-    }
+    } 
 
 
     var load_desk_classes = function(){

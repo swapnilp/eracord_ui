@@ -1,5 +1,9 @@
 <div style="margin:20px 0;">
-  <h2>Welcome to {{organisationName}}</h2>
+  <div>
+    <span>
+      My Cources
+    </span>
+  </div>
   <div class="alert alert-warning" ng-if="noData">No Standards are added. <a href="#/manage_organisation"> click here</a> for adding </div>
   <div request-loading is-loading="requestLoading"></div>
   <table st-table="rowCollection" class="table organisationCoursesTable" ng-show="!requestLoading && !noData && jkci_classes.length > 0">
@@ -43,6 +47,11 @@
     </tbody>
   </table>
   <div ng-if="us_jkci_classes.length > 0 && !noData">
+    <div>
+      <span>
+	Assigned courses
+      </span>
+    </div>
     <table st-table="rowCollection" class="table organisationCoursesTable">
       <thead>
 	<tr>

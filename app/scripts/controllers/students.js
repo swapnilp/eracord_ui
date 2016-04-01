@@ -117,7 +117,8 @@ angular.module('eracordUiApp.controller')
 	student.customGET("get_graph_data", {time_zone: $scope.selectedTimeZone, type: $scope.selectedGraphType}).then(function(data){
 	  if(data.success){
 	    $scope.labels = data.keys;
-	    $scope.data = [data.values];
+	    $scope.data = data.values;
+	    $scope.series = data.header
 	  }
 	});
       }
