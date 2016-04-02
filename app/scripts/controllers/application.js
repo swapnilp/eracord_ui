@@ -41,9 +41,11 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
   
   if ($location.path() !== '/user/sign_in' || $location.path() !== '/user/forgot_password') {
     Auth._currentUser = $cookieStore.get('currentUser');
-    Auth.currentUser().then(function(user) {
-      $rootScope.currentUser = user;
-    });
+    if(Auth._currentUser !== undefined) {
+      Auth.currentUser().then(function(user) {
+       $rootScope.currentUser = user;
+      });
+    }
   }
 
 
