@@ -98,6 +98,9 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
     if($location.path().search("^/user") >= 0 ){
       $scope.topMenu = "users";
     }
+    if($location.path().search("^/class_rooms") >= 0 ){
+      $scope.topMenu = "class_rooms";
+    }
     if($location.path().search("/user/sign_in") >= 0 ){
       $scope.topMenu = "home";
     }
