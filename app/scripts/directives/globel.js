@@ -8,9 +8,9 @@ app.directive('dlKeyCode', function() {
     restrict: 'AE',
     transclude: true,
     link: function($scope, $element, $attrs) {
-      $element.bind("keypress", function(event) {
+      $element.bind("keyup", function(event) {
         var keyCode = event.which || event.keyCode;
-        if (keyCode == $attrs.code) {
+        if (keyCode == $attrs.code || $attrs.value == "") {
           $scope.$apply(function() {
             $scope.$eval($attrs.dlKeyCode, {$event: event});
           });
