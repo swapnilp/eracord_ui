@@ -3,42 +3,44 @@
     No data found
   </div>
   <div request-loading is-loading="requestLoading"></div>
-  <table st-table="rowCollection" class="table" ng-show="!requestLoading && organisation_standards.length > 0">
-    <thead>
-      <tr>
-	<th st-sort="firstName">id</th>
-	<th st-sort="firstName">Standard</th>
-	<th st-sort="lastName">Organisaiton</th>
-	<th st-sort="lastName">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="standard in organisation_standards">
-	<td>{{$index+1}}</td>
-	<td>{{standard.name}}</td>
-	<td>
-	  <span ng-repeat="org in standard.organisaitons" class="standardOrganisationBtn" ng-class="{'bg-success': !org.is_assigned_to_other}">
-	    {{org.organisation_name}}
-	    <span uib-dropdown>
-	      <a  id="simple-dropdown" uib-dropdown-toggle >
-		<i class="fa fa-info-circle"></i>
-	      </a>
-	      <ul uib-dropdown-menu aria-labelledby="simple-dropdown" class="padding5">
-		<li>
-		  Email - {{org.email}}
-		</li>
-		<li>
-		  Mobile - {{org.mobile}}
-		</li>
-	      </ul>
+  <figure class="highlight col-sm-12">
+    <table st-table="rowCollection" class="table" ng-show="!requestLoading && organisation_standards.length > 0">
+      <thead>
+	<tr>
+	  <th st-sort="firstName">id</th>
+	  <th st-sort="firstName">Standard</th>
+	  <th st-sort="lastName">Organisaiton</th>
+	  <th st-sort="lastName">Actions</th>
+	</tr>
+      </thead>
+      <tbody>
+	<tr ng-repeat="standard in organisation_standards">
+	  <td>{{$index+1}}</td>
+	  <td>{{standard.name}}</td>
+	  <td>
+	    <span ng-repeat="org in standard.organisaitons" class="standardOrganisationBtn" ng-class="{'bg-success': !org.is_assigned_to_other}">
+	      {{org.organisation_name}}
+	      <span uib-dropdown>
+		<a  id="simple-dropdown" uib-dropdown-toggle >
+		  <i class="fa fa-info-circle"></i>
+		</a>
+		<ul uib-dropdown-menu aria-labelledby="simple-dropdown" class="padding5">
+		  <li>
+		    Email - {{org.email}}
+		  </li>
+		  <li>
+		    Mobile - {{org.mobile}}
+		  </li>
+		</ul>
+	      </span>
+	      <i class="fa fa-times" ng-if="org.organisation_id !== organisation_id && !org.is_parent_organisation" ng-click="removeOrganisaitonStandard(standard, org.organisation_id);"></i>
 	    </span>
-	    <i class="fa fa-times" ng-if="org.organisation_id !== organisation_id && !org.is_parent_organisation" ng-click="removeOrganisaitonStandard(standard, org.organisation_id);"></i>
-	  </span>
-	</td>
-	<td>
-	  <a href="#/organisation/standards/{{standard.id}}/assign_organisation"class="btn btn-default">Assign Organisaiton</a>
-	</td>
-      </tr>
-    </tbody>
-  </table>
+	  </td>
+	  <td>
+	    <a href="#/organisation/standards/{{standard.id}}/assign_organisation"class="btn btn-default">Assign Organisaiton</a>
+	  </td>
+	</tr>
+      </tbody>
+    </table>
+  </figure>
 </div>

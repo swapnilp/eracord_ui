@@ -1,22 +1,24 @@
 <div style="margin:20px 0;">
-  <table st-table="rowCollection" class="table dailyTeachesTable">
-    <thead>
-      <tr>
-	<th st-sort="firstName">Message</th>
-	<th st-sort="lastName">Type</th>
-	<th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr dir-paginate="row in notifications | itemsPerPage: 10" total-items="totalNotifications" current-page="pagination.current" pagination-id="notificationPagi">
-	<td>{{row.message}}</td>
-	<td>{{row.object_type}}</td>
-	<td>
-	  <a href="{{row.url}}" class="btn btn-primary">Show</a>
-	</td>
-      </tr>
-    </tbody>
-  </table>
+  <figure class="highlight col-sm-12">
+    <table st-table="rowCollection" class="table dailyTeachesTable">
+      <thead>
+	<tr>
+	  <th st-sort="firstName">Message</th>
+	  <th st-sort="lastName">Type</th>
+	  <th></th>
+	</tr>
+      </thead>
+      <tbody>
+	<tr dir-paginate="row in notifications | itemsPerPage: 10" total-items="totalNotifications" current-page="pagination.current" pagination-id="notificationPagi">
+	  <td>{{row.message}}</td>
+	  <td>{{row.object_type}}</td>
+	  <td>
+	    <a href="{{row.url}}" class="btn btn-primary">Show</a>
+	  </td>
+	</tr>
+      </tbody>
+    </table>
+  </figure>
   <dir-pagination-controls on-page-change="pageChanged(newPageNumber)" pagination-id="notificationPagi"></dir-pagination-controls>
 </div>
 

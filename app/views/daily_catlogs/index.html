@@ -1,31 +1,33 @@
 <div style="margin:20px 0;">
   <div request-loading is-loading="requestLoading"></div>
-  <table st-table="rowCollection" class="table dailyTeachesTable" ng-show="!requestLoading">
-    <thead>
-      <tr>
-	<th st-sort="firstName">Subject</th>
-	<th st-sort="lastName">Date</th>
-	<th st-sort="birthDate">Chapter</th>
-	<th st-sort="balance">Points</th>	
-	<th st-sort="balance">Absents</th>
-	<th st-sort="balance">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr dir-paginate="row in dtps | itemsPerPage: 10" total-items="totalDtps" current-page="pagination.current" pagination-id="dtpsPagi">
-	<td>{{row.subject}}</td>
-	<td>{{row.date}}</td>
-	<td>{{row.chapter}}</td>
-	<td>{{row.points}}</td>
-	<td>{{row.absents}}</td>
-	<td>
-	  <span ng-if="row.self_organisation">
-	    <a href="#/classes/{{classId}}/daily_catlogs/{{row.id}}/show", class="btn btn-primary">Show</a>
-	  </span>
-	</td>
-      </tr>
-    </tbody>
-  </table>
+  <figure class="highlight col-sm-12">
+    <table st-table="rowCollection" class="table dailyTeachesTable" ng-show="!requestLoading">
+      <thead>
+	<tr>
+	  <th st-sort="firstName">Subject</th>
+	  <th st-sort="lastName">Date</th>
+	  <th st-sort="birthDate">Chapter</th>
+	  <th st-sort="balance">Points</th>	
+	  <th st-sort="balance">Absents</th>
+	  <th st-sort="balance">Action</th>
+	</tr>
+      </thead>
+      <tbody>
+	<tr dir-paginate="row in dtps | itemsPerPage: 10" total-items="totalDtps" current-page="pagination.current" pagination-id="dtpsPagi">
+	  <td>{{row.subject}}</td>
+	  <td>{{row.date}}</td>
+	  <td>{{row.chapter}}</td>
+	  <td>{{row.points}}</td>
+	  <td>{{row.absents}}</td>
+	  <td>
+	    <span ng-if="row.self_organisation">
+	      <a href="#/classes/{{classId}}/daily_catlogs/{{row.id}}/show", class="btn btn-primary">Show</a>
+	    </span>
+	  </td>
+	</tr>
+      </tbody>
+    </table>
+  </figure>
   <dir-pagination-controls on-page-change="pageChanged(newPageNumber)" pagination-id="dtpsPagi"></dir-pagination-controls>
 </div>
 

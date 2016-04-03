@@ -2,30 +2,31 @@
   <div class="alert alert-warning" style="margin-top:20px;" ng-if="sub_organisations.length === 0">
     No data found
   </div>
-  
-  <table st-table="rowCollection" class="table" ng-if="sub_organisations.length > 0">
-    <thead>
-      <tr>
-	<th st-sort="Name">Name</th>
-	<th st-sort="Email">Email</th>
-	<th st-sort="Mobile">Mobile</th>
-	<th st-sort="Standards">Standards</th>
-	<th st-sort="Actions">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="row in sub_organisations">
-	<td>{{row.name}}</td>
-	<td>{{row.email}}</td>
-	<td>{{row.mobile}}</td>
-	<td>
-	  <span ng-bind-html="row.standards"></span>
-	</td>
-	<td>
-	  <a class="btn btn-link" ng-click="pullBackSubOrganisation(row);">Pull Back</a>
-	</td>
-      </tr>
-    </tbody>
-  </table>
+  <figure class="highlight col-sm-12">
+    <table st-table="rowCollection" class="table" ng-if="sub_organisations.length > 0">
+      <thead>
+	<tr>
+	  <th st-sort="Name">Name</th>
+	  <th st-sort="Email">Email</th>
+	  <th st-sort="Mobile">Mobile</th>
+	  <th st-sort="Standards">Standards</th>
+	  <th st-sort="Actions">Actions</th>
+	</tr>
+      </thead>
+      <tbody>
+	<tr ng-repeat="row in sub_organisations">
+	  <td>{{row.name}}</td>
+	  <td>{{row.email}}</td>
+	  <td>{{row.mobile}}</td>
+	  <td>
+	    <span ng-bind-html="row.standards"></span>
+	  </td>
+	  <td>
+	    <a class="btn btn-link" ng-click="pullBackSubOrganisation(row);">Pull Back</a>
+	  </td>
+	</tr>
+      </tbody>
+    </table>
+  </figure>
 </div>
 

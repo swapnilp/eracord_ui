@@ -33,50 +33,52 @@
     </div>
   </div>
   <div request-loading is-loading="requestLoading"></div>
-  <table st-table="rowCollection" class="table classExamsTable col-sm-12" ng-show="length > 0 && !requestLoading">
-    <thead>
-      <tr>
-	<th st-sort="firstName">Name</th>
-	<th st-sort="lastName">Marks</th>
-	<th st-sort="birthDate">Date</th>
-	<th st-sort="balance">Subject</th>	
-	<th st-sort="balance">Type</th>
-	<th st-sort="balance">Status</th>
-	<th st-sort="balance">Published Date</th>
-	<th st-sort="balance">Point Linked</th>
-	<th st-sort="balance">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr dir-paginate="row in exams | itemsPerPage: 10" total-items="totalExams" current-page="pagination.current" ng-class="{created: row.status == 'Created', verified: row.status == 'Verified', conducted: row.status == 'Conducted', published: row.status == 'Published', over_due: row.status == 'Pass date'}">
-	<td>{{row.name}}</td>
-	<td>{{row.marks}}</td>
-	<td>{{row.exam_date}}</td>
-	<td>{{row.subject}}</td>
-	<td>{{row.exam_type}}</td>
-	<td>{{row.status}}</td>
-	<td>{{row.published_date}}</td>
-	<td>
-	  <span ng-if="row.self_organisation">
-	    <span ng-if="!row.is_point_added && !row.is_group && row.status !== 'Created'">
-	      <a href="#/classes/{{row.jkci_class_id}}/exams/{{row.id}}/manage_points">Linked Points</a>
+  <figure class="highlight col-sm-12">
+    <table st-table="rowCollection" class="table classExamsTable col-sm-12" ng-show="length > 0 && !requestLoading">
+      <thead>
+	<tr>
+	  <th st-sort="firstName">Name</th>
+	  <th st-sort="lastName">Marks</th>
+	  <th st-sort="birthDate">Date</th>
+	  <th st-sort="balance">Subject</th>	
+	  <th st-sort="balance">Type</th>
+	  <th st-sort="balance">Status</th>
+	  <th st-sort="balance">Published Date</th>
+	  <th st-sort="balance">Point Linked</th>
+	  <th st-sort="balance">Actions</th>
+	</tr>
+      </thead>
+      <tbody>
+	<tr dir-paginate="row in exams | itemsPerPage: 10" total-items="totalExams" current-page="pagination.current" ng-class="{created: row.status == 'Created', verified: row.status == 'Verified', conducted: row.status == 'Conducted', published: row.status == 'Published', over_due: row.status == 'Pass date'}">
+	  <td>{{row.name}}</td>
+	  <td>{{row.marks}}</td>
+	  <td>{{row.exam_date}}</td>
+	  <td>{{row.subject}}</td>
+	  <td>{{row.exam_type}}</td>
+	  <td>{{row.status}}</td>
+	  <td>{{row.published_date}}</td>
+	  <td>
+	    <span ng-if="row.self_organisation">
+	      <span ng-if="!row.is_point_added && !row.is_group && row.status !== 'Created'">
+		<a href="#/classes/{{row.jkci_class_id}}/exams/{{row.id}}/manage_points">Linked Points</a>
+	      </span>
+	      <span ng-if="row.is_point_added">
+		true
+	      </span>
 	    </span>
-	    <span ng-if="row.is_point_added">
-	      true
+	    <span ng-if="!row.self_organisation">
+	      {{row.is_point_added == true ? 'Linked' : 'No'}}
 	    </span>
-	  </span>
-	  <span ng-if="!row.self_organisation">
-	    {{row.is_point_added == true ? 'Linked' : 'No'}}
-	  </span>
-	</td>
-	<td>
-	  <span ng-if="row.self_organisation">
-	    <a href="#/classes/{{row.jkci_class_id}}/exams/{{row.id}}/show">Show</a>
-	  </span>
-	</td>
-      </tr>
-    </tbody>
-  </table>
+	  </td>
+	  <td>
+	    <span ng-if="row.self_organisation">
+	      <a href="#/classes/{{row.jkci_class_id}}/exams/{{row.id}}/show">Show</a>
+	    </span>
+	  </td>
+	</tr>
+      </tbody>
+    </table>
+  </figure>
   <dir-pagination-controls on-page-change="pageChanged(newPageNumber, true)" class="col-sm-12" ng-show="length > 0"></dir-pagination-controls>
   <div ng-show="length == 0" class="col-sm-12 padding0" style="margin-top:20px;">
     <div class="alert alert-warning">

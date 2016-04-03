@@ -1,24 +1,26 @@
 <div style="margin:20px 0;">
   <a href="#/classes/{{classId}}/divisions/new" class="btn btn-primary">Create Division</a>
-  <table st-table="rowCollection" class="table organisationCoursesTable">
-    <thead>
-      <tr>
-	<th st-sort="firstName">Index</th>
-	<th st-sort="lastName">Name</th>
-	<th st-sort="lastName">Students</th>
-	<th st-sort="balance">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="row in divisions">
-	<td>{{$index+1}}</td>
-	<td>{{row.name}}</td>
-	<td>{{row.students_count}}</td>
-	<td>
-	  <a href="#/classes/{{classId}}/divisions/{{row.id}}">Show</a>
-	</td>
-      </tr>
-    </tbody>
-  </table>
+  <figure class="highlight col-sm-12">
+    <table st-table="rowCollection" class="table organisationCoursesTable">
+      <thead>
+	<tr>
+	  <th st-sort="firstName">Index</th>
+	  <th st-sort="lastName">Name</th>
+	  <th st-sort="lastName">Students</th>
+	  <th st-sort="balance">Actions</th>
+	</tr>
+      </thead>
+      <tbody>
+	<tr ng-repeat="row in divisions">
+	  <td>{{$index+1}}</td>
+	  <td>{{row.name}}</td>
+	  <td>{{row.students_count}}</td>
+	  <td>
+	    <a href="#/classes/{{classId}}/divisions/{{row.id}}">Show</a>
+	  </td>
+	</tr>
+      </tbody>
+    </table>
+  </figure>
 </div>
 

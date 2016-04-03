@@ -4,28 +4,30 @@
     No data found
   </div>
   <div request-loading is-loading="requestLoading"></div>
-  <table st-table="rowCollection" class="table" ng-show="!requestLoading && clarks.length > 0">
-    <thead>
-      <tr>
-	<th st-sort="firstName">Email</th>
-	<th st-sort="lastName">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="row in clarks">
-	<td>{{row.email}}</td>
-	<td>
-	  <button class="btn btn-primary left mLeft10" ng-click="manageRoles(row);">Manage Roles</button>
-	  <a href="#/organisation/users/{{row.id}}/change_password" class="btn btn-primary left mLeft10">Change Password</a>
-	  <toggle-switch class="left mLeft10"
-	     ng-model="row.is_enable"
-	     knob-label="ENABLE" ng-click="toggleEnableUser(row)">
-	  </toggle-switch>
-	  
-	  <button class="btn btn-primary left mLeft10" ng-click="deleteClark(row)">Delete User</button>
-	</td>
-      </tr>
-    </tbody>
-  </table>
+  <figure class="highlight col-sm-12">
+    <table st-table="rowCollection" class="table" ng-show="!requestLoading && clarks.length > 0">
+      <thead>
+	<tr>
+	  <th st-sort="firstName">Email</th>
+	  <th st-sort="lastName">Actions</th>
+	</tr>
+      </thead>
+      <tbody>
+	<tr ng-repeat="row in clarks">
+	  <td>{{row.email}}</td>
+	  <td>
+	    <button class="btn btn-primary left mLeft10" ng-click="manageRoles(row);">Manage Roles</button>
+	    <a href="#/organisation/users/{{row.id}}/change_password" class="btn btn-primary left mLeft10">Change Password</a>
+	    <toggle-switch class="left mLeft10"
+			   ng-model="row.is_enable"
+			   knob-label="ENABLE" ng-click="toggleEnableUser(row)">
+	    </toggle-switch>
+	    
+	    <button class="btn btn-primary left mLeft10" ng-click="deleteClark(row)">Delete User</button>
+	  </td>
+	</tr>
+      </tbody>
+    </table>
+  </figure>
 </div>
 
