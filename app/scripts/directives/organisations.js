@@ -42,8 +42,13 @@ app.directive('organisationCources', function(Restangular) {
       
       scope.loadCources = function(){
 	scope.requestLoading = true;
-	Restangular.all("/organisation_cources").getList().then(function(data){
-	  scope.cources = data;
+	Restangular.all("/organisations").customGET("cources").then(function(data){
+	  if(data.success) {
+	    scope.cources = data.body;
+	    scope.isRoot = data.is_root;
+	  }else{
+
+	  }
 	  scope.requestLoading = false;
 	});
       };

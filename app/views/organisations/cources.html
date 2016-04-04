@@ -1,8 +1,8 @@
 <div style="margin:20px 0;">
-  <a href="#/remaining_organisation_courses" class="btn btn-success"> Add Course</a>
+  <a href="#/remaining_organisation_courses" class="btn btn-success" ng-if="isRoot"> Add Course</a>
   
   <div request-loading is-loading="requestLoading" style="display:flex;"></div>
-  <div class="alert alert-warning" style="margin-top:20px;" ng-if="!requestLoading && cources.length ===  0">
+  <div class="alert alert-warning" style="margin-top:20px;" ng-if="!requestLoading && cources.length ===  0 && isRoot">
     No courses added.<a href="#/remaining_organisation_courses"> Add courses</a>  for managing organisation.
   </div>
   <figure class="highlight col-sm-12">
@@ -13,6 +13,7 @@
 	  <th st-sort="firstName">Name</th>
 	  <th st-sort="lastName">Assign To</th>
 	  <th st-sort="birthDate">Action</th>
+	  <th st-sort="birthDate">Total Fee</th>
 	  <th st-sort="balance">Last Login</th>
 	</tr>
       </thead>
@@ -47,6 +48,7 @@
 	      <button class="btn btn-link" ng-click="enableStandard(row);">Enable standard</button>
 	    </span>
 	  </td>
+	  <td>{{row.total_fee}}&nbsp;&nbsp;&nbsp;<a class="btn btn-link" href="#/organisations/{{row.id}}/fees/edit">Edit</a></td>
 	  <td>{{row.last_login}} <span ng-if="row.last_login">ago</span></td>
 	</tr>
       </tbody>
