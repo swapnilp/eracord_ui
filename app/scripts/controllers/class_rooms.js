@@ -20,6 +20,7 @@ angular.module('eracordUiApp.controller')
     
     if($location.path() === "/class_rooms"){
       $scope.isOpencal = false;
+      $scope.isOpenend = false;
       $scope.showFilter = true;
       $scope.days = {
 	1: 'Monday',
@@ -30,22 +31,27 @@ angular.module('eracordUiApp.controller')
 	6: 'Saturday'
       };
       $scope.length = 0;
+      $scope.vm = {};
 
 
       $scope.openCalendar = function($event, prop) {
 	$scope.isOpencal = true;
       };
+      $scope.openCalendarEnd = function($event, prop) {
+	$scope.isOpenend = true;
+      };
 
-      var loadClassRooms = function(){
-	class_rooms.customGET("get_class_rooms").then(function(data){
-	  $scope.selectedWeekDay = data.cwday + "";
-	  $scope.class_time = data.time;
+      $scope.getClassRooms = function(){
+	class_rooms.customGET("get_class_rooms", {filter: $scope.vm}).then(function(data){
+	  $scope.vm.selectedWeekDay = data.cwday + "";
+	  $scope.vm.class_time = data.time;
+	  $scope.vm.end_time = data.end_time;
 	  $scope.class_rooms = data.class_rooms;
 	  $scope.length = $scope.class_rooms.length;
 	});
       }
       
-      loadClassRooms();
+      $scope.getClassRooms();
     };
 
     
