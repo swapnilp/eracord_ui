@@ -41,8 +41,8 @@ angular.module('eracordUiApp.controller')
     };
 
     var load_standards = function() {
-      Restangular.all("organisation_cources").getList().then(function(data) {
-	$scope.org_standards = _.filter(data, function(num){ return num.is_active; });
+      Restangular.all("organisations").customGET("cources").then(function(data) {
+	$scope.org_standards = _.filter(data.body, function(num){ return num.is_active; });
 	if($scope.org_standards.length > 0) {
 	  $scope.noData = false;
 	}

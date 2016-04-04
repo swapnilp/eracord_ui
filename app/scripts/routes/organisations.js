@@ -37,7 +37,13 @@ app.config(function($routeProvider) {
     .when("/organisation/standards/:id/assign_organisation", {
       templateUrl: 'views/organisations/remaining_standards_organisation.html',
       controller: 'OrganisationsCtrl'
-    });
+    })
+    .when("/organisations/:course_id/fees/edit", {
+      templateUrl: 'views/organisations/manage_fee.html',
+      controller: 'OrganisationsCtrl'
+    });;
+
+    
 
 });
 

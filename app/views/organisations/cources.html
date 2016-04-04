@@ -48,7 +48,7 @@
 	      <button class="btn btn-link" ng-click="enableStandard(row);">Enable standard</button>
 	    </span>
 	  </td>
-	  <td>{{row.total_fee}}&nbsp;&nbsp;&nbsp;<a class="btn btn-link" href="#/organisations/{{row.id}}/fees/edit">Edit</a></td>
+	  <td>{{row.total_fee}}&nbsp;&nbsp;&nbsp;<a class="btn btn-link" href="#/organisations/{{row.id}}/fees/edit" ng-if="isRoot">Edit</a></td>
 	  <td>{{row.last_login}} <span ng-if="row.last_login">ago</span></td>
 	</tr>
       </tbody>

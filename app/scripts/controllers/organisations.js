@@ -136,6 +136,39 @@ angular.module('eracordUiApp.controller')
       };
     }
     //end assign standards
+
+    if($location.path() === "/organisations/" + $routeParams.course_id + "/fees/edit"){
+      base_organisation = Restangular.all("organisations");
+      $scope.vm = {};
+      $scope.requestLoading = true;
+      
+      base_organisation.one("courses", $routeParams.course_id).customGET("get_fee").then(function(data) {
+	if(data.success) {
+	  $scope.class_name = data.name;
+	  $scope.fee = data.fee;
+	  $scope.vm.fee = $scope.fee;
+	} else {
+	  Flash.create('warning', data.message, 'alert-danger');
+	  $location.path('/manage_organisation').replace();
+	}
+	$scope.requestLoading = false;
+      });
+
+      $scope.updateFee = function() {
+	base_organisation.one("courses", $routeParams.course_id).customPOST({fee: $scope.vm},"update_fee", {}).then(function(data) {
+	  if(data.success) {
+	    Flash.create('success', data.message, 'alert-success');
+	    $location.path('/manage_organisation').replace();
+	  } else {
+	    Flash.create('warning', data.message, 'alert-danger');
+	    $scope.vm.password = "";
+	  }
+	});
+      }
+      
+    }
+    //end manage fee
+    
     
     if($location.path() === '/edit_organisation') {
       $scope.vm = {};
