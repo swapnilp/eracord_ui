@@ -8,7 +8,7 @@
     <form name="form" ng-submit="updateFee()" role="form">
       <div class="form-group">
 	<label for="fee">Fee <span class="textRed"> *</span></label>
-	<input type="text" name="fee" id="fee" class="form-control" ng-model="vm.fee" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0" required/>
+	<input type="text" name="fee" id="fee" class="form-control" ng-model="vm.fee" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0 || event.charCode === 46" required/>
       </div>
       <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
 	<label for="password">Password <span class="textRed">*</span></label>
