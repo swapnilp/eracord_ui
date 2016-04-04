@@ -49,7 +49,12 @@ angular.module('eracordUiApp.controller')
 	  $scope.class_rooms = data.class_rooms;
 	  $scope.length = $scope.class_rooms.length;
 	});
-      }
+      };
+      
+      $scope.getCurrentTimeClasses = function() {
+	$scope.vm = {};
+	$scope.getClassRooms();
+      };
       
       $scope.getClassRooms();
     };

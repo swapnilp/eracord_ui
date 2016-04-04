@@ -1,5 +1,5 @@
 <div class="col-sm-12" style="margin:20px 0;">
-  <div class="col-sm-3">
+  <div class="col-sm-5">
     <form name="form" ng-submit="getClassRooms()" role="form">
       <div class="form-group">
 	<label for="cwday">Day</label>
@@ -22,6 +22,8 @@
 	<label for="class_time">Get class rooms</label>
 	<p class="input-group">
 	  <button class="btn btn-primary">Get class rooms</button>
+	  &nbsp;&nbsp;
+	  <a class="btn btn-primary" ng-click="getCurrentTimeClasses();">Get Current Time</a>
 	</p>
       </div>
     </form>
