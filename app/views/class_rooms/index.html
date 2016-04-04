@@ -1,1 +1,56 @@
-asdasdasdasd
+<div class="col-sm-12" style="margin:20px 0;">
+  <div class="col-sm-3">
+    <div class="form-group">
+      <label for="cwday">Day</label>
+      <select class="form-control ng-touched" ng-model="selectedWeekDay"  ng-options="k as v for (k, v) in days" required>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="class_time">Start Time</label>
+      <p class="input-group">
+	<input type="text" class="form-control" datetime-picker="HH:mm" ng-model="class_time" is-open="isOpencal" ng-click="openCalendar($event, prop);" enable-date="false" readonly/>
+      </p>
+    </div>
+    <div class="form-group">
+      <label for="class_time">Get class rooms</label>
+      <p class="input-group">
+	<button class="btn btn-primary">Get class rooms</button>
+      </p>
+    </div>
+  </div>
+  
+      
+  <div request-loading is-loading="requestLoading"></div>
+  <figure class="highlight col-sm-12" ng-show="length > 0 && !requestLoading">
+    <table st-table="rowCollection" class="table classExamsTable col-sm-12" >
+      <thead>
+	<tr>
+	  <th st-sort="firstName">Class Room</th>
+	  <th st-sort="balance">Subject</th>
+	  <th st-sort="balance">Division</th>
+	  <th st-sort="balance">Teacher</th>
+	  <th st-sort="balance">Start Time</th>
+	  <th st-sort="balance">End Time</th>
+	</tr>
+      </thead>
+      <tbody>
+	<tr ng-repeat="row in class_rooms">
+	  <td>{{row.class_room}}</td>
+	  <td>{{row.subject}}</td>
+	  <td>{{row.sub_class}}</td>
+	  <td>{{row.teacher}}</td>
+	  <td>{{row.start_time}}</td>
+	  <td>{{row.end_time}}</td>
+	</tr>
+      </tbody>
+    </table>
+  </figure>
+  
+  <div ng-show="length == 0" class="col-sm-12 padding0" style="margin-top:20px;">
+    <div class="alert alert-warning">
+      No data found
+    </div>
+  </div>
+</div>
+
+

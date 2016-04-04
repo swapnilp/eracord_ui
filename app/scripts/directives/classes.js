@@ -395,8 +395,8 @@ app.directive('classTimeTable', function(Restangular) {
 
       scope.registorTimeTableSlot = function() {
 	scope.vm.time_table_id = scope.time_table.id;
-	scope.vm.start_time = filter('date')(scope.start_time, "HH:mm");
-	scope.vm.end_time = filter('date')(scope.end_time, "HH:mm");
+	scope.vm.start_time = filter('date')(scope.start_time, "HH:mm").replace(":", ".");
+	scope.vm.end_time = filter('date')(scope.end_time, "HH:mm").replace(":", ".");
 	var millisecondsPerHour = 1000 * 60;
 	scope.vm.durations = Math.round((scope.end_time - scope.start_time)/millisecondsPerHour);
 	if(scope.vm.slot_type !== 'Class') {
