@@ -1,8 +1,8 @@
 <div style="margin:20px 0;">
   <div>
-    <span>
+    <h3>
       My Cources
-    </span>
+    </h3>
   </div>
   <div class="alert alert-warning" ng-if="noData">No Standards are added. <a href="#/manage_organisation"> click here</a> for adding </div>
   <div request-loading is-loading="requestLoading"></div>
@@ -50,9 +50,9 @@
   </figure>
   <div ng-if="us_jkci_classes.length > 0 && !noData">
     <div>
-      <span>
+      <h3>
 	Assigned courses
-      </span>
+      </h3>
     </div>
     <figure class="highlight">
       <table st-table="rowCollection" class="table organisationCoursesTable">
