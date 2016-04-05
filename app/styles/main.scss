@@ -16,6 +16,10 @@ body {
   padding: 0;
 }
 
+input, select, option {
+  font-family:Consolas, Lucida Console, monospace;
+}
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,

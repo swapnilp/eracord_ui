@@ -187,6 +187,49 @@ angular.module('eracordUiApp.controller')
       }
     };
     //end of edit path
+
+    if($location.path() === "/students/" + $routeParams.student_id + "/pay_fee"){
+      $scope.student_id = $routeParams.student_id;
+      var student = Restangular.one("students", $routeParams.student_id);
+      $scope.vm = {};
+      $scope.vm.payment_type = 'cash'
+      
+      var getPayInfo = function() {
+	student.customGET("get_fee_info").then(function(data) {
+	  if(data.success) {
+	    $scope.student_name = data.name;
+	    $scope.mobile = data.mobile;
+	    $scope.p_mobile = data.p_mobile;
+	    $scope.classes = data.jkci_classes;
+	    $scope.batch = data.batch;
+	  } else {
+	    Flash.create('warning', data.message, 'alert-danger');
+	    $location.path("/students/"+$scope.student_id+"/show").replace();
+	  }
+	});
+      };
+
+      $scope.payFee = function() {
+	student.customPOST({student_fee: $scope.vm}, "paid_student_fee", {}).then(function(data) {
+	  if(data.success) {
+	    Flash.create('success', data.message, 'alert-success');
+	    $location.path("/students/"+$scope.student_id+"/show").replace();
+	  } else {
+	    if(data.valid_password) {
+	      Flash.create('warning', data.message, 'alert-danger');
+	      $location.path("/students/"+$scope.student_id+"/show").replace();
+	    }else{
+	      Flash.create('warning', data.message, 'alert-danger');
+	      $scope.vm.password="";
+	    }
+	  }
+	});
+      }
+      
+      getPayInfo();
+      
+    };
+    //end of pay fee
     
   }]);
 

@@ -1,0 +1,71 @@
+<div class="col-sm-12" style="margin:20px 0;">
+  <div class="col-sm-5">
+    <form name="form" ng-submit="payFee()" role="form">
+      <div class="form-group">
+	<label for="name">Name</label>
+	<br />
+	<span>{{student_name}} </span>
+      </div>
+      <div class="form-group">
+	<label for="mobile">Mobile</label>
+	<br />
+	<span>{{mobile}} </span>
+      </div>
+      <div class="form-group">
+	<label for="name">Parent Mobile</label>
+	<br />
+	<span>{{p_mobile}} </span>
+      </div>
+      <div class="form-group">
+	<label for="name">Batch</label>
+	<br />
+	<span>{{batch}} </span>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error': form.class_id.$dirty && form.class_id.$error.required }" ng-if="classes.length > 0">
+	<label for="class_id">Class <span class="textRed"> *</span></label>
+	<select class="form-control ng-touched" ng-model="vm.jkci_class_id" ng-options="klass.class_id as klass.class_name for klass in classes" ng-required="classes.length > 0"></select>
+	<span ng-show="form.class_id.$dirty && form.class_id.$error.required" class="help-block">Class must be present</span>
+      </div>
+      <div class="col-md-12 padding0">
+	<label for="name">Payment Type</label>
+	<br />
+	<label class="btn active btn-default" ng-repeat="paymentType in ['cash', 'cheque']">
+	  <input name="cssPre" id="css1" type="radio" ng-value="paymentType" ng-model="vm.payment_type" >
+	  {{paymentType}}
+	</label>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error': form.amount.$dirty && form.amount.$error.required }">
+	<label for="amount">Amount <span class="textRed"> *</span></label>
+	<input type="text" name="amount" id="amount" class="form-control" ng-model="vm.amount"  placeholder="Please enter amount" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0" required/>
+      </div>
+      <div ng-show="vm.payment_type === 'cheque'" ng-class="{ 'has-error': form.bank_name.$dirty && form.bank_name.$error.required }">
+	<div class="form-group">
+	  <label for="bank_name">Bank name <span class="textRed"> *</span></label>
+	  <input type="text" name="bank_name" id="bank_name" class="form-control" ng-model="vm.bank_name" placeholder="Please enter bank name" ng-required="vm.payment_type == 'cheque'"/>
+	</div>
+	<div class="form-group" ng-class="{ 'has-error': form.cheque_number.$dirty && form.cheque_number.$error.required }">
+	  <label for="cheque_number">Cheque number <span class="textRed"> *</span></label>
+	  <input type="text" name="cheque_number" id="cheque_number" class="form-control" ng-model="vm.cheque_number" placeholder="Please enter cheque number" ng-required="vm.payment_type == 'cheque'"/>
+	</div>
+	
+	<div class="form-group" ng-class="{ 'has-error': form.cheque_issue_date.$dirty && form.cheque_issue_date.$error.required }">
+	  <label for="cheque_issue_date">Cheque Issue Date <span class="textRed"> *</span></label>
+	  <input type="text" name="cheque_issue_date" id="cheque_issue_date" class="form-control" ng-model="vm.cheque_issue_date" placeholder="Please enter cheque issue date" ng-required="vm.payment_type == 'cheque'"/>
+	</div>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+	<label for="password">Password <span class="textRed">*</span></label>
+	<input type="password" name="password" id="password" class="form-control" ng-model="vm.password" required />
+	<span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+      </div>
+      <div class="form-group">
+	<label for="class_time">Get class rooms</label>
+	<p class="input-group">
+	  <button class="btn btn-primary" ng-disabled="form.$invalid || vm.dataLoading">Pay</button>
+	  &nbsp;&nbsp;
+	  <a class="btn btn-primary" ng-click="goBack();">Back</a>
+	</p>
+      </div>
+    </form>
+  </div>
+</div>

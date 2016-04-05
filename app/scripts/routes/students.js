@@ -29,6 +29,11 @@ app.config(function($routeProvider) {
       templateUrl: 'views/students/new.html',
       controller: 'StudentsCtrl',
       controllerAs: 'students'
+    })
+    .when('/students/:student_id/pay_fee', {
+      templateUrl: 'views/students/pay_fee.html',
+      controller: 'StudentsCtrl',
+      controllerAs: 'students'
     });
     
 });
