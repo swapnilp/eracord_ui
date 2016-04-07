@@ -1,0 +1,75 @@
+<div style="margin:20px 0;">
+  <div>
+    <div class="col-sm-12 textLeft">
+      <span class="col-sm-2"><h5>Name</h5> </span>
+      <span class="col-sm-6 paddingTop10">{{student_name}}</span>
+    </div>
+    <div class="col-sm-12 textLeft">
+      <span class="col-sm-2"><h5>Mobile</h5> </span>
+      <span class="col-sm-6 paddingTop10">{{mobile}}</span>
+    </div>
+    <div class="col-sm-12 textLeft">
+      <span class="col-sm-2"><h5>Parent Mobile</h5> </span>
+      <span class="col-sm-6 paddingTop10">{{p_mobile}}</span>
+    </div>
+    <div class="col-sm-12 textLeft">
+      <span class="col-sm-2"><h5>Batch</h5> </span>
+      <span class="col-sm-6 paddingTop10">{{batch}}</span>
+    </div>
+    <div class="col-sm-12 textLeft">
+      <button class="btn btn-default" ng-click="goBack();">Back</button>
+    </div>
+  </div>
+  <div class="alert alert-warning col-sm-12">
+    <span ng-if="totalStudents > 0">
+      Total Payments are - {{total_payments}}
+    </span>
+    <span ng-if="totalStudents === 0">
+      No data found
+    </span>
+  </div>
+  <div request-loading is-loading="requestLoading"></div>
+  <figure class="highlight col-sm-12" ng-show="!requestLoading && totalStudents > 0">
+    <table st-table="rowCollection" class="table organisationCoursesTable" >
+      <thead>
+	<tr>
+	  <th st-sort="lastName">Class</th>
+	  <th st-sort="lastName">Date</th>
+	  <th st-sort="balance">Amount</th>
+	  <th st-sort="balance">Payment Type</th>
+	  <th st-sort="balance">Book Number</th>
+	  <th st-sort="balance">Receipt Number</th>
+	</tr>
+      </thead>
+      <tbody>
+	<tr ng-repeat="row in payments"> 
+	  <td>{{row.jkci_class}}</td>
+	  <td>{{row.date}}</td>
+	  <td>{{row.amount}}</td>
+	  <td>{{row.payment_type}}
+	    <span uib-dropdown ng-if="row.payment_type !== 'cash'">
+	      <a  id="simple-dropdown" uib-dropdown-toggle >
+		<i class="fa fa-info-circle"></i>
+	      </a>
+	      <ul uib-dropdown-menu aria-labelledby="simple-dropdown" class="padding5">
+		<li>
+		  Bank Name - {{row.bank_name}}
+		</li>
+		<li>
+		  Cheque number - {{row.cheque_number}}
+		</li>
+		<li>
+		  Cheque issue date - {{row.cheque_issue_date}}
+		</li>
+	      </ul>
+	    </span>
+	  </td>
+	  <td>{{row.book_number}}</td>
+	  <td>{{row.receipt_number}}</td>
+	</tr>
+      </tbody>
+    </table>
+  </figure>
+</div>
+
+
