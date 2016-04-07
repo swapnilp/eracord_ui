@@ -103,6 +103,7 @@ angular.module('eracordUiApp.controller')
     
     if($location.path() === "/classes/"+$routeParams.class_id+"/daily_catlogs/"+$routeParams.dtp_id+"/edit") {
       $scope.classId = $routeParams.class_id;
+      $scope.isNew = false;
       
       $scope.vm = {};
       $scope.selectedPoints = [];
