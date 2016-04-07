@@ -1,0 +1,89 @@
+<div style="margin:20px 0;">
+  <div class="examFilterDiv col-sm-12 padding0" ng-if="showFilter"> 
+    <div class="col-sm-2 paddingLeft0">
+      <label for="standard_id">Batch</label>
+      <select class="form-control ng-touched" ng-model="filterAmount.batch" ng-options="std.id as std.name for std in batches">
+	<option value="" class="hide" >Select Batch</option>
+      </select>
+    </div>
+    <div class="col-sm-2 paddingLeft0">
+      <label for="standard_id">Standard</label>
+      <select class="form-control ng-touched" ng-model="filterAmount.standard" ng-options="std.id as std.name for std in standards">
+	<option value="">All Standards</option>
+      </select>
+    </div>
+    <div class="col-sm-2 paddingLeft0">
+      <label for="exam_type">Payment Type</label>
+      <select class="form-control ng-touched" ng-model="filterAmount.payment_type" ng-options="values for values in ['Cash', 'Cheque']">
+	<option value="">All</option>
+      </select>
+    </div>
+    <div class="col-sm-2 paddingLeft0">
+      <button class="btn btn-primary" style="margin-top:23px;" ng-click="pageChanged(1, false);">Filter</button>
+      <button class="btn btn-primary" style="margin-top:23px;" ng-click="resetFilter();" ng-show="showResetFilter">Reset</button>
+    </div>
+    <div class="col-sm-12 padding0" style="margin-top:20px;" ng-show="length > 0">
+      <div class="alert alert-warning">Total amount are - {{totalAmount}} </div>
+    </div>
+  </div>
+  <div request-loading is-loading="requestLoading"></div>
+  <figure class="highlight col-sm-12" ng-show="length > 0 && !requestLoading">
+    <table st-table="rowCollection" class="table classExamsTable col-sm-12" >
+      <thead>
+	<tr>
+	  <th st-sort="firstName">Name</th>
+	  <th st-sort="firstName">Class</th>
+	  <th st-sort="firstName">Amount</th>
+	  <th st-sort="firstName">Payment Type</th>
+	</tr>
+      </thead>
+      <tbody>
+	<tr dir-paginate="row in payments | itemsPerPage: 10" total-items="totalPayments" current-page="pagination.current">
+	  <td>{{row.name}}
+	    <span uib-dropdown ng-if="row.assign_to !== ''">
+	      <a  id="simple-dropdown" uib-dropdown-toggle >
+		<i class="fa fa-info-circle"></i>
+	      </a>
+	      <ul uib-dropdown-menu aria-labelledby="simple-dropdown" class="padding5">
+		<li>
+		  Parent Name - {{row.parent_name}}
+		</li>
+		<li>
+		  Parent Mobile - {{row.p_mobile}}
+		</li>
+	      </ul>
+	    </span>
+	  </td>
+	  <td>{{row.jkci_class}}</td>
+	  <td>{{row.amount}}</td>
+	  <td>
+	    {{row.payment_type}}
+	    <span uib-dropdown ng-if="row.payment_type !== 'cash'">
+	      <a  id="simple-dropdown" uib-dropdown-toggle >
+		<i class="fa fa-info-circle"></i>
+	      </a>
+	      <ul uib-dropdown-menu aria-labelledby="simple-dropdown" class="padding5">
+		<li>
+		  Bank Name - {{row.bank_name}}
+		</li>
+		<li>
+		  Cheque number - {{row.cheque_number}}
+		</li>
+		<li>
+		  Cheque issue date - {{row.cheque_issue_date}}
+		</li>
+	      </ul>
+	    </span>
+	  </td>
+	</tr>
+      </tbody>
+    </table>
+  </figure>
+  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)" class="col-sm-12" ng-show="length > 0"></dir-pagination-controls>
+  <div ng-show="length == 0" class="col-sm-12 padding0" style="margin-top:20px;">
+    <div class="alert alert-warning">
+      No data found
+    </div>
+  </div>
+</div>
+
