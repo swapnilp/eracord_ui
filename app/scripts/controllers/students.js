@@ -230,6 +230,33 @@ angular.module('eracordUiApp.controller')
       
     };
     //end of pay fee
+
+    if($location.path() === "/students/" + $routeParams.student_id + "/payment_info"){
+      $scope.student_id = $routeParams.student_id;
+      var student = Restangular.one("students", $routeParams.student_id);
+      $scope.vm = {};
+      $scope.vm.payment_type = 'cash'
+      
+      var getPayInfo = function() {
+	student.customGET("get_payments_info").then(function(data) {
+	  if(data.success) {
+	    $scope.student_name = data.name;
+	    $scope.mobile = data.mobile;
+	    $scope.p_mobile = data.p_mobile;
+	    $scope.batch = data.batch;
+	    $scope.payments = data.payments;
+	    $scope.totalStudents = $scope.payments.length;
+	  } else {
+	    Flash.create('warning', data.message, 'alert-danger');
+	    $location.path("/students/"+$scope.student_id+"/show").replace();
+	  }
+	});
+      };
+
+      getPayInfo();
+    };
+    //end payment info
+    
     
   }]);
 

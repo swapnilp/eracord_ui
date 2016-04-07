@@ -48,6 +48,9 @@
       <div class="left mRight10">
 	<a class="btn btn-primary" href="#/students/{{student.id}}/pay_fee">paid Fee</a>
       </div>
+      <div class="left mRight10">
+	<a class="btn btn-primary" href="#/students/{{student.id}}/payment_info">Payment Info</a>
+      </div>
       <div class="left mRight10"  is-role-visible='["toggle_student_sms"]' email="currentUser.email">
 	<toggle-switch class="mLeft10"
 		       ng-model="student.enable_sms"
