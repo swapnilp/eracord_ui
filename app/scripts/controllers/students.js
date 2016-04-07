@@ -246,6 +246,7 @@ angular.module('eracordUiApp.controller')
 	    $scope.batch = data.batch;
 	    $scope.payments = data.payments;
 	    $scope.totalStudents = $scope.payments.length;
+	    $scope.totalFee = data.total_fee;
 	  } else {
 	    Flash.create('warning', data.message, 'alert-danger');
 	    $location.path("/students/"+$scope.student_id+"/show").replace();
