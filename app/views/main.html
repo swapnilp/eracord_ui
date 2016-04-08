@@ -10,7 +10,7 @@
     </label>
   </div>
   <br /><br />
-  <div class="col-md-12 jumbotron">
+  <div class="col-md-12 jumbotron" ng-if="classAbsentyData">
     <p>
       Class absenty chart
     </p>
@@ -32,7 +32,7 @@
       </canvas> 
     </div>
   </div>
-  <div class="col-md-12 jumbotron">
+  <div class="col-md-12 jumbotron" ng-if="examsData">
     <p>
       Exams chart
     </p>

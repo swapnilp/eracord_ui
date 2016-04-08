@@ -27,6 +27,9 @@ angular.module('eracordUiApp.controller')
     $scope.off_class_series = $scope.exam_series = $scope.series = [];
     $scope.off_class_data = $scope.exam_data = $scope.data = [];
     $scope.off_class_sum_data = $scope.exam_sum_data = $scope.sum_data = [];
+    $scope.classAbsentyData = false;
+    $scope.examsData = false;
+    $scope.offClassData = false;
     
     var loadData = function(durationType){
       Restangular.all("organisations").customGET('absenty_graph_report', {duration_type: durationType}).then(function(data){
@@ -35,6 +38,7 @@ angular.module('eracordUiApp.controller')
 	  $scope.series = $scope.series = data.labels;
 	  $scope.data = data.data;
 	  $scope.sum_data = data.sum_data;
+	  $scope.classAbsentyData = data.is_display;
 	}
       });  
       Restangular.all("organisations").customGET('exams_graph_report', {duration_type: durationType}).then(function(data){
@@ -43,6 +47,7 @@ angular.module('eracordUiApp.controller')
 	  $scope.exam_series = $scope.series = data.labels;
 	  $scope.exam_data = data.data;
 	  $scope.exam_sum_data = data.sum_data;
+	  $scope.examsData = data.is_display;
 	}
       });
       
@@ -52,6 +57,7 @@ angular.module('eracordUiApp.controller')
 	  $scope.off_class_series = $scope.series = data.labels;
 	  $scope.off_class_data = data.data;
 	  $scope.off_class_sum_data = data.sum_data;
+	  $scope.offClassData = data.is_display;
 	}
       });
     };
