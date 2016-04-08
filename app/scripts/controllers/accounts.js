@@ -33,6 +33,7 @@ angular.module('eracordUiApp.controller')
 
       
       var loadPayments = function(pageNumber){
+	$scope.requestLoading = true;
 	payment_fee.customGET("", {filter: $scope.filterAmount, page: pageNumber}).then(function(data) {
 	  if(data.success) {
 	    $scope.payments = data.payments;
@@ -41,7 +42,9 @@ angular.module('eracordUiApp.controller')
 	    $scope.totalPayments = data.count;
 	  } else {
 	  }
+	  $scope.requestLoading = false;
 	});
+
       };
 
       var loadAmountFilters  = function(){
