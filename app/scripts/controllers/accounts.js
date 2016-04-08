@@ -55,6 +55,12 @@ angular.module('eracordUiApp.controller')
 	});
       };
 
+      $scope.resetFilter = function() {
+	$scope.filterAmount = {};
+	$scope.filterAmount.batch = _.findWhere($scope.batches, {is_active: true}).id;
+	loadPayments(1);
+      };
+
       $scope.pageChanged = function(newPage, checkFilter) {
 	loadPayments(newPage);
       };
