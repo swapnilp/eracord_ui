@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="alert alert-warning" style="margin-top:20px;" ng-if="m_classes.length === 0 && other_classes.length === 0">
+  <div class="alert alert-warning" style="margin-top:20px;" ng-if="m_classes.length === 0 && other_classes.length === 0 && !requestLoading">
     No data found
   </div>
   <div request-loading is-loading="requestLoading"></div>

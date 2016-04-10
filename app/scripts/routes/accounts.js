@@ -9,6 +9,11 @@ app.config(function($routeProvider) {
       templateUrl: 'views/accounts/index.html',
       controller: 'AccountsCtrl',
       controllerAs: 'accounts'
+    })
+    .when('/accounts/graphs', {
+      templateUrl: 'views/accounts/graphs.html',
+      controller: 'AccountsCtrl',
+      controllerAs: 'accounts'
     });
 });
 

@@ -4,8 +4,8 @@
     No data found
   </div>
   <div request-loading is-loading="requestLoading"></div>
-  <figure class="highlight col-sm-12">
-    <table st-table="rowCollection" class="table" ng-show="!requestLoading && clarks.length > 0">
+  <figure class="highlight col-sm-12" ng-show="!requestLoading && clarks.length > 0">
+    <table st-table="rowCollection" class="table">
       <thead>
 	<tr>
 	  <th st-sort="firstName">Email</th>
@@ -22,7 +22,6 @@
 			   ng-model="row.is_enable"
 			   knob-label="ENABLE" ng-click="toggleEnableUser(row)">
 	    </toggle-switch>
-	    
 	    <button class="btn btn-primary left mLeft10" ng-click="deleteClark(row)">Delete User</button>
 	  </td>
 	</tr>

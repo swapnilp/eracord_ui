@@ -28,7 +28,8 @@ angular.module('eracordUiApp.controller')
 	3: 'Wednesday',
 	4: 'Thusday',
 	5: 'Friday',
-	6: 'Saturday'
+	6: 'Saturday',
+	7: 'Sunday'
       };
       $scope.length = 0;
       $scope.vm = {};

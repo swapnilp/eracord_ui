@@ -5,8 +5,8 @@
   <div class="alert alert-warning" style="margin-top:20px;" ng-if="!requestLoading && cources.length ===  0 && isRoot">
     No courses added.<a href="#/remaining_organisation_courses"> Add courses</a>  for managing organisation.
   </div>
-  <figure class="highlight col-sm-12">
-    <table st-table="rowCollection" class="table organisationCoursesTable" ng-show="!requestLoading && cources.length > 0 ">
+  <figure class="highlight col-sm-12" ng-show="!requestLoading && cources.length > 0">
+    <table st-table="rowCollection" class="table organisationCoursesTable">
       <thead>
 	<tr>
 	  <th></th>

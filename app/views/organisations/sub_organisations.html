@@ -2,8 +2,8 @@
   <div class="alert alert-warning" style="margin-top:20px;" ng-if="sub_organisations.length === 0">
     No data found
   </div>
-  <figure class="highlight col-sm-12">
-    <table st-table="rowCollection" class="table" ng-if="sub_organisations.length > 0">
+  <figure class="highlight col-sm-12" ng-if="sub_organisations.length > 0">
+    <table st-table="rowCollection" class="table">
       <thead>
 	<tr>
 	  <th st-sort="Name">Name</th>

@@ -33,8 +33,8 @@
     </div>
   </div>
   <div request-loading is-loading="requestLoading"></div>
-  <figure class="highlight col-sm-12">
-    <table st-table="rowCollection" class="table classExamsTable col-sm-12" ng-show="length > 0 && !requestLoading">
+  <figure class="highlight col-sm-12" ng-show="length > 0 && !requestLoading">
+    <table st-table="rowCollection" class="table classExamsTable col-sm-12">
       <thead>
 	<tr>
 	  <th st-sort="firstName">Name</th>

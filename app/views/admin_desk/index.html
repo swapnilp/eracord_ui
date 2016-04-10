@@ -2,10 +2,10 @@
   <div>
     <h3>My Cources</h3>
   </div>
-  <div class="alert alert-warning" ng-if="noData">No Standards are added. <a href="#/manage_organisation"> click here</a> for adding </div>
+  <div class="alert alert-warning" ng-if="noData && !requestLoading">No Standards are added. <a href="#/manage_organisation"> click here</a> for adding </div>
   <div request-loading is-loading="requestLoading"></div>
-  <figure class="highlight">
-    <table st-table="rowCollection" class="table organisationCoursesTable" ng-show="!requestLoading && !noData && jkci_classes.length > 0">
+  <figure class="highlight" ng-show="!requestLoading && !noData && jkci_classes.length > 0">
+    <table st-table="rowCollection" class="table organisationCoursesTable">
       <thead>
 	<tr>
 	  <th st-sort="firstName">Name</th>
