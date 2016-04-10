@@ -1,5 +1,5 @@
-
-<div class="col-md-6 col-md-offset-0">
+<div request-loading is-loading="requestLoading"></div>
+<div class="col-md-6 col-md-offset-0" ng-show="!requestLoading">
   <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
   <form name="form" ng-submit="createExam()" role="form">
     <div class="form-group">

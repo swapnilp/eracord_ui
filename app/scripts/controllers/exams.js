@@ -76,19 +76,25 @@ angular.module('eracordUiApp.controller')
       jkci_classes = Restangular.all("jkci_classes");
       $scope.isOpen = false; //for calender 
       $scope.isGroup = $routeParams.isGroup || false;
+      $scope.requestLoading = true;
       
-      jkci_classes.customGET(""+$routeParams.class_id+"/get_exam_info").then(function(data){
-	if(data.success){
-	  $scope.class_name = data.data.class_exam_data.class_name;
-	  $scope.divisions = data.data.class_exam_data.sub_classes;
-	  $scope.subjects = data.data.class_exam_data.subjects;
-	  $scope.examTypes= [{name: "Subjective", ticked: true}, {name: "Objective"}];
-	}else{
-	  $location.path("/admin_desk");
-	}
-	
-      });
-
+      var loadExamInfo = function() {
+	$scope.requestLoading = true;
+	jkci_classes.customGET(""+$routeParams.class_id+"/get_exam_info").then(function(data){
+	  if(data.success){
+	    $scope.class_name = data.data.class_exam_data.class_name;
+	    $scope.divisions = data.data.class_exam_data.sub_classes;
+	    $scope.subjects = data.data.class_exam_data.subjects;
+	    $scope.examTypes= [{name: "Subjective", ticked: true}, {name: "Objective"}];
+	  }else{
+	    $location.path("/admin_desk");
+	  }
+	  $scope.requestLoading = false;
+	});
+      };
+      
+      loadExamInfo();
+      
       $scope.openCalendar = function(e) {
         e.preventDefault();
         e.stopPropagation();
