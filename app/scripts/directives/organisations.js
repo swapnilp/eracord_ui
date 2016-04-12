@@ -10,14 +10,17 @@ app.directive('organisationProfile', function(Restangular) {
     //scope: true,
     templateUrl: 'views/organisations/profile.html',
     controller: ['$scope', 'Restangular', 'Flash', '$location', function(scope, Restangular, Flash, $location){
-
+      scope.profileRequestLoading = false;
+      
       scope.loadProfile = function(){
+	scope.profileRequestLoading = true;
 	Restangular.all("").customGET("/organisation_profile").then(function(data){
 	  if(data.success) {
 	    scope.organisation = data.organisation;
 	  } else {
 	    $location.path('/admin_desk').replace();
 	  }
+	  scope.profileRequestLoading = false;
 	});
       };
 

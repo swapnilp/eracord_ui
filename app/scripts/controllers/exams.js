@@ -77,6 +77,8 @@ angular.module('eracordUiApp.controller')
       $scope.isOpen = false; //for calender 
       $scope.isGroup = $routeParams.isGroup || false;
       $scope.requestLoading = true;
+      $scope.vm = {};
+      $scope.dataLoading = false;
       
       var loadExamInfo = function() {
 	$scope.requestLoading = true;
@@ -101,15 +103,18 @@ angular.module('eracordUiApp.controller')
         $scope.isOpen = true;
       };
       
-      $scope.createExam = function(){
+      $scope.createExam = function() {
+	$scope.dataLoading = true;
 	if(!$scope.isGroup){
 	  if(_.size($scope.selectedSubject) === 0){
 	    Flash.create('warning', "Subject must be present", 'alert-danger');
+	    $scope.dataLoading = false;
 	    return true;
 	  }
 	  
 	  if(_.size($scope.selectedExamType) === 0){
 	    Flash.create('warning', "Subject Type must be present", 'alert-danger');
+	    $scope.dataLoading = false;
 	    return true;
 	  }
 	  
@@ -122,14 +127,15 @@ angular.module('eracordUiApp.controller')
 	$scope.vm.jkci_class_id = $routeParams.class_id;
 	$scope.vm.is_group = $scope.isGroup;
 	jkci_classes.customPOST({exam: $scope.vm}, "/"+$routeParams.class_id+"/exams", {}).then(function(data){
-	  
 	  if(data.success) {
 	    Flash.create('success', "Exam has been created", 'alert-success');
 	    $location.path("/classes/"+$routeParams.class_id+"/exams/"+data.id+"/show").replace();
 	  }else {
 	    Flash.create('warning', "Something went wrong", 'alert-warning');
 	  }
+	  $scope.dataLoading = false;
 	});
+	
       };
     }
 
@@ -140,18 +146,25 @@ angular.module('eracordUiApp.controller')
       $scope.inGroup = true;
       $scope.classId = $routeParams.class_id;
       $scope.parentExamId = $routeParams.exam_id;
+      $scope.requestLoading = true;
+      $scope.dataLoading = false;
 
+      var loadExamInfo = function() {
+	$scope.requestLoading = true;
+	jkci_classes.one("exams", $routeParams.exam_id).customGET("get_exam_info").then(function(data){
+	  if(data.success){
+	    $scope.class_name = data.data.group_exam_data.class_name;
+	    $scope.divisions = data.data.group_exam_data.sub_classes;
+	    $scope.subjects = data.data.group_exam_data.subjects;
+	    $scope.examTypes= [{name: "Subjective", ticked: true}, {name: "Objective"}];
+	  }else{
+	    $location.path("/admin_desk");
+	  }
+	  $scope.requestLoading = false;
+	});
+      };
       
-      jkci_classes.one("exams", $routeParams.exam_id).customGET("get_exam_info").then(function(data){
-	if(data.success){
-	  $scope.class_name = data.data.group_exam_data.class_name;
-	  $scope.divisions = data.data.group_exam_data.sub_classes;
-	  $scope.subjects = data.data.group_exam_data.subjects;
-	  $scope.examTypes= [{name: "Subjective", ticked: true}, {name: "Objective"}];
-	}else{
-	  $location.path("/admin_desk");
-	}
-      });
+      loadExamInfo();
 
       $scope.openCalendar = function(e) {
         e.preventDefault();
@@ -159,13 +172,16 @@ angular.module('eracordUiApp.controller')
         $scope.isOpen = true;
       };
       
-      $scope.createExam = function(){
+      $scope.createExam = function() {
+	
 	if(_.size($scope.selectedSubject) === 0){
 	  Flash.create('warning', "Subject must be present", 'alert-danger');
+	  $scope.dataLoading = false;
 	  return true;
 	}
 	if(_.size($scope.selectedExamType) === 0){
 	  Flash.create('warning', "Subject Type must be present", 'alert-danger');
+	  $scope.dataLoading = false;
 	  return true;
 	}
 	$scope.vm.subject_id = $scope.selectedSubject[0].id;
@@ -182,13 +198,14 @@ angular.module('eracordUiApp.controller')
 	  }else {
 	    Flash.create('warning', "Something went wrong", 'alert-warning');
 	  }
+	  $scope.dataLoading = false;
 	});
       };
     }
     // end of new grouped exams
 
     if($location.path() === "/classes/"+$routeParams.class_id+"/exams/"+ $routeParams.exam_id+"/show") {
-      $scope.requestLoading = false;
+      $scope.requestLoading1 = true;
       $scope.class_id = $routeParams.class_id;
       $scope.file = null;
       $scope.fileName = "";
@@ -197,11 +214,16 @@ angular.module('eracordUiApp.controller')
       $scope.uploadingFile = false;
       $scope.uploadingMessage = "Uploading";
       $scope.uploadMeaasgeClass = "alert-warning";
-      jkci_classes.customGET("/"+$routeParams.class_id+"/exams/"+$routeParams.exam_id).then(function(data){
-	$scope.exam = data.exam;
-      }, function(res){
-	$location.path('/admin_desk').replace();
-      });
+      
+      var loadExam = function() {
+	$scope.requestLoading = true;
+	jkci_classes.customGET("/"+$routeParams.class_id+"/exams/"+$routeParams.exam_id).then(function(data){
+	  $scope.exam = data.exam;
+	  $scope.requestLoading1 = false;
+	}, function(res){
+	  $location.path('/admin_desk').replace();
+	});
+      };
       
       $scope.selectUploadFile = function(newVal){
 	if(newVal){
@@ -210,7 +232,9 @@ angular.module('eracordUiApp.controller')
 	  $scope.fileName  = newVal.name;
 	}
       };
-
+      
+      loadExam();
+      
       $scope.submit = function() {
 	if ($scope.file) {
 	  $scope.uploadingFile = true;
@@ -335,6 +359,8 @@ angular.module('eracordUiApp.controller')
     if($location.path() === "/classes/"+$routeParams.class_id+"/exams/"+ $routeParams.exam_id+"/edit") {
       jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
       $scope.isOpen = false; //for calender 
+      $scope.requestLoading = true
+      $scope.dataLoading = false;;
       //$scope.isGroup = $routeParams.isGroup || false;
 
       $scope.openCalendar = function(e) {
@@ -343,21 +369,27 @@ angular.module('eracordUiApp.controller')
         $scope.isOpen = true;
       };
 
-      jkci_classes.one("exams", $routeParams.exam_id).customGET("edit").then(function(data){
-	if(data.success){
-	  $scope.vm = data.exam;
-	  //$scope.class_name = data.data.class_exam_data.class_name;
-	  $scope.divisions = data.sub_classes;
-	  $scope.isGroup = data.exam.is_group;
-	  $scope.subjects = data.subjects;
-	  
-	  $scope.examTypes= [{name: "Subjective", ticked: (data.exam.exam_type === "Subjective")}, {name: "Objective", ticked: (data.exam.exam_type !== "Subjective")}];
-	}else{
-	  $location.path("/admin_desk");
-	}
-      });
-
-      $scope.createExam = function(){
+      var loadExam = function() {
+	jkci_classes.one("exams", $routeParams.exam_id).customGET("edit").then(function(data){
+	  if(data.success){
+	    $scope.vm = data.exam;
+	    //$scope.class_name = data.data.class_exam_data.class_name;
+	    $scope.divisions = data.sub_classes;
+	    $scope.isGroup = data.exam.is_group;
+	    $scope.subjects = data.subjects;
+	    
+	    $scope.examTypes= [{name: "Subjective", ticked: (data.exam.exam_type === "Subjective")}, {name: "Objective", ticked: (data.exam.exam_type !== "Subjective")}];
+	  }else{
+	    $location.path("/admin_desk");
+	  }
+	  $scope.requestLoading = false;
+	});
+      };
+      
+      loadExam();
+      
+      $scope.createExam = function() {
+	$scope.dataLoading = true;
 	if(!$scope.isGroup){
 	  if(_.size($scope.selectedSubject) === 0){
 	    Flash.create('warning', "Subject must be present", 'alert-danger');
@@ -383,6 +415,7 @@ angular.module('eracordUiApp.controller')
 	  }else {
 	    Flash.create('warning', "Something went wrong", 'alert-warning');
 	  }
+	  $scope.dataLoading = false;
 	});
       };
     }
