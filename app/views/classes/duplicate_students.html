@@ -1,7 +1,7 @@
 <div style="margin:20px 0;">
   <div request-loading is-loading="requestLoading"></div>
-  <figure class="highlight col-sm-12">
-    <table st-table="rowCollection" class="table" ng-show="!requestLoading">
+  <figure class="highlight col-sm-12" ng-show="!requestLoading">
+    <table st-table="rowCollection" class="table">
       <thead>
 	<tr>
 	  <th st-sort="firstName" ng-if="!isRollNumber">Number</th>

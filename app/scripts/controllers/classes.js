@@ -198,6 +198,8 @@ angular.module('eracordUiApp.controller')
       $scope.class_id = $routeParams.class_id;
       jkci_classes = Restangular.one("jkci_classes", $scope.class_id);
       $scope.remainingDuplicateCount = 0;
+      $scope.dataLoading = false;
+      
       if($routeParams.verify) {
 	$scope.classStudentVerificationTab = true;
       }
@@ -215,10 +217,12 @@ angular.module('eracordUiApp.controller')
       };
 
       $scope.recheckDuplicateStudent = function() {
+	$scope.dataLoading = true;
 	jkci_classes.customPOST({},"recheck_duplicate_student", {}).then(function(data) {
 	  if(data.success) {
 	    $scope.theDirFn();
 	  }
+	  $scope.dataLoading = false;
 	});
       };
 
@@ -227,10 +231,12 @@ angular.module('eracordUiApp.controller')
       }
 
       $scope.verifyDuplicateStudent = function() {
+	$scope.dataLoading = true;
 	jkci_classes.customPOST({},"verify_students", {}).then(function(data) {
 	  if(data.success) {
 	    $location.path("/classes/"+$routeParams.class_id).replace();
 	  }
+	  $scope.dataLoading = false;
 	});
       };
     }
