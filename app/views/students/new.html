@@ -1,7 +1,8 @@
 <div class="col-md-6 col-md-offset-3">
-  <h2>{{text}} User</h2>
+  <h2>{{text}} Student</h2>
+  <div request-loading is-loading="requestLoading"></div>
   <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
-  <form name="form" ng-submit="registerStudent()" role="form">
+  <form name="form" ng-submit="registerStudent()" role="form" ng-show="!requestLoading">
     <div class="form-group">
       <label for="initl">Initl</label>
       <select class="form-control ng-touched" ng-model="initl" style="" ng-options="values for values in ['Mr', 'Miss']" >
@@ -81,8 +82,8 @@
       <input type="text" name="rank" id="rank" class="form-control" ng-model="vm.user.rank" />
     </div>
     <div class="form-actions" style="padding-bottom:20px;">
-      <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">{{text === 'New' ? 'Save': 'Update'}}</button>
-      <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+      <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">{{text === 'New' ? 'Save': 'Update'}}</button>
+      <span button-req-load is-loading="dataLoading"></span>
       <a ng-click="goBack();" class="btn btn-default">Cancel</a>
     </div>
   </form>

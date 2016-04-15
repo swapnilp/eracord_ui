@@ -59,6 +59,8 @@ angular.module('eracordUiApp.controller')
       $scope.classStudents = !_.isUndefined($routeParams.class_id);
       $scope.vm = {};
       $scope.text = "New";
+      $scope.requestLoading = true;
+      $scope.dataLoading = false;
 
       students.customGET("new", {class_id: $routeParams.class_id}).then(function(data){
 	$scope.standards = data.standards;
@@ -66,6 +68,7 @@ angular.module('eracordUiApp.controller')
 	if($scope.classStudents){
 	  $scope.oSubjects= data.subjects;
 	}
+	$scope.requestLoading = false;
       });
       
       $scope.selectOptionalSubject = function(){
@@ -75,6 +78,7 @@ angular.module('eracordUiApp.controller')
       }
       
       $scope.registerStudent = function(){
+	$scope.dataLoading = true;
 	$scope.vm.user.o_subjects = $scope.optionalSubjects;
 	$scope.vm.user.initl = $scope.initl;
 	$scope.vm.user.gender = $scope.gender;
@@ -93,6 +97,7 @@ angular.module('eracordUiApp.controller')
 	  }else {
 	    Flash.create('warning', data.message, 'alert-danger');
 	  }
+	  $scope.dataLoading = false;
 	})
       }  
     };
@@ -152,6 +157,8 @@ angular.module('eracordUiApp.controller')
       var student = Restangular.one("students", $routeParams.student_id);
       $scope.vm = {};
       $scope.text = "Edit";
+      $scope.requestLoading = true;
+      $scope.dataLoading = false;
 
       $scope.selectOptionalSubject = function(){
 	Restangular.one("standards", $scope.vm.user.standard_id).customGET("optional_subjects").then(function(data){
@@ -161,7 +168,6 @@ angular.module('eracordUiApp.controller')
       
       student.customGET('edit').then(function(data){
 	if(data.success) {
-	  
 	  $scope.batches = data.batches;
 	  $scope.standards = data.standards;
 	  $scope.oSubjects= data.subjects;
@@ -171,9 +177,11 @@ angular.module('eracordUiApp.controller')
 	  $scope.optionalSubjects = data.o_subjects;
 	  //$scope.optionalSubjects = data.student.
 	}
+	$scope.requestLoading = false;
       });
 
       $scope.registerStudent = function() {
+	$scope.dataLoading = true;
 	$scope.vm.o_subjects = $scope.optionalSubjects;
 	$scope.vm.user.initl = $scope.initl;
 	$scope.vm.user.gender = $scope.gender;
@@ -183,6 +191,7 @@ angular.module('eracordUiApp.controller')
 	    $location.path("/students/"+$scope.student_id+"/show").replace();
 	  }else {
 	  }
+	  $scope.dataLoading = true;
 	});
       }
     };
