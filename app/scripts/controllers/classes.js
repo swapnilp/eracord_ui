@@ -123,24 +123,30 @@ angular.module('eracordUiApp.controller')
     if($location.path() === "/classes/"+$routeParams.class_id+"/manage_student_rollnumber") {
       jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
       $scope.classId = $routeParams.class_id;
+      $scope.requestLoading = true;
+      $scope.dataLoading = false;
+      
       jkci_classes.customGET("manage_roll_number").then(function(data){
 	if(data.success) {
 	  $scope.jk_class = data.jkci_class;
 	  $scope.students = data.students;
 	  $scope.subjects = data.subjects;
 	}
+	$scope.requestLoading = false;
       });
       
       $scope.saveRollNumber = function() {
+	$scope.dataLoading = true;
 	var rollNumbers = _.map(_.compact(_.pluck($scope.students, 'roll_number')), function(roll){ return ""+ roll;});
 	var uniqRollNumbers = _.uniq(rollNumbers);
-
+	
 	if(rollNumbers.length === uniqRollNumbers.length){
 	  jkci_classes.customPOST({roll_number: $scope.students}, "save_roll_number", {}).then(function(data){
 	    if(data.success) {
 	      $location.path("/classes/"+$routeParams.class_id+"/manage_class").replace();
 	    }else {
 	    }
+	    $scope.dataLoading = false;
 	  });
 	}else {
 	}
