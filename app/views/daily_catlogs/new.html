@@ -1,5 +1,5 @@
-
-<div class="col-md-6 col-md-offset-0">
+<div request-loading is-loading="requestLoading"></div>
+<div class="col-md-6 col-md-offset-0" ng-show="!requestLoading">
   <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
   <form name="form" ng-submit="registorDailyTeaches()" role="form">
     <div class="form-group">
@@ -45,15 +45,19 @@
     </div>
     
     <div class="form-group" ng-class="{ 'has-error': form.chapter_id.$dirty && form.chapter_id.$error.required }">
-      <label for="chapter_id">Chapter <span class="textRed"> *</span></label>
+      <label for="chapter_id">Chapter <span class="textRed"> *</span>
+	<span button-req-load is-loading="chapterLoading"></span>
+      </label>
       <select class="form-control ng-touched" ng-model="vm.daily_teachs.chapter_id" ng-change="getChaptersPoints()" ng-options="chapter.id as chapter.name for chapter in chapters"  required>
-	<option value="" class="hide">Select Chapter</option>
+	<option value="" class="hide">First Select Subject</option>
       </select>
       <span ng-show="form.chapter_id.$dirty && form.chapter_id.$error.required" class="help-block">Chapter is required</span>
     </div>
     
     <div class="form-group" ng-class="{ 'has-error': form.chapter_id.$dirty && form.chapter_id.$error.required }">
-      <label for="chapters_point_id">Points</label>
+      <label for="chapters_point_id">Points
+	<span button-req-load is-loading="chapterPointsLoading"></span>
+      </label>
       <label ng-repeat="point in points">
 	<input type="checkbox" checklist-model="selectedPoints" checklist-value="point.id"> {{point.name}} <br />
       </label>
@@ -62,8 +66,8 @@
     
     
     <div class="form-actions">
-      <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">{{isNew ? 'Fill catlog' : 'Update catlog'}}</button>
-      <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+      <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">{{isNew ? 'Fill catlog' : 'Update catlog'}}</button>
+      <span button-req-load is-loading="dataLoading"></span>
       <a class="btn btn-default" ng-click="goBack();">Back</a>
     </div>
   </form>

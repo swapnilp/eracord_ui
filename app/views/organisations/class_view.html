@@ -1,0 +1,15 @@
+<div class="wrapper">
+  <div class="rightMenu">
+    <a href="{{hostUrl}}/sub_organisation/{{jkClass.organisation_id}}/class/{{jkClass.id}}/get_report.pdf" target="_blank">
+      <i class="fa fa-line-chart"></i>
+    </a>
+  </div>
+  {{jkClass.name}}
+  <br />
+  Total Students {{jkClass.students_count}}
+  <br/>
+  <a class="btn btn-primary" href="#/classes/{{jkClass.id}}">Show</a>
+  <button class="btn btn-warning" ng-disabled="loadRequest" ng-click="activeClass(jkClass.id);" ng-if="!jkClass.is_current_active">Make Active</button>
+  <button class="btn btn-danger" ng-disabled="loadRequest" ng-click="deactiveClass(jkClass.id);" ng-if="jkClass.is_current_active">Make Deactive</button>
+  <span button-req-load is-loading="loadRequest"></span>
+</div>

@@ -25,6 +25,11 @@ angular.module('eracordUiApp.controller')
       $scope.selectedPoints = [];
       $scope.vm = {};
       $scope.vm.daily_teachs = {};
+      $scope.requestLoading = true;
+      $scope.chapterLoading = false;
+      $scope.chapterPointsLoading = false;
+      $scope.dataLoading = false;
+      
       var date = new Date();
       $scope.maxDate = ""+ date.getFullYear()+"/"+(date.getMonth()+1)+"/"+ (date.getDate()+1);
       
@@ -35,20 +40,28 @@ angular.module('eracordUiApp.controller')
       };
       
       $scope.getChapters = function(){
+	$scope.chapterLoading = true;
 	var subject_id = $scope.vm.daily_teachs.subject_id;
 	jkci_classes.customGET("get_chapters", {subject_id: subject_id}).then(function(data){
 	  if(data.success) {
 	    $scope.chapters = data.chapters;
 	  }else {
 	  }
+	  $scope.chapterLoading = false;
 	});
       };
       
-      jkci_classes.customGET('get_dtp_info').then(function(data) {
-	$scope.class_name = data.data.class_exam_data.class_name;
-	$scope.divisions = data.data.class_exam_data.sub_classes;
-	$scope.subjects = data.data.class_exam_data.subjects;
-      });
+      var loadInfo = function() {
+	$scope.requestLoading = true;
+	jkci_classes.customGET('get_dtp_info').then(function(data) {
+	  $scope.class_name = data.data.class_exam_data.class_name;
+	  $scope.divisions = data.data.class_exam_data.sub_classes;
+	  $scope.subjects = data.data.class_exam_data.subjects;
+	  $scope.requestLoading = false;
+	});
+      };
+      
+      loadInfo();
       
       if($routeParams.subject_id) {
 	$scope.vm.daily_teachs.subject_id = parseInt($routeParams.subject_id);
@@ -64,6 +77,7 @@ angular.module('eracordUiApp.controller')
       }
 
       $scope.getChaptersPoints = function(){
+	$scope.chapterPointsLoading = true;
 	var chapter_id = $scope.vm.daily_teachs.chapter_id;
 	Restangular.one("chapters", chapter_id).customGET('get_points').then(function(data){
 	  if(data.success) {
@@ -71,10 +85,12 @@ angular.module('eracordUiApp.controller')
 	    $scope.selectedPoints = [];
 	  }else {
 	  }
+	  $scope.chapterPointsLoading = false;
 	});
       };
       
       $scope.registorDailyTeaches = function(){
+	$scope.dataLoading = false;
 	if(!$scope.form.$invalid) {
 	  if($scope.selectedDivisions){
 	    $scope.vm.daily_teachs.sub_classes = _.pluck($scope.selectedDivisions, "id").join(',');

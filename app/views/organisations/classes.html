@@ -5,19 +5,7 @@
   <div request-loading is-loading="requestLoading"></div>
   <div class="col-sm-12 textLeft" ng-show="!requestLoading">
     <div class="col-sm-4 organisationClass" ng-repeat="jk_class in m_classes" ng-class="{active: jk_class.is_current_active}">
-      <div class="wrapper">
-	<div class="rightMenu">
-	  <a href="{{hostUrl}}/sub_organisation/{{jk_class.organisation_id}}/class/{{jk_class.id}}/get_report.pdf" target="_blank">
-	    <i class="fa fa-line-chart"></i>
-	  </a>
-	</div>
-	{{jk_class.name}}
-	<br />
-	Total Students {{jk_class.students_count}}
-	<br/>
-	<a class="btn btn-primary" href="#/classes/{{jk_class.id}}">Show</a>
-	<button class="btn btn-warning" ng-click="makeActiveClass(jk_class.id)" ng-if="!jk_class.is_current_active">Make Active</button>
-	<button class="btn btn-danger" ng-click="makeDeactiveClass(jk_class.id)" ng-if="jk_class.is_current_active">Make Deactive</button>
+      <div class-box make-deactive-class="makeDeactiveClass(classId)" make-active-class="makeActiveClass(classId)" jk-class="jk_class" host-url="{{hostUrl}}">
       </div>
     </div>
     <h3 class="col-sm-12" ng-if="other_classes.length > 0">Assigned To others</h3>

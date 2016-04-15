@@ -493,6 +493,7 @@ app.directive('classDuplicateStudents', function(Restangular) {
       scope.recheckStudents({theDirFn: getResultsPage});
       
       scope.acceptStudent = function(row) {
+	row.dataLoading = true;
 	row.is_duplicate_accepted = true;
 	jkci_classes.customPOST({student_id: row.student_id},"accept_duplicate_student", {}).then(function(data){
 	  if(!data.success) {
@@ -501,6 +502,7 @@ app.directive('classDuplicateStudents', function(Restangular) {
 	    var remaining_students = _.where(scope.students, {is_duplicate: true, is_duplicate_accepted: false}).length;
 	    scope.changeDuplicateRemaining({remainingValue: remaining_students});
 	  }
+	  row.dataLoading = false;
 	});
       };
       
@@ -515,7 +517,6 @@ app.directive('classDuplicateStudents', function(Restangular) {
   };
 });
 // end of class student verifications
-
 
 app.directive('classCatlogs', function(Restangular) {
   return {

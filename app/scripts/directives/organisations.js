@@ -305,3 +305,32 @@ app.directive('organisationStandards', function(Restangular) {
   };
 });
 // end of organisation Standards
+
+app.directive('classBox', function(Restangular) {
+  return {
+    restrict: 'AE',
+    transclude: true,
+    scope: {
+      makeDeactiveClass: '&',
+      makeActiveClass: '&',
+      jkClass: '=',
+      hostUrl: '@'
+    },
+    templateUrl: 'views/organisations/class_view.html',
+    controller: ['$scope', function(scope){
+      scope.loadRequest = false;
+      
+      scope.activeClass = function(classId){
+	scope.loadRequest = true;
+	scope.makeActiveClass({classId: classId})
+      };
+
+      scope.deactiveClass = function(classId){
+	scope.loadRequest = true;
+	scope.makeDeactiveClass({classId: classId})
+      };
+      
+    }]
+  }
+});
+// end of organisation class_view
