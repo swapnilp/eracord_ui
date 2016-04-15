@@ -10,7 +10,7 @@
 	<button class="btn btn-primary" ng-click="recheckDuplicateStudent();" ng-disabled="dataLoading">
 	  <i class="fa fa-refresh fa-spin fa-1x"></i>  Reset
 	</button>
-	<button class="btn btn-primary" ng-disabled="(remainingDuplicateCount > 0)" ng-click="verifyDuplicateStudent();">
+	<button class="btn btn-primary" ng-disabled="(remainingDuplicateCount > 0) || dataLoading" ng-click="verifyDuplicateStudent();">
 	  Verify Students
 	</button>
 	<span button-req-load is-loading="dataLoading"></span>

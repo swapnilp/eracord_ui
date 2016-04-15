@@ -1,9 +1,12 @@
-<div class="remainingStudentsList col-md-6">
+<h2>Assign Student to class</h2>
+<div request-loading is-loading="requestLoading"></div>
+<div class="remainingStudentsList col-md-6" ng-show="!requestLoading">
   <label ng-repeat="student in remainingStudents">
     <input type="checkbox" checklist-model="studentList" checklist-value="student.id"> {{student.name}} - {{student.p_mobile}}
   </label>
 </div>
-<div style="margin:20px 0;" class="col-md-12">
-  <button class="btn btn-primary" ng-click="saveStudentList()" ng-disabled="studentList == 0">Save</button>
+<div style="margin:20px 0;" class="col-md-12" ng-show="!requestLoading">
+  <button class="btn btn-primary" ng-click="saveStudentList()" ng-disabled="((studentList == 0) || dataLoading)">Save</button>
+  <span button-req-load is-loading="dataLoading"></span>
   <button ng-click="goBack();" class="btn btn-default">Back</button>
 </div>

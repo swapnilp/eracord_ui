@@ -75,6 +75,8 @@ angular.module('eracordUiApp.controller')
     // end of class show if path
 
     if($location.path() === "/classes/"+$routeParams.class_id+"/assign_students") {
+      $scope.requestLoading = true;
+      $scope.dataLoading = false;
       jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
       $scope.studentList = [];
       $scope.class_id = $routeParams.class_id;
@@ -85,15 +87,18 @@ angular.module('eracordUiApp.controller')
 	}else {
 	  $location.path("/classes/"+$routeParams.class_id);
 	}
+	$scope.requestLoading = false;
       });
 
       $scope.saveStudentList = function(){
+	$scope.dataLoading = true;
 	jkci_classes.customPOST({students_ids: $scope.studentList}, "manage_students").then(function(data){
 	  if(data.success) {
 	    $location.path("/classes/"+$routeParams.class_id+"/manage_class").replace();
 	  } else {
 	    Flash.create('warning', "Please try again", 'alert-danger');
 	  }
+	  $scope.dataLoading = false;
 	});
       };
     }
@@ -102,20 +107,25 @@ angular.module('eracordUiApp.controller')
     if($location.path() === "/classes/"+$routeParams.class_id+"/manage_student_subjects") {
       jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
       $scope.classId = $routeParams.class_id;
+      $scope.requestLoading = true;
+      $scope.dataLoading = false;
       jkci_classes.customGET("manage_student_subject").then(function(data){
 	if(data.success) {
 	  $scope.jk_class = data.jkci_class;
 	  $scope.students = data.students;
 	  $scope.subjects = data.subjects;
 	}
+	$scope.requestLoading = false;
       });
 
       $scope.saveStudentSubjects = function(){
+	$scope.dataLoading = true;
 	jkci_classes.customPOST({students: $scope.students}, "save_student_subjects").then(function(data){
 	  if(data.success) {
-	    $location.path("/classes/"+ $scope.classId).replace();
+	    $location.path("/classes/"+ $scope.classId+"/manage_class").replace();
 	  } else {
 	  }
+	  $scope.dataLoading = false;
 	});
       };
     }

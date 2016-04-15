@@ -1,10 +1,11 @@
 <div class="container" style="margin: 20px 0;">
   <div class="col-sm-12 textLeft">
     <h2>
-      Manage {{jk_class.name}}'s students optional subjects <br>
-      <small><span ng-repeat="subject in subjects"> {{subject.name}} </span> optional subjects for {{jk_class.name}} class</small>
+      Manage students optional subjects <br>
+      <small ng-show="!requestLoading"><span ng-repeat="subject in subjects"> {{subject.name}} </span> optional subjects for {{jk_class.name}} class</small>
     </h2>
-    <table class="table table-hover studentsTable highlight table-striped">
+    <div request-loading is-loading="requestLoading"></div>
+    <table class="table table-hover studentsTable highlight table-striped" ng-show="!requestLoading">
       <thead>
 	<tr>
 	  <th>Roll Number</th>
@@ -28,7 +29,10 @@
 	</tr>
       </tbody>
     </table>
-    <button class="btn btn-primary" ng-click="saveStudentSubjects();">Save</button>
-    <button class="btn btn-default" ng-click="goBack();">Back</button>
+    <div ng-show="!requestLoading">
+      <button class="btn btn-primary" ng-click="saveStudentSubjects();" ng-disabled="dataLoading">Save</button>
+      <span button-req-load is-loading="dataLoading"></span>
+      <button class="btn btn-default" ng-click="goBack();">Back</button>
+    </div>
   </div>
 </div>
