@@ -494,11 +494,11 @@ app.directive('classDuplicateStudents', function(Restangular) {
       
       scope.acceptStudent = function(row) {
 	row.dataLoading = true;
-	row.is_duplicate_accepted = true;
 	jkci_classes.customPOST({student_id: row.student_id},"accept_duplicate_student", {}).then(function(data){
 	  if(!data.success) {
 	    row.is_duplicate_accepted = false;
 	  } else {
+	    row.is_duplicate_accepted = true;
 	    var remaining_students = _.where(scope.students, {is_duplicate: true, is_duplicate_accepted: false}).length;
 	    scope.changeDuplicateRemaining({remainingValue: remaining_students});
 	  }
