@@ -138,6 +138,7 @@ app.directive('organisationSubOrganisations', function(Restangular, $location, F
     templateUrl: 'views/organisations/sub_organisations.html',
     controller: ['$scope', 'Restangular', '$window', function(scope, Restangular, $window){
       var base_organisation = Restangular.all("organisations");
+      
       scope.loadSubOrganisation = function(){
 	base_organisation.customGET('get_sub_organisations').then(function(data){
 	  scope.sub_organisations = data.organisations;
@@ -145,14 +146,18 @@ app.directive('organisationSubOrganisations', function(Restangular, $location, F
       };
       scope.loadSubOrganisation();
       scope.pullBackSubOrganisation = function(sub_organisation) {
-	base_organisation.one('sub_organisations', sub_organisation.id).remove().then(function(data){
-	  if(data.success) {
-	    scope.loadCources();
-	    scope.loadSubOrganisation();
-	  }else {
-	    Flash.create('warning', "Some thing went wrong", 'alert-danger');
-	  }
-	})
+	if($window.confirm('Are you sure?')){
+	  sub_organisation.dataLoading = true;
+	  base_organisation.one('sub_organisations', sub_organisation.id).remove().then(function(data){
+	    if(data.success) {
+	      scope.loadCources();
+	      scope.loadSubOrganisation();
+	    }else {
+	      Flash.create('warning', "Some thing went wrong", 'alert-danger');
+	    }
+	    sub_organisation.dataLoading = false;
+	  });
+	}
       }
     }]
   };

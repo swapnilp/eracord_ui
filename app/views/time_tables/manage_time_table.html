@@ -4,19 +4,21 @@
       <h2>TimeTable</h2>
     </div>
   </div>
-  <div class="col-sm-12 textLeft" style="margin:10px 0;">
+  <div request-loading is-loading="requestLoading"></div>
+  <div class="col-sm-12 textLeft" style="margin:10px 0;" ng-show="!requestLoading">
     <button class="btn btn-primary" ng-click="createTimeTableSlot();"> Create Slot</button>
   </div>
   
   <div class="col-sm-12 textLeft alert alert-success" ng-if="selectedSlot">
     you selected {{selectedSlot.name}} - {{selectedSlot.start_time}} to {{selectedSlot.end_time}}
     <button class="btn btn-link" ng-click="editTimeTableSlot(selectedSlot);">Edit</button>
-    <button ng-click="deleteSlot(selectedSlot);" class="btn btn-link">Delete</button>
+    <button ng-click="deleteSlot(selectedSlot);" class="btn btn-link" ng-disabled="deleteLoading">Delete</button>
+    <span button-req-load is-loading="deleteLoading"></span>
     <button ng-click="nullSelect();" class="btn btn-link">Cancel</button>
   </div>
   
   
-  <div class="col-sm-6 textLeft alert alert-success" ng-show="showSlotForm">
+  <div class="col-sm-6 textLeft alert alert-success" ng-show="showSlotForm && !requestLoading">
     <div class="col-md-12 col-md-offset-0">
       <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
       <form name="form" ng-submit="registorTimeTableSlot()" role="form">
@@ -70,15 +72,15 @@
 	  <input type="text" name="class_room" id="class_room" class="form-control" ng-model="vm.class_room" />
 	</div>
 	<div class="form-actions">
-	  <button type="submit" ng-disabled="(form.$invalid || vm.dataLoading) || (end_time < start_time) " class="btn btn-primary">Save</button>
-	  <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+	  <button type="submit" ng-disabled="(form.$invalid || dataLoading) || (end_time < start_time) " class="btn btn-primary">Save</button>
+	  <span button-req-load is-loading="dataLoading"></span>
 	  <a class="btn btn-default" ng-click="cancelTimeTableSlotManage();">Back</a>
 	</div>
       </form>
     </div>
     
   </div>
-  <div class="col-sm-12 textLeft">
+  <div class="col-sm-12 textLeft" ng-show="!requestLoading">
     <div class="timeTableSubjects">
       <span ng-repeat="subject in subjects" ng-style='{"background-color": subject.color, "color": subject.text_color }'>
 	{{subject.name}}

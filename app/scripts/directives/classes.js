@@ -314,7 +314,9 @@ app.directive('classTimeTable', function(Restangular) {
       
       scope.timeTableLoaded = false;
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
-
+      scope.requestLoading = true;
+      scope.dataLoading = false;
+      scope.deleteLoading = false;
 
       scope.timeSlots = _.range(1,24);
       scope.selectedSlot = null;
@@ -346,6 +348,7 @@ app.directive('classTimeTable', function(Restangular) {
       };
       
       scope.deleteSlot = function(slot) {
+	scope.deleteLoading = true;
 	var time_table_rec = Restangular.one("time_tables", scope.time_table.id);
 	time_table_rec.one("time_table_classes", slot.id).remove().then(function(data){
 	  if(data.success) {
@@ -354,6 +357,7 @@ app.directive('classTimeTable', function(Restangular) {
 	    calculateTimeSlotes();
 	  } else {
 	  }
+	  scope.deleteLoading = false;
 	});
       };
 
@@ -394,6 +398,7 @@ app.directive('classTimeTable', function(Restangular) {
       };
 
       scope.registorTimeTableSlot = function() {
+	scope.dataLoading = true;
 	scope.vm.time_table_id = scope.time_table.id;
 	scope.vm.start_time = filter('date')(scope.start_time, "HH:mm").replace(":", ".");
 	scope.vm.end_time = filter('date')(scope.end_time, "HH:mm").replace(":", ".");
@@ -412,12 +417,14 @@ app.directive('classTimeTable', function(Restangular) {
 	      calculateTimeSlotes();
 	    } else {
 	    }
+	    scope.dataLoading = false;
 	  });
 	} else {
 	  time_tables.customPOST({time_table_class: scope.vm}, "time_table_classes", {}).then(function(data) {
 	    scope.events.push(data.slot);
 	    scope.cancelTimeTableSlotManage();
 	    calculateTimeSlotes();
+	    scope.dataLoading = false;
 	  });
 	}
       };
@@ -442,6 +449,7 @@ app.directive('classTimeTable', function(Restangular) {
 	    calculateTimeSlotes();
 	  } else {
 	  }
+	  scope.requestLoading = false;
 	});
       };
       

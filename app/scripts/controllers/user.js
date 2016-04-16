@@ -18,6 +18,7 @@ angular.module('eracordUiApp.controller')
       $scope.multipleOrganisations = false;
       $scope.vm = {};
       $scope.vmorg = {};
+      $scope.dataLoading = false;
       
       if(Auth.isAuthenticated()){
 
@@ -32,6 +33,7 @@ angular.module('eracordUiApp.controller')
       
       
       $scope.login = function() {
+	$scope.dataLoading = true;
 	if($scope.multipleOrganisations) {
 	  var credentials = {
 	    organisation_id: $scope.vmorg.organisation,
@@ -64,10 +66,12 @@ angular.module('eracordUiApp.controller')
 	    $scope.organisations = user.organisations;
 	    $scope.vmorg.username = user.email;
 	  }
+	  $scope.dataLoading = false;
 	}, function(error) {
 	  $cookieStore.remove('currentUser');
           Flash.create('success', 'Please Enter valid credentials', 'alert-danger');
 	  $scope.vm.password = "";
+	  $scope.dataLoading = false;
 	});
 	
 	
@@ -94,8 +98,10 @@ angular.module('eracordUiApp.controller')
     if($location.path() === '/user/change_password') {
       
       $scope.vm = {};
-
+      $scope.dataLoading = false;
+      
       $scope.updatePassword = function() {
+	$scope.dataLoading = true;
 	Restangular.all("").customPUT({user: $scope.vm}, "users").then(function(data){
 	  if(data.success){
 	    Flash.create('success', "Password has been changed", 'alert-success');
@@ -103,6 +109,7 @@ angular.module('eracordUiApp.controller')
 	  }else{
 	    Flash.create('warning', data.message, 'alert-danger');
 	    $scope.vm = {};
+	    $scope.dataLoading = false;
 	  }
 	});
       }

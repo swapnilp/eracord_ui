@@ -17,6 +17,7 @@ app.directive('classDivisions', function(Restangular) {
     controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', function(scope, Restangular, Flash, $location, $window){
       var classDivisionLoaded = false;
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
+      scope.requestLoading = true;
       
       var loadDivisions = function() {
 	jkci_classes.customGET("sub_classes").then(function(data) {
@@ -24,6 +25,7 @@ app.directive('classDivisions', function(Restangular) {
 	    scope.divisions = data.sub_classes;
 	  }else {
 	  }
+	  scope.requestLoading = false;
 	});
       }
       

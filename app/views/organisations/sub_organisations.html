@@ -22,7 +22,8 @@
 	    <span ng-bind-html="row.standards"></span>
 	  </td>
 	  <td>
-	    <a class="btn btn-link" ng-click="pullBackSubOrganisation(row);">Pull Back</a>
+	    <a class="btn btn-link" ng-click="pullBackSubOrganisation(row);" ng-show="!row.dataLoading">Pull Back</a>
+	    <span button-req-load is-loading="row.dataLoading"></span>
 	  </td>
 	</tr>
       </tbody>

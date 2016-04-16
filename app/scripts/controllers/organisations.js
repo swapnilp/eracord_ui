@@ -103,15 +103,20 @@ angular.module('eracordUiApp.controller')
 
     if($location.path() === "/organisation/standards/" + $routeParams.standard_ids + "/launch_sub_organisation"){
       base_organisation = Restangular.all("organisations");
+      $scope.requestLoading = true;
+      $scope.dataLoading = false;
+      
       base_organisation.customGET('get_standards', {standards: $routeParams.standard_ids}).then(function(data){
 	$scope.standards = data.organisations;
 	if($scope.standards.length == 0){
 	  $location.path('/manage_organisation').replace();
 	}
 	$scope.name = _.map($scope.standards, function(obj){ return obj.name + '-' + obj.stream }).join(', ');
+	$scope.requestLoading = false;
       });
 
       $scope.registerOrganisation = function(){
+	$scope.dataLoading = true;
 	var std_ids = _.pluck($scope.standards, 'id').join(',');
 	base_organisation.customPOST({organisation: $scope.vm.org, standard_ids: std_ids}, "sub_organisation/launch_organisation", {}).then(function(data){
 	  if(data.success) {
@@ -119,6 +124,7 @@ angular.module('eracordUiApp.controller')
 	  } else {
 	    Flash.create('warning', data.message, 'alert-danger');
 	  }
+	  $scope.dataLoading = false;
 	});
       };
     }
