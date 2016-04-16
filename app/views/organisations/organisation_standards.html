@@ -33,7 +33,10 @@
 		  </li>
 		</ul>
 	      </span>
-	      <i class="fa fa-times" ng-if="org.organisation_id !== organisation_id && !org.is_parent_organisation" ng-click="removeOrganisaitonStandard(standard, org.organisation_id);"></i>
+	      <span ng-if="org.organisation_id !== organisation_id && !org.is_parent_organisation">
+		<i class="fa fa-times"  ng-click="removeOrganisaitonStandard(standard, org);" ng-show="!org.deleteLoading"></i>
+		<span button-req-load is-loading="org.deleteLoading"></span>
+	      </span>
 	    </span>
 	  </td>
 	  <td>

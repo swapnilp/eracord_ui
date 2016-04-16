@@ -292,12 +292,14 @@ app.directive('organisationStandards', function(Restangular) {
       	});
       };
 
-      scope.removeOrganisaitonStandard = function(standard, org_id) {
+      scope.removeOrganisaitonStandard = function(standard, org) {
 	if($window.confirm('Are you sure?')){
-	  Restangular.all("/organisations").customPOST({standard_id: standard.id, organisation_id: org_id}, 'remove_standard_from_organisation', {}).then(function(data){
+	  org.deleteLoading = true;
+	  Restangular.all("/organisations").customPOST({standard_id: standard.id, organisation_id: org.organisation_id}, 'remove_standard_from_organisation', {}).then(function(data){
 	    if(data.success) { 
-	      standard.organisaitons = _.reject(standard.organisaitons, function(obj){return obj.organisation_id == org_id});
+	      standard.organisaitons = _.reject(standard.organisaitons, function(obj){return obj.organisation_id == org.organisation_id});
 	    }
+	    org.deleteLoading = false;
 	  })
 	}
       }
