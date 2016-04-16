@@ -115,12 +115,14 @@ app.directive('organisationClarks', function(Restangular, $location, Flash) {
 
       scope.deleteClark = function(user) {
 	if($window.confirm('Are you sure?')){
+	  user.dataLoading = true;
 	  base_organisation.one('clarks', user.id).remove().then(function(data){
 	    if(data.success){
 	      scope.clarks = _.reject(scope.clarks, function(obj){return obj.id == user.id});
 	    }else {
 	      Flash.create('warning', "Some thing went wrong", 'alert-danger');
 	    }
+	    user.dataLoading = false;
 	  });
 	}
       };

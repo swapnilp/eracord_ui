@@ -38,9 +38,12 @@ angular.module('eracordUiApp.controller')
 
     if($location.path() === "/organisations/users/"+$routeParams.user_id+"/manage_roles") {
       base_organisation = Restangular.all("organisations");
+      $scope.requestLoading = true;
+      
       base_organisation.customGET("users/"+$routeParams.user_id+"/get_roles").then(function(data){
 	$scope.roles = data.data;
 	$scope.user_id = $routeParams.user_id;
+	$scope.requestLoading = false;
       });
 
       $scope.saveRoles = function(user_id){
@@ -58,21 +61,26 @@ angular.module('eracordUiApp.controller')
 
     if($location.path() === "/organisation/users/" + $routeParams.user_id + "/change_password") {
       base_organisation = Restangular.all("organisations");
+      $scope.requestLoading = true;
+      $scope.dataLoading = false;
       base_organisation.customGET("/users/"+ $routeParams.user_id + "/get_email").then(function(data){
 	if(data.success){
 	  $scope.email = data.email;
 	}else{
 	  $location.path('/manage_organisation');
 	}
+	$scope.requestLoading = false;
       });
 
       $scope.updateClarkPassword = function(){
+	$scope.dataLoading = true;
 	base_organisation.customPOST({clark: $scope.vm.user, email: $scope.email}, "/users/"+$routeParams.user_id+"/update_clark_password", {}).then(function(data){
 	  if(data.success){
 	    $location.path('/manage_organisation');
 	  }else{
 	    Flash.create('warning', "Please try again", 'alert-danger');
 	  }
+	  $scope.dataLoading = false;
 	});
       };
     }

@@ -1,4 +1,6 @@
-<div style="margin:20px 0;" class="userRoles">
+<h2>Manage clark roles</h2>
+<div request-loading is-loading="requestLoading"></div>
+<div style="margin:20px 0;" class="userRoles" ng-show="!requestLoading">
   <div ng-repeat="(key, value) in roles">
     <span role-select key="key" value="value"></span>
   </div>

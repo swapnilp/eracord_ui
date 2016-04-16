@@ -31,6 +31,11 @@
     <div class="col-sm-12 padding0" style="margin-top:20px;" ng-show="length > 0">
       <div class="alert alert-warning">Total Exams are - {{totalExams}} </div>
     </div>
+    <div ng-show="length == 0" class="col-sm-12 padding0" style="margin-top:20px;">
+      <div class="alert alert-warning">
+	No data found
+      </div>
+    </div>
   </div>
   <div request-loading is-loading="requestLoading"></div>
   <figure class="highlight col-sm-12" ng-show="length > 0 && !requestLoading">
@@ -80,10 +85,5 @@
     </table>
   </figure>
   <dir-pagination-controls on-page-change="pageChanged(newPageNumber, true)" class="col-sm-12" ng-show="length > 0"></dir-pagination-controls>
-  <div ng-show="length == 0" class="col-sm-12 padding0" style="margin-top:20px;">
-    <div class="alert alert-warning">
-      No data found
-    </div>
-  </div>
 </div>
 
