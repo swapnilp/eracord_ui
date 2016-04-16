@@ -131,21 +131,27 @@ angular.module('eracordUiApp.controller')
 
     if($location.path() === "/organisation/standards/" + $routeParams.id + "/assign_organisation"){
       $scope.sub_organisations = [];
+      $scope.dataLoading = false;
+      $scope.requestLoading = true;
+      
       $scope.vm = {standard_id: $routeParams.id};
       base_organisation = Restangular.all("organisations");
       base_organisation.one('standard', $routeParams.id).customGET('remaining_organisations').then(function(data){
       	if(data.success) {
 	  $scope.sub_organisations = data.body;
 	}
+	$scope.requestLoading = false;
       });
       
       $scope.registorOrganisation = function(){
+	$scope.dataLoading = true;
       	base_organisation.customPOST({switch_organisation_standard: $scope.vm}, "switch_organisation_standard", {}).then(function(data){
       	  if(data.success) {
 	    $location.path('/manage_organisation').replace();
       	  }else{
 	    Flash.create('warning', data.message, 'alert-danger');
 	  }
+	  $scope.dataLoading = false;
       	});
       };
     }
