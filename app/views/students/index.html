@@ -48,32 +48,35 @@
 	  <th st-sort="lastName">Name</th>
 	  <th st-sort="balance">Batch</th>
 	  <th st-sort="balance">Standard</th>
-	  <th st-sort="balance">Parent Name</th>
-	  <th st-sort="balance">Parent Mobile</th>
 	  <th st-sort="balance">Enable Sms</th>
 	  <th st-sort="balance" ng-if="!isRemove">Classes</th>
-	  <th></th>
 	  <th ng-if="isRemove">Remove</th>
 	</tr>
       </thead>
       <tbody>
-	<tr dir-paginate="row in students | toArray:false | itemsPerPage: 10" total-items="totalStudents" current-page="pagination.current" pagination-id="student">
+	<tr dir-paginate-start="row in students | toArray:false | itemsPerPage: 10" total-items="totalStudents" current-page="pagination.current" pagination-id="student" ng-click="openInfo(row);" class="pointer">
 	  <td><span ng-if="showRollNumber">{{ row.roll_number}}</span><span ng-if="!showRollNumber">{{ $index+1 + ((pagination.current - 1) * 10)}}</span></td>
-	  <td>{{row.name}}</td>
+	  <td><span>{{row.name}}</span></td>
 	  <td>{{row.batch}}</td>
 	  <td>{{row.standard}}</td>
-	  <td>{{row.parent_name}}</td>
-	  <td>{{row.p_mobile}}</td>
 	  <td>{{row.enable_sms}}</td>
 	  <td ng-if="!isRemove">{{row.class_names}}</td>
-	  <td>
-	    <a href="#/students/{{row.id}}/show" class="btn btn-link">Show</a>
-	    <a class="btn btn-link" href="#/students/{{row.id}}/pay_fee">Pay Fee</a>
-	  </td>
 	  <td ng-if="isRemove">
 	    <button ng-click="removeStudent(row)" class="btn btn-link">Remove</button>
 	  </td>
 	</tr>
+	<tr ng-if="row.expanded" dir-paginate-end="" class="noBorder alert alert-warning">
+	  <td></td>
+          <td colspan="5">
+	    <span>Parent Name - {{row.parent_name}} </span>
+	    <br />
+	    <span>Mobile - {{row.p_mobile}}</span>
+	    <br />
+	    <a href="#/students/{{row.id}}/show" class="btn btn-primary">Show</a>
+	    <a class="btn btn-primary" href="#/students/{{row.id}}/payment_info">Payment Info</a>
+	    <a class="btn btn-primary" href="#/students/{{row.id}}/pay_fee">Pay Fee</a>
+	  </td>
+        </tr>
       </tbody>
     </table>
   </figure>

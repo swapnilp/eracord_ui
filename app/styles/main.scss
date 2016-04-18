@@ -315,6 +315,7 @@ a:focus {
   position: fixed;
   width: 100%;
   top: 53px;
+  opacity: 0.7;
 }
  
 .flashAlert > div {
@@ -390,4 +391,14 @@ ul.padding5 {
 
 span.dropdown > a.dropdown-toggle {
   color:#5F5F5F;
+}
+
+tr.noBorder {
+  td {
+    border-top: none !important;
+  }
+}
+
+tr.pointer {
+  cursor: pointer;
 }

@@ -49,6 +49,11 @@ angular.module('eracordUiApp.controller')
       };
 
       getResultsPage(1);
+
+      $scope.openInfo = function(row) {
+	_.map($scope.students, function(student){ student.expanded = false;})
+	row.expanded = true;
+      };
     };
 
     if($location.path() === '/students/new' || $location.path() === "/classes/" + $routeParams.class_id + "/students/new"){
@@ -262,6 +267,7 @@ angular.module('eracordUiApp.controller')
 	    $scope.payments = data.payments;
 	    $scope.totalStudents = $scope.payments.length;
 	    $scope.totalFee = data.total_fee;
+	    $scope.id = data.id
 	  } else {
 	    Flash.create('warning', data.message, 'alert-danger');
 	    $location.path("/students/"+$scope.student_id+"/show").replace();

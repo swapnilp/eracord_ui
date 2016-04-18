@@ -31,6 +31,11 @@ app.directive('classStudents', function(Restangular) {
         current: $routeParams.page || 1
       };
 
+      scope.openInfo = function(row) {
+	_.map(scope.students, function(student){ student.expanded = false;})
+	row.expanded = true;
+      };
+
       scope.selectUploadFile = function(newVal){
 	if(newVal){
 	  scope.file = newVal;

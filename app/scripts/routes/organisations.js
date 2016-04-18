@@ -41,7 +41,11 @@ app.config(function($routeProvider) {
     .when("/organisations/:course_id/fees/edit", {
       templateUrl: 'views/organisations/manage_fee.html',
       controller: 'OrganisationsCtrl'
-    });;
+    })
+    .when("/organisations/classes/:class_id/fees/edit", {
+      templateUrl: 'views/organisations/manage_fee.html',
+      controller: 'OrganisationsCtrl'
+    });
 
     
 

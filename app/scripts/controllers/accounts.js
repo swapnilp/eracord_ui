@@ -54,6 +54,7 @@ angular.module('eracordUiApp.controller')
 	    $scope.totalAmount = data.total_amount;
 	    $scope.length = $scope.payments.length; 
 	    $scope.totalPayments = data.count;
+	    $scope.expectedAmount = data.expected_fees;
 	  } else {
 	  }
 	  $scope.requestLoading = false;
