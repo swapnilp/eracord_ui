@@ -68,6 +68,7 @@
 	  <td ng-if="!isRemove">{{row.class_names}}</td>
 	  <td>
 	    <a href="#/students/{{row.id}}/show" class="btn btn-link">Show</a>
+	    <a class="btn btn-link" href="#/students/{{row.id}}/pay_fee">Pay Fee</a>
 	  </td>
 	  <td ng-if="isRemove">
 	    <button ng-click="removeStudent(row)" class="btn btn-link">Remove</button>

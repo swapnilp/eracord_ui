@@ -199,6 +199,9 @@ angular.module('eracordUiApp.controller')
 
     if($location.path() === "/students/" + $routeParams.student_id + "/pay_fee"){
       $scope.student_id = $routeParams.student_id;
+      $scope.dataLoading = false;
+      $scope.requestLoading = true;
+      
       var student = Restangular.one("students", $routeParams.student_id);
       $scope.vm = {};
       $scope.vm.payment_type = 'cash'
@@ -215,10 +218,12 @@ angular.module('eracordUiApp.controller')
 	    Flash.create('warning', data.message, 'alert-danger');
 	    $location.path("/students/"+$scope.student_id+"/show").replace();
 	  }
+	  $scope.requestLoading = false;
 	});
       };
 
       $scope.payFee = function() {
+	$scope.dataLoading = true;
 	student.customPOST({student_fee: $scope.vm}, "paid_student_fee", {}).then(function(data) {
 	  if(data.success) {
 	    Flash.create('success', data.message, 'alert-success');
@@ -232,6 +237,7 @@ angular.module('eracordUiApp.controller')
 	      $scope.vm.password="";
 	    }
 	  }
+	  $scope.dataLoading = false;
 	});
       }
       

@@ -1,4 +1,5 @@
-<div class="col-sm-12" style="margin:20px 0;">
+<div request-loading is-loading="requestLoading"></div>
+<div class="col-sm-12" style="margin:20px 0;" ng-show="!requestLoading">
   <div class="col-sm-5">
     <form name="form" ng-submit="payFee()" role="form">
       <div class="form-group">
@@ -67,10 +68,10 @@
 	<span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
       </div>
       <div class="form-group">
-	<label for="class_time">Get class rooms</label>
 	<p class="input-group">
-	  <button class="btn btn-primary" ng-disabled="form.$invalid || vm.dataLoading">Pay</button>
+	  <button class="btn btn-primary" ng-disabled="form.$invalid || dataLoading">Pay Fee</button>
 	  &nbsp;&nbsp;
+	  <span button-req-load is-loading="dataLoading"></span>
 	  <a class="btn btn-primary" ng-click="goBack();">Back</a>
 	</p>
       </div>

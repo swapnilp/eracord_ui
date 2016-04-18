@@ -205,7 +205,7 @@ angular.module('eracordUiApp.controller')
     // end of new grouped exams
 
     if($location.path() === "/classes/"+$routeParams.class_id+"/exams/"+ $routeParams.exam_id+"/show") {
-      $scope.requestLoading1 = true;
+      $scope.requestLoading = true;
       $scope.class_id = $routeParams.class_id;
       $scope.file = null;
       $scope.fileName = "";
@@ -219,7 +219,7 @@ angular.module('eracordUiApp.controller')
 	$scope.requestLoading = true;
 	jkci_classes.customGET("/"+$routeParams.class_id+"/exams/"+$routeParams.exam_id).then(function(data){
 	  $scope.exam = data.exam;
-	  $scope.requestLoading1 = false;
+	  $scope.requestLoading = false;
 	}, function(res){
 	  $location.path('/admin_desk').replace();
 	});

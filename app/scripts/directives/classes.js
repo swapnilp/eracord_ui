@@ -241,7 +241,7 @@ app.directive('classDailyTeaches', function(Restangular) {
 	if(scope.classDtpTab === 'true' && dailyCatlogLoaded === false) {
 
 	  getResultsPage($routeParams.page || 1);
-	  scope.dailyCatlogLoaded = true;
+	  dailyCatlogLoaded = true;
 	}
 	
       });
