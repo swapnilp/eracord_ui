@@ -27,14 +27,24 @@ angular.module('eracordUiApp.controller')
       var students = Restangular.all("students");
 
       $scope.requestLoading = true;
+      $scope.classes = [];
+      $scope.isFilter = true;
       
       $scope.pagination = {
         current: 1
       };
 
+      var getfilterValues = function() {
+	students.customGET("get_filter_values").then(function(data) {
+	  if(data.success) {
+	    $scope.classes = data.classes;
+	  }
+	});
+      };
+
       var getResultsPage = function(pageNumber) {
 	$scope.requestLoading = true;
-	students.getList({page: pageNumber, search: $scope.filterStudent}).then(function(data){
+	students.getList({page: pageNumber, search: $scope.filterStudent, class_id: $scope.filterClass}).then(function(data){
 	  $scope.students = data[0];
 	  $scope.totalStudents = data[1] || 0;
 	  $scope.pagination = {
@@ -47,6 +57,8 @@ angular.module('eracordUiApp.controller')
       $scope.pageChanged = function(newPage) {
         getResultsPage(newPage);
       };
+
+      getfilterValues();
 
       getResultsPage(1);
 

@@ -26,8 +26,18 @@
     </span>
   </span>
   <div class="examFilterDiv col-sm-12"> 
-    Filter : <input type="text" ng-model="filterStudent" dl-key-code="pageChanged(1);" code="13" placeholder="Type name or mobile and  enter" style="width:230px;" value="{{filterStudent}}">
+    <div class="col-sm-3">
+      Filter : <input type="text" ng-model="filterStudent" dl-key-code="pageChanged(1);" code="13" placeholder="Type name or mobile and  enter" style="max-width:230px;" value="{{filterStudent}}">
+
+    </div>
+    <div class="col-sm-3" ng-if="isFilter">
+      <select class="form-control ng-touched" ng-model="filterClass" ng-options="cls.id as cls.name for cls in classes">
+	<option value="">All</option>
+      </select>
+    </div>
+    <div class="col-sm-3">
       <button class="btn btn-primary" ng-click="pageChanged(1);">Filter</button>
+    </div>		  
   </div>
   <br /><br /><br />
   <div class="alert alert-warning col-sm-12">
