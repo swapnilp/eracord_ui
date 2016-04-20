@@ -61,6 +61,17 @@ angular.module('eracordUiApp.controller')
 	  $scope.requestLoading = false;
 	});
       };
+
+      $scope.openInfo = function(row) {
+	if(row.expanded === true) {
+	  _.map($scope.payments, function(payment){ payment.expanded = false;})
+	}else{
+	  _.map($scope.payments, function(payment){ payment.expanded = false;})
+	  row.expanded = true;
+	}
+
+	
+      };
       
       $scope.pageChanged = function(newPage, checkFilter) {
 	loadPayments(newPage);

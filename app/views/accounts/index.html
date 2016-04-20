@@ -39,14 +39,14 @@
       <thead>
 	<tr>
 	  <th st-sort="firstName">Name</th>
-	  <th st-sort="firstName">Date</th>
 	  <th st-sort="firstName">Class</th>
-	  <th st-sort="firstName">Amount</th>
-	  <th st-sort="firstName">Payment Type</th>
+	  <th st-sort="firstName">Total Fee</th>
+	  <th st-sort="firstName">Remaining Fee</th>
+	  <th st-sort="firstName">Total Transactions</th>
 	</tr>
       </thead>
       <tbody>
-	<tr dir-paginate="row in payments | itemsPerPage: 10" total-items="totalPayments" current-page="pagination.current">
+	<tr dir-paginate-start="row in payments | itemsPerPage: 10" total-items="totalPayments" current-page="pagination.current" ng-click="openInfo(row);" class="pointer">
 	  <td>{{row.name}}
 	    <span uib-dropdown ng-if="row.assign_to !== ''">
 	      <a  id="simple-dropdown" uib-dropdown-toggle >
@@ -62,27 +62,67 @@
 	      </ul>
 	    </span>
 	  </td>
-	  <td>{{row.date}}</td>
 	  <td>{{row.jkci_class}}</td>
-	  <td>{{row.amount}}</td>
 	  <td>
-	    {{row.payment_type}}
-	    <span uib-dropdown ng-if="row.payment_type !== 'cash'">
-	      <a  id="simple-dropdown" uib-dropdown-toggle >
-		<i class="fa fa-info-circle"></i>
-	      </a>
-	      <ul uib-dropdown-menu aria-labelledby="simple-dropdown" class="padding5">
-		<li>
-		  Bank Name - {{row.bank_name}}
-		</li>
-		<li>
-		  Cheque number - {{row.cheque_number}}
-		</li>
-		<li>
-		  Cheque issue date - {{row.cheque_issue_date}}
-		</li>
-	      </ul>
-	    </span>
+	    {{row.collected_fee}}
+	  </td>
+	  <td>
+	    {{row.remaining_fee}}
+	  </td>
+	  <td>
+	    {{row.total_transactions}}
+	  </td>
+	</tr>
+	<tr ng-if="row.expanded" dir-paginate-end="" class="noBorder alert alert-warning">
+	  <td colspan="5">
+	    
+	    <table st-table="rowCollection" class="table col-sm-12">
+	      <tr>
+		<th st-sort="firstName">Date</th>
+		<th st-sort="firstName">Amount</th>
+		<th st-sort="firstName">Payment Type</th>
+		<th st-sort="firstName">Book Number</th>
+		<th st-sort="firstName">Receipt Number</th>
+	      </tr>
+	      <tr ng-repeat="t_row in row.transactions">
+		<td>
+		  {{t_row.date}}
+		</td>
+		<td>
+		  {{t_row.amount}}
+		</td>
+		<td>
+		  {{t_row.payment_type}}
+		  <span uib-dropdown ng-if="t_row.payment_type !== 'cash'">
+		    <a  id="simple-dropdown" uib-dropdown-toggle >
+		      <i class="fa fa-info-circle"></i>
+		    </a>
+		    <ul uib-dropdown-menu aria-labelledby="simple-dropdown" class="padding5">
+		      <li>
+			Bank Name - {{t_row.bank_name}}
+		      </li>
+		      <li>
+			Cheque number - {{t_row.cheque_number}}
+		      </li>
+		      <li>
+			Cheque issue date - {{t_row.cheque_issue_date}}
+		      </li>
+		    </ul>
+		  </span>
+		</td>
+		<td>
+		  {{t_row.book_number}}
+		</td>
+		<td>
+		  {{t_row.receipt_number}}
+		</td>
+	      </tr>
+	      <tr>
+		<td colspan="5">
+		  <a class="btn btn-primary" href="#/students/{{row.student_id}}/pay_fee" ng-if="row.remaining_fee !== 0">Pay Fee</a>
+		</td>
+	      </tr>
+	    </table>
 	  </td>
 	</tr>
       </tbody>
