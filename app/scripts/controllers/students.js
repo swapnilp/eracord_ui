@@ -63,8 +63,12 @@ angular.module('eracordUiApp.controller')
       getResultsPage(1);
 
       $scope.openInfo = function(row) {
-	_.map($scope.students, function(student){ student.expanded = false;})
-	row.expanded = true;
+	if(row.expanded === true) {
+	  _.map($scope.students, function(student){ student.expanded = false;})
+	}else {
+	  _.map($scope.students, function(student){ student.expanded = false;})
+	  row.expanded = true;
+	}
       };
     };
 

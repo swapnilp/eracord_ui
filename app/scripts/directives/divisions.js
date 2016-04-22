@@ -66,6 +66,15 @@ app.directive('divisionStudents', function(Restangular) {
 	  
 	});
       };
+
+      scope.openInfo = function(row) {
+	if(row.expanded === true) {
+	  _.map(scope.students, function(student){ student.expanded = false;})
+	}else {
+	  _.map(scope.students, function(student){ student.expanded = false;})
+	  row.expanded = true;
+	}
+      };
       
       scope.pagination = {
         current: $routeParams.page || 1

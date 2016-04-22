@@ -393,6 +393,10 @@ span.dropdown > a.dropdown-toggle {
   color:#5F5F5F;
 }
 
+div.btn-group > a#simple-dropdown {
+  color:#5F5F5F;
+}
+
 tr.noBorder {
   td {
     border-top: none !important;
@@ -401,4 +405,9 @@ tr.noBorder {
 
 tr.pointer {
   cursor: pointer;
+}
+
+
+.btn-group:hover>.dropdown-menu {
+  display: block;
 }

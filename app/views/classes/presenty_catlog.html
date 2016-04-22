@@ -31,7 +31,25 @@
     </tr>
     <tr ng-repeat="catlog in catlogs" style="margin-top:10px;">
       <td ng-repeat="td in catlog track by $index" ng-class="{warning: td ===  'a'}">
-	{{td}}
+	<span ng-if="$index === 0">
+	  {{td.name}}
+	  <div class="btn-group" dropdown>
+	    <a  id="simple-dropdown" uib-dropdown-toggle >
+	      <i class="fa fa-info-circle"></i>
+	    </a>
+	    <ul  aria-labelledby="simple-dropdown" class="padding5 dropdown-menu">
+	      <li>
+		Parent Name - {{td.parent_name}}
+	      </li>
+	      <li>
+		Parent Mobile - {{td.p_mobile}}
+	      </li>
+	    </ul>
+	  </div>
+	</span>
+	<span ng-if="$index !== 0">
+	  {{td}}
+	</span>
       </td>
     </tr>
   </table>

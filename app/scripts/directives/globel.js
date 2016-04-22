@@ -45,5 +45,3 @@ app.directive('buttonReqLoad', function() {
   };
 });
 
-
-
