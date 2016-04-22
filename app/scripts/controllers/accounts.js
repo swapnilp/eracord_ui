@@ -24,13 +24,12 @@ angular.module('eracordUiApp.controller')
     $scope.batches = [];
     $scope.filterAmount = {};
     var payment_fee = Restangular.all("student_fees");
-    var loadAmountFilters  = function(){
+    var loadAmountFilters  = function() {
       payment_fee.customGET("filter_data").then(function(data) {
 	if(data.success) {
 	  $scope.batches = data.batches;
 	  $scope.standards = data.standards;
 	  $scope.filterAmount.batch = _.findWhere($scope.batches, {is_active: true}).id;
-
 	} 
       });
     };
@@ -46,7 +45,7 @@ angular.module('eracordUiApp.controller')
       $scope.payments = [];
       $scope.pagination = {current: 1};
       
-      var loadPayments = function(pageNumber){
+      var loadPayments = function(pageNumber) {
 	$scope.requestLoading = true;
 	payment_fee.customGET("", {filter: $scope.filterAmount, page: pageNumber}).then(function(data) {
 	  if(data.success) {
@@ -57,6 +56,8 @@ angular.module('eracordUiApp.controller')
 	    $scope.expectedAmount = data.expected_fees;
 	    $scope.totalStudents = data.total_students;
 	  } else {
+	    Flash.create('warning', data.message, 'alert-danger');
+	    $location.path("/admin_desk").replace();
 	  }
 	  $scope.requestLoading = false;
 	});
