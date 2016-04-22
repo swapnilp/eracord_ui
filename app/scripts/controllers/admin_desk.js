@@ -46,6 +46,8 @@ angular.module('eracordUiApp.controller')
 	$scope.org_standards = _.filter(data.body, function(num){ return num.is_active; });
 	if($scope.org_standards.length === 0 && $scope.us_jkci_classes.length === 0) {
 	  $scope.noData = true;
+	} else {
+	  $scope.noData = false;
 	}
       });
     }
@@ -55,8 +57,10 @@ angular.module('eracordUiApp.controller')
       var unassigned_jkci_classes = Restangular.all("get_unassigned_classes");
       unassigned_jkci_classes.getList().then(function(data){
 	$scope.us_jkci_classes = data;
-	if($scope.us_jkci_classes.length === 0 && $scope.org_standards.length == 0) {
+	if($scope.us_jkci_classes.length === 0 && $scope.org_standards.length === 0) {
 	  $scope.noData = true;
+	} else {
+	  $scope.noData = false;
 	}
       });
     };
