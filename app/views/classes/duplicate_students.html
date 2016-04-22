@@ -13,7 +13,7 @@
 	</tr>
       </thead>
       <tbody>
-	<tr ng-repeat="row in students" ng-class="{danger: (row.is_duplicate && !row.is_duplicate_accepted), warning: (row.is_duplicate && row.is_duplicate_accepted)}">
+	<tr ng-repeat-start="row in students" ng-class="{danger: (row.is_duplicate && !row.is_duplicate_accepted), warning: (row.is_duplicate && row.is_duplicate_accepted)}" ng-click="openInfo(row);" class="pointer">
 	  <td><span ng-if="showRollNumber">{{ row.roll_number}}</span><span ng-if="!showRollNumber">{{$index+1}}</span></td>
 	  <td>{{row.name}}</td>
 	  <td>{{row.p_mobile}}</td>
@@ -21,6 +21,14 @@
 	  <td>
 	    <button ng-click="acceptStudent(row)" class="btn btn-link" ng-if="(row.is_duplicate && !row.is_duplicate_accepted && !row.dataLoading)">Accept</button>
 	    <span button-req-load is-loading="row.dataLoading"></span>
+	  </td>
+	</tr>
+	<tr ng-if="row.expanded" ng-repeat-end="" class="noBorder alert alert-info">
+	  <td colspan="5">
+	    Total exams attented are -  {{row.exams_count}}
+	    <br />
+	    <button ng-click="acceptStudent(row)" class="btn btn-link" ng-if="(row.is_duplicate && !row.is_duplicate_accepted && !row.dataLoading)">Accept</button>
+	    <button ng-click="removeStudent(row);" class="btn btn-link">Remove Student</button>
 	  </td>
 	</tr>
       </tbody>

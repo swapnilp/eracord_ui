@@ -506,6 +506,26 @@ app.directive('classDuplicateStudents', function(Restangular) {
 	  }
 	});
       };
+
+      scope.openInfo = function(row) {
+	if(row.expanded === true) {
+	  _.map(scope.students, function(student){ student.expanded = false;})
+	}else {
+	  _.map(scope.students, function(student){ student.expanded = false;})
+	  row.expanded = true;
+	}
+      };
+
+      scope.removeStudent = function(student) {
+	if($window.confirm('Are you sure?')){
+	  jkci_classes.one('students', student.student_id).remove().then(function(data){
+	    if(data.success) {
+	      scope.students = _.reject(scope.students, function(obj){return obj.student_id == student.student_id});
+	    }else {
+	    }
+	  });
+	}
+      }
       
       scope.recheckStudents({theDirFn: getResultsPage});
       
