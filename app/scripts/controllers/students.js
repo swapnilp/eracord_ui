@@ -223,6 +223,10 @@ angular.module('eracordUiApp.controller')
       $scope.dataLoading = false;
       $scope.requestLoading = true;
       
+      $scope.fee_amount = 0;
+      $scope.tax_amount = 0;
+      $scope.total_amount = 0;
+      
       var student = Restangular.one("students", $routeParams.student_id);
       $scope.vm = {};
       $scope.vm.payment_type = 'cash'
@@ -235,6 +239,9 @@ angular.module('eracordUiApp.controller')
 	    $scope.p_mobile = data.p_mobile;
 	    $scope.classes = data.jkci_classes;
 	    $scope.batch = data.batch;
+	    $scope.enable_tax = data.enable_tax;
+	    $scope.tax = data.service_tax;
+	    $scope.fee_include_service_tax = data.fee_include_service_tax;
 	  } else {
 	    Flash.create('warning', data.message, 'alert-danger');
 	    $location.path("/students/"+$scope.student_id+"/show").replace();
@@ -242,6 +249,19 @@ angular.module('eracordUiApp.controller')
 	  $scope.requestLoading = false;
 	});
       };
+
+      $scope.calculateTax = function(amount) {
+	if(amount > 0){
+	  $scope.tax_amount = (amount*($scope.tax / 100)).toFixed(2);
+	  $scope.fee_amount = amount - $scope.tax_amount;
+	  $scope.total_amount = amount;
+	}else{
+	  $scope.fee_amount = 0;
+	  $scope.tax_amount = 0;
+	  $scope.total_amount = 0;
+	}
+
+      }
 
       $scope.payFee = function() {
 	$scope.dataLoading = true;

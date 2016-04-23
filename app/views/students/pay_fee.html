@@ -44,8 +44,12 @@
 	<input type="text" name="receipt_number" id="receipt_number" class="form-control" ng-model="vm.receipt_number"  placeholder="Please enter receipt  number" >
       </div>
       <div class="form-group" ng-class="{ 'has-error': form.amount.$dirty && form.amount.$error.required }">
-	<label for="amount">Amount <span class="textRed"> *</span></label>
-	<input type="text" name="amount" id="amount" class="form-control" ng-model="vm.amount"  placeholder="Please enter amount" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0" required/>
+	<label for="amount">Total Amount <span ng-if="enable_tax">With Tax</span><span class="textRed"> *</span></label>
+	<input type="text" name="amount" id="amount" class="form-control" ng-model="vm.amount"  placeholder="Please enter amount" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0" ng-change="calculateTax(vm.amount);"required/>
+	<div ng-if="enable_tax && total_amount > 0">
+	  Fee Amount + Tax Amount = Total Amount <br/>
+	  <span> {{fee_amount}} </span> + <span>{{tax_amount}}</span> = <span>{{total_amount}}</span>
+	</div>
       </div>
       <div ng-show="vm.payment_type === 'cheque'" ng-class="{ 'has-error': form.bank_name.$dirty && form.bank_name.$error.required }">
 	<div class="form-group">
