@@ -17,6 +17,7 @@ app.directive('organisationProfile', function(Restangular) {
 	Restangular.all("").customGET("/organisation_profile").then(function(data){
 	  if(data.success) {
 	    scope.organisation = data.organisation;
+	    scope.is_root = data.is_root;
 	  } else {
 	    $location.path('/admin_desk').replace();
 	  }

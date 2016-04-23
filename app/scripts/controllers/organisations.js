@@ -228,6 +228,7 @@ angular.module('eracordUiApp.controller')
       Restangular.all("").customGET("organisation_edit").then(function(data){
 	if(data.success) {
 	  $scope.vm = data.organisation;
+	  $scope.is_root = data.is_root;
 	} else {
 	  $location.path('/admin_desk').replace();
 	}
