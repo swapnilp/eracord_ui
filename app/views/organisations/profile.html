@@ -40,10 +40,6 @@
     <span class="col-sm-2"><h5>Service tax</h5> </span>
     <span class="col-sm-6 paddingTop10">{{organisation.service_tax}}%</span>
   </div>
-  <div class="col-sm-12 textLeft paddingLeft0" ng-if="organisation.enable_service_tax && is_root">
-    <span class="col-sm-2"><h5>Fee included with service tax</h5> </span>
-    <span class="col-sm-6 paddingTop10">{{organisation.fee_include_service_tax}}</span>
-  </div>
   <div class="col-sm-12 textLeft paddingLeft0" ng-show="!profileRequestLoading">
     <a href="#/edit_organisation" class="btn btn-primary">Edit</a>
   </div>

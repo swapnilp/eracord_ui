@@ -49,13 +49,6 @@
       <label for="service_tax">Service Tax <span class="textRed"> *</span></label>
       <input type="text" name="service_tax" id="service_tax" class="form-control" ng-model="vm.service_tax"  placeholder="Service Tax" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0 || || event.charCode === 46"/>
     </div>
-    <div class="form-group" ng-if="vm.enable_service_tax && is_root" style="display:flex;">
-      <label for="fee_include_service_tax" style="margin-top:7px;">Fee included with tax <span class="textRed"> *</span></label>
-      <toggle-switch class="mLeft10"
-		     ng-model="vm.fee_include_service_tax"
-		     knob-label="withTax">
-      </toggle-switch>
-    </div>
     <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
       <label for="password">Password <span class="textRed">*</span></label>
       <input type="password" name="password" id="password" class="form-control" ng-model="vm.password" required />
