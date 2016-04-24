@@ -83,8 +83,8 @@
 	    <span>Mobile - {{row.p_mobile}}</span>
 	    <br />
 	    <a href="#/students/{{row.id}}/show" class="btn btn-primary">Show</a>
-	    <a class="btn btn-primary" href="#/students/{{row.id}}/payment_info">Payment Info</a>
-	    <a class="btn btn-primary" href="#/students/{{row.id}}/pay_fee">Pay Fee</a>
+	    <a class="btn btn-primary" href="#/students/{{row.id}}/payment_info" ng-if="has_show_pay_info">Payment Info</a>
+	    <a class="btn btn-primary" href="#/students/{{row.id}}/pay_fee" ng-if="has_pay_fee">Pay Fee</a>
 	  </td>
         </tr>
       </tbody>

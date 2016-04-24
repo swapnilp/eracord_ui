@@ -47,6 +47,8 @@ angular.module('eracordUiApp.controller')
 	students.getList({page: pageNumber, search: $scope.filterStudent, class_id: $scope.filterClass}).then(function(data){
 	  $scope.students = data[0];
 	  $scope.totalStudents = data[1] || 0;
+	  $scope.has_show_pay_info = data[2].has_show_pay_info;
+	  $scope.has_pay_fee = data[2].has_pay_fee;
 	  $scope.pagination = {
             current: pageNumber || 1
 	  };
@@ -136,6 +138,8 @@ angular.module('eracordUiApp.controller')
       student.get().then(function(data){
 	if(data.success) {
 	  $scope.student = data.body.student;
+	  $scope.has_show_pay_info = data.has_show_pay_info;
+	  $scope.has_pay_fee = data.has_pay_fee;
 	}
       });
 

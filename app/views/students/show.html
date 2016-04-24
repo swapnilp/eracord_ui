@@ -45,10 +45,10 @@
       <div class="left mRight10">
 	<a class="btn btn-primary" href="#/students/{{student.id}}/edit">Edit</a>
       </div>
-      <div class="left mRight10">
+      <div class="left mRight10" ng-if="has_pay_fee">
 	<a class="btn btn-primary" href="#/students/{{student.id}}/pay_fee">Pay Fee</a>
       </div>
-      <div class="left mRight10">
+      <div class="left mRight10" ng-if="has_show_pay_info">
 	<a class="btn btn-primary" href="#/students/{{student.id}}/payment_info">Payment Info</a>
       </div>
       <div class="left mRight10"  is-role-visible='["toggle_student_sms"]' email="currentUser.email">

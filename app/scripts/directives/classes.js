@@ -94,6 +94,8 @@ app.directive('classStudents', function(Restangular) {
 	jkci_classes.customGET("students", {page: pageNumber, search: scope.filterStudent}).then(function(data){
 	  scope.students = data.students;
 	  scope.totalStudents = data.count;
+	  scope.has_show_pay_info = data.has_show_pay_info;
+	  scope.has_pay_fee = data.has_pay_fee;
 	  scope.pagination = {
             current: pageNumber || 1
 	  };

@@ -57,7 +57,7 @@ angular
       var extractedData;
       if (operation === "getList") {
 	if(data.count){
-          extractedData = [data.body, data.count];
+          extractedData = [data.body, data.count, data];
 	}else {
 	   extractedData = data.body;
 	}
