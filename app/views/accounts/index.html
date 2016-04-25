@@ -27,6 +27,8 @@
     <div class="col-sm-12 padding0" style="margin-top:20px;" ng-show="length > 0">
       <div class="alert alert-warning">Total amount are - {{totalAmount}} &nbsp;&nbsp;&nbsp;<a href="#/accounts/graphs" class="btn btn-primary">Show Graphical </a>
 	<br/><br/>
+	Total service tax are - {{totalTax}}
+	<br/><br/>
 	Total Expected amount are (without filter) - <strong>{{expectedAmount}}</strong> &nbsp;&nbsp;&nbsp;
 	<br/><br/>
 	Total students are - <strong>{{totalStudents}}</strong> &nbsp;&nbsp;&nbsp;
@@ -82,6 +84,7 @@
 	      <tr>
 		<th st-sort="firstName">Date</th>
 		<th st-sort="firstName">Amount</th>
+		<th st-sort="firstName">Service Tax</th>
 		<th st-sort="firstName">Payment Type</th>
 		<th st-sort="firstName">Book Number</th>
 		<th st-sort="firstName">Receipt Number</th>
@@ -92,6 +95,9 @@
 		</td>
 		<td>
 		  {{t_row.amount}}
+		</td>
+		<td>
+		  {{t_row.service_tax}}
 		</td>
 		<td>
 		  {{t_row.payment_type}}

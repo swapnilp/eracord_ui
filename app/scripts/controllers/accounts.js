@@ -51,6 +51,7 @@ angular.module('eracordUiApp.controller')
 	  if(data.success) {
 	    $scope.payments = data.payments;
 	    $scope.totalAmount = data.total_amount;
+	    $scope.totalTax = data.total_tax;
 	    $scope.length = $scope.payments.length; 
 	    $scope.totalPayments = data.count;
 	    $scope.expectedAmount = data.expected_fees;
