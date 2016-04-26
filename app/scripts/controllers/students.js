@@ -272,7 +272,7 @@ angular.module('eracordUiApp.controller')
 	student.customPOST({student_fee: $scope.vm}, "paid_student_fee", {}).then(function(data) {
 	  if(data.success) {
 	    Flash.create('success', data.message, 'alert-success');
-	    printer.print('/views/accounts/print_reset.html', {data: data.print_data});
+	    printer.print('views/accounts/print_reset.html', {data: data.print_data});
 	    $location.path("/students/"+$scope.student_id+"/show").replace();
 	  } else {
 	    if(data.valid_password) {
