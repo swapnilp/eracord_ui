@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('StudentsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$cookieStore', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window, $cookieStore) {
+  .controller('StudentsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$cookieStore', 'printer', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window, $cookieStore, printer) {
 
     if(!Auth.isAuthenticated()){
       $location.path('/user/sign_in').replace();
@@ -268,9 +268,11 @@ angular.module('eracordUiApp.controller')
 
       $scope.payFee = function() {
 	$scope.dataLoading = true;
+
 	student.customPOST({student_fee: $scope.vm}, "paid_student_fee", {}).then(function(data) {
 	  if(data.success) {
 	    Flash.create('success', data.message, 'alert-success');
+	    printer.print('/views/accounts/print_reset.html', {data: data.print_data});
 	    $location.path("/students/"+$scope.student_id+"/show").replace();
 	  } else {
 	    if(data.valid_password) {
