@@ -40,6 +40,7 @@
 	  <th st-sort="balance">Payment Type</th>
 	  <th st-sort="balance">Book Number</th>
 	  <th st-sort="balance">Receipt Number</th>
+	  <th>Print</th>
 	</tr>
       </thead>
       <tbody>
@@ -67,6 +68,10 @@
 	  </td>
 	  <td>{{row.book_number}}</td>
 	  <td>{{row.receipt_number}}</td>
+	  <td>
+	    <button class="btn btn-link" ng-click="printRecipt(row);" ng-if="!row.reqLoading">Print</button>
+	    <span button-req-load is-loading="row.reqLoading"></span>
+	  </td>
 	</tr>
       </tbody>
     </table>

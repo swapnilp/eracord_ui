@@ -88,6 +88,7 @@
 		<th st-sort="firstName">Payment Type</th>
 		<th st-sort="firstName">Book Number</th>
 		<th st-sort="firstName">Receipt Number</th>
+		<th> Print recipt</th>
 	      </tr>
 	      <tr ng-repeat="t_row in row.transactions">
 		<td>
@@ -123,6 +124,10 @@
 		</td>
 		<td>
 		  {{t_row.receipt_number}}
+		</td>
+		<td>
+		  <button class="btn btn-link" ng-click="printRecipt(t_row);" ng-if="!t_row.reqLoading">Print</button>
+		  <span button-req-load is-loading="t_row.reqLoading"></span>
 		</td>
 	      </tr>
 	      <tr>

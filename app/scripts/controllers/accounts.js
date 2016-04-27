@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('AccountsCtrl',['$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', '$window', '_', '$cookieStore', function ( $scope, Flash, $location, Auth, Restangular, $routeParams, $window, _, $cookieStore) {
+  .controller('AccountsCtrl',['$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', '$window', '_', '$cookieStore', 'printer', function ( $scope, Flash, $location, Auth, Restangular, $routeParams, $window, _, $cookieStore, printer) {
 
     if(!Auth.isAuthenticated()){
       $location.path('/user/sign_in').replace();
@@ -71,8 +71,18 @@ angular.module('eracordUiApp.controller')
 	  _.map($scope.payments, function(payment){ payment.expanded = false;})
 	  row.expanded = true;
 	}
+      };
 
-	
+      $scope.hideInfo = function(row) {
+	row.expanded = false;
+      };
+
+      $scope.printRecipt = function(row) {
+	row.reqLoading = true;
+	payment_fee.customGET(row.id+"/print_recipt", {student_id: row.student_id}).then(function(data) {
+	  printer.print('public/print_reset.html', {data: data.print_data});
+	  row.reqLoading = false;
+	});
       };
       
       $scope.pageChanged = function(newPage, checkFilter) {

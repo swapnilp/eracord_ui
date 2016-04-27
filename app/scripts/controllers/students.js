@@ -22,6 +22,7 @@ angular.module('eracordUiApp.controller')
     }
 
     $scope.token = $cookieStore.get('currentUser').token;
+    var payment_fee = Restangular.all("student_fees");
     
     if($location.path() === '/students') {
       var students = Restangular.all("students");
@@ -314,6 +315,14 @@ angular.module('eracordUiApp.controller')
 	    Flash.create('warning', data.message, 'alert-danger');
 	    $location.path("/students/"+$scope.student_id+"/show").replace();
 	  }
+	});
+      };
+      
+      $scope.printRecipt = function(row) {
+	row.reqLoading = true;
+	payment_fee.customGET(row.id+"/print_recipt", {student_id: row.student_id}).then(function(data) {
+	  printer.print('public/print_reset.html', {data: data.print_data});
+	  row.reqLoading = false;
 	});
       };
 
