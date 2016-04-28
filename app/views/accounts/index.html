@@ -126,8 +126,7 @@
 		  {{t_row.receipt_number}}
 		</td>
 		<td>
-		  <button class="btn btn-link" ng-click="printRecipt(t_row);" ng-if="!t_row.reqLoading">Print</button>
-		  <span button-req-load is-loading="t_row.reqLoading"></span>
+		  <a href="#/accounts/students/{{t_row.student_id}}/fee_receipt/{{t_row.id}}"><i class="fa fa-print"></i></a>
 		</td>
 	      </tr>
 	      <tr>

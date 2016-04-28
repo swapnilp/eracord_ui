@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('StudentsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$cookieStore', 'printer', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window, $cookieStore, printer) {
+  .controller('StudentsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$cookieStore', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window, $cookieStore) {
 
     if(!Auth.isAuthenticated()){
       $location.path('/user/sign_in').replace();
@@ -273,9 +273,7 @@ angular.module('eracordUiApp.controller')
 	student.customPOST({student_fee: $scope.vm}, "paid_student_fee", {}).then(function(data) {
 	  if(data.success) {
 	    Flash.create('success', data.message, 'alert-success');
-	    //printer.print('views/accounts/print_reset.html', {data: data.print_data});
-	    printer.print('public/print_reset.html', {data: data.print_data});
-	    $location.path("/students/"+$scope.student_id+"/show").replace();
+	    $location.path("/accounts/students/"+$scope.student_id+"/fee_receipt/"+data.receipt_id).replace();
 	  } else {
 	    if(data.valid_password) {
 	      Flash.create('warning', data.message, 'alert-danger');
@@ -318,14 +316,6 @@ angular.module('eracordUiApp.controller')
 	});
       };
       
-      $scope.printRecipt = function(row) {
-	row.reqLoading = true;
-	payment_fee.customGET(row.id+"/print_recipt", {student_id: row.student_id}).then(function(data) {
-	  printer.print('public/print_reset.html', {data: data.print_data});
-	  row.reqLoading = false;
-	});
-      };
-
       getPayInfo();
     };
     //end payment info

@@ -411,3 +411,23 @@ tr.pointer, td.pointer {
 .btn-group:hover>.dropdown-menu {
   display: block;
 }
+
+@media screen {
+  #printSection {
+    display: none;
+  }
+}
+
+@media print {
+  body * {
+    visibility:hidden;
+  }
+  #printSection, #printSection * {
+    visibility:visible;
+  }
+  #printSection {
+    position:absolute;
+    left:0;
+    top:0;
+  }
+}

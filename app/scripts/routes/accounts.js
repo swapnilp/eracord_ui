@@ -14,6 +14,11 @@ app.config(function($routeProvider) {
       templateUrl: 'views/accounts/graphs.html',
       controller: 'AccountsCtrl',
       controllerAs: 'accounts'
+    })
+    .when('/accounts/students/:student_id/fee_receipt/:receipt_id', {
+      templateUrl: 'views/accounts/fee_receipt.html',
+      controller: 'AccountsCtrl',
+      controllerAs: 'accounts'
     });
 });
 
