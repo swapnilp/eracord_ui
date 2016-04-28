@@ -1,0 +1,16 @@
+<div id="printRecipt">
+  <h1>{{data.organisation_name}}</h1>
+  <table>
+    <tr><td>Name</td><td ng-bind="data.student_name"></td></tr>
+    <tr><td>Class Name</td><td ng-bind="data.class_name"></td></tr>
+    <tr><td>Date</td><td ng-bind="data.date"></td></tr>
+    <tr><td>Pan Number</td><td ng-bind="data.pan_number"></td></tr>
+    <tr><td>Tan Number</td><td ng-bind="data.tan_number"></td></tr>
+    <tr><td>Amount</td><td ng-bind="data.amount"></td></tr>
+    <tr><td>Service Tax</td><td ng-bind="data.service_tax"></td></tr>
+  </table>
+</div>
+
+
+<button class="btn btn-primary" ng-print print-element-id="printRecipt"><i class="fa fa-print"></i> Print</button>
+<a ng-click="goBack();" class="btn btn-default">Cancel</a>
