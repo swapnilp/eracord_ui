@@ -51,6 +51,7 @@ app.directive('ngPrint', ['$window', function printDirective($window) {
   // if there is no printing section, create one
   if (!printSection) {
     printSection = document.createElement('div');
+    printSection.style= "width:97%;padding-left:5%;"
     printSection.id = 'printSection';
     document.body.appendChild(printSection);
   }
@@ -58,8 +59,9 @@ app.directive('ngPrint', ['$window', function printDirective($window) {
   function link(scope, element, attrs) {
     element.on('click', function () {
       var elemToPrint = document.getElementById(attrs.printElementId);
+      var dupElemToPrint = document.getElementById(attrs.duplicatePrintElementId);
       if (elemToPrint) {
-        printElement(elemToPrint);
+        printElement(elemToPrint, dupElemToPrint);
         $window.print();
       }
     });
@@ -70,11 +72,13 @@ app.directive('ngPrint', ['$window', function printDirective($window) {
     }
   }
   
-  function printElement(elem) {
+  function printElement(elem, dupElem) {
     // clones the element you want to print
     var domClone = elem.cloneNode(true);
+    var domClone1 = dupElem.cloneNode(true);
     printSection.innerHTML = '';
     printSection.appendChild(domClone);
+    printSection.appendChild(domClone1);
   }
   
   return {

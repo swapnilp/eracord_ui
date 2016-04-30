@@ -1,0 +1,90 @@
+<table class="table headerless" style="border:none; width:100%;">
+  <tr class="borderless" style="border:none">
+    <th class="borderless" style="width: 12.5%; border:none"></th>
+    <th class="borderless" style="width: 12.5%"></th>
+    <th class="borderless" style="width: 12.5%"></th>
+    <th class="borderless" style="width: 12.5%"></th>
+    <th class="borderless" style="width: 12.5%"></th>
+    <th class="borderless" style="width: 12.5%"></th>
+    <th class="borderless" style="width: 12.5%"></th>
+    <th class="borderless" style="width: 12.5%"></th>
+  </tr>
+
+  <tbody style="border: solid 1px grey; ">
+    <tr class="text-center" style="border: none;">
+      <td colspan="8" style="border: none;background:#eee;">
+	<h2 class="margin0">{{data.organisation_name}}</h2>
+	<strong>
+	  Payment Receipt
+	</strong>
+      </td>
+    </tr>
+    <tr class="text-center" >
+      <td colspan="8" style="border:none;text-align:right;padding-right:20px;background:#eee;">
+	Receipt No - {{data.id}}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" style="border: solid 1px grey;">
+	<strong>Paid by</strong> - {{data.student_name}}
+      </td>
+      <td colspan="4" style="border: solid 1px grey;">
+	<strong>Paid to</strong> - {{data.organisation_name}}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" style="border: solid 1px grey;">
+	<strong>DESCRIPTION</strong>
+      </td>
+      <td colspan="4" style="border: solid 1px grey;">
+	<strong>
+	  AMOUNT
+	</strong>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" style="border: none;">
+	Name - {{data.student_name}}
+      </td>
+      <td colspan="2" style="border: solid 1px grey;">
+	amount
+      </td>
+      <td colspan="2" style="border: solid 1px grey;">
+	{{data.amount}}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" style="border: none;">
+	Class - {{data.class_name}}
+      </td>
+      <td colspan="2" style="border: solid 1px grey;">
+	Service Tax
+      </td>
+      <td colspan="2" style="border: solid 1px grey;">
+	{{data.service_tax}}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" style="border: none;">
+	Pan Number - {{data.pan_number}}
+      </td>
+      <td colspan="2" rowspan="2" style="border: solid 1px grey;">
+	Total
+      </td>
+      <td colspan="2" rowspan="2" style="border: solid 1px grey;"> 
+	{{data.amount + data.service_tax}}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" style="border: none;">
+	Tan Number - {{data.tan_number}}
+      </td>
+    </tr>
+    <tr style="background:#eee;">
+      <td colspan="6" style="border: solid 1px grey;">
+	<strong>Received by - {{data.user}}</strong>
+      </td>
+      <td colspan="2" style="border: solid 1px grey;"><strong>Date- {{data.date}}</strong></td>
+    </tr>
+  </tbody>
+</table>
