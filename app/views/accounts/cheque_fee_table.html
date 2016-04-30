@@ -51,6 +51,14 @@
       <td colspan="4" style="border: none;">
 	<strong>Name </strong> {{data.student_name}}
       </td>
+      <td colspan="4" style="border: solid 1px grey;">
+	{{data.cheque_number}} <strong>{{data.bank_name}}</strong> cheque issued on {{data.cheque_issue_date}}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" style="border: none;">
+	<strong>Class </strong> {{data.class_name}}
+      </td>
       <td colspan="2" style="border: solid 1px grey;">
 	<strong>Amount</strong>
       </td>
@@ -60,7 +68,7 @@
     </tr>
     <tr>
       <td colspan="4" style="border: none;">
-	<strong>Class </strong> {{data.class_name}}
+	<strong>Pan Number </strong> {{data.pan_number}}
       </td>
       <td colspan="2" style="border: solid 1px grey;">
 	<strong>Service Tax</strong>
@@ -71,18 +79,13 @@
     </tr>
     <tr>
       <td colspan="4" style="border: none;">
-	<strong>Pan Number </strong> {{data.pan_number}}
+	<strong>Tan Number </strong> {{data.tan_number}}
       </td>
-      <td colspan="2" rowspan="2" style="border: solid 1px grey;">
+      <td colspan="2" style="border: solid 1px grey;">
 	<strong>Total</strong>
       </td>
-      <td colspan="2" rowspan="2" style="border: solid 1px grey;"> 
+      <td colspan="2" style="border: solid 1px grey;"> 
 	{{data.amount + data.service_tax}}
-      </td>
-    </tr>
-    <tr>
-      <td colspan="4" style="border: none;">
-	<strong>Tan Number </strong> {{data.tan_number}}
       </td>
     </tr>
     <tr>

@@ -425,10 +425,14 @@ tr.pointer, td.pointer {
 @media print {
   body * {
     visibility:hidden;
+    -webkit-print-color-adjust: exact;
   }
   #printSection, #printSection * {
     visibility:visible;
   }
+  
+  
+  
   #printSection {
     position:absolute;
     left:0;
@@ -443,6 +447,30 @@ table.headerless {
       border: none;
       th {
         border: none;
+      }
+
+      td.greyBackground {
+        padding:0;
+
+	div.hed {
+	  background-color:#eee;
+          background-image:url("img/666666.png");
+          background-repeat:repeat;
+          box-shadow: inset 0 0 0 1000px #eee;
+          border:20px solid #eee;
+          height:0;
+          line-height:10px;
+	}
+
+	div.foo {
+	  background-color:#eee;
+          background-image:url("img/666666.png");
+          background-repeat:repeat;
+          box-shadow: inset 0 0 0 1000px #eee;
+          border:20px solid #eee;
+          height:0;
+          line-height:0px;
+	}
       }
     }
   }

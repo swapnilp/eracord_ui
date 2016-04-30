@@ -4,13 +4,15 @@
 
 
 <div id="printRecipt"  style="width:100%;">
-  <div ng-include src="'views/accounts/fee_table.html'"></div>  
+  <div ng-include src="'views/accounts/fee_table.html'" ng-if="data.payment_type === 'cash'"></div>  
+  <div ng-include src="'views/accounts/cheque_fee_table.html'" ng-if="data.payment_type === 'cheque'"></div>  
   <hr style="margin-top:50px;color:#000;"/>
 </div>
 
 <div class="hide">
   <div id="printReciptDuplicate"  style="width:100%;">
-    <div ng-include src="'views/accounts/fee_table.html'"></div>  
+    <div ng-include src="'views/accounts/fee_table.html'" ng-if="data.payment_type === 'cash'"></div>  
+    <div ng-include src="'views/accounts/cheque_fee_table.html'" ng-if="data.payment_type === 'cheque'"></div>  
   </div>
 </div>
 
