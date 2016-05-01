@@ -51,7 +51,7 @@ app.directive('ngPrint', ['$window', function printDirective($window) {
   // if there is no printing section, create one
   if (!printSection) {
     printSection = document.createElement('div');
-    printSection.style= "width:97%;padding-left:5%;"
+    printSection.style= "width:695px;padding-left:5%;";
     printSection.id = 'printSection';
     document.body.appendChild(printSection);
   }

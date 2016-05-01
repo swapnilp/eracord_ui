@@ -467,7 +467,8 @@ table.headerless {
           background-image:url("img/666666.png");
           background-repeat:repeat;
           box-shadow: inset 0 0 0 1000px #eee;
-          border:20px solid #eee;
+          border:solid #eee;
+	  border-width: 20px 0px 20px 10px;
           height:0;
           line-height:0px;
 	}
