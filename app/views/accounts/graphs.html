@@ -2,31 +2,41 @@
   <div class="examFilterDiv col-sm-12 padding0" ng-if="showFilter"> 
     <div class="col-sm-2 paddingLeft0">
       <label for="standard_id">Batch</label>
-      <select class="form-control ng-touched" ng-model="filterAmount.batch" ng-options="std.id as std.name for std in batches">
+      <select class="form-control ng-touched" ng-model="filter.batch" ng-options="std.id as std.name for std in batches">
 	<option value="" class="hide" >Select Batch</option>
       </select>
     </div>
     <div class="col-sm-2 paddingLeft0">
       <label for="standard_id">Standard</label>
-      <select class="form-control ng-touched" ng-model="filterAmount.standard" ng-options="std.id as std.name for std in standards">
+      <select class="form-control ng-touched" ng-model="filter.standard" ng-options="std.id as std.name for std in standards">
 	<option value="">All Standards</option>
       </select>
     </div>
     <div class="col-sm-2 paddingLeft0">
       <label for="exam_type">Payment Type</label>
-      <select class="form-control ng-touched" ng-model="filterAmount.payment_type" ng-options="values for values in ['Cash', 'Cheque']">
+      <select class="form-control ng-touched" ng-model="filter.payment_type" ng-options="values for values in ['Cash', 'Cheque']">
 	<option value="">All</option>
       </select>
     </div>
     
     <div class="examFilterDiv col-sm-12 paddingLeft0 mTop15"> 
-      Filter : <input type="text" ng-model="filterAmount.name" dl-key-code="loadPayments();" code="13" placeholder="Type name or mobile and  enter" style="width:230px;" value="{{filterAmount.name}}">
-      <button class="btn btn-primary" ng-click="pageChanged(1, false);">Filter</button>
+      Filter : <input type="text" ng-model="filter.name" dl-key-code="loadPayments();" code="13" placeholder="Type name or mobile and  enter" style="width:230px;" value="{{filterAmount.name}}">
+      <button class="btn btn-primary" ng-click="loadGraph();">Filter</button>
       <button class="btn btn-primary" ng-click="resetFilter();">Reset</button>
     </div>
     <div class="col-sm-12 padding0" style="margin-top:20px;" ng-show="length > 0">
-      <div class="alert alert-warning">Total amount are - {{totalAmount}} &nbsp;&nbsp;&nbsp;
-	<a href="#/accounts" class="btn btn-primary">Details account </a></div>
+      <div class="alert alert-warning">
+	<div>
+	  Total amount are - {{totalAmount}} &nbsp;&nbsp;&nbsp;
+	  <a href="#/accounts" class="btn btn-primary">Details account </a>
+	</div>
+	<div style="margin-top:20px;">
+	  <label class="btn active btn-default" ng-repeat="accountType in ['Fee', 'Tax', 'Both']">
+	    <input name="cssPre" id="css1" type="radio" ng-value="accountType" ng-model="filter.selectedAccountType" ng-click="loadGraph();">
+	    {{accountType}}
+	  </label>
+	</div>
+      </div>
     </div>
   </div>
   <div request-loading is-loading="requestLoading"></div>

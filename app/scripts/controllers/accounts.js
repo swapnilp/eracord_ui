@@ -89,25 +89,38 @@ angular.module('eracordUiApp.controller')
     if($location.path() === '/accounts/graphs') {
       $scope.showFilter = true;
       $scope.length = 1;
-      
+      $scope.filter = {};
+      $scope.filter.selectedAccountType = 'Both';
       loadAmountFilters();
 
-      $scope.loadPayments = function(){
+      $scope.loadGraph = function(){
 	$scope.requestLoading = true;
 	$scope.labels = [];
-	$scope.series = ['Amount'];
+	$scope.series = ['Fee'];
 	$scope.data = [];
-	payment_fee.customGET("graph_data", {filter: $scope.filterAmount}).then(function(data) {
+
+	payment_fee.customGET("graph_data", {filter: $scope.filter}).then(function(data) {
 	  if(data.success) {
 	    $scope.totalPayments = data.count;
-	    $scope.labels = data.values;
-	    $scope.data = [data.keys];
+	    $scope.data= [data.values];
+	    $scope.labels = data.keys;
+	    $scope.totalAmount = data.total_amount;
 	  } else {
 	  }
 	  $scope.requestLoading = false;
 	});
       };
-      $scope.loadPayments();
+
+      $scope.resetFilter = function() {
+	$scope.filter = {};
+	$scope.filter.selectedAccountType = 'Both';
+	$scope.filterAmount = {};
+	$scope.filter.batch = _.findWhere($scope.batches, {is_active: true}).id;
+	$scope.loadGraph();
+      };
+      
+      
+      $scope.loadGraph();
     }
     // end of graph action 
 

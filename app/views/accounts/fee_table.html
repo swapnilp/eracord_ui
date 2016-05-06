@@ -11,11 +11,10 @@
   </tr>
 
   <tbody style="border: solid 1px grey;">
-    <tr class="text-center" style="border: none;">
-      <td colspan="8" style="border: none;" class="greyBackground">
+    <tr class="text-center" style="border:none;">
+      <td colspan="8" style="border:none;" class="greyBackground">
 	<div class="hed">
-	  <h2 class="margin0">{{data.organisation_name}}</h2>
-	  <strong>
+	  <strong style="font-size:20px;">
 	    Payment Receipt
 	  </strong>
 	</div>
@@ -30,10 +29,15 @@
     </tr>
     <tr>
       <td colspan="4" style="border: solid 1px grey;">
-	<strong>Paid by</strong> - {{data.student_name}}
+	<strong>Organisation</strong>
+	<br/>	  
+	{{data.organisation_name}}
+	
       </td>
       <td colspan="4" style="border: solid 1px grey;">
-	<strong>Paid to</strong> - {{data.organisation_name}}
+	<strong>PAN Number </strong> {{data.pan_number}}
+	<br />
+	<strong>TAN Number </strong> {{data.tan_number}}
       </td>
     </tr>
     <tr>
@@ -71,7 +75,7 @@
     </tr>
     <tr>
       <td colspan="4" style="border: none;">
-	<strong>Pan Number </strong> {{data.pan_number}}
+	<strong>Mobile</strong>  {{data.mobile}}
       </td>
       <td colspan="2" rowspan="2" style="border: solid 1px grey;">
 	<strong>Total</strong>
@@ -82,7 +86,6 @@
     </tr>
     <tr>
       <td colspan="4" style="border: none;">
-	<strong>Tan Number </strong> {{data.tan_number}}
       </td>
     </tr>
     <tr>
