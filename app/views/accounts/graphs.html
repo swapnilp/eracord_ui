@@ -30,12 +30,18 @@
 	  Total amount are - {{totalAmount}} &nbsp;&nbsp;&nbsp;
 	  <a href="#/accounts" class="btn btn-primary">Details account </a>
 	</div>
-	<div style="margin-top:20px;">
-	  <label class="btn active btn-default" ng-repeat="accountType in ['Fee', 'Tax', 'Both']">
-	    <input name="cssPre" id="css1" type="radio" ng-value="accountType" ng-model="filter.selectedAccountType" ng-click="loadGraph();">
-	    {{accountType}}
-	  </label>
-	</div>
+      </div>
+      <div style="margin-top:20px;" class="pull-left">
+	<label class="btn active btn-default" ng-repeat="accountType in ['Fee', 'Tax', 'Both']">
+	  <input name="cssPre" id="css1" type="radio" ng-value="accountType" ng-model="filter.selectedAccountType" ng-click="loadGraph();">
+	  {{accountType}}
+	</label>
+      </div>
+      <div style="margin-top:20px;" class="pull-right">
+	<label class="btn active btn-default" ng-repeat="accountSpan in ['month', 'week', 'day']">
+	  <input name="cssPre1" id="css2" type="radio" ng-value="accountSpan" ng-model="filter.selectedAccountSpan" ng-click="loadGraph();">
+	  {{accountSpan}}
+	</label>
       </div>
     </div>
   </div>
