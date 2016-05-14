@@ -35,23 +35,23 @@
       <div class="col-sm-12">
 	<h5>
 	  <small class="col-sm-2">Download Progress Report :</small> 
-	  <span style="font-size:20px;">
+	  <span style="font-size:20px;" ng-if="student">
 	    <a class="btn btn-primary btn-sm" target="_blank" href="{{hostUrl}}/students/{{student.id}}/download_report.pdf?&authorization_token={{token}}" rel="nofollow">Download Report</a>
 	  </span>
 	</h5>
       </div>
     </div>
-    <div class="col-sm-12 left">
-      <div class="left mRight10">
+    <div class="col-sm-12 left padding0" style="margin:15px 0px;">
+      <div class="left mRight10" ng-if="student">
 	<a class="btn btn-primary" href="#/students/{{student.id}}/edit">Edit</a>
       </div>
-      <div class="left mRight10" ng-if="has_pay_fee">
+      <div class="left mRight10" ng-if="has_pay_fee && student">
 	<a class="btn btn-primary" href="#/students/{{student.id}}/pay_fee">Pay Fee</a>
       </div>
-      <div class="left mRight10" ng-if="has_show_pay_info">
+      <div class="left mRight10" ng-if="has_show_pay_info && student">
 	<a class="btn btn-primary" href="#/students/{{student.id}}/payment_info">Payment Info</a>
       </div>
-      <div class="left mRight10"  is-role-visible='["toggle_student_sms"]' email="currentUser.email">
+      <div class="left mRight10"  is-role-visible='["toggle_student_sms"]' email="currentUser.email" ng-if="student">
 	<toggle-switch class="mLeft10"
 		       ng-model="student.enable_sms"
 		       knob-label="SMS" ng-click="toggleStudentSms()">

@@ -106,6 +106,8 @@ angular.module('eracordUiApp.controller')
 	    $scope.data= [data.values];
 	    $scope.labels = data.keys;
 	    $scope.totalAmount = data.total_amount;
+	    $scope.minDate = data.min_date;
+	    $scope.maxDate = data.max_date;
 	  } else {
 	  }
 	  $scope.requestLoading = false;
