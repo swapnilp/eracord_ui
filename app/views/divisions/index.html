@@ -1,7 +1,7 @@
 <div request-loading is-loading="requestLoading"></div>
 <div style="margin:20px 0;" ng-show="!requestLoading">
   <a href="#/classes/{{classId}}/divisions/new" class="btn btn-primary">Create Division</a>
-  <figure class="highlight col-sm-12">
+  <figure class="highlight col-sm-12"  ng-if="divisions.length > 0">
     <table st-table="rowCollection" class="table organisationCoursesTable">
       <thead>
 	<tr>
@@ -24,4 +24,8 @@
     </table>
   </figure>
 </div>
-
+<div class="alert alert-warning col-sm-12">
+    <span ng-if="divisions.length  < 1">
+      No data found
+    </span>
+  </div>
