@@ -216,7 +216,11 @@ angular.module('eracordUiApp.controller')
 
 	student.customPOST({student: $scope.vm.user, o_subjects: $scope.vm.o_subjects}, "update", {}).then(function(data){
 	  if(data.success) {
-	    $location.path("/students/"+$scope.student_id+"/show").replace();
+	    if($routeParams.location){
+	      $location.path("classes/"+$routeParams.class_id+"/manage_class").replace();
+	    }else{
+	      $location.path("/students/"+$scope.student_id+"/show").replace();
+	    }
 	  }else {
 	  }
 	  $scope.dataLoading = true;

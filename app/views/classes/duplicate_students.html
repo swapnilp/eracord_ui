@@ -38,7 +38,7 @@
 	    Total exams attented are -  {{row.exams_count}}
 	    <br />
 	    <button ng-click="acceptStudent(row)" class="btn btn-link" ng-if="(row.is_duplicate && !row.is_duplicate_accepted && !row.dataLoading)">Accept and leave as it is</button>
-	    <a class="btn btn-link" href="#/students/{{row.student_id}}/edit">Edit Student</a>
+	    <a class="btn btn-link" href="#/students/{{row.student_id}}/edit?&location=manage_class&class_id={{classId}}">Edit Student</a>
 	    <button ng-click="removeStudent(row);" class="btn btn-link">Remove student from class</button>
 	  </td>
 	</tr>

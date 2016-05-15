@@ -102,12 +102,20 @@ app.directive('examCatlog', function(Restangular) {
 
       scope.ignoreStudent = function(catlog) {
 	catlog.is_ingored = true;
-	scope.publishEnable = false;
+	//scope.publishEnable = false;
+	jkci_classes.one("exams", scope.exam.id).customPOST({catlog_id: catlog.id }, "add_ignored_student").then(function(data){
+	  scope.savedAlert = true;
+	  scope.remainingLength = remainingStudentsFilter(scope.examCatlogs).length;
+	});
       };
 
       scope.removeIgnored = function(catlog) {
 	catlog.is_ingored = null;
-	scope.publishEnable = false;
+	jkci_classes.one("exams", scope.exam.id).customPOST({catlog_id: catlog.id }, "remove_ignored_student").then(function(data){
+	  scope.savedAlert = true;
+	  scope.remainingLength = remainingStudentsFilter(scope.examCatlogs).length;
+	});
+	//scope.publishEnable = false;
       };
 
       
