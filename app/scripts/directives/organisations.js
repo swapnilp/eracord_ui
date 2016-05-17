@@ -153,10 +153,11 @@ app.directive('organisationSubOrganisations', function(Restangular, $location, F
 	    if(data.success) {
 	      scope.loadCources();
 	      scope.loadSubOrganisation();
+	      sub_organisation.dataLoading = false;
 	    }else {
 	      Flash.create('warning', "Some thing went wrong", 'alert-danger');
 	    }
-	    sub_organisation.dataLoading = false;
+
 	  });
 	}
       }
