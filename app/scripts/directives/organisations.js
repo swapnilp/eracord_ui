@@ -145,15 +145,16 @@ app.directive('organisationSubOrganisations', function(Restangular, $location, F
 	  scope.sub_organisations = data.organisations;
 	});
       };
+      
       scope.loadSubOrganisation();
+      
       scope.pullBackSubOrganisation = function(sub_organisation) {
 	if($window.confirm('Are you sure?')){
 	  sub_organisation.dataLoading = true;
 	  base_organisation.one('sub_organisations', sub_organisation.id).remove().then(function(data){
 	    if(data.success) {
+	      scope.sub_organisations = _.reject(scope.sub_organisations, function(d){ return d.id === sub_organisation.id; });
 	      scope.loadCources();
-	      scope.loadSubOrganisation();
-	      sub_organisation.dataLoading = false;
 	    }else {
 	      Flash.create('warning', "Some thing went wrong", 'alert-danger');
 	    }
@@ -227,10 +228,11 @@ app.directive('organisationClasses', function(Restangular) {
       hostUrl: '@'
     },
     templateUrl: 'views/organisations/classes.html',
-    controller: ['$scope', 'Restangular', 'Flash', '$location', function(scope, Restangular, Flash, $location){
+    controller: ['$scope', 'Restangular', 'Flash', '$location', '$cookieStore', function(scope, Restangular, Flash, $location, $cookieStore){
       scope.m_classes = scope.other_classes = [];
       scope.organisationClassesLoded = false;
       scope.requestLoading = true;
+      scope.token = $cookieStore.get('currentUser').token;
       
       scope.loadClasses = function(){
 	scope.requestLoading = true;
@@ -325,7 +327,8 @@ app.directive('classBox', function(Restangular) {
       makeDeactiveClass: '&',
       makeActiveClass: '&',
       jkClass: '=',
-      hostUrl: '@'
+      hostUrl: '@',
+      token: '@'
     },
     templateUrl: 'views/organisations/class_view.html',
     controller: ['$scope', function(scope){

@@ -5,14 +5,14 @@
   <div request-loading is-loading="requestLoading"></div>
   <div class="col-sm-12 textLeft" ng-show="!requestLoading">
     <div class="col-sm-4 organisationClass" ng-repeat="jk_class in m_classes" ng-class="{active: jk_class.is_current_active}">
-      <div class-box make-deactive-class="makeDeactiveClass(classId)" make-active-class="makeActiveClass(classId)" jk-class="jk_class" host-url="{{hostUrl}}">
+      <div class-box make-deactive-class="makeDeactiveClass(classId)" make-active-class="makeActiveClass(classId)" jk-class="jk_class" host-url="{{hostUrl}}" token="{{token}}">
       </div>
     </div>
     <h3 class="col-sm-12" ng-if="other_classes.length > 0">Assigned To others</h3>
     <div class="col-sm-4 organisationClass" ng-repeat="jk_class in other_classes" ng-class="{active: jk_class.is_current_active}">
       <div class="wrapper">
 	<div class="rightMenu">
-	  <a href="{{hostUrl}}/sub_organisation/{{jk_class.organisation_id}}/class/{{jk_class.id}}/get_report.pdf" target="_blank">
+	  <a href="{{hostUrl}}/sub_organisation/{{jk_class.organisation_id}}/class/{{jk_class.id}}/get_report.pdf?&authorization_token={{token}}" target="_blank">
 	    <i class="fa fa-line-chart"></i>
 	  </a>
 	</div>
