@@ -18,6 +18,12 @@
 	<option value="">All</option>
       </select>
     </div>
+    <div class="col-sm-2 paddingLeft0">
+      <label for="is_remaining">Is Remaining</label>
+      <select class="form-control ng-touched" ng-model="filterAmount.is_remaining" ng-options="values for values in ['Remaining']">
+	<option value="">All</option>
+      </select>
+    </div>
     
     <div class="examFilterDiv col-sm-12 paddingLeft0 mTop15"> 
       Filter : <input type="text" ng-model="filterAmount.name" dl-key-code="pageChanged(1);" code="13" placeholder="Type name or mobile and  enter" style="width:230px;" value="{{filterAmount.name}}">
@@ -61,6 +67,9 @@
 		  </li>
 		  <li>
 		    Parent Mobile - {{row.p_mobile}}
+		  </li>
+		  <li>
+		    Parent Occupation - {{row.parent_occupation}}
 		  </li>
 		</ul>
 	      </div>
@@ -131,6 +140,7 @@
 	      </tr>
 	      <tr>
 		<td colspan="5">
+		  <a class="btn btn-primary" href="#/students/{{row.student_id}}/show">Show</a>
 		  <a class="btn btn-primary" href="#/students/{{row.student_id}}/pay_fee" ng-if="row.remaining_fee !== 0">Pay Fee</a>
 		</td>
 	      </tr>

@@ -92,6 +92,7 @@ angular.module('eracordUiApp.controller')
       $scope.filter = {};
       $scope.filter.selectedAccountType = 'Both';
       $scope.filter.selectedAccountSpan = 'month';
+      $scope.filter.is_remaining = 'All';
       loadAmountFilters();
 
       $scope.loadGraph = function(){
