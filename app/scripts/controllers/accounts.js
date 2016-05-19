@@ -138,6 +138,14 @@ angular.module('eracordUiApp.controller')
       });
     }
     // end of print receipt
+
+    if($location.path() === '/accounts/print_account') {
+      $scope.reqLoading = true;
+      payment_fee.customGET("print_account", {filter: $routeParams.filter}).then(function(data) {
+	$scope.data = data.data;
+	$scope.reqLoading = false;
+      });
+    }
   }]);
 
 

@@ -29,13 +29,12 @@
       Filter : <input type="text" ng-model="filterAmount.name" dl-key-code="pageChanged(1);" code="13" placeholder="Type name or mobile and  enter" style="width:230px;" value="{{filterAmount.name}}">
       <button class="btn btn-primary" ng-click="pageChanged(1, false);">Filter</button>
       <button class="btn btn-primary" ng-click="resetFilter();">Reset</button>
+      <a href="#/accounts/print_account?&filter={{filterAmount}}" class="btn btn-primary"><i class="fa fa-print"></i>&nbsp;&nbsp;Print</a>
+      <a href="" class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;Download</a>
     </div>
     <div class="col-sm-12 padding0" style="margin-top:20px;" ng-show="length > 0">
       <div class="alert alert-warning">Total amount are - {{totalAmount}} &nbsp;&nbsp;&nbsp;<a href="#/accounts/graphs" class="btn btn-primary">Show Graphical </a>
-	&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href=""><i class="fa fa-print"></i></a>
-	&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href=""><i class="fa fa-file-excel-o"></i></a>
+
 	<br/><br/>
 	Total service tax are - {{totalTax}}
 	<br/><br/>

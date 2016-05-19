@@ -19,6 +19,11 @@ app.config(function($routeProvider) {
       templateUrl: 'views/accounts/fee_receipt.html',
       controller: 'AccountsCtrl',
       controllerAs: 'accounts'
-    });
+    })
+    .when('/accounts/print_account', {
+      templateUrl: 'views/accounts/print_account.html',
+      controller: 'AccountsCtrl',
+      controllerAs: 'accounts'
+    });;
 });
 

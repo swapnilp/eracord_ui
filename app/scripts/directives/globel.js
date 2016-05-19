@@ -75,10 +75,14 @@ app.directive('ngPrint', ['$window', function printDirective($window) {
   function printElement(elem, dupElem) {
     // clones the element you want to print
     var domClone = elem.cloneNode(true);
-    var domClone1 = dupElem.cloneNode(true);
+    if(dupElem) {
+      var domClone1 = dupElem.cloneNode(true);
+    }
     printSection.innerHTML = '';
     printSection.appendChild(domClone);
-    printSection.appendChild(domClone1);
+    if(dupElem) {
+      printSection.appendChild(domClone1);
+    }
   }
   
   return {
