@@ -44,6 +44,7 @@ angular.module('eracordUiApp.controller')
       $scope.showFilter = true;
       $scope.payments = [];
       $scope.pagination = {current: 1};
+       $scope.token = $cookieStore.get('currentUser').token;
       
       var loadPayments = function(pageNumber) {
 	$scope.requestLoading = true;
@@ -141,6 +142,7 @@ angular.module('eracordUiApp.controller')
 
     if($location.path() === '/accounts/print_account') {
       $scope.reqLoading = true;
+     
       payment_fee.customGET("print_account", {filter: $routeParams.filter}).then(function(data) {
 	$scope.data = data.data;
 	$scope.reqLoading = false;
