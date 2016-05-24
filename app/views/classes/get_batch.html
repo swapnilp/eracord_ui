@@ -29,8 +29,12 @@
       </label>
     </div>
     <div class="col-sm-12 textLeft paddingTop10 remainingStudentsList">
+      <span ng-if="withStudent">
+	<button ng-click="checkAllStudent();">Check all</button>
+	<button ng-click="uncheckAllStudent();">uncheck all</button>
+      </span>
       <label ng-repeat="student in students">
-	<input type="checkbox" checklist-model="studentList" checklist-value="student.id"> {{student.name}} - {{student.p_mobile}}
+	<input type="checkbox" checklist-model="studentList" checklist-value="student.id" ng-model="student.checked"> {{student.name}} - {{student.p_mobile}}
       </label>
     </div>
     <div class="col-sm-12 textLeft paddingTop10">

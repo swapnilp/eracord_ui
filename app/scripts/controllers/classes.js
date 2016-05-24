@@ -178,6 +178,19 @@ angular.module('eracordUiApp.controller')
 	  $location.path("/classes/"+$routeParams.class_id);
 	}
       });
+
+      $scope.checkAllStudent = function() {
+	_.each($scope.students, function(student){
+	  student.checked = true;
+	});
+	$scope.studentList = _.pluck($scope.students, 'id');
+      };
+
+      $scope.uncheckAllStudent = function() {
+	_.each($scope.students, function(student){
+	  student.checked = false;
+	});
+      };
       
       $scope.getStudents = function(){
 	if($scope.withStudent){
@@ -197,7 +210,7 @@ angular.module('eracordUiApp.controller')
 	    then(function(data){
 	      if(data.success) {
 		if(data.is_same_organisation) {
-		  $location.path("/classes/"+data.id).replace();
+		  $location.path("/classes/"+data.class_id).replace();
 		}else {
 		  $location.path("/admin_desk").replace();
 		}
