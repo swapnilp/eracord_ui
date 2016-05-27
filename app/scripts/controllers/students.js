@@ -237,6 +237,7 @@ angular.module('eracordUiApp.controller')
       $scope.fee_amount = 0;
       $scope.tax_amount = 0;
       $scope.total_amount = 0;
+      $scope.maxFee = 0;
       
       var student = Restangular.one("students", $routeParams.student_id);
       $scope.vm = {};
@@ -258,6 +259,11 @@ angular.module('eracordUiApp.controller')
 	  }
 	  $scope.requestLoading = false;
 	});
+      };
+
+      $scope.calculateMaxFee = function(klass){
+	$scope.maxFee = _.where($scope.classes, {class_id: klass})[0].remaining_fee;
+	$scope.vm.amount = '';
       };
 
       $scope.calculateTax = function(amount) {

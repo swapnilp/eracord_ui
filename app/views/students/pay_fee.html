@@ -24,7 +24,7 @@
       </div>
       <div class="form-group" ng-class="{ 'has-error': form.class_id.$dirty && form.class_id.$error.required }" ng-if="classes.length > 0">
 	<label for="class_id">Class <span class="textRed"> *</span></label>
-	<select class="form-control ng-touched" ng-model="vm.jkci_class_id" ng-options="klass.class_id as klass.class_name for klass in classes" ng-required="classes.length > 0"></select>
+	<select class="form-control ng-touched" ng-model="vm.jkci_class_id" ng-options="klass.class_id as klass.class_name for klass in classes" ng-required="classes.length > 0" ng-change="calculateMaxFee(vm.jkci_class_id);"></select>
 	<span ng-show="form.class_id.$dirty && form.class_id.$error.required" class="help-block">Class must be present</span>
       </div>
       <div class="col-md-12 padding0">
@@ -43,9 +43,11 @@
 	<label for="receipt_number">Receipt Number</label>
 	<input type="text" name="receipt_number" id="receipt_number" class="form-control" ng-model="vm.receipt_number"  placeholder="Please enter receipt  number" >
       </div>
-      <div class="form-group" ng-class="{ 'has-error': form.amount.$dirty && form.amount.$error.required }">
-	<label for="amount">Total Amount <span ng-if="enable_tax">With Tax</span><span class="textRed"> *</span></label>
-	<input type="text" name="amount" id="amount" class="form-control" ng-model="vm.amount"  placeholder="Please enter amount" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0" ng-change="calculateTax(vm.amount);"required/>
+      <div class="form-group" ng-class="{ 'has-error': form.amount.$error.required || !vm.amount}">
+	<label for="amount">Total Amount <span ng-if="enable_tax">With Tax</span><span class="textRed"> *</span>
+	  <span ng-if="maxFee > 0"> &nbsp;&nbsp;MaxFee- {{maxFee}}</span>
+	</label>
+	<input type="number" name="amount" id="amount" class="form-control" ng-model="vm.amount"  placeholder="Please enter amount" ng-change="calculateTax(vm.amount);" ng-max="maxFee" required/>
 	<div ng-if="enable_tax && total_amount > 0">
 	  Fee Amount + Tax Amount = Total Amount <br/>
 	  <span> {{fee_amount}} </span> + <span>{{tax_amount}}</span> = <span>{{total_amount}}</span>
