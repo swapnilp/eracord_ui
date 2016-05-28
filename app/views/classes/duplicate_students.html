@@ -1,6 +1,14 @@
 <div style="margin:20px 0;">
   <div request-loading is-loading="requestLoading"></div>
-  <figure class="highlight col-sm-12" ng-show="!requestLoading">
+  <div class="alert alert-warning col-sm-12" ng-show="!requestLoading">
+    <span ng-if="students.length > 0">
+      Total Students are - {{students.length}}
+    </span>
+    <span ng-if="students.length === 0">
+      No data found
+    </span>
+  </div>
+  <figure class="highlight col-sm-12" ng-show="!requestLoading" ng-if="students.length > 0">
     <table st-table="rowCollection" class="table">
       <thead>
 	<tr>

@@ -139,6 +139,9 @@ angular.module('eracordUiApp.controller')
       base_organisation.one('standard', $routeParams.id).customGET('remaining_organisations').then(function(data){
       	if(data.success) {
 	  $scope.sub_organisations = data.body;
+	} else {
+	  Flash.create('warning', data.message, 'alert-danger');
+	  $location.path('/manage_organisation').replace();
 	}
 	$scope.requestLoading = false;
       });

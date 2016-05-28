@@ -33,14 +33,14 @@
 		  </li>
 		</ul>
 	      </span>
-	      <span ng-if="org.organisation_id !== organisation_id && !org.is_parent_organisation">
+	      <span ng-if="org.organisation_id !== organisation_id && !org.is_parent_organisation && org.is_children">
 		<i class="fa fa-times"  ng-click="removeOrganisaitonStandard(standard, org);" ng-show="!org.deleteLoading"></i>
 		<span button-req-load is-loading="org.deleteLoading"></span>
 	      </span>
 	    </span>
 	  </td>
 	  <td>
-	    <a href="#/organisation/standards/{{standard.id}}/assign_organisation"class="btn btn-default">Assign Organisaiton</a>
+	    <a href="#/organisation/standards/{{standard.id}}/assign_organisation" class="btn btn-default" ng-if="standard.is_permission">Assign Organisation</a>
 	  </td>
 	</tr>
       </tbody>
