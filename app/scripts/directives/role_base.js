@@ -25,6 +25,9 @@ app.directive('isRoleVisible', function(Restangular) {
       scope.checkRole = function(){
 	getRoles();
 	if(_.contains(roles, "admin")){
+	  if(_.contains(scope.roles, "accountant")){
+	    return(_.intersection(roles, ["accountant"]).length);
+	  }
 	  return 1;
 	}
 	return(_.intersection(roles, scope.roles).length);
