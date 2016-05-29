@@ -30,10 +30,10 @@ angular.module('eracordUiApp.controller')
 	  $scope.classDtpTab = true;
 	} else if(selectTab === 'notifications') {
 	  $scope.classNotificationTab = true;
-	} else if (selectTab === 'students'){
-	  $scope.classStudentTab = true;
-	} else {
+	} else if (selectTab === 'class_catlogs'){
 	  $scope.classCatlogTab = true;
+	} else {
+	  $scope.classStudentTab = true;
 	}
       };
 
