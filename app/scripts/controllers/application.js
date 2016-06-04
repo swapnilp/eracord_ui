@@ -107,6 +107,9 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
     if($location.path().search("/accounts") >= 0 ){
       $scope.topMenu = "accounts";
     }
+    if($location.path().search("/sms") >= 0 ){
+      $scope.topMenu = "sms";
+    }
     if($location.path() === "/"){
       $scope.topMenu = "home";
     }

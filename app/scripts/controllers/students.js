@@ -9,7 +9,7 @@
  */
 angular.module('eracordUiApp.controller')
   .controller('StudentsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$cookieStore', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window, $cookieStore) {
-
+    
     if(!Auth.isAuthenticated()){
       $location.path('/user/sign_in').replace();
       return true;

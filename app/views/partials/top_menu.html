@@ -27,6 +27,7 @@
 	  <li is-role-visible='["accountant"]' email="currentUser.email" ng-class="{active: topMenu==='accounts'}">
 	    <a ng-href="#/accounts">Accounts</a>
 	  </li>
+	  <li is-role-visible='["manage_organiser"]' email="currentUser.email" ng-class="{active: topMenu=== 'sms'}"><a ng-href="#/sms">Sms</a></li>
           <li ng-class="{active: topMenu==='contacts'}"><a ng-href="#/contact">Contact</a></li>
         </ul>
 	<ul class="nav navbar-nav pull-right" ng-if="currentUser.email">
