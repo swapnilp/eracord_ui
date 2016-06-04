@@ -1,0 +1,49 @@
+<div style="margin:20px 0;">
+  <div class="examFilterDiv col-sm-12"> 
+    <div class="col-sm-3">
+      Filter : <input type="text" ng-model="filterStudent" dl-key-code="pageChanged(1);" code="13" placeholder="Type mobile and enter" style="max-width:230px;" value="{{filterStudent}}">
+
+    </div>
+    
+    <div class="col-sm-3">
+      <button class="btn btn-primary" ng-click="pageChanged(1);">Filter</button>
+    </div>		  
+  </div>
+  <br /><br /><br />
+  <div class="alert alert-warning col-sm-12">
+    <span ng-if="totalCount > 0">
+      Total Sent sms  are - {{totalCount}}
+    </span>
+    <span ng-if="totalCount === 0">
+      No data found
+    </span>
+  </div>
+  <div request-loading is-loading="requestLoading"></div>
+  <figure class="highlight col-sm-12" ng-show="!requestLoading && totalCount > 0">
+    <table st-table="rowCollection" class="table organisationCoursesTable">
+      <thead>
+	<tr>
+	  <th st-sort="balance">#</th>
+	  <th st-sort="firstName">Type</th>
+	  <th st-sort="firstName">Message</th>
+	  <th st-sort="lastName">Is Parent</th>
+	  <th st-sort="balance">Student Name</th>
+	  <th st-sort="balance">Number</th>
+	</tr>
+      </thead>
+      <tbody>
+	<tr dir-paginate="row in sms_sents | toArray:false | itemsPerPage: 10" total-items="totalCount" current-page="pagination.current" pagination-id="sms_sent" ng-click="openInfo(row);" class="pointer">
+	  <td><span ng-if="!showRollNumber">{{ $index+1 + ((pagination.current - 1) * 10)}}</span></td>
+	  <td><span>{{row.obj_type}}</span></td>
+	  <td>{{row.message}}</td>
+	  <td>{{row.is_parent}}</td>
+	  <td>{{row.student_name}}</td>
+	  <td>{{row.number}}</td>
+	</tr>
+      </tbody>
+    </table>
+  </figure>
+  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)" pagination-id="sms_sent" ng-show="totalCount > 9"></dir-pagination-controls>
+</div>
+
+
