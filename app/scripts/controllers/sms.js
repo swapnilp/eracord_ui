@@ -20,24 +20,22 @@ angular.module('eracordUiApp.controller')
       $location.path('/user/sign_in').replace();
       return true;
     }
-    
+    var sms_sent = Restangular.all("sms_sent");
     if($location.path() === '/sms') {
       $scope.requestLoading = true;
       $scope.pagination = {
         current: 1
       };
+      $scope.filterStudent = "";
       
       var getResultsPage = function(pageNumber){
-	var students = Restangular.all("sms_sent");
-	students.customGET("", {page: pageNumber}).then(function(data){
+	sms_sent.customGET("", {page: pageNumber, filter: $scope.filterStudent}).then(function(data){
 	  $scope.sms_sents = data.sms_sents;
 	  $scope.totalCount = data.count;
 	  $scope.requestLoading = false;
 	});
-	
       }
 
-      
       $scope.pageChanged = function(newPage) {
         getResultsPage(newPage);
       };
@@ -47,7 +45,7 @@ angular.module('eracordUiApp.controller')
       $scope.pageChanged = function(newPage) {
         getResultsPage(newPage);
       };
-      
     }
+    //end of sms index method
   }
 ]);

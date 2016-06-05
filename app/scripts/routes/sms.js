@@ -9,5 +9,5 @@ app.config(function($routeProvider) {
       templateUrl: 'views/sms/index.html',
       controller: 'SmsCtrl',
       controllerAs: 'sms'
-    })
+    });
 });
