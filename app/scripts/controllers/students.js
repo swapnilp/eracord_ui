@@ -117,7 +117,7 @@ angular.module('eracordUiApp.controller')
 	    if($scope.classStudents) {
 	      $location.path("/classes/"+$routeParams.class_id+"/manage_class").replace();
 	    } else {
-	      $location.path("/students").replace();
+	      $location.path("/students/"+data.student_id+"/show").replace();
 	    }
 	    
 	  }else {
@@ -134,6 +134,7 @@ angular.module('eracordUiApp.controller')
       $scope.labels = [];
       $scope.series = ['Time'];
       $scope.data = [];
+      $scope.classes = [];
       $scope.selectedTimeZone = 'month';
       $scope.selectedGraphType = 'all';
       
@@ -143,6 +144,7 @@ angular.module('eracordUiApp.controller')
 	  $scope.student = data.body.student;
 	  $scope.has_show_pay_info = data.has_show_pay_info;
 	  $scope.has_pay_fee = data.has_pay_fee;
+	  $scope.classes = data.classes;
 	}
       });
 

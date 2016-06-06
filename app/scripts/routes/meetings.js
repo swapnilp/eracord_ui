@@ -14,5 +14,10 @@ app.config(function($routeProvider) {
       templateUrl: 'views/meetings/new.html',
       controller: 'MeetingsCtrl',
       controllerAs: 'meetings'
+    })
+    .when('/meetings/:id/show', {
+      templateUrl: 'views/meetings/show.html',
+      controller: 'MeetingsCtrl',
+      controllerAs: 'meetings'
     });
 });

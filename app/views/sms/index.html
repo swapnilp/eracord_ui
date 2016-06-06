@@ -30,7 +30,7 @@
 	</tr>
       </thead>
       <tbody>
-	<tr dir-paginate="row in sms_sents | toArray:false | itemsPerPage: 10" total-items="totalCount" current-page="pagination.current" pagination-id="sms_sent" ng-click="openInfo(row);" class="pointer">
+	<tr dir-paginate="row in sms_sents | toArray:false | itemsPerPage: 10" total-items="totalCount" current-page="pagination.current" pagination-id="sms_sent" ng-click="openInfo(row);">
 	  <td><span ng-if="!showRollNumber">{{ $index+1 + ((pagination.current - 1) * 10)}}</span></td>
 	  <td><span>{{row.obj_type}}</span></td>
 	  <td>{{row.message}}</td>

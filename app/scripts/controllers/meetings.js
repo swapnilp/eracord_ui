@@ -44,6 +44,15 @@ angular.module('eracordUiApp.controller')
       $scope.pageChanged = function(newPage) {
         getResultsPage(newPage);
       };
+
+      $scope.openInfo = function(row) {
+	if(row.expanded === true) {
+	  _.map($scope.meetings, function(student){ student.expanded = false;})
+	}else {
+	  _.map($scope.meetings, function(student){ student.expanded = false;})
+	  row.expanded = true;
+	}
+      };
     }
     //end of meetings index method
     
@@ -74,6 +83,16 @@ angular.module('eracordUiApp.controller')
       };
     }
     //end of meetings new method
+
+    if($location.path() === '/meetings/' + $routeParams.id + '/show') {
+      
+      $scope.meetingId = $routeParams.id;
+	
+      Restangular.one("parents_meetings", $routeParams.id).get().then(function(data){
+	$scope.meeting = data.parents_meeting;
+      });
+    }
+    //end of meetings show method
   }
 ]);
 
