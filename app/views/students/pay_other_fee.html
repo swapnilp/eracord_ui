@@ -1,7 +1,7 @@
 <div request-loading is-loading="requestLoading"></div>
 <div class="col-sm-12" style="margin:20px 0;" ng-show="!requestLoading">
   <h2>
-    Pay Fee
+    Pay Other Fee <small>(like Stationary, Mess, libory, Other than tution fee)</small>
   </h2>
   <div class="col-sm-5">
     <form name="form" ng-submit="payFee()" role="form" autocomplete="off">
@@ -47,14 +47,14 @@
 	<input type="text" name="receipt_number" id="receipt_number" class="form-control" ng-model="vm.receipt_number"  placeholder="Please enter receipt  number" >
       </div>
       <div class="form-group" ng-class="{ 'has-error': form.amount.$error.required || !vm.amount}">
-	<label for="amount">Total Amount <span ng-if="enable_tax">With Tax</span><span class="textRed"> *</span>
-	  <span ng-if="maxFee > 0"> &nbsp;&nbsp;MaxFee- {{maxFee}}</span>
+	<label for="amount">Total Amount <span class="textRed"> *</span>
 	</label>
-	<input type="number" name="amount" id="amount" class="form-control" ng-model="vm.amount"  placeholder="Please enter amount" ng-change="calculateTax(vm.amount);" ng-max="maxFee" required/>
-	<div ng-if="enable_tax && total_amount > 0">
-	  Fee Amount + Tax Amount = Total Amount <br/>
-	  <span> {{fee_amount}} </span> + <span>{{tax_amount}}</span> = <span>{{total_amount}}</span>
-	</div>
+	<input type="number" name="amount" id="amount" class="form-control" ng-model="vm.amount"  placeholder="Please enter amount" required/>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error': form.reason.$error.required || !vm.reason}">
+	<label for="reason">Reason <span class="textRed"> *</span>
+	</label>
+	<input type="text" name="reason" id="reason" class="form-control" ng-model="vm.reason"  placeholder="Please enter reason" required/>
       </div>
       <div ng-show="vm.payment_type === 'cheque'" ng-class="{ 'has-error': form.bank_name.$dirty && form.bank_name.$error.required }">
 	<div class="form-group">

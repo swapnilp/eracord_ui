@@ -306,6 +306,82 @@ angular.module('eracordUiApp.controller')
     };
     //end of pay fee
 
+    if($location.path() === "/students/" + $routeParams.student_id + "/pay_other_fee"){
+      $scope.student_id = $routeParams.student_id;
+      $scope.dataLoading = false;
+      $scope.requestLoading = true;
+      
+      $scope.fee_amount = 0;
+      $scope.tax_amount = 0;
+      $scope.total_amount = 0;
+      $scope.maxFee = 0;
+      
+      var student = Restangular.one("students", $routeParams.student_id);
+      $scope.vm = {};
+      $scope.vm.payment_type = 'cash'
+      $scope.vm.is_fee = false;
+      
+      var getPayInfo = function() {
+	student.customGET("get_fee_info").then(function(data) {
+	  if(data.success) {
+	    $scope.student_name = data.name;
+	    $scope.mobile = data.mobile;
+	    $scope.p_mobile = data.p_mobile;
+	    $scope.classes = data.jkci_classes;
+	    $scope.batch = data.batch;
+	    $scope.enable_tax = data.enable_tax;
+	    $scope.tax = data.service_tax;
+	  } else {
+	    Flash.create('warning', data.message, 'alert-danger');
+	    $location.path("/students/"+$scope.student_id+"/show").replace();
+	  }
+	  $scope.requestLoading = false;
+	});
+      };
+
+      $scope.calculateMaxFee = function(klass){
+	$scope.maxFee = _.where($scope.classes, {class_id: klass})[0].remaining_fee;
+	$scope.vm.amount = '';
+      };
+
+      $scope.calculateTax = function(amount) {
+	if(amount > 0){
+	  $scope.tax_amount = (amount*($scope.tax / 100)).toFixed(2);
+	  $scope.fee_amount = amount - $scope.tax_amount;
+	  $scope.total_amount = amount;
+	}else{
+	  $scope.fee_amount = 0;
+	  $scope.tax_amount = 0;
+	  $scope.total_amount = 0;
+	}
+
+      }
+
+      $scope.payFee = function() {
+	$scope.dataLoading = true;
+
+	student.customPOST({student_fee: $scope.vm}, "paid_student_fee", {}).then(function(data) {
+	  if(data.success) {
+	    Flash.create('success', data.message, 'alert-success');
+	    $location.path("/accounts/students/"+$scope.student_id+"/fee_receipt/"+data.receipt_id).replace();
+	  } else {
+	    if(data.valid_password) {
+	      Flash.create('warning', data.message, 'alert-danger');
+	      $location.path("/students/"+$scope.student_id+"/show").replace();
+	    }else{
+	      Flash.create('warning', data.message, 'alert-danger');
+	      $scope.vm.password="";
+	    }
+	  }
+	  $scope.dataLoading = false;
+	});
+      }
+      
+      getPayInfo();
+      
+    };
+    //end of pay other fee
+
     if($location.path() === "/students/" + $routeParams.student_id + "/payment_info"){
       $scope.student_id = $routeParams.student_id;
       var student = Restangular.one("students", $routeParams.student_id);

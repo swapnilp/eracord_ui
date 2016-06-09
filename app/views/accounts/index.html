@@ -51,8 +51,9 @@
 	<tr>
 	  <th st-sort="firstName">Name</th>
 	  <th st-sort="firstName">Class</th>
-	  <th st-sort="firstName">Total Fee</th>
+	  <th st-sort="firstName">Fee</th>
 	  <th st-sort="firstName">Remaining Fee</th>
+	  <th st-sort="firstName">Other</th>
 	  <th st-sort="firstName">Total Transactions</th>
 	</tr>
       </thead>
@@ -86,12 +87,14 @@
 	    {{row.remaining_fee}}
 	  </td>
 	  <td>
+	    {{row.other_fee}}
+	  </td>
+	  <td>
 	    {{row.total_transactions}}
 	  </td>
 	</tr>
 	<tr ng-if="row.expanded" dir-paginate-end="" class="noBorder alert alert-warning">
 	  <td colspan="5">
-	    
 	    <table st-table="rowCollection" class="table col-sm-12">
 	      <tr>
 		<th st-sort="firstName">Date</th>
@@ -100,6 +103,7 @@
 		<th st-sort="firstName">Payment Type</th>
 		<th st-sort="firstName">Book Number</th>
 		<th st-sort="firstName">Receipt Number</th>
+		<th st-sort="firstName">Reason</th>
 		<th> Print recipt</th>
 	      </tr>
 	      <tr ng-repeat="t_row in row.transactions">
@@ -138,6 +142,9 @@
 		  {{t_row.receipt_number}}
 		</td>
 		<td>
+		  {{t_row.reason}}
+		</td>
+		<td>
 		  <a href="#/accounts/students/{{t_row.student_id}}/fee_receipt/{{t_row.id}}"><i class="fa fa-print"></i></a>
 		</td>
 	      </tr>
@@ -145,6 +152,7 @@
 		<td colspan="5">
 		  <a class="btn btn-primary" href="#/students/{{row.student_id}}/show">Show</a>
 		  <a class="btn btn-primary" href="#/students/{{row.student_id}}/pay_fee" ng-if="row.remaining_fee !== 0">Pay Fee</a>
+		  <a class="btn btn-primary" href="#/students/{{row.student_id}}/pay_other_fee">Pay Other Fee</a>
 		</td>
 	      </tr>
 	    </table>
