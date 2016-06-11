@@ -27,8 +27,9 @@ angular.module('eracordUiApp.controller')
       var questions = Restangular.all("questions");
       
       $scope.getQuestions = function(){
+	$scope.requestLoading = true;
 	$scope.selected = null;
-	questions.customGET("").then(function(data){
+	questions.customGET("", {keys: $scope.helpKeys.join(',')}).then(function(data){
 	  if(data.success){
 	    $scope.questions = data.questions;
 	  }else{
@@ -53,6 +54,12 @@ angular.module('eracordUiApp.controller')
       $scope.addKey = function(val){
 	$scope.helpKeys = $scope.helpKeys.concat([val]);
 	this.addKeyVal = "";
+	$scope.getQuestions();
+      };
+
+      $scope.removeKey = function(val){
+	$scope.helpKeys = _.without($scope.helpKeys, val);
+	$scope.getQuestions();
       };
 
       $scope.getQuestions();

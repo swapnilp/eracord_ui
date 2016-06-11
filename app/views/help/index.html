@@ -2,13 +2,21 @@
   <h3 class="modal-title">HELP!</h3>
   <a ng-click="cancel()" style="float: right;position: absolute;right: 15px;top: 19px;cursor:pointer;color:#999;"><i class="fa fa-times"></i></a>
 </div>
-<div class="modal-body">
-  <div request-loading is-loading="requestLoading"></div>
-  <div ng-if="!selected && !requestLoading">
+<div class="modal-body" style="min-height:300px;">
+  <div ng-if="!selected">
     Keys - 
-    <span ng-repeat="key in helpKeys track by $index">{{key}}{{$last ? '' : ', '}}</span>
+    <div class="helpKeys" ng-repeat="key in helpKeys track by $index">
+      {{key}}&nbsp;&nbsp;<i class="fa fa-times pointer" ng-click="removeKey(key);"></i>
+    </div>
+    <br />
     <br />
     <input type="text" ng-model="addKeyVal" placeholder="Enter text" enter-event="addKey(val);" on-enter-event>
+    <br />
+    <br />
+  </div>
+  <div request-loading is-loading="requestLoading"></div>
+  <div ng-if="!selected && !requestLoading">
+    
     <ul ng-if="questions.length > 0">
       <li ng-repeat="question in questions">
 	<a ng-click="getAnswer(question);" style="cursor:pointer;">{{ question.question }}</a>
