@@ -1,1 +1,33 @@
-asd asdasd asfd adsf
+<div class="modal-header">
+  <h3 class="modal-title">HELP!</h3>
+  <a ng-click="cancel()" style="float: right;position: absolute;right: 15px;top: 19px;cursor:pointer;color:#999;"><i class="fa fa-times"></i></a>
+</div>
+<div class="modal-body">
+  <div request-loading is-loading="requestLoading"></div>
+  <div ng-if="!selected && !requestLoading">
+    Keys - 
+    <span ng-repeat="key in helpKeys track by $index">{{key}}{{$last ? '' : ', '}}</span>
+    <br />
+    <input type="text" ng-model="addKeyVal" placeholder="Enter text" enter-event="addKey(val);" on-enter-event>
+    <ul ng-if="questions.length > 0">
+      <li ng-repeat="question in questions">
+	<a ng-click="getAnswer(question);" style="cursor:pointer;">{{ question.question }}</a>
+      </li>
+    </ul>
+    <div class="alert alert-warning col-sm-12" ng-if="questions.length === 0">
+      No data found
+    </div>
+  </div>
+  <div ng-if="selected && !requestLoading">
+    <a ng-click="getQuestions();" class="pointer">Back</a>
+    <h3>{{question.question}}</h3>
+    <ul>
+      <li ng-repeat="answer in answers">
+	<span>{{ answer.answer }}</span>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" type="button" ng-click="cancel()">OK</button>
+</div>

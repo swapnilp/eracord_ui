@@ -8,12 +8,52 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('HelpCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$cookieStore', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window, $cookieStore) {
+  .controller('HelpCtrl',['$scope', '$uibModalInstance', 'Restangular', 'reason',
+    function ($scope, $uibModalInstance, Restangular, reason) {
 
-    $scope.token = $cookieStore.get('currentUser').token;
-    
-    if($location.path() === '/help') {
+      $scope.questions = [];
+      $scope.requestLoading = true;
+      $scope.selected = "";
+      $scope.addKeyVal = "";
+      $scope.helpKeys = [reason];
       
-    }
-  }
-]);
+      $scope.ok = function () {
+	$uibModalInstance.close($scope.selected.item);
+      };
+      
+      $scope.cancel = function () {
+	$uibModalInstance.dismiss('cancel');
+      };
+      var questions = Restangular.all("questions");
+      
+      $scope.getQuestions = function(){
+	$scope.selected = null;
+	questions.customGET("").then(function(data){
+	  if(data.success){
+	    $scope.questions = data.questions;
+	  }else{
+	  }
+	  $scope.requestLoading = false;
+	});
+      };
+
+      $scope.getAnswer = function(question){
+	$scope.requestLoading = true;
+	$scope.selected = question;
+	questions.customGET(""+question.id).then(function(data){
+	  if(data.success){
+	    $scope.question = data.question;
+	    $scope.answers = data.answers;
+	  }else{
+	  }
+	  $scope.requestLoading = false;
+	});
+      };
+
+      $scope.addKey = function(val){
+	$scope.helpKeys = $scope.helpKeys.concat([val]);
+	this.addKeyVal = "";
+      };
+
+      $scope.getQuestions();
+    }]);

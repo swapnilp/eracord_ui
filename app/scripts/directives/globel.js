@@ -116,3 +116,28 @@ app.directive('ngMax', function () {
         }
     };
 });
+
+app.directive('onEnterEvent', function() {
+  return {
+    require: '?ngModel',
+    scope: {
+      enterEvent: '&'
+    },
+    link: function(scope, element, attrs, ngModelCtrl) {
+      if(!ngModelCtrl) {
+        return; 
+      }
+
+      element.bind('keypress', function(event) {
+        if(event.keyCode === 32) {
+          event.preventDefault();
+        }else if(event.keyCode === 13) {
+	  if(ngModelCtrl.$modelValue !== '' && ngModelCtrl.$modelValue !== undefined){ 
+	    scope.enterEvent({val: ngModelCtrl.$modelValue});
+	    scope.$apply();
+	  }
+	}
+      });
+    }
+  };
+});

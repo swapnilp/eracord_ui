@@ -3,7 +3,7 @@ var app;
 
 app = angular.module('eracordUiApp.controller');
 
-app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $routeParams, $window, Auth, Flash, Restangular, $cookieStore) {
+app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $routeParams, $window, Auth, Flash, Restangular, $cookieStore, $uibModal) {
   var clearUserInformation, directAccessRoutes, i, len, path;
   $scope.userAlertCount = 0;
   $scope.alertsVisible = false;
@@ -61,7 +61,26 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
       return $location.path('/user/sign_in');
     });
   };
-
+  
+  $scope.open = function (size, reason) {
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'views/help/index.html',
+      controller: 'HelpCtrl',
+      size: size,
+      resolve: {
+	reason: function(){
+	  return reason;
+	}
+      }
+    });
+    
+    modalInstance.result.then(function (selectedItem) {
+      $scope.selected = selectedItem;
+    }, function () {
+      //$log.info('Modal dismissed at: ' + new Date());
+    });
+  };
 
   $rootScope.$on('devise:unauthorized', function(loopPrevention) {
 
