@@ -488,3 +488,12 @@ table.headerless {
   border-radius: 10px;
   margin-left: 5px;
 }
+
+.helpBtn, .helpBtn:hover, .helpBtn:focus, .helpBtn:active, .helpBtn:active:focus{
+  color: rgba(52, 156, 2, 0.85);
+  position: absolute;
+  top: 50px;
+  right: 30px;
+  border: 0px solid transparent;
+  outline: none;
+}

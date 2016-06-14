@@ -3,6 +3,8 @@
   <a ng-click="cancel()" style="float: right;position: absolute;right: 15px;top: 19px;cursor:pointer;color:#999;"><i class="fa fa-times"></i></a>
 </div>
 <div class="modal-body" style="min-height:300px;">
+
+  
   <div ng-if="!selected">
     Keys - 
     <div class="helpKeys" ng-repeat="key in helpKeys track by $index">
@@ -10,8 +12,7 @@
     </div>
     <br />
     <br />
-    <input type="text" ng-model="addKeyVal" placeholder="Enter text" enter-event="addKey(val);" on-enter-event>
-    <br />
+      <input type="text" ng-model="addKeyVal" uib-typeahead="tag for tag in tags | filter:$viewValue" class="form-control" typeahead-show-hint="true" typeahead-min-length="0" on-enter-event enter-event="addKey(val);" placeholder="Enter text" style="max-width:200px;">
     <br />
   </div>
   <div request-loading is-loading="requestLoading"></div>

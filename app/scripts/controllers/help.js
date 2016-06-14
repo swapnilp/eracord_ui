@@ -14,9 +14,12 @@ angular.module('eracordUiApp.controller')
       $scope.questions = [];
       $scope.requestLoading = true;
       $scope.selected = "";
-      $scope.addKeyVal = "";
+      $scope.addKeyVal = [];
       $scope.helpKeys = [reason];
-      
+
+    //lookup values
+      $scope.tags = [];
+          
       $scope.ok = function () {
 	$uibModalInstance.close($scope.selected.item);
       };
@@ -29,7 +32,7 @@ angular.module('eracordUiApp.controller')
       $scope.getQuestions = function(){
 	$scope.requestLoading = true;
 	$scope.selected = null;
-	questions.customGET("", {keys: $scope.helpKeys.join(',')}).then(function(data){
+	questions.customGET("", {keys: $scope.helpKeys.join(',')}).then(function(data) {
 	  if(data.success){
 	    $scope.questions = data.questions;
 	  }else{
@@ -38,10 +41,19 @@ angular.module('eracordUiApp.controller')
 	});
       };
 
+      var getTags = function() {
+	questions.customGET("filter_info").then(function(data) {
+	  $scope.tags = data.tags;
+	  $scope.getQuestions();
+	});
+      };
+
+      getTags();
+
       $scope.getAnswer = function(question){
 	$scope.requestLoading = true;
 	$scope.selected = question;
-	questions.customGET(""+question.id).then(function(data){
+	questions.customGET(""+question.id).then(function(data) {
 	  if(data.success){
 	    $scope.question = data.question;
 	    $scope.answers = data.answers;
@@ -62,5 +74,5 @@ angular.module('eracordUiApp.controller')
 	$scope.getQuestions();
       };
 
-      $scope.getQuestions();
+
     }]);
