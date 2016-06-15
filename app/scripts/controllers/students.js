@@ -331,6 +331,7 @@ angular.module('eracordUiApp.controller')
 	    $scope.batch = data.batch;
 	    $scope.enable_tax = data.enable_tax;
 	    $scope.tax = data.service_tax;
+	    $scope.reasons = data.payment_reasons;
 	  } else {
 	    Flash.create('warning', data.message, 'alert-danger');
 	    $location.path("/students/"+$scope.student_id+"/show").replace();

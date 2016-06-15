@@ -54,7 +54,7 @@
       <div class="form-group" ng-class="{ 'has-error': form.reason.$error.required || !vm.reason}">
 	<label for="reason">Reason <span class="textRed"> *</span>
 	</label>
-	<input type="text" name="reason" id="reason" class="form-control" ng-model="vm.reason"  placeholder="Please enter reason" required/>
+	<select class="form-control ng-touched" ng-model="vm.payment_reason_id" ng-options="reason.id as reason.reason for reason in reasons" placeholder="Please select reason"></select>
       </div>
       <div ng-show="vm.payment_type === 'cheque'" ng-class="{ 'has-error': form.bank_name.$dirty && form.bank_name.$error.required }">
 	<div class="form-group">
