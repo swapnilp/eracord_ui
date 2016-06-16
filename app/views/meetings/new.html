@@ -2,7 +2,7 @@
   <h2>New Meeting</h2>
   <div request-loading is-loading="requestLoading"></div>
   <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
-  <form name="form" ng-submit="registerMeeting()" role="form" ng-show="!requestLoading">
+  <form name="form" ng-submit="registerMeeting()" role="form" ng-show="!requestLoading" autocomplete="off">
     <div class="form-group">
       <label for="agenda">Agenda <span class="textRed"> *</span></label>
       <select class="form-control ng-touched" ng-model="vm.agenda" style="" ng-options="values for values in ['parent Meeting']"  required>
@@ -15,15 +15,16 @@
       </p>
       <span ng-show="form.marks.$dirty && form.marks.$error.required" class="help-block">Exam Date is required</span>
     </div>
+    <div class="form-group" ng-class="{ 'has-error': form.contact_person.$dirty && form.contact_person.$error.required }">
+      <label for="contact_person">Contact Person </label>
+      <input type="text" name="contact_person" id="contact_person" class="form-control" ng-model="vm.contact_person"  />
+    </div>
     <div class="form-group" ng-class="{ 'has-error': form.date.$dirty && form.date.$error.required }">
       <label for="date">Class <span class="textRed"> *</span></label>
       <select class="form-control ng-touched" ng-model="vm.jkci_class_id" style=""  ng-options="jk_class.id as jk_class.name for jk_class in jk_classes" placeholder="Please select reason" required></select>
       <span ng-show="form.marks.$dirty && form.marks.$error.required" class="help-block">Exam Date is required</span>
     </div>
-    <div class="form-group" ng-class="{ 'has-error': form.contact_person.$dirty && form.contact_person.$error.required }">
-      <label for="contact_person">Contact Person </label>
-      <input type="text" name="contact_person" id="contact_person" class="form-control" ng-model="vm.contact_person"  />
-    </div>
+    <div select-meetings-students jkci_class_id="{{vm.jkci_class_id}}" student-list="studentList"></div>
     <div class="form-actions" style="padding-bottom:20px;">
       <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">New</button>
       <span button-req-load is-loading="dataLoading"></span>

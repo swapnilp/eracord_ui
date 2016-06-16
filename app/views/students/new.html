@@ -2,7 +2,7 @@
   <h2>{{text}} Student</h2>
   <div request-loading is-loading="requestLoading"></div>
   <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
-  <form name="form" ng-submit="registerStudent()" role="form" ng-show="!requestLoading">
+  <form name="form" ng-submit="registerStudent()" role="form" ng-show="!requestLoading" autocomplete="off">
     <div class="form-group">
       <label for="initl">Initl</label>
       <select class="form-control ng-touched" ng-model="initl" style="" ng-options="values for values in ['Mr', 'Miss']" >

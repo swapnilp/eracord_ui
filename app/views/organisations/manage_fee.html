@@ -5,7 +5,7 @@
   <div request-loading is-loading="requestLoading"></div>
   <div ng-show="!requestLoading">
     <h2>Update Fee</h2>
-    <form name="form" ng-submit="updateFee()" role="form">
+    <form name="form" ng-submit="updateFee()" role="form" autocomplete="off">
       <div class="form-group">
 	<label for="fee">Fee <span class="textRed"> *</span></label>
 	<input type="text" name="fee" id="fee" class="form-control" ng-model="vm.fee" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0 || event.charCode === 46" required/>

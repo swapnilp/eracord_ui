@@ -1,0 +1,11 @@
+<h4 ng-if="!requestLoading && students.length > 0">Select students</h4>
+<div request-loading is-loading="requestLoading"></div>
+<div ng-if="!requestLoading && students.length > 0">
+  <a ng-click="checkAllStudent();" class="btn pointer">Check all</a>
+  <a ng-click="uncheckAllStudent();" class="btn pointer">uncheck all</a>
+</div>
+<div class="remainingStudentsList col-md-12" ng-show="!requestLoading">
+  <label ng-repeat="student in students">
+    <input type="checkbox" checklist-model="studentList" checklist-value="student.id" ng-model="student.checked"> {{student.name}} - {{student.p_mobile}}
+  </label>
+</div>

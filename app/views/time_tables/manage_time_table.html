@@ -21,7 +21,7 @@
   <div class="col-sm-6 textLeft alert alert-success" ng-show="showSlotForm && !requestLoading">
     <div class="col-md-12 col-md-offset-0">
       <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
-      <form name="form" ng-submit="registorTimeTableSlot()" role="form">
+      <form name="form" ng-submit="registorTimeTableSlot()" role="form" autocomplete="off">
 
 	<div class="form-group" ng-class="{ 'has-error': form.cwday.$dirty && form.cwday.$error.required }">
 	  <label for="cwday">Day</label>

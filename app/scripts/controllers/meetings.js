@@ -61,6 +61,7 @@ angular.module('eracordUiApp.controller')
       
       $scope.isOpen = false;
       $scope.dataLoading = false;
+      $scope.studentList = [];
       $scope.openCalendar = function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -80,7 +81,7 @@ angular.module('eracordUiApp.controller')
 
       $scope.registerMeeting = function() {
 	$scope.dataLoading = true;
-	
+
 	parents_meetings.customPOST({parents_meeting: $scope.vm}, "", {}).then(function(data){
 	  if(data.success) {
 	    Flash.create('success', "Meeting Sms will send shortly", 'alert-success');
@@ -90,7 +91,6 @@ angular.module('eracordUiApp.controller')
 	  }
 	  $scope.dataLoading = false;
 	});
-	
       };
     }
     //end of meetings new method
