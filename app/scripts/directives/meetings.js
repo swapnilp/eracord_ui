@@ -37,6 +37,7 @@ app.directive('selectMeetingsStudents', function(Restangular) {
       var parents_meetings = Restangular.all("parents_meetings");
       
       var getStudents = function(){
+	scope.studentList = [];
 	scope.requestLoading = true;
 	parents_meetings.customGET("get_class_students",{class_id: scope.jkciClassId}).then(function(data){
 	  scope.students = data.students;  
