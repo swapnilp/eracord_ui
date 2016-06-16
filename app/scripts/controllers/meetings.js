@@ -67,6 +67,17 @@ angular.module('eracordUiApp.controller')
         $scope.isOpen = true;
       };
 
+      var getInfo = function(){
+	parents_meetings.customGET("new").then(function(data){
+	  if(data.success){
+	    $scope.jk_classes = data.classes;
+	  }else {
+	  }
+	})
+      };
+
+      getInfo();
+
       $scope.registerMeeting = function() {
 	$scope.dataLoading = true;
 	

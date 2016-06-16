@@ -487,6 +487,7 @@ table.headerless {
   display: inline-block;
   border-radius: 10px;
   margin-left: 5px;
+  color: #777;
 }
 
 .helpBtn, .helpBtn:hover, .helpBtn:focus, .helpBtn:active, .helpBtn:active:focus{
@@ -496,4 +497,14 @@ table.headerless {
   right: 30px;
   border: 0px solid transparent;
   outline: none;
+}
+
+.helpQuestion .list-group-item {
+  border: none;
+  padding: 2px 10px;
+}
+
+.helpQuestion a {
+  color: #777;
+  font-size:15px;
 }
