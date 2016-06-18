@@ -82,7 +82,7 @@ angular.module('eracordUiApp.controller')
       $scope.registerMeeting = function() {
 	$scope.dataLoading = true;
 
-	parents_meetings.customPOST({parents_meeting: $scope.vm}, "", {}).then(function(data){
+	parents_meetings.customPOST({parents_meeting: $scope.vm}, "", {student_list: $scope.studentList.join(',')}).then(function(data){
 	  if(data.success) {
 	    Flash.create('success', "Meeting Sms will send shortly", 'alert-success');
 	    $location.path("/admin_desk").replace();
