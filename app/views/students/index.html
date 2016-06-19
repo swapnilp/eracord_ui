@@ -39,10 +39,9 @@
       <button class="btn btn-primary" ng-click="pageChanged(1);">Filter</button>
     </div>		  
   </div>
-  <div class="col-sm-12" style="padding-bottom:20px;" is-role-visible='["accountant", "accountant_clark"]' email="currentUser.email">
+  <div class="col-sm-12" style="padding-bottom:20px;" is-role-visible='["accountant", "accountant_clark"]' email="currentUser.email" ng-if="newStudent">
     <a class="btn btn-primary" href="#/students/new" ng-if="!classId">New Student</a>
     <a class="btn btn-primary" href="#/classes/{{classId}}/students/new" ng-if="classId">New Student</a>
-    
   </div>
   <br /><br /><br />
   <div class="alert alert-warning col-sm-12">

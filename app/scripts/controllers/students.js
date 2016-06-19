@@ -30,6 +30,7 @@ angular.module('eracordUiApp.controller')
       $scope.requestLoading = true;
       $scope.classes = [];
       $scope.isFilter = true;
+      $scope.newStudent = true;
       
       $scope.pagination = {
         current: 1

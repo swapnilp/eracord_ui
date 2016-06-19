@@ -13,7 +13,8 @@ app.directive('classStudents', function(Restangular) {
       updateUrl: '&',
       isRemove: '@',
       showOptions: '@',
-      hostUrl: '@'
+      hostUrl: '@',
+      newStudent: '@'
     },
     templateUrl: 'views/students/index.html',
     controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', '$route', 'Upload', '$cookieStore', function(scope, Restangular, Flash, $location, $window, $routeParams, $route, Upload, $cookieStore){
@@ -22,6 +23,7 @@ app.directive('classStudents', function(Restangular) {
       scope.isRollNumber = true;
       scope.requestLoading = true;
       scope.studentLoaded = false;
+
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       scope.token = $cookieStore.get('currentUser').token;
 
