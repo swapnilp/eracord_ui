@@ -52,8 +52,10 @@
 	<a class="btn btn-primary" href="#/students/{{student.id}}/edit">Edit</a>
       </div>
       <div class="left mRight10" ng-if="has_pay_fee && student">
-	<a class="btn btn-primary" href="#/students/{{student.id}}/pay_fee">Pay Fee</a>
+	<a class="btn btn-primary" href="#/students/{{student.id}}/pay_fee" ng-if="remaining_fee > 0" uib-tooltip="Remaining fee are {{remaining_fee}}">Pay Fee</a>
+	<button class="btn btn-primary" ng-if="remaining_fee == 0" disabled>Pay Fee</a>
       </div>
+      
       <div class="left mRight10" ng-if="has_show_pay_info && student">
 	<a class="btn btn-primary" href="#/students/{{student.id}}/payment_info">Payment Info</a>
       </div>

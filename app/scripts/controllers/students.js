@@ -145,6 +145,7 @@ angular.module('eracordUiApp.controller')
 	  $scope.student = data.body.student;
 	  $scope.has_show_pay_info = data.has_show_pay_info;
 	  $scope.has_pay_fee = data.has_pay_fee;
+	  $scope.remaining_fee = data.remaining_fee
 	  $scope.classes = data.classes;
 	}
       });
@@ -400,7 +401,8 @@ angular.module('eracordUiApp.controller')
 	    $scope.payments = data.payments;
 	    $scope.totalStudents = $scope.payments.length;
 	    $scope.totalFee = data.total_fee;
-	    $scope.id = data.id
+	    $scope.id = data.id;
+	    $scope.remaining_fee = data.remaining_fee;
 	  } else {
 	    Flash.create('warning', data.message, 'alert-danger');
 	    $location.path("/students/"+$scope.student_id+"/show").replace();
