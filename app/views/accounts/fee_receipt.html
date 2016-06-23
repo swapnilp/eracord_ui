@@ -1,19 +1,18 @@
 <button class="btn btn-primary" ng-print print-element-id="printRecipt" duplicate-print-element-id="printReciptDuplicate"><i class="fa fa-print"></i> Print</button>
 <a ng-click="goBack();" class="btn btn-default">Cancel</a>
 
-
-
-<div id="printRecipt"  style="width:100%;">
-  <div ng-include src="'views/accounts/fee_table.html'" ng-if="data.payment_type === 'cash'"></div>  
-  <div ng-include src="'views/accounts/cheque_fee_table.html'" ng-if="data.payment_type === 'cheque'"></div>  
-</div>
-
-<div class="hide">
-  <div id="printReciptDuplicate"  style="width:100%;">
-    <hr style="margin-top:50px;color:#000;"/>
+<div request-loading is-loading="reqLoading"></div>
+<div ng-if="!reqLoading">
+  <div id="printRecipt"  style="width:100%;">
     <div ng-include src="'views/accounts/fee_table.html'" ng-if="data.payment_type === 'cash'"></div>  
     <div ng-include src="'views/accounts/cheque_fee_table.html'" ng-if="data.payment_type === 'cheque'"></div>  
   </div>
+  
+  <div class="hide">
+    <div id="printReciptDuplicate"  style="width:100%;">
+      <hr style="margin-top:50px;color:#000;"/>
+      <div ng-include src="'views/accounts/fee_table.html'" ng-if="data.payment_type === 'cash'"></div>  
+      <div ng-include src="'views/accounts/cheque_fee_table.html'" ng-if="data.payment_type === 'cheque'"></div>  
+    </div>
+  </div>
 </div>
-
-
