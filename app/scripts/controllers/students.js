@@ -142,7 +142,7 @@ angular.module('eracordUiApp.controller')
       
       student.get().then(function(data){
 	if(data.success) {
-	  $scope.student = data.body.student;
+	  $scope.student = data.body.student_show;
 	  $scope.has_show_pay_info = data.has_show_pay_info;
 	  $scope.has_pay_fee = data.has_pay_fee;
 	  $scope.remaining_fee = data.remaining_fee
