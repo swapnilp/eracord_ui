@@ -38,6 +38,14 @@
 	</h5>
 	<span style="font-size:14px;" ng-repeat="class in classes ">{{class.name}}</span>
       </div>
+      <div class="col-sm-12" ng-if="has_pay_fee && student">
+	<h5>
+	  <span class="col-sm-2">Remaining Fee :</span> 
+	</h5>
+	<span style="font-size:20px;" ng-if="student">
+	  {{remaining_fee}}
+	</span>
+      </div>
       <div class="col-sm-12">
 	<h5>
 	  <span class="col-sm-2">Download Progress Report :</span> 
