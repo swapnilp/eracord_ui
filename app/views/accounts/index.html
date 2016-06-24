@@ -152,6 +152,7 @@
 		<td colspan="5">
 		  <a class="btn btn-primary" href="#/students/{{row.student_id}}/show">Show</a>
 		  <a class="btn btn-primary" href="#/students/{{row.student_id}}/pay_fee" ng-if="row.remaining_fee !== 0">Pay Fee</a>
+		  <button class="btn btn-primary" ng-if="row.remaining_fee === 0" disabled>Pay Fee</button>
 		  <a class="btn btn-primary" href="#/students/{{row.student_id}}/pay_other_fee">Pay Other Fee</a>
 		</td>
 	      </tr>
