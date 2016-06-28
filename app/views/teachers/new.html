@@ -1,0 +1,46 @@
+<div class="col-md-6 col-md-offset-3">
+  <h2>New Teacher</h2>
+  <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
+  <form name="form" ng-submit="registerTeacher()" role="form">
+    <div class="form-group" ng-class="{ 'has-error': form.first_name.$dirty && form.first_name.$error.required }">
+      <label for="first_name">First name <span class="textRed"> *</span></label>
+      <input type="text" name="first_name" id="first_name" class="form-control" ng-model="vm.user.first_name" required />
+      <span ng-show="form.first_name.$dirty && form.first_name.$error.required" class="help-block">First name is required</span>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': form.last_name.$dirty && form.last_name.$error.required }">
+      <label for="last_name">Last name <span class="textRed"> *</span></label>
+      <input type="text" name="last_name" id="last_name" class="form-control" ng-model="vm.user.last_name" required />
+      <span ng-show="form.last_name.$dirty && form.last_name.$error.required" class="help-block">Last name is required</span>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }" ng-if="isNew">
+      <label for="email">Email <span class="textRed"> *</span></label>
+      <input type="email" name="email" id="email" class="form-control" ng-model="vm.user.email" required />
+      <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Email is required</span>
+    </div>
+    <div class="form-group" ng-if="!isNew">
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" class="form-control" ng-model="vm.user.email"  readonly/>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': form.mobile.$dirty && form.mobile.$error.required }">
+      <label for="mobile">Mobile <span class="textRed"> *</span></label>
+      <input type="text" name="mobile" id="mobile" class="form-control" ng-model="vm.user.mobile" ng-minlength="10"  ng-maxlength="10" placeholder="must be present in 10 digit" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0" required />
+      <span ng-show="form.mobile.$dirty && form.mobile.$error.required" class="help-block">Mobile is required</span>
+      <div ng-show="form.mobile.$error.minlength || form.mobile.$error.maxlength">
+	<span class="textRed">Must be a valid 10 digit phone number</span>
+      </div>
+    </div>
+    <div class="form-group" style="display:flex;">
+      <label for="is_full_time" style="margin-top:7px;">Full time? <span class="textRed"> *</span></label>
+      <toggle-switch class="mLeft10"
+		     ng-model="vm.user.is_full_time"
+		     knob-label="full time">
+      </toggle-switch>
+    </div>
+    <div class="form-actions" style="padding-bottom:20px;">
+      <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Register</button>
+      <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+      <a href="#/manage_organisation" class="btn btn-default">Cancel</a>
+    </div>
+  </form>
+</div>
+

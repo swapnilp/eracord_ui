@@ -10,10 +10,16 @@
       <uib-tab-heading><i class="icon-bell"></i> All Classes</uib-tab-heading>
       <div organisation-classes organisation-classes-tab="{{organisationClassesTab}}" host-url="{{hostUrl}}"></div>
     </uib-tab>
-    <uib-tab>
+    <uib-tab ng-attr-active="organisationClarkssTab">
       <uib-tab-heading><i class="icon-bell"></i> Users / Clark</uib-tab-heading>
       <div>
-	<div organisation-clarks></div>
+	<div organisation-clarks organisation-clarks-tab="{{organisationClarksTab}}"></div>
+      </div>
+    </uib-tab>
+    <uib-tab ng-attr-active="organisationTeachersTab">
+      <uib-tab-heading><i class="icon-bell"></i>Teachers</uib-tab-heading>
+      <div>
+	<div organisation-teachers organisation-teachers-tab="{{organisationTeachersTab}}"></div>
       </div>
     </uib-tab>
     <uib-tab>

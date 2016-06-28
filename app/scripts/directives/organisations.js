@@ -131,6 +131,46 @@ app.directive('organisationClarks', function(Restangular, $location, Flash) {
   };
 });
 
+app.directive('organisationTeachers', function(Restangular, $location, Flash) {
+  return {
+    restrict: 'AE',
+    transclude: true,
+    scope: {
+      organisationTeachersTab: "@"
+    },
+    templateUrl: 'views/teachers/index.html',
+    controller: ['$scope', 'Restangular', '$window', function(scope, Restangular, $window){
+      var base_organisation = Restangular.all("organisations");
+      scope.requestLoading = true;
+      var teachersLoaded = false;
+      
+      var loadTeachers = function() {
+	base_organisation.customGET('teachers').then(function(data){
+	  scope.teachers = data.teachers;
+	  scope.requestLoading = false;
+	});
+      };
+
+      scope.manageSubjects = function(teacher){
+	$location.path("/organisations/teachers/"+teacher.id+"/teachers_subjects");
+      };
+
+      scope.toggleEnableUser = function(user){
+	base_organisation.customGET("users/"+user.id+"/toggleEnable", {enabled: user.is_enable});
+      };
+
+      scope.$watch('organisationTeachersTab', function(){
+	if(scope.organisationTeachersTab === 'true' && teachersLoaded === false){
+	  loadTeachers();
+	  teachersLoaded = true;
+	  //scope.organisationClassesLoded = true;
+	}
+      })
+
+    }]
+  };
+});
+
 app.directive('organisationSubOrganisations', function(Restangular, $location, Flash) {
   return {
     restrict: 'AE',
