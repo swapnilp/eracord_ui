@@ -137,6 +137,10 @@ input, select, option {
   padding-top:25px;
 }
 
+.padding10 { 
+  padding:10px;
+}
+
 .remainingStudentsList {
   label {
     display: table;
@@ -496,6 +500,10 @@ table.headerless {
   top: 50px;
   right: 30px;
   border: 0px solid transparent;
+  outline: none;
+}
+
+.buttonNoneBorder , .buttonNoneBorder:hover, .buttonNoneBorder:focus, .buttonNoneBorder:active, .buttonNoneBorder:active:focus{
   outline: none;
 }
 

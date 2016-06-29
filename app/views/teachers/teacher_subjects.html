@@ -1,0 +1,19 @@
+<figure class="highlight col-sm-12" ng-show="!requestLoading && subjects.length > 0">
+  <table st-table="rowCollection" class="col-sm-12">
+    <thead>
+      <tr>
+	<th st-sort="firstName">#</th>
+	<th st-sort="firstName">Subject</th>
+	<th st-sort="lastName">Standard</th>
+	<th st-sort="balance">Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in subjects">
+	<td>{{$index}}</td>
+	<td>{{row.subject_name}}</td>
+	<td>remove</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>

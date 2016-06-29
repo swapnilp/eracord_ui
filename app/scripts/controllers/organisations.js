@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('OrganisationsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$route', '$cookieStore', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window, $route, $cookieStore) {
+  .controller('OrganisationsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$route', '$cookieStore', '$uibModal', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window, $route, $cookieStore, $uibModal) {
 
     if(!Auth.isAuthenticated()){
       $location.path('/user/sign_in');
@@ -112,7 +112,7 @@ angular.module('eracordUiApp.controller')
       	$scope.vm.user.role = 'clark';
       	base_organisation.customPOST({teacher: $scope.vm.user}, 'teachers', {}).then(function(data){
       	  if(data.success){
-      	    $location.path('/manage_organisation');
+	    $location.path('/organisations/teachers/'+data.teacher_id);
       	  }else{
       	    $scope.vm.dataLoading = false;
       	    Flash.create('warning', data.message, 'alert-danger');
@@ -140,7 +140,7 @@ angular.module('eracordUiApp.controller')
       	$scope.vm.user.role = 'clark';
       	base_organisation.customPUT({teacher: $scope.vm.user}, 'teachers/'+$routeParams.teacher_id, {}).then(function(data){
       	  if(data.success){
-      	    $location.path('/manage_organisation');
+      	    $location.path('/organisations/teachers/'+data.teacher_id);
       	  }else{
       	    $scope.vm.dataLoading = false;
       	    Flash.create('warning', data.message, 'alert-danger');
@@ -152,6 +152,31 @@ angular.module('eracordUiApp.controller')
     }
 
     if($location.path() === "/organisations/teachers/" + $routeParams.teacher_id) {
+      base_organisation = Restangular.all("organisations");
+      
+      var getTeacher = function(){
+	base_organisation.customGET('teachers/'+$routeParams.teacher_id).then(function(data){
+	  $scope.teacher = data.teacher;
+	})
+      };
+
+      $scope.openSubjects = function (size, teacher_id) {
+	var modalInstance = $uibModal.open({
+	  animation: true,
+	  templateUrl: 'views/teachers/add_subjects.html',
+	  controller: 'TeacherSubjectsCtrl',
+	  size: size,
+	  resolve: {
+	    teacher_id: function(){
+	      return teacher_id;
+	    }
+	  }
+	});
+      }
+      getTeacher();
+    }
+    
+    if($location.path() === "/organisations/teachers/" + $routeParams.teacher_id + "/add_subjects") {
       base_organisation = Restangular.all("organisations");
       
       var getTeacher = function(){

@@ -22,10 +22,14 @@
       </div>
     </div>
     <div class="col-sm-12 left padding0" style="margin:15px 0px;">
-      <a class="btn btn-primary" href="#/teachers/{{teacher.id}}/edit">Edit</a>
+      <a class="btn btn-primary" href="#/organisations/teachers/{{teacher.id}}/edit">Edit</a>
+      <button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openSubjects('lg', teacher.id)" uib-tooltip="Add Subject">
+	Add Subjects
+      </button>
       <button class="btn btn-default" ng-click="goBack();">
 	Back
       </button>
     </div>
   </div>
+  <div teacher-subjects teacher-id="{{teacher.id}}"></div>
 </div>
