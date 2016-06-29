@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="col-sm-12 textLeft">
+    <div class="studentShow col-sm-12">
+      <p>&nbsp;</p>
+      <div class="col-sm-12">
+	<h5>
+	  <span class="col-sm-2">Name :</span>
+	</h5>
+	<span style="font-size:20px;">{{teacher.name}}</span>
+      </div>
+      <div class="col-sm-12">
+	<h5>
+	  <span class="col-sm-2">Mobile :</span> 
+	</h5>
+	<span style="font-size:20px;">{{teacher.mobile}}</span>
+      </div>
+      <div class="col-sm-12">
+	<h5>
+	  <span class="col-sm-2">Email :</span>
+	</h5>
+	<span style="font-size:20px;">{{teacher.email}}</span>
+      </div>
+    </div>
+    <div class="col-sm-12 left padding0" style="margin:15px 0px;">
+      <a class="btn btn-primary" href="#/teachers/{{teacher.id}}/edit">Edit</a>
+      <button class="btn btn-default" ng-click="goBack();">
+	Back
+      </button>
+    </div>
+  </div>
+</div>

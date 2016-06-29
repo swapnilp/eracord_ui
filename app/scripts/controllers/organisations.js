@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('OrganisationsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams) {
+  .controller('OrganisationsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$route', '$cookieStore', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window, $route, $cookieStore) {
 
     if(!Auth.isAuthenticated()){
       $location.path('/user/sign_in');
@@ -148,6 +148,17 @@ angular.module('eracordUiApp.controller')
       	});
       };
       
+      getTeacher();
+    }
+
+    if($location.path() === "/organisations/teachers/" + $routeParams.teacher_id) {
+      base_organisation = Restangular.all("organisations");
+      
+      var getTeacher = function(){
+	base_organisation.customGET('teachers/'+$routeParams.teacher_id).then(function(data){
+	  $scope.teacher = data.teacher;
+	})
+      };
       getTeacher();
     }
 
@@ -303,9 +314,31 @@ angular.module('eracordUiApp.controller')
     }
 
     if($location.path() === '/manage_organisation') {
+      var loadTabs = function(selectTab){
+	if(selectTab === 'standards') {
+	  $scope.organisationStandardTab = true;
+	} else if(selectTab === 'classes') {
+	  $scope.organisationClassesTab = true;
+	} else if(selectTab === 'clarks') {
+	  $scope.organisationClarksTab = true;
+	} else if (selectTab === 'teachers'){
+	  $scope.organisationTeachersTab = true;
+	} else if (selectTab === 'sub_organisation'){
+	  $scope.subOrganisationTab = true;
+	} else {
+	  $scope.organisationProfileTab = true;
+	}
+      };
+
+      loadTabs($routeParams.tab);
+      
       if($routeParams.standards_manage) {
 	$scope.organisationStandardTab = true;
       }
+      
+      $scope.updateTabParams = function(tabName){
+	$route.updateParams({ tab: tabName, page: null});
+      };
     }
     //var exams = Restangular.all("exams").getList();
     //Flash.create('success', message, 'custom-class');

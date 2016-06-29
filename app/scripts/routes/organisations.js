@@ -8,7 +8,8 @@ app.config(function($routeProvider) {
     .when('/manage_organisation', {
       templateUrl: 'views/organisations/index.html',
       controller: 'OrganisationsCtrl',
-      controllerAs: 'organisations'
+      controllerAs: 'organisations',
+      reloadOnSearch: false
     })
     .when('/remaining_organisation_courses', {
       templateUrl: 'views/organisations/remaining_courses.html',
@@ -24,6 +25,10 @@ app.config(function($routeProvider) {
     })
     .when('/organisations/teachers/new', {
       templateUrl: 'views/teachers/new.html',
+      controller: 'OrganisationsCtrl'
+    })
+    .when('/organisations/teachers/:teacher_id', {
+      templateUrl: 'views/teachers/show.html',
       controller: 'OrganisationsCtrl'
     })
     .when('/organisations/teachers/:teacher_id/edit', {

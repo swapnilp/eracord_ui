@@ -7,10 +7,14 @@ app.directive('organisationProfile', function(Restangular) {
   return {
     restrict: 'AE',
     transclude: true,
-    //scope: true,
+    scope: {
+      updateUrl: '&',
+      organisationProfileTab: "@"
+    },
     templateUrl: 'views/organisations/profile.html',
     controller: ['$scope', 'Restangular', 'Flash', '$location', function(scope, Restangular, Flash, $location){
       scope.profileRequestLoading = false;
+      var profileLoaded = false;
       
       scope.loadProfile = function(){
 	scope.profileRequestLoading = true;
@@ -26,7 +30,6 @@ app.directive('organisationProfile', function(Restangular) {
       };
 
       scope.loadProfile();
-      
     }]
   };
 });
@@ -36,15 +39,18 @@ app.directive('organisationCources', function(Restangular) {
   return {
     restrict: 'AE',
     transclude: true,
-    //scope: true,
+    scope: {
+      organisationProfileTab: "@"
+    },
     templateUrl: 'views/organisations/cources.html',
     controller: ['$scope', 'Restangular', 'Flash', '$location', function(scope, Restangular, Flash, $location){
       scope.cources = [];
       scope.requestLoading = true;
+      var profileLoaded = false;
       
       var base_organisation = Restangular.all("organisations");
       
-      scope.loadCources = function(){
+      var loadCources = function(){
 	scope.requestLoading = true;
 	Restangular.all("/organisations").customGET("cources").then(function(data){
 	  if(data.success) {
@@ -72,8 +78,6 @@ app.directive('organisationCources', function(Restangular) {
 	  }
 	});
       };
-
-      scope.loadCources();
       
       scope.launchSubOrganisation = function(){
 	var standards = $('.organisationCoursesTable input:checked').map(
@@ -85,7 +89,8 @@ app.directive('organisationCources', function(Restangular) {
 	var isSelected = _.pluck(scope.cources, 'is_selected');
         return _.contains(isSelected, true);
       };
-      
+
+      loadCources();
     }]
   };
 });
@@ -95,17 +100,23 @@ app.directive('organisationClarks', function(Restangular, $location, Flash) {
   return {
     restrict: 'AE',
     transclude: true,
-    scope: true,
+    scope: {
+      updateUrl: '&',
+      organisationClarksTab: "@"
+    },
     templateUrl: 'views/organisations/clarks.html',
     controller: ['$scope', 'Restangular', '$window', function(scope, Restangular, $window){
       var base_organisation = Restangular.all("organisations");
       scope.requestLoading = true;
+      var clarksLoaded = false;
       
-      base_organisation.customGET('get_clarks').then(function(data){
-	scope.clarks = data.data;
-	scope.requestLoading = false;
-      });
-
+      var loadClarks = function() {
+	base_organisation.customGET('get_clarks').then(function(data){
+	  scope.clarks = data.data;
+	  scope.requestLoading = false;
+	});
+      };
+      
       scope.manageRoles = function(user){
 	$location.path("/organisations/users/"+user.id+"/manage_roles");
       };
@@ -127,6 +138,16 @@ app.directive('organisationClarks', function(Restangular, $location, Flash) {
 	  });
 	}
       };
+
+      scope.$watch('organisationClarksTab', function(){
+	if(scope.organisationClarksTab === 'true') {
+	  scope.updateUrl({tabName: 'clarks'});
+	}
+	if(scope.organisationClarksTab === 'true' && clarksLoaded === false){
+	  loadClarks();
+	  clarksLoaded = true;
+	}
+      });
     }]
   };
 });
@@ -136,6 +157,7 @@ app.directive('organisationTeachers', function(Restangular, $location, Flash) {
     restrict: 'AE',
     transclude: true,
     scope: {
+      updateUrl: '&',
       organisationTeachersTab: "@"
     },
     templateUrl: 'views/teachers/index.html',
@@ -158,15 +180,16 @@ app.directive('organisationTeachers', function(Restangular, $location, Flash) {
       scope.toggleEnableUser = function(user){
 	base_organisation.customGET("users/"+user.id+"/toggleEnable", {enabled: user.is_enable});
       };
-
+      
       scope.$watch('organisationTeachersTab', function(){
+	if(scope.organisationTeachersTab === 'true') {
+	  scope.updateUrl({tabName: 'teachers'});
+	}
 	if(scope.organisationTeachersTab === 'true' && teachersLoaded === false){
 	  loadTeachers();
 	  teachersLoaded = true;
-	  //scope.organisationClassesLoded = true;
 	}
-      })
-
+      });
     }]
   };
 });
@@ -175,18 +198,20 @@ app.directive('organisationSubOrganisations', function(Restangular, $location, F
   return {
     restrict: 'AE',
     transclude: true,
-    scope: true,
+    scope: {
+      updateUrl: '&',
+      subOrganisationTab: "@"
+    },
     templateUrl: 'views/organisations/sub_organisations.html',
     controller: ['$scope', 'Restangular', '$window', function(scope, Restangular, $window){
       var base_organisation = Restangular.all("organisations");
+      var subOrganisationLoaded = false;
       
-      scope.loadSubOrganisation = function(){
+      var loadSubOrganisation = function(){
 	base_organisation.customGET('get_sub_organisations').then(function(data){
 	  scope.sub_organisations = data.organisations;
 	});
       };
-      
-      scope.loadSubOrganisation();
       
       scope.pullBackSubOrganisation = function(sub_organisation) {
 	if($window.confirm('Are you sure?')){
@@ -194,20 +219,27 @@ app.directive('organisationSubOrganisations', function(Restangular, $location, F
 	  base_organisation.one('sub_organisations', sub_organisation.id).remove().then(function(data){
 	    if(data.success) {
 	      scope.sub_organisations = _.reject(scope.sub_organisations, function(d){ return d.id === sub_organisation.id; });
-	      scope.loadCources();
+	      loadCources();
 	    }else {
 	      Flash.create('warning', "Some thing went wrong", 'alert-danger');
 	    }
-
 	  });
 	}
       }
+
+      scope.$watch('subOrganisationTab', function(){
+	if(scope.subOrganisationTab === 'true') {
+	  scope.updateUrl({tabName: 'sub_organisation'});
+	}
+	if(scope.subOrganisationTab === 'true' && subOrganisationLoaded === false){
+	  loadSubOrganisation();
+	  subOrganisationLoaded = true;
+	}
+      });
     }]
   };
 });
     
-
-
 app.directive('csSelect', function () {
   return {
     require: '^stTable',
@@ -264,6 +296,7 @@ app.directive('organisationClasses', function(Restangular) {
     restrict: 'AE',
     transclude: true,
     scope: {
+      updateUrl: '&',
       organisationClassesTab: "@",
       hostUrl: '@'
     },
@@ -274,7 +307,7 @@ app.directive('organisationClasses', function(Restangular) {
       scope.requestLoading = true;
       scope.token = $cookieStore.get('currentUser').token;
       
-      scope.loadClasses = function(){
+      var loadClasses = function(){
 	scope.requestLoading = true;
 	Restangular.all("/organisations").customGET('get_classes').then(function(data){
 	  if(data.success){
@@ -303,8 +336,8 @@ app.directive('organisationClasses', function(Restangular) {
       
       scope.$watch('organisationClassesTab', function(){
 	if(scope.organisationClassesTab === 'true'){
-	  scope.loadClasses();
-	  //scope.organisationClassesLoded = true;
+	  loadClasses();
+	  scope.updateUrl({tabName: 'classes'});
 	}
       })
     }]
@@ -317,6 +350,7 @@ app.directive('organisationStandards', function(Restangular) {
     restrict: 'AE',
     transclude: true,
     scope: {
+      updateUrl: '&',
       organisationStandardTab: "@",
       hostUrl: '@'
     },
@@ -326,7 +360,7 @@ app.directive('organisationStandards', function(Restangular) {
       scope.organisation_id = $cookieStore.get('currentUser').organisation_id;
       scope.requestLoading = true;
       
-      scope.loadOrganisationStandards = function(){
+      var loadOrganisationStandards = function(){
 	scope.requestLoading = true;
 	Restangular.all("/organisations").customGET('organisation_standards').then(function(data){
 	  if(data.success){
@@ -350,8 +384,8 @@ app.directive('organisationStandards', function(Restangular) {
       
       scope.$watch('organisationStandardTab', function(){
 	if(scope.organisationStandardTab === 'true'){
-	  scope.loadOrganisationStandards();
-	  //scope.organisationClassesLoded = true;
+	  scope.updateUrl({tabName: 'standards'});
+	  loadOrganisationStandards();
 	}
       })
     }]
