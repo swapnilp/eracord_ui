@@ -153,11 +153,34 @@ angular.module('eracordUiApp.controller')
 
     if($location.path() === "/organisations/teachers/" + $routeParams.teacher_id) {
       base_organisation = Restangular.all("organisations");
+      $scope.teacherId = $routeParams.teacher_id;;
+      $scope.requestLoading = false;
+      $scope.subjects = [];
       
       var getTeacher = function(){
 	base_organisation.customGET('teachers/'+$routeParams.teacher_id).then(function(data){
-	  $scope.teacher = data.teacher;
+	  if(data.success) {
+	    $scope.teacher = data.teacher;
+	  }
 	})
+      };
+
+      var loadSubjects = function() {
+	$scope.requestLoading = true;
+	base_organisation.customGET('teachers/'+$routeParams.teacher_id+'/get_subjects').then(function(data){
+	  $scope.subjects = data.subjects;
+	  $scope.requestLoading = false;
+	});
+      };
+
+      $scope.removeTeacherSubject = function(subject_id) {
+	if($window.confirm('Are you sure?')){
+	  base_organisation.customGET('teachers/'+$routeParams.teacher_id+'/subjects/'+subject_id+'/remove').then(function(data){
+	    if(data.success) {
+	      $scope.subjects = _.reject($scope.subjects, function(d){ return d.id === subject_id; });
+	    }
+	  })
+	}
       };
 
       $scope.openSubjects = function (size, teacher_id) {
@@ -172,9 +195,16 @@ angular.module('eracordUiApp.controller')
 	    }
 	  }
 	});
-      }
+
+	modalInstance.result.then(null, function () {
+	  loadSubjects();
+	});
+      };
+
       getTeacher();
+      loadSubjects();
     }
+    //end of teacher show
     
     if($location.path() === "/organisations/teachers/" + $routeParams.teacher_id + "/add_subjects") {
       base_organisation = Restangular.all("organisations");

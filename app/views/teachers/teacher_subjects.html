@@ -1,18 +1,17 @@
 <figure class="highlight col-sm-12" ng-show="!requestLoading && subjects.length > 0">
-  <table st-table="rowCollection" class="col-sm-12">
+  <table st-table="rowCollection" class="table organisationCoursesTable">
     <thead>
       <tr>
 	<th st-sort="firstName">#</th>
 	<th st-sort="firstName">Subject</th>
-	<th st-sort="lastName">Standard</th>
 	<th st-sort="balance">Remove</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="row in subjects">
-	<td>{{$index}}</td>
+	<td>{{$index + 1}}</td>
 	<td>{{row.subject_name}}</td>
-	<td>remove</td>
+	<td><a class="pointer  btn btn-link danger padding0" ng-click="removeTeacherSubject({{row.id}});"><i class="fa fa-times-circle-o fa-2x text-danger"></i></a></td>
       </tr>
     </tbody>
   </table>
