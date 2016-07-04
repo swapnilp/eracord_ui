@@ -10,9 +10,7 @@
 	<tr>
 	  <th st-sort="firstName">Name</th>
 	  <th st-sort="lastName">Students</th>
-	  <th st-sort="birthDate">Fill Daily Catlog</th>
-	  <th st-sort="balance">Create Exam</th>	
-	  <th st-sort="balance">Create Grouped Exams</th>
+	  <th st-sort="lastName">Create</th>
 	  <th st-sort="balance">Notifications</th>
 	</tr>
       </thead>
@@ -21,27 +19,20 @@
 	  <td><a href="#/classes/{{row.id}}">{{row.class_name}}</a></td>
 	  <td>{{row.students}}</td>
 	  <td>
-	    <span is-role-visible='["create_daily_teach"]' email="currentUser.email" ng-if="row.is_student_verified">
-	      <a ng-href="#/classes/{{row.id}}/daily_catlogs/new">Fill Catlog</a>
+	    <span ng-if="row.is_student_verified"> 
+	      <span is-role-visible='["create_daily_teach"]' email="currentUser.email" >
+		<a ng-href="#/classes/{{row.id}}/daily_catlogs/new" uib-tooltip="Catlog"><i class="fa fa-table fa-2x"></i></a>
+	      </span>
+	      <span is-role-visible='["create_exam"]' email="currentUser.email">
+		<a ng-href="#/classes/{{row.id}}/exams/new" uib-tooltip="Exam"><i class="fa fa-wpforms fa-2x"></i></a>
+		<a ng-href="#/classes/{{row.id}}/exams/new?&isGroup=true" uib-tooltip="Group Exam"><fa class="fa fa-object-group fa-2x"></i></a>
+	      </span>
 	    </span>
 	    <span ng-if="!row.is_student_verified">
-	      <a ng-href="#/classes/{{row.id}}/manage_class?&verify=true">Verify students</a>
-	    </span>
-	  </td>
-	  <td>
-	    <span is-role-visible='["create_exam"]' email="currentUser.email" ng-if="row.is_student_verified">
-	      <a ng-href="#/classes/{{row.id}}/exams/new">Create Exam</a>
-	    </span>
-	  </td>
-	  <td>
-	    <span is-role-visible='["create_exam"]' email="currentUser.email" ng-if="row.is_student_verified">
-	      <a ng-href="#/classes/{{row.id}}/exams/new?&isGroup=true">Create Group Exam</a>
+	      <a ng-href="#/classes/{{row.id}}/manage_class?&verify=true" uib-tooltip="Verify Class Students"><i class="fa fa-check-square fa-2x"></i></a>
 	    </span>
 	  </td>
 	  <td>{{row.remaining_activity}}</td>
-	  <td>
-	    
-	  </td>
 	</tr>
       </tbody>
     </table>
