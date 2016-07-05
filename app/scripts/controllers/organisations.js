@@ -106,10 +106,8 @@ angular.module('eracordUiApp.controller')
       $scope.vm = {};
       $scope.isNew = true;
       $scope.vm.user = {}
-      $scope.vm.user.full_time = true;
       $scope.registerTeacher = function(){
       	$scope.vm.dataLoading = true;
-      	$scope.vm.user.role = 'clark';
       	base_organisation.customPOST({teacher: $scope.vm.user}, 'teachers', {}).then(function(data){
       	  if(data.success){
 	    $location.path('/organisations/teachers/'+data.teacher_id);
@@ -126,7 +124,6 @@ angular.module('eracordUiApp.controller')
       $scope.vm = {};
       $scope.isNew = false;
       $scope.vm.user = {}
-      $scope.vm.user.full_time = true;
       
       var getTeacher = function(){
 	base_organisation.customGET('teachers/'+$routeParams.teacher_id+'/edit').then(function(data){
