@@ -1,6 +1,6 @@
 <div style="margin:20px 0;">
   <div>
-    <h3>My Cources</h3>
+    <h3>My Courses</h3>
   </div>
   <div class="alert alert-warning" ng-if="noData && !requestLoading">No Standards are added. <a href="#/manage_organisation"> click here</a> for adding </div>
   <div request-loading is-loading="requestLoading"></div>
@@ -64,6 +64,7 @@
       </table>
     </figure>
   </div>
+  <hr>
   <div class="col-md-12 padding0">
     <h2>Time Tables</h2>
     <div class="col-md-4 padding0">
@@ -81,6 +82,6 @@
     <div class="pull-right" ng-show="loadCalenderEvent">
       <i class="fa fa-refresh fa-spin fa-2x"></i>
     </div>
-    <div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources" calendar="myCalendar"></div> 
+    <div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources" calendar="myCalendar" style="margin-bottom:15px;"></div> 
   </div>
 </div>

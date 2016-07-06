@@ -30,6 +30,11 @@ app.directive('organisationProfile', function(Restangular) {
       };
 
       scope.loadProfile();
+      scope.$watch('organisationProfileTab', function(){
+	if(scope.organisationProfileTab == 'true') {
+	  scope.updateUrl({tabName: 'profile'});
+	}
+      });
     }]
   };
 });

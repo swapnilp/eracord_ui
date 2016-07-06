@@ -1,46 +1,46 @@
 <div class="container">
   <div class="col-sm-12 textLeft paddingLeft0">
-    <span class="col-sm-2"><h5>Name</h5> </span>
+    <span class="col-sm-2 paddingLeft0"><h5>Name</h5> </span>
     <span class="col-sm-6 paddingTop10">{{organisation.name}}</span>
   </div>
 
   <div class="col-sm-12 textLeft paddingLeft0">
-    <span class="col-sm-2"><h5>Email</h5> </span>
+    <span class="col-sm-2 paddingLeft0"><h5>Email</h5> </span>
     <span class="col-sm-6 paddingTop10">{{organisation.email}}</span>
   </div>
 
   <div class="col-sm-12 textLeft paddingLeft0">
-    <span class="col-sm-2"><h5>mobile</h5> </span>
+    <span class="col-sm-2 paddingLeft0"><h5>Mobile</h5> </span>
     <span class="col-sm-6 paddingTop10">{{organisation.mobile}}</span>
   </div>
   
   <div class="col-sm-12 textLeft paddingLeft0">
-    <span class="col-sm-2"><h5>Sms</h5> </span>
+    <span class="col-sm-2 paddingLeft0"><h5>SMS</h5> </span>
     <span class="col-sm-6 paddingTop10">{{organisation.is_send_message}}
-      <span ng-if="organisation.is_send_message != 'Enabled' && is_root" class="alert alert-warning marginLeft10">Need to contact 
+      <span ng-if="organisation.is_send_message != 'Enabled' && is_root" class="alert alert-warning marginLeft10" style="padding:10px;">Need to contact 
 	<a href="#/contact"> Eracord Admin</a> 
       </span>
     </span>
   </div>
 
   <div class="col-sm-12 textLeft paddingLeft0" ng-if="is_root">
-    <span class="col-sm-2"><h5>Account Sms number</h5> </span>
+    <span class="col-sm-2 paddingLeft0"><h5>Account SMS Number</h5> </span>
     <span class="col-sm-6 paddingTop10">{{organisation.account_sms}}</span>
   </div>
   <div class="col-sm-12 textLeft paddingLeft0" ng-if="is_root">
-    <span class="col-sm-2"><h5>Pan Number</h5> </span>
+    <span class="col-sm-2 paddingLeft0"><h5>Pan Number</h5> </span>
     <span class="col-sm-6 paddingTop10">{{organisation.pan_number}}</span>
   </div>
   <div class="col-sm-12 textLeft paddingLeft0" ng-if="is_root">
-    <span class="col-sm-2"><h5>Tan Number</h5> </span>
+    <span class="col-sm-2 paddingLeft0"><h5>Tan Number</h5> </span>
     <span class="col-sm-6 paddingTop10">{{organisation.tan_number}}</span>
   </div>
   <div class="col-sm-12 textLeft paddingLeft0" ng-if="is_root">
-    <span class="col-sm-2"><h5>Enable service tax</h5> </span>
+    <span class="col-sm-2 paddingLeft0"><h5>Enable Service Tax</h5> </span>
     <span class="col-sm-6 paddingTop10">{{organisation.enable_service_tax}}</span>
   </div>
   <div class="col-sm-12 textLeft paddingLeft0" ng-if="organisation.enable_service_tax && is_root">
-    <span class="col-sm-2"><h5>Service tax</h5> </span>
+    <span class="col-sm-2 paddingLeft0"><h5>Service tax</h5> </span>
     <span class="col-sm-6 paddingTop10">{{organisation.service_tax}}%</span>
   </div>
   <div class="col-sm-12 textLeft paddingLeft0" ng-show="!profileRequestLoading">

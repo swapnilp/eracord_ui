@@ -25,21 +25,18 @@
       </form>
     </span>
   </span>
-  <div class="examFilterDiv col-sm-12"> 
-    <div class="col-sm-3">
-      Filter : <input type="text" ng-model="filterStudent" dl-key-code="pageChanged(1);" code="13" placeholder="Type name or mobile and  enter" style="max-width:230px;" value="{{filterStudent}}">
-
-    </div>
-    <div class="col-sm-3" ng-if="isFilter">
-      <select class="form-control ng-touched" ng-model="filterClass" ng-options="cls.id as cls.name for cls in classes">
-	<option value="">All</option>
-      </select>
-    </div>
-    <div class="col-sm-3">
+  <div class="examFilterDiv col-sm-12 padding0"> 
+    <div class="pull-right">
+      <input type="text" ng-model="filterStudent" dl-key-code="pageChanged(1);" code="13" placeholder="Enter name or mobile" value="{{filterStudent}}" style="width:230px;display:inline;" class="form-control">
+      <span  ng-if="isFilter">
+	<select class="form-control ng-touched" ng-model="filterClass" ng-options="cls.id as cls.name for cls in classes" style="width:200px;display:inline;">
+	  <option value="">All</option>
+	</select>
+      </span>
       <button class="btn btn-primary" ng-click="pageChanged(1);">Filter</button>
     </div>		  
   </div>
-  <div class="col-sm-12" style="padding-bottom:20px;" is-role-visible='["accountant", "accountant_clark"]' email="currentUser.email" ng-if="newStudent">
+  <div class="col-sm-12 padding0" style="padding-bottom:20px;" is-role-visible='["accountant", "accountant_clark"]' email="currentUser.email" ng-if="newStudent">
     <a class="btn btn-primary" href="#/students/new" ng-if="!classId">New Student</a>
     <a class="btn btn-primary" href="#/classes/{{classId}}/students/new" ng-if="classId">New Student</a>
   </div>

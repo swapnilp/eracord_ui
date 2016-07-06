@@ -1,4 +1,4 @@
-<h2>Manage clark roles</h2>
+<h2>Manage clerk roles</h2>
 <div request-loading is-loading="requestLoading"></div>
 <div style="margin:20px 0;" class="userRoles" ng-show="!requestLoading">
   <div ng-repeat="(key, value) in roles">
@@ -6,5 +6,5 @@
   </div>
   <br />
   <button class="btn btn-primary" ng-click="saveRoles();">Save Roles</button>
-  <a ng-href="#/manage_organisation" class="btn btn-default">Cancel</a>
+  <a ng-click="goBack();" class="btn btn-default">Cancel</a>
 </div>
