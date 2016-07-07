@@ -41,7 +41,7 @@
     <a class="btn btn-primary" href="#/classes/{{classId}}/students/new" ng-if="classId">New Student</a>
   </div>
   <br /><br /><br />
-  <div class="alert alert-warning col-sm-12">
+  <div class="alert alert-warning col-sm-12" ng-show="!requestLoading">
     <span ng-if="totalStudents > 0">
       Total Students are - {{totalStudents}}
     </span>
