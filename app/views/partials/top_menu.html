@@ -42,7 +42,7 @@
           <li ng-class="{active: topMenu==='contacts'}"><a ng-href="#/contact">Contact</a></li>
         </ul>
 	<ul class="nav navbar-nav pull-right" ng-if="currentUser.email">
-	  <li ng-class="{active: topMenu==='users'}">
+	  <li ng-class="{active: topMenu==='users'}" uib-tooltip="{{currentUser.email}}" tooltip-placement="bottom">
 	    <a class="btn btn-link" href="#/user/change_password">{{currentUser.name}}</a>
 	  </li>
           <li><a class="btn btn-link" ng-click="doLogout();">Logout</a></li>
