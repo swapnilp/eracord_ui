@@ -110,7 +110,7 @@ angular.module('eracordUiApp.controller')
       	$scope.vm.dataLoading = true;
       	base_organisation.customPOST({teacher: $scope.vm.user}, 'teachers', {}).then(function(data){
       	  if(data.success){
-	    $location.path('/organisations/teachers/'+data.teacher_id);
+	    $location.path('/organisations/teachers/'+data.teacher_id).replace();;
       	  }else{
       	    $scope.vm.dataLoading = false;
       	    Flash.create('warning', data.message, 'alert-danger');
@@ -137,7 +137,7 @@ angular.module('eracordUiApp.controller')
       	$scope.vm.user.role = 'clark';
       	base_organisation.customPUT({teacher: $scope.vm.user}, 'teachers/'+$routeParams.teacher_id, {}).then(function(data){
       	  if(data.success){
-      	    $location.path('/organisations/teachers/'+data.teacher_id);
+      	    $location.path('/organisations/teachers/'+data.teacher_id).replace();;
       	  }else{
       	    $scope.vm.dataLoading = false;
       	    Flash.create('warning', data.message, 'alert-danger');
@@ -366,6 +366,8 @@ angular.module('eracordUiApp.controller')
     }
 
     if($location.path() === '/manage_organisation') {
+
+      $scope.isRoot = $cookieStore.get('currentUser').is_root;;
       var loadTabs = function(selectTab){
 	if(selectTab === 'standards') {
 	  $scope.organisationStandardTab = true;
