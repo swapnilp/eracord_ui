@@ -78,7 +78,8 @@ angular.module('eracordUiApp.controller')
 		title: exam.title,
 		start: new Date(exam.start),
 		end: new Date(exam.end),
-		url: exam.url
+		url: exam.url,
+		name: "exams"
 	      });
 	    }else {
 	      examEvents.push({
@@ -86,7 +87,8 @@ angular.module('eracordUiApp.controller')
 		title: exam.title,
 		start: new Date(exam.start),
 		end: new Date(exam.end),
-		className: ['bg-info-black']
+		className: ['bg-info-black'],
+		name: "exams"
 	      });
 	    }
 	  });
@@ -103,14 +105,16 @@ angular.module('eracordUiApp.controller')
 	  var time_table_slot = null;
 	  for(var i=1; i< 8;i += 1) {
 	    time_table_slot = _.where(data.time_table_classes, {cwday: i});
-	    if(time_table_slot.length > 0) {
+	    _.each(time_table_slot, function(tts){
 	      timeTableEvents.push({
-		type: 'time_table',
-		title: _.pluck(time_table_slot, 'name').join(','),
+		type: tts.start_time,
+		title: tts.name,
 		dow: [i],
-		allDay: true
+		allDay: true,
+		name: "time_table",
+		jkci_class_id: tts.jkci_class_id
 	      });
-	    }
+	    });
 	  }
 	  $scope.loadCalenderEvent = false;
 	  callback(timeTableEvents);
@@ -129,7 +133,8 @@ angular.module('eracordUiApp.controller')
               title: off_class.name,
 	      start: date,
 	      allDay: true,
-	      className: ['bg-red-danger']
+	      className: ['bg-red-danger'],
+	      name: "exams"
 	    });
 	  });
 	  $scope.loadCalenderEvent = false;
@@ -166,7 +171,7 @@ angular.module('eracordUiApp.controller')
     
 
     $scope.alertOnDayClick = function( data){
-      console.log(data);
+      //console.log(data);
     }
     
     
@@ -183,9 +188,16 @@ angular.module('eracordUiApp.controller')
 
      /* Render Tooltip */
     $scope.eventRender = function( event, element, view ) { 
-        element.attr({'uib-tooltip': event.type,
-                     'tooltip-append-to-body': true});
-        $compile(element)($scope);
+      element.attr({'uib-tooltip': event.type,
+        'tooltip-append-to-body': true});
+      //element.attr({'href': "asdasd"})
+      if(event.name == "time_table" && (event.start.format("MMM D") === moment().format("MMM D"))) {
+	element.attr({'href': "#/classes/"+event.jkci_class_id+"/daily_catlogs/new"})
+      }else if(event.name == "time_table"){
+	element.attr({'class': element.attr("class")+" bg-info-black"})
+	//event.className.push("bg-info-black");
+      }
+      $compile(element)($scope);
     };
 
     
