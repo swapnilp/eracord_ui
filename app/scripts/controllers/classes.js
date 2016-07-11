@@ -74,36 +74,6 @@ angular.module('eracordUiApp.controller')
     }
     // end of class show if path
 
-    if($location.path() === "/classes/"+$routeParams.class_id+"/assign_students") {
-      $scope.requestLoading = true;
-      $scope.dataLoading = false;
-      jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
-      $scope.studentList = [];
-      $scope.class_id = $routeParams.class_id;
-      
-      jkci_classes.customGET("/assign_students").then(function(data){
-	if(data.success) {
-	  $scope.remainingStudents = data.students;
-	}else {
-	  $location.path("/classes/"+$routeParams.class_id);
-	}
-	$scope.requestLoading = false;
-      });
-
-      $scope.saveStudentList = function(){
-	$scope.dataLoading = true;
-	jkci_classes.customPOST({students_ids: $scope.studentList}, "manage_students").then(function(data){
-	  if(data.success) {
-	    $location.path("/classes/"+$routeParams.class_id+"/manage_class").replace();
-	  } else {
-	    Flash.create('warning', "Please try again", 'alert-danger');
-	  }
-	  $scope.dataLoading = false;
-	});
-      };
-    }
-    // end of class assign student if path
-
     if($location.path() === "/classes/"+$routeParams.class_id+"/manage_student_subjects") {
       jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
       $scope.classId = $routeParams.class_id;
@@ -271,6 +241,40 @@ angular.module('eracordUiApp.controller')
     }
     //end of manage Class
     
-  }]);
+  }])
 
 
+  .controller('ClassAssignStudentCtrl',['$scope', '$uibModalInstance', 'Restangular', 'class_id',
+    function ($scope, $uibModalInstance, Restangular, class_id)  {
+      $scope.requestLoading = true;
+      $scope.dataLoading = false;
+      $scope.class_id = class_id;
+      var jkci_classes = Restangular.one("jkci_classes", class_id);
+      $scope.studentList = [];
+      
+      
+      jkci_classes.customGET("/assign_students").then(function(data){
+      	if(data.success) {
+      	  $scope.remainingStudents = data.students;
+      	}else {
+	  $scope.cancel();
+      	}
+      	$scope.requestLoading = false;
+      });
+      
+      $scope.saveStudentList = function(){
+      	$scope.dataLoading = true;
+      	jkci_classes.customPOST({students_ids: $scope.studentList}, "manage_students").then(function(data){
+      	  if(data.success) {
+	    $uibModalInstance.dismiss('cancel');
+      	  } else {
+      	    Flash.create('warning', "Please try again", 'alert-danger');
+      	  }
+      	  $scope.dataLoading = false;
+      	});
+      };
+      
+      $scope.cancel = function () {
+	$uibModalInstance.dismiss('cancel');
+      };
+    }]);

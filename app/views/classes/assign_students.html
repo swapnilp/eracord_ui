@@ -1,12 +1,19 @@
-<h2>Assign Student to class</h2>
-<div request-loading is-loading="requestLoading"></div>
-<div class="remainingStudentsList col-md-6" ng-show="!requestLoading">
-  <label ng-repeat="student in remainingStudents">
-    <input type="checkbox" checklist-model="studentList" checklist-value="student.id"> {{student.name}} - {{student.p_mobile}}
-  </label>
+<div class="modal-header">
+  <h3 class="modal-title">Assign Student to class</h3>
+  <a ng-click="cancel()" style="float: right;position: absolute;right: 15px;top: 19px;cursor:pointer;color:#999;"><i class="fa fa-times"></i></a>
 </div>
-<div style="margin:20px 0;" class="col-md-12" ng-show="!requestLoading">
+<div class="modal-body" style="min-height:300px;overflow: scroll;">
+
+  <div request-loading is-loading="requestLoading"></div>
+  <div class="remainingStudentsList col-md-6" ng-show="!requestLoading">
+    <label ng-repeat="student in remainingStudents">
+      <input type="checkbox" checklist-model="studentList" checklist-value="student.id"> {{student.name}} - {{student.p_mobile}}
+    </label>
+  </div>
+</div>
+<div style="margin:20px 0;" class="modal-footer">
   <button class="btn btn-primary" ng-click="saveStudentList()" ng-disabled="((studentList == 0) || dataLoading)">Save</button>
   <span button-req-load is-loading="dataLoading"></span>
-  <button ng-click="goBack();" class="btn btn-default">Back</button>
+  <button ng-click="cancel();" class="btn btn-default">Back</button>
 </div>
+

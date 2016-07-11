@@ -3,8 +3,10 @@
     <span is-role-visible='["manage_roll_number"]' email="currentUser.email">
       <a href="#/classes/{{classId}}/manage_student_rollnumber" class="btn btn-primary" ng-if="classId">Manage Roll Number</a>
     </span>
-    <span is-role-visible='["manage_class_student"]' email="currentUser.email">
-      <a href="#/classes/{{classId}}/assign_students" class="btn btn-primary" ng-if="classId">Assign Student</a>
+    <span is-role-visible='["manage_class_student"]' email="currentUser.email" ng-if="classId">
+      <button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openAssignStudentModel('lg')" uib-tooltip="Assign Students">
+	Assign Students
+      </button>
     </span>
     <span is-role-visible='["manage_student_subject"]' email="currentUser.email">
       <a href="#/classes/{{classId}}/manage_student_subjects" class="btn btn-primary" ng-if="classId">manage_student_subjects</a>

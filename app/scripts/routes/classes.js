@@ -16,11 +16,6 @@ app.config(function($routeProvider) {
       controllerAs: 'classes',
       reloadOnSearch: false
     })
-    .when('/classes/:class_id/assign_students', {
-      templateUrl: 'views/classes/assign_students.html',
-      controller: 'ClassesCtrl',
-      controllerAs: 'classes'
-    })
     .when('/classes/:class_id/manage_student_subjects', {
       templateUrl: 'views/classes/manage_student_subjects.html',
       controller: 'ClassesCtrl',

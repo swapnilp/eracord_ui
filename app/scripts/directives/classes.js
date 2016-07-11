@@ -17,7 +17,7 @@ app.directive('classStudents', function(Restangular) {
       newStudent: '@'
     },
     templateUrl: 'views/students/index.html',
-    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', '$route', 'Upload', '$cookieStore', function(scope, Restangular, Flash, $location, $window, $routeParams, $route, Upload, $cookieStore){
+    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', '$route', 'Upload', '$cookieStore', '$uibModal', function(scope, Restangular, Flash, $location, $window, $routeParams, $route, Upload, $cookieStore, $uibModal){
       scope.cources = [];
       scope.showRollNumber = true;
       scope.isRollNumber = true;
@@ -40,6 +40,24 @@ app.directive('classStudents', function(Restangular) {
 	  _.map(scope.students, function(student){ student.expanded = false;})
 	  row.expanded = true;
 	}
+      };
+      
+      scope.openAssignStudentModel = function(size) {
+	var modalInstance = $uibModal.open({
+	  animation: true,
+	  templateUrl: 'views/classes/assign_students.html',
+	  controller: 'ClassAssignStudentCtrl',
+	  size: size,
+	  resolve: {
+	    class_id: function(){
+	      return scope.classId;
+	    }
+	  }
+	});
+	
+	modalInstance.result.then(null, function () {
+	  getResultsPage(1);
+	});
       };
 
       scope.selectUploadFile = function(newVal){
