@@ -35,10 +35,6 @@ app.config(function($routeProvider) {
       templateUrl: 'views/teachers/new.html',
       controller: 'OrganisationsCtrl'
     })
-    .when('/organisations/teachers/:teacher_id/add_subjects', {
-      templateUrl: 'views/teachers/add_subjects.html',
-      controller: 'OrganisationsCtrl'
-    })
     .when('/edit_organisation', {
       templateUrl: 'views/organisations/edit_organisation.html',
       controller: 'OrganisationsCtrl'

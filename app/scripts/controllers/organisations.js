@@ -203,17 +203,6 @@ angular.module('eracordUiApp.controller')
     }
     //end of teacher show
     
-    if($location.path() === "/organisations/teachers/" + $routeParams.teacher_id + "/add_subjects") {
-      base_organisation = Restangular.all("organisations");
-      
-      var getTeacher = function(){
-	base_organisation.customGET('teachers/'+$routeParams.teacher_id).then(function(data){
-	  $scope.teacher = data.teacher;
-	})
-      };
-      getTeacher();
-    }
-
     if($location.path() === "/organisation/standards/" + $routeParams.standard_ids + "/launch_sub_organisation"){
       base_organisation = Restangular.all("organisations");
       $scope.requestLoading = true;
