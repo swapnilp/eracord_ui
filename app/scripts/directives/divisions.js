@@ -58,12 +58,15 @@ app.directive('divisionStudents', function(Restangular) {
       scope.isRemove = true;
       
       var getResultsPage = function(pageNumber) {
+	scope.requestLoading = true;
+	scope.students = [];
 	jkci_classes.one("sub_classes", scope.divisionId).customGET("students", {page: pageNumber, search: scope.filterStudent}).then(function(data){
 	  if(data.success) {
 	    scope.students = data.students;
 	    scope.totalStudents = data.count;
 	  } else {
 	  }
+	  scope.requestLoading = false;
 	  
 	});
       };
@@ -97,7 +100,6 @@ app.directive('divisionStudents', function(Restangular) {
       }
       
       scope.$watch("reloadStudent", function(){
-	console.log(scope.reloadStudent);
 	getResultsPage(1);
       });
 
