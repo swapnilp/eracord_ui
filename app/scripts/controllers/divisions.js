@@ -38,6 +38,7 @@ angular.module('eracordUiApp.controller')
     if($location.path() === "/classes/"+$routeParams.class_id+"/divisions/"+$routeParams.division_id) {
       $scope.classId = $routeParams.class_id;
       $scope.divisionId = $routeParams.division_id;
+      $scope.reloadStudent = 1;
       jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
       
       jkci_classes.one("sub_classes", $scope.divisionId).get().then(function(data) {
@@ -62,6 +63,11 @@ angular.module('eracordUiApp.controller')
 	    }
 	  }
 	});
+	
+	modalInstance.result.then(null, function () {
+	  $scope.reloadStudent = $scope.reloadStudent + 1;
+	});
+
       }
 
       $scope.deleteDivision = function() {

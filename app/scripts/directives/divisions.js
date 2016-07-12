@@ -48,7 +48,8 @@ app.directive('divisionStudents', function(Restangular) {
     transclude: true,
     scope: {
       classId: '@',
-      divisionId: '@'
+      divisionId: '@',
+      reloadStudent: '='
     },
     templateUrl: 'views/students/index.html',
     controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', function(scope, Restangular, Flash, $location, $window, $routeParams){
@@ -95,7 +96,10 @@ app.directive('divisionStudents', function(Restangular) {
 	}
       }
       
-      getResultsPage(1);
+      scope.$watch("reloadStudent", function(){
+	console.log(scope.reloadStudent);
+	getResultsPage(1);
+      });
 
     }]
   }
