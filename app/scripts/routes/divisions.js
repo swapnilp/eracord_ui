@@ -14,11 +14,6 @@ app.config(function($routeProvider) {
       templateUrl: 'views/divisions/show.html',
       controller: 'DivisionsCtrl',
       controllerAs: 'divisions'
-    })
-    .when('/classes/:class_id/divisions/:division_id/assign_students', {
-      templateUrl: 'views/classes/assign_students.html',
-      controller: 'DivisionsCtrl',
-      controllerAs: 'divisions'
     });
 });
 

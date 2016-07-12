@@ -19,7 +19,9 @@
     <div class="col-sm-12">
       <a class="btn btn-default" href="#/classes/{{classId}}/manage_class">Back</a>
       <button class="btn btn-primary" ng-click="deleteDivision();">Delete</button>
-      <a class="btn btn-primary" href="#/classes/{{classId}}/divisions/{{divisionId}}/assign_students">Assign Students</a>
+      <button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openAssignStudentModel('lg')" uib-tooltip="Assign Students">
+	Assign Students
+      </button>
     </div>
   </div>
   <div class="col-sm-12 textLeft">
