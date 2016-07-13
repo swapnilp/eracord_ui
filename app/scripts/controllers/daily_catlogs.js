@@ -25,13 +25,18 @@ angular.module('eracordUiApp.controller')
       $scope.selectedPoints = [];
       $scope.vm = {};
       $scope.vm.daily_teachs = {};
+      $scope.vm.daily_teachs.date = new Date();
       $scope.requestLoading = true;
       $scope.chapterLoading = false;
       $scope.chapterPointsLoading = false;
       $scope.dataLoading = false;
       
-      var date = new Date();
-      $scope.maxDate = ""+ date.getFullYear()+"/"+(date.getMonth()+1)+"/"+ (date.getDate()+1);
+      var maxDate = moment().format("'MM-DD-YY'");
+      var minDate = moment().subtract(7, 'days').format("'MM-DD-YY'");
+      $scope.dateOptions = {
+      	maxDate: maxDate,
+	minDate: minDate
+      };
       
       $scope.openCalendar = function(e) {
         e.preventDefault();
