@@ -68,7 +68,7 @@
   <div class="col-md-12 padding0">
     <h2>Time Tables</h2>
     <div class="col-md-4 padding0">
-      <label class="btn active btn-default" ng-repeat="calenderType in ['exams', 'time_table', 'off_class']">
+      <label class="btn active btn-default" ng-repeat="calenderType in ['exams', 'time_table', 'off_class']" style="display: inline-flex;">
 	<input name="cssPre" id="css1" type="radio" ng-value="calenderType" ng-model="selectedCalenderType" ng-click="reloadCalenderEvent(calenderType);">
 	{{calenderType}}
       </label>
