@@ -4,8 +4,8 @@
   <div class="alert alert-warning">You are belongs to multiple organisation please select organisation you want to login.</div>
   <div class="form-group" ng-class="{ 'has-error': form.organisation.$dirty && form.organisation.$error.required }">
     <label for="Organisation">Organisation</label>
-    <label class="btn active btn-default" ng-repeat="organisation in organisations">
-      <input name="cssPre" id="css1" value="{{organisation.organisation_id}}" class="active" type="radio" ng-model="vmorg.organisation" required>{{organisation.organisation_name}}
+    <label class="btn active btn-default" ng-repeat="organisation in organisations" style="display: inline-flex;">
+      <input name="cssPre" id="css1" value="{{organisation.organisation_id}}" class="active" type="radio" ng-model="vmorg.organisation" required>{{organisation.organisation_name}} as {{organisation.role}}
     </label>
     <span ng-show="form.organisation.$dirty && form.organisation.$error.required" class="help-block">Oganisation ID is required</span>
   </div>
