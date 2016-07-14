@@ -248,7 +248,7 @@ app.directive('organisationSubOrganisations', function(Restangular, $location, F
 app.directive('csSelect', function () {
   return {
     require: '^stTable',
-    template: '<input ng-model="row.is_selected" type="checkbox" data-key="{{row.standard_id}}"/>',
+    template: '<input id="std_{{row.standard_id}}" ng-model="row.is_selected" type="checkbox" data-key="{{row.standard_id}}"/> <label for="std_{{row.standard_id}}"></label>',
     scope: {
       row: '=csSelect'
     },

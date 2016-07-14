@@ -519,28 +519,31 @@ table.headerless {
   font-size:15px;
 }
 
-input[type="checkbox"] , input[type="radio"]{
-  -moz-appearance:none;
-  -webkit-appearance:none;
-  -o-appearance:none;
-  width: 20px;
-  height: 20px;
-  background-color: #f9f9f9;
-  border: 1px solid #cccccc;
-  border-radius: 5px;
-  margin: 0px 10px 0;
-}
-
 input[type="radio"]{
-  margin: 0px 5px 0;
+  margin: 4px 4px 0;
 }
 
-input[type="checkbox"]:checked, input[type="radio"]:checked{
-  background: url('../images/checkbox_tick.png') no-repeat 5px 1px;
-  background-size: 11px 16px;
+.checkBoxStyle input[type="checkbox"] {
+  display:none;
 }
 
-input[type="checkbox"]:focus, input[type="radio"]:focus {
-    outline-offset: -2px;
-    outline: none;
+.checkBoxStyle label {
+  margin: 4px;
+}
+.checkBoxStyle input[type="checkbox"] {
+ display:none;
+}
+.checkBoxStyle label:before {
+ content: "";
+ display: inline-block;
+ width: 20px;
+ height: 20px;
+ vertical-align: middle;
+ background-color: #f9f9f9;
+  border: 1px solid #ccc;
+ border-radius: 5px;
+}
+.checkBoxStyle input[type="checkbox"]:checked + label:before {
+  background: url('../images/checkbox_tick.png') 3px 3px no-repeat;
+  background-size: 13px 15px;
 }

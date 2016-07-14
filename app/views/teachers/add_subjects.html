@@ -6,8 +6,10 @@
   <div request-loading is-loading="requestLoading"></div>
   <figure class="highlight col-sm-12" ng-show="!requestLoading">
     <div class="remainingStudentsList col-md-6">
-      <label ng-repeat="subject in subjects">
-	<input type="checkbox" checklist-model="subjectsList" checklist-value="subject.id"> {{subject.std_name}}
+      <label ng-repeat="subject in subjects" class="checkBoxStyle">
+	<input id="subject_{{subject.id}}" type="checkbox" checklist-model="subjectsList" checklist-value="subject.id"> 
+	<label for="subject_{{subject.id}}"></label>
+	{{subject.std_name}}
       </label>
     </div>
   </figure>

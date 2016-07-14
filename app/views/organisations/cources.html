@@ -19,7 +19,7 @@
       </thead>
       <tbody>
 	<tr ng-repeat="row in cources" ng-class="{danger: !row.is_active}">
-	  <td cs-select="row" ng-if="!row.actions && row.is_active"></td>
+	  <td class="checkBoxStyle" cs-select="row" ng-if="!row.actions && row.is_active"></td>
 	  <td ng-if="row.actions || !row.is_active"></td>
 	  <td>
 	    {{row.name}}
