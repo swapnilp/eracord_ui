@@ -95,7 +95,12 @@ app.directive('organisationCources', function(Restangular) {
         return _.contains(isSelected, true);
       };
 
-      loadCources();
+      scope.$watch('organisationProfileTab', function(){
+	if(scope.organisationProfileTab == 'true') {
+	  loadCources();
+	}
+      });
+
     }]
   };
 });

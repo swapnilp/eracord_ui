@@ -2,9 +2,9 @@
   <uib-tabset justified="true">
     <uib-tab ng-attr-active="organisationProfileTab">
       <uib-tab-heading><i class="icon-bell"></i> Profile</uib-tab-heading>
-      <div organisation-profile organisation-profile-tab="{{organisationProfileTab}}"update-url="updateTabParams(tabName)"></div>
+      <div organisation-profile organisation-profile-tab="{{organisationProfileTab}}" update-url="updateTabParams(tabName)"></div>
       <h2>Courses</h2>
-      <div organisation-cources></div>
+      <div organisation-cources organisation-profile-tab="{{organisationProfileTab}}"></div>
     </uib-tab>
     <uib-tab ng-attr-active="organisationClassesTab">
       <uib-tab-heading><i class="icon-bell"></i> All Classes</uib-tab-heading>
