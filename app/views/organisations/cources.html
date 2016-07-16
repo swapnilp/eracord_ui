@@ -27,17 +27,19 @@
 	  <td>
 	    {{row.assign_to}}
 	    <span uib-dropdown ng-if="row.assign_to !== ''">
-	      <a  id="simple-dropdown" uib-dropdown-toggle >
-		<i class="fa fa-info-circle"></i>
-	      </a>
-	      <ul uib-dropdown-menu aria-labelledby="simple-dropdown" class="padding5">
-		<li>
-		  Email - {{row.assigned_org_info.email}}
-		</li>
-		<li>
-		  Mobile - {{row.assigned_org_info.mobile}}
-		</li>
-	      </ul>
+	      <div class="btn-group" dropdown>
+		<a  id="simple-dropdown" uib-dropdown-toggle >
+		  <i class="fa fa-info-circle"></i>
+		</a>
+		<ul uib-dropdown-menu aria-labelledby="simple-dropdown" class="padding5">
+		  <li>
+		    Email - {{row.assigned_org_info.email}}
+		  </li>
+		  <li>
+		    Mobile - {{row.assigned_org_info.mobile}}
+		  </li>
+		</ul>
+	      </div>
 	    </span>
 	  </td>
 	  <td>
