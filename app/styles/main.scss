@@ -239,7 +239,11 @@ input, select, option {
 
 .bg-red-danger {
   background :red;
-  color: #000;
+  color: #FFF;
+}
+
+.bg-red-danger:hover {
+  color: #ddd;
 }
 
 .bg-info-black, .bg-info-black:hover {

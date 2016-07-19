@@ -129,7 +129,7 @@ angular.module('eracordUiApp.controller')
 	  _.each(data.off_classes, function(off_class) {
 	    var date = new Date(off_class.date);
 	    offClassEvents.push({
-	      type: 'off class',
+	      type: off_class.teacher_name,
               title: off_class.name,
 	      start: date,
 	      allDay: true,
