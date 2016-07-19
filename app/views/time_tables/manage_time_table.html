@@ -17,7 +17,6 @@
     <button ng-click="nullSelect();" class="btn btn-link">Cancel</button>
   </div>
   
-  
   <div class="col-sm-6 textLeft alert alert-success" ng-show="showSlotForm && !requestLoading">
     <div class="col-md-12 col-md-offset-0">
       <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
@@ -49,6 +48,17 @@
 	  <select class="form-control ng-touched" ng-model="vm.subject_id" ng-options="values.id as values.name for values in subjects" required>
 	  </select>
 	  <span ng-show="form.subject_id.$dirty && form.subject_id.$error.required" class="help-block">Subject is required</span>
+	</div>
+
+	<div class="form-group">
+	  <label for="subject_id">Teacher</label>
+	  <button type="button" class="btn btn-link" ng-click="openSelectTeacher('lg')" uib-tooltip="Help">
+	    {{vm.teacher_name ? 'Change teacher' : 'Assign teacher'}}
+	  </button>
+	  <div ng-if="vm.teacher_name">
+	    {{vm.teacher_name}}
+	    <input type="hidden" name="teacher_id" value="{{vm.teacher_id}}" />
+	  </div>
 	</div>
 	
 	<div class="form-group" ng-class="{ 'has-error': form.start_time.$dirty && form.start_time.$error.required }">

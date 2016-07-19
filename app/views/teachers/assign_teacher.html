@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <h3 class="modal-title">Assign Teacher</h3>
+  <a ng-click="cancel()" style="float: right;position: absolute;right: 15px;top: 19px;cursor:pointer;color:#999;"><i class="fa fa-times"></i></a>
+</div>
+<div class="modal-body" style="min-height:300px;">
+  <div request-loading is-loading="requestLoading"></div>
+  <figure class="highlight col-sm-12" ng-show="!requestLoading">
+    <div class="remainingStudentsList col-md-6">
+      <label class="checkBoxStyle" ng-repeat="teacher in teachers">
+      <input name="selectTeacher" id="teacher_{{teacher.id}}" ng-value="{{teacher.id}}" class="active" type="radio" ng-model="selectedTeacher" ng-change="selectTeacher(teacher);">
+      <label for="teacher_{{teacher.id}}"></label>
+      {{teacher.name}}
+    </label>
+    </div>
+  </figure>
+</div>
+<div class="modal-footer">
+  <a class="btn btn-primary" type="button" ng-click="assignTeacher()" ng-disabled="saveRequestLoading">Save</a>
+  <span button-req-load is-loading="saveRequestLoading"></span>
+  <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+</div>

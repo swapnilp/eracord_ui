@@ -143,8 +143,12 @@ input, select, option {
 
 .remainingStudentsList {
   label {
-    display: flex;
     margin-bottom:6px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    display: -webkit-box;
+    line-height: 18px;
   }
 }
 
@@ -523,16 +527,14 @@ input[type="radio"]{
   margin: 4px 4px 0;
 }
 
-.checkBoxStyle input[type="checkbox"] {
+.checkBoxStyle input[type="checkbox"], .checkBoxStyle input[type="radio"] {
   display:none;
 }
 
 .checkBoxStyle label {
-  margin: 4px;
+  margin: 1px 10px 4px 0px ;
 }
-.checkBoxStyle input[type="checkbox"] {
- display:none;
-}
+
 .checkBoxStyle label:before {
  content: "";
  display: inline-block;
@@ -543,7 +545,8 @@ input[type="radio"]{
   border: 1px solid #ccc;
  border-radius: 5px;
 }
-.checkBoxStyle input[type="checkbox"]:checked + label:before {
+
+.checkBoxStyle input[type="checkbox"]:checked + label:before, .checkBoxStyle input[type="radio"]:checked + label:before {
   background: url('../images/checkbox_tick.png') 3px 3px no-repeat;
   background-size: 13px 15px;
 }

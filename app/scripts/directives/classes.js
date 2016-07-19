@@ -341,7 +341,7 @@ app.directive('classTimeTable', function(Restangular) {
       showOptions: '@'
     },
     templateUrl: 'views/time_tables/manage_time_table.html',
-    controller: ['$scope', '$filter', 'Restangular', 'Flash', '$location', '$window', '$routeParams', '$route', function(scope, filter, Restangular, Flash, $location, $window, $routeParams, $route){
+    controller: ['$scope', '$filter', 'Restangular', 'Flash', '$location', '$window', '$routeParams', '$route', '$uibModal', function(scope, filter, Restangular, Flash, $location, $window, $routeParams, $route, $uibModal){
       
       scope.timeTableLoaded = false;
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
@@ -399,8 +399,10 @@ app.directive('classTimeTable', function(Restangular) {
 	scope.vm.slot_type = selectedSlot.slot_type;
 	scope.vm.sub_class_id = selectedSlot.sub_class_id;
 	scope.vm.class_room = selectedSlot.class_room;
-	console.log(selectedSlot.start_time);
+	scope.vm.teacher_id = selectedSlot.teacher_id;
+	scope.vm.teacher_name = selectedSlot.teacher_name;
 	scope.start_time = new Date("3/3/2016 "+ (""+parseFloat(selectedSlot.start_time).toFixed(2)).replace(".", ":"));
+	//user dummy date
 	scope.end_time = new Date("3/3/2016 "+ (""+parseFloat(selectedSlot.end_time).toFixed(2)).replace(".", ":"));
 	scope.showSlotForm = true;
 	scope.selectedSlot = null;
@@ -415,6 +417,29 @@ app.directive('classTimeTable', function(Restangular) {
 	scope.start_time = null;
 	scope.selectedSlot = null;
       };
+      
+      scope.openSelectTeacher = function (size) {
+	var modalInstance = $uibModal.open({
+	  animation: true,
+	  templateUrl: 'views/teachers/assign_teacher.html',
+	  controller: 'AssignTeacherCtrl',
+	  size: size,
+	  resolve: {
+	    class_id: function(){
+	      return scope.classId;
+	    },
+	    time_table_id: function(){
+	      return scope.time_table_id;
+	    }
+	  }
+	});
+	
+	modalInstance.result.then(function (selectedTeacher) {
+	  //console.log(selectedItem)
+	  scope.vm.teacher_name = selectedTeacher.name;
+	  scope.vm.teacher_id = selectedTeacher.id;
+	}, null);
+      }
       
       scope.cancelTimeTableSlotManage = function() {
 	scope.vm = {};
@@ -474,6 +499,7 @@ app.directive('classTimeTable', function(Restangular) {
 	jkci_classes.customGET('get_timetable').then(function(data){
 	  if(data.success){
 	    scope.time_table = data.time_table;
+	    scope.time_table_id = scope.time_table.id;
 	    scope.subjects = data.subjects;
 	    scope.events = data.slots;
 	    scope.sub_classes = data.sub_classes;
