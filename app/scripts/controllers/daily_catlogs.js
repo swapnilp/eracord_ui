@@ -30,6 +30,7 @@ angular.module('eracordUiApp.controller')
       $scope.chapterLoading = false;
       $scope.chapterPointsLoading = false;
       $scope.dataLoading = false;
+      $scope.subjectId = $routeParams.subject_id;
       
       var maxDate = moment().format("'MM-DD-YY'");
       var minDate = moment().subtract(7, 'days').format("'MM-DD-YY'");
@@ -68,8 +69,8 @@ angular.module('eracordUiApp.controller')
       
       loadInfo();
       
-      if($routeParams.subject_id) {
-	$scope.vm.daily_teachs.subject_id = parseInt($routeParams.subject_id);
+      if($scope.subjectId) {
+	$scope.vm.daily_teachs.subject_id = parseInt($scope.subjectId);
 	$scope.getChapters();
       }
       

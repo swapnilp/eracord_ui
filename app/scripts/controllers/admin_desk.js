@@ -112,7 +112,8 @@ angular.module('eracordUiApp.controller')
 		dow: [i],
 		allDay: true,
 		name: "time_table",
-		jkci_class_id: tts.jkci_class_id
+		jkci_class_id: tts.jkci_class_id,
+		subject_id: tts.subject_id
 	      });
 	    });
 	  }
@@ -192,7 +193,7 @@ angular.module('eracordUiApp.controller')
         'tooltip-append-to-body': true});
       //element.attr({'href': "asdasd"})
       if(event.name == "time_table" && (event.start.format("MMM D") === moment().format("MMM D"))) {
-	element.attr({'href': "#/classes/"+event.jkci_class_id+"/daily_catlogs/new"})
+	element.attr({'href': "#/classes/"+event.jkci_class_id+"/daily_catlogs/new?&subject_id="+event.subject_id})
       }else if(event.name == "time_table"){
 	element.attr({'class': element.attr("class")+" bg-info-black"})
 	//event.className.push("bg-info-black");
