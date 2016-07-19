@@ -41,8 +41,8 @@ angular.module('eracordUiApp.controller')
       
     }])
 
-  .controller('AssignTeacherCtrl',['$scope', '$uibModalInstance', 'Restangular', 'class_id', 'time_table_id',
-    function ($scope, $uibModalInstance, Restangular, class_id, time_table_id) {
+  .controller('AssignTeacherCtrl',['$scope', '$uibModalInstance', 'Restangular', 'class_id', 'time_table_id', 'teacher_id',
+    function ($scope, $uibModalInstance, Restangular, class_id, time_table_id, teacher_id) {
       var base_organisation = Restangular.all("organisations");
       $scope.requestLoading = false;
       //$scope.saveRequestLoading = false;
@@ -57,7 +57,10 @@ angular.module('eracordUiApp.controller')
 	$scope.requestLoading = true;
 	base_organisation.customGET("teachers").then(function(data){
 	  if(data.success){
-	    $scope.teachers = data.teachers
+	    $scope.teachers = data.teachers;
+	    if(teacher_id) {
+	      $scope.selectedTeacher = _.findWhere($scope.teachers, {id: teacher_id}).id;
+	    }
 	  }
 	  $scope.requestLoading = false;
 	});
@@ -66,10 +69,11 @@ angular.module('eracordUiApp.controller')
       loadTeachers();
       
       $scope.selectTeacher = function(teacher){
-	$scope.selectedTeacher = teacher;
+	$scope.selectedTeacher = teacher.id;
       }
       
       $scope.assignTeacher = function() {
-	$uibModalInstance.close($scope.selectedTeacher);
+	var selected = _.findWhere($scope.teachers, {id: $scope.selectedTeacher});
+	$uibModalInstance.close(selected);
       }
     }]);

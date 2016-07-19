@@ -15,7 +15,7 @@
   </figure>
 </div>
 <div class="modal-footer">
-  <a class="btn btn-primary" type="button" ng-click="assignTeacher()" ng-disabled="saveRequestLoading">Save</a>
+  <a class="btn btn-primary" type="button" ng-click="assignTeacher()" ng-disabled="saveRequestLoading || !selectedTeacher">Assign</a>
   <span button-req-load is-loading="saveRequestLoading"></span>
   <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
 </div>

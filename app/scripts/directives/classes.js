@@ -430,6 +430,9 @@ app.directive('classTimeTable', function(Restangular) {
 	    },
 	    time_table_id: function(){
 	      return scope.time_table_id;
+	    },
+	    teacher_id: function(){
+	      return scope.vm.teacher_id;
 	    }
 	  }
 	});
