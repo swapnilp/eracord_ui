@@ -551,6 +551,7 @@ app.directive('classDuplicateStudents', function(Restangular) {
 	jkci_classes.customGET("check_verify_students").then(function(data){
 	  if(data.success) {
 	    scope.students = data.class_students;
+	    scope.totalStudents = data.total_students;
 	    var remaining_students = _.where(scope.students, {is_duplicate: true, is_duplicate_accepted: false}).length;
 	    scope.changeDuplicateRemaining({remainingValue: remaining_students});
 	    scope.requestLoading = false;

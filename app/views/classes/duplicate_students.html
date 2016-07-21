@@ -1,14 +1,20 @@
 <div style="margin:20px 0;">
   <div request-loading is-loading="requestLoading"></div>
-  <div class="alert alert-warning col-sm-12" ng-show="!requestLoading">
-    <span ng-if="students.length > 0">
-      Total Students are - {{students.length}}
-    </span>
-    <span ng-if="students.length === 0">
-      No data found
-    </span>
-  </div>
+  <figure class="highlight col-sm-12">
+    <div class="col-sm-12 padding0" ng-show="!requestLoading">
+      <h4>
+	<span ng-if="students.length > 0">
+	  Total Students are - {{totalStudents}}
+	</span>
+	<span ng-if="students.length === 0">
+	  No data found
+	</span>
+      </h4>
+    </div>
+  </figure>
+  
   <figure class="highlight col-sm-12" ng-show="!requestLoading" ng-if="students.length > 0">
+    <h4>Please accept duplicate Student fields</h4>
     <table st-table="rowCollection" class="table">
       <thead>
 	<tr>
@@ -52,6 +58,9 @@
 	</tr>
       </tbody>
     </table>
+  </figure>
+  <figure class="highlight col-sm-12">
+    <h4>Divisions</h4>
   </figure>
 </div>
 
