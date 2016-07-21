@@ -20,7 +20,7 @@
 	</tr>
       </thead>
       <tbody>
-	<tr ng-repeat-start="row in students" ng-class="{danger: (row.is_duplicate && !row.is_duplicate_accepted), warning: (row.is_duplicate && row.is_duplicate_accepted), 'alert-info': row.isOpen}">
+	<tr ng-repeat-start="row in students" ng-class="{danger: (row.is_duplicate && !row.is_duplicate_accepted), warning: (row.is_duplicate && row.is_duplicate_accepted), 'alert-info': row.expanded}">
 	  <td ng-click="openInfo(row);" class="pointer">
 	    <span ng-if="showRollNumber">{{ row.roll_number}}</span><span ng-if="!showRollNumber">{{$index+1}}</span>
 	  </td>
