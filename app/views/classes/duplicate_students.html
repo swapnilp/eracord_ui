@@ -54,6 +54,16 @@
   </figure>
   <figure class="highlight col-sm-12">
     <h4>Divisions</h4>
+    <div request-loading is-loading="divisionRequestLoading"></div>
+    <div ng-repeat="division in divisions">
+      <div class="col-sm-4 divisionBox">
+	<strong>Name</strong> - {{division.name}}
+	<br />
+	<strong>Students count</strong> - {{division.students_count}}
+	<br /><br />
+	<a href="#/classes/{{classId}}/divisions/{{division.id}}" class="btn btn-primary">Show</a>
+      </div>
+    </div>
   </figure>
 </div>
 

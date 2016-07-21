@@ -545,6 +545,7 @@ app.directive('classDuplicateStudents', function(Restangular) {
 
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       scope.requestLoading = true;
+      scope.divisionRequestLoading = true;
 
       var getResultsPage = function() {
 	scope.requestLoading = true;
@@ -559,6 +560,17 @@ app.directive('classDuplicateStudents', function(Restangular) {
 	});
       };
 
+      var loadDivisions = function() {
+	scope.divisionRequestLoading = true;
+	jkci_classes.customGET("sub_classes").then(function(data) {
+	  if(data.success) {
+	    scope.divisions = data.sub_classes;
+	  }else {
+	  }
+	  scope.divisionRequestLoading = false;
+	});
+      }
+      
       scope.openInfo = function(row) {
 	if(row.expanded === true) {
 	  _.map(scope.students, function(student){ student.expanded = false;})
@@ -598,6 +610,7 @@ app.directive('classDuplicateStudents', function(Restangular) {
       scope.$watch('classStudentVerificationTab', function(){
 	if(scope.classStudentVerificationTab === 'true') {
 	  getResultsPage();
+	  loadDivisions();
 	  //scope.updateUrl({tabName: 'students'});
 	}
       });
