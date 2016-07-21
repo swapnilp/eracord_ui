@@ -2,14 +2,12 @@
   <div request-loading is-loading="requestLoading"></div>
   <figure class="highlight col-sm-12">
     <div class="col-sm-12 padding0" ng-show="!requestLoading">
-      <h4>
-	  Total Students are - {{totalStudents}}
-      </h4>
+      <h4>Total Students are - {{totalStudents}}</h4>
     </div>
   </figure>
   
   <figure class="highlight col-sm-12" ng-show="!requestLoading" ng-if="students.length > 0">
-    <h4>Please accept duplicate Student fields</h4>
+    <h4>Duplicate fielf students count are - {{students.length}}</h4>
     <table st-table="rowCollection" class="table">
       <thead>
 	<tr>
@@ -22,7 +20,7 @@
 	</tr>
       </thead>
       <tbody>
-	<tr ng-repeat-start="row in students" ng-class="{danger: (row.is_duplicate && !row.is_duplicate_accepted), warning: (row.is_duplicate && row.is_duplicate_accepted)}" >
+	<tr ng-repeat-start="row in students" ng-class="{danger: (row.is_duplicate && !row.is_duplicate_accepted), warning: (row.is_duplicate && row.is_duplicate_accepted), 'alert-info': row.isOpen}">
 	  <td ng-click="openInfo(row);" class="pointer">
 	    <span ng-if="showRollNumber">{{ row.roll_number}}</span><span ng-if="!showRollNumber">{{$index+1}}</span>
 	  </td>

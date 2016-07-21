@@ -561,10 +561,11 @@ app.directive('classDuplicateStudents', function(Restangular) {
 
       scope.openInfo = function(row) {
 	if(row.expanded === true) {
-	  _.map(scope.students, function(student){ student.expanded = false;})
+	  _.map(scope.students, function(student){ student.expanded = false;student.isOpen = false;})
 	}else {
-	  _.map(scope.students, function(student){ student.expanded = false;})
+	  _.map(scope.students, function(student){ student.expanded = false;student.isOpen = false;})
 	  row.expanded = true;
+	  row.isOpen = true;
 	}
       };
 

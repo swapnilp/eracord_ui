@@ -554,3 +554,7 @@ input[type="radio"]{
   background: url('../images/checkbox_tick.png') 3px 3px no-repeat;
   background-size: 13px 15px;
 }
+
+.table > tbody > tr.alert-info > td {
+ background-color: #d9edf7;
+}
