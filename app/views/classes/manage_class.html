@@ -11,9 +11,9 @@
 <div class="col-sm-12 textLeft paddingTop20">
   <uib-tabset justified="true">
     <uib-tab ng-attr-active="classStudentVerificationTab" >
-      <uib-tab-heading><i class="icon-bell"></i> Verify Students</uib-tab-heading>
+      <uib-tab-heading><i class="icon-bell"></i> Verify class</uib-tab-heading>
       <div style="margin:20px 0;">
-	<h3>Please verify student</h3>
+	<h3>Please verify class</h3>
 	<div class-duplicate-students class-id="{{class_id}}" class-student-verification-tab="{{classStudentVerificationTab}}" update-url="updateTabParams(tabName)" change-duplicate-remaining="changeDuplicateRemaining(remainingValue);" recheck-students="dirRecheckStudents(theDirFn);"></div>
 	<button class="btn btn-primary" ng-disabled="(remainingDuplicateCount > 0) || dataLoading" ng-click="verifyDuplicateStudent();">
 	  Verify Class

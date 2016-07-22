@@ -56,12 +56,17 @@
     <h4>Divisions</h4>
     <div request-loading is-loading="divisionRequestLoading"></div>
     <div ng-repeat="division in divisions">
-      <div class="col-sm-4 divisionBox">
-	<strong>Name</strong> - {{division.name}}
-	<br />
-	<strong>Students count</strong> - {{division.students_count}}
-	<br /><br />
-	<a href="#/classes/{{classId}}/divisions/{{division.id}}" class="btn btn-primary">Show</a>
+      <div class="col-sm-4" style="padding:10px 5px;">
+	<div class="divisionBox">
+	  <strong>Name</strong> - {{division.name}}
+	  <br />
+	  <strong>Students count</strong> - {{division.students_count}}
+	  <br /><br />
+	  <a href="#/classes/{{classId}}/divisions/{{division.id}}" class="btn btn-primary">Show</a>
+	  <button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openAssignStudentModel('lg', division.id)" uib-tooltip="Assign Students">
+	    Assign Students
+	  </button>
+	</div>
       </div>
     </div>
   </figure>

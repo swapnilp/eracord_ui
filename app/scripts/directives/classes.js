@@ -541,7 +541,7 @@ app.directive('classDuplicateStudents', function(Restangular) {
       recheckStudents: '&'
     },
     templateUrl: 'views/classes/duplicate_students.html',
-    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', '$route', function(scope, Restangular, Flash, $location, $window, $routeParams, $route){
+    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', '$route', '$uibModal', function(scope, Restangular, Flash, $location, $window, $routeParams, $route, $uibModal){
 
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       scope.requestLoading = true;
@@ -569,6 +569,28 @@ app.directive('classDuplicateStudents', function(Restangular) {
 	  }
 	  scope.divisionRequestLoading = false;
 	});
+      }
+
+      scope.openAssignStudentModel = function(size, division_id) {
+	var modalInstance = $uibModal.open({
+	  animation: true,
+	  templateUrl: 'views/classes/assign_students.html',
+	  controller: 'DivisionAssignStudentCtrl',
+	  size: size,
+	  resolve: {
+	    class_id: function(){
+	      return scope.classId;
+	    },
+	    division_id: function(){
+	      return division_id;
+	    }
+	  }
+	});
+	
+	modalInstance.result.then(null, function () {
+	  loadDivisions();
+	});
+
       }
       
       scope.openInfo = function(row) {
