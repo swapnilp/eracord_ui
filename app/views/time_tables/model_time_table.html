@@ -1,0 +1,35 @@
+<div class="modal-header">
+  <h3 class="modal-title">Time table</h3>
+  <a ng-click="cancel()" style="float: right;position: absolute;right: 15px;top: 19px;cursor:pointer;color:#999;"><i class="fa fa-times"></i></a>
+</div>
+<div class="modal-body" style="min-height:300px;overflow: scroll;">
+  <div request-loading is-loading="requestLoading"></div>
+  <div ng-repeat="day in days">
+    <h4>{{day}}</h4>
+    <table st-table="rowCollection" class="table organisationCoursesTable">
+      <thead>
+	<tr>
+	  <th st-sort="firstName" ng-if="!isRollNumber">Number</th>
+	  <th st-sort="firstName" ng-if="isRollNumber">Roll Number</th>
+	  <th st-sort="lastName">Name</th>
+	  <th st-sort="balance">Batch</th>
+	  <th st-sort="balance">Standard</th>
+	  <th st-sort="balance">Enable Sms</th>
+	  <th st-sort="balance" ng-if="!isRemove">Classes</th>
+	  <th ng-if="isRemove">Remove</th>
+	</tr>
+      </thead>
+      <tbody>
+	<tr ng-repeat="slot in timetable[day]">
+	  <td>
+	    {{slot.name}}
+	  </td>
+	</tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div style="margin:20px 0;" class="modal-footer">
+  <button class="btn btn-primary" ng-click="saveStudentList()" ng-disabled="((studentList == 0) || dataLoading)">Print</button>
+  <button ng-click="cancel();" class="btn btn-default">Back</button>
+</div>

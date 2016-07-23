@@ -67,7 +67,23 @@ angular.module('eracordUiApp.controller')
 	modalInstance.result.then(null, function () {
 	  $scope.reloadStudent = $scope.reloadStudent + 1;
 	});
+      }
 
+      $scope.openTimetableModel = function(size) {
+	var modalInstance = $uibModal.open({
+	  animation: true,
+	  templateUrl: 'views/time_tables/model_time_table.html',
+	  controller: 'DivisionTimeTableCtrl',
+	  size: size,
+	  resolve: {
+	    class_id: function(){
+	      return $scope.classId;
+	    },
+	    division_id: function(){
+	      return $scope.divisionId;
+	    }
+	  }
+	});
       }
 
       $scope.deleteDivision = function() {

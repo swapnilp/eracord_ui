@@ -52,7 +52,7 @@
       </tbody>
     </table>
   </figure>
-  <figure class="highlight col-sm-12">
+  <figure class="highlight col-sm-12" ng-if="divisions.length > 0">
     <h4>Divisions</h4>
     <div request-loading is-loading="divisionRequestLoading"></div>
     <div ng-repeat="division in divisions">
@@ -62,9 +62,9 @@
 	  <br />
 	  <strong>Students count</strong> - {{division.students_count}}
 	  <br /><br />
-	  <a href="#/classes/{{classId}}/divisions/{{division.id}}" class="btn btn-primary">Show</a>
+	  <a href="#/classes/{{classId}}/divisions/{{division.id}}" class="btn btn-primary" uib-tooltip="Show"><i class="fa fa-eye"></i></a>
 	  <button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openAssignStudentModel('lg', division.id)" uib-tooltip="Assign Students">
-	    Assign Students
+	    <i class="fa fa-user-plus"></i>
 	  </button>
 	</div>
       </div>

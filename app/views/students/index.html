@@ -1,31 +1,47 @@
 <div style="margin:20px 0;">
   <span ng-if="!showOptions">
     <span is-role-visible='["manage_roll_number"]' email="currentUser.email">
-      <a href="#/classes/{{classId}}/manage_student_rollnumber" class="btn btn-primary" ng-if="classId">Manage Roll Number</a>
+      <a href="#/classes/{{classId}}/manage_student_rollnumber" class="btn btn-primary" ng-if="classId" uib-tooltip="Manage Roll Number">
+	<i class="fa fa-sort-numeric-asc"></i>
+      </a>
     </span>
     <span is-role-visible='["manage_class_student"]' email="currentUser.email" ng-if="classId">
       <button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openAssignStudentModel('lg')" uib-tooltip="Assign Students">
-	Assign Students
+	<i class="fa fa-users"></i>
       </button>
     </span>
     <span is-role-visible='["manage_student_subject"]' email="currentUser.email">
-      <a href="#/classes/{{classId}}/manage_student_subjects" class="btn btn-primary" ng-if="classId">manage_student_subjects</a>
+      <a href="#/classes/{{classId}}/manage_student_subjects" class="btn btn-primary" ng-if="classId" uib-tooltip="Manage Subjects">
+	<i class="fa fa-folder-o"></i>
+      </a>
     </span>
     <span is-role-visible='["add_student"]' email="currentUser.email">
-      <a href="#/classes/{{classId}}/students/new" class="btn btn-primary" ng-if="classId"> New Student</a>
+      <a href="#/classes/{{classId}}/students/new" class="btn btn-primary" ng-if="classId" uib-tooltip="New Student"> 
+	<i class="fa fa-user-plus"></i>
+      </a>
     </span>
-    <span ng-if="classId">
-      <a href="{{hostUrl}}/classes/{{classId}}/download_excel.xlsx?&authorization_token={{token}}" class="btn btn-primary" ng-if="classId" target="_blank"> Download Students or excel format</a>
-    </span>
-    <span class=" paddingTop10 " style="display:block;" ng-if="classId">
-      <form name="form">
-	<div class="btn btn-primary" ngf-select ng-model="file" name="file" ngf-pattern="'.xlsx,.xls'"
-	     accept=".xlsx,.xls" ngf-max-size="20MB" ng-change="selectUploadFile(file);">Select File</div>
-	<span>{{fileName}}</span>
-	<span ng-class="uploadMeaasgeClass" ng-if="uploadingFile">{{uploadingMessage}}</span>
-	<button type="submit" ng-click="submit()" ng-if="!uploadingFile" class="btn btn-default" ng-disabled="requestLoading">Upload</button>
-      </form>
-    </span>
+    <div ng-if="classId" style="margin-top:10px;">
+      <figure class="highlight col-sm-12" ng-show="!requestLoading && totalStudents > 0">
+	<span>
+	  <a href="{{hostUrl}}/classes/{{classId}}/download_excel.xlsx?&authorization_token={{token}}" class="btn btn-primary" ng-if="classId" target="_blank" uib-tooltip="Download student excel">
+	    <i class="fa fa-download"></i>
+	  </a>
+	</span>
+	<span class=" paddingTop10 " style="display:block;" ng-if="classId">
+	  <form name="form">
+	    <div class="btn btn-primary" ngf-select ng-model="file" name="file" ngf-pattern="'.xlsx,.xls'"
+		 accept=".xlsx,.xls" ngf-max-size="20MB" ng-change="selectUploadFile(file);" uib-tooltip="Select File">
+	      <i class="fa fa-folder-open"></i>
+	    </div>
+	    <span>{{fileName}}</span>
+	    <span ng-class="uploadMeaasgeClass" ng-if="uploadingFile">{{uploadingMessage}}</span>
+	    <button type="submit" ng-click="submit()" ng-if="!uploadingFile" class="btn btn-default" ng-disabled="requestLoading" uib-tooltip="Upload">
+	      <i class="fa fa-upload"></i>
+	    </button>
+	  </form>
+	</span>
+      </figure>
+    </div>
   </span>
   <div class="examFilterDiv col-sm-12 padding0"> 
     <div class="pull-right">
@@ -57,25 +73,25 @@
       <thead>
 	<tr>
 	  <th st-sort="firstName" ng-if="!isRollNumber">Number</th>
-	  <th st-sort="firstName" ng-if="isRollNumber">Roll Number</th>
+	  <th class="text-center" st-sort="firstName" ng-if="isRollNumber">Roll Number</th>
 	  <th st-sort="lastName">Name</th>
 	  <th st-sort="balance">Batch</th>
 	  <th st-sort="balance">Standard</th>
-	  <th st-sort="balance">Enable Sms</th>
+	  <th st-sort="balance">Enable SMS</th>
 	  <th st-sort="balance" ng-if="!isRemove">Classes</th>
-	  <th ng-if="isRemove">Remove</th>
+	  <th ng-if="isRemove"></th>
 	</tr>
       </thead>
       <tbody>
 	<tr dir-paginate-start="row in students | toArray:false | itemsPerPage: 10" total-items="totalStudents" current-page="pagination.current" pagination-id="student" ng-click="openInfo(row);" class="pointer">
-	  <td><span ng-if="showRollNumber">{{ row.roll_number}}</span><span ng-if="!showRollNumber">{{ $index+1 + ((pagination.current - 1) * 10)}}</span></td>
+	  <td class="text-center"><span ng-if="showRollNumber">{{ row.roll_number || '-'}} </span><span ng-if="!showRollNumber">{{ $index+1 + ((pagination.current - 1) * 10)}}</span></td>
 	  <td><span>{{row.name}}</span></td>
 	  <td>{{row.batch}}</td>
 	  <td>{{row.standard}}</td>
-	  <td>{{row.enable_sms}}</td>
+	  <td><i class="fa fa-{{row.enable_sms ? 'check' : 'times'}}" ng-class="{'green': row.enable_sms, 'red': !row.enable_sms}"></i></td>
 	  <td ng-if="!isRemove">{{row.class_names}}</td>
 	  <td ng-if="isRemove">
-	    <button ng-click="removeStudent(row)" class="btn btn-link">Remove</button>
+	    <button ng-click="removeStudent(row)" class="btn btn-link paddingT0"><i class="fa fa-trash" uib-tooltip="Remove"></i></button>
 	  </td>
 	</tr>
 	<tr ng-if="row.expanded" dir-paginate-end="" class="noBorder alert alert-warning">

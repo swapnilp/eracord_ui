@@ -17,10 +17,18 @@
       </div>
     </div>
     <div class="col-sm-12">
-      <a class="btn btn-default" href="#/classes/{{classId}}/manage_class">Back</a>
-      <button class="btn btn-primary" ng-click="deleteDivision();">Delete</button>
+      <a class="btn btn-default" href="#/classes/{{classId}}/manage_class" uib-tooltip="Back">
+	<i class="fa fa-arrow-circle-left"></i>
+      </a>
+
       <button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openAssignStudentModel('lg')" uib-tooltip="Assign Students">
-	Assign Students
+	<i class="fa fa-user-plus"></i>
+      </button>
+      <button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openTimetableModel('lg')" uib-tooltip="Show timetable">
+	<i class="fa fa-clock-o"></i>
+      </button>
+      <button class="btn btn-warning" ng-click="deleteDivision();" uib-tooltip="Delete division">
+	<i class="fa fa-trash"></i>
       </button>
     </div>
   </div>
