@@ -22,6 +22,9 @@
     </span>
     <div ng-if="classId" style="margin-top:10px;">
       <figure class="highlight col-sm-12" ng-show="!requestLoading && totalStudents > 0">
+	<div>
+	  Download -> Fill Excel -> Upload
+	</div>
 	<span>
 	  <a href="{{hostUrl}}/classes/{{classId}}/download_excel.xlsx?&authorization_token={{token}}" class="btn btn-primary" ng-if="classId" target="_blank" uib-tooltip="Download student excel">
 	    <i class="fa fa-download"></i>

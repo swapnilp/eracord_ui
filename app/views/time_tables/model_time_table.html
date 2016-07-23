@@ -2,21 +2,18 @@
   <h3 class="modal-title">Time table</h3>
   <a ng-click="cancel()" style="float: right;position: absolute;right: 15px;top: 19px;cursor:pointer;color:#999;"><i class="fa fa-times"></i></a>
 </div>
-<div class="modal-body" style="min-height:300px;overflow: scroll;">
+<div class="modal-body" style="min-height:300px;overflow: scroll;" id="printRecipt">
   <div request-loading is-loading="requestLoading"></div>
-  <div ng-repeat="day in days">
+  <div ng-repeat="day in days" ng-if="timetable[day].length > 0">
     <h4>{{day}}</h4>
     <table st-table="rowCollection" class="table organisationCoursesTable">
       <thead>
 	<tr>
-	  <th st-sort="firstName" ng-if="!isRollNumber">Number</th>
-	  <th st-sort="firstName" ng-if="isRollNumber">Roll Number</th>
-	  <th st-sort="lastName">Name</th>
-	  <th st-sort="balance">Batch</th>
-	  <th st-sort="balance">Standard</th>
-	  <th st-sort="balance">Enable Sms</th>
-	  <th st-sort="balance" ng-if="!isRemove">Classes</th>
-	  <th ng-if="isRemove">Remove</th>
+	  <th st-sort="firstName">Name</th>
+	  <th st-sort="firstName">Start Time</th>
+	  <th st-sort="lastName">End Time</th>
+	  <th st-sort="balance">Teacher Name</th>
+	  <th st-sort="balance">Class Room</th>
 	</tr>
       </thead>
       <tbody>
@@ -24,12 +21,24 @@
 	  <td>
 	    {{slot.name}}
 	  </td>
+	  <td>
+	    {{slot.start_time}}
+	  </td>
+	  <td>
+	    {{slot.end_time}}
+	  </td>
+	  <td>
+	    {{slot.teacher_name}}
+	  </td>
+	  <td>
+	    {{slot.class_room}}
+	  </td>
 	</tr>
       </tbody>
     </table>
   </div>
 </div>
 <div style="margin:20px 0;" class="modal-footer">
-  <button class="btn btn-primary" ng-click="saveStudentList()" ng-disabled="((studentList == 0) || dataLoading)">Print</button>
+  <button class="btn btn-primary" ng-print print-element-id="printRecipt"><i class="fa fa-print"></i> Print</button>
   <button ng-click="cancel();" class="btn btn-default">Back</button>
 </div>

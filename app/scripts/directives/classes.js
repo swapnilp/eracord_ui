@@ -588,9 +588,25 @@ app.directive('classDuplicateStudents', function(Restangular) {
 	});
 	
 	modalInstance.result.then(null, function () {
-	  loadDivisions();
+          loadDivisions();
 	});
+      }
 
+      scope.openTimetableModel = function(size, division_id) {
+	var modalInstance = $uibModal.open({
+	  animation: true,
+	  templateUrl: 'views/time_tables/model_time_table.html',
+	  controller: 'DivisionTimeTableCtrl',
+	  size: size,
+	  resolve: {
+	    class_id: function(){
+	      return scope.classId;
+	    },
+	    division_id: function(){
+	      return division_id;
+	    }
+	  }
+	});
       }
       
       scope.openInfo = function(row) {

@@ -63,6 +63,9 @@
 	  <strong>Students count</strong> - {{division.students_count}}
 	  <br /><br />
 	  <a href="#/classes/{{classId}}/divisions/{{division.id}}" class="btn btn-primary" uib-tooltip="Show"><i class="fa fa-eye"></i></a>
+	  <button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openTimetableModel('lg', division.id)" uib-tooltip="Show timetable">
+	    <i class="fa fa-clock-o"></i>
+	  </button>
 	  <button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openAssignStudentModel('lg', division.id)" uib-tooltip="Assign Students">
 	    <i class="fa fa-user-plus"></i>
 	  </button>
