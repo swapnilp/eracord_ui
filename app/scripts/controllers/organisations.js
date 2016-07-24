@@ -198,6 +198,20 @@ angular.module('eracordUiApp.controller')
 	});
       };
 
+      $scope.openTeacherTimeTable = function (size, teacher_id) {
+	var modalInstance = $uibModal.open({
+	  animation: true,
+	  templateUrl: 'views/time_tables/model_time_table.html',
+	  controller: 'TeacherTimeTableCtrl',
+	  size: size,
+	  resolve: {
+	    teacher_id: function(){
+	      return teacher_id;
+	    }
+	  }
+	});
+      };
+      
       getTeacher();
       loadSubjects();
     }

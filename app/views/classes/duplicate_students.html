@@ -7,7 +7,7 @@
   </figure>
   
   <figure class="highlight col-sm-12" ng-show="!requestLoading" ng-if="students.length > 0">
-    <h4>Duplicate fielf students count are - {{students.length}}</h4>
+    <h4>Duplicate field students count are - {{students.length}}</h4>
     <table st-table="rowCollection" class="table">
       <thead>
 	<tr>
@@ -39,14 +39,20 @@
 	  </td>
 	</tr>
 	<tr ng-if="row.expanded" ng-repeat-end="" class="noBorder alert alert-info">
-	  <td colspan="5">
+	  <td colspan="3">
 	    Student Id - {{row.student_id}}
 	    <br />
 	    Total exams attented are -  {{row.exams_count}}
 	    <br />
 	    <button ng-click="acceptStudent(row)" class="btn btn-link" ng-if="(row.is_duplicate && !row.is_duplicate_accepted && !row.dataLoading)">Accept and leave as it is</button>
-	    <a class="btn btn-link" href="#/students/{{row.student_id}}/edit?&location=manage_class&class_id={{classId}}">Edit Student</a>
-	    <button ng-click="removeStudent(row);" class="btn btn-link">Remove student from class</button>
+	  </td>
+	  <td colspan="2" class="alignRight">
+	    <a class="btn btn-link" href="#/students/{{row.student_id}}/edit?&location=manage_class&class_id={{classId}}" uib-tooltip="Edit">
+	      <i class="fa fa-edit"></i>
+	    </a>
+	    <button ng-click="removeStudent(row);" class="btn btn-link" uib-tooltip="Remove student from class">
+	      <i class="fa fa-trash"></i>
+	    </button>
 	  </td>
 	</tr>
       </tbody>

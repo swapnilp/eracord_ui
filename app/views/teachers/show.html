@@ -22,12 +22,17 @@
       </div>
     </div>
     <div class="col-sm-12 left padding0" style="margin:15px 0px;">
-      <a class="btn btn-primary" href="#/organisations/teachers/{{teacher.id}}/edit">Edit</a>
+      <a class="btn btn-primary" href="#/organisations/teachers/{{teacher.id}}/edit" uib-tooltip="Edit">
+	<i class="fa fa-edit"></i>
+      </a>
       <button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openSubjects('lg', teacher.id)" uib-tooltip="Add Subject">
-	Add Subjects
+	<i class="fa fa-folder-o"></i>
       </button>
-      <button class="btn btn-default" ng-click="goBack();">
-	Back
+      <button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openTeacherTimeTable('lg', teacher.id)" uib-tooltip="Time Table">
+	<i class="fa fa-clock-o"></i>
+      </button>
+      <button class="btn btn-default" ng-click="goBack();" uib-tooltip="Back">
+	<i class="fa fa-arrow-circle-left"></i>
       </button>
     </div>
   </div>

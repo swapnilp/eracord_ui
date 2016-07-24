@@ -416,6 +416,8 @@ div.btn-group > a#simple-dropdown {
 }
 
 tr.noBorder {
+  border-right: none !important;
+  
   td {
     border-top: none !important;
   }
@@ -575,4 +577,16 @@ input[type="radio"]{
 }
 .red {
   color: red;
+}
+
+.marginB10 {
+  margin-bottom: 10px;
+}
+
+.marginB15 {
+  margin-bottom: 15px;
+}
+
+.alignRight {
+  text-align: right;
 }
