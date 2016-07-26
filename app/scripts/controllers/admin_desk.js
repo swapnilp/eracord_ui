@@ -20,7 +20,7 @@ angular.module('eracordUiApp.controller')
     $scope.selectedCalenderType = 'exams';
     $scope.loadCalenderEvent = false;
     $scope.standardCalenderFilter = null;
-    $scope.requestLoading = true;
+    $scope.requestLoading = false;
     $scope.noData = false;
     $scope.jkci_classes = [];
     $scope.us_jkci_classes = [];
@@ -35,11 +35,24 @@ angular.module('eracordUiApp.controller')
 
     var load_desk_classes = function(){
       var jkci_classes = Restangular.all("jkci_classes");
-      jkci_classes.getList().then(function(data){
+	$scope.requestLoading = true;
+	jkci_classes.getList().then(function(data){
+	  $scope.jkci_classes = data;
+	  $scope.requestLoading = false;
+	});
+    };
+
+    var load_teacher_classes = function(){
+      var jkci_classes = Restangular.all("jkci_classes");
+      $scope.requestLoading = true;
+      jkci_classes.getList({is_teacher: true}).then(function(data){
 	$scope.jkci_classes = data;
 	$scope.requestLoading = false;
       });
     };
+
+
+      
 
     var load_standards = function() {
       Restangular.all("organisations").customGET("cources").then(function(data) {
@@ -51,7 +64,7 @@ angular.module('eracordUiApp.controller')
 	}
       });
     }
-    
+      
 
     var load_unassigned_classes = function(){
       var unassigned_jkci_classes = Restangular.all("get_unassigned_classes");
@@ -144,9 +157,15 @@ angular.module('eracordUiApp.controller')
       });
     };
     
-    load_desk_classes();
+    
     load_standards();
-    load_unassigned_classes();
+    var roles = $cookieStore.get('currentUser').roles.split(',');
+    if(!_.include(roles, 'organisation') && _.include(roles, 'teacher')){
+      load_teacher_classes();
+    } else {
+      load_desk_classes();
+      load_unassigned_classes();
+    }
 
     
     $scope.reloadCalenderEvent = function(selectedType) {
