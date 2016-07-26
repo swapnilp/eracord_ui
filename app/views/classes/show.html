@@ -44,6 +44,12 @@
       </span>
     </div>
     <div class="col-sm-12 textLeft" is-role-visible='["create_daily_teach"]' email="currentUser.email">
+      <span class="col-sm-2"><h5>Division Students</h5></span>
+      <span class="col-sm-6 paddingTop10">
+	<a class="btn btn-primary btn-sm" href="{{hostUrl}}/class/{{class.id}}/sub_class_students_report.pdf?&authorization_token={{token}}" target="_blank">Get Division Students</a>
+      </span>
+    </div>
+    <div class="col-sm-12 textLeft" is-role-visible='["create_daily_teach"]' email="currentUser.email">
       <span class="col-sm-2"><h5>Get report</h5></span>
       <span class="col-sm-6 paddingTop10">
 	<a class="btn btn-primary btn-sm" href="{{hostUrl}}/sub_organisation/{{class.organisation_id}}/class/{{class.id}}/get_report.pdf?&authorization_token={{token}}" target="_blank">Get Report</a>
