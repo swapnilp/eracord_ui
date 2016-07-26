@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('AdminDeskCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular','$compile', 'uiCalendarConfig', '$cookieStore' , function ($rootScope, $scope, Flash, $location, Auth, Restangular, $compile, uiCalendarConfig, $cookieStore) {
+  .controller('AdminDeskCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular','$compile', 'uiCalendarConfig', '$cookieStore', '$uibModal' , function ($rootScope, $scope, Flash, $location, Auth, Restangular, $compile, uiCalendarConfig, $cookieStore, $uibModal) {
 
     if(!Auth.isAuthenticated()){
       $scope.eventSources = [];
@@ -22,6 +22,7 @@ angular.module('eracordUiApp.controller')
     $scope.standardCalenderFilter = null;
     $scope.requestLoading = false;
     $scope.noData = false;
+    $scope.teacherId = null;
     $scope.jkci_classes = [];
     $scope.us_jkci_classes = [];
     $scope.org_standards = []
@@ -31,7 +32,6 @@ angular.module('eracordUiApp.controller')
       $location.path('/user/sign_in').replace();
       return true;
     } 
-
 
     var load_desk_classes = function(){
       var jkci_classes = Restangular.all("jkci_classes");
@@ -45,14 +45,26 @@ angular.module('eracordUiApp.controller')
     var load_teacher_classes = function(){
       var jkci_classes = Restangular.all("jkci_classes");
       $scope.requestLoading = true;
-      jkci_classes.getList({is_teacher: true}).then(function(data){
-	$scope.jkci_classes = data;
+      jkci_classes.customGET("",{is_teacher: true}).then(function(data){
+	$scope.jkci_classes = data.body;
 	$scope.requestLoading = false;
+	$scope.teacherId = data.teacher_id;
       });
     };
 
-
-      
+    $scope.openTeacherTimeTable = function (size, teacher_id) {
+      var modalInstance = $uibModal.open({
+	animation: true,
+	templateUrl: 'views/time_tables/model_time_table.html',
+	controller: 'TeacherTimeTableCtrl',
+	size: size,
+	resolve: {
+	  teacher_id: function(){
+	    return teacher_id;
+	  }
+	}
+      });
+    };
 
     var load_standards = function() {
       Restangular.all("organisations").customGET("cources").then(function(data) {
@@ -64,7 +76,6 @@ angular.module('eracordUiApp.controller')
 	}
       });
     }
-      
 
     var load_unassigned_classes = function(){
       var unassigned_jkci_classes = Restangular.all("get_unassigned_classes");
@@ -82,7 +93,6 @@ angular.module('eracordUiApp.controller')
       var examEvents = [];
       Restangular.all("exams").customGET("calender_index", {start: start, end: end, standard: $scope.standardCalenderFilter}).then(function(data) {
 	if(data.success) {
-	  
 	  _.each(data.exams, function(exam){
 	    //addExamEvent(exam);
 	    if(exam.selfOrg){
@@ -157,7 +167,6 @@ angular.module('eracordUiApp.controller')
       });
     };
     
-    
     load_standards();
     var roles = $cookieStore.get('currentUser').roles.split(',');
     if(!_.include(roles, 'organisation') && _.include(roles, 'teacher')){
@@ -166,7 +175,6 @@ angular.module('eracordUiApp.controller')
       load_desk_classes();
       load_unassigned_classes();
     }
-
     
     $scope.reloadCalenderEvent = function(selectedType) {
       $scope.selectedCalenderType = selectedType;
@@ -189,11 +197,9 @@ angular.module('eracordUiApp.controller')
       }
     };
     
-
     $scope.alertOnDayClick = function( data){
       //console.log(data);
     }
-    
     
     /* Change View */
     $scope.changeView = function(view,calendar) {
@@ -220,7 +226,6 @@ angular.module('eracordUiApp.controller')
       $compile(element)($scope);
     };
 
-    
     /* config object */
     $scope.uiConfig = {
       calendar:{

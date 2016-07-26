@@ -1,6 +1,9 @@
 <div style="margin:20px 0;">
   <div>
     <h3>Classes</h3>
+    <button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openTeacherTimeTable('lg', teacherId)" uib-tooltip="Time Table" ng-if="teacherId">
+      <i class="fa fa-clock-o"></i>
+    </button>
   </div>
   <div class="alert alert-warning" ng-if="noData && !requestLoading">No Standards are added. <a href="#/manage_organisation"> click here</a> for adding </div>
   <div request-loading is-loading="requestLoading"></div>
