@@ -36,9 +36,10 @@ angular.module('eracordUiApp.controller')
     var load_desk_classes = function(){
       var jkci_classes = Restangular.all("jkci_classes");
 	$scope.requestLoading = true;
-	jkci_classes.getList().then(function(data){
-	  $scope.jkci_classes = data;
+	jkci_classes.customGET("").then(function(data){
+	  $scope.jkci_classes = data.body;
 	  $scope.requestLoading = false;
+	  $scope.teacherId = data.teacher_id;
 	});
     };
 
