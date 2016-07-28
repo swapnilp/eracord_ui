@@ -160,14 +160,16 @@ input, select, option {
   color: #035827; 
 }
 
-.classExamsTable tr.published:hover{
-  background: #035827;
-  color:#FFF;
+.classExamsTable tr.published{
+  //background: #035827;
+  //color:#FFF;
+  color:#999;
 }
 
-.classExamsTable tr.over_due:hover{
-  background: #960000;
-  color:#FFF;
+.classExamsTable tr.over_due{
+  //background: #960000;
+  //color:#FFF;
+  color:#960000;
 }
 
 .alert.alert-dismissible.alertIn {
