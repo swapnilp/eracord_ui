@@ -23,18 +23,6 @@ app.config(function($routeProvider) {
       templateUrl: 'views/organisations/new_organisation_clark.html',
       controller: 'OrganisationsCtrl'
     })
-    .when('/organisations/teachers/new', {
-      templateUrl: 'views/teachers/new.html',
-      controller: 'OrganisationsCtrl'
-    })
-    .when('/organisations/teachers/:teacher_id', {
-      templateUrl: 'views/teachers/show.html',
-      controller: 'OrganisationsCtrl'
-    })
-    .when('/organisations/teachers/:teacher_id/edit', {
-      templateUrl: 'views/teachers/new.html',
-      controller: 'OrganisationsCtrl'
-    })
     .when('/edit_organisation', {
       templateUrl: 'views/organisations/edit_organisation.html',
       controller: 'OrganisationsCtrl'

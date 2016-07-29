@@ -10,6 +10,160 @@
 
 
 angular.module('eracordUiApp.controller')
+  .controller('TeachersCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$cookieStore', '$uibModal', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window, $cookieStore, $uibModal) {
+
+    if(!Auth.isAuthenticated()){
+      $location.path('/user/sign_in').replace();
+      return true;
+    };
+    if ($cookieStore.get('currentUser') === undefined) {
+      $scope.eventSources = [];
+      $location.path('/user/sign_in').replace();
+      return true;
+    }
+
+    $scope.token = $cookieStore.get('currentUser').token;
+    
+    if($location.path() === '/teachers') {
+
+      var base_organisation = Restangular.all("organisations");
+      $scope.requestLoading = true;
+      
+      var loadTeachers = function() {
+	base_organisation.customGET('teachers').then(function(data){
+	  $scope.teachers = data.teachers;
+	  $scope.requestLoading = false;
+	});
+      };
+
+      $scope.manageSubjects = function(teacher){
+	$location.path("/organisations/teachers/"+teacher.id+"/teachers_subjects");
+      };
+
+      $scope.toggleEnableUser = function(user){
+	base_organisation.customGET("users/"+user.id+"/toggleEnable", {enabled: user.is_enable});
+      };
+      
+      loadTeachers();
+    }
+
+    if($location.path() === "/organisations/teachers/new") {
+      base_organisation = Restangular.all("organisations");
+      $scope.vm = {};
+      $scope.isNew = true;
+      $scope.vm.user = {}
+      $scope.registerTeacher = function(){
+      	$scope.vm.dataLoading = true;
+      	base_organisation.customPOST({teacher: $scope.vm.user}, 'teachers', {}).then(function(data){
+      	  if(data.success){
+	    $location.path('/organisations/teachers/'+data.teacher_id).replace();;
+      	  }else{
+      	    $scope.vm.dataLoading = false;
+      	    Flash.create('warning', data.message, 'alert-danger');
+      	  }
+      	});
+      };
+    }
+
+    if($location.path() === "/organisations/teachers/" + $routeParams.teacher_id + "/edit") {
+      base_organisation = Restangular.all("organisations");
+      $scope.vm = {};
+      $scope.isNew = false;
+      $scope.vm.user = {}
+      
+      var getTeacher = function(){
+	base_organisation.customGET('teachers/'+$routeParams.teacher_id+'/edit').then(function(data){
+	  $scope.vm.user = data.teacher;
+	})
+      };
+      
+      
+      $scope.registerTeacher = function(){
+      	$scope.vm.dataLoading = true;
+      	$scope.vm.user.role = 'clark';
+      	base_organisation.customPUT({teacher: $scope.vm.user}, 'teachers/'+$routeParams.teacher_id, {}).then(function(data){
+      	  if(data.success){
+      	    $location.path('/organisations/teachers/'+data.teacher_id).replace();;
+      	  }else{
+      	    $scope.vm.dataLoading = false;
+      	    Flash.create('warning', data.message, 'alert-danger');
+      	  }
+      	});
+      };
+      
+      getTeacher();
+    }
+
+    if($location.path() === "/organisations/teachers/" + $routeParams.teacher_id) {
+      base_organisation = Restangular.all("organisations");
+      $scope.teacherId = $routeParams.teacher_id;;
+      $scope.requestLoading = false;
+      $scope.subjects = [];
+      
+      var getTeacher = function(){
+	base_organisation.customGET('teachers/'+$routeParams.teacher_id).then(function(data){
+	  if(data.success) {
+	    $scope.teacher = data.teacher;
+	  }
+	})
+      };
+
+      var loadSubjects = function() {
+	$scope.requestLoading = true;
+	base_organisation.customGET('teachers/'+$routeParams.teacher_id+'/get_subjects').then(function(data){
+	  $scope.subjects = data.subjects;
+	  $scope.requestLoading = false;
+	});
+      };
+
+      $scope.removeTeacherSubject = function(subject_id) {
+	if($window.confirm('Are you sure?')){
+	  base_organisation.customGET('teachers/'+$routeParams.teacher_id+'/subjects/'+subject_id+'/remove').then(function(data){
+	    if(data.success) {
+	      $scope.subjects = _.reject($scope.subjects, function(d){ return d.id === subject_id; });
+	    }
+	  })
+	}
+      };
+
+      $scope.openSubjects = function (size, teacher_id) {
+	var modalInstance = $uibModal.open({
+	  animation: true,
+	  templateUrl: 'views/teachers/add_subjects.html',
+	  controller: 'TeacherSubjectsCtrl',
+	  size: size,
+	  resolve: {
+	    teacher_id: function(){
+	      return teacher_id;
+	    }
+	  }
+	});
+
+	modalInstance.result.then(null, function () {
+	  loadSubjects();
+	});
+      };
+
+      $scope.openTeacherTimeTable = function (size, teacher_id) {
+	var modalInstance = $uibModal.open({
+	  animation: true,
+	  templateUrl: 'views/time_tables/model_time_table.html',
+	  controller: 'TeacherTimeTableCtrl',
+	  size: size,
+	  resolve: {
+	    teacher_id: function(){
+	      return teacher_id;
+	    }
+	  }
+	});
+      };
+      
+      getTeacher();
+      loadSubjects();
+    }
+    //end of teacher show
+    
+  }])
   .controller('TeacherSubjectsCtrl',['$scope', '$uibModalInstance', 'Restangular', 'teacher_id',
     function ($scope, $uibModalInstance, Restangular, teacher_id) {
       var base_organisation = Restangular.all("organisations");
