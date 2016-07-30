@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('ExamsCtrl',['$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '_', '$cookieStore', function ( $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window, _, $cookieStore) {
+  .controller('ExamsCtrl',['$scope', 'Flash', 'lazyFlash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '_', '$cookieStore', function ( $scope, Flash, lazyFlash, $location, Auth, Restangular, $routeParams, Upload, $window, _, $cookieStore) {
 
     var jkci_classes;
     var jkci_class;
@@ -107,13 +107,15 @@ angular.module('eracordUiApp.controller')
 	$scope.dataLoading = true;
 	if(!$scope.isGroup){
 	  if(_.size($scope.selectedSubject) === 0){
-	    Flash.create('warning', "Subject must be present", 'alert-danger');
+	    Flash.clear();
+	    Flash.create('warning', "Subject must be present", 0, {}, true);
 	    $scope.dataLoading = false;
 	    return true;
 	  }
 	  
 	  if(_.size($scope.selectedExamType) === 0){
-	    Flash.create('warning', "Subject Type must be present", 'alert-danger');
+	    Flash.clear();
+	    Flash.create('warning', "Subject Type must be present", 0, {}, true);
 	    $scope.dataLoading = false;
 	    return true;
 	  }
@@ -128,10 +130,11 @@ angular.module('eracordUiApp.controller')
 	$scope.vm.is_group = $scope.isGroup;
 	jkci_classes.customPOST({exam: $scope.vm}, "/"+$routeParams.class_id+"/exams", {}).then(function(data){
 	  if(data.success) {
-	    Flash.create('success', "Exam has been created", 'alert-success');
+	    lazyFlash.success("Exam has been created");
 	    $location.path("/classes/"+$routeParams.class_id+"/exams/"+data.id+"/show").replace();
 	  }else {
-	    Flash.create('warning', "Something went wrong", 'alert-warning');
+	    Flash.clear();
+	    Flash.create('warning', "Something went wrong", 0, {}, true);
 	  }
 	  $scope.dataLoading = false;
 	});
@@ -175,12 +178,14 @@ angular.module('eracordUiApp.controller')
       $scope.createExam = function() {
 	
 	if(_.size($scope.selectedSubject) === 0){
-	  Flash.create('warning', "Subject must be present", 'alert-danger');
+	  Flash.clear();
+	  Flash.create('warning', "Subject must be present", 0, {}, true);
 	  $scope.dataLoading = false;
 	  return true;
 	}
 	if(_.size($scope.selectedExamType) === 0){
-	  Flash.create('warning', "Subject Type must be present", 'alert-danger');
+	  Flash.clear();
+	  Flash.create('warning', "Subject Type must be present", 0, {}, true);
 	  $scope.dataLoading = false;
 	  return true;
 	}
@@ -193,10 +198,11 @@ angular.module('eracordUiApp.controller')
 	$scope.vm.ancestry = $routeParams.exam_id;
 	jkci_classes.one("exams", $routeParams.exam_id).customPOST({exam: $scope.vm}, "exams", {}).then(function(data){
 	  if(data.success) {
-	    Flash.create('success', "Exam has been created", 'alert-success');
+	    lazyFlash.success("Exam has been created");
 	    $location.path("/classes/"+$routeParams.class_id+"/exams/"+data.id+"/show").replace();
 	  }else {
-	    Flash.create('warning', "Something went wrong", 'alert-warning');
+	    Flash.clear();
+	    Flash.create('warning', "Something went wrong", 0, {}, true);
 	  }
 	  $scope.dataLoading = false;
 	});
@@ -246,6 +252,7 @@ angular.module('eracordUiApp.controller')
 
       $scope.verifyExam = function(exam) {
 	if($window.confirm('Are you sure?')){
+	  Flash.clear();
 	  $scope.requestLoading = true;
 	  jkci_classes.customGET("/"+$routeParams.class_id+"/exams/"+$routeParams.exam_id+"/verify_exam").then(function(data){
 	    $scope.requestLoading = false;
@@ -274,7 +281,8 @@ angular.module('eracordUiApp.controller')
 	  if(data.success) {
 	    $location.path(data.backUrl).replace();
 	  }else {
-	    Flash.create('warning', "Not saved", 'alert-danger');
+	    Flash.clear();
+	    Flash.create('warning', "Not deleted", 0, {}, true);
 	  }
 	  
 	});
@@ -392,12 +400,14 @@ angular.module('eracordUiApp.controller')
 	$scope.dataLoading = true;
 	if(!$scope.isGroup){
 	  if(_.size($scope.selectedSubject) === 0){
-	    Flash.create('warning', "Subject must be present", 'alert-danger');
+	    Flash.clear();
+	    Flash.create('warning', "Subject must be present", 0, {}, true);
 	    return true;
 	  }
 	  
 	  if(_.size($scope.selectedExamType) === 0){
-	    Flash.create('warning', "Subject Type must be present", 'alert-danger');
+	    Flash.clear();
+	    Flash.create('warning', "Subject Type must be present", 0, {}, true);
 	    return true;
 	  }
 	  
@@ -413,7 +423,8 @@ angular.module('eracordUiApp.controller')
 	  if(data.success) {
 	    $location.path("/classes/"+$routeParams.class_id+"/exams/"+data.id+"/show").replace();
 	  }else {
-	    Flash.create('warning', "Something went wrong", 'alert-warning');
+	    Flash.clear();
+	    Flash.create('warning', "Something went wrong", 0, {}, true);
 	  }
 	  $scope.dataLoading = false;
 	});

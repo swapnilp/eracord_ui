@@ -123,7 +123,7 @@ angular.module('eracordUiApp.controller')
 	  if(data.success) {
 	    $uibModalInstance.dismiss('cancel');
 	  } else {
-	    Flash.create('warning', "Please try again", 'alert-danger');
+	    Flash.create('warning', "Please try again", 0, {}, true);
 	  }
 	});
       };

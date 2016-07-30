@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('MeetingsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$cookieStore', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window, $cookieStore) {
+  .controller('MeetingsCtrl',['$rootScope', '$scope', 'Flash', 'lazyFlash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$cookieStore', function ($rootScope, $scope, Flash, lazyFlash, $location, Auth, Restangular, $routeParams, Upload, $window, $cookieStore) {
 
     if(!Auth.isAuthenticated()){
       $location.path('/user/sign_in').replace();
@@ -84,10 +84,10 @@ angular.module('eracordUiApp.controller')
 
 	parents_meetings.customPOST({parents_meeting: $scope.vm}, "", {student_list: $scope.studentList.join(',')}).then(function(data){
 	  if(data.success) {
-	    Flash.create('success', "Meeting Sms will send shortly", 'alert-success');
+	    lazyFlash.success("Meeting Sms will send shortly");
 	    $location.path("/admin_desk").replace();
 	  }else {
-	    Flash.create('warning', "Something went wrong", 'alert-warning');
+	    Flash.create('warning', "Something went wrong", 0, {}, true);
 	  }
 	  $scope.dataLoading = false;
 	});

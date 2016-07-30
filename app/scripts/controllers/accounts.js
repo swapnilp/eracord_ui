@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('AccountsCtrl',['$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', '$window', '_', '$cookieStore', function ( $scope, Flash, $location, Auth, Restangular, $routeParams, $window, _, $cookieStore) {
+  .controller('AccountsCtrl',['$scope', 'lazyFlash', '$location', 'Auth', 'Restangular', '$routeParams', '$window', '_', '$cookieStore', function ( $scope, lazyFlash, $location, Auth, Restangular, $routeParams, $window, _, $cookieStore) {
 
     if(!Auth.isAuthenticated()){
       $location.path('/user/sign_in').replace();
@@ -58,7 +58,7 @@ angular.module('eracordUiApp.controller')
 	    $scope.expectedAmount = data.expected_fees;
 	    $scope.totalStudents = data.total_students;
 	  } else {
-	    Flash.create('warning', data.message, 'alert-danger');
+	    lazyFlash.warning(data.message);
 	    $location.path("/admin_desk").replace();
 	  }
 	  $scope.requestLoading = false;
