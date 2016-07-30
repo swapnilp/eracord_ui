@@ -119,6 +119,10 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
       $scope.topMenu = "teachers";
       $scope.dropDowmMenu = 'academic';
     }
+    if($location.path().search("^/off_classes") >= 0 ){
+      $scope.topMenu = "off_classes";
+      $scope.dropDowmMenu = 'academic';
+    }
     if($location.path().search("^/contact") >= 0 ){
       $scope.topMenu = "contacts";
       $scope.dropDowmMenu = null;
