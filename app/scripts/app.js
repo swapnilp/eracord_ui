@@ -26,7 +26,7 @@ angular
     'eracordUiApp.routes',
     'ngSanitize',
     'ngTouch',
-    'flash',
+    'ngFlash',
     'Devise',
     'restangular',
     'ngCookies',

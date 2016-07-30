@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('UserCtrl',['$rootScope', '$scope', 'Flash', 'Auth', '$location', '$cookieStore', 'Restangular', function ($rootScope, $scope, Flash, Auth, $location, $cookieStore, Restangular) {
+  .controller('UserCtrl',['$rootScope', '$scope', 'Flash', 'Auth', '$location', '$cookieStore', 'Restangular', 'lazyFlash', function ($rootScope, $scope, Flash, Auth, $location, $cookieStore, Restangular, lazyFlash) {
     //var message = '<strong>You are not sign in!</strong> Please Sign in.';
     //Flash.create('success', message, 'alert-warning');
 
@@ -26,8 +26,8 @@ angular.module('eracordUiApp.controller')
 	  $rootScope.currentUser = {};
 	  Auth._currentUser = {};
 	}else{
-	  Flash.create('success', 'You are already signed in', 'alert-success');
-	  $location.path('/');
+	  lazyFlash.success("You are already signed in");
+	  //$location.path('/');
 	}
       }
       
@@ -59,7 +59,7 @@ angular.module('eracordUiApp.controller')
 	    $rootScope.currentUser.name = user.name;
             $rootScope.currentUser.token = user.token;
 	    $cookieStore.put('currentUser', user);
-      	    //Flash.create('success', 'Login Success', 'alert-success');
+	    lazyFlash.success("Login Success");
 	    $location.path('/admin_desk');
 	  } else {
 	    $scope.multipleOrganisations = true;
@@ -69,7 +69,7 @@ angular.module('eracordUiApp.controller')
 	  $scope.dataLoading = false;
 	}, function(error) {
 	  $cookieStore.remove('currentUser');
-          Flash.create('success', 'Please Enter valid credentials', 'alert-danger');
+	  Flash.create('danger', 'Please Enter valid credentials', 0, {}, true);
 	  $scope.vm.password = "";
 	  $scope.dataLoading = false;
 	});
@@ -86,8 +86,8 @@ angular.module('eracordUiApp.controller')
       $scope.submitForgotPassword = function() {
 	Restangular.all("users").customPOST({user: {email: $scope.vm.email}}, "reset_password",{}).then(function(data){
 	  if(data) {
-	    Flash.create('success', 'Reset password link sent to your email', 'alert-success');
-	    $location.path("#/user/sign_in").replace();
+	    lazyFlash.success("Reset password link sent to your email");
+	    $location.path("/user/sign_in").replace();
 	  } else {
 	  }
 	    
@@ -104,10 +104,10 @@ angular.module('eracordUiApp.controller')
 	$scope.dataLoading = true;
 	Restangular.all("").customPUT({user: $scope.vm}, "users").then(function(data){
 	  if(data.success){
-	    Flash.create('success', "Password has been changed", 'alert-success');
+	    lazyFlash.success("Password has been changed");
 	    $location.path("/admin_desk").replace();
 	  }else{
-	    Flash.create('warning', data.message, 'alert-danger');
+	    Flash.create('warning', data.message, 0, {}, true);
 	    $scope.vm = {};
 	    $scope.dataLoading = false;
 	  }

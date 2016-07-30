@@ -35,7 +35,7 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
     }
   }
   
-  if ($cookieStore.get('currentUser') === null) {
+  if ($cookieStore.get('currentUser') === null && $location.path() !== '/user/sign_in') {
     $location.path('/user/sign_in');
   }
   
