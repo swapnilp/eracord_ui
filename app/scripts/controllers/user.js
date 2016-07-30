@@ -54,6 +54,7 @@ angular.module('eracordUiApp.controller')
 	};
 	
 	Auth.login(credentials, config).then(function(user) {
+	  Flash.clear();
 	  if(user.success){
 	    $rootScope.currentUser.email = user.email;
 	    $rootScope.currentUser.name = user.name;
