@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('OrganisationsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$route', '$cookieStore', '$uibModal', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window, $route, $cookieStore, $uibModal) {
+  .controller('OrganisationsCtrl',['$rootScope', '$scope', 'Flash', 'lazyFlash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$route', '$cookieStore', '$uibModal', function ($rootScope, $scope, Flash, lazyFlash, $location, Auth, Restangular, $routeParams, Upload, $window, $route, $cookieStore, $uibModal) {
 
     if(!Auth.isAuthenticated()){
       $location.path('/user/sign_in');
@@ -78,7 +78,8 @@ angular.module('eracordUiApp.controller')
 	  if(data.success){
 	    $location.path('/manage_organisation');
 	  }else{
-	    Flash.create('warning', "Please try again", 'alert-danger');
+	    Flash.clear();
+	    Flash.create('warning', "Please try again", 0, {}, true);
 	  }
 	  $scope.dataLoading = false;
 	});
@@ -95,7 +96,8 @@ angular.module('eracordUiApp.controller')
 	    $location.path('/manage_organisation');
 	  }else{
 	    $scope.vm.dataLoading = false;
-	    Flash.create('warning', data.message, 'alert-danger');
+	    Flash.clear();
+	    Flash.create('warning', data.message, 0, {}, true);
 	  }
 	});
       };
@@ -124,7 +126,8 @@ angular.module('eracordUiApp.controller')
 	  if(data.success) {
 	    $location.path('/manage_organisation').replace();
 	  } else {
-	    Flash.create('warning', data.message, 'alert-danger');
+	    Flash.clear();
+	    Flash.create('warning', data.message, 0, {}, true);
 	  }
 	  $scope.dataLoading = false;
 	});
@@ -142,7 +145,7 @@ angular.module('eracordUiApp.controller')
       	if(data.success) {
 	  $scope.sub_organisations = data.body;
 	} else {
-	  Flash.create('warning', data.message, 'alert-danger');
+	  lazyFlash.warning(data.message);
 	  $location.path('/manage_organisation').replace();
 	}
 	$scope.requestLoading = false;
@@ -154,7 +157,8 @@ angular.module('eracordUiApp.controller')
       	  if(data.success) {
 	    $location.path('/manage_organisation').replace();
       	  }else{
-	    Flash.create('warning', data.message, 'alert-danger');
+	    Flash.clear();
+	    Flash.create('warning', data.message, 0, {}, true);
 	  }
 	  $scope.dataLoading = false;
       	});
@@ -173,7 +177,7 @@ angular.module('eracordUiApp.controller')
 	  $scope.fee = data.fee;
 	  $scope.vm.fee = $scope.fee;
 	} else {
-	  Flash.create('warning', data.message, 'alert-danger');
+	  lazyFlash.warning(data.message);
 	  $location.path('/manage_organisation').replace();
 	}
 	$scope.requestLoading = false;
@@ -182,10 +186,11 @@ angular.module('eracordUiApp.controller')
       $scope.updateFee = function() {
 	base_organisation.one("courses", $routeParams.course_id).customPOST({fee: $scope.vm},"update_fee", {}).then(function(data) {
 	  if(data.success) {
-	    Flash.create('success', data.message, 'alert-success');
+	    lazyFlash.success(data.message);
 	    $location.path('/manage_organisation').replace();
 	  } else {
-	    Flash.create('warning', data.message, 'alert-danger');
+	    Flash.clear();
+	    Flash.create('warning', data.message, 0, {}, true);
 	    $scope.vm.password = "";
 	  }
 	});
@@ -206,7 +211,7 @@ angular.module('eracordUiApp.controller')
 	  $scope.fee = data.fee;
 	  $scope.vm.fee = $scope.fee;
 	} else {
-	  Flash.create('warning', data.message, 'alert-danger');
+	  Flash.warning(data.message);
 	  $location.path('/manage_organisation').replace();
 	}
 	$scope.requestLoading = false;
@@ -215,10 +220,11 @@ angular.module('eracordUiApp.controller')
       $scope.updateFee = function() {
 	base_organisation.one("classes", $routeParams.class_id).customPOST({fee: $scope.vm},"update_fee", {}).then(function(data) {
 	  if(data.success) {
-	    Flash.create('success', data.message, 'alert-success');
+	    lazyFlash.success(data.message);
 	    $location.path('/manage_organisation').replace();
 	  } else {
-	    Flash.create('warning', data.message, 'alert-danger');
+	    Flash.clear();
+	    Flash.create('warning', data.message, 0, {}, true);
 	    $scope.vm.password = "";
 	  }
 	});
