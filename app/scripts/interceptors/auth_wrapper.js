@@ -22,10 +22,10 @@ app.factory('authWrapper', function($rootScope, $q, $window, Flash, lazyFlash, $
         case 401:
 	  $cookieStore.remove('currentUser');
 	  $rootScope.currentUser = {};
-	  message = 'Please log in.';
+	  //message = 'Please log in.';
           $location.path("/user/sign_in");
-	  Flash.clear();
-	  Flash.create('warning', message, 0, {}, true);
+	  //Flash.clear();
+	  //Flash.create('warning', message, 0, {}, true);
         break;
         case 403:
 	  lazyFlash.warning('You are not authorized to perform this action.');
