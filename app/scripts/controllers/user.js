@@ -9,10 +9,6 @@
  */
 angular.module('eracordUiApp.controller')
   .controller('UserCtrl',['$rootScope', '$scope', 'Flash', 'Auth', '$location', '$cookieStore', 'Restangular', 'lazyFlash', function ($rootScope, $scope, Flash, Auth, $location, $cookieStore, Restangular, lazyFlash) {
-    //var message = '<strong>You are not sign in!</strong> Please Sign in.';
-    //Flash.create('success', message, 'alert-warning');
-
-
     
     if($location.path() === '/user/sign_in') {
       $scope.multipleOrganisations = false;
@@ -27,7 +23,7 @@ angular.module('eracordUiApp.controller')
 	  Auth._currentUser = {};
 	}else{
 	  lazyFlash.success("You are already signed in");
-	  //$location.path('/');
+	  $location.path('/');
 	}
       }
       
@@ -108,6 +104,7 @@ angular.module('eracordUiApp.controller')
 	    lazyFlash.success("Password has been changed");
 	    $location.path("/admin_desk").replace();
 	  }else{
+	    Flash.clear();
 	    Flash.create('warning', data.message, 0, {}, true);
 	    $scope.vm = {};
 	    $scope.dataLoading = false;

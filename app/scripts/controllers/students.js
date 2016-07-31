@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('StudentsCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$cookieStore', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window, $cookieStore) {
+  .controller('StudentsCtrl',['$rootScope', '$scope', 'Flash', 'lazyFlash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$cookieStore', function ($rootScope, $scope, Flash, lazyFlash, $location, Auth, Restangular, $routeParams, Upload, $window, $cookieStore) {
     
     if(!Auth.isAuthenticated()){
       $location.path('/user/sign_in').replace();
@@ -122,7 +122,8 @@ angular.module('eracordUiApp.controller')
 	    }
 	    
 	  }else {
-	    Flash.create('warning', data.message, 'alert-danger');
+	    Flash.clear();
+	    Flash.create('warning', data.message, 0, {}, true);
 	  }
 	  $scope.dataLoading = false;
 	})
@@ -258,7 +259,7 @@ angular.module('eracordUiApp.controller')
 	    $scope.enable_tax = data.enable_tax;
 	    $scope.tax = data.service_tax;
 	  } else {
-	    Flash.create('warning', data.message, 'alert-danger');
+	    lazyFlash.warning(data.message);
 	    $location.path("/students/"+$scope.student_id+"/show").replace();
 	  }
 	  $scope.requestLoading = false;
@@ -288,14 +289,15 @@ angular.module('eracordUiApp.controller')
 
 	student.customPOST({student_fee: $scope.vm}, "paid_student_fee", {}).then(function(data) {
 	  if(data.success) {
-	    Flash.create('success', data.message, 'alert-success');
+	    lazyFlash.success(data.message);
 	    $location.path("/accounts/students/"+$scope.student_id+"/fee_receipt/"+data.receipt_id).replace();
 	  } else {
 	    if(data.valid_password) {
-	      Flash.create('warning', data.message, 'alert-danger');
+	      lazyFlash.warning(data.message);
 	      $location.path("/students/"+$scope.student_id+"/show").replace();
 	    }else{
-	      Flash.create('warning', data.message, 'alert-danger');
+	      Flash.clear();
+	      Flash.create('warning', data.message, 0, {}, true);
 	      $scope.vm.password="";
 	    }
 	  }
@@ -335,7 +337,7 @@ angular.module('eracordUiApp.controller')
 	    $scope.tax = data.service_tax;
 	    $scope.reasons = data.payment_reasons;
 	  } else {
-	    Flash.create('warning', data.message, 'alert-danger');
+	    lazyFlash.warning(data.message);
 	    $location.path("/students/"+$scope.student_id+"/show").replace();
 	  }
 	  $scope.requestLoading = false;
@@ -365,14 +367,15 @@ angular.module('eracordUiApp.controller')
 
 	student.customPOST({student_fee: $scope.vm}, "paid_student_fee", {}).then(function(data) {
 	  if(data.success) {
-	    Flash.create('success', data.message, 'alert-success');
+	    lazyFlash.success(data.message);
 	    $location.path("/accounts/students/"+$scope.student_id+"/fee_receipt/"+data.receipt_id).replace();
 	  } else {
 	    if(data.valid_password) {
-	      Flash.create('warning', data.message, 'alert-danger');
+	      lazyFlash.warning(data.message);
 	      $location.path("/students/"+$scope.student_id+"/show").replace();
 	    }else{
-	      Flash.create('warning', data.message, 'alert-danger');
+	      Flash.clear();
+	      Flash.create('warning', data.message, 0, {}, true);
 	      $scope.vm.password="";
 	    }
 	  }
@@ -404,7 +407,7 @@ angular.module('eracordUiApp.controller')
 	    $scope.id = data.id;
 	    $scope.remaining_fee = data.remaining_fee;
 	  } else {
-	    Flash.create('warning', data.message, 'alert-danger');
+	    lazyFlash.warning(data.message);
 	    $location.path("/students/"+$scope.student_id+"/show").replace();
 	  }
 	});

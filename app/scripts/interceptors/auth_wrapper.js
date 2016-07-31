@@ -3,7 +3,7 @@ var app;
 
 app = angular.module('eracordUiApp.services');
 
-app.factory('authWrapper', function($rootScope, $q, $window, Flash, $cookieStore, $location) {
+app.factory('authWrapper', function($rootScope, $q, $window, Flash, lazyFlash, $cookieStore, $location) {
   return {
     request: function(config) {
       var user;
@@ -24,14 +24,16 @@ app.factory('authWrapper', function($rootScope, $q, $window, Flash, $cookieStore
 	  $rootScope.currentUser = {};
 	  message = 'Please log in.';
           $location.path("/user/sign_in");
-	  Flash.create('warning', message, 'alert-danger');
+	  Flash.clear();
+	  Flash.create('warning', message, 0, {}, true);
         break;
         case 403:
-	  Flash.create('warning', 'You are not authorized to perform this action.', 'alert-danger');
+	  lazyFlash.warning('You are not authorized to perform this action.');
 	  $location.path("/admin_desk");
 	  break;
 	case 404:
-	  Flash.create('warning', 'Record not found.', 'alert-danger');
+	  Flash.clear();
+	  Flash.create('warning', 'Record not found.', 0, {}, true);
 	  break;
 	case 500:
 	  console.log('asdasdasdad');

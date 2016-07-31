@@ -142,7 +142,8 @@ app.directive('organisationClarks', function(Restangular, $location, Flash) {
 	    if(data.success){
 	      scope.clarks = _.reject(scope.clarks, function(obj){return obj.id == user.id});
 	    }else {
-	      Flash.create('warning', "Some thing went wrong", 'alert-danger');
+	      Flash.clear();
+	      Flash.create('warning', "Some thing went wrong", 0, {}, true);
 	    }
 	    user.dataLoading = false;
 	  });
@@ -189,7 +190,8 @@ app.directive('organisationSubOrganisations', function(Restangular, $location, F
 	      scope.sub_organisations = _.reject(scope.sub_organisations, function(d){ return d.id === sub_organisation.id; });
 	      loadCources();
 	    }else {
-	      Flash.create('warning', "Some thing went wrong", 'alert-danger');
+	      Flash.clear();
+	      Flash.create('warning', "Some thing went wrong", 0, {}, true);
 	    }
 	  });
 	}

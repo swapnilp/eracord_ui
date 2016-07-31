@@ -59,7 +59,8 @@ angular.module('eracordUiApp.controller')
 	    $location.path('/organisations/teachers/'+data.teacher_id).replace();;
       	  }else{
       	    $scope.vm.dataLoading = false;
-      	    Flash.create('warning', data.message, 'alert-danger');
+	    Flash.clear();
+      	    Flash.create('warning', data.message, 0, {}, true);
       	  }
       	});
       };
@@ -86,7 +87,8 @@ angular.module('eracordUiApp.controller')
       	    $location.path('/organisations/teachers/'+data.teacher_id).replace();;
       	  }else{
       	    $scope.vm.dataLoading = false;
-      	    Flash.create('warning', data.message, 'alert-danger');
+	    Flash.clear();
+      	    Flash.create('warning', data.message, 0, {}, true);
       	  }
       	});
       };
