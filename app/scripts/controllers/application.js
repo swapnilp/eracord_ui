@@ -143,8 +143,12 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
       $scope.topMenu = "accounts";
       $scope.dropDowmMenu = 'non_academic';
     }
-    if($location.path().search("^/sms") >= 0 || $location.path().search("^/meetings") >= 0){
+    if($location.path().search("^/sms") >= 0){
       $scope.topMenu = "sms";
+      $scope.dropDowmMenu = 'non_academic';
+    }
+    if($location.path().search("^/meetings") >= 0){
+      $scope.topMenu = "meetings";
       $scope.dropDowmMenu = 'non_academic';
     }
     if($location.path() === "/"){
