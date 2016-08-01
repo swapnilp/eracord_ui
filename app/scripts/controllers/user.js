@@ -66,6 +66,7 @@ angular.module('eracordUiApp.controller')
 	  $scope.dataLoading = false;
 	}, function(error) {
 	  $cookieStore.remove('currentUser');
+	  Flash.clear();
 	  Flash.create('danger', 'Please Enter valid credentials', 0, {}, true);
 	  $scope.vm.password = "";
 	  $scope.dataLoading = false;
