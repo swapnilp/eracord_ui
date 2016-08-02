@@ -14,8 +14,6 @@
 	<th st-sort="lastName">student</th>
 	<th st-sort="birthDate">p_mobile</th>
 	<th st-sort="balance">Marks</th>
-	<th st-sort="balance">Is Present</th>
-	<th st-sort="balance">Ignored</th>
       </tr>
     </thead>
     <tbody>
@@ -23,9 +21,7 @@
 	<td>{{$index + 1}}</td>
 	<td>{{row.student}}</td>
 	<td>{{row.p_mobile}}</td>
-	<td>{{row.marks}}</td>
-	<td>{{row.is_present}}</td>
-	<td>{{row.is_ingored || false}}</td>
+	<td>{{row.is_ingored ? 'Ignored' : (row.is_present ? row.marks : 'A')}}</td>
       </tr>
     </tbody>
   </table>
