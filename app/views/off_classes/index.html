@@ -1,9 +1,32 @@
 <div style="margin-top:20px;">
-  <div class="alert alert-warning" style="margin-top:20px;" ng-if="off_classes.length === 0">
-    No data found
+  <div class="examFilterDiv col-sm-12 padding0"> 
+    <div class="col-sm-2 paddingLeft0">
+      <label for="standard_id">Teacher</label>
+      <select class="form-control ng-touched" ng-model="filterOffClass.filterTeacher" ng-options="std.id as std.name for std in teachers">
+	<option value="" >Filter Teacher</option>
+      </select>
+    </div>
+    <div class="col-sm-2 paddingLeft0">
+      <label for="standard_id">Class</label>
+      <select class="form-control ng-touched" ng-model="filterOffClass.filterClass" ng-options="std.id as std.name for std in classes">
+	<option value="">Filter Class</option>
+      </select>
+    </div>
+    <div class="col-sm-2 paddingLeft0">
+      <button class="btn btn-primary" style="margin-top:23px;" ng-click="pageChanged(1, false);">Filter</button>
+      <button class="btn btn-primary" style="margin-top:23px;" ng-click="resetFilter();" ng-show="showResetFilter">Reset</button>
+    </div>
+    <div class="col-sm-12 padding0" style="margin-top:20px;" ng-show="totalOffClasses > 0 && !requestLoading">
+      <div class="alert alert-warning">Total records are - {{totalOffClasses}} </div>
+    </div>
+    <div ng-show="totalOffClasses == 0 && !requestLoading" class="col-sm-12 padding0 mTop20">
+      <div class="alert alert-warning">
+	No data found
+      </div>
+    </div>
   </div>
   <div request-loading is-loading="requestLoading"></div>
-  <figure class="highlight col-sm-12" ng-show="!requestLoading && off_classes.length > 0">
+  <figure class="highlight col-sm-12 mTop20" ng-show="!requestLoading && off_classes.length > 0">
     <table st-table="rowCollection" class="table">
       <thead>
 	<tr>
@@ -14,17 +37,15 @@
 	</tr>
       </thead>
       <tbody>
-	<tr ng-repeat="row in off_classes">
+	<tr dir-paginate="row in off_classes | itemsPerPage: 10" total-items="totalOffClasses" current-page="pagination.current">
 	  <td>{{row.name}}</td>
 	  <td>{{row.teacher_name}}</td>
 	  <td>{{row.date}}</td>
 	  <td>
-
 	  </td>
 	</tr>
       </tbody>
     </table>
   </figure>
+  <dir-pagination-controls on-page-change="pageChanged(newPageNumber, true)" class="col-sm-12" ng-show="off_classes.length > 0"></dir-pagination-controls>
 </div>
-
-
