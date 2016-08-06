@@ -79,6 +79,7 @@ angular.module('eracordUiApp.controller')
       $scope.requestLoading = true;
       $scope.vm = {};
       $scope.dataLoading = false;
+      $scope.isNew = true;
       
       var loadExamInfo = function() {
 	$scope.requestLoading = true;
@@ -368,7 +369,8 @@ angular.module('eracordUiApp.controller')
       jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
       $scope.isOpen = false; //for calender 
       $scope.requestLoading = true
-      $scope.dataLoading = false;;
+      $scope.dataLoading = false;
+      $scope.isNew = false;
       //$scope.isGroup = $routeParams.isGroup || false;
 
       $scope.openCalendar = function(e) {
@@ -385,6 +387,7 @@ angular.module('eracordUiApp.controller')
 	    $scope.divisions = data.sub_classes;
 	    $scope.isGroup = data.exam.is_group;
 	    $scope.subjects = data.subjects;
+	    $scope.class_name = data.class_name;
 	    
 	    $scope.examTypes= [{name: "Subjective", ticked: (data.exam.exam_type === "Subjective")}, {name: "Objective", ticked: (data.exam.exam_type !== "Subjective")}];
 	  }else{

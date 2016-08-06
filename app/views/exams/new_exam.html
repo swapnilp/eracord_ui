@@ -1,96 +1,97 @@
 <div request-loading is-loading="requestLoading"></div>
-<div class="col-md-6 col-md-offset-0" ng-show="!requestLoading">
+<div class="col-md-12 col-md-offset-0" ng-show="!requestLoading">
   <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
   <form name="form" ng-submit="createExam();" role="form" autocomplete="off">
-    <div class="form-group">
-      <label for="class">Class</label>
-      <br />
-      <span>{{class_name}}</span>
-      <span ng-show="form.organisation.$dirty && form.organisation.$error.required" class="help-block">Oganisation ID is required</span>
+    <div class="col-md-12 ">
+      <h4>{{isNew ? 'Create' : 'Update'}} exam for {{class_name}}</h4>
     </div>
-    <div class="form-group" ng-show="divisions.length > 0">
-      <label for="class">Divisions</label>
-      <br />
-      <div
-	 angular-multi-select
-	 helper-elements="noreset nofilter"
-	 input-model="divisions"
-	 output-model="selectedDivisions"
-	 item-label="<[ name ]>"
-	 button-template="angular-multi-select-btn-data.htm"
-	 button-label="<[ name ]>"
-	 button-label-separator='[" & ", " & "]'
-	 tick-property="ticked"
-	 >
+    <div class="col-md-12 padding0">
+      <div class="form-group col-md-4" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+	<label for="name">Name <span class="textRed"> *</span></label>
+	<input type="text" name="name" id="name" class="form-control" ng-model="vm.name" required />
+	<span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Name is required</span>
+      </div>
+      <div class="form-group col-md-4" ng-class="{ 'has-error': form.marks.$dirty && form.marks.$error.required }" ng-if="!isGroup">
+	<label for="marks">Marks <span class="textRed"> *</span></label>
+	<input type="text" name="marks" id="marks" class="form-control" ng-model="vm.marks" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required />
+	<span ng-show="form.marks.$dirty && form.marks.$error.required" class="help-block">Marks are required</span>
+      </div>
+      <div class="form-group col-md-4" ng-if="!isGroup">
+	<label for="duration">Duration</label>
+	<input type="text" name="duration" id="duration" class="form-control" ng-model="vm.duration" onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
       </div>
     </div>
-    <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
-      <label for="name">Name <span class="textRed"> *</span></label>
-      <input type="text" name="name" id="name" class="form-control" ng-model="vm.name" required />
-      <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Name is required</span>
-    </div>
-    <div class="form-group" ng-show="!isGroup">
-      <label for="subject">Subject <span class="textRed"> *</span></label>
-      <br />
-      <div
-	 angular-multi-select
-	 helper-elements="noreset nofilter"
-	 input-model="subjects"
-	 output-model="selectedSubject"
-	 item-label="<[ std_name ]>"
-	 button-template="angular-multi-select-btn-data.htm"
-	 button-label="<[ std_name ]>"
-	 tick-property="ticked"
-	 selection-mode="single"
-	 >
+    <div class="col-md-12 padding0">
+      <div class="form-group col-md-4" ng-show="divisions.length > 0">
+	<label for="class">Divisions</label>
+	<br />
+	<div
+	   angular-multi-select
+	   helper-elements="noreset nofilter"
+	   input-model="divisions"
+	   output-model="selectedDivisions"
+	   item-label="<[ name ]>"
+	   button-template="angular-multi-select-btn-data.htm"
+	   button-label="<[ name ]>"
+	   button-label-separator='[" & ", " & "]'
+	   tick-property="ticked"
+	   >
+	</div>
       </div>
-      
-    </div>
-    <div class="form-group" ng-if="!isGroup">
-      <label for="conducted_by">Conducted By</label>
-      <input type="text" name="conducted_by" id="conducted_by" class="form-control" ng-model="vm.conducted_by"/>
-    </div>
-    <div class="form-group" ng-class="{ 'has-error': form.marks.$dirty && form.marks.$error.required }" ng-if="!isGroup">
-      <label for="marks">Marks <span class="textRed"> *</span></label>
-      <input type="text" name="marks" id="marks" class="form-control" ng-model="vm.marks" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required />
-      <span ng-show="form.marks.$dirty && form.marks.$error.required" class="help-block">Marks are required</span>
-    </div>
-    <div class="form-group" ng-class="{ 'has-error': form.exam_date.$dirty && form.exam_date.$error.required }">
-      <label for="exam_date">Exam Date <span class="textRed"> *</span></label>
-      <p class="input-group">
-	<input type="text" class="form-control" datetime-picker="dd/MM/yyyy HH:mm" ng-model="vm.exam_date" is-open="isOpen" ng-click="openCalendar($event, prop);" ng-focus="openCalendar($event, prop);" readonly required/>
-      </p>
-      <span ng-show="form.marks.$dirty && form.marks.$error.required" class="help-block">Exam Date is required</span>
-    </div>
-    <div class="form-group" ng-if="!isGroup">
-      <label for="duration">Duration</label>
-      <input type="text" name="duration" id="duration" class="form-control" ng-model="vm.duration" onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
-    </div>
-    <div class="form-group" ng-show="!isGroup">
-      <label for="exam_type">Exam Type <span class="textRed"> *</span></label>
-      <br />
-      <div
-	 angular-multi-select
-	 helper-elements="noreset nofilter"
-	 input-model="examTypes"
-	 output-model="selectedExamType"
-	 item-label="<[ name ]>"
-	 button-template="angular-multi-select-btn-data.htm"
-	 button-label="<[ name ]>"
-	 button-label-separator='[" & ", " & "]'
-	 selection-mode="single"
-	 tick-property="ticked"
-	 >
+      <div class="form-group col-md-4" ng-show="!isGroup">
+	<label for="subject">Subject <span class="textRed"> *</span></label>
+	<br />
+	<div
+	   angular-multi-select
+	   helper-elements="noreset nofilter"
+	   input-model="subjects"
+	   output-model="selectedSubject"
+	   item-label="<[ std_name ]>"
+	   button-template="angular-multi-select-btn-data.htm"
+	   button-label="<[ std_name ]>"
+	   tick-property="ticked"
+	   selection-mode="single"
+	   >
+	</div>
       </div>
-
-      <span ng-show="form.exam_type.$dirty && form.exam_type.$error.required" class="help-block">Exam Type is required</span>
-    </div>
-    <div class="form-group">
-      <label for="remark">Remark</label>
-      <input type="text" name="remark" id="remark" class="form-control" ng-model="vm.remark" />
+      <div class="form-group col-md-4" ng-show="!isGroup">
+	<label for="exam_type">Exam Type <span class="textRed"> *</span></label>
+	<br />
+	<div
+	   angular-multi-select
+	   helper-elements="noreset nofilter"
+	   input-model="examTypes"
+	   output-model="selectedExamType"
+	   item-label="<[ name ]>"
+	   button-template="angular-multi-select-btn-data.htm"
+	   button-label="<[ name ]>"
+	   button-label-separator='[" & ", " & "]'
+	   selection-mode="single"
+	   tick-property="ticked"
+	   >
+	</div>
+	<span ng-show="form.exam_type.$dirty && form.exam_type.$error.required" class="help-block">Exam Type is required</span>
+      </div>
     </div>
     
-    <div class="form-actions">
+    <div class="col-md-12 padding0">
+      <div class="form-group col-md-4" ng-class="{ 'has-error': form.exam_date.$dirty && form.exam_date.$error.required }">
+	<label for="exam_date">Exam Date <span class="textRed"> *</span></label>
+	<p class="input-group">
+	  <input type="text" class="form-control" datetime-picker="dd/MM/yyyy HH:mm" ng-model="vm.exam_date" is-open="isOpen" ng-click="openCalendar($event, prop);" ng-focus="openCalendar($event, prop);" readonly required/>
+	</p>
+	<span ng-show="form.marks.$dirty && form.marks.$error.required" class="help-block">Exam Date is required</span>
+      </div>
+      <div class="form-group col-md-4" ng-if="!isGroup">
+	<label for="conducted_by">Conducted By</label>
+	<input type="text" name="conducted_by" id="conducted_by" class="form-control" ng-model="vm.conducted_by"/>
+      </div>
+      <div class="form-group col-md-4">
+	<label for="remark">Remark</label>
+	<input type="text" name="remark" id="remark" class="form-control" ng-model="vm.remark" />
+      </div>
+    </div>
+    <div class="form-actions col-md-12">
       <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">Create Exam</button>
       <span button-req-load is-loading="dataLoading"></span>
       <a ng-click="goBack();" class="btn btn-default">Cancel</a>
