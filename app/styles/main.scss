@@ -652,3 +652,12 @@ input[type="radio"]{
     max-height: 300px;
     opacity: 1;
 }
+
+.navbar-brand.image {
+  padding:0;
+  
+  img {
+    max-height:52px;
+    max-width:60px;
+  }
+}

@@ -12,7 +12,7 @@ app.directive('organisationProfile', function(Restangular) {
       organisationProfileTab: "@"
     },
     templateUrl: 'views/organisations/profile.html',
-    controller: ['$scope', 'Restangular', 'Flash', '$location', function(scope, Restangular, Flash, $location){
+    controller: ['$scope', 'Restangular', 'Flash', '$location', 'Upload', function(scope, Restangular, Flash, $location, Upload){
       scope.profileRequestLoading = false;
       var profileLoaded = false;
       
@@ -27,6 +27,49 @@ app.directive('organisationProfile', function(Restangular) {
 	  }
 	  scope.profileRequestLoading = false;
 	});
+      };
+
+      scope.selectUploadFile = function(newVal){
+	if(newVal){
+	  scope.file = newVal;
+	  scope.uploadingFile = false;
+	  scope.fileName  = newVal.name;
+	}
+      };
+
+      scope.submit = function() {
+	if (scope.file) {
+	  scope.uploadingFile = true;
+	  scope.uploadMeaasgeClass = "alert-warning";
+	  scope.uploadingMessage = "Uploading";
+          scope.upload(scope.file);
+	}
+      };
+
+      scope.upload = function (file) {
+	scope.requestLoading = true;
+        Upload.upload({
+          url: "api/organisations/upload_logo",
+          data: {organisation: {image: file}}
+        }).then(function (resp) {
+	  scope.requestLoading = false;
+	  if(resp.data.success) {
+	    scope.uploadMeaasgeClass = "alert-success";
+	    scope.uploadingMessage = "Completed Successfully";
+	    scope.fileName = "";
+	    scope.file = null;
+	  }else {
+	    scope.uploadMeaasgeClass = "alert-danger";
+	    scope.uploadingMessage = resp.data.message;
+	  }
+          //console.log('Success ' + resp.config.data.image.name + 'uploaded. Response: ' + resp.data);
+        }, function (resp) {
+	  scope.requestLoading = false;
+	  scope.uploadingFile = false;
+        }, function (evt) {
+	  scope.requestLoading = false;
+          //var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        });
       };
 
       scope.loadProfile();
@@ -188,7 +231,6 @@ app.directive('organisationSubOrganisations', function(Restangular, $location, F
 	  base_organisation.one('sub_organisations', sub_organisation.id).remove().then(function(data){
 	    if(data.success) {
 	      scope.sub_organisations = _.reject(scope.sub_organisations, function(d){ return d.id === sub_organisation.id; });
-	      loadCources();
 	    }else {
 	      Flash.clear();
 	      Flash.create('warning', "Some thing went wrong", 0, {}, true);

@@ -9,11 +9,13 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
   $scope.alertsVisible = false;
   $scope.firstLoad = false;
   $scope.topMenu = "home";
-
+  $rootScope.logoUrl = "";
+  
 
   $scope.hostUrl = "http://localhost:3000";
   //$scope.hostUrl = "http://54.152.133.36:3000/";
   //$scope.hostUrl = "http://192.168.0.100:3000/";  
+  
 
   if ($rootScope.currentUser === undefined) {
     $rootScope.currentUser = {};
@@ -47,11 +49,13 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
       });
     }
   }
-
+  
+  $rootScope.logoUrl  = $cookieStore.get('currentUser').logo_url;
 
   clearUserInformation = function() {
     $cookieStore.remove('currentUser');
     $rootScope.currentUser = {};
+    $rootScope.logoUrl = "";
     return $rootScope.currentUser;
   };
 
@@ -83,11 +87,12 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
   };
 
   $rootScope.$on('devise:unauthorized', function(loopPrevention) {
-
+    
     if (loopPrevention === null) {
       loopPrevention = false;
     }
     $scope.doLogout();
+    $rootScope.logoUrl = "";
     if (loopPrevention) {
       if ($cookieStore.get('currentUser') === null) {
         return;

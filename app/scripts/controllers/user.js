@@ -55,6 +55,7 @@ angular.module('eracordUiApp.controller')
 	    $rootScope.currentUser.email = user.email;
 	    $rootScope.currentUser.name = user.name;
             $rootScope.currentUser.token = user.token;
+	    $rootScope.logoUrl = user.logo_url;;
 	    $cookieStore.put('currentUser', user);
 	    lazyFlash.success("Login Success");
 	    $location.path('/admin_desk');
