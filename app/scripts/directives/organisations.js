@@ -12,7 +12,7 @@ app.directive('organisationProfile', function(Restangular) {
       organisationProfileTab: "@"
     },
     templateUrl: 'views/organisations/profile.html',
-    controller: ['$scope', 'Restangular', 'Flash', '$location', 'Upload', function(scope, Restangular, Flash, $location, Upload){
+    controller: ['$rootScope', '$scope', 'Restangular', 'Flash', '$location', 'Upload', function($rootScope, scope, Restangular, Flash, $location, Upload){
       scope.profileRequestLoading = false;
       var profileLoaded = false;
       
@@ -58,6 +58,7 @@ app.directive('organisationProfile', function(Restangular) {
 	    scope.uploadingMessage = "Completed Successfully";
 	    scope.fileName = "";
 	    scope.file = null;
+	    $rootScope.logoUrl = resp.data.url;
 	  }else {
 	    scope.uploadMeaasgeClass = "alert-danger";
 	    scope.uploadingMessage = resp.data.message;

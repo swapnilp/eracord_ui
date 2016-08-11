@@ -48,9 +48,12 @@
   </div>
   <div class="col-sm-12 textLeft paddingLeft0 mTop20" ng-if="is_root">
     <span class="col-sm-2 paddingLeft0"><h5>Upload Logo</h5> </span>
+    <span>
+      <img ng-src="{{organisation.logo_url}}" class="pull-left smallImg">
+    </span>
     <form name="form" class="col-sm-6">
       <div class="btn btn-primary" ngf-select ng-model="file" name="file" ngf-pattern="'.doc,.docx,.pdf,.jpg,video/*'"
-	   accept=".doc,.docx,.pdf,.jpg,video/*" ngf-max-size="20MB" ng-change="selectUploadFile(file);"><i class="fa fa-2x fa-cloud-upload"></i></div>
+	   accept=".doc,.docx,.pdf,.jpg,video/*" ngf-max-size="20MB" ng-change="selectUploadFile(file);" uib-tooltip="{{organisation.logo_url == '' ? 'Select logo image' : 'Change logo image'}}"><i class="fa fa-2x fa-cloud-upload"></i></div>
       <span>{{fileName}}</span>
       <span ng-class="uploadMeaasgeClass" ng-if="uploadingFile">{{uploadingMessage}}</span>
       <button type="submit" ng-click="submit()" ng-if="!uploadingFile" class="btn btn-default" ng-disabled="requestLoading">Upload</button>
