@@ -660,3 +660,23 @@ input[type="radio"]{
     max-height:52px;
   }
 }
+
+.userInfoDropDown {
+  display:flex;
+
+  .imageDiv {
+    min-height:60px;
+    width:200px; 
+    padding:5px;
+  
+    img {
+      max-height:30px;
+      border-radius: 20px;
+    }
+
+    a {
+      font-size:12px;
+    }
+  }
+  
+}
