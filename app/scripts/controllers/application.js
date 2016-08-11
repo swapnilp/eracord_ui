@@ -19,6 +19,8 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
 
   if ($rootScope.currentUser === undefined) {
     $rootScope.currentUser = {};
+  } else {
+    $rootScope.logoUrl  = $cookieStore.get('currentUser').logo_url;
   }
 
   $scope.goBack = function() {
@@ -49,8 +51,6 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
       });
     }
   }
-  
-  $rootScope.logoUrl  = $cookieStore.get('currentUser').logo_url;
 
   clearUserInformation = function() {
     $cookieStore.remove('currentUser');
