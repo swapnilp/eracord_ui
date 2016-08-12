@@ -683,3 +683,12 @@ input[type="radio"]{
 .smallImg {
   max-height: 50px;
 }
+
+.navbar-default .navbar-nav > li > a.userIcon {
+  color: #999;
+  padding: 10px;
+}
+
+.navbar-default .navbar-nav > li > a.userIcon:hover, .navbar-default .navbar-nav > li > a.userIcon:focus {
+    color: #777;
+}
