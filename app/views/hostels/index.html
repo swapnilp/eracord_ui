@@ -1,0 +1,31 @@
+<div request-loading is-loading="requestLoading"></div>
+<div style="margin:20px 0;" ng-show="!requestLoading">
+  <a href="#/hostels/new" class="btn btn-primary">Create Hostel</a>
+  <figure class="highlight col-sm-12"  ng-if="hostels.length > 0">
+    <table st-table="rowCollection" class="table organisationCoursesTable">
+      <thead>
+	<tr>
+	  <th st-sort="firstName">Index</th>
+	  <th st-sort="lastName">Name</th>
+	  <th st-sort="lastName">Students</th>
+	  <th st-sort="balance">Actions</th>
+	</tr>
+      </thead>
+      <tbody>
+	<tr ng-repeat="row in hostels">
+	  <td>{{$index+1}}</td>
+	  <td>{{row.name}}</td>
+	  <td></td>
+	  <td>
+	    <a href="#/hostels/{{id}}">Show</a>
+	  </td>
+	</tr>
+      </tbody>
+    </table>
+  </figure>
+</div>
+<div class="alert alert-warning col-sm-12" ng-if="divisions.length  < 1">
+  <span >
+    No data found
+  </span>
+</div>
