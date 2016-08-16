@@ -14,5 +14,15 @@ app.config(function($routeProvider) {
       templateUrl: 'views/hostels/new.html',
       controller: 'HostelsCtrl',
       controllerAs: 'hostels'
+    })
+    .when('/hostels/:id', {
+      templateUrl: 'views/hostels/show.html',
+      controller: 'HostelsCtrl',
+      controllerAs: 'hostels'
+    })
+    .when('/hostels/:id/edit', {
+      templateUrl: 'views/hostels/new.html',
+      controller: 'HostelsCtrl',
+      controllerAs: 'hostels'
     });
 });

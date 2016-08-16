@@ -1,0 +1,38 @@
+<div request-loading is-loading="requestLoading1"></div>
+<div class="col-sm-12 textLeft padding0" style="margin:20px 0;">
+  <div class="col-sm-12 textLeft padding0">
+    <span class="col-sm-2"><h5>Name</h5> </span>
+    <span class="col-sm-6 paddingTop10">{{hostel.name}}</span>
+  </div>
+  <div class="col-sm-12 textLeft padding0">
+    <span class="col-sm-2"><h5>Owner</h5> </span>
+    <span class="col-sm-6 paddingTop10">{{hostel.owner}}</span>
+  </div>
+  <div class="col-sm-12 textLeft padding0">
+    <span class="col-sm-2"><h5>Number of rooms</h5> </span>
+    <span class="col-sm-6 paddingTop10">{{hostel.rooms}}</span>
+  </div>
+  <div class="col-sm-12 textLeft padding0">
+    <span class="col-sm-2"><h5>Student occupancy</h5> </span>
+    <span class="col-sm-6 paddingTop10">{{hostel.student_occupancy}}</span>
+  </div>
+  <div class="col-sm-12 textLeft padding0">
+    <span class="col-sm-2"><h5>Average fee</h5> </span>
+    <span class="col-sm-6 paddingTop10">{{hostel.average_fee}}</span>
+  </div>
+  <div class="col-sm-12 textLeft padding0" ng-if="hostel.is_service_tax">
+    <span class="col-sm-2"><h5>Service tax</h5> </span>
+    <span class="col-sm-6 paddingTop10">{{hostel.service_tax}}</span>
+  </div>
+  
+  <div class="col-sm-12 textLeft padding0">
+    <div class="col-sm-12 paddingTop10" style="">
+      <span ng-show="!exam.create_verification">
+	<a href="#/hostels/{{hostel.id}}/edit" class="btn btn-primary" ng-disabled="requestLoading">Edit</a>
+      </span>
+      <button class="btn btn-default" ng-click="goBack();">
+	  Back
+	</button>
+    </div>
+  </div>
+</div>

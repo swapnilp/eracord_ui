@@ -155,6 +155,10 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
       $scope.topMenu = "meetings";
       $scope.dropDowmMenu = 'non_academic';
     }
+    if($location.path().search("^/hostels") >= 0){
+      $scope.topMenu = "hostels";
+      $scope.dropDowmMenu = 'non_academic';
+    }
     if($location.path() === "/"){
       $scope.topMenu = "home";
       $scope.dropDowmMenu = null;

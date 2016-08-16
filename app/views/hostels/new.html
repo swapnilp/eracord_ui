@@ -1,34 +1,35 @@
 <div class="col-md-12 col-md-offset-0">
-  <h2>New Hostel</h2>
+  <h2>{{isNew ? 'New' : 'Edit'}} Hostel</h2>
 </div>
-<div class="col-md-6 col-md-offset-0">
+
+<div request-loading is-loading="requestLoading"></div>
+<div class="col-md-6 col-md-offset-0" ng-show="!requestLoading">
   <div ng-show="vm.hostel.error" class="alert alert-danger">{{vm.hostel.error}}</div>
-  <form name="form" ng-submit="registerDivision()" role="form" autocomplete="off">
-    
+  <form name="form" ng-submit="registerHostel()" role="form" autocomplete="off">
     <div class="form-group" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
       <label for="name">Name</label>
       <input type="text" name="name" id="name" class="form-control" ng-model="vm.hostel.name" placeholder="Must be present" required />
       <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">Name is required</span>
-    </div>
-    <div class="form-group" ng-class="{ 'has-error': form.rooms.$dirty && form.rooms.$error.required }">
-      <label for="name">Number of Rooms</label>
-      <input type="text" name="rooms" id="rooms" class="form-control" ng-model="vm.hostel.rooms" ng-maxlength="10" placeholder="must be present " onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0"/>
-      <span ng-show="form.rooms.$dirty && form.name.$error.required" class="help-block">Number of is required</span>
     </div>
     <div class="form-group" ng-class="{ 'has-error': form.owner.$dirty && form.owner.$error.required }">
       <label for="name">Owner</label>
       <input type="text" name="owner" id="owner" class="form-control" ng-model="vm.hostel.owner" placeholder="Must be present" required />
       <span ng-show="form.owner.$dirty && form.owner.$error.required" class="help-block">Owner is required</span>
     </div>
-    <div class="form-group" ng-class="{ 'has-error': form.average_fee.$dirty && form.average_fee.$error.required }">
-      <label for="name">Average Fee</label>
-      <input type="text" name="average_fee" id="average_fee" class="form-control" ng-model="vm.hostel.average_fee" ng-maxlength="10" placeholder="must be present " onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0"/>
-      <span ng-show="form.average_fee.$dirty && form.average_fee.$error.required" class="help-block">Average fee is required</span>
+    <div class="form-group" ng-class="{ 'has-error': form.rooms.$dirty && form.rooms.$error.required }">
+      <label for="name">Number of Rooms</label>
+      <input type="text" name="rooms" id="rooms" class="form-control" ng-model="vm.hostel.rooms" ng-maxlength="10" placeholder="must be present " onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0"/>
+      <span ng-show="form.rooms.$dirty && form.name.$error.required" class="help-block">Number of is required</span>
     </div>
     <div class="form-group">
       <label for="destription">Student Occupancy</label>
       <input type="text" name="student_occupancy" id="student_occupancy" class="form-control" ng-model="vm.hostel.student_occupancy" ng-maxlength="10" placeholder="must be present " onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0"/>
       <span ng-show="form.student_occupancy.$dirty && form.student_occupancy.$error.required" class="help-block">Student occupancy is required</span>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': form.average_fee.$dirty && form.average_fee.$error.required }">
+      <label for="name">Average Fee</label>
+      <input type="text" name="average_fee" id="average_fee" class="form-control" ng-model="vm.hostel.average_fee" ng-maxlength="10" placeholder="must be present " onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0"/>
+      <span ng-show="form.average_fee.$dirty && form.average_fee.$error.required" class="help-block">Average fee is required</span>
     </div>
     <div class="form-group" style="display:flex;">
       <label for="enable_service_tax" style="margin-top:7px;">Has service tax <span class="textRed"> *</span></label>
