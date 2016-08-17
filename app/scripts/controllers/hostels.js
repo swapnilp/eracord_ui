@@ -43,6 +43,7 @@ angular.module('eracordUiApp.controller')
     if($location.path() === "/hostels/" + $routeParams.id) {
       var hostels = Restangular.all("hostels");
       $scope.hostel = {};
+      $scope.hostelRooms = [];
       var getHostel = function(){
 	hostels.customGET($routeParams.id).then(function(data) {
 	  if(data.success) {
@@ -53,7 +54,59 @@ angular.module('eracordUiApp.controller')
 	  }
 	});
       };
+
+      var getHostelRooms = function(){
+	hostels.one($routeParams.id).customGET("hostel_rooms").then(function(data) {
+	  if(data.success) {
+	    //$scope.hostel = data.hostel;
+	    $scope.hostelRooms = data.rooms;
+	  }else {
+	    $location.path("/hostels").replace();
+	  }
+	});
+      };
+
+      $scope.newRoom = function(size) {
+	var modalInstance = $uibModal.open({
+	  animation: true,
+	  templateUrl: 'views/hostels/new_room.html',
+	  controller: 'NewHostelRoomCtrl',
+	  size: size,
+	  resolve: {
+	    hostel_id: function(){
+	      return $routeParams.id;
+	    }
+	  }
+	});
+
+	modalInstance.result.then(null, function () {
+	  getHostelRooms();
+	});
+      };
+
+      $scope.editRoom = function(room_id) {
+	var modalInstance = $uibModal.open({
+	  animation: true,
+	  templateUrl: 'views/hostels/new_room.html',
+	  controller: 'EditHostelRoomCtrl',
+	  size: 'lg',
+	  resolve: {
+	    hostel_id: function(){
+	      return $routeParams.id;
+	    },
+	    room_id: function(){
+	      return room_id;
+	    }
+	  }
+	});
+
+	modalInstance.result.then(null, function () {
+	  getHostelRooms();
+	});
+      };
+      
       getHostel();
+      getHostelRooms();
     }
 
     if($location.path() === "/hostels/" + $routeParams.id + "/edit") {
@@ -85,10 +138,60 @@ angular.module('eracordUiApp.controller')
 	  }
 	});
       };
-      
       getHostel();
     }
-    
-    
-  }]);
+  }])
+
+
+  .controller('NewHostelRoomCtrl',['$scope', '$uibModalInstance', 'Restangular', 'hostel_id',
+    function ($scope, $uibModalInstance, Restangular, hostel_id) {
+      var hostels = Restangular.all("hostels");
+      $scope.vm = {};
+      $scope.vm.hostel_room = {};
+      $scope.cancel = function () {
+	$uibModalInstance.dismiss('cancel');
+      };
+
+      $scope.registerHostelRoom = function() {
+	hostels.one(hostel_id).customPOST({hostel_room: $scope.vm.hostel_room}, "hostel_rooms").then(function(data){
+	  if(data.success) {
+	    $scope.cancel();
+	  }
+	});
+      };
+      
+    }])
+
+  .controller('EditHostelRoomCtrl',['$scope', '$uibModalInstance', 'Restangular', 'hostel_id', 'room_id',
+    function ($scope, $uibModalInstance, Restangular, hostel_id, room_id) {
+      var hostels = Restangular.all("hostels");
+      $scope.vm = {};
+      $scope.vm.hostel_room = {};
+      $scope.requestLoading = true;
+      $scope.cancel = function () {
+	$uibModalInstance.dismiss('cancel');
+      };
+      
+      var getRoom = function(){
+	hostels.one(hostel_id).customGET("hostel_rooms/"+room_id+"/edit").then(function(data) {
+	  if(data.success) {
+	    $scope.vm.hostel_room = data.room;
+	  }
+	  $scope.requestLoading = false;
+	});
+      };
+      
+      $scope.registerHostelRoom = function() {
+	hostels.one(hostel_id).customPUT({hostel_room: $scope.vm.hostel_room}, "hostel_rooms/"+room_id).then(function(data){
+	  if(data.success) {
+	    $scope.cancel();
+	  }
+	});
+      };
+      
+      getRoom();
+      
+    }]);;
+
+
 

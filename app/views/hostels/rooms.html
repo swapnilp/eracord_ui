@@ -1,0 +1,20 @@
+<div class="col-sm-4 hostelRoom">
+  <div class="highlight col-sm-12 padding0">
+    <div class="col-sm-12 padding0">
+      <span>
+	<strong>{{room.name}}</strong>
+      </span>
+      <span>
+	has  <strong>{{room.beds}} </strong> total beds
+      </span>
+      <a class="pointer" ng-click="editHostelRoom();">edit</a>
+    </div>
+    <div class="col-sm-12 padding0">
+      <span ng-repeat="n in [] | range:room.beds">
+	<span class="bed" ng-class="{'allocatedBed':  n < 5}">
+	  <i class="fa fa-bed fa-2x"></i>
+	</span>
+      </span>
+    </div>
+  </div>
+</div>

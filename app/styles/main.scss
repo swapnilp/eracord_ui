@@ -692,3 +692,18 @@ input[type="radio"]{
 .navbar-default .navbar-nav > li > a.userIcon:hover, .navbar-default .navbar-nav > li > a.userIcon:focus {
     color: #777;
 }
+
+.hostelRoom  {
+  padding: 30px 15px;
+
+  .highlight {
+    min-height: 180px;
+  }
+  span.bed {
+    color:#999;
+  }
+
+  span.bed.allocatedBed {
+    color:#000;
+  }
+}
