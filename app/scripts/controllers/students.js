@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('StudentsCtrl',['$rootScope', '$scope', 'Flash', 'lazyFlash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$cookieStore', function ($rootScope, $scope, Flash, lazyFlash, $location, Auth, Restangular, $routeParams, Upload, $window, $cookieStore) {
+  .controller('StudentsCtrl',['$rootScope', '$scope', 'Flash', 'lazyFlash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$cookieStore', '$uibModal', function ($rootScope, $scope, Flash, lazyFlash, $location, Auth, Restangular, $routeParams, Upload, $window, $cookieStore, $uibModal) {
     
     if(!Auth.isAuthenticated()){
       $location.path('/user/sign_in').replace();
@@ -140,17 +140,19 @@ angular.module('eracordUiApp.controller')
       $scope.selectedTimeZone = 'month';
       $scope.selectedGraphType = 'all';
       
+      var loadStudent = function() {
+	student.get().then(function(data){
+	  if(data.success) {
+	    $scope.student = data.body.student_show;
+	    $scope.has_show_pay_info = data.has_show_pay_info;
+	    $scope.has_pay_fee = data.has_pay_fee;
+	    $scope.remaining_fee = data.remaining_fee
+	    $scope.classes = data.classes;
+	    $scope.classes = data.classes;
+	  }
+	});
+      };
       
-      student.get().then(function(data){
-	if(data.success) {
-	  $scope.student = data.body.student_show;
-	  $scope.has_show_pay_info = data.has_show_pay_info;
-	  $scope.has_pay_fee = data.has_pay_fee;
-	  $scope.remaining_fee = data.remaining_fee
-	  $scope.classes = data.classes;
-	}
-      });
-
       var loadGraph = function() {
 	student.customGET("get_graph_data", {time_zone: $scope.selectedTimeZone, type: $scope.selectedGraphType}).then(function(data){
 	  if(data.success){
@@ -176,7 +178,26 @@ angular.module('eracordUiApp.controller')
 	  $scope.student.enable_sms = data.enable_sms; 
 	});
       };
+
+      $scope.allotmentHostel = function(size) {
+	var modalInstance = $uibModal.open({
+	  animation: true,
+	  templateUrl: 'views/students/hostel_allotment.html',
+	  controller: 'StudentHostelAllotmentCtrl',
+	  size: size,
+	  resolve: {
+	    student_id: function(){
+	      return $routeParams.student_id;
+	    }
+	  }
+	});
+
+	modalInstance.result.then(null, function () {
+	  loadStudent();//getHostelRooms();
+	});
+      };
       
+      loadStudent();
       loadGraph();
       
       $scope.onClick = function (points, evt) {
@@ -416,8 +437,44 @@ angular.module('eracordUiApp.controller')
       getPayInfo();
     };
     //end payment info
-    
-    
-  }]);
+  }])
+
+  .controller('StudentHostelAllotmentCtrl',['$scope', '$uibModalInstance', 'Restangular', 'student_id',
+    function ($scope, $uibModalInstance, Restangular, student_id) {
+      var student = Restangular.one("students", student_id);
+      var hostels = Restangular.all("hostels");
+      $scope.vm = {};
+      $scope.vm.student = {};
+      $scope.cancel = function () {
+	$uibModalInstance.dismiss('cancel');
+      };
+
+      var getHostels = function() {
+	hostels.customGET("").then(function(data) {
+	  if(data.success) {
+	    $scope.hostels = data.hostels;
+	  }
+	});
+      };
+
+      $scope.registerStudentHostel = function() {
+	student.customPOST({student: $scope.vm.student}, "allocate_hostel").then(function(data) {
+	  if(data.success) {
+	    $scope.cancel();
+	  }
+	});
+      };
+
+      $scope.deallocateHostel = function() {
+	student.customDELETE("deallocate_hostel").then(function(data) {
+	  if(data.success) {
+	    $scope.cancel();
+	  }
+	});
+      }
+
+      getHostels();
+      
+    }]);
 
 

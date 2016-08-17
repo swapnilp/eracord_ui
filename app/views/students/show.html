@@ -46,6 +46,19 @@
 	  {{remaining_fee}}
 	</span>
       </div>
+      <div class="col-sm-12" >
+	<h5>
+	  <span class="col-sm-2">Hostel :</span> 
+	</h5>
+	<span ng-if="student.hostel_id">
+	  <strong>{{student.hostel}}</strong>
+	  <a class="pointer" ng-click="allotmentHostel();">Change hostel</a>
+	</span>
+	<span ng-if="!student.hostel_id">
+	  <a class="pointer" ng-click="allotmentHostel();">Allocate hostel</a>
+	</span>
+
+      </div>
       <div class="col-sm-12">
 	<h5>
 	  <span class="col-sm-2">Download Progress Report :</span> 
