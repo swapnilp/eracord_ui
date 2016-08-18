@@ -44,6 +44,7 @@ angular.module('eracordUiApp.controller')
       var hostels = Restangular.all("hostels");
       $scope.hostel = {};
       $scope.hostelRooms = [];
+      $scope.filterStudent = "";
       var getHostel = function(){
 	hostels.customGET($routeParams.id).then(function(data) {
 	  if(data.success) {

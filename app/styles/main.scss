@@ -710,4 +710,8 @@ input[type="radio"]{
   span.bed.allocatedBed {
     color:#000;
   }
+  
+  span.bed.allocatedBed.isHighlight {
+    color:red;
+  }
 }
