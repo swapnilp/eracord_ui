@@ -695,6 +695,10 @@ input[type="radio"]{
 
 .hostelRoom  {
   padding: 30px 15px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  cursor: default;
 
   .highlight {
     min-height: 180px;

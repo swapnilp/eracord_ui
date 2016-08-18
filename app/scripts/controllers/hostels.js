@@ -60,6 +60,7 @@ angular.module('eracordUiApp.controller')
 	  if(data.success) {
 	    //$scope.hostel = data.hostel;
 	    $scope.hostelRooms = data.rooms;
+	    $scope.unallocatedStudents = data.unallocated_students;
 	  }else {
 	    $location.path("/hostels").replace();
 	  }
@@ -96,6 +97,30 @@ angular.module('eracordUiApp.controller')
 	    },
 	    room_id: function(){
 	      return room_id;
+	    }
+	  }
+	});
+
+	modalInstance.result.then(null, function () {
+	  getHostelRooms();
+	});
+      };
+
+      $scope.allocateStudent = function(room_id, room_name) {
+	var modalInstance = $uibModal.open({
+	  animation: true,
+	  templateUrl: 'views/hostels/allocate_room.html',
+	  controller: 'AllocateHostelRoomCtrl',
+	  size: 'lg',
+	  resolve: {
+	    hostel_id: function(){
+	      return $routeParams.id;
+	    },
+	    room_id: function(){
+	      return room_id;
+	    },
+	    room_name: function(){
+	      return room_name;
 	    }
 	  }
 	});
@@ -188,10 +213,43 @@ angular.module('eracordUiApp.controller')
 	  }
 	});
       };
-      
       getRoom();
+    }])
+
+  .controller('AllocateHostelRoomCtrl',['$scope', '$uibModalInstance', 'Restangular', 'hostel_id', 'room_id', 'room_name',
+    function ($scope, $uibModalInstance, Restangular, hostel_id, room_id, room_name) {
+      var hostel = Restangular.one("hostels", hostel_id);
+      //$scope.requestLoading = true;
+      $scope.students = [];
+      $scope.studentsList = [];
+      $scope.roomName = room_name;
       
-    }]);;
+      $scope.cancel = function () {
+	$uibModalInstance.dismiss('cancel');
+      };
+
+      var getStudents = function() {
+	hostel.customGET("get_unallocated_students").then(function(data) {
+	  if(data.success) {
+	    $scope.students = data.students;
+	  } else {
+	    $scope.cancel();
+	  }
+	});
+      };
+
+      $scope.allocateStudentRoom = function() {
+	console.log($scope.studentsList);
+	hostel.one("hostel_rooms", room_id).customGET("allocate_students", {student_ids: $scope.studentsList.toString()}).then(function(data) {
+	  if(data.success) {
+	    $scope.cancel();
+	  } else {
+	  }
+	});
+      };
+
+      getStudents();
+    }]);
 
 
 

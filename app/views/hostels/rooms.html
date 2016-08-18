@@ -7,11 +7,13 @@
       <span>
 	has  <strong>{{room.beds}} </strong> total beds
       </span>
-      <a class="pointer" ng-click="editHostelRoom();">edit</a>
+      <a class="pointer" ng-click="allocateRoomStudent();" ng-if="unallocatedStudents > 0">Allocate Student</a>
+      &nbsp;&nbsp;
+      <a class="pointer" ng-click="editHostelRoom();">Edit</a>
     </div>
     <div class="col-sm-12 padding0">
       <span ng-repeat="n in [] | range:room.beds">
-	<span class="bed" ng-class="{'allocatedBed':  n < 5}">
+	<span class="bed" ng-class="{'allocatedBed':  n <= room.students_count}">
 	  <i class="fa fa-bed fa-2x"></i>
 	</span>
       </span>
