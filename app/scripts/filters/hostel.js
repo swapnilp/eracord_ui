@@ -13,7 +13,7 @@ app.filter('hostelStudents', function() {
 
     // Using the angular.forEach method, go through the array of data and perform the operation of figuring out if the language is statically or dynamically typed.
     angular.forEach(input, function(student) {
-      if (patt.test(student.name) && regex !== '') {
+      if ((patt.test(student.name) || patt.test(student.mobile)) && regex !== '') {
 	student.isHighlight = true;
       }else {
 	student.isHighlight = false;

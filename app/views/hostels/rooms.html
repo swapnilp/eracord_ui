@@ -13,7 +13,7 @@
     </div>
     <div class="col-sm-12 padding0">
       <span ng-repeat="n in [] | range:room.beds">
-	<span class="bed allocatedBed" ng-class="{'isHighlight': students[n].isHighlight}" ng-if="students[n]" uib-tooltip="{{students[n].name}}">
+	<span class="bed allocatedBed" ng-class="{'isHighlight': students[n].isHighlight}" ng-if="students[n]" uib-tooltip="{{students[n].name }} - {{students[n].mobile}}">
 	  <i class="fa fa-bed fa-2x"></i>
 	</span>
 	<span class="bed" ng-if="!room.students[n]">
