@@ -18,7 +18,6 @@ app.directive('hostelRooms', function(Restangular) {
     },
     templateUrl: 'views/hostels/rooms.html',
     controller: ['$scope', 'Restangular', 'Flash', function(scope, Restangular, Flash){
-
       scope.editHostelRoom = function(){
 	scope.editRoom({roomId: scope.room.id});
       };
