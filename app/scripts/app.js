@@ -39,6 +39,7 @@ angular
     'ngFileUpload',
     'checklist-model',
     'angularUtils.directives.dirPagination',
+    'angular-confirm',
     'eracordUiApp.controller',
     'eracordUiApp.directives'
   ])

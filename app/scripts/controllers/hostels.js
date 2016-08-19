@@ -135,6 +135,16 @@ angular.module('eracordUiApp.controller')
 	  getHostelRooms();
 	});
       };
+
+      $scope.deallocateStudentFromHostel = function(student_id) {
+	var student = Restangular.one("students", student_id);
+	student.customDELETE("deallocate_hostel").then(function(data) {
+	  if(data.success) {
+	    $scope.hostel.occupied_students = $scope.hostel.occupied_students - 1;
+	    getHostelRooms();
+	  }
+	});
+      };
       
       getHostel();
       getHostelRooms();
@@ -243,7 +253,7 @@ angular.module('eracordUiApp.controller')
 	  }
 	});
       };
-
+      
       $scope.allocateStudentRoom = function() {
 	console.log($scope.studentsList);
 	hostel.one("hostel_rooms", room_id).customGET("allocate_students", {student_ids: $scope.studentsList.toString()}).then(function(data) {

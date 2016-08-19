@@ -23,6 +23,13 @@
       <strong>{{hostel.occupied_students}}</strong> out of <strong>{{hostel.student_occupancy}}</strong>
     </span>
   </div>
+
+  <div class="col-sm-12 textLeft padding0" ng-if="unallocatedStudents > 0">
+    <span class="col-sm-2"><h5>UnOccupied Students</h5> </span>
+    <span class="col-sm-6 paddingTop10">
+      <strong>{{unallocatedStudents}}</strong>
+    </span>
+  </div>
   <div class="col-sm-12 textLeft padding0">
     <span class="col-sm-2"><h5>Average fee</h5> </span>
     <span class="col-sm-6 paddingTop10">{{hostel.average_fee}}</span>
@@ -49,7 +56,7 @@
     <input ng-model="filterStudent" placeholder="Search Student"/>&nbsp;<span class="padding5 pointer" ng-click="filterStudent = ''"><i class="fa fa-refresh"></i></span>
   </div>
   <div ng-repeat="room in hostelRooms">
-    <div hostel-rooms hostel-id="{{hostel.id}}" room="room" edit-room="editRoom(roomId)" allocate-student="allocateStudent(roomId, roomName);" unallocated-students="{{unallocatedStudents}}" filter-student="filterStudent">
+    <div hostel-rooms hostel-id="{{hostel.id}}" room="room" edit-room="editRoom(roomId)" allocate-student="allocateStudent(roomId, roomName);" unallocated-students="{{unallocatedStudents}}" filter-student="filterStudent" deallocate-student-from-hostel="deallocateStudentFromHostel(student_id);">
     </div>
   </div>
 </div>

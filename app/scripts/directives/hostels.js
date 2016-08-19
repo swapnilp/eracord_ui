@@ -15,10 +15,11 @@ app.directive('hostelRooms', function(Restangular) {
       editRoom: '&',
       allocateStudent: '&',
       unallocatedStudents: '@',
-      filterStudent: '='
+      filterStudent: '=',
+      deallocateStudentFromHostel: '&'
     },
     templateUrl: 'views/hostels/rooms.html',
-    controller: ['$scope', 'Restangular', 'Flash', 'hostelStudentsFilter', function(scope, Restangular, Flash, hostelStudentsFilter){
+    controller: ['$scope', 'Restangular', 'Flash', 'hostelStudentsFilter', '$confirm', function(scope, Restangular, Flash, hostelStudentsFilter, $confirm){
       scope.showRoom = true;
       scope.students = scope.room.students;
       scope.editHostelRoom = function(){
@@ -27,6 +28,13 @@ app.directive('hostelRooms', function(Restangular) {
 
       scope.allocateRoomStudent = function() {
 	scope.allocateStudent({roomId: scope.room.id, roomName: scope.room.name});
+      };
+
+      scope.removeStudentFromHostel = function(student_id) {
+	$confirm({text: 'Are you sure you want to remove from hostel?'})
+          .then(function() {
+            scope.deallocateStudentFromHostel({student_id: student_id});
+          });
       };
 
       scope.$watch('filterStudent', function() {
