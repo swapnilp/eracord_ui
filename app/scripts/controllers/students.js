@@ -472,8 +472,23 @@ angular.module('eracordUiApp.controller')
 	  }
 	});
       }
-
       getHostels();
+    }])
+  
+  .controller('StudentInfoCtrl',['$scope', '$uibModalInstance', 'Restangular', 'student_id',
+    function ($scope, $uibModalInstance, Restangular, student_id) {
+      var student = Restangular.one("students", student_id);
+      
+      $scope.cancel = function () {
+	$uibModalInstance.dismiss('cancel');
+      };
+
+      var getStudent = function() {
+	student.customGET("").then(function(data) {
+	});
+      };
+      
+      getStudent();
       
     }]);
 

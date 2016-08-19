@@ -88,7 +88,7 @@
       <tbody>
 	<tr dir-paginate-start="row in students | toArray:false | itemsPerPage: 10" total-items="totalStudents" current-page="pagination.current" pagination-id="student" ng-click="openInfo(row);" class="pointer">
 	  <td class="text-center"><span ng-if="showRollNumber">{{ row.roll_number || '-'}} </span><span ng-if="!showRollNumber">{{ $index+1 + ((pagination.current - 1) * 10)}}</span></td>
-	  <td><span>{{row.name}}</span></td>
+	  <td><span>{{row.name}} <span ng-if="row.has_hostel"><i class="fa fa-bed"></i></span></span></td>
 	  <td>{{row.batch}}</td>
 	  <td>{{row.standard}}</td>
 	  <td><i class="fa fa-{{row.enable_sms ? 'check' : 'times'}}" ng-class="{'green': row.enable_sms, 'red': !row.enable_sms}"></i></td>
