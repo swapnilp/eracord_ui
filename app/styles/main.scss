@@ -707,11 +707,15 @@ input[type="radio"]{
     color:#999;
   }
 
-  span.bed.allocatedBed {
+  span.bed.allocatedBed a{
     color:#000;
   }
   
-  span.bed.allocatedBed.isHighlight {
+  span.bed.allocatedBed.isHighlight a{
     color: fuchsia;
   }
+}
+
+.padding5 {
+  padding: 5px;
 }

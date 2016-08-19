@@ -1,7 +1,13 @@
 <div request-loading is-loading="requestLoading1"></div>
 <div class="col-sm-12 textLeft padding0" style="margin:20px 0;">
   <div class="col-sm-12 textLeft padding0">
-    <div class="col-sm-12"><h3>{{hostel.name}} Hostel</h3></div>
+    <div class="col-sm-12">
+      <h3>{{hostel.name}} Hostel
+	<small ng-if="newHostelShow">
+	  <a href="#/hostels/new">Add new Hostel</a>
+	</small>
+      </h3>
+    </div>
   </div>
   <div class="col-sm-12 textLeft padding0">
     <span class="col-sm-2"><h5>Owner</h5> </span>
@@ -40,7 +46,7 @@
     </div>
   </div>
   <div class="col-sm-12 mTop20">
-    <input ng-model="filterStudent" placeholder="Search Student"/>
+    <input ng-model="filterStudent" placeholder="Search Student"/>&nbsp;<span class="padding5 pointer" ng-click="filterStudent = ''"><i class="fa fa-refresh"></i></span>
   </div>
   <div ng-repeat="room in hostelRooms">
     <div hostel-rooms hostel-id="{{hostel.id}}" room="room" edit-room="editRoom(roomId)" allocate-student="allocateStudent(roomId, roomName);" unallocated-students="{{unallocatedStudents}}" filter-student="filterStudent">

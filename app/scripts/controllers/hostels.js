@@ -21,6 +21,9 @@ angular.module('eracordUiApp.controller')
       
       hostels.customGET("").then(function(data){
 	$scope.hostels = data.hostels;
+	if ($scope.hostels.length === 1) {
+	  $location.path("/hostels/"+$scope.hostels[0].id).search('add_hostel', true).replace();
+	}
       });
     }
 
@@ -40,11 +43,13 @@ angular.module('eracordUiApp.controller')
       };
     }
     
-    if($location.path() === "/hostels/" + $routeParams.id) {
+    if($location.path().search("^/hostels/"+$routeParams.id) >= 0 ) {
       var hostels = Restangular.all("hostels");
       $scope.hostel = {};
       $scope.hostelRooms = [];
       $scope.filterStudent = "";
+      $scope.newHostelShow= $routeParams.add_hostel;
+      console.log($routeParams.add_hostel);
       var getHostel = function(){
 	hostels.customGET($routeParams.id).then(function(data) {
 	  if(data.success) {
