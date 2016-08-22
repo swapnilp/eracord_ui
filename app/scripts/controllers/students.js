@@ -474,19 +474,36 @@ angular.module('eracordUiApp.controller')
       }
       getHostels();
     }])
-  
+
   .controller('StudentInfoCtrl',['$scope', '$uibModalInstance', 'Restangular', 'student_id',
     function ($scope, $uibModalInstance, Restangular, student_id) {
       var student = Restangular.one("students", student_id);
-      
+      $scope.requestLoading = true;
+      $scope.absenteeRequestLoading = true;
+      $scope.absentee = [];
       $scope.cancel = function () {
 	$uibModalInstance.dismiss('cancel');
       };
-
+      
       var getStudent = function() {
-	student.customGET("").then(function(data) {
+	student.get().then(function(data) {
+	  if(data.success) {
+	    $scope.student = data.body.student_show;
+	    getAbsentee();
+	  }
+	  $scope.requestLoading = false;
 	});
       };
+
+      var getAbsentee = function() {
+	student.customGET("get_absentee").then(function(data) {
+	  if(data.success) {
+	    $scope.absentee = data.absentee;
+	  }
+	  $scope.absenteeRequestLoading = false;
+	  //$scope.requestLoading = false;
+	});
+      }
       
       getStudent();
       

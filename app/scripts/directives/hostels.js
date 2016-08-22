@@ -19,7 +19,7 @@ app.directive('hostelRooms', function(Restangular) {
       deallocateStudentFromHostel: '&'
     },
     templateUrl: 'views/hostels/rooms.html',
-    controller: ['$scope', 'Restangular', 'Flash', 'hostelStudentsFilter', '$confirm', function(scope, Restangular, Flash, hostelStudentsFilter, $confirm){
+    controller: ['$scope', 'Restangular', 'Flash', 'hostelStudentsFilter', '$confirm', '$uibModal', function(scope, Restangular, Flash, hostelStudentsFilter, $confirm, $uibModal){
       scope.showRoom = true;
       scope.students = scope.room.students;
       scope.editHostelRoom = function(){
@@ -36,6 +36,20 @@ app.directive('hostelRooms', function(Restangular) {
             scope.deallocateStudentFromHostel({student_id: student_id});
           });
       };
+
+      scope.showStudentsInfo = function(student_id) {
+	var modalInstance = $uibModal.open({
+	  animation: true,
+	  templateUrl: 'views/students/student_info.html',
+	  controller: 'StudentInfoCtrl',
+	  size: 'lg',
+	  resolve: {
+	    student_id: function(){
+	      return student_id;
+	    }
+	  }
+	});
+      }
 
       scope.$watch('filterStudent', function() {
 	if(scope.filterStudent !== '' && scope.students.length === 0 ) {
