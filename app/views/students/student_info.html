@@ -20,8 +20,8 @@
     </div>
     <div request-loading is-loading="absenteeRequestLoading"></div>
     <div class="col-sm-12" ng-show="!absenteeRequestLoading">
-      <div class="alert alert-warning" ng-if="absentee.length > 0">
-	<h5>Last Month Absentee</h5>
+      <div class="alert alert-warning mTop20" ng-if="absentee.length > 0">
+	<h5 class="mTop0">Last Month Absentee</h5>
 	<div ng-repeat="absenty in absentee">
 	  {{$index+1}} <strong>{{absenty.date}}</strong>  {{absenty.class_name}}
 	</div>
