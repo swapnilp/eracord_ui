@@ -706,9 +706,13 @@ input[type="radio"]{
   span.bed {
     color:#999;
   }
-
+  
   span.bed.allocatedBed a{
     color:#000;
+  }
+  
+  span.bed.allocatedBed.dues a{
+    color:#a02828;
   }
   
   span.bed.allocatedBed.isHighlight a{
@@ -726,4 +730,8 @@ input[type="radio"]{
 
 .mTop0 {
   margin-top: 0;
+}
+
+.flex {
+  display: flex;
 }
