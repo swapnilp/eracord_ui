@@ -27,9 +27,14 @@
       <span ng-show="form.student_occupancy.$dirty && form.student_occupancy.$error.required" class="help-block">Student occupancy is required</span>
     </div>
     <div class="form-group" ng-class="{ 'has-error': form.average_fee.$dirty && form.average_fee.$error.required }">
-      <label for="name">Average Fee</label>
-      <input type="text" name="average_fee" id="average_fee" class="form-control" ng-model="vm.hostel.average_fee" ng-maxlength="10" placeholder="must be present " onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0"/>
+      <label for="name">Average Monthly Fee</label>
+      <input type="text" name="average_fee" id="average_fee" class="form-control" ng-model="vm.hostel.average_fee" ng-maxlength="10" placeholder="must be present " onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0" required />
       <span ng-show="form.average_fee.$dirty && form.average_fee.$error.required" class="help-block">Average fee is required</span>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': form.months.$error.required || !vm.hostel.months}">
+      <label for="name">Fee collection periods in months</label>
+      <input type="number" name="months" id="months" class="form-control" ng-model="vm.hostel.months" ng-maxlength="2" placeholder="must be present" ng-max="12" required/>
+      <span ng-show="!vm.hostel.months" class="help-block textRED">Max length is 12 months</span>
     </div>
     <div class="form-group" style="display:flex;">
       <label for="enable_service_tax" style="margin-top:7px;">Has service tax <span class="textRed"> *</span></label>
