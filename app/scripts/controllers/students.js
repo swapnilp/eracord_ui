@@ -455,7 +455,7 @@ angular.module('eracordUiApp.controller')
 	    $scope.clr_student = data.student;
 	  } else {
 	    lazyFlash.warning("Please pay Dues");
-	    $location.path("/students/"+$routeParams.student_id+"/show").replace();
+	    $location.path("/students/"+$routeParams.student_id+"/payment_info").replace();
 	  }
 	  $scope.requestLoading = false;
 	});
