@@ -31,6 +31,7 @@ angular.module('eracordUiApp.controller')
       $scope.classes = [];
       $scope.isFilter = true;
       $scope.newStudent = true;
+      $scope.filter = {}
       
       $scope.pagination = {
         current: 1
@@ -44,9 +45,14 @@ angular.module('eracordUiApp.controller')
 	});
       };
 
+      $scope.resetFilter = function() {
+	$scope.filter = {};
+	getResultsPage(1);
+      };
+
       var getResultsPage = function(pageNumber) {
 	$scope.requestLoading = true;
-	students.getList({page: pageNumber, search: $scope.filterStudent, class_id: $scope.filterClass}).then(function(data){
+	students.getList({page: pageNumber, filter: $scope.filter}).then(function(data){
 	  $scope.students = data[0];
 	  $scope.totalStudents = data[1] || 0;
 	  if(data[2]){

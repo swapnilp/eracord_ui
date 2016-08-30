@@ -23,6 +23,7 @@ app.directive('classStudents', function(Restangular) {
       scope.isRollNumber = true;
       scope.requestLoading = true;
       scope.studentLoaded = false;
+      scope.filter = {};
 
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       scope.token = $cookieStore.get('currentUser').token;
@@ -31,6 +32,11 @@ app.directive('classStudents', function(Restangular) {
       
       scope.pagination = {
         current: $routeParams.page || 1
+      };
+
+      scope.resetFilter = function() {
+	scope.filter = {};
+	getResultsPage(1);
       };
 
       scope.openInfo = function(row) {
@@ -111,7 +117,7 @@ app.directive('classStudents', function(Restangular) {
 
       var getResultsPage = function(pageNumber) {
 	scope.requestLoading = true;
-	jkci_classes.customGET("students", {page: pageNumber, search: scope.filterStudent}).then(function(data){
+	jkci_classes.customGET("students", {page: pageNumber, filter: scope.filter}).then(function(data){
 	  scope.students = data.students;
 	  scope.totalStudents = data.count;
 	  scope.has_show_pay_info = data.has_show_pay_info;

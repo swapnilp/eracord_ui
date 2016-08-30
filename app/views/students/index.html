@@ -48,13 +48,19 @@
   </span>
   <div class="examFilterDiv col-sm-12 padding0"> 
     <div class="pull-left marginB15">
-      <input type="text" ng-model="filterStudent" dl-key-code="pageChanged(1);" code="13" placeholder="Enter name or mobile" value="{{filterStudent}}" style="width:230px;display:inline;" class="form-control">
+      <input type="text" ng-model="filter.name" dl-key-code="pageChanged(1);" code="13" placeholder="Enter name or mobile" value="{{filter.name}}" style="width:230px;display:inline;" class="form-control">
       <span  ng-if="isFilter">
-	<select class="form-control ng-touched" ng-model="filterClass" ng-options="cls.id as cls.name for cls in classes" style="width:200px;display:inline;">
+	<select class="form-control ng-touched" ng-model="filter.class" ng-options="cls.id as cls.name for cls in classes" style="width:200px;display:inline;">
 	  <option value="">All</option>
 	</select>
+	<span  ng-if="isFilter">
+	  <select class="form-control ng-touched" ng-model="filter.hostel" ng-options="values for values in ['Hostelied', 'Non Hostelied']" style="width:200px;display:inline;">
+	  <option value="">All</option>
+	</select>
+	</span>
       </span>
       <button class="btn btn-primary" ng-click="pageChanged(1);" uib-tooltip="Filter"><i class="fa fa-filter"></i></button>
+      <button class="btn btn-primary" ng-click="resetFilter();" uib-tooltip="Reset Filter"><i class="fa fa-refresh"></i></button>
     </div>		  
   </div>
   <div class="col-sm-12 padding0" style="padding-bottom:20px;" is-role-visible='["accountant", "accountant_clark"]' email="currentUser.email" ng-if="newStudent">
