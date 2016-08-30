@@ -17,7 +17,7 @@
       <span class="col-sm-6 paddingTop10">{{batch}}</span>
     </div>
     <div class="col-sm-12 textLeft">
-      <span class="col-sm-2"><h5>Total Remaining Fee</h5> </span>
+      <span class="col-sm-2" ng-class="{'bg-danger': remaining_fee > 0}"><h5>Total Remaining Fee</h5> </span>
       <span class="col-sm-6 paddingTop10">{{remaining_fee}}</span>
     </div>
     <div class="col-sm-12 textLeft">
@@ -29,7 +29,7 @@
       <a class="btn btn-primary" href="#/students/{{id}}/pay_fee" ng-if="remaining_fee > 0">Pay Fee</a>
       <button class="btn btn-primary" ng-if="remaining_fee === 0" disabled>Pay Fee</button>
       <a class="btn btn-primary" href="#/students/{{id}}/pay_other_fee">Pay Other Fee</a>
-      <button class="btn btn-primary" ng-disabled="advances < 0" ng-click="get_clearance();">Clearance</button>
+      <button class="btn btn-primary" ng-disabled="advances < 0 || remaining_fee > 0" ng-click="get_clearance();">Clearance</button>
       <button class="btn btn-default" ng-click="goBack();">Back</button>
     </div>
   </div>
