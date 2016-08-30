@@ -427,6 +427,8 @@ angular.module('eracordUiApp.controller')
 	    $scope.totalFee = data.total_fee;
 	    $scope.id = data.id;
 	    $scope.remaining_fee = data.remaining_fee;
+	    $scope.advances = data.advances;
+	    $scope.hostel_payments = data.hostel_transations;
 	  } else {
 	    lazyFlash.warning(data.message);
 	    $location.path("/students/"+$scope.student_id+"/show").replace();
@@ -434,9 +436,31 @@ angular.module('eracordUiApp.controller')
 	});
       };
       
+
+      $scope.get_clearance = function() {
+	$location.path("/students/"+$scope.student_id+"/get_clearance").replace();
+      };
       getPayInfo();
     };
     //end payment info
+
+    if($location.path() === "/students/" + $routeParams.student_id + "/get_clearance"){
+      var student = Restangular.one("students", $routeParams.student_id);
+      $scope.clr_student = {}
+      
+      var loadStudent = function() {
+	student.get().then(function(data){
+	  if(data.success) {
+	    $scope.clr_student = data.body.student_show;
+	  }
+	  console.log($scope.clr_student);
+	});
+      };
+
+      
+      loadStudent();
+    };
+    // end of get clearence
   }])
 
   .controller('StudentHostelAllotmentCtrl',['$scope', '$uibModalInstance', 'Restangular', 'student_id',

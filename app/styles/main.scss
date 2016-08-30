@@ -262,6 +262,26 @@ input, select, option {
   padding: 0;
 }
 
+.marginT10 {
+  margin-top: 10px;
+}
+
+.marginT20 {
+  margin-top: 20px;
+}
+
+.marginT30 {
+  margin-top: 30px;
+}
+
+.marginB10 {
+  margin-bottom: 10px;
+}
+
+.marginT0 {
+  margin-top: 0px;
+}
+
 .margin0 {
   margin: 0;
 }
@@ -734,4 +754,49 @@ input[type="radio"]{
 
 .flex {
   display: flex;
+}
+
+.clearanceCertificate {
+   max-width: 720px;
+
+  .prnBox {
+    border: 1px solid;
+    padding: 10px 30px;
+  }  
+
+  .certificateTitle {
+    text-align: center;
+    border: 3px solid;
+    margin-top: 20px;
+    width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+
+    
+    div {
+      padding:10px;
+      border: 1px solid;
+      font-size: 16px;
+      font-weight: 600;
+    }
+  }
+
+  .prinNote {
+    font-weight: bold;
+  }
+
+  .department {
+    border: 2px solid;
+    padding: 10px;
+    
+    .cashier {
+      border-top: 1px solid;
+    }
+  }
+
+  .receiver {
+    border: 1px solid;
+    padding: 10px;  	    
+  }
 }
