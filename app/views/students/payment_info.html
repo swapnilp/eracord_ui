@@ -43,7 +43,7 @@
   </div>
   <div class="alert alert-danger col-sm-12" ng-if="advances < 0">
     <span>
-      Total dues are are   {{advances * -1}}
+      Total dues are are   {{(advances * -1 ) + remaining_fee}}
     </span>
   </div>
   <div request-loading is-loading="requestLoading"></div>
