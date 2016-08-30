@@ -447,13 +447,17 @@ angular.module('eracordUiApp.controller')
     if($location.path() === "/students/" + $routeParams.student_id + "/get_clearance"){
       var student = Restangular.one("students", $routeParams.student_id);
       $scope.clr_student = {}
+      $scope.requestLoading = true;
       
       var loadStudent = function() {
-	student.get().then(function(data){
+	student.customGET("get_clearance").then(function(data){
 	  if(data.success) {
-	    $scope.clr_student = data.body.student_show;
+	    $scope.clr_student = data.student;
+	  } else {
+	    lazyFlash.warning("Please pay Dues");
+	    $location.path("/students/"+$routeParams.student_id+"/show").replace();
 	  }
-	  console.log($scope.clr_student);
+	  $scope.requestLoading = false;
 	});
       };
 

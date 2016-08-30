@@ -1,11 +1,12 @@
-<div class="col-md-12 text-center">
+<div request-loading is-loading="requestLoading"></div>
+<div class="col-md-12 text-center" ng-show="!requestLoading">
   <button class="btn btn-primary" ng-print print-element-id="printRecipt"><i class="fa fa-print"></i> Print</button>
 </div>
-<div id="printRecipt" class="col-md-12 marginT30">
+<div id="printRecipt" class="col-md-12 marginT30" ng-show="!requestLoading">
   <div class="clearanceCertificate center-block" >
     <div class="prnBox">
       <div>
-	<span>class <strong> {{clr_student.class_names}}</strong></span>
+	<span>class <strong> {{clr_student.class_name}}</strong></span>
 	<span class="pull-right">PRN ................</span>
       </div>
     </div>
@@ -25,7 +26,7 @@
     <div>
       <p>Name of Student  <strong> {{clr_student.name}}</strong></p>
       <p>Roll number    <strong></strong></p>
-      <p>class & Year  <strong> {{clr_student.class_names}}</strong></p>
+      <p>class & Year  <strong> {{clr_student.class_name}}</strong></p>
     </div>
 
     <div class="department col-sm-12">
