@@ -1,6 +1,7 @@
 <div request-loading is-loading="requestLoading"></div>
 <div class="col-md-12 text-center" ng-show="!requestLoading">
   <button class="btn btn-primary" ng-print print-element-id="printRecipt"><i class="fa fa-print"></i> Print</button>
+  <a class="btn btn-default" ng-click="goBack();"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
 </div>
 <div id="printRecipt" class="col-md-12 marginT30" ng-show="!requestLoading">
   <div class="clearanceCertificate center-block" >

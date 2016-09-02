@@ -444,7 +444,7 @@ angular.module('eracordUiApp.controller')
       
 
       $scope.get_clearance = function() {
-	$location.path("/students/"+$scope.student_id+"/get_clearance").replace();
+	$location.path("/students/"+$scope.student_id+"/get_clearance");
       };
       getPayInfo();
     };

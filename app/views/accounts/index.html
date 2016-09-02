@@ -40,7 +40,7 @@
 	<br/><br/>
 	Expected collection  amount are - <strong>{{expectedAmount}}</strong> &nbsp;&nbsp;&nbsp;
 	<br/><br/>
-	Paid students are - <strong>{{totalStudents}}</strong> &nbsp;&nbsp;&nbsp;
+	Total students are - <strong>{{totalStudents}}</strong> &nbsp;&nbsp;&nbsp;
       </div>
     </div>
   </div>
@@ -53,6 +53,7 @@
 	  <th st-sort="firstName">Class</th>
 	  <th st-sort="firstName">Fee</th>
 	  <th st-sort="firstName">Remaining Fee</th>
+	  <th st-sort="firstName">Dues</th>
 	  <th st-sort="firstName">Other</th>
 	  <th st-sort="firstName">Total Transactions</th>
 	</tr>
@@ -85,6 +86,9 @@
 	  </td>
 	  <td>
 	    {{row.remaining_fee}}
+	  </td>
+	  <td>
+	    {{row.advances < 0 ? row.advances * -1 : 0}}
 	  </td>
 	  <td>
 	    {{row.other_fee}}
