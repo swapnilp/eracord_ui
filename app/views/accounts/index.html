@@ -88,7 +88,7 @@
 	    {{row.remaining_fee}}
 	  </td>
 	  <td>
-	    {{row.advances < 0 ? (row.advances * -1) : 0}}
+	    {{row.advances < 0 ? row.advances : 0}}
 	  </td>
 	  <td>
 	    {{row.other_fee}}
