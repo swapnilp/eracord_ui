@@ -22,7 +22,7 @@
     </div>
     <div class="col-sm-12 textLeft">
       <span class="col-sm-2" ng-class="{'bg-danger': advances < 0}"><h5>{{advances < 0 ? 'Dues' : 'Advances'}}</h5> </span>
-      <span class="col-sm-6 paddingTop10">{{advances < 0 ? advances * -1 : advances }}</span>
+      <span class="col-sm-6 paddingTop10">{{advances < 0 ? (advances * -1) : advances }}</span>
     </div>
     <div class="col-sm-12 textLeft header">
       
