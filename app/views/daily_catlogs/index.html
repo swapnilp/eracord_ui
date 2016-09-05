@@ -21,7 +21,7 @@
 	</tr>
       </thead>
       <tbody>
-	<tr dir-paginate="row in dtps | itemsPerPage: 10" total-items="totalDtps" current-page="pagination.current" pagination-id="dtpsPagi">
+	<tr dir-paginate="row in dtps | itemsPerPage: 10" total-items="totalDtps" current-page="pagination.current">
 	  <td>{{row.subject}}</td>
 	  <td>{{row.date}}</td>
 	  <td>{{row.chapter}}</td>
@@ -36,6 +36,6 @@
       </tbody>
     </table>
   </figure>
-  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)" pagination-id="dtpsPagi"></dir-pagination-controls>
+  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
 </div>
 
