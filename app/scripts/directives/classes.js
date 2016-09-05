@@ -266,7 +266,6 @@ app.directive('classDailyTeaches', function(Restangular) {
       };
       
       scope.pageChanged = function(newPage) {
-	console.log('asdasd');
         getDailyResultsPage(newPage);
       };
       
@@ -275,7 +274,7 @@ app.directive('classDailyTeaches', function(Restangular) {
 	  scope.updateUrl({tabName: 'daily_teaches'});
 	}
 	
-	if(scope.classDtpTab === 'true' && dailyCatlogLoaded ==== false) {
+	if(scope.classDtpTab === 'true' && dailyCatlogLoaded === false) {
 	  dailyCatlogLoaded = true;
 	  getDailyResultsPage($routeParams.page || 1);
 	}
