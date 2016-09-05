@@ -252,7 +252,7 @@ app.directive('classDailyTeaches', function(Restangular) {
       scope.requestLoading = true;
 
       
-      var getResultsPage = function(pageNumber) {
+      var getDailyResultsPage = function(pageNumber) {
 	scope.requestLoading = true;
 	jkci_classes.customGET('daily_teachs', {page: pageNumber}).then(function(data){
 	  if(data.success) {
@@ -266,18 +266,16 @@ app.directive('classDailyTeaches', function(Restangular) {
       };
       
       scope.pageChanged = function(newPage) {
-        getResultsPage(newPage);
+        getDailyResultsPage(newPage);
       };
       
       scope.$watch('classDtpTab', function(){
 	if(scope.classDtpTab === 'true') {
 	  scope.updateUrl({tabName: 'daily_teaches'});
-	  
 	}
 	
 	if(scope.classDtpTab === 'true' && dailyCatlogLoaded === false) {
-
-	  getResultsPage($routeParams.page || 1);
+	  getDailyResultsPage($routeParams.page || 1);
 	  dailyCatlogLoaded = true;
 	}
 	
