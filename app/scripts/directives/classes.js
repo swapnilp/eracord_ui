@@ -266,6 +266,7 @@ app.directive('classDailyTeaches', function(Restangular) {
       };
       
       scope.pageChanged = function(newPage) {
+	console.log('asdasd');
         getDailyResultsPage(newPage);
       };
       
@@ -274,7 +275,7 @@ app.directive('classDailyTeaches', function(Restangular) {
 	  scope.updateUrl({tabName: 'daily_teaches'});
 	}
 	
-	if(scope.classDtpTab === 'true' && dailyCatlogLoaded === false) {
+	if(scope.classDtpTab === 'true' && dailyCatlogLoaded ==== false) {
 	  dailyCatlogLoaded = true;
 	  getDailyResultsPage($routeParams.page || 1);
 	}
@@ -295,7 +296,7 @@ app.directive('classNotifications', function(Restangular) {
     },
     templateUrl: 'views/classes/notifications.html',
     controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', '$route', function(scope, Restangular, Flash, $location, $window, $routeParams, $route){
-      var dailyCatlogLoaded = false;
+      //var dailyCatlogLoaded = false;
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       
       scope.totalNotifications = 0;
@@ -318,16 +319,16 @@ app.directive('classNotifications', function(Restangular) {
       };
       
       
-      scope.$watch('classNotificationTab', function(){
-	if(scope.classNotificationTab === 'true') {
-	  scope.updateUrl({tabName: 'notifications'});
-	}
-	
-	if(scope.classNotificationTab === 'true' && dailyCatlogLoaded === false){
-	  getResultsPage($routeParams.page || 1);
-	  scope.dailyCatlogLoaded = true;
-	}
-      });
+      //scope.$watch('classNotificationTab', function(){
+      //	if(scope.classNotificationTab === 'true') {
+      //	  scope.updateUrl({tabName: 'notifications'});
+      //	}
+      //	
+      //	if(scope.classNotificationTab === 'true' && dailyCatlogLoaded === false){
+      //	  getResultsPage($routeParams.page || 1);
+      //	  scope.dailyCatlogLoaded = true;
+      //	}
+      //});
     }]
   }
 });
