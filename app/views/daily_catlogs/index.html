@@ -1,7 +1,7 @@
 <div style="margin:20px 0;">
   <div request-loading is-loading="requestLoading"></div>
   <div class="alert alert-warning col-sm-12">
-    <span ng-if="dtps > 0" ng-show="!requestLoading">
+    <span ng-if="dtps.length > 0" ng-show="!requestLoading">
       Total Students are - {{dtps.length}}
     </span>
     <span ng-if="dtps.length === 0">
