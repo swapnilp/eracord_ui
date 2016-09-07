@@ -483,9 +483,11 @@ angular.module('eracordUiApp.controller')
       };
 
       var getHostels = function() {
-	hostels.customGET("").then(function(data) {
+	hostels.customGET("" , {student_id: student_id}).then(function(data) {
 	  if(data.success) {
 	    $scope.hostels = data.hostels;
+	    $scope.vm.student.hostel_id  = data.student_hostel;
+	    $scope.dispalyDeallocate = data.student_hostel;
 	  }
 	});
       };
