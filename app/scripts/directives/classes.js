@@ -146,6 +146,7 @@ app.directive('classStudents', function(Restangular) {
       
       scope.$watch('classStudentsTab', function(){
 	if(scope.classStudentsTab === 'true') {
+	  scope.resetFilter();
 	  scope.updateUrl({tabName: 'students'});
 	}
 	if(scope.classStudentsTab === 'true' && scope.studentLoaded == false){
@@ -220,6 +221,7 @@ app.directive('classExams', function(Restangular) {
       scope.$watch('classExamsTab', function(){
 	if(scope.classExamsTab === 'true') {
 	  scope.updateUrl({tabName: 'exams'});
+	  scope.resetFilter();
 	}
 	if(scope.classExamsTab === 'true' && scope.examsLoaded == false){
 	  getResultsPage($routeParams.page || 1, true);

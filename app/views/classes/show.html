@@ -38,12 +38,12 @@
       </span>
     </div>
     <div class="col-sm-12 textLeft" is-role-visible='["create_daily_teach"]' email="currentUser.email">
-      <span class="col-sm-2"><h5>Download Student List</h5></span>
+      <span class="col-sm-2"><h5>Download Student Info</h5></span>
       <span class="col-sm-6 paddingTop10">
-	<a class="btn btn-primary btn-sm" target="_blank" href="{{hostUrl}}/class/{{class.id}}/download_class_student_list.pdf?&authorization_token={{token}}">Download Student List</a>
+	<a class="btn btn-primary btn-sm" target="_blank" href="{{hostUrl}}/class/{{class.id}}/download_class_student_list.pdf?&authorization_token={{token}}">Download Student Info</a>
       </span>
     </div>
-    <div class="col-sm-12 textLeft" is-role-visible='["create_daily_teach"]' email="currentUser.email">
+    <div class="col-sm-12 textLeft hide" is-role-visible='["create_daily_teach"]' email="currentUser.email">
       <span class="col-sm-2"><h5>Division Students</h5></span>
       <span class="col-sm-6 paddingTop10">
 	<a class="btn btn-primary btn-sm" href="{{hostUrl}}/class/{{class.id}}/sub_class_students_report.pdf?&authorization_token={{token}}" target="_blank">Get Division Students</a>
