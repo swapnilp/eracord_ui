@@ -306,7 +306,6 @@ angular.module('eracordUiApp.controller')
 	    $scope.uploadMeaasgeClass = "alert-danger";
 	    $scope.uploadingMessage = resp.data.message;
 	  }
-          console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
         }, function (resp) {
 	  $scope.requestLoading = false;
 	  $scope.uploadingFile = false;

@@ -207,7 +207,6 @@ angular.module('eracordUiApp.controller')
       loadGraph();
       
       $scope.onClick = function (points, evt) {
-	console.log(points, evt);
       };
     };
     // end of show path

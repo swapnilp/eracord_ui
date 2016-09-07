@@ -49,7 +49,6 @@ angular.module('eracordUiApp.controller')
       $scope.hostelRooms = [];
       $scope.filterStudent = "";
       $scope.newHostelShow= $routeParams.add_hostel;
-      console.log($routeParams.add_hostel);
       var getHostel = function(){
 	hostels.customGET($routeParams.id).then(function(data) {
 	  if(data.success) {
@@ -255,7 +254,6 @@ angular.module('eracordUiApp.controller')
       };
       
       $scope.allocateStudentRoom = function() {
-	console.log($scope.studentsList);
 	hostel.one("hostel_rooms", room_id).customGET("allocate_students", {student_ids: $scope.studentsList.toString()}).then(function(data) {
 	  if(data.success) {
 	    $scope.cancel();

@@ -36,7 +36,7 @@ app.factory('authWrapper', function($rootScope, $q, $window, Flash, lazyFlash, $
 	  Flash.create('warning', 'Record not found.', 0, {}, true);
 	  break;
 	case 500:
-	  console.log('asdasdasdad');
+	  break;
       }
       return $q.reject(rejection);
     }

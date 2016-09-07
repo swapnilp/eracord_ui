@@ -101,7 +101,6 @@ app.directive('classStudents', function(Restangular) {
 	    scope.uploadMeaasgeClass = "alert-danger";
 	    scope.uploadingMessage = resp.data.message;
 	  }
-          console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
         }, function (resp) {
 	  scope.requestLoading = false;
 	  scope.uploadMeaasgeClass = "alert-danger";
@@ -442,7 +441,6 @@ app.directive('classTimeTable', function(Restangular) {
 	});
 	
 	modalInstance.result.then(function (selectedTeacher) {
-	  //console.log(selectedItem)
 	  scope.vm.teacher_name = selectedTeacher.name;
 	  scope.vm.teacher_id = selectedTeacher.id;
 	}, null);
