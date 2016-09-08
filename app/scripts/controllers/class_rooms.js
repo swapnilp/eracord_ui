@@ -43,7 +43,6 @@ angular.module('eracordUiApp.controller')
       };
 
       $scope.getClassRooms = function(){
-	console.log($scope.vm);
 	class_rooms.customGET("get_class_rooms", {filter: $scope.vm}).then(function(data){
 	  $scope.vm.selectedWeekDay = data.cwday + "";
 	  $scope.vm.class_time = data.time;
