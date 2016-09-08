@@ -8,14 +8,20 @@ app.directive('dlKeyCode', function() {
     restrict: 'AE',
     transclude: true,
     link: function($scope, $element, $attrs) {
+      var isBlank = true;
       $element.bind("keyup", function(event) {
+	console.log(event.keyCode);
         var keyCode = event.which || event.keyCode;
         if (keyCode == $attrs.code || $attrs.value == "") {
           $scope.$apply(function() {
-            $scope.$eval($attrs.dlKeyCode, {$event: event});
+	    if(!isBlank) { 
+              $scope.$eval($attrs.dlKeyCode, {$event: event});
+	    }
           });
-	  
         }
+	if($attrs.value !== "") {
+	  isBlank = false;
+	}
       });
     }
   };
