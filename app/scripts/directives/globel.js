@@ -17,6 +17,9 @@ app.directive('dlKeyCode', function() {
 	    if(!isBlank) { 
               $scope.$eval($attrs.dlKeyCode, {$event: event});
 	    }
+	    if($attrs.value == "") {
+	      isBlank = true;
+	    }
           });
         }
 	if($attrs.value !== "") {
