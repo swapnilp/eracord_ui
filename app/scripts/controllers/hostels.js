@@ -187,7 +187,8 @@ angular.module('eracordUiApp.controller')
     function ($scope, $uibModalInstance, Restangular, hostel_id) {
       var hostels = Restangular.all("hostels");
       $scope.vm = {};
-      $scope.vm.hostel_room = {};
+      $scope.vm.hostel_room = {extra_charges: 0, beds: 1};
+      
       $scope.cancel = function () {
 	$uibModalInstance.dismiss('cancel');
       };
