@@ -12,9 +12,9 @@
 	<input type="text" name="name" id="name" class="form-control" ng-model="vm.hostel_room.name" placeholder="Must be present" required />
 	<span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">Name is required</span>
       </div>
-      <div class="form-group" ng-class="{ 'has-error': form.rooms.$dirty && form.rooms.$error.required }">
+      <div class="form-group" ng-class="{ 'has-error': (form.rooms.$dirty && form.rooms.$error.required) || bedsError }">
 	<label for="name">Number of beds <span class="textRed"> *</span></label>
-	<input type="text" name="beds" id="beds" class="form-control" ng-model="vm.hostel_room.beds" placeholder="must be present " onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0" required/>
+	<input type="text" name="beds" id="beds" class="form-control" ng-model="vm.hostel_room.beds" placeholder="must be present " onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0"  ng-blur="onChangeBeds();" required/>
 	<span ng-show="form.beds.$dirty && form.beds.$error.required" class="help-block">Number of is required</span>
       </div>
       <div class="form-group" ng-class="{ 'has-error': form.average_fee.$dirty && form.average_fee.$error.required }">

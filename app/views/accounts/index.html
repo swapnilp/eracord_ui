@@ -19,8 +19,8 @@
       </select>
     </div>
     <div class="col-sm-2 paddingLeft0">
-      <label for="is_remaining">Is Remaining</label>
-      <select class="form-control ng-touched" ng-model="filterAmount.is_remaining" ng-options="values for values in ['Remaining']">
+      <label for="exam_type">Account Type</label>
+      <select class="form-control ng-touched" ng-model="filterAmount.account_type" ng-options="values for values in ['Cash', 'Cheque']">
 	<option value="">All</option>
       </select>
     </div>
@@ -98,7 +98,7 @@
 	  </td>
 	</tr>
 	<tr ng-if="row.expanded" dir-paginate-end="" class="noBorder alert alert-warning">
-	  <td colspan="5">
+	  <td colspan="7">
 	    <table st-table="rowCollection" class="table col-sm-12">
 	      <tr>
 		<th st-sort="firstName">Date</th>

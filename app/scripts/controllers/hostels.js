@@ -212,16 +212,28 @@ angular.module('eracordUiApp.controller')
       $scope.cancel = function () {
 	$uibModalInstance.dismiss('cancel');
       };
+      $scope.students_count = 0;
+      $scope.bedsError = false;
       
       var getRoom = function(){
 	hostels.one(hostel_id).customGET("hostel_rooms/"+room_id+"/edit").then(function(data) {
 	  if(data.success) {
 	    $scope.vm.hostel_room = data.room;
+	    $scope.students_count = data.students_count;
 	  }
 	  $scope.requestLoading = false;
 	});
       };
-      
+
+      $scope.onChangeBeds = function() {
+	if($scope.vm.hostel_room.beds < $scope.students_count) {
+	  $scope.vm.hostel_room.beds = $scope.students_count;
+	  $scope.bedsError = true;
+	}else{
+	  $scope.bedsError = false;
+	}
+      }
+
       $scope.registerHostelRoom = function() {
 	hostels.one(hostel_id).customPUT({hostel_room: $scope.vm.hostel_room}, "hostel_rooms/"+room_id).then(function(data){
 	  if(data.success) {

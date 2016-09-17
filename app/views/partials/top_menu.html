@@ -31,7 +31,7 @@
 	    <ul class="dropdown-menu">
 	      <li ng-class="{active: topMenu==='exams'}"><a ng-href="#/exams">Exams</a></li>
 	      <li ng-class="{active: topMenu==='students'}"><a ng-href="#/students">Students</a></li>
-	      <li ng-class="{active: topMenu==='teachers'}"><a ng-href="#/teachers">Teachers</a></li>
+	      <li is-role-visible='["manage_organiser"]' email="currentUser.email" ng-class="{active: topMenu==='teachers'}"><a ng-href="#/teachers">Teachers</a></li>
 	      <li ng-class="{active: topMenu==='off_classes'}"><a ng-href="#/off_classes">Off Classes</a></li>
 	    </ul>
 	  </li>
@@ -47,10 +47,12 @@
 	      <li ng-class="{active: topMenu==='sms'}">
 		<a ng-href="#/sms">SMS</a>
 	      </li>
-	      <li ng-class="{active: topMenu==='meetings'}">
+	      <li is-role-visible='["manage_organiser"]' email="currentUser.email" ng-class="{active: topMenu==='meetings'}">
 		<a ng-href="#/meetings">Meetings</a>
 	      </li>
-	      <li ng-class="{active: topMenu==='hostels'}"><a ng-href="#/hostels">Hostels</a></li>
+	      <li is-role-visible='["manage_organiser"]' email="currentUser.email" ng-class="{active: topMenu==='hostels'}">
+		<a ng-href="#/hostels">Hostels</a>
+	      </li>
 	    </ul>
 	  </li>
           <li ng-class="{active: topMenu==='contacts'}"><a ng-href="#/contact">Contact</a></li>
