@@ -58,7 +58,7 @@
       </thead>
       <tbody>
 	<tr dir-paginate-start="row in payments | itemsPerPage: 10" total-items="totalPayments" current-page="pagination.current" ng-click="openInfo(row);" class="pointer">
-	  <td>{{row.name}}
+	  <td>{{row.name}} <span ng-if="row.hostel_id">&nbsp;<i class="fa fa-bed"></i></span>
 	    <span ng-if="row.assign_to !== ''">
 	      <div class="btn-group" dropdown>
 		<a  id="simple-dropdown" uib-dropdown-toggle >
