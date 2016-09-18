@@ -53,9 +53,7 @@
 	  <th st-sort="firstName">Class</th>
 	  <th st-sort="firstName">Fee</th>
 	  <th st-sort="firstName">Remaining Fee</th>
-	  <th st-sort="firstName">Dues</th>
-	  <th st-sort="firstName">Other</th>
-	  <th st-sort="firstName">Total Transactions</th>
+	  <th st-sort="firstName">Advances</th>
 	</tr>
       </thead>
       <tbody>
@@ -90,16 +88,11 @@
 	  <td>
 	    {{row.advances}}
 	  </td>
-	  <td>
-	    {{row.other_fee}}
-	  </td>
-	  <td>
-	    {{row.total_transactions}}
-	  </td>
 	</tr>
 	<tr ng-if="row.expanded" dir-paginate-end="" class="noBorder alert alert-warning">
 	  <td colspan="7">
-	    <table st-table="rowCollection" class="table col-sm-12">
+	    <div request-loading is-loading="row.is_loading"></div>
+	    <table st-table="rowCollection" class="table col-sm-12" ng-show="!row.is_loading">
 	      <tr>
 		<th st-sort="firstName">Date</th>
 		<th st-sort="firstName">Amount</th>

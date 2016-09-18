@@ -70,9 +70,20 @@ angular.module('eracordUiApp.controller')
 	  _.map($scope.payments, function(payment){ payment.expanded = false;})
 	}else{
 	  _.map($scope.payments, function(payment){ payment.expanded = false;})
+	  get_transactions(row);
 	  row.expanded = true;
 	}
       };
+
+      var get_transactions = function(row) {
+	row.is_loading = true;
+	payment_fee.customGET(row.jkci_class_id+"/get_transactions/"+row.student_id).then(function(data) {
+	  if(data.success) {
+	    row.transactions = data.transactions;
+	  }
+	  row.is_loading = false;
+	});
+      }
 
       $scope.hideInfo = function(row) {
 	row.expanded = false;
