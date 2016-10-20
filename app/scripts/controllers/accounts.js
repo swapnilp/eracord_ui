@@ -23,6 +23,7 @@ angular.module('eracordUiApp.controller')
     
     $scope.batches = [];
     $scope.filterAmount = {};
+    $scope.isRemained = false;
     var payment_fee = Restangular.all("student_fees");
     var loadAmountFilters  = function() {
       payment_fee.customGET("filter_data").then(function(data) {
@@ -36,6 +37,7 @@ angular.module('eracordUiApp.controller')
     
     $scope.resetFilter = function() {
       $scope.filterAmount = {};
+      $scope.isRemained = false;
       $scope.filterAmount.batch = _.findWhere($scope.batches, {is_active: true}).id;
       loadPayments(1);
     };
@@ -44,7 +46,7 @@ angular.module('eracordUiApp.controller')
       $scope.showFilter = true;
       $scope.payments = [];
       $scope.pagination = {current: 1};
-       $scope.token = $cookieStore.get('currentUser').token;
+      $scope.token = $cookieStore.get('currentUser').token;
       
       var loadPayments = function(pageNumber) {
 	$scope.requestLoading = true;
@@ -92,6 +94,14 @@ angular.module('eracordUiApp.controller')
       $scope.pageChanged = function(newPage, checkFilter) {
 	loadPayments(newPage);
       };
+
+      $scope.getRemainingStudents = function() {
+	$scope.isRemained = true;
+	$scope.filterAmount.remaining = true;
+	loadPayments(0);
+      };
+	
+
       
       loadAmountFilters();
       loadPayments(1);
