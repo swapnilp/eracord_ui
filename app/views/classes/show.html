@@ -1,94 +1,107 @@
 <div class="container" style="margin:20px 0;">
-  <div class="col-sm-12 textLeft">
-    <div class="col-sm-12 textLeft">
-      <h2>Class</h2>
-    </div>
-    <div class="col-sm-12 textLeft">
-      <span class="col-sm-2"><h5>Class Name</h5></span>
-      <span class="col-sm-6 paddingTop10">{{class.class_name}}</span>
-    </div>
-    <div class="col-sm-12 textLeft">
-      <span class="col-sm-2"><h5>Subjects</h5></span>
-      <span class="col-sm-6 paddingTop10">{{class.subjects}}</span>
-    </div>
-    <div class="col-sm-12 textLeft">
-      <span class="col-sm-2"><h5>Daily Absenty Sms Enable</h5></span>
-      <toggle-switch class="left mLeft10"
-		     ng-model="class.enable_class_sms"
-		     knob-label="ENABLE" ng-click="toggleClassAbsentSms()">
-      </toggle-switch>
-    </div>
-    <div class="col-sm-12 textLeft">
-      <span class="col-sm-2"><h5>Exam Sms Enable</h5></span>
-      <toggle-switch class="left mLeft10"
-		     ng-model="class.enable_exam_sms"
-		     knob-label="ENABLE" ng-click="toggleExamClassSms()">
-      </toggle-switch>
-    </div>
-    <div class="col-sm-12 textLeft">
-      <span class="col-sm-2"><h5>Download Syllabus</h5></span>
-      <span class="col-sm-6 paddingTop10">
-	<a class="btn btn-primary btn-sm" target="_blank" href="{{hostUrl}}/class/{{class.id}}/download_class_syllabus.pdf?&authorization_token={{token}}">Download Syllabus</a> &nbsp;&nbsp;&nbsp;
-      </span>
-    </div>
-    <div class="col-sm-12 textLeft">
-      <span class="col-sm-2"><h5>Download Catlog</h5></span>
-      <span class="col-sm-6 paddingTop10">
-	<a class="btn btn-primary btn-sm" target="_blank" href="{{hostUrl}}/class/{{class.id}}/download_class_catlog.pdf?&authorization_token={{token}}">Download Catlog</a>
-      </span>
-    </div>
-    <div class="col-sm-12 textLeft" is-role-visible='["create_daily_teach"]' email="currentUser.email">
-      <span class="col-sm-2"><h5>Download Student Info</h5></span>
-      <span class="col-sm-6 paddingTop10">
-	<a class="btn btn-primary btn-sm" target="_blank" href="{{hostUrl}}/class/{{class.id}}/download_class_student_list.pdf?&authorization_token={{token}}">Download Student Info</a>
-      </span>
-    </div>
-    <div class="col-sm-12 textLeft hide" is-role-visible='["create_daily_teach"]' email="currentUser.email">
-      <span class="col-sm-2"><h5>Division Students</h5></span>
-      <span class="col-sm-6 paddingTop10">
-	<a class="btn btn-primary btn-sm" href="{{hostUrl}}/class/{{class.id}}/sub_class_students_report.pdf?&authorization_token={{token}}" target="_blank">Get Division Students</a>
-      </span>
-    </div>
-    <div class="col-sm-12 textLeft" is-role-visible='["create_daily_teach"]' email="currentUser.email">
-      <span class="col-sm-2"><h5>Get report</h5></span>
-      <span class="col-sm-6 paddingTop10">
-	<a class="btn btn-primary btn-sm" href="{{hostUrl}}/sub_organisation/{{class.organisation_id}}/class/{{class.id}}/get_report.pdf?&authorization_token={{token}}" target="_blank">Get Report</a>
-      </span>
-    </div>
+  <div request-loading is-loading="requestLoading"></div>
+  <div class="col-sm-12 textLeft" ng-show="!requestLoading">
+    <a class="btn btn-default" href="#/admin_desk" uib-tooltip="Back"><i class="fa fa-arrow-circle-left"></i></a>
 
-    <div class="col-sm-12 textLeft paddingTop10">
-      <div class="col-sm-12 textLeft paddingTop10">
-	<span ng-if="class.self_organisation && class.is_current_active">
-	  <span is-role-visible='["create_daily_teach"]' email="currentUser.email">
-	    <a class="btn btn-primary" ng-disabled="!class.is_student_verified" uib-tooltip="Please Verify Students" ng-if="!class.is_student_verified"> Create Daily Catlog</a>
-	    <a href="#/classes/{{class.id}}/daily_catlogs/new" class="btn btn-primary" ng-if="class.is_student_verified"> Create Daily Catlog</a>
+    <uib-accordion class="classAccordion">
+      <div uib-accordion-group class="panel-default" is-open="status.isCustomHeaderOpen">
+	<uib-accordion-heading>
+          <h2>{{class.class_name}}&nbsp;&nbsp<small ng-class="{'red': !class.enable_class_sms}">Daily Absenty Sms</small> &nbsp;/ &nbsp;<small ng-class="{'red': !class.enable_exam_sms}">Exam Sms</small></h2>
+	  <div class="textLeft">
+	    <span class="paddingTop10">{{class.subjects}}</span>
+	    
+	  </div>
+	   <p class="text-center">
+	     <i class="glyphicon" ng-class="{'glyphicon-chevron-up': status.isCustomHeaderOpen, 'glyphicon-chevron-down': !status.isCustomHeaderOpen}"></i>
+	   </p>
+	</uib-accordion-heading>
+	<!-- asdasda -->
+	
+	<div class="col-sm-12 textLeft">
+	  <span class="col-sm-2"><h5>Daily Absenty Sms Enable</h5></span>
+	  <toggle-switch class="left mLeft10"
+			 ng-model="class.enable_class_sms"
+			 knob-label="ENABLE" ng-click="toggleClassAbsentSms()">
+	  </toggle-switch>
+	</div>
+	<div class="col-sm-12 textLeft">
+	  <span class="col-sm-2"><h5>Exam Sms Enable</h5></span>
+	  <toggle-switch class="left mLeft10"
+			 ng-model="class.enable_exam_sms"
+			 knob-label="ENABLE" ng-click="toggleExamClassSms()">
+	  </toggle-switch>
+	</div>
+	<div class="col-sm-12 textLeft">
+	  <span class="col-sm-2"><h5>Download Syllabus</h5></span>
+	  <span class="col-sm-6 paddingTop10">
+	    <a class="btn btn-primary btn-sm" target="_blank" href="{{hostUrl}}/class/{{class.id}}/download_class_syllabus.pdf?&authorization_token={{token}}">Download Syllabus</a> &nbsp;&nbsp;&nbsp;
 	  </span>
-	  <span is-role-visible='["create_exam"]' email="currentUser.email">
-	    <a class="btn btn-primary" ng-disabled="!class.is_student_verified" uib-tooltip="Please Verify Students" ng-if="!class.is_student_verified">Create Exam</a>
-	    <div class="btn-group" uib-dropdown ng-if="class.is_student_verified">
-	      <a href="#/classes/{{class.id}}/exams/new" class="btn btn-primary">Create Exam</a>
-	      <button type="button" class="btn btn-primary" uib-dropdown-toggle>
-		<span class="caret"></span>
-		<span class="sr-only">Split button!</span>
-	      </button>
-	      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
-		<li role="menuitem">
-		  <a href="#/classes/{{class.id}}/exams/new">Create Exam</a>
-		</li>
-		<li role="menuitem">
-		  <a href="#/classes/{{class.id}}/exams/new?&isGroup=true">Create Group Exam</a>
-		</li>
-	      </ul>
-	    </div>
-
+	</div>
+	<div class="col-sm-12 textLeft">
+	  <span class="col-sm-2"><h5>Download Catlog</h5></span>
+	  <span class="col-sm-6 paddingTop10">
+	    <a class="btn btn-primary btn-sm" target="_blank" href="{{hostUrl}}/class/{{class.id}}/download_class_catlog.pdf?&authorization_token={{token}}">Download Catlog</a>
 	  </span>
-	  <span is-role-visible='["manage_class_student"]' email="currentUser.email" ng-if="has_manage_class">
-	    <a href="#/classes/{{class.id}}/manage_class" class="btn btn-primary">Manage Class</a>
+	</div>
+	<div class="col-sm-12 textLeft" is-role-visible='["create_daily_teach"]' email="currentUser.email">
+	  <span class="col-sm-2"><h5>Download Student Info</h5></span>
+	  <span class="col-sm-6 paddingTop10">
+	    <a class="btn btn-primary btn-sm" target="_blank" href="{{hostUrl}}/class/{{class.id}}/download_class_student_list.pdf?&authorization_token={{token}}">Download Student Info</a>
 	  </span>
-	</span>
-	<a class="btn btn-default" href="#/admin_desk">Back</a>
+	</div>
+	<div class="col-sm-12 textLeft hide" is-role-visible='["create_daily_teach"]' email="currentUser.email">
+	  <span class="col-sm-2"><h5>Division Students</h5></span>
+	  <span class="col-sm-6 paddingTop10">
+	    <a class="btn btn-primary btn-sm" href="{{hostUrl}}/class/{{class.id}}/sub_class_students_report.pdf?&authorization_token={{token}}" target="_blank">Get Division Students</a>
+	  </span>
+	</div>
+	<div class="col-sm-12 textLeft" is-role-visible='["create_daily_teach"]' email="currentUser.email">
+	  <span class="col-sm-2"><h5>Get report</h5></span>
+	  <span class="col-sm-6 paddingTop10">
+	    <a class="btn btn-primary btn-sm" href="{{hostUrl}}/sub_organisation/{{class.organisation_id}}/class/{{class.id}}/get_report.pdf?&authorization_token={{token}}" target="_blank">Get Report</a>
+	  </span>
+	</div>
+	
+	<div class="col-sm-12 textLeft paddingTop10">
+	  <div class="col-sm-12 textLeft paddingTop10">
+	    <span ng-if="class.self_organisation && class.is_current_active">
+	      <span is-role-visible='["create_daily_teach"]' email="currentUser.email">
+		<a class="btn btn-primary" ng-disabled="!class.is_student_verified" uib-tooltip="Please Verify Students" ng-if="!class.is_student_verified"> Create Daily Catlog</a>
+		<a href="#/classes/{{class.id}}/daily_catlogs/new" class="btn btn-primary" ng-if="class.is_student_verified"> Create Daily Catlog</a>
+	      </span>
+	      <span is-role-visible='["create_exam"]' email="currentUser.email">
+		<a class="btn btn-primary" ng-disabled="!class.is_student_verified" uib-tooltip="Please Verify Students" ng-if="!class.is_student_verified">Create Exam</a>
+		<div class="btn-group" uib-dropdown ng-if="class.is_student_verified">
+		  <a href="#/classes/{{class.id}}/exams/new" class="btn btn-primary">Create Exam</a>
+		  <button type="button" class="btn btn-primary" uib-dropdown-toggle>
+		    <span class="caret"></span>
+		    <span class="sr-only">Split button!</span>
+		  </button>
+		  <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+		    <li role="menuitem">
+		      <a href="#/classes/{{class.id}}/exams/new">Create Exam</a>
+		    </li>
+		    <li role="menuitem">
+		      <a href="#/classes/{{class.id}}/exams/new?&isGroup=true">Create Group Exam</a>
+		    </li>
+		  </ul>
+		</div>
+		
+	      </span>
+	      <span is-role-visible='["manage_class_student"]' email="currentUser.email" ng-if="has_manage_class">
+		<a href="#/classes/{{class.id}}/manage_class" class="btn btn-primary">Manage Class</a>
+	      </span>
+	    </span>
+	  </div>
+	</div>
+	<!-- asdasdsad -->
       </div>
-    </div>
+      
+
+    </uib-accordion>
+    
+    
+    
     <div class="col-sm-12 textLeft paddingTop20">
       <uib-tabset justified="true">
 	<uib-tab ng-attr-active="classCatlogTab" >

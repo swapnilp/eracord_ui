@@ -22,6 +22,9 @@ angular.module('eracordUiApp.controller')
       $scope.class_id = $routeParams.class_id;
       $scope.classExamsTab = $scope.classDtpTab = $scope.classDivisionTab = $scope.classNotificationTab = $scope.classStudentTab= $scope.classCatlogTab = false;
       $scope.token = $cookieStore.get('currentUser').token;
+      $scope.requestLoading = true;
+      $scope.status = {};
+      $scope.status.isInfoOpen = false;
 
       var loadTabs = function(selectTab){
 	if(selectTab === 'exams') {
@@ -47,6 +50,7 @@ angular.module('eracordUiApp.controller')
 	  $scope.class = data.jkci_class;
 	  $scope.class.self_organisation = data.self_organisation;
 	  loadTabs($routeParams.tab);
+	  $scope.requestLoading = false;
 	} else {
 	  $location.path("/admin_desk").replace();
 	}
