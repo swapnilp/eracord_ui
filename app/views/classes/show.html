@@ -6,7 +6,7 @@
     <uib-accordion class="classAccordion">
       <div uib-accordion-group class="panel-default" is-open="status.isCustomHeaderOpen">
 	<uib-accordion-heading>
-          <h2>{{class.class_name}}&nbsp;&nbsp<small ng-class="{'red': !class.enable_class_sms}">Daily Absenty Sms</small> &nbsp;/ &nbsp;<small ng-class="{'red': !class.enable_exam_sms}">Exam Sms</small></h2>
+          <h2>{{class.class_name}}&nbsp;&nbsp<small class="padding5" ng-class="{'bg-danger': !class.enable_class_sms}">Daily Absentee Sms</small> &nbsp;/ &nbsp;<small class="padding5" ng-class="{'bg-danger': !class.enable_exam_sms}">Exam Sms</small></h2>
 	  <div class="textLeft">
 	    <span class="paddingTop10">{{class.subjects}}</span>
 	    
@@ -18,7 +18,7 @@
 	<!-- asdasda -->
 	
 	<div class="col-sm-12 textLeft">
-	  <span class="col-sm-2"><h5>Daily Absenty Sms Enable</h5></span>
+	  <span class="col-sm-2"><h5>Daily Absentee Sms Enable</h5></span>
 	  <toggle-switch class="left mLeft10"
 			 ng-model="class.enable_class_sms"
 			 knob-label="ENABLE" ng-click="toggleClassAbsentSms()">
