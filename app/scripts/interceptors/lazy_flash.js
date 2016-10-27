@@ -11,8 +11,7 @@ app.factory('lazyFlash', function($rootScope, $location, Flash) {
     Flash.clear();
     currentMessage = queue.shift() || '';
     if(currentMessage) {
-
-      Flash.create(currentMessage.type, currentMessage.message, 0, {}, true);
+      Flash.create(currentMessage.type, currentMessage.message, 3000, {}, true);
     }
     return currentMessage;
   });

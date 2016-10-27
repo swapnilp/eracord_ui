@@ -56,11 +56,12 @@ app.directive('divisionStudents', function(Restangular) {
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       scope.showOptions = true;
       scope.isRemove = true;
+      scope.filter = {};
       
       var getResultsPage = function(pageNumber) {
 	scope.requestLoading = true;
 	scope.students = [];
-	jkci_classes.one("sub_classes", scope.divisionId).customGET("students", {page: pageNumber, search: scope.filterStudent}).then(function(data){
+	jkci_classes.one("sub_classes", scope.divisionId).customGET("students", {page: pageNumber, search: scope.filter}).then(function(data){
 	  if(data.success) {
 	    scope.students = data.students;
 	    scope.totalStudents = data.count;
@@ -69,6 +70,11 @@ app.directive('divisionStudents', function(Restangular) {
 	  scope.requestLoading = false;
 	  
 	});
+      };
+
+      scope.resetFilter = function() {
+	scope.filter = {};
+	getResultsPage(1);
       };
 
       scope.openInfo = function(row) {
