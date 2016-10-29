@@ -129,6 +129,7 @@ angular.module('eracordUiApp.controller')
 	var std_ids = _.pluck($scope.standards, 'id').join(',');
 	base_organisation.customPOST({organisation: $scope.vm.org, standard_ids: std_ids}, "sub_organisation/launch_organisation", {}).then(function(data){
 	  if(data.success) {
+	    lazyFlash.success("Sub organisation has been created successfully");
 	    $location.path('/manage_organisation').replace();
 	  } else {
 	    Flash.clear();
