@@ -39,26 +39,29 @@ angular.module('eracordUiApp.controller')
     if($location.path() === "/organisations/users/"+$routeParams.user_id+"/manage_roles") {
       base_organisation = Restangular.all("organisations");
       $scope.requestLoading = true;
-      
+      $scope.rolesList = [];
       base_organisation.customGET("users/"+$routeParams.user_id+"/get_roles").then(function(data){
-	$scope.roles = data.data;
+	$scope.roles = data.roles;
+	$scope.rolesList = $scope.roles;
+	$scope.clarks_roles = data.clarks_roles;
 	$scope.user_id = $routeParams.user_id;
 	$scope.requestLoading = false;
+
       });
 
       $scope.saveRoles = function(user_id){
 	//$('.userRoles input:')
-	var roles = $('.userRoles input:checked').map(
-	  function () {return $(this).data('key');}).get().join(",");
+	var roles = $scope.rolesList.join();
 	base_organisation.customPOST({roles: roles, user_id: $scope.user_id}, 'users/' + $scope.user_id + '/update_roles', {})
 	  .then(function(data){
 	    if(data.success){
+	      lazyFlash.success("User roles has been saved");
 	      $location.path('/manage_organisation').replace();
 	    }
 	  });
-      };
+      }
     }
-
+    
     if($location.path() === "/organisation/users/" + $routeParams.user_id + "/change_password") {
       base_organisation = Restangular.all("organisations");
       $scope.requestLoading = true;
@@ -67,7 +70,7 @@ angular.module('eracordUiApp.controller')
 	if(data.success){
 	  $scope.email = data.email;
 	}else{
-	  $location.path('/manage_organisation');
+	  $location.path('/manage_organisation').search({tab: 'clarks'}).replace();
 	}
 	$scope.requestLoading = false;
       });
@@ -76,7 +79,8 @@ angular.module('eracordUiApp.controller')
 	$scope.dataLoading = true;
 	base_organisation.customPOST({clark: $scope.vm.user, email: $scope.email}, "/users/"+$routeParams.user_id+"/update_clark_password", {}).then(function(data){
 	  if(data.success){
-	    $location.path('/manage_organisation');
+	    lazyFlash.success("Password has been changed");
+	    $location.path('/manage_organisation').search({tab: 'clarks'}).replace();
 	  }else{
 	    Flash.clear();
 	    Flash.create('warning', "Please try again", 0, {}, true);
@@ -93,7 +97,8 @@ angular.module('eracordUiApp.controller')
 	$scope.vm.user.role = 'clark';
 	base_organisation.customPOST({clark: $scope.vm.user}, 'users/create_organisation_clark', {}).then(function(data){
 	  if(data.success){
-	    $location.path('/manage_organisation');
+	    lazyFlash.success("New Clark has been created");
+	    $location.path('/manage_organisation').search({tab: 'clarks'}).replace();
 	  }else{
 	    $scope.vm.dataLoading = false;
 	    Flash.clear();
