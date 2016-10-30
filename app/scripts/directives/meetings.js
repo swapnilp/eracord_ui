@@ -30,7 +30,7 @@ app.directive('selectMeetingsStudents', function(Restangular) {
       studentList: "="
     },
     templateUrl: 'views/meetings/select_students.html',
-    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', '$route', 'Upload', '$cookieStore', function(scope, Restangular, Flash, $location, $window, $routeParams, $route, Upload, $cookieStore){
+    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', '$route', 'Upload', '$cookieStore', '$timeout', function(scope, Restangular, Flash, $location, $window, $routeParams, $route, Upload, $cookieStore, $timeout){
       
       //scope.requestLoading = true;
       //scope.studentLoaded = false;
@@ -53,16 +53,14 @@ app.directive('selectMeetingsStudents', function(Restangular) {
 
       scope.checkAllStudent = function() {
         _.each(scope.students, function(student){
-          student.checked = true;
+	  $timeout(function(){student.checked = true;}, 5); 
         });
-        scope.studentList = _.pluck(scope.students, 'id');
       };
 
       scope.uncheckAllStudent = function() {
         _.each(scope.students, function(student){
-          student.checked = false;
+	  $timeout(function(){student.checked = false;}, 5); 
         });
-	scope.studentList = [];
       };
 
     }]

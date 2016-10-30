@@ -5,7 +5,9 @@
   <a ng-click="uncheckAllStudent();" class="btn pointer">uncheck all</a>
 </div>
 <div class="remainingStudentsList col-md-12" ng-show="!requestLoading">
-  <label ng-repeat="student in students">
-    <input type="checkbox" checklist-model="studentList" checklist-value="student.id" ng-model="student.checked"> {{student.name}} - {{student.p_mobile}}
+  <label ng-repeat="student in students" class="checkBoxStyle">
+    <input id="student_{{student.id}}" type="checkbox" checklist-model="studentList" checklist-value="student.id" ng-model="student.checked"> 
+    <label for="student_{{student.id}}"></label>
+    {{student.name}} - {{student.p_mobile}}
   </label>
 </div>

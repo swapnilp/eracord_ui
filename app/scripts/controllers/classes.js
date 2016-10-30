@@ -248,8 +248,8 @@ angular.module('eracordUiApp.controller')
   }])
 
 
-  .controller('ClassAssignStudentCtrl',['$scope', '$uibModalInstance', 'Restangular', 'class_id',
-    function ($scope, $uibModalInstance, Restangular, class_id)  {
+  .controller('ClassAssignStudentCtrl',['$scope', '$uibModalInstance', '$timeout',  'Restangular', 'class_id',
+    function ($scope, $uibModalInstance, $timeout, Restangular, class_id)  {
       $scope.requestLoading = true;
       $scope.dataLoading = false;
       $scope.class_id = class_id;
@@ -265,6 +265,18 @@ angular.module('eracordUiApp.controller')
       	}
       	$scope.requestLoading = false;
       });
+      
+      $scope.selectAll = function() {
+	_.map($scope.remainingStudents, function(student){
+	  $timeout(function(){student.checked = true;}, 5); 
+	});
+      };
+
+      $scope.unselectAll = function() {
+	_.map($scope.remainingStudents, function(student){
+	  $timeout(function(){student.checked = false;}, 5); 
+	});
+      };
       
       $scope.saveStudentList = function(){
       	$scope.dataLoading = true;

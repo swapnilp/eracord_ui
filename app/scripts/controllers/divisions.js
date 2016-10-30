@@ -99,8 +99,8 @@ angular.module('eracordUiApp.controller')
     }
   }])
 
-  .controller('DivisionAssignStudentCtrl',['$scope', '$uibModalInstance', 'Restangular', 'class_id', 'division_id',
-    function ($scope, $uibModalInstance, Restangular, class_id, division_id)  {
+  .controller('DivisionAssignStudentCtrl',['$scope', '$uibModalInstance', '$timeout', 'Restangular', 'class_id', 'division_id',
+    function ($scope, $uibModalInstance, $timeout, Restangular, class_id, division_id)  {
       $scope.requestLoading = true;
       $scope.dataLoading = false;
       $scope.divisionId = division_id;
@@ -117,6 +117,18 @@ angular.module('eracordUiApp.controller')
 	  $uibModalInstance.dismiss('cancel');
 	}
       });
+
+      $scope.selectAll = function() {
+	_.map($scope.remainingStudents, function(student){
+	  $timeout(function(){student.checked = true;}, 5); 
+	});
+      };
+
+      $scope.unselectAll = function() {
+	_.map($scope.remainingStudents, function(student){
+	  $timeout(function(){student.checked = false;}, 5); 
+	});
+      };
       
       $scope.saveStudentList = function(){
 	jkci_classes.one("sub_classes", $scope.divisionId).customPOST({students: $scope.studentList.join(',')}, "add_students").then(function(data){

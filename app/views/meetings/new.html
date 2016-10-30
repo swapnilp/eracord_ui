@@ -13,7 +13,7 @@
       <p class="input-group">
 	<input type="text" class="form-control" datetime-picker="dd/MM/yyyy HH:mm" ng-model="vm.date" is-open="isOpen" ng-click="openCalendar($event, prop);" ng-focus="openCalendar($event, prop);" readonly required/>
       </p>
-      <span ng-show="form.marks.$dirty && form.marks.$error.required" class="help-block">Exam Date is required</span>
+      <span ng-show="form.marks.$dirty && form.marks.$error.required" class="help-block">Meeting Date is required</span>
     </div>
     <div class="form-group" ng-class="{ 'has-error': form.contact_person.$dirty && form.contact_person.$error.required }">
       <label for="contact_person">Contact Person </label>
@@ -22,7 +22,7 @@
     <div class="form-group" ng-class="{ 'has-error': form.date.$dirty && form.date.$error.required }">
       <label for="date">Class <span class="textRed"> *</span></label>
       <select class="form-control ng-touched" ng-model="vm.jkci_class_id" style=""  ng-options="jk_class.id as jk_class.name for jk_class in jk_classes" placeholder="Please select reason" required></select>
-      <span ng-show="form.marks.$dirty && form.marks.$error.required" class="help-block">Exam Date is required</span>
+      <span ng-show="form.marks.$dirty && form.marks.$error.required" class="help-block">Class is required</span>
     </div>
     <div select-meetings-students jkci_class_id="{{vm.jkci_class_id}}" student-list="studentList"></div>
     <div class="form-actions" style="padding-bottom:20px;">
