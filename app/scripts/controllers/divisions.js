@@ -102,22 +102,33 @@ angular.module('eracordUiApp.controller')
   .controller('DivisionAssignStudentCtrl',['$scope', '$uibModalInstance', '$timeout', 'Restangular', 'class_id', 'division_id',
     function ($scope, $uibModalInstance, $timeout, Restangular, class_id, division_id)  {
       $scope.requestLoading = true;
-      $scope.dataLoading = false;
       $scope.divisionId = division_id;
+      $scope.isDivision = true;
+      $scope.allStudents = true;
       
       var jkci_classes = Restangular.one("jkci_classes", class_id);
       $scope.studentList = [];
       $scope.class_id = class_id;
-      
-      jkci_classes.one("sub_classes", $scope.divisionId).customGET("remaining_students").then(function(data){
-	if(data.success) {
-	  $scope.remainingStudents = data.students;
-	  $scope.requestLoading = false;
-	}else {
-	  $uibModalInstance.dismiss('cancel');
-	}
-      });
 
+      $scope.loadStudents = function() {
+	$scope.requestLoading = true;
+	jkci_classes.one("sub_classes", $scope.divisionId).customGET("remaining_students", {remaining: $scope.allStudents}).then(function(data){
+	  if(data.success) {
+	    $scope.remainingStudents = data.students;
+	    $scope.requestLoading = false;
+	  }else {
+	    $uibModalInstance.dismiss('cancel');
+	  }
+	});
+      };
+
+      $scope.loadStudents();
+
+      $scope.toggleRemaining = function() {
+	$scope.allStudents = !$scope.allStudents;
+	$scope.loadStudents();
+      };
+      
       $scope.selectAll = function() {
 	_.map($scope.remainingStudents, function(student){
 	  $timeout(function(){student.checked = true;}, 5); 
