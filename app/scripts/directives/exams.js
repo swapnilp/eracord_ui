@@ -47,11 +47,15 @@ app.directive('examCatlog', function(Restangular) {
 	}
       };
       
-      scope.saveTempMarks = function(catlog){
-	if(catlog.temp_marks !== '' && catlog.temp_marks !== undefined) {
+      scope.saveTempMarks = function(catlog, maxMarks){
+	if(catlog.temp_marks !== '' && catlog.temp_marks !== undefined && catlog.temp_marks <= maxMarks) {
+	  catlog.hasError = false;
 	  catlog.marks = catlog.temp_marks;
 	}else{
 	  catlog.marks = null;
+	  if(catlog.temp_marks !== '' && catlog.temp_marks !== undefined){
+	    catlog.hasError = true 
+	  }
 	}
 	scope.publishEnable = false;
       };
