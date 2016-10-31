@@ -10,16 +10,16 @@
     </div>
     <div class="form-group" ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }">
       <label for="first_name">First Name <span class="textRed"> *</span></label>
-      <input type="text" name="first_name" id="first_name" class="form-control" ng-model="vm.user.first_name" required />
+      <input type="text" name="first_name" id="first_name" class="form-control" ng-model="vm.user.first_name" only-text required />
       <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Email is required</span>
     </div>
     <div class="form-group">
       <label for="middle_name">Middle Name</label>
-      <input type="text" name="middle_name" id="middle_name" class="form-control" ng-model="vm.user.middle_name" />
+      <input type="text" name="middle_name" id="middle_name" class="form-control" ng-model="vm.user.middle_name" only-text />
     </div>
     <div class="form-group" ng-class="{ 'has-error': form.last_name.$dirty && form.last_name.$error.required }">
       <label for="last_name">last_name <span class="textRed"> *</span></label>
-      <input type="text" name="last_name" id="last_name" class="form-control" ng-model="vm.user.last_name" required />
+      <input type="text" name="last_name" id="last_name" class="form-control" ng-model="vm.user.last_name" only-text required />
       <span ng-show="form.last_name.$dirty && form.last_name.$error.required" class="help-block">Last Name is required</span>
     </div>
     <div class="form-group">
@@ -62,7 +62,7 @@
     </div>
     <div class="form-group" ng-class="{ 'has-error': form.parent_name.$dirty && form.parent_name.$error.required }">
       <label for="parent_name">Parent Name <span class="textRed"> *</span></label>
-      <input type="text" name="parent_name" id="parent_name" class="form-control" ng-model="vm.user.parent_name" required />
+      <input type="text" name="parent_name" id="parent_name" class="form-control" ng-model="vm.user.parent_name" only-text required />
       <span ng-show="form.parent_name.$dirty && form.parent_name.$error.required" class="help-block">Parent name is required</span>
     </div>
     <div class="form-group" ng-class="{ 'has-error': form.p_mobile.$dirty && form.p_mobile.$error.required }">
@@ -75,7 +75,7 @@
     </div>
     <div class="form-group">
       <label for="parent_occupation">Parent Occupation</label>
-      <input type="text" name="parent_occupation" id="parent_occupation" class="form-control" ng-model="vm.user.parent_occupation" />
+      <input type="text" name="parent_occupation" id="parent_occupation" class="form-control" ng-model="vm.user.parent_occupation" only-text />
     </div>
     <div class="form-group">
       <label for="address">Address</label>
