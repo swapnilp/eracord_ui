@@ -20,7 +20,7 @@
 	    <a href="#/organisation/users/{{row.id}}/change_password" class="btn btn-primary left mLeft10">Change Password</a>
 	    <toggle-switch class="left mLeft10"
 			   ng-model="row.is_enable"
-			   knob-label="ENABLE" ng-click="toggleEnableUser(row)">
+			   knob-label="ACTIVE" ng-click="toggleEnableUser(row)">
 	    </toggle-switch>
 	    <button class="btn btn-primary left mLeft10" ng-click="deleteClark(row)" ng-disabled="row.dataLoading">Delete User</button>
 	    <span button-req-load is-loading="row.dataLoading"></span>
