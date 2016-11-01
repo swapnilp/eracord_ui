@@ -44,7 +44,7 @@
       <span ng-show="!exam.create_verification">
 	<a href="#/hostels/{{hostel.id}}/edit" class="btn btn-primary" ng-disabled="requestLoading">Edit</a>
       </span>
-      <button class="btn btn-primary" ng-click="newRoom('lg');">
+      <button class="btn btn-primary" ng-click="newRoom('lg');" ng-if="hostel.rooms > hostelRooms.length">
 	Add room
       </button>
       <button class="btn btn-default" ng-click="goBack();">

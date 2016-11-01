@@ -194,9 +194,12 @@ angular.module('eracordUiApp.controller')
       };
 
       $scope.registerHostelRoom = function() {
+	$scope.message = false;
 	hostels.one(hostel_id).customPOST({hostel_room: $scope.vm.hostel_room}, "hostel_rooms").then(function(data){
 	  if(data.success) {
 	    $scope.cancel();
+	  } else {
+	    $scope.message = data.message;
 	  }
 	});
       };
