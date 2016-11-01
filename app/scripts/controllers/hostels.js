@@ -251,19 +251,25 @@ angular.module('eracordUiApp.controller')
       $scope.students = [];
       $scope.studentsList = [];
       $scope.roomName = room_name;
+      $scope.remainingCount = 0;
       
       $scope.cancel = function () {
 	$uibModalInstance.dismiss('cancel');
       };
 
       var getStudents = function() {
-	hostel.customGET("get_unallocated_students").then(function(data) {
+	hostel.customGET("get_unallocated_students", {room_id: room_id}).then(function(data) {
 	  if(data.success) {
 	    $scope.students = data.students;
+	    $scope.remainingCount = data.remaining_count;
 	  } else {
 	    $scope.cancel();
 	  }
 	});
+      };
+
+      $scope.selectHostelRoom = function(student) {
+	student.selected = !student.selected;
       };
       
       $scope.allocateStudentRoom = function() {

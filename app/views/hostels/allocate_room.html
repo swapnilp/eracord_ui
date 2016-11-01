@@ -6,8 +6,8 @@
   <div request-loading is-loading="requestLoading"></div>
   <figure class="highlight col-sm-12" ng-show="!requestLoading">
     <div class="remainingStudentsList col-md-6">
-      <label ng-repeat="student in students" class="checkBoxStyle">
-	<input id="student_{{student.id}}" type="checkbox" checklist-model="studentsList" checklist-value="student.id"> 
+      <label ng-repeat="student in students" class="checkBoxStyle" ng-class="{'lightText': !student.selected && studentsList.length >= remainingCount}">
+	<input id="student_{{student.id}}" type="checkbox" checklist-model="studentsList" checklist-value="student.id" ng-change="selectHostelRoom(student)" ng-disabled="!student.selected && studentsList.length >= remainingCount">
 	<label for="student_{{student.id}}"></label>
 	{{student.name}}
       </label>
