@@ -8,13 +8,14 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('UserCtrl',['$rootScope', '$scope', 'Flash', 'Auth', '$location', '$cookieStore', 'Restangular', 'lazyFlash', function ($rootScope, $scope, Flash, Auth, $location, $cookieStore, Restangular, lazyFlash) {
+  .controller('UserCtrl',['$rootScope', '$scope', 'Flash', 'Auth', '$location', '$cookieStore', 'Restangular', 'lazyFlash', '$timeout', '$window', function ($rootScope, $scope, Flash, Auth, $location, $cookieStore, Restangular, lazyFlash, $timeout, $window) {
     
     if($location.path() === '/user/sign_in') {
       $scope.multipleOrganisations = false;
       $scope.vm = {};
       $scope.vmorg = {};
       $scope.dataLoading = false;
+      var reloadTimer;
       
       if(Auth.isAuthenticated()){
 
@@ -59,10 +60,13 @@ angular.module('eracordUiApp.controller')
 	    $cookieStore.put('currentUser', user);
 	    lazyFlash.success("Login Success");
 	    $location.path('/admin_desk');
+	    $timeout.cancel(reloadTimer);
 	  } else {
 	    $scope.multipleOrganisations = true;
 	    $scope.organisations = user.organisations;
 	    $scope.vmorg.username = user.email;
+	    $scope.vmorg.password = $scope.vm.password;
+	    reloadTimer = $timeout(function(){$window.location.reload();}, 10000)
 	  }
 	  $scope.dataLoading = false;
 	}, function(error) {
