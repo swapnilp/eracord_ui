@@ -42,8 +42,37 @@ angular.module('eracordUiApp.controller')
 	});
       };
     }
-    
-    if($location.path().search("^/hostels/"+$routeParams.id) >= 0 ) {
+    if($location.path() === "/hostels/" + $routeParams.id + "/edit") {
+      var hostels = Restangular.all("hostels");
+      $scope.vm = {};
+      $scope.vm.hostel = {};
+      $scope.requestLoading = true;
+      $scope.isNew = false;
+      
+      var getHostel = function(){
+	hostels.customGET($routeParams.id+"/edit").then(function(data) {
+	  if(data.success) {
+	    $scope.vm.hostel = data.hostel;
+	  }else {
+	    lazyFlash.warning(data.message);
+	    $location.path("/hostels").replace();
+	  }
+	  $scope.requestLoading = false;
+	});
+      };
+
+      $scope.registerHostel = function(){
+	hostels.customPUT({hostel: $scope.vm.hostel}, $routeParams.id).then(function(data) {
+	  if(data.success) {
+	    $location.path("/hostels/"+data.id).replace();
+	  }else {
+	    lazyFlash.warning(data.message);
+	    $location.path("/hostels").replace();
+	  }
+	});
+      };
+      getHostel();
+    }else if($location.path().search("^/hostels/"+$routeParams.id) >= 0 ) {
       var hostels = Restangular.all("hostels");
       $scope.hostel = {};
       $scope.hostelRooms = [];
@@ -149,37 +178,7 @@ angular.module('eracordUiApp.controller')
       getHostelRooms();
     }
 
-    if($location.path() === "/hostels/" + $routeParams.id + "/edit") {
-      var hostels = Restangular.all("hostels");
-      $scope.vm = {};
-      $scope.vm.hostel = {};
-      $scope.requestLoading = true;
-      $scope.isNew = false;
-      
-      var getHostel = function(){
-	hostels.customGET($routeParams.id).then(function(data) {
-	  if(data.success) {
-	    $scope.vm.hostel = data.hostel;
-	  }else {
-	    lazyFlash.warning(data.message);
-	    $location.path("/hostels").replace();
-	  }
-	  $scope.requestLoading = false;
-	});
-      };
-
-      $scope.registerHostel = function(){
-	hostels.customPUT({hostel: $scope.vm.hostel}, $routeParams.id).then(function(data) {
-	  if(data.success) {
-	    $location.path("/hostels/"+data.id).replace();
-	  }else {
-	    lazyFlash.warning(data.message);
-	    $location.path("/hostels").replace();
-	  }
-	});
-      };
-      getHostel();
-    }
+    
   }])
 
 
