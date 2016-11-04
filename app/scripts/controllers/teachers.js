@@ -31,8 +31,12 @@ angular.module('eracordUiApp.controller')
       
       var loadTeachers = function() {
 	base_organisation.customGET('teachers').then(function(data){
-	  $scope.teachers = data.teachers;
-	  $scope.requestLoading = false;
+	  if(data.success) {
+	    $scope.teachers = data.teachers;
+	    $scope.requestLoading = false;
+	  }else {
+	    $location.path("/admin_desk").replace();
+	  }
 	});
       };
 
@@ -56,7 +60,7 @@ angular.module('eracordUiApp.controller')
       	$scope.vm.dataLoading = true;
       	base_organisation.customPOST({teacher: $scope.vm.user}, 'teachers', {}).then(function(data){
       	  if(data.success){
-	    $location.path('/organisations/teachers/'+data.teacher_id).replace();;
+	    $location.path('/organisations/teachers/'+data.teacher_id).replace();
       	  }else{
       	    $scope.vm.dataLoading = false;
 	    Flash.clear();

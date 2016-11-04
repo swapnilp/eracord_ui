@@ -36,11 +36,10 @@ app.directive('isRoleVisible', function(Restangular) {
      }],
     link: function(scope, element, attrs) {
       scope.$watch('email', function(){
-	console.log(scope.onlyRoot);
 	if(scope.checkRole() == 0) {
 	  element.hide();
 	} else {
-	  if(scope.onlyRoot === "false"){
+	  if(scope.onlyRoot === false){
 	    element.hide();
 	  }else {
 	    element.show();

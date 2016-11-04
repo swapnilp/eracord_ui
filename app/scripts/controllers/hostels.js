@@ -20,9 +20,14 @@ angular.module('eracordUiApp.controller')
       var hostels = Restangular.all("hostels");
       
       hostels.customGET("").then(function(data){
-	$scope.hostels = data.hostels;
-	if ($scope.hostels.length === 1) {
-	  $location.path("/hostels/"+$scope.hostels[0].id).search('add_hostel', true).replace();
+	if(data.success){
+	  $scope.hostels = data.hostels;
+	  if ($scope.hostels.length === 1) {
+	    $location.path("/hostels/"+$scope.hostels[0].id).search('add_hostel', true).replace();
+	  }
+	}else {
+	  lazyFlash.warning(data.message);
+	  $location.path("/admin_desk").replace();
 	}
       });
     }

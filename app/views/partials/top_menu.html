@@ -54,7 +54,7 @@
 	      <li is-role-visible='["manage_organiser"]' email="currentUser.email" ng-class="{active: topMenu==='meetings'}">
 		<a ng-href="#/meetings">Meetings</a>
 	      </li>
-	      <li is-role-visible='["manage_hostel"]' email="currentUser.email" ng-class="{active: topMenu==='hostels'}">
+	      <li is-role-visible='["manage_hostel"]' email="currentUser.email" ng-class="{active: topMenu==='hostels'}" only_root="currentUser.is_root">
 		<a ng-href="#/hostels">Hostels</a>
 	      </li>
 	    </ul>
