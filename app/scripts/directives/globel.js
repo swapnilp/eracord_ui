@@ -152,28 +152,21 @@ app.directive('onEnterEvent', function() {
 });
 
 
-app.directive('onlyText', function () {
+app.directive('onlyText', function(){
     return {
-      require: 'ngModel',
-      restrict: 'A',
-      link: function (scope, element, attr, ctrl) {
-        function inputValue(val) {
-          if (val) {
-            var digits = val.replace(/[^A-Za-z_ ]/g, '');
+        require: 'ngModel',
+        link: function(scope, element, attrs, modelCtrl) {
 
-            if (digits.split('.').length > 2) {
-              digits = digits.substring(0, digits.length - 1);
-            }
+            modelCtrl.$parsers.push(function (inputValue) {
+                var transformedInput = inputValue ? inputValue.replace(/[^A-Za-z_ ]/,'') : null;
 
-            if (digits !== val) {
-              ctrl.$setViewValue(digits);
-              ctrl.$render();
-            }
-            return parseFloat(digits);
-          }
-          return undefined;
-        }            
-        ctrl.$parsers.push(inputValue);
-      }
+                if (transformedInput!=inputValue) {
+                    modelCtrl.$setViewValue(transformedInput);
+                    modelCtrl.$render();
+                }
+
+                return transformedInput;
+            });
+        }
     };
- });
+});

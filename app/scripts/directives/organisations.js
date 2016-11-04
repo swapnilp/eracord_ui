@@ -12,7 +12,7 @@ app.directive('organisationProfile', function(Restangular) {
       organisationProfileTab: "@"
     },
     templateUrl: 'views/organisations/profile.html',
-    controller: ['$rootScope', '$scope', 'Restangular', 'Flash', '$location', 'Upload', function($rootScope, scope, Restangular, Flash, $location, Upload){
+    controller: ['$rootScope', '$scope', 'Restangular', 'Flash', '$location', 'Upload', '$cookieStore', function($rootScope, scope, Restangular, Flash, $location, Upload, $cookieStore){
       scope.profileRequestLoading = false;
       var profileLoaded = false;
       
@@ -59,6 +59,10 @@ app.directive('organisationProfile', function(Restangular) {
 	    scope.fileName = "";
 	    scope.file = null;
 	    $rootScope.logoUrl = resp.data.url;
+	    $rootScope.currentUser.logo_url = resp.data.url;
+	    scope.organisation.logo_url = resp.data.url;
+	    $cookieStore.remove('currentUser');
+	    $cookieStore.put('currentUser', $rootScope.currentUser);
 	  }else {
 	    scope.uploadMeaasgeClass = "alert-danger";
 	    scope.uploadingMessage = resp.data.message;
