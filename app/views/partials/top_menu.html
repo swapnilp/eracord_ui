@@ -35,7 +35,7 @@
 	    <ul class="dropdown-menu">
 	      <li ng-class="{active: topMenu==='exams'}"><a ng-href="#/exams">Exams</a></li>
 	      <li ng-class="{active: topMenu==='students'}"><a ng-href="#/students">Students</a></li>
-	      <li is-role-visible='["manage_organiser"]' email="currentUser.email" ng-class="{active: topMenu==='teachers'}"><a ng-href="#/teachers">Teachers</a></li>
+	      <li is-role-visible='["manage_organiser"]' email="currentUser.email" ng-class="{active: topMenu==='teachers'}" only_root="currentUser.is_root"><a ng-href="#/teachers">Teachers</a></li>
 	      <li ng-class="{active: topMenu==='off_classes'}"><a ng-href="#/off_classes">Off Classes</a></li>
 	    </ul>
 	  </li>

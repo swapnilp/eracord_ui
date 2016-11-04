@@ -8,11 +8,12 @@ app.directive('isRoleVisible', function(Restangular) {
     restrict: 'AE',
     scope: {
       roles: '=isRoleVisible',
-      email: '='
+      email: '=',
+      onlyRoot: "="
     },
     controller: ['$scope', '$cookieStore', function(scope, $cookieStore){
       var roles = [];
-
+      
       
       var getRoles = function(){
 	if ($cookieStore.get('currentUser') !== undefined) {
@@ -35,10 +36,15 @@ app.directive('isRoleVisible', function(Restangular) {
      }],
     link: function(scope, element, attrs) {
       scope.$watch('email', function(){
+	console.log(scope.onlyRoot);
 	if(scope.checkRole() == 0) {
 	  element.hide();
 	} else {
-	  element.show();
+	  if(scope.onlyRoot == false){
+	    element.hide();
+	  }else {
+	    element.show();
+	  }
 	}
       });
     }
