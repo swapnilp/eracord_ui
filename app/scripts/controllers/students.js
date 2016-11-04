@@ -145,6 +145,7 @@ angular.module('eracordUiApp.controller')
       $scope.classes = [];
       $scope.selectedTimeZone = 'month';
       $scope.selectedGraphType = 'all';
+      $scope.studentLoading = true;
       
       var loadStudent = function() {
 	student.get().then(function(data){
@@ -155,7 +156,11 @@ angular.module('eracordUiApp.controller')
 	    $scope.remaining_fee = data.remaining_fee
 	    $scope.classes = data.classes;
 	    $scope.classes = data.classes;
+	    $scope.studentLoading = false;
+	  } else {
+	    $location.path("/students").replace();
 	  }
+
 	});
       };
       
@@ -478,6 +483,8 @@ angular.module('eracordUiApp.controller')
       var hostels = Restangular.all("hostels");
       $scope.vm = {};
       $scope.vm.student = {};
+      $scope.requestLoading = true;
+      
       $scope.cancel = function () {
 	$uibModalInstance.dismiss('cancel');
       };
@@ -488,6 +495,7 @@ angular.module('eracordUiApp.controller')
 	    $scope.hostels = data.hostels;
 	    $scope.vm.student.hostel_id  = data.student_hostel;
 	    $scope.dispalyDeallocate = data.student_hostel;
+	    $scope.requestLoading = false;
 	  }
 	});
       };
