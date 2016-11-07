@@ -62,34 +62,6 @@ angular.module('eracordUiApp.controller')
       }
     }
     
-    if($location.path() === "/organisation/users/" + $routeParams.user_id + "/change_password") {
-      base_organisation = Restangular.all("organisations");
-      $scope.requestLoading = true;
-      $scope.dataLoading = false;
-      base_organisation.customGET("/users/"+ $routeParams.user_id + "/get_email").then(function(data){
-	if(data.success){
-	  $scope.email = data.email;
-	}else{
-	  $location.path('/manage_organisation').search({tab: 'clarks'}).replace();
-	}
-	$scope.requestLoading = false;
-      });
-
-      $scope.updateClarkPassword = function(){
-	$scope.dataLoading = true;
-	base_organisation.customPOST({clark: $scope.vm.user, email: $scope.email}, "/users/"+$routeParams.user_id+"/update_clark_password", {}).then(function(data){
-	  if(data.success){
-	    lazyFlash.success("Password has been changed");
-	    $location.path('/manage_organisation').search({tab: 'clarks'}).replace();
-	  }else{
-	    Flash.clear();
-	    Flash.create('warning', "Please try again", 0, {}, true);
-	  }
-	  $scope.dataLoading = false;
-	});
-      };
-    }
-
     if($location.path() === "/add_organisation_clark") {
       base_organisation = Restangular.all("organisations");
       $scope.registerUser = function(){
@@ -217,8 +189,8 @@ angular.module('eracordUiApp.controller')
 	  $scope.fee = data.fee;
 	  $scope.vm.fee = $scope.fee;
 	} else {
-	  Flash.warning(data.message);
-	  $location.path('/manage_organisation').replace();
+	  lazyFlash.warning(data.message);
+	  $location.path('/manage_organisation').search({tab: 'classes'}).replace();
 	}
 	$scope.requestLoading = false;
       });

@@ -17,13 +17,15 @@
 	  <td>{{row.email}}</td>
 	  <td>
 	    <button class="btn btn-primary left mLeft10" ng-click="manageRoles(row);">Manage Roles</button>
-	    <a href="#/organisation/users/{{row.id}}/change_password" class="btn btn-primary left mLeft10">Change Password</a>
+
 	    <toggle-switch class="left mLeft10"
 			   ng-model="row.is_enable"
 			   knob-label="Login" knob-label="ACTIVE" on-label="Active" off-label="Inactive" ng-click="toggleEnableUser(row)">
 	    </toggle-switch>
 	    <button class="btn btn-primary left mLeft10" ng-click="deleteClark(row)" ng-disabled="row.dataLoading">Delete User</button>
 	    <span button-req-load is-loading="row.dataLoading"></span>
+	    <button class="btn btn-primary left mLeft10" ng-click="resendActivetionLink(row);" ng-if="row.is_active">Resend register link</button>
+
 	  </td>
 	</tr>
       </tbody>

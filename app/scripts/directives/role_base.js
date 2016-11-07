@@ -16,7 +16,7 @@ app.directive('isRoleVisible', function(Restangular) {
       
       
       var getRoles = function(){
-	if ($cookieStore.get('currentUser') !== undefined) {
+	if ($cookieStore.get('currentUser') !== undefined && $cookieStore.get('currentUser').roles !== undefined) {
 	  roles = $cookieStore.get('currentUser').roles.split(',');
 	}else{
 	  roles = [];

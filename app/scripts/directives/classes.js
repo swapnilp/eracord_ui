@@ -495,7 +495,7 @@ app.directive('classTimeTable', function(Restangular) {
       
       var calculateTimeSlotes = function() {
 	if(scope.events.length > 0){
-	  var min_time = Math.trunc(_.min(_.pluck(scope.events, 'start_time')));
+	  var min_time = Math.floor(_.min(_.pluck(scope.events, 'start_time')));
 	  var max_time = Math.ceil(_.max(_.pluck(scope.events, 'end_time')));
 	  scope.timeSlots = _.range(min_time, max_time+1);
 	}

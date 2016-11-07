@@ -47,7 +47,7 @@ app.directive('daySlots', function() {
 
       var createEventSlot = function() {
 	_.map(scope.timeSlots, function(slot){
-	  scope.timeEvents[slot] = _.filter(scope.events, function(event) { return  (Math.trunc(event.start_time) <= slot && Math.ceil(event.end_time) > slot && event.cwday === scope.cwday)});
+	  scope.timeEvents[slot] = _.filter(scope.events, function(event) { return  (Math.floor(event.start_time) <= slot && Math.ceil(event.end_time) > slot && event.cwday === scope.cwday)});
 	});
       };
       

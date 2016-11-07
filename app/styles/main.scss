@@ -178,15 +178,14 @@ input, select, option {
   padding:10px;
 }
 
-.remainingStudentsList {
-  label {
-    margin-bottom:6px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-    display: -webkit-box;
-    line-height: 18px;
-  }
+.remainingStudentsList > label {
+  margin-bottom:6px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  display: -webkit-box;
+  line-height: 18px;
+  width: 100%;
 }
 
 .classExamsTable tr.created:hover{
