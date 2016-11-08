@@ -54,6 +54,12 @@ angular
     // Enables `devise:unauthorized` interceptor
     RestangularProvider.setBaseUrl('/api');
     RestangularProvider.setRequestSuffix('.json');
+    RestangularProvider.setDefaultHeaders({
+      'Content-Type': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'Accept, X-Requested-With'
+    });
     RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
       var extractedData;
       if (operation === "getList") {

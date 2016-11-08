@@ -80,6 +80,19 @@ angular.module('eracordUiApp.controller')
       };
     }
 
+    if($location.path() === "/organisations/clarks/"+$routeParams.clark_id+"/edit") {
+      base_organisation = Restangular.all("organisations");
+      base_organisation.customGET("clarks/"+$routeParams.clark_id+"/edit").then(function(data) {
+	if(data.success) {
+	  
+	  
+	} else {
+	  lazyFlash.warning("No record found");
+	  $location.path('/manage_organisation').search({tab: 'clarks'}).replace();
+	}
+      })
+    }
+
     
     
     if($location.path() === "/organisation/standards/" + $routeParams.standard_ids + "/launch_sub_organisation"){
