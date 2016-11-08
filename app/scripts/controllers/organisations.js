@@ -82,15 +82,28 @@ angular.module('eracordUiApp.controller')
 
     if($location.path() === "/organisations/clarks/"+$routeParams.clark_id+"/edit") {
       base_organisation = Restangular.all("organisations");
+      $scope.vm = {};
       base_organisation.customGET("clarks/"+$routeParams.clark_id+"/edit").then(function(data) {
 	if(data.success) {
-	  
+	  $scope.vm.user = data.data;
 	  
 	} else {
 	  lazyFlash.warning("No record found");
 	  $location.path('/manage_organisation').search({tab: 'clarks'}).replace();
 	}
-      })
+      });
+
+      $scope.updateClark = function(){
+	base_organisation.customPOST({clark: $scope.vm.user}, "clarks/"+$routeParams.clark_id+"/update").then(function(data) {
+	  if(data.success) {
+	    lazyFlash.success("Clark update successfully.");
+	    $location.path('/manage_organisation').search({tab: 'clarks'}).replace();
+	  } else {
+	    Flash.clear();
+	    Flash.create('warning', data.message, 0, {}, true);
+	  }
+	});
+      }
     }
 
     
