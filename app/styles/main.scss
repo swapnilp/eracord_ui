@@ -841,3 +841,7 @@ input[type="radio"]{
   }
 }
 
+a.disabled {
+  cursor: default;
+  color: #999;
+}

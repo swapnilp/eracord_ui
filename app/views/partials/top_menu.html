@@ -12,10 +12,10 @@
 	<a class="navbar-brand" href="{{hostUrl}}" ng-if="!currentUser.email" style="width: 120px;">
 	  <img class="img-responsive" src="https://s3.amazonaws.com/Eracord/Eracord/images/eracord.png" alt="" style="max-width:100px;">
 	</a>
-        <a class="navbar-brand" href="#/admin_desk" ng-if="currentUser.email && logoUrl == ''" style="width: 120px;">
+        <a class="navbar-brand" href="#/admin_desk" ng-if="currentUser.email && logoUrl == ''" style="width: 120px;" disabled-link="disableNav">
 	  <img class="img-responsive" src="https://s3.amazonaws.com/Eracord/Eracord/images/eracord.png" alt="" style="max-width:100px;">
 	</a>
-	<a class="navbar-brand image" href="#/admin_desk" ng-if="currentUser.email && logoUrl !== ''">
+	<a class="navbar-brand image" href="#/admin_desk" ng-if="currentUser.email && logoUrl !== ''" disabled-link="disableNav">
 	  <img ng-src="{{logoUrl}}" alt="logo" />
 	</a>
       </div>
@@ -23,43 +23,43 @@
       <div class="collapse navbar-collapse" id="js-navbar-collapse">
 	
         <ul class="nav navbar-nav">
-          <li ng-class="{active: topMenu==='home'}"><a href="#/">Home</a></li>
-	  <li ng-class="{active: topMenu==='admin_desk'}" ng-click="changeLocation('admin_desk');"><a ng-href="#/admin_desk">Admin Desk</a></li>
-	  <li is-role-visible='["manage_organiser"]' email="currentUser.email" ng-class="{active: topMenu==='manage_organisation'}">
-	    <a ng-href="#/manage_organisation">Manage Organisation</a>
+          <li ng-class="{active: topMenu==='home', 'disabled': disableNav}"><a href="#/" disabled-link="disableNav">Home</a></li>
+	  <li ng-class="{active: topMenu==='admin_desk', 'disabled': disableNav}" ng-click="changeLocation('admin_desk');"><a ng-href="#/admin_desk" disabled-link="disableNav">Admin Desk</a></li>
+	  <li is-role-visible='["manage_organiser"]' email="currentUser.email" ng-class="{active: topMenu==='manage_organisation', 'disabled': disableNav}">
+	    <a ng-href="#/manage_organisation" disabled-link="disableNav">Manage Organisation</a>
 	  </li>
-	  <li ng-class="{active: dropDowmMenu === 'academic'}" class="dropdown">
-	    <a class="dropdown-toggle" data-toggle="dropdown" href="">Academic
+	  <li ng-class="{active: dropDowmMenu === 'academic', 'disabled': disableNav}" class="dropdown">
+	    <a class="dropdown-toggle" data-toggle="dropdown" href="" disabled-link="disableNav">Academic
               <span class="caret"></span>
 	    </a>
 	    <ul class="dropdown-menu">
-	      <li ng-class="{active: topMenu==='exams'}"><a ng-href="#/exams">Exams</a></li>
-	      <li ng-class="{active: topMenu==='students'}"><a ng-href="#/students">Students</a></li>
-	      <li is-role-visible='["manage_organiser"]' email="currentUser.email" ng-class="{active: topMenu==='teachers'}" only_root="currentUser.is_root"><a ng-href="#/teachers">Teachers</a></li>
-	      <li ng-class="{active: topMenu==='off_classes'}"><a ng-href="#/off_classes">Off Classes</a></li>
+	      <li ng-class="{active: topMenu==='exams', 'disabled': disableNav}"><a ng-href="#/exams" disabled-link="disableNav">Exams</a></li>
+	      <li ng-class="{active: topMenu==='students', 'disabled': disableNav}"><a ng-href="#/students" disabled-link="disableNav">Students</a></li>
+	      <li is-role-visible='["manage_organiser"]' email="currentUser.email" ng-class="{active: topMenu==='teachers', 'disabled': disableNav}" only_root="currentUser.is_root"><a ng-href="#/teachers" disabled-link="disableNav">Teachers</a></li>
+	      <li ng-class="{active: topMenu==='off_classes', 'disabled': disableNav}"><a ng-href="#/off_classes" disabled-link="disableNav">Off Classes</a></li>
 	    </ul>
 	  </li>
-	  <li  ng-class="{active: dropDowmMenu === 'non_academic'}" class="dropdown">
-	    <a class="dropdown-toggle" data-toggle="dropdown" href="">Non Academic
+	  <li  ng-class="{active: dropDowmMenu === 'non_academic', 'disabled': disableNav}" class="dropdown">
+	    <a class="dropdown-toggle" data-toggle="dropdown" href="" disabled-link="disableNav">Non Academic
               <span class="caret"></span>
 	    </a>
 	    <ul class="dropdown-menu">
-	      <li ng-class="{active: topMenu==='class_rooms'}"><a ng-href="#/class_rooms">Class Rooms</a></li>
-	      <li is-role-visible='["accountant"]' email="currentUser.email" ng-class="{active: topMenu==='accounts'}">
-		<a ng-href="#/accounts">Accounts</a>
+	      <li ng-class="{active: topMenu==='class_rooms', 'disabled': disableNav}"><a ng-href="#/class_rooms" disabled-link="disableNav">Class Rooms</a></li>
+	      <li is-role-visible='["accountant"]' email="currentUser.email" ng-class="{active: topMenu==='accounts', 'disabled': disableNav}">
+		<a ng-href="#/accounts" disabled-link="disableNav">Accounts</a>
 	      </li>
-	      <li ng-class="{active: topMenu==='sms'}">
-		<a ng-href="#/sms">SMS</a>
+	      <li ng-class="{active: topMenu==='sms', 'disabled': disableNav}">
+		<a ng-href="#/sms" disabled-link="disableNav">SMS</a>
 	      </li>
-	      <li is-role-visible='["manage_organiser"]' email="currentUser.email" ng-class="{active: topMenu==='meetings'}">
-		<a ng-href="#/meetings">Meetings</a>
+	      <li is-role-visible='["manage_organiser"]' email="currentUser.email" ng-class="{active: topMenu==='meetings', 'disabled': disableNav}">
+		<a ng-href="#/meetings" disabled-link="disableNav">Meetings</a>
 	      </li>
-	      <li is-role-visible='["manage_hostel"]' email="currentUser.email" ng-class="{active: topMenu==='hostels'}" only_root="currentUser.is_root">
-		<a ng-href="#/hostels">Hostels</a>
+	      <li is-role-visible='["manage_hostel"]' email="currentUser.email" ng-class="{active: topMenu==='hostels', 'disabled': disableNav}" only_root="currentUser.is_root">
+		<a ng-href="#/hostels" disabled-link="disableNav">Hostels</a>
 	      </li>
 	    </ul>
 	  </li>
-          <li ng-class="{active: topMenu==='contacts'}"><a ng-href="#/contact">Contact</a></li>
+          <li ng-class="{active: topMenu==='contacts', 'disabled': disableNav}"><a ng-href="#/contact" disabled-link="disableNav">Contact</a></li>
         </ul>
 	<ul class="nav navbar-nav pull-right" ng-if="currentUser.email">
 	  <li ng-class="{active: dropDowmMenu === 'users'}" class="dropdown">

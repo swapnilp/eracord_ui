@@ -170,3 +170,19 @@ app.directive('onlyText', function(){
         }
     };
 });
+
+app.directive('disabledLink', function() {
+  return {
+    scope: {
+      disabled: '=disabledLink'
+    },
+    link: function(scope, element, attrs) {
+      element.bind('click', function(event) {
+        if(scope.disabled) {
+          event.preventDefault();
+        }
+      });
+      
+    }
+  };
+});

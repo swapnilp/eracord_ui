@@ -56,11 +56,18 @@ angular.module('eracordUiApp.controller')
 	    $rootScope.currentUser.email = user.email;
 	    $rootScope.currentUser.name = user.name;
             $rootScope.currentUser.token = user.token;
-	    $rootScope.logoUrl = user.logo_url;;
+	    $rootScope.currentUser.mobile = user.mobile;
+	    $rootScope.logoUrl = user.logo_url;
 	    $cookieStore.put('currentUser', user);
-	    lazyFlash.success("Login Success");
-	    $location.path('/admin_desk');
 	    $timeout.cancel(reloadTimer);
+	    if(user.verify_mobile) {
+	      lazyFlash.success("Login Success");
+	      $rootScope.disableNav = false;
+	      $location.path('/admin_desk');
+	    } else {
+	      lazyFlash.warning("Login Success but you need to verify your mobile");
+	      $location.path('/user/verify_mobile');
+	    }
 	  } else {
 	    $scope.multipleOrganisations = true;
 	    $scope.organisations = user.organisations;
@@ -120,5 +127,47 @@ angular.module('eracordUiApp.controller')
     }
 
     // end of change password 
+
+    if($location.path() === '/user/verify_mobile') {
+      $scope.mobile = $rootScope.currentUser.mobile;
+      $scope.vm = {user: {} };
+      $scope.disableLink = false;
+      var linkTimer;
+
+      $scope.resendMobileToken = function() {
+	if(!$scope.disableLink) {
+	  Restangular.all("organisations").customPOST({}, "resend_mobile_token",{}).then(function(data){
+	    if(data.success) {
+	      $scope.disableLink = true;
+	      linkTimer = $timeout(function(){
+		$scope.disableLink = false;
+		$timeout.cancel(linkTimer);
+	      }, 50000)
+	    }
+	    else {
+	      $scope.disableLink = false;
+	    }
+	  });
+	}
+      }
+      
+      $scope.verifyMobile = function() {
+	Restangular.all("organisations").customPOST({user: $scope.vm.user}, "verify_user_mobile",{}).then(function(data){
+	  if(data.success) {
+	    $location.path('/admin_desk').replace();
+	    $rootScope.disableNav = false;
+	  } else {
+	    Flash.clear();
+	    Flash.create('danger', data.message, 0, {}, true);
+	  }
+	});
+      }
+
+      $scope.ignoreMobileVerification = function() {
+	$location.path('/admin_desk').replace();
+	$rootScope.disableNav = false;
+      }
+      
+    }
     
   }]);

@@ -10,6 +10,7 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
   $scope.firstLoad = false;
   $scope.topMenu = "home";
   $rootScope.logoUrl = "";
+  $rootScope.disableNav = true;
   
 
   $scope.hostUrl = "http://localhost:3000";
@@ -47,6 +48,9 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
       Auth.currentUser().then(function(user) {
 	$rootScope.currentUser = user;
 	$rootScope.logoUrl  = $rootScope.currentUser.logo_url;
+	if($location.path() !== '/user/verify_mobile'){
+	  $rootScope.disableNav = false;
+	}
       });
     }
   }
@@ -55,6 +59,7 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
     $cookieStore.remove('currentUser');
     $rootScope.currentUser = {};
     $rootScope.logoUrl = "";
+    $rootScope.disableNav = true;
     return $rootScope.currentUser;
   };
 

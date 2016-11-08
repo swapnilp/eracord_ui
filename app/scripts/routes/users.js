@@ -9,6 +9,11 @@ app.config(function($routeProvider) {
       templateUrl: 'views/users/edit.html',
       controller: 'UserCtrl',
       controllerAs: 'users'
+    })
+    .when('/user/verify_mobile', {
+      templateUrl: 'views/users/verify_mobile.html',
+      controller: 'UserCtrl',
+      controllerAs: 'users'
     });
 });
 
