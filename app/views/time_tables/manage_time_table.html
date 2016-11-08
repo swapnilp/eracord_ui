@@ -38,7 +38,7 @@
 	
 	<div class="form-group" ng-class="{ 'has-error': form.slot_type.$dirty && form.slot_type.$error.required }">
 	  <label for="slot_type">Type</label>
-	  <select class="form-control ng-touched" ng-model="vm.slot_type" ng-options="values for values in ['Class', 'Break', 'Exam']" required>
+	  <select class="form-control ng-touched" ng-model="vm.slot_type" ng-options="values for values in ['Class']" required>
 	  </select>
 	  <span ng-show="form.slot_type.$dirty && form.slot_type.$error.required" class="help-block">Type is required</span>
 	</div>

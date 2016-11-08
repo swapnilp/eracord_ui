@@ -15,7 +15,7 @@
       <div style="margin:20px 0;">
 	<h3>Please verify class</h3>
 	<div class-duplicate-students class-id="{{class_id}}" class-student-verification-tab="{{classStudentVerificationTab}}" update-url="updateTabParams(tabName)" change-duplicate-remaining="changeDuplicateRemaining(remainingValue);" recheck-students="dirRecheckStudents(theDirFn);"></div>
-	<button class="btn btn-primary" ng-disabled="(remainingDuplicateCount > 0) || dataLoading" ng-click="verifyDuplicateStudent();">
+	<button class="btn btn-primary" ng-disabled="(remainingDuplicateCount > 0) || dataLoading || jk_class.is_student_verified" ng-click="verifyDuplicateStudent();">
 	  Verify Class
 	</button>
 	<span button-req-load is-loading="dataLoading"></span>
