@@ -17,6 +17,7 @@ if (env === 'development') {
 }
 
 app.use('/', express["static"](__dirname + "/dist"));
+app.use(favicon(__dirname + '/favicon.ico'));
 
 app.all('/api/*', function(appRequest, appResponse) {
   var apiHost, apiPath, apiPort, apiRequestUrl;
