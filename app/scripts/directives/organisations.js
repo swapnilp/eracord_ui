@@ -154,23 +154,23 @@ app.directive('organisationCources', function(Restangular) {
 });
 
 
-app.directive('organisationClarks', function(Restangular, $location, Flash) {
+app.directive('organisationClerks', function(Restangular, $location, Flash) {
   return {
     restrict: 'AE',
     transclude: true,
     scope: {
       updateUrl: '&',
-      organisationClarksTab: "@"
+      organisationClerksTab: "@"
     },
-    templateUrl: 'views/organisations/clarks.html',
+    templateUrl: 'views/organisations/clerks.html',
     controller: ['$scope', 'Restangular', '$window', function(scope, Restangular, $window){
       var base_organisation = Restangular.all("organisations");
       scope.requestLoading = true;
-      var clarksLoaded = false;
+      var clerksLoaded = false;
       
-      var loadClarks = function() {
-	base_organisation.customGET('get_clarks').then(function(data){
-	  scope.clarks = data.data;
+      var loadClerks = function() {
+	base_organisation.customGET('get_clerks').then(function(data){
+	  scope.clerks = data.data;
 	  scope.requestLoading = false;
 	});
       };
@@ -183,12 +183,12 @@ app.directive('organisationClarks', function(Restangular, $location, Flash) {
 	base_organisation.customGET("users/"+user.id+"/toggleEnable", {enabled: user.is_enable});
       };
 
-      scope.deleteClark = function(user) {
+      scope.deleteClerk = function(user) {
 	if($window.confirm('Are you sure?')){
 	  user.dataLoading = true;
-	  base_organisation.one('clarks', user.id).remove().then(function(data){
+	  base_organisation.one('clerks', user.id).remove().then(function(data){
 	    if(data.success){
-	      scope.clarks = _.reject(scope.clarks, function(obj){return obj.id == user.id});
+	      scope.clerks = _.reject(scope.clerks, function(obj){return obj.id == user.id});
 	    }else {
 	      Flash.clear();
 	      Flash.create('warning', "Some thing went wrong", 0, {}, true);
@@ -198,13 +198,13 @@ app.directive('organisationClarks', function(Restangular, $location, Flash) {
 	}
       };
 
-      scope.$watch('organisationClarksTab', function(){
-	if(scope.organisationClarksTab === 'true') {
-	  scope.updateUrl({tabName: 'clarks'});
+      scope.$watch('organisationClerksTab', function(){
+	if(scope.organisationClerksTab === 'true') {
+	  scope.updateUrl({tabName: 'clerks'});
 	}
-	if(scope.organisationClarksTab === 'true' && clarksLoaded === false){
-	  loadClarks();
-	  clarksLoaded = true;
+	if(scope.organisationClerksTab === 'true' && clerksLoaded === false){
+	  loadClerks();
+	  clerksLoaded = true;
 	}
       });
     }]

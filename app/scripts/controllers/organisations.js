@@ -43,7 +43,7 @@ angular.module('eracordUiApp.controller')
       base_organisation.customGET("users/"+$routeParams.user_id+"/get_roles").then(function(data){
 	$scope.roles = data.roles;
 	$scope.rolesList = $scope.roles;
-	$scope.clarks_roles = data.clarks_roles;
+	$scope.clerks_roles = data.clerks_roles;
 	$scope.user_id = $routeParams.user_id;
 	$scope.requestLoading = false;
 
@@ -62,15 +62,15 @@ angular.module('eracordUiApp.controller')
       }
     }
     
-    if($location.path() === "/add_organisation_clark") {
+    if($location.path() === "/add_organisation_clerk") {
       base_organisation = Restangular.all("organisations");
       $scope.registerUser = function(){
 	$scope.vm.dataLoading = true;
-	$scope.vm.user.role = 'clark';
-	base_organisation.customPOST({clark: $scope.vm.user}, 'users/create_organisation_clark', {}).then(function(data){
+	$scope.vm.user.role = 'clerk';
+	base_organisation.customPOST({clerk: $scope.vm.user}, 'users/create_organisation_clerk', {}).then(function(data){
 	  if(data.success){
-	    lazyFlash.success("New Clark has been created");
-	    $location.path('/manage_organisation').search({tab: 'clarks'}).replace();
+	    lazyFlash.success("New Clerk has been created");
+	    $location.path('/manage_organisation').search({tab: 'clerks'}).replace();
 	  }else{
 	    $scope.vm.dataLoading = false;
 	    Flash.clear();
@@ -80,24 +80,24 @@ angular.module('eracordUiApp.controller')
       };
     }
 
-    if($location.path() === "/organisations/clarks/"+$routeParams.clark_id+"/edit") {
+    if($location.path() === "/organisations/clerks/"+$routeParams.clerk_id+"/edit") {
       base_organisation = Restangular.all("organisations");
       $scope.vm = {};
-      base_organisation.customGET("clarks/"+$routeParams.clark_id+"/edit").then(function(data) {
+      base_organisation.customGET("clerks/"+$routeParams.clerk_id+"/edit").then(function(data) {
 	if(data.success) {
 	  $scope.vm.user = data.data;
 	  
 	} else {
 	  lazyFlash.warning("No record found");
-	  $location.path('/manage_organisation').search({tab: 'clarks'}).replace();
+	  $location.path('/manage_organisation').search({tab: 'clerks'}).replace();
 	}
       });
 
-      $scope.updateClark = function(){
-	base_organisation.customPOST({clark: $scope.vm.user}, "clarks/"+$routeParams.clark_id+"/update").then(function(data) {
+      $scope.updateClerk = function(){
+	base_organisation.customPOST({clerk: $scope.vm.user}, "clerks/"+$routeParams.clerk_id+"/update").then(function(data) {
 	  if(data.success) {
-	    lazyFlash.success("Clark update successfully.");
-	    $location.path('/manage_organisation').search({tab: 'clarks'}).replace();
+	    lazyFlash.success("Clerk update successfully.");
+	    $location.path('/manage_organisation').search({tab: 'clerks'}).replace();
 	  } else {
 	    Flash.clear();
 	    Flash.create('warning', data.message, 0, {}, true);
@@ -272,8 +272,8 @@ angular.module('eracordUiApp.controller')
 	  $scope.organisationStandardTab = true;
 	} else if(selectTab === 'classes') {
 	  $scope.organisationClassesTab = true;
-	} else if(selectTab === 'clarks') {
-	  $scope.organisationClarksTab = true;
+	} else if(selectTab === 'clerks') {
+	  $scope.organisationClerksTab = true;
 	} else if (selectTab === 'teachers'){
 	  $scope.organisationTeachersTab = true;
 	} else if (selectTab === 'sub_organisation'){

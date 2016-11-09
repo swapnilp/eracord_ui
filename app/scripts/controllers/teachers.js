@@ -85,7 +85,7 @@ angular.module('eracordUiApp.controller')
       
       $scope.registerTeacher = function(){
       	$scope.vm.dataLoading = true;
-      	$scope.vm.user.role = 'clark';
+      	$scope.vm.user.role = 'clerk';
       	base_organisation.customPUT({teacher: $scope.vm.user}, 'teachers/'+$routeParams.teacher_id, {}).then(function(data){
       	  if(data.success){
       	    $location.path('/organisations/teachers/'+data.teacher_id).replace();;

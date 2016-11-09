@@ -19,8 +19,8 @@ app.config(function($routeProvider) {
       templateUrl: 'views/organisations/manage_user_roles.html',
       controller: 'OrganisationsCtrl'
     })
-    .when('/add_organisation_clark', {
-      templateUrl: 'views/organisations/new_organisation_clark.html',
+    .when('/add_organisation_clerk', {
+      templateUrl: 'views/organisations/new_organisation_clerk.html',
       controller: 'OrganisationsCtrl'
     })
     .when('/edit_organisation', {
@@ -39,8 +39,8 @@ app.config(function($routeProvider) {
       templateUrl: 'views/organisations/manage_fee.html',
       controller: 'OrganisationsCtrl'
     })
-    .when("/organisations/clarks/:clark_id/edit", {
-      templateUrl: 'views/organisations/edit_clark.html',
+    .when("/organisations/clerks/:clerk_id/edit", {
+      templateUrl: 'views/organisations/edit_clerk.html',
       controller: 'OrganisationsCtrl'
     })
     .when("/organisations/classes/:class_id/fees/edit", {
