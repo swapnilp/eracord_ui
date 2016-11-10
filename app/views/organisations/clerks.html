@@ -13,6 +13,15 @@
 	</tr>
       </thead>
       <tbody>
+	<tr ng-repeat="row in user_clerks">
+	  <td>{{row.email}}</td>
+	  <td>
+	    <a class="btn btn-primary left mLeft10" href="#/organisations/user_clerks/{{row.id}}/edit">Edit</a>
+	    <button class="btn btn-primary left mLeft10" ng-click="resendActivetionLink(row);" ng-disabled="row.resend">Resend register link</button>
+	    <button class="btn btn-primary left mLeft10" ng-click="deleteUserClerk(row)" ng-disabled="row.dataLoading">Delete User</button>
+	    <span button-req-load is-loading="row.dataLoading"></span>
+	  </td>
+	</tr>
 	<tr ng-repeat="row in clerks">
 	  <td>{{row.email}}</td>
 	  <td>
@@ -25,8 +34,6 @@
 	    <a class="btn btn-primary left mLeft10" href="#/organisations/clerks/{{row.id}}/edit">Edit</a>
 	    <button class="btn btn-primary left mLeft10" ng-click="deleteClerk(row)" ng-disabled="row.dataLoading">Delete User</button>
 	    <span button-req-load is-loading="row.dataLoading"></span>
-	    <button class="btn btn-primary left mLeft10" ng-click="resendActivetionLink(row);" ng-if="row.is_active">Resend register link</button>
-
 	  </td>
 	</tr>
       </tbody>

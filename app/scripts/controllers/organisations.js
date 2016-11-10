@@ -106,6 +106,32 @@ angular.module('eracordUiApp.controller')
       }
     }
 
+    if($location.path() === "/organisations/user_clerks/"+$routeParams.clerk_id+"/edit") {
+      base_organisation = Restangular.all("organisations");
+      $scope.vm = {};
+      base_organisation.customGET("user_clerks/"+$routeParams.clerk_id+"/edit").then(function(data) {
+	if(data.success) {
+	  $scope.vm.user = data.data;
+	  
+	} else {
+	  lazyFlash.warning("No record found");
+	  $location.path('/manage_organisation').search({tab: 'clerks'}).replace();
+	}
+      });
+
+      $scope.updateClerk = function(){
+	base_organisation.customPUT({clerk: $scope.vm.user}, "user_clerks/"+$routeParams.clerk_id).then(function(data) {
+	  if(data.success) {
+	    lazyFlash.success("Clerk update successfully.");
+	    $location.path('/manage_organisation').search({tab: 'clerks'}).replace();
+	  } else {
+	    Flash.clear();
+	    Flash.create('warning', data.message, 0, {}, true);
+	  }
+	});
+      }
+    }
+
     
     
     if($location.path() === "/organisation/standards/" + $routeParams.standard_ids + "/launch_sub_organisation"){

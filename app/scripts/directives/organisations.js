@@ -171,12 +171,41 @@ app.directive('organisationClerks', function(Restangular, $location, Flash) {
       var loadClerks = function() {
 	base_organisation.customGET('get_clerks').then(function(data){
 	  scope.clerks = data.data;
+	  scope.user_clerks = data.user_clerks;
 	  scope.requestLoading = false;
 	});
       };
       
       scope.manageRoles = function(user){
 	$location.path("/organisations/users/"+user.id+"/manage_roles");
+      };
+
+      scope.resendActivetionLink = function(user) {
+	base_organisation.customGET('user_clerks/' + user.id + '/resend_invitation').then(function(data){
+	  if(data.success) {
+	    Flash.clear();
+	    Flash.create('success', "Link has been sent on user's email.", 0, {}, true);
+	    user.resend= true;
+	  }else {
+	    Flash.clear();
+	    Flash.create('warning', data.message, 0, {}, true);
+	  }
+	});
+      };
+      
+      scope.deleteUserClerk = function(user) {
+	if($window.confirm('Are you sure?')){
+	  user.dataLoading = true;
+	  base_organisation.one('user_clerks', user.id).remove().then(function(data){
+	    if(data.success){
+	      scope.user_clerks = _.reject(scope.user_clerks, function(obj){return obj.id == user.id});
+	    }else {
+	      Flash.clear();
+	      Flash.create('warning', "Some thing went wrong", 0, {}, true);
+	    }
+	    user.dataLoading = false;
+	  });
+	}
       };
 
       scope.toggleEnableUser = function(user){
