@@ -83,10 +83,13 @@ angular.module('eracordUiApp.controller')
     if($location.path() === "/organisations/clerks/"+$routeParams.clerk_id+"/edit") {
       base_organisation = Restangular.all("organisations");
       $scope.vm = {};
+      $scope.requestLoading = true;
+      $scope.dataLoading = false;
+      
       base_organisation.customGET("clerks/"+$routeParams.clerk_id+"/edit").then(function(data) {
 	if(data.success) {
 	  $scope.vm.user = data.data;
-	  
+	  $scope.requestLoading = false;
 	} else {
 	  lazyFlash.warning("No record found");
 	  $location.path('/manage_organisation').search({tab: 'clerks'}).replace();
@@ -94,6 +97,7 @@ angular.module('eracordUiApp.controller')
       });
 
       $scope.updateClerk = function(){
+	$scope.dataLoading = true;
 	base_organisation.customPOST({clerk: $scope.vm.user}, "clerks/"+$routeParams.clerk_id+"/update").then(function(data) {
 	  if(data.success) {
 	    lazyFlash.success("Clerk update successfully.");
@@ -102,6 +106,7 @@ angular.module('eracordUiApp.controller')
 	    Flash.clear();
 	    Flash.create('warning', data.message, 0, {}, true);
 	  }
+	  $scope.dataLoading = false;
 	});
       }
     }
@@ -109,10 +114,13 @@ angular.module('eracordUiApp.controller')
     if($location.path() === "/organisations/user_clerks/"+$routeParams.clerk_id+"/edit") {
       base_organisation = Restangular.all("organisations");
       $scope.vm = {};
+      $scope.requestLoading = true;
+      $scope.dataLoading = false;
+      
       base_organisation.customGET("user_clerks/"+$routeParams.clerk_id+"/edit").then(function(data) {
 	if(data.success) {
 	  $scope.vm.user = data.data;
-	  
+	  $scope.requestLoading = false;
 	} else {
 	  lazyFlash.warning("No record found");
 	  $location.path('/manage_organisation').search({tab: 'clerks'}).replace();
@@ -120,6 +128,7 @@ angular.module('eracordUiApp.controller')
       });
 
       $scope.updateClerk = function(){
+	$scope.dataLoading = true;
 	base_organisation.customPUT({clerk: $scope.vm.user}, "user_clerks/"+$routeParams.clerk_id).then(function(data) {
 	  if(data.success) {
 	    lazyFlash.success("Clerk update successfully.");
@@ -128,6 +137,7 @@ angular.module('eracordUiApp.controller')
 	    Flash.clear();
 	    Flash.create('warning', data.message, 0, {}, true);
 	  }
+	  $scope.dataLoading = false;
 	});
       }
     }
