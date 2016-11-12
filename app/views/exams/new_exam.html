@@ -8,17 +8,17 @@
     <div class="col-md-12 padding0">
       <div class="form-group col-md-4" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
 	<label for="name">Name <span class="textRed"> *</span></label>
-	<input type="text" name="name" id="name" class="form-control" ng-model="vm.name" required />
+	<input type="text" name="name" id="name" class="form-control" ng-model="vm.name" placeholder="Exam Name"required />
 	<span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Name is required</span>
       </div>
       <div class="form-group col-md-4" ng-class="{ 'has-error': form.marks.$dirty && form.marks.$error.required }" ng-if="!isGroup">
 	<label for="marks">Marks <span class="textRed"> *</span></label>
-	<input type="text" name="marks" id="marks" class="form-control" ng-model="vm.marks" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required />
+	<input type="text" name="marks" id="marks" class="form-control" ng-model="vm.marks" onkeypress="return event.charCode >= 48 && event.charCode <= 57" placeholder="Marks" required />
 	<span ng-show="form.marks.$dirty && form.marks.$error.required" class="help-block">Marks are required</span>
       </div>
       <div class="form-group col-md-4" ng-if="!isGroup">
 	<label for="duration">Duration</label>
-	<input type="text" name="duration" id="duration" class="form-control" ng-model="vm.duration" onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
+	<input type="text" name="duration" id="duration" class="form-control" ng-model="vm.duration" onkeypress="return event.charCode >= 48 && event.charCode <= 57" placeholder="Duration in MIN"/>
       </div>
     </div>
     <div class="col-md-12 padding0">
@@ -105,7 +105,7 @@
       </div>
     </div>
     <div class="form-actions col-md-12">
-      <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">Create Exam</button>
+      <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">{{ isNew ? 'Create' : 'Update' }} Exam</button>
       <span button-req-load is-loading="dataLoading"></span>
       <a ng-click="goBack();" class="btn btn-default">Cancel</a>
     </div>

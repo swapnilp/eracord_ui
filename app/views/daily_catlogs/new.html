@@ -54,7 +54,7 @@
       <span ng-show="form.chapter_id.$dirty && form.chapter_id.$error.required" class="help-block">Chapter is required</span>
     </div>
     
-    <div class="form-group" ng-class="{ 'has-error': form.chapter_id.$dirty && form.chapter_id.$error.required }">
+    <div class="form-group" ng-class="{ 'has-error': form.chapter_id.$dirty && form.chapter_id.$error.required }" ng-show="vm.daily_teachs.chapter_id">
       <label for="chapters_point_id">Points
 	<span button-req-load is-loading="chapterPointsLoading"></span>
       </label>

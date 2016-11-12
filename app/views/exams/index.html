@@ -55,7 +55,10 @@
       </thead>
       <tbody>
 	<tr dir-paginate="row in exams | itemsPerPage: 10" total-items="totalExams" current-page="pagination.current" ng-class="{created: row.status == 'Created', verified: row.status == 'Verified', conducted: row.status == 'Conducted', published: row.status == 'Published', over_due: row.status == 'Pass date'}">
-	  <td>{{row.name}}</td>
+	  <td>
+	    <i ng-if="row.is_group" class="fa fa-object-group fa-1x"></i>
+	    <i ng-if="!row.is_group" class="fa fa-wpforms fa-1x"></i>
+	    &nbsp;&nbsp;{{row.name}}</td>
 	  <td>{{row.marks}}</td>
 	  <td>{{row.exam_date}}</td>
 	  <td>{{row.subject}}</td>
