@@ -74,12 +74,15 @@ angular.module('eracordUiApp.controller')
     
     if($location.path() === "/classes/"+$routeParams.class_id+"/exams/new") {
       jkci_classes = Restangular.all("jkci_classes");
-      $scope.isOpen = false; //for calender 
+      
       $scope.isGroup = $routeParams.isGroup || false;
       $scope.requestLoading = true;
       $scope.vm = {};
+      $scope.vm.exam_date = new Date();
+      $scope.vm.isOpen = false; //for calender 
       $scope.dataLoading = false;
       $scope.isNew = true;
+      $scope.dateOptions = {};
       
       var loadExamInfo = function() {
 	$scope.requestLoading = true;
@@ -101,7 +104,7 @@ angular.module('eracordUiApp.controller')
       $scope.openCalendar = function(e) {
         e.preventDefault();
         e.stopPropagation();
-        $scope.isOpen = true;
+        $scope.vm.isOpen = true;
       };
       
       $scope.createExam = function() {

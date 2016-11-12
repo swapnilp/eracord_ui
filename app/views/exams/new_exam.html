@@ -78,7 +78,7 @@
       <div class="form-group col-md-4" ng-class="{ 'has-error': form.exam_date.$dirty && form.exam_date.$error.required }">
 	<label for="exam_date">Exam Date <span class="textRed"> *</span></label>
 	<p class="input-group">
-	  <input type="text" class="form-control" datetime-picker="dd/MM/yyyy HH:mm" ng-model="vm.exam_date" is-open="isOpen" ng-click="openCalendar($event, prop);" ng-focus="openCalendar($event, prop);" readonly required/>
+	  <input type="text" class="form-control" datetime-picker="dd/MM/yyyy HH:mm" ng-model="vm.exam_date" is-open="vm.isOpen" ng-click="openCalendar($event, prop);" ng-focus="openCalendar($event, prop);"  datepicker-options="dateOptions" readonly required/>
 	</p>
 	<span ng-show="form.marks.$dirty && form.marks.$error.required" class="help-block">Exam Date is required</span>
       </div>
@@ -95,7 +95,7 @@
       <div class="form-group col-md-12" ng-class="{ 'has-error': form.exam_date.$dirty && form.exam_date.$error.required }">
 	<label for="exam_date">Exam Date <span class="textRed"> *</span></label>
 	<p class="input-group">
-	  <input type="text" class="form-control" datetime-picker="dd/MM/yyyy HH:mm" ng-model="vm.exam_date" is-open="isOpen" ng-click="openCalendar($event, prop);" ng-focus="openCalendar($event, prop);" readonly required/>
+	  <input type="text" class="form-control" datetime-picker="dd/MM/yyyy HH:mm" ng-model="vm.exam_date" is-open="vm.isOpen" ng-click="openCalendar($event, prop);" ng-focus="openCalendar($event, prop);" readonly required/>
 	</p>
 	<span ng-show="form.marks.$dirty && form.marks.$error.required" class="help-block">Exam Date is required</span>
       </div>
