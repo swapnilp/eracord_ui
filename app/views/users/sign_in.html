@@ -1,4 +1,4 @@
-<div class="col-md-6 col-md-offset-3" ng-if="!multipleOrganisations" style="margin-bottom:20px;">
+<!--div class="col-md-6 col-md-offset-3 highlight" ng-if="!multipleOrganisations" style="margin-bottom:20px;">
   <h2>Login</h2>
   <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
   <form name="form" ng-submit="login()" role="form">
@@ -22,4 +22,31 @@
 </div>
 <div class="col-md-6 col-md-offset-3" ng-if="multipleOrganisations" style="margin-bottom:20px;">
   <div ng-include src="'views/users/select_organisations.html'"></div>
+</div-->
+<div class="signInBox" ng-if="!multipleOrganisations">
+  <h1 class="welcome text-center">&nbsp;</h1>
+  <div class="card card-container">
+    <img class="img-responsive" src="https://s3.amazonaws.com/Eracord/Eracord/images/eracord.png" alt="" style="max-width:160px;">
+    <hr>
+    <form name="form" class="form-signin" ng-submit="login()" role="form">
+      <span id="reauth-email" class="reauth-email"></span>
+      <p class="input_title blackColor">Email</p>
+      <input type="email" name="username" id="inputEmail" class="login_box" ng-model="vm.username"  placeholder="" ng-pattern="emailFormat" ng-change="changeText();"  required />
+      <p ng-show="form.username.$dirty && form.username.$error.required" class="help-block red">Email is required</p>
+      <p ng-show="form.username.$error.pattern" class="help-block red">Invalid email</p>
+      <p class="input_title blackColor">Password</p>
+      <input type="password" name="password" id="inputPassword" class="login_box" ng-model="vm.password" ng-change="changeText();" required />
+      <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block red">Password is required</span>
+      <span ng-show="invalidLogin" class="help-block red">Incorrect email or password</span>
+      <div id="remember" class="checkbox">
+      </div>
+      
+      <button class="btn btn-lg btn-primary" type="submit" ng-disabled="form.$invalid || dataLoading">Login</button>
+      <p class="text-center"><a href="#/user/forgot_password" class="input_title blueColor">Forgot password?</a></p>
+    </form><!-- /form -->
+  </div><!-- /card-container -->
 </div>
+<div class="col-md-6 col-md-offset-3" ng-if="multipleOrganisations" style="margin-bottom:20px;">
+  <div ng-include src="'views/users/select_organisations.html'"></div>
+</div>
+

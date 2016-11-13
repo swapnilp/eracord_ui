@@ -1,4 +1,4 @@
-<div class="header">
+<div class="header" ng-if="currentUser.email">
   <div class="navbar navbar-default" role="navigation">
     <div class="container">
       <div class="navbar-header">
@@ -91,6 +91,6 @@
     </div>
   </div>
 </div>
-<flash-message class="flashAlert">
-    <div class="my-flash flashAlert">{{ flash.text }}</div>
+<flash-message class="flashAlert" ng-class="{'flashTop': currentUser.email}">
+    <div class="my-flash flashAlert" >{{ flash.text }}</div>
 </flash-message>

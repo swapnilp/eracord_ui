@@ -9,12 +9,15 @@
  */
 angular.module('eracordUiApp.controller')
   .controller('UserCtrl',['$rootScope', '$scope', 'Flash', 'Auth', '$location', '$cookieStore', 'Restangular', 'lazyFlash', '$timeout', '$window', function ($rootScope, $scope, Flash, Auth, $location, $cookieStore, Restangular, lazyFlash, $timeout, $window) {
+    $scope.emailFormat = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
     
     if($location.path() === '/user/sign_in') {
       $scope.multipleOrganisations = false;
       $scope.vm = {};
       $scope.vmorg = {};
       $scope.dataLoading = false;
+      $scope.invalidLogin = false;
+      
       var reloadTimer;
       
       if(Auth.isAuthenticated()){
@@ -78,14 +81,16 @@ angular.module('eracordUiApp.controller')
 	  $scope.dataLoading = false;
 	}, function(error) {
 	  $cookieStore.remove('currentUser');
-	  Flash.clear();
-	  Flash.create('danger', 'Please Enter valid credentials', 0, {}, true);
-	  $scope.vm.password = "";
+	  $scope.invalidLogin = true;
 	  $scope.dataLoading = false;
+	  
 	});
 	
 	
       };
+      $scope.changeText = function() {
+	$scope.invalidLogin = false;
+      }
     }
     // end of sign in path
 

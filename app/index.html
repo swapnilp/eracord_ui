@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="bower_components/angular-flash-alert/dist/angular-flash.css" />
     <link rel="stylesheet" href="bower_components/angular-toggle-switch/angular-toggle-switch.css" />
     <link rel="stylesheet" href="bower_components/angular-multi-select-alexandernst/dist/angular-multi-select.css" />
+    <link rel="stylesheet" href="bower_components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css" />
     <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css" />
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
@@ -28,7 +29,6 @@
     <!-- Add your site or application content here -->
     <div ng-controller="ApplicationCtrl" data-ng-init="init();">
       <div ng-include src="'views/partials/top_menu.html'"></div>
-      
       <div class="container">
 	<div ng-view=""></div>
 	
@@ -36,13 +36,13 @@
           <span  class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>Loading
 	</div>
 	<div>
-	  <button type="button" class="btn btn-link helpBtn" ng-click="open('lg', 'time_table')" uib-tooltip="Help">
+	  <button type="button" class="btn btn-link helpBtn" ng-click="open('lg', 'time_table')" uib-tooltip="Help" ng-if="currentUser.email">
 	    <i class="fa fa-question-circle fa-3x" aria-hidden="true"></i>
 	  </button>
 	</div>
       </div>
     </div>
-    <div class="footer">
+    <div class="footer" ng-if="currentUser.email">
       <div class="container">
         <p><span class="glyphicon glyphicon-heart"></span> from the eraCord Team</p>
       </div>
@@ -73,12 +73,13 @@
     <script src="bower_components/angular-toggle-switch/angular-toggle-switch.js"></script>
     <script src="bower_components/angular-filter/dist/angular-filter.js"></script>
     <script src="bower_components/angular-multi-select-alexandernst/dist/angular-multi-select.js"></script>
-    <script src="bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
+    <script src="bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.templates.js"></script>
     <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
     <script src="bower_components/checklist-model/checklist-model.js"></script>
     <script src="bower_components/angular-utils-pagination/dirPagination.js"></script>
     <script src="bower_components/ng-file-upload-shim/ng-file-upload-shim.js"></script>
-    <script src="bower_components/moment/moment.js"></script>
     <script src="bower_components/fullcalendar/dist/fullcalendar.js"></script>
     <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
     <script src="bower_components/Chart.js/Chart.js"></script>
