@@ -79,7 +79,6 @@ angular.module('eracordUiApp.controller')
 	    $scope.counter = 60;
 	    reloadTimer = $interval(function(){
 	      $scope.counter--;
-	      console.log($scope.counter);
 	      if($scope.counter < 1) {
 		$window.location.reload();
 	      }
