@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('UserCtrl',['$rootScope', '$scope', 'Flash', 'Auth', '$location', '$cookieStore', 'Restangular', 'lazyFlash', '$timeout', '$window', function ($rootScope, $scope, Flash, Auth, $location, $cookieStore, Restangular, lazyFlash, $timeout, $window) {
+  .controller('UserCtrl',['$rootScope', '$scope', 'Flash', 'Auth', '$location', '$cookieStore', 'Restangular', 'lazyFlash', '$timeout', '$window', '$interval', function ($rootScope, $scope, Flash, Auth, $location, $cookieStore, Restangular, lazyFlash, $timeout, $window, $interval) {
     $scope.emailFormat = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
     
     if($location.path() === '/user/sign_in') {
@@ -62,7 +62,7 @@ angular.module('eracordUiApp.controller')
 	    $rootScope.currentUser.mobile = user.mobile;
 	    $rootScope.logoUrl = user.logo_url;
 	    $cookieStore.put('currentUser', user);
-	    $timeout.cancel(reloadTimer);
+	    $interval.cancel(reloadTimer);
 	    if(user.verify_mobile) {
 	      lazyFlash.success("Login Success");
 	      $rootScope.disableNav = false;
@@ -76,7 +76,14 @@ angular.module('eracordUiApp.controller')
 	    $scope.organisations = user.organisations;
 	    $scope.vmorg.username = user.email;
 	    $scope.vmorg.password = $scope.vm.password;
-	    reloadTimer = $timeout(function(){$window.location.reload();}, 60000)
+	    $scope.counter = 60;
+	    reloadTimer = $interval(function(){
+	      $scope.counter--;
+	      console.log($scope.counter);
+	      if($scope.counter < 1) {
+		$window.location.reload();
+	      }
+	    }, 1000)
 	  }
 	  $scope.dataLoading = false;
 	}, function(error) {

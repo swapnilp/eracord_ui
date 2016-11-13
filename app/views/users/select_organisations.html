@@ -20,7 +20,8 @@
 	<span ng-show="form.organisation.$dirty && form.organisation.$error.required" class="help-block">Oganisation ID is required</span>
       </div>
       <button class="btn btn-lg btn-primary pointer" type="submit" ng-disabled="form.$invalid || vmorg.dataLoading" style="margin-top:10px;">Login</button>
-      <p class="text-center"><a ng-click="reloadPage();" class="input_title blueColor pointer">Cancel</a></p>
+      <p class="pull-left"><a ng-click="reloadPage();" class="input_title blueColor pointer">Cancel</a></p>
+      <p class="pull-right green">Remaining time : {{counter}}</p>
     </form>
   </div>
 </div>
