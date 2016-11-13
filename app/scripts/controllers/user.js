@@ -76,7 +76,7 @@ angular.module('eracordUiApp.controller')
 	    $scope.organisations = user.organisations;
 	    $scope.vmorg.username = user.email;
 	    $scope.vmorg.password = $scope.vm.password;
-	    reloadTimer = $timeout(function(){$window.location.reload();}, 10000)
+	    reloadTimer = $timeout(function(){$window.location.reload();}, 60000)
 	  }
 	  $scope.dataLoading = false;
 	}, function(error) {
