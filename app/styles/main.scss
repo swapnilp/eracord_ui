@@ -711,7 +711,8 @@ input[type="radio"]{
   padding:0;
   
   img {
-    max-height:52px;
+    max-height:41px;
+    margin-top:5px;
   }
 }
 
@@ -1039,9 +1040,6 @@ a.disabled {
     color: #000;
     font-weight: bold;
     margin-top: 25px;
-  }
-  .blueColor {
-    color: rgb(42, 102, 158);
   }
   
   hr {

@@ -89,7 +89,6 @@ angular.module('eracordUiApp.controller')
 	  $cookieStore.remove('currentUser');
 	  $scope.invalidLogin = true;
 	  $scope.dataLoading = false;
-	  
 	});
 	
 	
@@ -112,13 +111,14 @@ angular.module('eracordUiApp.controller')
       $scope.vm = {};
       
       $scope.submitForgotPassword = function() {
+	$scope.dataLoading = true;
 	Restangular.all("users").customPOST({user: {email: $scope.vm.email}}, "reset_password",{}).then(function(data){
 	  if(data) {
 	    lazyFlash.success("Reset password link sent to your email");
 	    $location.path("/user/sign_in").replace();
 	  } else {
 	  }
-	    
+	  $scope.dataLoading = false;
 	})
       }
     }
@@ -150,6 +150,7 @@ angular.module('eracordUiApp.controller')
       $scope.mobile = $rootScope.currentUser.mobile;
       $scope.vm = {user: {} };
       $scope.disableLink = false;
+      $scope.dataLoading = false;
       var linkTimer;
 
       $scope.resendMobileToken = function() {
@@ -170,11 +171,13 @@ angular.module('eracordUiApp.controller')
       }
       
       $scope.verifyMobile = function() {
+	$scope.dataLoading = true;
 	Restangular.all("organisations").customPOST({user: $scope.vm.user}, "verify_user_mobile",{}).then(function(data){
 	  if(data.success) {
 	    $location.path('/admin_desk').replace();
 	    $rootScope.disableNav = false;
 	  } else {
+	    $scope.dataLoading = false;
 	    Flash.clear();
 	    Flash.create('danger', data.message, 0, {}, true);
 	  }

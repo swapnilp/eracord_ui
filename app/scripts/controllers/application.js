@@ -111,38 +111,51 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
     if($location.path().search("/classes") >= 0 || $location.path().search("/admin_desk") >= 0){
       $scope.topMenu = "admin_desk";
       $scope.dropDowmMenu = null;
+      $rootScope.disableNav = false;
     }
     if($location.path().search("^/exams") >= 0 ){
       $scope.topMenu = "exams";
       $scope.dropDowmMenu = 'academic';
+      $rootScope.disableNav = false;
     }
     if($location.path().search("^/manage_organisation") >= 0 || $location.path().search("^/edit_organisation") >= 0 || $location.path().search("^/organisations") >= 0 || $location.path().search("^/remaining_organisation_courses") >= 0){
       $scope.topMenu = "manage_organisation";
       $scope.dropDowmMenu = null;
+      $rootScope.disableNav = false;
     }
     if($location.path().search("^/students") >= 0 ){
       $scope.topMenu = "students";
       $scope.dropDowmMenu = 'academic';
+      $rootScope.disableNav = false;
     }
     if($location.path().search("^/teachers") >= 0 ){
       $scope.topMenu = "teachers";
       $scope.dropDowmMenu = 'academic';
+      $rootScope.disableNav = false;
     }
     if($location.path().search("^/off_classes") >= 0 ){
       $scope.topMenu = "off_classes";
       $scope.dropDowmMenu = 'academic';
+      $rootScope.disableNav = false;
     }
     if($location.path().search("^/contact") >= 0 ){
       $scope.topMenu = "contacts";
       $scope.dropDowmMenu = null;
+      $rootScope.disableNav = false;
     }
     if($location.path().search("^/user") >= 0 ){
       $scope.topMenu = "users";
       $scope.dropDowmMenu = 'users';
+      $rootScope.disableNav = false;
     }
+    if($location.path().search("^/user/verify_mobile") >= 0 ){
+      $rootScope.disableNav = true;
+    }
+    
     if($location.path().search("^/class_rooms") >= 0 ){
       $scope.topMenu = "class_rooms";
       $scope.dropDowmMenu = 'non_academic';
+      $rootScope.disableNav = false;
     }
     if($location.path().search("/user/sign_in") >= 0 ){
       $scope.topMenu = "home";
@@ -151,22 +164,27 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
     if($location.path().search("/accounts") >= 0 ){
       $scope.topMenu = "accounts";
       $scope.dropDowmMenu = 'non_academic';
+      $rootScope.disableNav = false;
     }
     if($location.path().search("^/sms") >= 0){
       $scope.topMenu = "sms";
       $scope.dropDowmMenu = 'non_academic';
+      $rootScope.disableNav = false;
     }
     if($location.path().search("^/meetings") >= 0){
       $scope.topMenu = "meetings";
       $scope.dropDowmMenu = 'non_academic';
+      $rootScope.disableNav = false;
     }
     if($location.path().search("^/hostels") >= 0){
       $scope.topMenu = "hostels";
       $scope.dropDowmMenu = 'non_academic';
+      $rootScope.disableNav = false;
     }
     if($location.path() === "/"){
       $scope.topMenu = "home";
       $scope.dropDowmMenu = null;
+      $rootScope.disableNav = false;
     }
   });
 
