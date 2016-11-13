@@ -379,6 +379,10 @@ select:-moz-focusring {
   color: red;
 }
 
+.blueColor {
+  color: rgb(42, 102, 158);
+}
+
 .lightText {
   opacity: 0.4;
 }
@@ -723,6 +727,7 @@ input[type="radio"]{
       max-height:50px;
       max-width:90px;
       border-radius: 20px;
+      margin-left: 20px;
     }
 
     a {
