@@ -1,26 +1,27 @@
-<h2>Login</h2>
-<div ng-show="vmorg.error" class="alert alert-danger">{{vmorg.error}}</div>
-<form name="form" ng-submit="login()" role="form">
-  <div class="alert alert-warning">You are belongs to multiple organisation please select organisation you want to login.</div>
-  <h3><span class="label label-default">{{vmorg.username}}</span></h3>
-  <div class="form-group" ng-class="{ 'has-error': form.organisation.$dirty && form.organisation.$error.required }">
-    <label class="btn active btn-default" ng-repeat="organisation in organisations" style="margin:5px;">
-      
-      <input name="cssPre" id="css1" value="{{organisation.organisation_id}}" class="active" type="radio" ng-model="vmorg.organisation" required>
-      <br />{{organisation.organisation_name}} as {{organisation.role}}
-      <div>
-	<i ng-if="organisation.role == 'teacher'" class="fa fa-user fa-4x"></i>
-	<i ng-if="organisation.role != 'teacher'" class="fa fa-university fa-4x"></i>
+<div class="signInBox">
+  <h1 class="welcome text-center">&nbsp;</h1>
+  <div class="card card-container">
+    <img class="img-responsive" src="https://s3.amazonaws.com/Eracord/Eracord/images/eracord.png" alt="" style="max-width:160px;">
+    <hr>
+    <form class="form-signin" name="form" ng-submit="login()" role="form">
+      <input type="hidden" name="username" value="{{vmorg.username}}">
+      <input type="hidden" name="password" value="{{vmorg.password}}">
+      <p class="text-center marginT10">Welcome <strong class="blueColor">{{vmorg.username  | capitalize}}</strong></p>
+      <div class="marginT10" ng-class="{ 'has-error': form.organisation.$dirty && form.organisation.$error.required }">
+	<label class="pointer" ng-repeat="organisation in organisations" style="margin:5px;width:46%;" ng-click="selectOrg(organisation);" ng-class="{'blueColor': organisation.selected}">
+	  <input name="cssPre" id="css1" value="{{organisation.organisation_id}}" class="active hide" type="radio" ng-model="vmorg.organisation" required>
+	  <p class="text-center">
+	    <i ng-if="organisation.role == 'teacher'" class="fa fa-user fa-4x"></i>
+	    <i ng-if="organisation.role != 'teacher'" class="fa fa-university fa-4x"></i>
+	  </p>
+	  <p class="text-center orgName" ><strong>{{organisation.organisation_name}}</strong></p>
+	  <p class="text-center">{{organisation.role | capitalize}}</p>
+	</label>
+	<span ng-show="form.organisation.$dirty && form.organisation.$error.required" class="help-block">Oganisation ID is required</span>
       </div>
-    </label>
-    <span ng-show="form.organisation.$dirty && form.organisation.$error.required" class="help-block">Oganisation ID is required</span>
+      <button class="btn btn-lg btn-primary pointer" type="submit" ng-disabled="form.$invalid || vmorg.dataLoading" style="margin-top:10px;">Login</button>
+      <p class="text-center"><a ng-click="reloadPage();" class="input_title blueColor pointer">Cancel</a></p>
+    </form>
   </div>
-  <input type="hidden" name="username" value="{{vmorg.username}}">
-  <input type="hidden" name="password" value="{{vmorg.password}}">
-  <div class="form-actions">
-    <button type="submit" ng-disabled="form.$invalid || vmorg.dataLoading" class="btn btn-primary">Login</button>
-    <img ng-if="vmorg.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-    <button class="btn btn-default" ng-click="reloadPage();">Back</button>
-  </div>
-</form>
+</div>
 

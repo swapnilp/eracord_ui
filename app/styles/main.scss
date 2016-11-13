@@ -280,6 +280,10 @@ input, select, option {
   margin-top: 20px;
 }
 
+.marginT25 {
+  margin-top: 25px;
+}
+
 .marginT30 {
   margin-top: 30px;
 }
@@ -597,7 +601,7 @@ table.headerless {
 }
 
 .helpBtn, .helpBtn:hover, .helpBtn:focus, .helpBtn:active, .helpBtn:active:focus{
-  color: rgba(109, 156, 2, 0.54);
+  color: rgba(42, 102, 158, 0.84);
   position: absolute;
   top: 50px;
   right: 30px;
@@ -899,7 +903,6 @@ a.disabled {
   -moz-user-select: none;
   -webkit-user-select: none;
   user-select: none;
-  cursor: default;
   border-radius:0;
   background: rgb(42, 102, 158);
   height: 55px;
@@ -1042,5 +1045,10 @@ a.disabled {
   }
   img {
     margin: 20px auto;
+  }
+
+  .orgName {
+    font-size: 20px;
+    margin-bottom:0;
   }
 }

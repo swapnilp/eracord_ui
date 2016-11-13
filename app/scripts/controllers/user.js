@@ -91,6 +91,13 @@ angular.module('eracordUiApp.controller')
       $scope.changeText = function() {
 	$scope.invalidLogin = false;
       }
+
+      $scope.selectOrg = function(org) {
+	_.map($scope.organisations, function(o){ o.selected = false; });
+	org.selected = true;
+
+	
+      }
     }
     // end of sign in path
 
