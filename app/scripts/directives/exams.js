@@ -209,12 +209,21 @@ app.directive('newGroupExam', function(Restangular) {
     controller: ['$scope', 'Restangular', 'Flash', '$location',  '$window', 'remainingStudentsFilter', function(scope, Restangular, Flash, $location, $window, remainingStudentsFilter){
       
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
+      scope.requestLoading = false;
       
       scope.loadExams = function(){
+	scope.requestLoading = true;
 	jkci_classes.one("exams", scope.exam.id).customGET("get_descendants").then(function(data){
 	  scope.exams = data.body;
+	  scope.requestLoading = false;
 	})
       };
+      
+      scope.$watch("activeTab", function() {
+	if(scope.activeTab == 1) {
+	  scope.groupedExamReportTab = true;
+	}
+      });
       scope.loadExams();
     }]
   }
@@ -234,12 +243,16 @@ app.directive('groupedExamReports', function(Restangular) {
     controller: ['$scope', 'Restangular', 'Flash', '$location',  '$window', 'remainingStudentsFilter', function(scope, Restangular, Flash, $location, $window, remainingStudentsFilter){
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       scope.reportLoaded = false;
+      scope.requestLoading = false;
 
       scope.loadCatlog = function(){
+	scope.requestLoading = true;
 	jkci_classes.one("exams", scope.exam.id).customGET("group_exam_report").then(function(data){
 	  scope.tableHead = data.table_head;
 	  scope.tableData = data.table_data;
+	  scope.requestLoading = false;
 	})
+
       };
 
       scope.$watch('groupedExamReportTab', function(){

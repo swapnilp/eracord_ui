@@ -1,10 +1,10 @@
 <div style="margin:20px 0;">
-  <uib-tabset justified="true">
-    <uib-tab>
+  <uib-tabset justified="true" active="activeTab">
+    <uib-tab index="0"  active="true">
       <uib-tab-heading><i class="icon-bell"></i> Exams</uib-tab-heading>
       <div ng-include src="'views/exams/grouped_exams_lists.html'"></div>
     </uib-tab>
-    <uib-tab ng-attr-active="groupedExamReportTab">
+    <uib-tab index="1">
       <uib-tab-heading><i class="icon-bell"></i> Results</uib-tab-heading>
       <div>
 	<div grouped-exam-reports class-id="{{classId}}" exam="exam" grouped-exam-report-tab="{{groupedExamReportTab}}"></div>

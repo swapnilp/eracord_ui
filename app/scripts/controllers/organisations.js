@@ -305,21 +305,40 @@ angular.module('eracordUiApp.controller')
       $scope.isRoot = $cookieStore.get('currentUser').is_root;;
       var loadTabs = function(selectTab){
 	if(selectTab === 'standards') {
-	  $scope.organisationStandardTab = true;
+
+	  $scope.activeTabs = 4;
 	} else if(selectTab === 'classes') {
-	  $scope.organisationClassesTab = true;
+
+	  $scope.activeTabs = 1;
 	} else if(selectTab === 'clerks') {
-	  $scope.organisationClerksTab = true;
-	} else if (selectTab === 'teachers'){
-	  $scope.organisationTeachersTab = true;
-	} else if (selectTab === 'sub_organisation'){
-	  $scope.subOrganisationTab = true;
+
+	  $scope.activeTabs = 2;
+	}  else if (selectTab === 'sub_organisation'){
+
+	  $scope.activeTabs = 3;
 	} else {
-	  $scope.organisationProfileTab = true;
+
+	  $scope.activeTabs = 0;
 	}
       };
 
-      loadTabs($routeParams.tab);
+      $scope.$watch('activeTabs', function() {
+	if($scope.activeTabs !== undefined){
+	  if($scope.activeTabs == 0) {
+	    $scope.organisationProfileTab = true;
+	  }else if($scope.activeTabs == 1) {
+	    $scope.organisationClassesTab = true;
+	  }else if($scope.activeTabs == 2) {
+	    $scope.organisationClerksTab = true;
+	  }else if($scope.activeTabs == 3) {
+	    $scope.subOrganisationTab = true;
+	  }else if($scope.activeTabs == 4) {
+	    $scope.organisationStandardTab = true;
+	  }
+	}else {
+	  loadTabs($routeParams.tab);
+	}
+      });
       
       if($routeParams.standards_manage) {
 	$scope.organisationStandardTab = true;

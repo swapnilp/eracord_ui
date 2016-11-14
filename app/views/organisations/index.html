@@ -1,28 +1,28 @@
 <div>
-  <uib-tabset justified="true">
-    <uib-tab ng-attr-active="organisationProfileTab">
+  <uib-tabset justified="true" active="activeTabs">
+    <uib-tab index="0">
       <uib-tab-heading><i class="icon-bell"></i> Profile</uib-tab-heading>
       <div organisation-profile organisation-profile-tab="{{organisationProfileTab}}" update-url="updateTabParams(tabName)"></div>
       <h2>Courses</h2>
       <div organisation-cources organisation-profile-tab="{{organisationProfileTab}}"></div>
     </uib-tab>
-    <uib-tab ng-attr-active="organisationClassesTab">
+    <uib-tab index="1">
       <uib-tab-heading><i class="icon-bell"></i> All Classes</uib-tab-heading>
       <div organisation-classes organisation-classes-tab="{{organisationClassesTab}}" host-url="{{hostUrl}}" update-url="updateTabParams(tabName)"></div>
     </uib-tab>
-    <uib-tab ng-attr-active="organisationClerksTab">
+    <uib-tab index="2">
       <uib-tab-heading><i class="icon-bell"></i> Users / Clerks</uib-tab-heading>
       <div>
 	<div organisation-clerks organisation-clerks-tab="{{organisationClerksTab}}" update-url="updateTabParams(tabName)"></div>
       </div>
     </uib-tab>
-    <uib-tab ng-attr-active="subOrganisationTab">
+    <uib-tab index="3">
       <uib-tab-heading><i class="icon-bell"></i> Sub Organisation</uib-tab-heading>
       <div>
 	<div organisation-sub-organisations sub-organisation-tab="{{subOrganisationTab}}" update-url="updateTabParams(tabName)"></div>
       </div>
     </uib-tab>
-    <uib-tab ng-attr-active="organisationStandardTab">
+    <uib-tab index="4">
       <uib-tab-heading><i class="icon-bell"></i> Standard's Manage</uib-tab-heading>
       <div organisation-standards organisation-standard-tab="{{organisationStandardTab}}" host-url="{{hostUrl}}" update-url="updateTabParams(tabName)"></div>
     </uib-tab>

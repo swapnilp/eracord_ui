@@ -2,7 +2,8 @@
   <button class="btn btn-primary" ng-print print-element-id="printResult"><i class="fa fa-print"></i> Print</button>
 </div>
 <div style="margin:20px 0;" id="printResult">
-  <table st-table="rowCollection" class="table groupExamReportTable">
+  <div request-loading is-loading="requestLoading"></div>
+  <table st-table="rowCollection" class="table groupExamReportTable" ng-show="!requestLoading">
     <thead>
       <tr>
 	<th ng-repeat="th in tableHead track by $index">{{th}}</th>

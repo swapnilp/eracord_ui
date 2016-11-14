@@ -9,7 +9,7 @@
  */
 angular.module('eracordUiApp.controller')
   .controller('UserCtrl',['$rootScope', '$scope', 'Flash', 'Auth', '$location', '$cookieStore', 'Restangular', 'lazyFlash', '$timeout', '$window', '$interval', function ($rootScope, $scope, Flash, Auth, $location, $cookieStore, Restangular, lazyFlash, $timeout, $window, $interval) {
-    $scope.emailFormat = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
+    $scope.emailFormat = /^[a-zA-Z]+[a-zA-Z0-9._]+@[a-zA-Z]+\.[a-zA-Z.]{2,5}$/;
     
     if($location.path() === '/user/sign_in') {
       $scope.multipleOrganisations = false;

@@ -1,5 +1,6 @@
 <a href="#/classes/{{classId}}/exams/{{exam.id}}/new_grouped_exams" class="btn btn-primary" ng-if="!exam.create_verification">Add Exam</a>
-<table st-table="rowCollection" class="table organisationCoursesTable">
+<div request-loading is-loading="requestLoading"></div>
+<table st-table="rowCollection" class="table organisationCoursesTable" ng-show="!requestLoading">
   <thead>
     <tr>
       <th st-sort="firstName">Name</th>
