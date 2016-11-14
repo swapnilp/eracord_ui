@@ -26,19 +26,33 @@ angular.module('eracordUiApp.controller')
       $scope.status = {};
       $scope.status.isInfoOpen = false;
 
-      var loadTabs = function(selectTab){
-	if(selectTab === 'exams') {
-	  $scope.classExamsTab = true;
-	} else if(selectTab === 'daily_teaches') {
-	  $scope.classDtpTab = true;
-	} else if(selectTab === 'notifications') {
-	  $scope.classNotificationTab = true;
-	} else if (selectTab === 'class_catlogs'){
-	  $scope.classCatlogTab = true;
-	} else {
-	  $scope.classStudentTab = true;
+      $scope.$watch('activeTab', function() {
+	if($scope.activeTab == undefined){
+	  if($routeParams.tab == 'class_catlogs'){
+	    $scope.activeTab = 0;
+	  }else if($routeParams.tab == 'exams'){
+	    $scope.activeTab = 2;
+	  }else if($routeParams.tab == 'daily_teaches') {
+	    $scope.activeTab = 3;
+	  }else{
+	    $scope.activeTab = 1;
+	  }
+	}else{
+	  if($scope.activeTab === 0){
+	    $scope.updateTabParams('class_catlogs'); 
+	    $scope.classCatlogTab = true;
+	  }else if($scope.activeTab === 1){
+	    $scope.updateTabParams('students'); 
+	    $scope.classStudentTab = true;
+	  }else if($scope.activeTab === 2){
+	    $scope.updateTabParams('exams'); 
+	    $scope.classExamsTab = true;
+	  }else if($scope.activeTab === 3){
+	    $scope.updateTabParams('daily_teaches'); 
+	    $scope.classDtpTab = true;
+	  }
 	}
-      };
+      });
 
       $scope.updateTabParams = function(tabName){
 	$route.updateParams({ tab: tabName, page: null});
@@ -49,7 +63,6 @@ angular.module('eracordUiApp.controller')
 	  $scope.has_manage_class = data.has_manage_class;
 	  $scope.class = data.jkci_class;
 	  $scope.class.self_organisation = data.self_organisation;
-	  loadTabs($routeParams.tab);
 	  $scope.requestLoading = false;
 	} else {
 	  $location.path("/admin_desk").replace();
@@ -206,6 +219,24 @@ angular.module('eracordUiApp.controller')
       if($routeParams.verify) {
 	$scope.classStudentVerificationTab = true;
       }
+      
+      $scope.$watch('activeTab', function() {
+	if($scope.activeTab == undefined){
+	  $scope.activeTab = 0;
+	}else{
+	  if($scope.activeTab === 0){
+	    $scope.classStudentVerificationTab = true;
+	  }else if($scope.activeTab === 1){
+	    $scope.classStudentTab = true;
+	  }else if($scope.activeTab === 2){
+	    $scope.classDivisionTab = true;
+	  }else if($scope.activeTab === 3){
+	    $scope.classTimeTableTab = true;
+	  } else if($scope.activeTab === 4){
+	    $scope.classNotificationTab = true;
+	  }
+	}
+      });
       
       jkci_classes.get().then(function(data){
 	if(data.success) {

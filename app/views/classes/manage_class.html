@@ -9,8 +9,8 @@
 </div>
 <a class="btn btn-default" href="#/classes/{{class_id}}">Back</a>
 <div class="col-sm-12 textLeft paddingTop20">
-  <uib-tabset justified="true">
-    <uib-tab ng-attr-active="classStudentVerificationTab" >
+  <uib-tabset justified="true" active="activeTab">
+    <uib-tab index="0" ng-attr-active="classStudentVerificationTab" >
       <uib-tab-heading><i class="icon-bell"></i> Verify class</uib-tab-heading>
       <div style="margin:20px 0;">
 	<h3>Please verify class</h3>
@@ -21,23 +21,23 @@
 	<span button-req-load is-loading="dataLoading"></span>
       </div>
     </uib-tab>
-    <uib-tab ng-attr-active="classStudentTab">
+    <uib-tab index="1" ng-attr-active="classStudentTab">
       <uib-tab-heading><i class="icon-bell"></i> Students</uib-tab-heading>
       <div class-students class-id="{{class_id}}" class-students-tab="{{classStudentTab}}" update-url="updateTabParams(tabName)" is-remove="true" host_url="{{hostUrl}}"></div>
     </uib-tab>
-    <uib-tab ng-attr-active="classDivisionTab">
+    <uib-tab index="2" ng-attr-active="classDivisionTab">
       <uib-tab-heading><i class="icon-bell"></i> Divisions</uib-tab-heading>
       <div>
 	<div class-divisions class-id="{{class_id}}" class-division-tab="{{classDivisionTab}}" update-url="updateTabParams(tabName)"></div>
       </div>
     </uib-tab>
-    <uib-tab ng-attr-active="classTimeTableTab">
+    <uib-tab index="3" ng-attr-active="classTimeTableTab">
       <uib-tab-heading><i class="icon-bell"></i> TimeTable</uib-tab-heading>
       <div>
 	<div class-time-table class-id="{{class_id}}" class-time-table-tab="{{classTimeTableTab}}" update-url="updateTabParams(tabName)"></div>
       </div>
     </uib-tab>
-    <uib-tab ng-attr-active="classNotificationTab" ng-if="jk_class.has_upgrade_batch">
+    <uib-tab  index="3" ng-attr-active="classNotificationTab" ng-if="jk_class.has_upgrade_batch">
       <uib-tab-heading><i class="icon-bell"></i> Upgrade batch</uib-tab-heading>
       <div style="margin:20px 0;">
 	<h3>Please click upgrade batch</h3>

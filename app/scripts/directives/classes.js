@@ -150,7 +150,6 @@ app.directive('classStudents', function(Restangular) {
 	  scope.updateUrl({tabName: 'students'});
 	}
 	if(scope.classStudentsTab === 'true' && scope.studentLoaded == false){
-	  getResultsPage($routeParams.page || 1);
 	  scope.studentLoaded = true;
 	}
       });
@@ -170,7 +169,6 @@ app.directive('classExams', function(Restangular) {
     },
     templateUrl: 'views/exams/index.html',
     controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', '$route', function(scope, Restangular, Flash, $location, $window, $routeParams, $route){
-
       scope.examsLoaded = false;
       scope.showFilter = true;
       scope.showClassFilter = false;
@@ -224,7 +222,6 @@ app.directive('classExams', function(Restangular) {
 	  scope.resetFilter();
 	}
 	if(scope.classExamsTab === 'true' && scope.examsLoaded == false){
-	  getResultsPage($routeParams.page || 1, true);
 	  scope.examsLoaded = true;
 	}
       });

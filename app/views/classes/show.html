@@ -100,27 +100,25 @@
 
     </uib-accordion>
     
-    
-    
     <div class="col-sm-12 textLeft paddingTop20">
-      <uib-tabset justified="true">
-	<uib-tab ng-attr-active="classCatlogTab" >
+      <uib-tabset justified="true" active="activeTab">
+	<uib-tab  index="0" select="selectTabs();">
 	  <uib-tab-heading><i class="icon-bell"></i> Presenty catlog</uib-tab-heading>
 	  <div>
 	    <div class-catlogs class-id="{{class_id}}" class-catlog-tab="{{classCatlogTab}}" update-url="updateTabParams(tabName)" host-url="{{hostUrl}}"></div>
 	  </div>
 	</uib-tab>
-	<uib-tab ng-attr-active="classStudentTab" ng-click="updateTabParams('students')">
+	<uib-tab index="1" select="selectTabs();">
 	  <uib-tab-heading><i class="icon-bell"></i> Students</uib-tab-heading>
 	  <div class-students class-id="{{class_id}}" class-students-tab="{{classStudentTab}}" update-url="updateTabParams(tabName)" show-options="true"></div>
 	</uib-tab>
-	<uib-tab ng-attr-active="classExamsTab">
+	<uib-tab index="2" select="selectTabs();">
 	  <uib-tab-heading><i class="icon-bell"></i> Exams</uib-tab-heading>
 	  <div>
 	    <div class-exams class-id="{{class_id}}" class-exams-tab="{{classExamsTab}}" update-url="updateTabParams(tabName)"></div>
 	  </div>
 	</uib-tab>
-	<uib-tab ng-attr-active="classDtpTab">
+	<uib-tab index="3"  select="selectTabs();">
 	  <uib-tab-heading><i class="icon-bell"></i> Daily Teaches</uib-tab-heading>
 	  <div>
 	    <div class-daily-teaches class-id="{{class_id}}" class-dtp-tab="{{classDtpTab}}" update-url="updateTabParams(tabName)"></div>
