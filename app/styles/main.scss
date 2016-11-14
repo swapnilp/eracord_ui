@@ -1054,3 +1054,12 @@ a.disabled {
     margin-bottom:0;
   }
 }
+
+.form-group.uib-time.hours input {
+  pointer-events: none;
+  tab-index: -1;
+}
+
+.form-group.uib-time.minutes input { 
+  pointer-events: none;
+}

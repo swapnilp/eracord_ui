@@ -79,7 +79,7 @@
 	<!--datetimepicker data-ng-model="data.date"></datetimepicker-->
 	<label for="exam_date">Exam Date <span class="textRed"> *</span></label>
 	<p class="input-group">
-	  <input type="text" class="form-control" datetime-picker="dd/MM/yyyy HH:mm" ng-model="vm.exam_date" is-open="vm.isOpen" ng-click="openCalendar($event, prop);" ng-focus="openCalendar($event, prop);"  datepicker-options="dateOptions" readonly required/>
+	  <input type="text" class="form-control" datetime-picker="dd/MM/yyyy HH:mm" ng-model="vm.exam_date" is-open="vm.isOpen" ng-click="openCalendar($event, prop);" ng-focus="openCalendar($event, prop);"  datepicker-options="dateOptions" readonly-time="true" date-disabled="true" readonly required/>
 	</p>
 	<span ng-show="form.marks.$dirty && form.marks.$error.required" class="help-block">Exam Date is required</span>
       </div>

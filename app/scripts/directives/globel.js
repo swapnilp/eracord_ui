@@ -192,3 +192,19 @@ app.filter('capitalize', function() {
       return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
     }
 });
+
+
+app.directive("uibTime", function(){
+  return {
+    restrict: 'C',
+    link: function($scope, $element, $attrs) {
+      if($element.hasClass('hours') || $element.hasClass('minutes')) {
+	$element.find('input').bind('keydown keypress', function(event) {
+          event.preventDefault();
+	});
+	
+      }
+      
+    }
+  };
+});
