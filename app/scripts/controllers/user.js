@@ -68,7 +68,6 @@ angular.module('eracordUiApp.controller')
 	      $rootScope.disableNav = false;
 	      $location.path('/admin_desk');
 	    } else {
-	      lazyFlash.warning("Login Success but you need to verify your mobile");
 	      $location.path('/user/verify_mobile');
 	    }
 	  } else {

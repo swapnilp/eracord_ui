@@ -196,7 +196,7 @@ app.directive('organisationClerks', function(Restangular, $location, Flash) {
       scope.deleteUserClerk = function(user) {
 	if($window.confirm('Are you sure?')){
 	  user.dataLoading = true;
-	  base_organisation.one('user_clerks', user.id).remove().then(function(data){
+	  base_organisation.customDELETE('user_clerks/'+ user.id).then(function(data){
 	    if(data.success){
 	      scope.user_clerks = _.reject(scope.user_clerks, function(obj){return obj.id == user.id});
 	    }else {
@@ -215,7 +215,7 @@ app.directive('organisationClerks', function(Restangular, $location, Flash) {
       scope.deleteClerk = function(user) {
 	if($window.confirm('Are you sure?')){
 	  user.dataLoading = true;
-	  base_organisation.one('clerks', user.id).remove().then(function(data){
+	  base_organisation.customDELETE('clerks/'+ user.id).then(function(data){
 	    if(data.success){
 	      scope.clerks = _.reject(scope.clerks, function(obj){return obj.id == user.id});
 	    }else {
