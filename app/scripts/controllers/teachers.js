@@ -123,12 +123,26 @@ angular.module('eracordUiApp.controller')
       };
 
       $scope.removeTeacherSubject = function(subject_id) {
-	if($window.confirm('Are you sure?')){
+	if($window.confirm('Are you sure?')) {
 	  base_organisation.customGET('teachers/'+$routeParams.teacher_id+'/subjects/'+subject_id+'/remove').then(function(data){
 	    if(data.success) {
 	      $scope.subjects = _.reject($scope.subjects, function(d){ return d.id === subject_id; });
 	    }
 	  })
+	}
+      };
+
+
+      $scope.removeTeacher = function() {
+	if($window.confirm('Are you sure?')) {
+	  base_organisation.customDELETE('teachers/'+$routeParams.teacher_id).then(function(data){
+	    if(data.success) {
+	      $location.path('/teachers').replace();
+	    } else {
+	      Flash.clear();
+      	      Flash.create('warning', "Something went wrong. Please try again.", 0, {}, true);
+	    }
+	  });
 	}
       };
 
