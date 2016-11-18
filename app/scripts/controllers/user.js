@@ -160,7 +160,7 @@ angular.module('eracordUiApp.controller')
 	      linkTimer = $timeout(function(){
 		$scope.disableLink = false;
 		$timeout.cancel(linkTimer);
-	      }, 50000)
+	      }, 10000)
 	    }
 	    else {
 	      $scope.disableLink = false;

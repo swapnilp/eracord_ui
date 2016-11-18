@@ -572,6 +572,17 @@ app.directive('classDuplicateStudents', function(Restangular) {
 	});
       }
 
+      var loadTimeTableWithotTeacher = function() {
+	scope.timeTableRequestLoading = true;
+	jkci_classes.customGET("get_time_table_to_verify").then(function(data) {
+	  if(data.success) {
+	    scope.slots = data.slots;
+	  }else {
+	  }
+	  scope.timeTableRequestLoading = false;
+	});
+      }
+
       scope.openAssignStudentModel = function(size, division_id) {
 	var modalInstance = $uibModal.open({
 	  animation: true,
@@ -650,6 +661,7 @@ app.directive('classDuplicateStudents', function(Restangular) {
 	if(scope.classStudentVerificationTab === 'true') {
 	  getResultsPage();
 	  loadDivisions();
+	  loadTimeTableWithotTeacher();
 	  //scope.updateUrl({tabName: 'students'});
 	}
       });

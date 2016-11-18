@@ -79,6 +79,40 @@
       </div>
     </div>
   </figure>
+  <figure class="highlight col-sm-12" ng-if="divisions.length > 0">
+    <h4>Time table without teacher</h4>
+    <div request-loading is-loading="timeTableRequestLoading"></div>
+    <table st-table="rowCollection" class="table">
+      <thead>
+	<tr>
+	  <th st-sort="firstName">Division</th>
+	  <th st-sort="lastName">Subject</th>
+	  <th st-sort="balance">Day</th>
+	  <th st-sort="balance">Time</th>
+	  <th st-sort="balance">Assign Teacher</th>
+	</tr>
+      </thead>
+      <tbody>
+	<tr ng-repeat="row in slots">
+	  <td>
+	    {{row.sub_class_name}}
+	  </td>
+	  <td>
+	    {{row.name}}
+	  </td>
+	  <td>
+	    {{}}
+	  </td>
+	  <td>
+	    {{row.start_time}} - {{row.end_time}} 
+	  </td>
+	  <td>
+	    Assign teacher
+	  </td>
+	</tr>
+      </tbody>
+    </table>
+  </figure>
 </div>
 
 

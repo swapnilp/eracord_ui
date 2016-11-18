@@ -5,14 +5,19 @@
     <hr>
     <h3 class="text-center">Verify mobile</h3>
     <p class="text-center">Registered mobile {{mobile}}</p>
-    <p class="text-center" ng-if="!disableLink"><a ng-click="resendMobileToken();"  ng-class="{'disabled': disableLink}" class="pointer blueColor">Resend mobile token </a></p>
-    <p ng-if="disableLink" class="green">Token has been sent to your registered mobile</p>
+    <p ng-if="disableLink" class="green">OTP has been sent to your registered mobile</p>
     <form name="form" class="form-signin" ng-submit="verifyMobile();" role="form">
-      <p class="input_title blackColor">Mobile token</p>
-      <input type="password" name="mobile_token" id="inputEmail" class="login_box" ng-model="vm.user.mobile_token" required />
+      <div class="input-group">
+	<input type="password" name="mobile_token" id="inputEmail" class="login_box form-control" ng-model="vm.user.mobile_token" placeholder="Enter OTP" required />
+	<span class="input-group-btn">
+          <button class="btn btn-primary" type="button" style="height:43px;" ng-click="resendMobileToken();" ng-disabled="disableLink"><i class="fa fa-envelope"></i> &nbsp;&nbsp;Get OTP</button>
+	</span>
+      </div>
+  
+      <!--input type="password" name="mobile_token" id="inputEmail" class="login_box" ng-model="vm.user.mobile_token" placeholder="Enter OTP" required /-->
       <p ng-show="form.email.$dirty && form.email.$error.required" class="help-block red">Email is required</p>
       <p ng-show="form.email.$error.pattern" class="help-block red">Invalid email</p>
-      <button class="btn btn-lg btn-primary pointer" type="submit" ng-disabled="form.$invalid || dataLoading">Verify mobile <i class="fa fa-spinner fa-spin" ng-if="dataLoading"></i></button>
+      <button class="signBtn btn-lg btn-primary pointer" type="submit" ng-disabled="form.$invalid || dataLoading">Verify mobile <i class="fa fa-spinner fa-spin" ng-if="dataLoading"></i></button>
       <p class="text-center"><a ng-click="ignoreMobileVerification();" class="input_title blueColor pointer">Skip now</a>
     </form>
   </div>
