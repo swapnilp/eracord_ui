@@ -1068,3 +1068,7 @@ a.disabled {
 .form-group.uib-time.minutes input { 
   pointer-events: none;
 }
+
+.modal-header {
+  border-radius: 5px 5px 0 0;
+}

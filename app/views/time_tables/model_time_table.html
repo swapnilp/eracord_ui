@@ -1,31 +1,36 @@
-<div class="modal-header">
-  <h3 class="modal-title">Time table</h3>
+<div class="modal-header bg-primary">
+  <h3 class="modal-title text-center ">Time Table</h3>
   <a ng-click="cancel()" style="float: right;position: absolute;right: 15px;top: 19px;cursor:pointer;color:#999;"><i class="fa fa-times"></i></a>
 </div>
-<div class="modal-body" style="min-height:300px;overflow: scroll;" id="printRecipt">
+<div class="modal-body" style="min-height:300px;overflow-y: auto; overflow-x: hidden;" id="printRecipt">
+  <button class="btn btn-link pull-right userColor" ng-print print-element-id="printRecipt" uib-tooltip="Print" tooltip-placement="bottom"><i class="fa fa-print fa-2x"></i></button>
   <div request-loading is-loading="requestLoading"></div>
   <div ng-repeat="day in days" ng-if="timetable[day].length > 0">
-    <h4>{{day}}</h4>
-    <table st-table="rowCollection" class="table organisationCoursesTable">
+    <h4><strong>{{day}}</strong></h4>
+    <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
       <thead>
 	<tr>
-	  <th st-sort="firstName">Name</th>
-	  <th st-sort="firstName">Start Time</th>
-	  <th st-sort="lastName">End Time</th>
-	  <th st-sort="balance">Teacher Name</th>
-	  <th st-sort="balance">Class Room</th>
+	  <th st-sort="firstName">Class</th>
+	  <th st-sort="firstName">Division</th>
+	  <th st-sort="firstName">Subject</th>
+	  <th st-sort="firstName">Duration</th>
+	  <th st-sort="balance">Teacher</th>
+	  <th st-sort="balance">Location / Room</th>
 	</tr>
       </thead>
       <tbody>
 	<tr ng-repeat="slot in timetable[day]">
 	  <td>
-	    {{slot.name}}
+	    {{slot.class_name}}
 	  </td>
 	  <td>
-	    {{slot.start_time}}
+	    {{slot.sub_class_name}}
 	  </td>
 	  <td>
-	    {{slot.end_time}}
+	    {{slot.subject}}
+	  </td>
+	  <td>
+	    {{slot.start_time}} - {{slot.end_time}}
 	  </td>
 	  <td>
 	    {{slot.teacher_name}}
@@ -37,8 +42,4 @@
       </tbody>
     </table>
   </div>
-</div>
-<div style="margin:20px 0;" class="modal-footer">
-  <button class="btn btn-primary" ng-print print-element-id="printRecipt"><i class="fa fa-print"></i> Print</button>
-  <button ng-click="cancel();" class="btn btn-default">Back</button>
 </div>
