@@ -86,19 +86,18 @@
 	  <th st-sort="lastName">Name</th>
 	  <th st-sort="balance">Batch</th>
 	  <th st-sort="balance">Standard</th>
-	  <th st-sort="balance">Enable SMS</th>
 	  <th st-sort="balance" ng-if="!isRemove">Classes</th>
 	  <th ng-if="isRemove"></th>
 	</tr>
       </thead>
       <tbody>
 	<tr dir-paginate="row in students | toArray:false | itemsPerPage: 10" total-items="totalStudents" current-page="pagination.current" pagination-id="student">
-	  <td class="text-center" ng-click="openInfo(row);"><span ng-if="showRollNumber">{{ row.roll_number || '-'}} </span><span ng-if="!showRollNumber">{{ $index+1 + ((pagination.current - 1) * 10)}}</span></td>
-	  <td ng-click="openInfo(row);">
+	  <td class="text-center"><span ng-if="showRollNumber">{{ row.roll_number || '-'}} </span><span ng-if="!showRollNumber">{{ $index+1 + ((pagination.current - 1) * 10)}}</span></td>
+	  <td>
 	    <a class="linkOverwite" href="#/students/{{row.id}}/show">{{row.name}}</a>&nbsp;&nbsp;
-	    <span uib-dropdown ng-if="row.assign_to !== ''" class="paddingR10" is-open="row.isopen">
-	      <div class="btn-group" ng-mouseover="row.isopen = true" ng-mouseleave="row.isopen = false" dropdown>
-		<a  id="simple-dropdown" class="pointer" uib-dropdown-toggle >
+	    <span uib-dropdown ng-if="row.assign_to !== ''" class="paddingR10">
+	      <div class="btn-group" >
+		<a  id="simple-dropdown" class="pointer"  uib-dropdown-toggle>
 		  <i class="fa fa-info-circle"></i>
 		</a>
 		<ul uib-dropdown-menu aria-labelledby="simple-dropdown" class="padding10 parentInfo">
@@ -118,31 +117,16 @@
 		</ul>
 	      </div>
 	    </span>
-	    <span ng-if="row.has_hostel"><i class="fa fa-bed"></i></span>
+	    <span ng-if="row.has_hostel" class="green paddingR10"><i class="fa fa-bed"></i></span>
+	    <span ng-if="row.enable_sms" class="green"><i class="fa fa-mobile-phone"></i></span>
 	  </td>
-	  <td ng-click="openInfo(row);">{{row.batch}}</td>
-	  <td ng-click="openInfo(row);">{{row.standard}}</td>
-	  <td ng-click="openInfo(row);"><i class="fa fa-{{row.enable_sms ? 'check' : 'times'}}" ng-class="{'green': row.enable_sms, 'red': !row.enable_sms}"></i></td>
+	  <td>{{row.batch}}</td>
+	  <td>{{row.standard}}</td>
 	  <td ng-if="!isRemove" ng-click="openInfo(row);">{{row.class_names}}</td>
 	  <td ng-if="isRemove">
 	    <button ng-click="removeStudent(row)" class="btn btn-link paddingT0"><i class="fa fa-trash" uib-tooltip="Remove"></i></button>
 	  </td>
 	</tr>
-	<tr ng-if="row.expanded" dir-paginate-end="" class="noBorder alert alert-warning">
-	  <td></td>
-          <td colspan="5">
-	    <span>Parent Name - {{row.parent_name}} </span>
-	    <br />
-	    <span>Mobile - {{row.p_mobile}}</span>
-	    <br />
-	    <a href="#/students/{{row.id}}/show" class="btn btn-primary">Show</a>
-	    <span ng-if="has_show_pay_info">
-	      <a class="btn btn-primary" href="#/students/{{row.id}}/pay_fee" ng-if="row.remaining_fee > 0">Pay Fee</a>
-	      <button class="btn btn-primary" ng-if="row.remaining_fee === 0" disabled>Pay Fee</button>
-	      <a class="btn btn-primary" href="#/students/{{row.id}}/payment_info" >Payment Info</a>
-	    </span>
-	  </td>
-        </tr>
       </tbody>
     </table>
   </figure>
