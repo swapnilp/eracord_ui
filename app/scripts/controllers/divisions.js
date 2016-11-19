@@ -138,6 +138,7 @@ angular.module('eracordUiApp.controller')
       $scope.loadStudents();
 
       $scope.toggleRemaining = function() {
+	$scope.unselectAll();
 	$scope.allStudents = !$scope.allStudents;
 	$scope.loadStudents();
       };
@@ -152,6 +153,7 @@ angular.module('eracordUiApp.controller')
 	_.map($scope.remainingStudents, function(student){
 	  $timeout(function(){student.checked = false;}, 5); 
 	});
+	$scope.studentList = [];
       };
       
       $scope.saveStudentList = function(){

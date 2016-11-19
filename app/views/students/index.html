@@ -1,27 +1,29 @@
 <div style="margin:20px 0;">
-  <span ng-if="!showOptions">
-    <span is-role-visible='["manage_roll_number"]' email="currentUser.email">
-      <a href="#/classes/{{classId}}/manage_student_rollnumber" class="btn btn-primary" ng-if="classId" uib-tooltip="Manage Roll Number">
-	<i class="fa fa-sort-numeric-asc"></i>
-      </a>
-    </span>
-    <span is-role-visible='["manage_class_student"]' email="currentUser.email" ng-if="classId">
-      <button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openAssignStudentModel('lg')" uib-tooltip="Assign Students">
-	<i class="fa fa-users"></i>
-      </button>
-    </span>
-    <span is-role-visible='["manage_student_subject"]' email="currentUser.email">
-      <a href="#/classes/{{classId}}/manage_student_subjects" class="btn btn-primary" ng-if="classId" uib-tooltip="Manage Subjects">
-	<i class="fa fa-folder-o"></i>
-      </a>
-    </span>
-    <span is-role-visible='["add_student"]' email="currentUser.email">
-      <a href="#/classes/{{classId}}/students/new" class="btn btn-primary" ng-if="classId" uib-tooltip="New Student"> 
-	<i class="fa fa-user-plus"></i>
-      </a>
-    </span>
-    <div ng-if="classId" style="margin-top:10px;">
-      <figure class="highlight col-sm-12" ng-show="!requestLoading">
+  <div ng-if="!showOptions">
+    <div class="pull-right">
+      <span is-role-visible='["manage_roll_number"]' email="currentUser.email">
+	<a href="#/classes/{{classId}}/manage_student_rollnumber" class="btn btn-primary" ng-if="classId" uib-tooltip="Manage Roll Number">
+	  <i class="fa fa-sort-numeric-asc"></i>
+	</a>
+      </span>
+      <span is-role-visible='["manage_class_student"]' email="currentUser.email" ng-if="classId">
+	<button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openAssignStudentModel('lg')" uib-tooltip="Assign Students">
+	  <i class="fa fa-users"></i>
+	</button>
+      </span>
+      <span is-role-visible='["manage_student_subject"]' email="currentUser.email">
+	<a href="#/classes/{{classId}}/manage_student_subjects" class="btn btn-primary" ng-if="classId" uib-tooltip="Manage Subjects">
+	  <i class="fa fa-folder-o"></i>
+	</a>
+      </span>
+      <span is-role-visible='["add_student"]' email="currentUser.email">
+	<a href="#/classes/{{classId}}/students/new" class="btn btn-primary" ng-if="classId" uib-tooltip="New Student"> 
+	  <i class="fa fa-user-plus"></i>
+	</a>
+      </span>
+    </div>
+    <div ng-if="classId" style="margin-top:10px;" >
+      <figure class="highlight pull-left" ng-show="!requestLoading">
 	<div>
 	  Download -> Fill Excel -> Upload
 	</div>
@@ -45,7 +47,8 @@
 	</span>
       </figure>
     </div>
-  </span>
+    
+  </div>
   
   <div class="examFilterDiv col-sm-12 padding0"> 
     <div class="pull-left marginT10" ng-show="!requestLoading">

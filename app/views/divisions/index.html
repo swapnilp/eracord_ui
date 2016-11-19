@@ -1,15 +1,17 @@
 <div request-loading is-loading="requestLoading"></div>
 <div style="margin:20px 0;" ng-show="!requestLoading">
   <!--a href="#/classes/{{classId}}/divisions/new" class="btn btn-primary">Create Division</a-->
-  <a ng-click="newDivisionModel('lg');" class="btn btn-primary">Create Division</a>
-  <figure class="highlight col-sm-12"  ng-if="divisions.length > 0">
-    <table st-table="rowCollection" class="table organisationCoursesTable">
+  <div class="col-sm-12">
+    <a ng-click="newDivisionModel('lg');" class="btn btn-primary pull-right marginB10">Create Division</a>
+  </div>
+  <figure class="col-sm-12"  ng-if="divisions.length > 0">
+    <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
       <thead>
 	<tr>
 	  <th st-sort="firstName">Index</th>
 	  <th st-sort="lastName">Name</th>
-	  <th st-sort="lastName">Students</th>
-	  <th st-sort="balance">Actions</th>
+	  <th st-sort="lastName">Student</th>
+	  <th st-sort="balance">Action</th>
 	</tr>
       </thead>
       <tbody>
