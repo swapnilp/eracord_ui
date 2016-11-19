@@ -46,6 +46,7 @@
       </figure>
     </div>
   </span>
+  
   <div class="examFilterDiv col-sm-12 padding0"> 
     <div class="pull-left marginT10" ng-show="!requestLoading">
       <span ng-if="totalStudents > 0">
@@ -55,6 +56,7 @@
 	No data found
       </span>
     </div>
+    
     <div class="pull-right marginB15">
       <input type="text" ng-model="filter.name" dl-key-code="pageChanged(1);" code="13" placeholder="Enter name or mobile" value="{{filter.name}}" style="width:230px;display:inline;" class="form-control">
       <span  ng-if="isFilter">
@@ -71,11 +73,10 @@
       <button class="btn btn-primary" ng-click="resetFilter();" uib-tooltip="Reset"><i class="fa fa-refresh"></i></button>
     </div>		  
   </div>
-  <div class="col-sm-12 padding0" style="padding-bottom:20px;" is-role-visible='["accountant", "accountant_clerk"]' email="currentUser.email" ng-if="newStudent">
+  <div class="pull-left" style="padding-bottom:20px;" is-role-visible='["accountant", "accountant_clerk"]' email="currentUser.email" ng-if="newStudent">
     <a class="btn btn-primary" href="#/students/new" ng-if="!classId">New Student</a>
     <a class="btn btn-primary" href="#/classes/{{classId}}/students/new" ng-if="classId">New Student</a>
   </div>
-  
   <div request-loading is-loading="requestLoading"></div>
   <figure class=" col-sm-12 padding0" ng-show="!requestLoading && totalStudents > 0">
     <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
@@ -86,7 +87,7 @@
 	  <th st-sort="lastName">Name</th>
 	  <th st-sort="balance">Batch</th>
 	  <th st-sort="balance">Standard</th>
-	  <th st-sort="balance" ng-if="!isRemove">Classes</th>
+	  <th st-sort="balance" ng-if="!isRemove">Class</th>
 	  <th ng-if="isRemove"></th>
 	</tr>
       </thead>
@@ -117,8 +118,8 @@
 		</ul>
 	      </div>
 	    </span>
-	    <span ng-if="row.has_hostel" class="green paddingR10"><i class="fa fa-bed"></i></span>
-	    <span ng-if="row.enable_sms" class="green"><i class="fa fa-mobile-phone"></i></span>
+	    <span ng-if="row.has_hostel" class="green paddingR10" uib-tooltip="Hostalite"><i class="fa fa-bed"></i></span>
+	    <span ng-if="row.enable_sms" class="green" uib-tooltip="SMS Enabled" ><i class="fa fa-mobile-phone"></i></span>
 	  </td>
 	  <td>{{row.batch}}</td>
 	  <td>{{row.standard}}</td>
