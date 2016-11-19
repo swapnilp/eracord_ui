@@ -1,37 +1,44 @@
 <div class="container">
-  <div class="col-sm-12 textLeft">
-    <h2>Sub Class For {{division.class_name}}</h2>
-    <div class="studentShow col-sm-12" style="margin:20px 0;">
-      <p>&nbsp;</p>
-      <div class="col-sm-12">
-	<h5>
-	  <span class="col-sm-2">Name :</span> 
-	  <span class="col-sm-6" style="font-size:20px;">{{division.name}}</span>
-	</h5>
-      </div>
-      <div class="col-sm-12">
-	<h5>
-	  <span class="col-sm-2">Description :</span> 
-	  <span class="col-sm-6" style="font-size:20px;">{{division.description}}</span>
-	</h5>
-      </div>
-    </div>
-    <div class="col-sm-12">
-      <a class="btn btn-default" href="#/classes/{{classId}}/manage_class" uib-tooltip="Back">
+  <div class="col-sm-12">
+    <h3 class="pull-left"><strong>Division</strong></h3>
+    <div class=" pull-right marginT20">
+      <a class="btn btn-primary" href="#/classes/{{classId}}/manage_class" uib-tooltip="Back">
 	<i class="fa fa-arrow-circle-left"></i>
       </a>
 
-      <button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openAssignStudentModel('lg')" uib-tooltip="Assign Students">
+      <button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openAssignStudentModel('lg')" uib-tooltip="Assign Student">
 	<i class="fa fa-user-plus"></i>
       </button>
-      <button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openTimetableModel('lg')" uib-tooltip="Show timetable">
+      <button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openTimetableModel('lg')" uib-tooltip="Time Table">
 	<i class="fa fa-clock-o"></i>
       </button>
-      <button class="btn btn-warning" ng-click="deleteDivision();" uib-tooltip="Delete division">
+      <button class="btn btn-danger" ng-click="deleteDivision();" uib-tooltip="Delete">
 	<i class="fa fa-trash"></i>
       </button>
     </div>
   </div>
+  <div request-loading is-loading="loadDivision"></div>
+  <div class="studentShow col-sm-12" style="margin:10px 0;" ng-show="!loadDivision">
+    <div class="row">
+      <h5>
+	<span class="col-sm-2"><strong>Division :</strong></span> 
+	<span class="col-sm-6" >{{division.name}}</span>
+      </h5>
+    </div>
+    <div class="row">
+      <h5>
+	<span class="col-sm-2"><strong>Class :</strong></span> 
+	<span class="col-sm-6" >{{division.class_name}}</span>
+      </h5>
+    </div>
+    <div class="row">
+      <h5>
+	<span class="col-sm-2"><strong>Description :</strong></span> 
+	<span class="col-sm-6" >{{division.description}}</span>
+      </h5>
+    </div>
+  </div>
+  
   <div class="col-sm-12 textLeft">
     <div division-students class-id="{{classId}}" division-id="{{divisionId}}" reload-student="reloadStudent"></div>
   </div>

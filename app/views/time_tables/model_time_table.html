@@ -1,10 +1,13 @@
 <div class="modal-header bg-primary">
   <h3 class="modal-title text-center ">Time Table</h3>
-  <a ng-click="cancel()" style="float: right;position: absolute;right: 15px;top: 19px;cursor:pointer;color:#999;"><i class="fa fa-times"></i></a>
+  <a ng-click="cancel()" class="textWhite" style="float: right;position: absolute;right: 15px;top: 19px;cursor:pointer;"><i class="fa fa-times"></i></a>
 </div>
-<div class="modal-body" style="min-height:300px;overflow-y: auto; overflow-x: hidden;" id="printRecipt">
-  <button class="btn btn-link pull-right userColor" ng-print print-element-id="printRecipt" uib-tooltip="Print" tooltip-placement="bottom"><i class="fa fa-print fa-2x"></i></button>
+<div class="modal-body" style="min-height:300px;overflow-y: auto; overflow-x: hidden;" id="printRecipt" >
+  <button ng-if="count > 0" class="btn btn-link pull-right userColor" ng-print print-element-id="printRecipt" uib-tooltip="Print" tooltip-placement="bottom"><i class="fa fa-print fa-2x"></i></button>
   <div request-loading is-loading="requestLoading"></div>
+  <div ng-if="count == 0" class="text-center">
+    <h2 class="text-warning">Timetable not yet available.</h2>
+  </div>
   <div ng-repeat="day in days" ng-if="timetable[day].length > 0">
     <h4><strong>{{day}}</strong></h4>
     <table st-table="rowCollection" class="table organisationCoursesTable table-striped">

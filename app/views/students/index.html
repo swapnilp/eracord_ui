@@ -47,7 +47,15 @@
     </div>
   </span>
   <div class="examFilterDiv col-sm-12 padding0"> 
-    <div class="pull-left marginB15">
+    <div class="pull-left marginT10" ng-show="!requestLoading">
+      <span ng-if="totalStudents > 0">
+	Records : <strong> {{totalStudents}}</strong>
+      </span>
+      <span ng-if="totalStudents === 0">
+	No data found
+      </span>
+    </div>
+    <div class="pull-right marginB15">
       <input type="text" ng-model="filter.name" dl-key-code="pageChanged(1);" code="13" placeholder="Enter name or mobile" value="{{filter.name}}" style="width:230px;display:inline;" class="form-control">
       <span  ng-if="isFilter">
 	<select class="form-control ng-touched" ng-model="filter.class" ng-options="cls.id as cls.name for cls in classes" style="width:200px;display:inline;">
@@ -60,28 +68,20 @@
 	</span>
       </span>
       <button class="btn btn-primary" ng-click="pageChanged(1);" uib-tooltip="Filter"><i class="fa fa-filter"></i></button>
-      <button class="btn btn-primary" ng-click="resetFilter();" uib-tooltip="Reset Filter"><i class="fa fa-refresh"></i></button>
+      <button class="btn btn-primary" ng-click="resetFilter();" uib-tooltip="Reset"><i class="fa fa-refresh"></i></button>
     </div>		  
   </div>
   <div class="col-sm-12 padding0" style="padding-bottom:20px;" is-role-visible='["accountant", "accountant_clerk"]' email="currentUser.email" ng-if="newStudent">
     <a class="btn btn-primary" href="#/students/new" ng-if="!classId">New Student</a>
     <a class="btn btn-primary" href="#/classes/{{classId}}/students/new" ng-if="classId">New Student</a>
   </div>
-  <br /><br /><br />
-  <div class="alert alert-warning col-sm-12" ng-show="!requestLoading">
-    <span ng-if="totalStudents > 0">
-      Total Students are - {{totalStudents}}
-    </span>
-    <span ng-if="totalStudents === 0">
-      No data found
-    </span>
-  </div>
+  
   <div request-loading is-loading="requestLoading"></div>
-  <figure class="highlight col-sm-12" ng-show="!requestLoading && totalStudents > 0">
-    <table st-table="rowCollection" class="table organisationCoursesTable">
+  <figure class=" col-sm-12 padding0" ng-show="!requestLoading && totalStudents > 0">
+    <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
       <thead>
 	<tr>
-	  <th st-sort="firstName" ng-if="!isRollNumber">Number</th>
+	  <th st-sort="firstName" ng-if="!isRollNumber">Sr. No.</th>
 	  <th class="text-center" st-sort="firstName" ng-if="isRollNumber">Roll Number</th>
 	  <th st-sort="lastName">Name</th>
 	  <th st-sort="balance">Batch</th>
@@ -92,9 +92,34 @@
 	</tr>
       </thead>
       <tbody>
-	<tr dir-paginate-start="row in students | toArray:false | itemsPerPage: 10" total-items="totalStudents" current-page="pagination.current" pagination-id="student"  class="pointer">
+	<tr dir-paginate="row in students | toArray:false | itemsPerPage: 10" total-items="totalStudents" current-page="pagination.current" pagination-id="student">
 	  <td class="text-center" ng-click="openInfo(row);"><span ng-if="showRollNumber">{{ row.roll_number || '-'}} </span><span ng-if="!showRollNumber">{{ $index+1 + ((pagination.current - 1) * 10)}}</span></td>
-	  <td ng-click="openInfo(row);"><span>{{row.name}} <span ng-if="row.has_hostel"><i class="fa fa-bed"></i></span></span></td>
+	  <td ng-click="openInfo(row);">
+	    <a class="linkOverwite" href="#/students/{{row.id}}/show">{{row.name}}</a>&nbsp;&nbsp;
+	    <span uib-dropdown ng-if="row.assign_to !== ''" class="paddingR10" is-open="row.isopen">
+	      <div class="btn-group" ng-mouseover="row.isopen = true" ng-mouseleave="row.isopen = false" dropdown>
+		<a  id="simple-dropdown" class="pointer" uib-dropdown-toggle >
+		  <i class="fa fa-info-circle"></i>
+		</a>
+		<ul uib-dropdown-menu aria-labelledby="simple-dropdown" class="padding5">
+		  <li>
+		    Parent name - {{row.parent_name}}
+		  </li>
+		  <li>
+		    Mobile - {{row.p_mobile}}
+		  </li>
+		  <li ng-if="has_show_pay_info">
+		    <span>
+		      <a class="btn btn-primary" href="#/students/{{row.id}}/pay_fee" ng-if="row.remaining_fee > 0">Pay Fee</a>
+		      <button class="btn btn-primary" ng-if="row.remaining_fee === 0" disabled>Pay Fee</button>
+		      <a class="btn btn-primary" href="#/students/{{row.id}}/payment_info" >Payment Info</a>
+		    </span> 
+		  </li>
+		</ul>
+	      </div>
+	    </span>
+	    <span ng-if="row.has_hostel"><i class="fa fa-bed"></i></span>
+	  </td>
 	  <td ng-click="openInfo(row);">{{row.batch}}</td>
 	  <td ng-click="openInfo(row);">{{row.standard}}</td>
 	  <td ng-click="openInfo(row);"><i class="fa fa-{{row.enable_sms ? 'check' : 'times'}}" ng-class="{'green': row.enable_sms, 'red': !row.enable_sms}"></i></td>
@@ -121,6 +146,6 @@
       </tbody>
     </table>
   </figure>
-  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)" pagination-id="student" ng-show="totalStudents > 9"></dir-pagination-controls>
+  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)" pagination-id="student" ng-show="totalStudents > 9" class="col-sm-12 text-center"></dir-pagination-controls>
 </div>
 

@@ -1,17 +1,19 @@
-<div class="modal-header">
-  <h3 class="modal-title">Assign Student to <span ng-if="isDivision">Division</span><span ng-if="!isDivision">class</span></h3>
-  <a ng-click="cancel()" style="float: right;position: absolute;right: 15px;top: 19px;cursor:pointer;color:#999;"><i class="fa fa-times"></i></a>
+<div class="modal-header bg-primary">
+  <h3 class="modal-title text-center">Assign Student</h3>
+  <a ng-click="cancel()" class="textWhite" style="float: right;position: absolute;right: 15px;top: 19px;cursor:pointer;"><i class="fa fa-times"></i></a>
 </div>
 <div class="modal-body" style="min-height:300px;overflow: auto;">
 
   <div request-loading is-loading="requestLoading"></div>
-  <div class="remainingStudentsList col-md-6" ng-show="!requestLoading">
-    <div class="col-md-12 padding0 marginB10" ng-if="isDivision">
-      <a class="pointer" ng-click="toggleRemaining();">{{allStudents ? 'Remaining stduents' : 'All students'}}</a>
-    </div>
-    <a ng-click="selectAll();" class="pointer">Select All</a>&nbsp;&nbsp;&nbsp;
+  <div class="pull-right marginB20" ng-show="!requestLoading">
+    <a ng-click="selectAll();" class="pointer">Select All</a>&nbsp;&nbsp;&#124;&nbsp
     <a ng-click="unselectAll();" class="pointer">Unselect All</a>
-    <label ng-repeat="student in remainingStudents" class="checkBoxStyle">
+    <span ng-if="isDivision">&nbsp;&#124;&nbsp</span>
+    <a class="pointer" ng-click="toggleRemaining();" ng-if="isDivision">{{allStudents ? 'Remaining stduents' : 'All students'}}</a>
+  </div>
+  <div class="assignStudentsList col-lg-12" ng-show="!requestLoading">
+    
+    <label ng-repeat="student in remainingStudents" class="checkBoxStyle col-lg-6">
       <input id="student_{{student.id}}" type="checkbox" checklist-model="studentList" checklist-value="student.id" ng-model="student.checked"> 
       <label for="student_{{student.id}}"></label>
       {{student.name}} - {{student.p_mobile}}
@@ -19,9 +21,8 @@
   </div>
 </div>
 <div style="margin:20px 0;" class="modal-footer">
-  <strong class="pull-left paddingLeft20">{{studentList.length}} students are selected</strong>
+  <strong class="pull-left paddingLeft20">Selected : {{studentList.length}}</strong>
   <button class="btn btn-primary" ng-click="saveStudentList()" ng-disabled="((studentList == 0) || dataLoading)">Save</button>
   <span button-req-load is-loading="dataLoading"></span>
-  <button ng-click="cancel();" class="btn btn-default">Back</button>
 </div>
 

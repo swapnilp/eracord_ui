@@ -188,6 +188,15 @@ input, select, option {
   width: 100%;
 }
 
+.assignStudentsList > label {
+  margin-bottom:6px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  line-height: 18px;
+  display: -webkit-box;
+}
+
 .classExamsTable tr.created:hover{
   background: #E6AEAE;
 }
@@ -272,8 +281,20 @@ input, select, option {
   padding: 0;
 }
 
+.paddingR10 {
+  padding-right: 10px;;
+}
+
+.marginT5 {
+  margin-top: 5px;
+}
+
 .marginT10 {
   margin-top: 10px;
+}
+
+.marginT15 {
+  margin-top: 15px;
 }
 
 .marginT20 {
@@ -291,7 +312,12 @@ input, select, option {
 .marginB10 {
   margin-bottom: 10px;
 }
-
+.marginB15 {
+  margin-bottom: 15px;
+}
+.marginB20 {
+  margin-bottom: 20px;
+}
 .marginB0 {
   margin-bottom: 0px;
 }
@@ -377,6 +403,10 @@ select:-moz-focusring {
 
 .textRed {
   color: red;
+}
+
+.textWhite {
+  color: #FFF;
 }
 
 .blueColor {
@@ -1071,4 +1101,15 @@ a.disabled {
 
 .modal-header {
   border-radius: 5px 5px 0 0;
+}
+.linkOverwite {
+  color:#000;
+}
+
+.linkOverwite:focus {
+  outline: 0;
+}
+
+.linkOverwite:hover {
+  text-decoration: none;
 }

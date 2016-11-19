@@ -39,6 +39,7 @@ angular.module('eracordUiApp.controller')
       $scope.classId = $routeParams.class_id;
       $scope.divisionId = $routeParams.division_id;
       $scope.reloadStudent = 1;
+      $scope.loadDivision = true;
       jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
       
       jkci_classes.one("sub_classes", $scope.divisionId).get().then(function(data) {
@@ -46,6 +47,7 @@ angular.module('eracordUiApp.controller')
 	  $scope.division = data.sub_class;
 	}else {
 	}
+	$scope.loadDivision = false;
       });
 
       $scope.openAssignStudentModel = function(size) {
@@ -87,7 +89,7 @@ angular.module('eracordUiApp.controller')
       }
 
       $scope.deleteDivision = function() {
-	if($window.confirm('Are you sure?')){
+	if($window.confirm("Do you really want to delete division '"+$scope.division.name+"' ?")){
 	  jkci_classes.one("sub_classes", $scope.divisionId).remove().then(function(data) {
 	    if(data.success) {
 	      $location.path("/classes/"+$routeParams.class_id+"/manage_class").replace();

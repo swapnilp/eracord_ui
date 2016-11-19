@@ -1,14 +1,14 @@
-<div class="modal-header">
-  <h3 class="modal-title">Student Allotment</h3>
-  <a ng-click="cancel()" style="float: right;position: absolute;right: 15px;top: 19px;cursor:pointer;color:#999;"><i class="fa fa-times"></i></a>
+<div class="modal-header bg-primary">
+  <h3 class="modal-title text-center">Student Allotment</h3>
+  <a ng-click="cancel()" class="textWhite" style="float: right;position: absolute;right: 15px;top: 19px;cursor:pointer;"><i class="fa fa-times"></i></a>
 </div>
-<div class="modal-body" style="min-height:300px;">
+<div class="modal-body">
   <div request-loading is-loading="requestLoading"></div>
   <div ng-show="!requestLoading">
     <div ng-show="vm.student.error" class="alert alert-danger">{{vm.student.error}}</div>
     <form name="form" ng-submit="registerStudentHostel()" role="form" autocomplete="off">
       <div class="form-group" ng-class="{ 'has-error': form.hostel_id.$dirty && form.hostel_id.$error.required }">
-	<label for="name">Hostel</label>
+	<label for="name">Choose hostel</label>
 	<select class="form-control ng-touched" name="hostel_id" ng-model="vm.student.hostel_id" ng-options="hostel.id as hostel.name for hostel in hostels" required>
 	  <option value="" class="hide">Select Hostel</option>
 	</select>
@@ -18,11 +18,9 @@
       <div class="form-actions" style="padding-bottom:20px;">
 	<button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Register</button>
 	<img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-	<a class="btn btn-default" ng-click="cancel()">Cancel</a>
-	<a class="btn btn-primary pointer" ng-click="deallocateHostel();" ng-if="dispalyDeallocate">Deallocate Hostel</a>
+	<a class="btn btn-primary pointer" ng-click="deallocateHostel();" ng-if="dispalyDeallocate">Deallocate</a>
       </div>
     </form>
-    
   </div>
 </div>
 

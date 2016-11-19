@@ -20,6 +20,7 @@ angular.module('eracordUiApp.controller')
       jkci_classes.one("sub_classes", $scope.divisionId).customGET("get_time_table").then(function(data){
 	if(data.success) {
 	  $scope.timetable = data.timetable;
+	  $scope.count = data.count;
 	}else {
 	  $uibModalInstance.dismiss('cancel');
 	}
@@ -44,6 +45,7 @@ angular.module('eracordUiApp.controller')
       jkci_classes.customGET("get_time_table").then(function(data){
 	if(data.success) {
 	  $scope.timetable = data.timetable;
+	  $scope.count = data.count;
 	}else {
 	  $uibModalInstance.dismiss('cancel');
 	}
