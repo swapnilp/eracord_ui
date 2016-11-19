@@ -4,9 +4,9 @@
 </div>
 <div class="modal-body" style="min-height:300px;">
   <div request-loading is-loading="requestLoading"></div>
-  <figure class="highlight col-sm-12" ng-show="!requestLoading">
-    <div class="remainingStudentsList col-md-6">
-      <label ng-repeat="subject in subjects" class="checkBoxStyle">
+  <figure class="col-sm-12" ng-show="!requestLoading">
+    <div class="assignStudentsList">
+      <label ng-repeat="subject in subjects" class="checkBoxStyle col-md-4">
 	<input id="subject_{{subject.id}}" type="checkbox" checklist-model="subjectsList" checklist-value="subject.id"> 
 	<label for="subject_{{subject.id}}"></label>
 	{{subject.std_name}}

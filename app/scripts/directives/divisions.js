@@ -115,7 +115,7 @@ app.directive('divisionStudents', function(Restangular) {
       };
 
       scope.removeStudent = function(student) {
-	if($window.confirm('Are you sure?')){
+	if($window.confirm("Do you really want to remove '"+student.name+"' from this division?")){
 	  jkci_classes.one("sub_classes", scope.divisionId).one('remove_student', student.id).remove().then(function(data){
 	    if(data.success) {
 	      scope.students = _.reject(scope.students, function(obj){return obj.id == student.id});

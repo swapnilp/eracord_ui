@@ -4,12 +4,12 @@
 </div>
 <div class="modal-body" style="min-height:300px;">
   <div request-loading is-loading="requestLoading"></div>
-  <figure class="highlight col-sm-12" ng-show="!requestLoading">
-    <div class="remainingStudentsList col-md-6">
-      <label class="checkBoxStyle" ng-repeat="teacher in teachers">
+  <figure class=" col-sm-12" ng-show="!requestLoading">
+    <div class="assignStudentsList ">
+      <label class="checkBoxStyle col-md-6" ng-repeat="teacher in teachers">
       <input name="selectTeacher" id="teacher_{{teacher.id}}" ng-value="{{teacher.id}}" class="active" type="radio" ng-model="selectedTeacher" ng-change="selectTeacher(teacher);">
       <label for="teacher_{{teacher.id}}"></label>
-      {{teacher.name}}
+      {{teacher.name | capitalize}} - {{teacher.mobile}}
     </label>
     </div>
   </figure>

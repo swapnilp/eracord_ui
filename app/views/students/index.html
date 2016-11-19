@@ -1,4 +1,5 @@
-<div style="margin:20px 0;">
+<div>
+  <h3 class="" ng-if="!classId">Students</h3>
   <div ng-if="!showOptions">
     <div class="pull-right">
       <span is-role-visible='["manage_roll_number"]' email="currentUser.email">
@@ -7,12 +8,12 @@
 	</a>
       </span>
       <span is-role-visible='["manage_class_student"]' email="currentUser.email" ng-if="classId">
-	<button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openAssignStudentModel('lg')" uib-tooltip="Assign Students">
+	<button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openAssignStudentModel('lg')" uib-tooltip="Assign Student">
 	  <i class="fa fa-users"></i>
 	</button>
       </span>
       <span is-role-visible='["manage_student_subject"]' email="currentUser.email">
-	<a href="#/classes/{{classId}}/manage_student_subjects" class="btn btn-primary" ng-if="classId" uib-tooltip="Manage Subjects">
+	<a href="#/classes/{{classId}}/manage_student_subjects" class="btn btn-primary" ng-if="classId" uib-tooltip="Manage Subject">
 	  <i class="fa fa-folder-o"></i>
 	</a>
       </span>
@@ -50,7 +51,7 @@
     
   </div>
   
-  <div class="examFilterDiv col-sm-12 padding0"> 
+  <div class="examFilterDiv col-sm-12 padding0 marginT20"> 
     <div class="pull-left marginT10" ng-show="!requestLoading">
       <span ng-if="totalStudents > 0">
 	Records : <strong> {{totalStudents}}</strong>

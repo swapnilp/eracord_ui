@@ -19,11 +19,11 @@
 	  </a>
 	  <ul class="dropdown-menu">
 	    <li class="pointer flex" ng-click="showStudentsInfo(students[n].id)">
-	      <div class="padding5 col-sm-12">
-		<span style="width:20%"><i class="fa fa-user fa-2x"></i></span>
-		<span class="pull-right text-right" style="width:80%"> {{students[n].name}}</span>
-		<br/>
-		<span class="pull-right"> {{students[n].mobile}}</span>
+	      <div class="padding5 col-sm-12" style="border-bottom:1px solid;">
+		<span style="width:20%"><i class="fa fa-user fa-4x"></i></span>
+		<span class="pull-right text-right" style="width:70%;color:#000;font-size:12px;"> 
+		  {{students[n].name}} <br/> {{students[n].mobile}}
+		</span>
 	      </div>
 	    </li>
 	    <li class="text-right padding5" ng-if="students[n].dues < 0">

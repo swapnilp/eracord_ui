@@ -1,37 +1,81 @@
 <div class="modal-header bg-primary">
-  <h3 class="modal-title text-center">{{student.name}} Info</h3>
+  <h3 class="modal-title text-center">Contact Card</h3>
   <a ng-click="cancel()" class="textWhite" style="float: right;position: absolute;right: 15px;top: 19px;cursor:pointer;"><i class="fa fa-times"></i></a>
 </div>
 <div class="modal-body col-sm-12" style="min-height:300px;">
   <div request-loading is-loading="requestLoading"></div>
   <div ng-show="!requestLoading">
-    <div class="col-sm-4">
-      <i class="fa fa-user fa-4x userColor"></i>
+    <div class="col-sm-4 text-center">
+      <i class="fa fa-user fa-4x userColor" style="font-size: 120px;"></i>
     </div>
     <div class="col-sm-8">
-      <div>Name - <strong>{{student.name}}</strong></div>
-      <div>Mobile - <strong>{{student.mobile}}</strong></div>
-      <div>
-	Parent Name - <strong>{{student.parent_name}}</strong>
-      </div>
-      <div>Parent Mobile - <strong>{{student.p_mobile}}</strong></div>
-      <div>Class - <strong>{{student.class_names}}</strong></div>
-      <div>Subjects - <strong>{{student.subjects}}</strong></div>
+      <table>
+	<tbody>
+	  <tr>
+	    <td width="90px;">
+	      <strong>Name</strong>
+	    </td>
+	    <td>
+	      {{student.name | capitalize}}
+	    </td>
+	  </tr>
+	  <tr>
+	    <td>
+	      <strong>Mobile</strong>
+	    </td>
+	    <td>
+	      {{student.mobile}}
+	    </td>
+	  </tr>
+	  <tr>
+	    <td>
+	      <strong>Parent</strong>
+	    </td>
+	    <td>
+	      {{student.parent_name | capitalize}}
+	    </td>
+	  </tr>
+	  <tr>
+	    <td>
+	      <strong>p Mobile</strong>
+	    </td>
+	    <td>
+	      {{student.p_mobile}}
+	    </td>
+	  </tr>
+	  <tr>
+	    <td>
+	      <strong>Class</strong>
+	    </td>
+	    <td>
+	      {{student.class_names}}
+	    </td>
+	  </tr>
+	  <tr>
+	    <td>
+	      <strong>Subjects</strong>
+	    </td>
+	    <td>
+	      {{student.subjects}}
+	    </td>
+	  </tr>
+	</tbody>
+      </table>
+      
     </div>
     <div request-loading is-loading="absenteeRequestLoading"></div>
     <div class="col-sm-12" ng-show="!absenteeRequestLoading">
       <div class="alert alert-warning mTop20" ng-if="absentee.length > 0">
-	<h5 class="mTop0">Last Month Absentee</h5>
+	<h4 class="mTop0"> <strong>Last Month Absentee</strong></h4>
 	<div ng-repeat="absenty in absentee">
-	  {{$index+1}} <strong>{{absenty.date}}</strong>  {{absenty.class_name}}
+	  {{$index+1}}. {{absenty.class_name}} - <strong>{{absenty.date}}</strong>  
 	</div>
       </div>
       <div class="alert alert-success mTop20" ng-if="absentee.length == 0">
-	No class absentee in last Month
+	Regular student in all class
       </div>
     </div>
   </div>
 </div>
 <div class="modal-footer">
-  <a ng-click="cancel()" class="btn btn-default">Close</a>
 </div>
