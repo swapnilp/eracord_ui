@@ -2,7 +2,7 @@
   <h3 class="modal-title text-center ">Time Table</h3>
   <a ng-click="cancel()" class="textWhite" style="float: right;position: absolute;right: 15px;top: 19px;cursor:pointer;"><i class="fa fa-times"></i></a>
 </div>
-<div class="modal-body" style="min-height:300px;overflow-y: auto; overflow-x: hidden;" id="printRecipt" >
+<div class="modal-body" style="min-height:300px;overflow-y: auto; overflow-x: hidden;" id="printRecipt">
   <button ng-if="count > 0" class="btn btn-link pull-right userColor" ng-print print-element-id="printRecipt" uib-tooltip="Print" tooltip-placement="bottom"><i class="fa fa-print fa-2x"></i></button>
   <div request-loading is-loading="requestLoading"></div>
   <div ng-if="count == 0" class="text-center">

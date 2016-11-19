@@ -1,6 +1,7 @@
 <div request-loading is-loading="requestLoading"></div>
 <div style="margin:20px 0;" ng-show="!requestLoading">
-  <a href="#/classes/{{classId}}/divisions/new" class="btn btn-primary">Create Division</a>
+  <!--a href="#/classes/{{classId}}/divisions/new" class="btn btn-primary">Create Division</a-->
+  <a ng-click="newDivisionModel('lg');" class="btn btn-primary">Create Division</a>
   <figure class="highlight col-sm-12"  ng-if="divisions.length > 0">
     <table st-table="rowCollection" class="table organisationCoursesTable">
       <thead>

@@ -17,24 +17,6 @@ angular.module('eracordUiApp.controller')
       return true;
     }
 
-    if($location.path() === "/classes/"+$routeParams.class_id+"/divisions/new") {
-      jkci_classes = Restangular.one("jkci_classes", $routeParams.class_id);
-      $scope.classId = $routeParams.class_id;
-      jkci_classes.get().then(function(data){
-	$scope.classes = data.jkci_class;
-      });
-
-      $scope.registerDivision = function(){
-	jkci_classes.customPOST({sub_class: $scope.vm.sub_class}, "sub_classes").then(function(data) {
-	  if(data.success) {
-	    $location.path("/classes/"+$scope.classId+"/divisions/"+ data.id).replace();
-	  }else {
-	    
-	  }
-	});
-      };
-    }
-
     if($location.path() === "/classes/"+$routeParams.class_id+"/divisions/"+$routeParams.division_id) {
       $scope.classId = $routeParams.class_id;
       $scope.divisionId = $routeParams.division_id;
@@ -100,6 +82,35 @@ angular.module('eracordUiApp.controller')
       };
     }
   }])
+
+  .controller('CreateDivisionCtrl',['$scope', '$uibModalInstance', '$timeout', 'Restangular', 'class_id',
+    function ($scope, $uibModalInstance, $timeout, Restangular, class_id)  {
+      $scope.requestLoading = true;
+      var jkci_classes;
+
+      $scope.classId = class_id;
+
+      jkci_classes = Restangular.one("jkci_classes", $scope.classId);
+
+      jkci_classes.get().then(function(data){
+	$scope.classes = data.jkci_class;
+      });
+
+      $scope.registerDivision = function(){
+	jkci_classes.customPOST({sub_class: $scope.vm.sub_class}, "sub_classes").then(function(data) {
+	  if(data.success) {
+	    $scope.cancel();
+	  }else {
+	    
+	  }
+	});
+      };
+
+      
+      $scope.cancel = function () {
+	$uibModalInstance.dismiss('cancel');
+      };
+    }])
 
   .controller('DivisionAssignStudentCtrl',['$scope', '$uibModalInstance', '$timeout', 'Restangular', 'class_id', 'division_id',
     function ($scope, $uibModalInstance, $timeout, Restangular, class_id, division_id)  {

@@ -14,12 +14,13 @@ app.directive('classDivisions', function(Restangular) {
       updateUrl: '&'
     },
     templateUrl: 'views/divisions/index.html',
-    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', function(scope, Restangular, Flash, $location, $window){
+    controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$uibModal', function(scope, Restangular, Flash, $location, $window, $uibModal){
       var classDivisionLoaded = false;
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       scope.requestLoading = true;
       
       var loadDivisions = function() {
+	scope.requestLoading = true;
 	jkci_classes.customGET("sub_classes").then(function(data) {
 	  if(data.success) {
 	    scope.divisions = data.sub_classes;
@@ -28,6 +29,25 @@ app.directive('classDivisions', function(Restangular) {
 	  scope.requestLoading = false;
 	});
       }
+
+      scope.newDivisionModel = function(size) {
+	var modalInstance = $uibModal.open({
+	  animation: true,
+	  templateUrl: 'views/divisions/new_divisions.html',
+	  controller: 'CreateDivisionCtrl',
+	  size: size,
+	  resolve: {
+	    class_id: function(){
+	      return scope.classId;
+	    }
+	    
+	  }
+	});
+	modalInstance.result.then(null, function () {
+	  loadDivisions();
+	  //$scope.reloadStudent = $scope.reloadStudent + 1;
+	});
+      };
       
       scope.$watch('classDivisionTab', function(){
 	if(scope.classDivisionTab === 'true') {
