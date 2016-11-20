@@ -1,118 +1,113 @@
 <div request-loading is-loading="studentLoading"></div>
 <div class="container" ng-show="!studentLoading">
-  <div class="col-sm-12 textLeft">
-    <div class="studentShow col-sm-12">
-      <p>&nbsp;</p>
+  <div class="col-sm-12 marginB20 ">
+    <div class="row">
       <div class="col-sm-12">
-	<h5>
-	  <span class="col-sm-2">Name :</span>
-	</h5>
-	<span style="font-size:20px;">{{student.name}}</span>
-      </div>
-      <div class="col-sm-12">
-	<h5>
-	  <span class="col-sm-2">Mobile :</span> 
-	</h5>
-	<span style="font-size:20px;">{{student.mobile}}</span>
-      </div>
-      <div class="col-sm-12">
-	<h5>
-	  <span class="col-sm-2">Parent Name:</span> 
-	</h5>
-	<span style="font-size:20px;">{{student.parent_name}}</span>
-      </div>
-      <div class="col-sm-12">
-	<h5>
-	  <span class="col-sm-2">Parent Mobile :</span> 
-	  </h5>
-	<span style="font-size:20px;">{{student.p_mobile}}</span>
-      </div>
-      <div class="col-sm-12">
-	<h5>
-	  <span class="col-sm-2">Subjects :</span> 
-	</h5>
-	<span style="font-size:14px;">{{student.subjects}}</span>
-      </div>
-      <div class="col-sm-12">
-	<h5>
-	  <span class="col-sm-2">Classes :</span> 
-	</h5>
-	<span style="font-size:14px;" ng-repeat="class in classes ">{{class.name}}</span>
-      </div>
-      <div class="col-sm-12" ng-if="has_pay_fee && student">
-	<h5>
-	  <span class="col-sm-2">Remaining Fee :</span> 
-	</h5>
-	<span style="font-size:20px;" ng-if="student">
-	  {{remaining_fee}}
-	</span>
-      </div>
-      <div class="col-sm-12" >
-	<h5>
-	  <span class="col-sm-2">Hostel :</span> 
-	</h5>
-	<span ng-if="student.hostel_id">
-	  <strong>{{student.hostel}}</strong>
-	  <a class="pointer" ng-click="allotmentHostel();">Change hostel</a>
-	</span>
-	<span ng-if="!student.hostel_id">
-	  <a class="pointer" ng-click="allotmentHostel();">Allocate hostel</a>
-	</span>
-
-      </div>
-      <div class="col-sm-12">
-	<h5>
-	  <span class="col-sm-2">Download Progress Report :</span> 
-	</h5>
-	<span style="font-size:20px;" ng-if="student">
-	  <a class="btn btn-primary btn-sm" target="_blank" href="{{hostUrl}}/students/{{student.id}}/download_report.pdf?&authorization_token={{token}}" rel="nofollow">Download Report</a>
-	</span>
+	<h3 class="pull-left">Student Information</h3>
+	<div class="pull-right padding0" style="margin:15px 0px;">
+	  <div class="left mRight10">
+	    <button class="btn btn-primary" ng-click="goBack();" uib-tooltip="Back">
+	      <i class="fa fa-arrow-circle-o-left"></i>
+	    </button>
+	    <a class="btn btn-primary" target="_blank" href="{{hostUrl}}/students/{{student.id}}/download_report.pdf?&authorization_token={{token}}" rel="nofollow" uib-tooltip="Download Report"><i class="fa fa-download"></i></a>
+	    <button class="btn btn btn-default hide" onclick="return confirm('Are you sure?')" href="/student/10/disable_student">
+	      Disable Student
+	    </button>
+	  </div>
+	</div>
       </div>
     </div>
-    <div class="col-sm-12 left padding0" style="margin:15px 0px;">
-      <div class="left mRight10" ng-if="student">
-	<a class="btn btn-primary" href="#/students/{{student.id}}/edit">Edit</a>
+    <div class="col-sm-12 padding0">
+      <div class="col-sm-4 paddingLeft0">
+	<div class="col-sm-12 padding0 text-center borderBottom marginB10">
+	  <i class="fa fa-user" style="font-size:150px;"></i>
+	</div>
+	<div class="col-sm-12 padding0">
+	  <span class="pull-right mRight10"  is-role-visible='["toggle_student_sms"]' email="currentUser.email" ng-if="student">
+	    <toggle-switch class=""
+			   ng-model="student.enable_sms"
+			   knob-label="SMS" ng-click="toggleStudentSms()">
+	    </toggle-switch>
+	  </span>
+	  <a class="btn btn-primary" href="#/students/{{student.id}}/edit" ng-if="student" uib-tooltip="Edit"><i class="fa fa-edit"></i></a>
+	  <a class="btn btn-primary" href="#/students/{{student.id}}/payment_info" ng-if="has_show_pay_info && student" uib-tooltip="Payment Info"><i class="fa fa-inr"></i></a>
+	  <a class="btn btn-primary" href="#/students/{{student.id}}/pay_fee" ng-if="has_pay_fee && student && remaining_fee > 0" uib-tooltip="Pay Now">Pay Fee</a>
+	  <a class="btn btn-primary " ng-if="remaining_fee == 0" disabled> Pay Fee</a>
+	</div>
       </div>
-      <div class="left mRight10" ng-if="has_pay_fee && student">
-	<a class="btn btn-primary" href="#/students/{{student.id}}/pay_fee" ng-if="remaining_fee > 0" uib-tooltip="Remaining fee are {{remaining_fee}}">Pay Fee</a>
-	<button class="btn btn-primary" ng-if="remaining_fee == 0" disabled>Pay Fee</a>
-      </div>
-      
-      <div class="left mRight10" ng-if="has_show_pay_info && student">
-	<a class="btn btn-primary" href="#/students/{{student.id}}/payment_info">Payment Info</a>
-      </div>
-      <div class="left mRight10"  is-role-visible='["toggle_student_sms"]' email="currentUser.email" ng-if="student">
-	<toggle-switch class="mLeft10"
-		       ng-model="student.enable_sms"
-		       knob-label="SMS" ng-click="toggleStudentSms()">
-	</toggle-switch>
-      </div>
-      <div class="left mRight10">
-	<button class="btn btn btn-default" onclick="return confirm('Are you sure?')" href="/student/10/disable_student">
-	  Disable Student
-	</button>
-	<button class="btn btn-default" ng-click="goBack();">
-	  Back
-	</button>
+      <div class="col-sm-8 paddingLeft0">
+	<div class="col-sm-12 padding0">
+	  <h4><u>Personal Details</u></h4>
+	</div>
+	<div class="col-sm-6 paddingLeft0">
+	  <strong class="col-sm-4 padding0">Name</strong>
+	  <span class="col-sm-8 padding0">{{student.name}}</span>
+	</div>
+	<div class="col-sm-6 paddingLeft0">
+	  <strong class="col-sm-4 padding0">Mobile</strong>
+	  <span class="col-sm-8 padding0">{{student.mobile}}</span>
+	</div>
+	<div class="col-sm-6 paddingLeft0">
+	  <strong class="col-sm-4 padding0">Parent Name</strong>
+	  <span class="col-sm-8 padding0">{{student.parent_name}}</span>
+	</div>
+	<div class="col-sm-6 paddingLeft0">
+	  <strong class="col-sm-4 padding0">Parent Mobile</strong>
+	  <span class="col-sm-8 padding0">{{student.p_mobile}}</span>
+	</div>
+	<div class="col-sm-12 padding0 marginT20">
+	  <h4><u>Academic Details</u></h4>
+	</div>
+	<div class="col-sm-6 paddingLeft0">
+	  <strong class="col-sm-4 padding0">Class</strong>
+	  <span class="col-sm-8 padding0"><span ng-repeat="class in classes ">{{class.name}}</span></span>
+	</div>
+	<div class="col-sm-6 paddingLeft0" ng-if="has_pay_fee && student">
+	  <strong class="col-sm-4 padding0">Remaining Fee</strong>
+	  <span class="col-sm-8 padding0"><i class="fa fa-inr"></i> {{remaining_fee | number}}</span>
+	</div>
+	<div class="col-sm-6 paddingLeft0">
+	  <strong class="col-sm-4 padding0">Subjects</strong>
+	  <span class="col-sm-8 padding0"><span class="tag label label-primary" style="display:inline-table; margin: 0 10px 0 0;" ng-repeat="sub in student.subjects">{{sub}}</span></span>
+	</div>
+	
+	
+	<div class="col-sm-6 paddingLeft0">
+	  <strong class="col-sm-4 padding0">Hostel</strong>
+	  <span class="col-sm-8 padding0">
+	    {{student.hostel}}
+
+	    <span ng-if="student.hostel_id">
+	      &nbsp;&nbsp; <a class="pointer" style="font-size: 12px;" ng-click="allotmentHostel();">Change hostel</a>
+	    </span>
+	    <span ng-if="!student.hostel_id">
+	      <a class="pointer"  ng-click="allotmentHostel();">Allocate hostel</a>
+	    </span>
+	  </span>
+	</div>
       </div>
     </div>
   </div>
-  <div class="col-sm-12 textLeft">
-    <div class=" padding0 pull-left">
-      <label class="btn active btn-default" ng-repeat="graphType in ['all', 'subject_wise']">
-	<input name="cssPre1" id="css2" type="radio" ng-value="graphType" ng-model="selectedGraphType" ng-click="loadGraphByType(graphType);">
-	{{graphType}}
-      </label>
+  <hr class="col-sm-12 padding0">
+  <div class="col-sm-12 textRight ">
+    <div class="row">
+      <div class="col-sm-2 pull-right padding0">
+	<select id="selectTime" class="form-control ng-touched" ng-model="selectedTimeZone" ng-change="loadGraphByTime(selectedTimeZone);" ng-options="
+																		       value.id as value.name for value in [{id:'day', name: 'Day'}, {id: 'week', name: 'Week'}, {id: 'month',name: 'Month' }]" >
+	</select>
+      </div>
+      <label class="pull-right marginT5" >&nbsp;&nbsp;Frequency&nbsp;&nbsp;:&nbsp;</label>
+      <div class="col-sm-2 pull-right padding0">
+	<select class="form-control ng-touched" ng-model="selectedGraphType" ng-change="loadGraphByType(selectedGraphType);" ng-options="value.id as value.name for value in [{id: 'all', name: 'All'}, {id: 'subject_wise', name: 'Subject Wise'}]" >
+	</select>
+      </div>
+      <label class="pull-right marginT5">Type&nbsp;&nbsp;:&nbsp;</label>
     </div>
-    <div class=" padding0 pull-right">
-      <label class="btn active btn-default" ng-repeat="timeZone in ['day', 'week', 'month']">
-	<input name="cssPre" id="css1" type="radio" ng-value="timeZone" ng-model="selectedTimeZone" ng-click="loadGraphByTime(timeZone);">
-	{{timeZone}}
-      </label>
+    <div class="studentInfo paddingTop20" style="position:relative;">
+      <canvas id="line" height="70" class="chart chart-line " chart-data="data"
+	      chart-labels="labels" chart-legend="true" chart-series="series"
+	      chart-click="onClick">
+      </canvas> 
     </div>
-    <canvas id="line" class="chart chart-line" chart-data="data"
-	    chart-labels="labels" chart-legend="true" chart-series="series"
-	    chart-click="onClick" >
-    </canvas> 
   </div>
 </div>

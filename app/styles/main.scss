@@ -1121,3 +1121,13 @@ a.disabled {
 .bold {
   font-weight: bold;
 }
+
+.borderBottom {
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.studentInfo chart-legend ul {
+  position:absolute;
+  top: 0;
+  left: 20px;
+}
