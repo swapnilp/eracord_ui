@@ -1,123 +1,144 @@
-<div style="margin:20px 0;">
-  Filter Student <input ng-model="search"> 
-  <button ng-if="!addMarksFlag && publishEnable && remainingLength == 0 && exam.verify_result && exam.verify_absenty" class="btn btn-primary" ng-click="publishExam()">
-    Publish Exam
-  </button>
-  <button class="btn btn-primary" ng-if="!exam.verify_result && !addMarksFlag && exam.verify_absenty" ng-click="verifyResult();">
-    Verify Result
-  </button>
-  <button class="btn btn-primary" ng-if="!exam.verify_absenty && !addMarksFlag" ng-click="verifyAbsenty();">
-    Verify Absenty
-  </button>
-  <span ng-if="!addMarksFlag && remainingLength > 0">
-    <button class="btn btn-primary" ng-click="addMarks()">Add Marks</button>
-  </span>
-  <span ng-if="addMarksFlag">
-    <button class="btn btn-primary" ng-click="saveMarks()">Save Marks</button>
-    <button class="btn btn-primary" ng-click="cancelAddMarks()">Cancel</button>
-  </span>
-  <span ng-if="savedAlert">
-    Saved
-  </span>
-  
-  <div ng-if="!addMarksFlag">
-    <h2>Remaining Students</h2>
-    <table st-table="rowCollection" class="table organisationCoursesTable">
-      <thead>
-	<tr>
-	  <th st-sort="firstName">Index</th>
-	  <th st-sort="lastName">student</th>
-	  <th st-sort="birthDate">p_mobile</th>
-	  <th st-sort="balance">Add Absenty</th>	
-	  <th st-sort="balance">Marks</th>
-	  <th st-sort="balance">Ignore</th>
-	</tr>
-      </thead>
-      <tbody>
-	<tr ng-repeat="row in examCatlogs| filter:search | remainingStudents">
-	  <td>{{$index + 1}}</td>
-	  <td>{{row.student}}</td>
-	  <td>{{row.p_mobile}}</td>
-	  <td>
-	    <button class="btn btn-primary" ng-click="absentStudent(row);">add Absent</button>
-	  </td>
-	  <td>{{row.marks}}</td>
-	  <td>
-	    <button class="btn btn-primary" ng-click="ignoreStudent(row);">Ignore</button>
-	  </td>
-	</tr>
-      </tbody>
-    </table>
-    
-    <h2>Results</h2>
-    <table st-table="rowCollection" class="table organisationCoursesTable">
-      <thead>
-	<tr>
-	  <th st-sort="firstName">Index</th>
-	  <th st-sort="lastName">student</th>
-	  <th st-sort="birthDate">p_mobile</th>
-	  <th st-sort="balance">Marks</th>
-	  <th> Remove Result</th>
-	</tr>
-      </thead>
-      <tbody>
-	<tr ng-repeat="row in examCatlogs| filter:search | resultedStudents">
-	  <td>{{$index + 1}}</td>
-	  <td>{{row.student}}</td>
-	  <td>{{row.p_mobile}}</td>
-	  <td>{{row.marks}}</td>
-	  <td><button class="btn btn-link" ng-click="removeMarks(row);">Remove</button></td>
-	</tr>
-      </tbody>
-    </table>
+<div style="margin:20px 0;border-top:1px solid #e2e2e2;" class="paddingTop20">
+  <div class="pull-left">
+    <button ng-if="!addMarksFlag && publishEnable && remainingLength == 0 && exam.verify_result && exam.verify_absenty" class="btn btn-primary" ng-click="publishExam()">
+      Publish Exam
+    </button>
+    <button class="btn btn-primary" ng-if="!exam.verify_result && !addMarksFlag && exam.verify_absenty" ng-click="verifyResult();">
+      Verify Result
+    </button>
+    <button class="btn btn-primary" ng-if="!exam.verify_absenty && !addMarksFlag" ng-click="verifyAbsenty();">
+      Verify Absenty
+    </button>
+    <span ng-if="!addMarksFlag && remainingLength > 0">
+      <button class="btn btn-primary" ng-click="addMarks()">Add Marks</button>
+    </span>
+    <span ng-if="addMarksFlag">
+      <button class="btn btn-primary" ng-click="saveMarks()">Save Marks</button>
+      <button class="btn btn-primary" ng-click="cancelAddMarks()">Cancel</button>
+    </span>
+    <span ng-if="savedAlert">
+      Saved
+    </span>
+  </div>
+  <div class="pull-right paddingTop15">
+    Filter Student <input ng-model="search"> 
+  </div>
+  <div class="col-sm-12 padding0 marginT20" ng-if="!addMarksFlag">
+    <uib-tabset justified="true" active="activeTab">
+      <uib-tab  index="0">
+	<uib-tab-heading><i class="icon-bell"></i>Remaining Students <strong>({{(examCatlogs| filter:search | remainingStudents).length}})</strong></uib-tab-heading>
+	<div>
+	  <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
+	    <thead>
+	      <tr>
+		<th st-sort="firstName">Index</th>
+		<th st-sort="lastName">student</th>
+		<th st-sort="birthDate">p_mobile</th>
+		<th st-sort="balance">Add Absenty</th>	
+		<th st-sort="balance">Marks</th>
+		<th st-sort="balance">Ignore</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr ng-repeat="row in examCatlogs| filter:search | remainingStudents">
+		<td>{{$index + 1}}</td>
+		<td>{{row.student}}</td>
+		<td>{{row.p_mobile}}</td>
+		<td>
+		  <button class="btn btn-primary" ng-click="absentStudent(row);">add Absent</button>
+		</td>
+		<td>{{row.marks}}</td>
+		<td>
+		  <button class="btn btn-primary" ng-click="ignoreStudent(row);">Ignore</button>
+		</td>
+	      </tr>
+	    </tbody>
+	  </table>
+	  
+	</div>
+      </uib-tab>
+      <uib-tab  index="1">
+	<uib-tab-heading><i class="icon-bell"></i> Results <strong>({{(examCatlogs| filter:search | resultedStudents).length}})</strong></uib-tab-heading>
+	<div>
+	  <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
+	    <thead>
+	      <tr>
+		<th st-sort="firstName">Index</th>
+		<th st-sort="lastName">student</th>
+		<th st-sort="birthDate">p_mobile</th>
+		<th st-sort="balance">Marks</th>
+		<th> Remove Result</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr ng-repeat="row in examCatlogs| filter:search | resultedStudents">
+		<td>{{$index + 1}}</td>
+		<td>{{row.student}}</td>
+		<td>{{row.p_mobile}}</td>
+		<td>{{row.marks}}</td>
+		<td><button class="btn btn-link" ng-click="removeMarks(row);">Remove</button></td>
+	      </tr>
+	    </tbody>
+	  </table>
+	</div>
+      </uib-tab>
+      
+      <uib-tab  index="2">
+	<uib-tab-heading><i class="icon-bell"></i> Absent Students <strong>({{(examCatlogs| filter:search | absentStudents).length}})</strong></uib-tab-heading>
+	<div>
+	  <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
+	    <thead>
+	      <tr>
+		<th st-sort="firstName">Index</th>
+		<th st-sort="lastName">student</th>
+		<th st-sort="birthDate">p_mobile</th>
+		<th st-sort="balance">Remove from absenty</th>	
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr ng-repeat="row in examCatlogs| filter:search | absentStudents">
+		<td>{{$index + 1}}</td>
+		<td>{{row.student}}</td>
+		<td>{{row.p_mobile}}</td>
+		<td>
+		  <button class="btn btn-link" ng-click="removeAbsent(row);" ng-if="!row.absent_sms_sent"> Remove</button>
+		</td>
+	      </tr>
+	    </tbody>
+	  </table>
+	</div>
+      </uib-tab>
+      <uib-tab  index="3">
+	<uib-tab-heading><i class="icon-bell"></i>Ignored Students <strong>({{(examCatlogs| filter:search | ignoredStudents).length}})</strong></uib-tab-heading>
+	<div>
+	  <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
+	    <thead>
+	      <tr>
+		<th st-sort="firstName">Index</th>
+		<th st-sort="lastName">student</th>
+		<th st-sort="birthDate">p_mobile</th>
+		<th st-sort="balance">Remove from absenty</th>	
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr ng-repeat="row in examCatlogs| filter:search | ignoredStudents">
+		<td>{{$index + 1}}</td>
+		<td>{{row.student}}</td>
+		<td>{{row.p_mobile}}</td>
+		<td>
+		  <button class="btn btn-link" ng-click="removeIgnored(row);" ng-if="!row.absent_sms_sent"> Remove</button>
+		</td>
+	      </tr>
+	    </tbody>
+	  </table>
+	</div>
+      </uib-tab>
+    </uib-tabset>
 
-    <h2>Absent Students</h2>
-    <table st-table="rowCollection" class="table organisationCoursesTable">
-      <thead>
-	<tr>
-	  <th st-sort="firstName">Index</th>
-	  <th st-sort="lastName">student</th>
-	  <th st-sort="birthDate">p_mobile</th>
-	  <th st-sort="balance">Remove from absenty</th>	
-	</tr>
-      </thead>
-      <tbody>
-	<tr ng-repeat="row in examCatlogs| filter:search | absentStudents">
-	  <td>{{$index + 1}}</td>
-	  <td>{{row.student}}</td>
-	  <td>{{row.p_mobile}}</td>
-	  <td>
-	    <button class="btn btn-link" ng-click="removeAbsent(row);" ng-if="!row.absent_sms_sent"> Remove</button>
-	  </td>
-	</tr>
-      </tbody>
-    </table>
-
-    <h2>Ignored Students</h2>
-    <table st-table="rowCollection" class="table organisationCoursesTable">
-      <thead>
-	<tr>
-	  <th st-sort="firstName">Index</th>
-	  <th st-sort="lastName">student</th>
-	  <th st-sort="birthDate">p_mobile</th>
-	  <th st-sort="balance">Remove from absenty</th>	
-	</tr>
-      </thead>
-      <tbody>
-	<tr ng-repeat="row in examCatlogs| filter:search | ignoredStudents">
-	  <td>{{$index + 1}}</td>
-	  <td>{{row.student}}</td>
-	  <td>{{row.p_mobile}}</td>
-	  <td>
-	    <button class="btn btn-link" ng-click="removeIgnored(row);" ng-if="!row.absent_sms_sent"> Remove</button>
-	  </td>
-	</tr>
-      </tbody>
-    </table>
   </div>
   <div ng-if="addMarksFlag">
     <h2>Remaining Students</h2>
-    <table st-table="rowCollection" class="table organisationCoursesTable">
+    <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
       <thead>
 	<tr>
 	  <th st-sort="firstName">Index</th>
@@ -139,7 +160,7 @@
       </tbody>
     </table>
 
-    <table st-table="rowCollection" class="table organisationCoursesTable">
+    <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
       <thead>
 	<tr>
 	  <th st-sort="firstName">Index</th>
@@ -160,5 +181,4 @@
       </tbody>
     </table>
   </div>
-
 </div>

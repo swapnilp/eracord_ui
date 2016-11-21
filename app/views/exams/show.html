@@ -1,50 +1,63 @@
+
 <div request-loading is-loading="requestLoading1"></div>
-<div class="col-sm-12 textLeft padding0" style="margin:20px 0;">
-  <div class="col-sm-12 textLeft padding0">
-    <span class="col-sm-2"><h5>Name</h5> </span>
-    <span class="col-sm-6 paddingTop10">{{exam.name}}</span>
+<div class="col-sm-12 textLeftpadding0">
+  <div class="col-sm-12">
+    <h3 class="pull-left">Exam</h3>
+    
+    <div class="pull-right paddingTop10">
+      <button ng-click="goBack();" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i></button>
+      <span ng-show="!exam.create_verification" ng-if="exam">
+	<a href="#/classes/{{class_id}}/exams/{{exam.id}}/edit" class="btn btn-primary" ng-disabled="requestLoading">Edit</a>
+      </span>
+    </div>
   </div>
-  <div class="col-sm-12 textLeft padding0" ng-if="!exam.is_group">
-    <span class="col-sm-2"><h5>Conducted By</h5> </span>
-    <span class="col-sm-6 paddingTop10">{{exam.conducted_by}}</span>
+  <div class="col-sm-6 textLeft padding0 marginB5">
+    <span class="col-sm-3"><strong>Name</strong> </span>
+    <span class="col-sm-9">{{exam.name | capitalize}}</span>
   </div>
-  <div class="col-sm-12 textLeft padding0">
-    <span class="col-sm-2"><h5>Class</h5> </span>
-    <span class="col-sm-6 paddingTop10">
+  <div class="col-sm-6 textLeft padding0 marginB5">
+    <span class="col-sm-3"><strong>Date</strong></span>
+    <span class="col-sm-9">{{exam.exam_date}}</span>
+  </div>
+  
+  <div class="col-sm-6 textLeft padding0 marginB5">
+    <span class="col-sm-3"><strong>Class</strong> </span>
+    <span class="col-sm-9">
         <a href="#/classes/{{class_id}}">{{exam.jkci_class}}</a>
     </span>
   </div>
-  <div class="col-sm-12 textLeft padding0">
-    <span class="col-sm-2"><h5>Subject</h5></span>
-    <span class="col-sm-6 paddingTop10">{{exam.subject}}</span>
+  <div class="col-sm-6 textLeft padding0 marginB5">
+    <span class="col-sm-3"><strong>Subject</strong></span>
+    <span class="col-sm-9">{{exam.subject}}</span>
   </div>
-  <div class="col-sm-12 textLeft padding0" ng-if="exam.is_point_added">
-    <span class="col-sm-2"><h5>Points</h5></span>
-    <span class="col-sm-6 paddingTop10">{{exam.chapters_points}}</span>
+  <div class="col-sm-6 textLeft padding0 marginB5" ng-if="!exam.is_group">
+    <span class="col-sm-3"><strong>Conducted By</strong> </span>
+    <span class="col-sm-9 ">{{exam.conducted_by | capitalize}}</span>
   </div>
-  <div class="col-sm-12 textLeft padding0">
-    <span class="col-sm-2"><h5>Date</h5></span>
-    <span class="col-sm-6 paddingTop10">{{exam.exam_date}}</span>
+  <div class="col-sm-6 textLeft padding0 marginB5" ng-if="!exam.is_group">
+    <span class="col-sm-3"><strong>Duration</strong></span>
+    <span class="col-sm-9">{{exam.duration}} Min</span>
   </div>
-  <div class="col-sm-12 textLeft padding0" ng-if="!exam.is_group">
-    <span class="col-sm-2"><h5>Duration</h5></span>
-    <span class="col-sm-6 paddingTop10">{{exam.duration}} Min</span>
+  <div class="col-sm-6 textLeft padding0 marginB5" ng-if="!exam.is_group">
+    <span class="col-sm-3"><strong>Total Marks</strong></span>
+    <span class="col-sm-9">{{exam.marks}}</span>
   </div>
-  <div class="col-sm-12 textLeft padding0" ng-if="!exam.is_group">
-    <span class="col-sm-2"><h5>Total Marks</h5></span>
-    <span class="col-sm-6 paddingTop10">{{exam.marks}}</span>
-  </div>
-  <div class="col-sm-12 textLeft padding0" ng-if="!exam.is_group">
-    <span class="col-sm-2"><h5>Papers</h5></span>
-    <span class="col-sm-6 paddingTop10">
+  
+  
+  <div class="col-sm-6 textLeft padding0" ng-if="!exam.is_group">
+    <span class="col-sm-3"><strong>Papers</strong></span>
+    <span class="col-sm-9">
       <span ng-repeat="paper in exam.documents">
-	<a href="{{paper}}" target="_blank">{{paper}}</a>
+	<a href="{{paper}}" class="pointer" target="_blank" >
+	  <i class="fa fa-external-link" ng-if="exam.documents.length > 1" uib-tooltip="paper-{{$index+1}}"></i>
+	  <span ng-if="exam.documents.length < 2">Click here</span>
+	</a>
       </span>
     </span>
   </div>
-  <div class="col-sm-12 textLeft padding0" ng-if="!exam.is_group">
-    <span class="col-sm-2"><h5>Upload paper</h5></span>
-    <span class="col-sm-6 paddingTop10">
+  <div class="col-sm-6 textLeft padding0" ng-if="!exam.is_group">
+    <span class="col-sm-3 paddingTop5"><strong>Upload paper</strong></span>
+    <span class="col-sm-9">
       <form name="form">
 	<div class="btn btn-primary" ngf-select ng-model="file" name="file" ngf-pattern="'.doc,.docx,.pdf,.jpg,video/*'"
 	     accept=".doc,.docx,.pdf,.jpg,video/*" ngf-max-size="20MB" ng-change="selectUploadFile(file);">Select File</div>
@@ -54,11 +67,13 @@
       </form>
     </span>
   </div>
+  <div class="col-sm-12 textLeft padding0 marginT10" ng-if="exam.is_point_added">
+    <span class="col-sm-1"><strong>Points</strong></span>
+    <div class="col-sm-11"><span class="tag label label-primary marginR5 marginB5" ng-repeat="p in exam.chapters_points" style="display: inline-block;">{{p}}</span> </div>
+  </div>
   <div class="col-sm-12 textLeft padding0" ng-if="exam">
     <div class="col-sm-12 paddingTop10" style="">
-      <span ng-show="!exam.create_verification">
-	<a href="#/classes/{{class_id}}/exams/{{exam.id}}/edit" class="btn btn-primary" ng-disabled="requestLoading">Edit</a>
-      </span>
+      
       <span ng-show="!exam.create_verification" ng-if="exam.root">
 	<button class="btn btn-primary" ng-click="verifyExam(exam)" ng-disabled="requestLoading">Verify Exam</button>
       </span>
@@ -68,7 +83,7 @@
       <span ng-show="!exam.create_verification">
 	<button class="btn btn-primary" ng-click="deleteExam(exam);" ng-disabled="requestLoading">Remove Exam</button>
       </span>
-      <button ng-click="goBack();" class="btn btn-default">Back</button>
+      
       <span ng-show="exam.create_verification && !exam.is_point_added && !exam.is_group">
 	<a href="#/classes/{{exam.jkci_class_id}}/exams/{{exam.id}}/manage_points" class="btn btn-primary">Add Points</a>
       </span>
