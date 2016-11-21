@@ -9,7 +9,6 @@
           <h2>{{class.class_name}}&nbsp;&nbsp<small class="padding5" ng-class="{'bg-danger': !class.enable_class_sms}">Daily Absentee Sms</small> &nbsp;/ &nbsp;<small class="padding5" ng-class="{'bg-danger': !class.enable_exam_sms}">Exam Sms</small></h2>
 	  <div class="textLeft">
 	    <span class="paddingTop10">{{class.subjects}}</span>
-	    
 	  </div>
 	   <p class="text-center">
 	     <i class="glyphicon" ng-class="{'glyphicon-chevron-up': status.isCustomHeaderOpen, 'glyphicon-chevron-down': !status.isCustomHeaderOpen}"></i>
@@ -61,46 +60,39 @@
 	    <a class="btn btn-primary btn-sm" href="{{hostUrl}}/sub_organisation/{{class.organisation_id}}/class/{{class.id}}/get_report.pdf?&authorization_token={{token}}" target="_blank">Get Report</a>
 	  </span>
 	</div>
-	
-	<div class="col-sm-12 textLeft paddingTop10">
-	  <div class="col-sm-12 textLeft paddingTop10">
-	    <span ng-if="class.self_organisation && class.is_current_active">
-	      <span is-role-visible='["create_daily_teach"]' email="currentUser.email">
-		<a class="btn btn-primary" ng-disabled="!class.is_student_verified" uib-tooltip="Please Verify Students" ng-if="!class.is_student_verified"> Create Daily Catlog</a>
-		<a href="#/classes/{{class.id}}/daily_catlogs/new" class="btn btn-primary" ng-if="class.is_student_verified"> Create Daily Catlog</a>
-	      </span>
-	      <span is-role-visible='["create_exam"]' email="currentUser.email">
-		<a class="btn btn-primary" ng-disabled="!class.is_student_verified" uib-tooltip="Please Verify Students" ng-if="!class.is_student_verified">Create Exam</a>
-		<div class="btn-group" uib-dropdown ng-if="class.is_student_verified">
-		  <a href="#/classes/{{class.id}}/exams/new" class="btn btn-primary">Create Exam</a>
-		  <button type="button" class="btn btn-primary" uib-dropdown-toggle>
-		    <span class="caret"></span>
-		    <span class="sr-only">Split button!</span>
-		  </button>
-		  <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
-		    <li role="menuitem">
-		      <a href="#/classes/{{class.id}}/exams/new">Create Exam</a>
-		    </li>
-		    <li role="menuitem">
-		      <a href="#/classes/{{class.id}}/exams/new?&isGroup=true">Create Group Exam</a>
-		    </li>
-		  </ul>
-		</div>
-		
-	      </span>
-	      <span is-role-visible='["manage_class_student"]' email="currentUser.email" ng-if="has_manage_class">
-		<a href="#/classes/{{class.id}}/manage_class" class="btn btn-primary">Manage Class</a>
-	      </span>
-	    </span>
-	  </div>
-	</div>
-	<!-- asdasdsad -->
       </div>
-      
-
     </uib-accordion>
+    <div class="col-sm-12 textLeft padding0 marginT10">
+      <span ng-if="class.self_organisation && class.is_current_active">
+	<span is-role-visible='["create_daily_teach"]' email="currentUser.email">
+	  <a class="btn btn-primary" ng-disabled="!class.is_student_verified" uib-tooltip="Please Verify Students" ng-if="!class.is_student_verified"> Create Daily Catlog</a>
+	  <a href="#/classes/{{class.id}}/daily_catlogs/new" class="btn btn-primary" ng-if="class.is_student_verified"> Create Daily Catlog</a>
+	</span>
+	<span is-role-visible='["create_exam"]' email="currentUser.email">
+	  <a class="btn btn-primary" ng-disabled="!class.is_student_verified" uib-tooltip="Please Verify Students" ng-if="!class.is_student_verified">Create Exam</a>
+	  <div class="btn-group" uib-dropdown ng-if="class.is_student_verified">
+	    <a href="#/classes/{{class.id}}/exams/new" class="btn btn-primary">Create Exam</a>
+	    <button type="button" class="btn btn-primary" uib-dropdown-toggle>
+	      <span class="caret"></span>
+	      <span class="sr-only">Split button!</span>
+	    </button>
+	    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+	      <li role="menuitem">
+		<a href="#/classes/{{class.id}}/exams/new">Create Exam</a>
+	      </li>
+	      <li role="menuitem">
+		<a href="#/classes/{{class.id}}/exams/new?&isGroup=true">Create Group Exam</a>
+	      </li>
+	    </ul>
+	  </div>
+	</span>
+	<span is-role-visible='["manage_class_student"]' email="currentUser.email" ng-if="has_manage_class">
+	  <a href="#/classes/{{class.id}}/manage_class" class="btn btn-primary">Manage Class</a>
+	</span>
+      </span>
+    </div>
     
-    <div class="col-sm-12 textLeft paddingTop20">
+    <div class="col-sm-12 textLeft padding0 marginT20 ">
       <uib-tabset justified="true" active="activeTab">
 	<uib-tab  index="0" select="selectTabs();">
 	  <uib-tab-heading><i class="icon-bell"></i> Presenty catlog</uib-tab-heading>

@@ -162,6 +162,9 @@ input, select, option {
   background-color:#337ab7;
 }
 
+.round20 {
+  border-radius:20px
+}
 .paddingTop5 {
   padding-top:5px;
 }
@@ -1144,4 +1147,9 @@ a.disabled {
   position:absolute;
   top: 0;
   left: 20px;
+}
+
+.classAccordion .panel {
+  border: none;
+  box-shadow: none;
 }
