@@ -12,8 +12,8 @@
   <tbody>
     <tr ng-repeat="row in exams">
       <td>
-	<i ng-if="row.is_group" class="bold fa fa-newspaper-o fa-1x"></i>
-	<i ng-if="!row.is_group" class="bold fa fa-wpforms fa-1x"></i>
+	<i ng-if="row.is_group" class="bold fa fa-file-o fa-1x"></i>
+	<i ng-if="!row.is_group" class="bold fa fa-files-o fa-1x"></i>
 	&nbsp;&nbsp;
 	<a class="linkOverwite" href="#/classes/{{row.jkci_class_id}}/exams/{{row.id}}/show">{{row.name | capitalize}}</a>
 	<span uib-dropdown class="paddingR10" ng-if="!row.is_group">
