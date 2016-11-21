@@ -1,32 +1,51 @@
 <a href="#/classes/{{classId}}/exams/{{exam.id}}/new_grouped_exams" class="btn btn-primary" ng-if="!exam.create_verification">Add Exam</a>
 <div request-loading is-loading="requestLoading"></div>
-<table st-table="rowCollection" class="table organisationCoursesTable" ng-show="!requestLoading">
+<table st-table="rowCollection" class="table organisationCoursesTable table-striped" ng-show="!requestLoading">
   <thead>
     <tr>
       <th st-sort="firstName">Name</th>
-      <th st-sort="lastName">Marks</th>
-      <th st-sort="birthDate">Date</th>
+      <th st-sort="birthDate">Exam Date</th>
       <th st-sort="balance">Subject</th>	
-      <th st-sort="balance">Type</th>
       <th st-sort="balance">Status</th>
-      <th st-sort="balance">Published Date</th>
-      <th st-sort="balance">Ignored</th>
-      <th st-sort="balance">Actions</th>
     </tr>
   </thead>
   <tbody>
     <tr ng-repeat="row in exams">
-      <td>{{row.name}}</td>
-      <td>{{row.marks}}</td>
+      <td>
+	<i ng-if="row.is_group" class="bold fa fa-newspaper-o fa-1x"></i>
+	<i ng-if="!row.is_group" class="bold fa fa-wpforms fa-1x"></i>
+	&nbsp;&nbsp;
+	<a class="linkOverwite" href="#/classes/{{row.jkci_class_id}}/exams/{{row.id}}/show">{{row.name | capitalize}}</a>
+	<span uib-dropdown class="paddingR10" ng-if="!row.is_group">
+	  <div class="btn-group" >
+	    <a  id="simple-dropdown" class="pointer"  uib-dropdown-toggle>
+	      <i class="fa fa-info-circle"></i>
+	    </a>
+	    <ul uib-dropdown-menu aria-labelledby="simple-dropdown" class="padding10">
+	      <li>
+		Marks : {{row.marks}}
+	      </li>
+	      <li>
+		Type : {{row.exam_type}}
+	      </li>
+	      <li ng-if="has_show_pay_info">
+		<span>
+		  <a class="btn btn-primary" href="#/students/{{row.id}}/pay_fee" ng-if="row.remaining_fee > 0">Pay Fee</a>
+		  <button class="btn btn-primary" ng-if="row.remaining_fee === 0" disabled>Pay Fee</button>
+		  <a class="btn btn-primary" href="#/students/{{row.id}}/payment_info" >Payment Info</a>
+		</span> 
+	      </li>
+	    </ul>
+	  </div>
+	</span>
+      </td>
       <td>{{row.exam_date}}</td>
       <td>{{row.subject}}</td>
-      <td>{{row.exam_type}}</td>
-      <td>{{row.status}}</td>
-      <td>{{row.published_date}}</td>
-      <td>{{row.ignored}}</td>
       <td>
-	<a href="#/classes/{{row.jkci_class_id}}/exams/{{row.id}}/show">Show</a>
+	<a href="#/classes/{{row.jkci_class_id}}/exams/{{row.id}}/show" class="bold" ng-class="{'red': row.status === 'Pending'}"> 
+	  {{row.status}}
+	</a>
       </td>
-      </tr>
+    </tr>
   </tbody>
 </table>
