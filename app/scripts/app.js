@@ -42,7 +42,7 @@ angular
     'angular-confirm',
     'eracordUiApp.controller',
     'eracordUiApp.directives',
-    'webcam'
+    'camera'
   ])
 
   .config(function ($routeProvider, RestangularProvider, AuthProvider, ChartJsProvider) {

@@ -1,11 +1,19 @@
 <i class="fa fa-camera fa-2x absolute" style="right:0;top:0;" ng-click="disablePicture();"></i>
-<div request-loading is-loading="!loadingCam && (baseImage === null)"></div>
-<webcam
-  channel="channel" on-stream="onStream(stream)"
-  on-streaming="onSuccess()"
-  on-error="onError(err)" ng-show="loadingCam">
-</webcam>
-<canvas id="snapshot" ng-show="baseImage !== null">
-</canvas>
-<button ng-click="makeSnapshot();" ng-if="baseImage === null">Take Photo</button>
-<button ng-click="retakePhoto();" ng-if="baseImage !== null">Retake Photo</button>
+
+<ng-camera
+    capture-message="Cheeeese!"
+    countdown="3"
+    output-height="160"
+    output-width="213"
+    viewer-height="320"
+    viewer-width="426"
+    crop-height="90"
+    crop-width="120"
+    image-format="jpeg"
+    jpeg-quality="100"
+    action-message="Take picture"
+    snapshot="vm.picture"
+    flash-fallback-url="/vendors/webcamjs/webcam.swf"
+    overlay-url="/overlay.png"
+    shutter-url="/shutter.mp3"
+></ng-camera>
