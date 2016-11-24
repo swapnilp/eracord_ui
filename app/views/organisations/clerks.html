@@ -1,10 +1,10 @@
 <div style="margin-top:20px;">
   <a href="#/add_organisation_clerk" class="btn btn-success"> New User</a>
-  <div class="alert alert-warning" style="margin-top:20px;" ng-if="clerks.length === 0">
+  <div class="alert alert-warning" style="margin-top:20px;" ng-if="clerks.length === 0 && user_clerks.length === 0 ">
     No data found
   </div>
   <div request-loading is-loading="requestLoading"></div>
-  <figure class="highlight col-sm-12" ng-show="!requestLoading && clerks.length > 0">
+  <figure class="highlight col-sm-12" ng-show="!requestLoading && ((clerks.length > 0) || (user_clerks.length > 0))">
     <table st-table="rowCollection" class="table">
       <thead>
 	<tr>
