@@ -146,6 +146,7 @@ angular.module('eracordUiApp.controller')
       $scope.selectedTimeZone = 'month';
       $scope.selectedGraphType = 'all';
       $scope.studentLoading = true;
+      $scope.cameraSnap = false;
       
       var loadStudent = function() {
 	student.get().then(function(data){
@@ -172,6 +173,14 @@ angular.module('eracordUiApp.controller')
 	    $scope.series = data.header
 	  }
 	});
+      }
+
+      $scope.takePicture = function() {
+	$scope.cameraSnap = true;
+      }
+
+      $scope.cancelTakePicture = function() {
+	$scope.cameraSnap = false;
       }
 
       $scope.loadGraphByType = function(type) {

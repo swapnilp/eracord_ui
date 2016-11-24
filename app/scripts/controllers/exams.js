@@ -155,6 +155,9 @@ angular.module('eracordUiApp.controller')
       $scope.parentExamId = $routeParams.exam_id;
       $scope.requestLoading = true;
       $scope.dataLoading = false;
+      $scope.vm = {};
+      $scope.vm.exam_date = new Date();
+      $scope.dateOptions = {};
 
       var loadExamInfo = function() {
 	$scope.requestLoading = true;
@@ -176,7 +179,7 @@ angular.module('eracordUiApp.controller')
       $scope.openCalendar = function(e) {
         e.preventDefault();
         e.stopPropagation();
-        $scope.isOpen = true;
+        $scope.vm.isOpen = true;
       };
       
       $scope.createExam = function() {

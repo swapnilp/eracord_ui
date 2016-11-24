@@ -19,8 +19,10 @@
     </div>
     <div class="col-sm-12 padding0">
       <div class="col-sm-4 paddingLeft0">
-	<div class="col-sm-12 padding0 text-center borderBottom marginB10">
-	  <i class="fa fa-user" style="font-size:150px;"></i>
+	<div class="col-sm-12 padding0 text-center borderBottom marginB10 relative" style="min-height:151px;">
+	  <i ng-if="!cameraSnap" class="fa fa-camera fa-2x absolute pointer" style="right:0;top:0;" ng-click="takePicture();"></i>
+	  <i ng-if="!cameraSnap" class="fa fa-user" style="font-size:150px;"></i>
+	  <web-cam-div ng-if="cameraSnap" cancel-take-picture="cancelTakePicture()"></web-cam-div>
 	</div>
 	<div class="col-sm-12 padding0">
 	  <span class="pull-right mRight10"  is-role-visible='["toggle_student_sms"]' email="currentUser.email" ng-if="student">

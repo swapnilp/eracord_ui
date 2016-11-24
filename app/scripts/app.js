@@ -41,7 +41,8 @@ angular
     'angularUtils.directives.dirPagination',
     'angular-confirm',
     'eracordUiApp.controller',
-    'eracordUiApp.directives'
+    'eracordUiApp.directives',
+    'webcam'
   ])
 
   .config(function ($routeProvider, RestangularProvider, AuthProvider, ChartJsProvider) {
@@ -58,6 +59,7 @@ angular
       'Content-Type': 'application/json',
       'X-Requested-With': 'XMLHttpRequest',
       'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
       'Access-Control-Allow-Headers': 'Accept, X-Requested-With'
     });
     RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
