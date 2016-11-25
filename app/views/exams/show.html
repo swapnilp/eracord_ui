@@ -74,13 +74,13 @@
   <div class="col-sm-12 textLeft padding0" ng-if="exam">
     <div class="col-sm-12 paddingTop10" style="">
       
-      <span ng-show="!exam.create_verification" ng-if="exam.root">
+      <span ng-show="!exam.create_verification" ng-if="exam.root && (( exam.is_group && exam.descendants_count > 0) || !exam.is_group)">
 	<button class="btn btn-primary" ng-click="verifyExam(exam)" ng-disabled="requestLoading">Verify Exam</button>
       </span>
-      <span ng-show="exam.create_verification && !exam.is_completed && !exam.is_group">
+      <span ng-if="exam.create_verification && !exam.is_completed && !exam.is_group">
 	<button class="btn btn-primary" ng-click="conductExam(exam);" ng-disabled="requestLoading">Conduct Exam</button>
       </span>
-      <span ng-show="!exam.create_verification">
+      <span ng-if="!exam.create_verification">
 	<button class="btn btn-primary" ng-click="deleteExam(exam);" ng-disabled="requestLoading">Remove Exam</button>
       </span>
       

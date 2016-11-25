@@ -20,9 +20,23 @@
     <div class="col-sm-12 padding0">
       <div class="col-sm-4 paddingLeft0">
 	<div class="col-sm-12 padding0 text-center borderBottom marginB10 relative" style="min-height:151px;">
-	  <i ng-if="!cameraSnap" class="fa fa-camera fa-2x absolute pointer" style="right:0;top:0;" ng-click="takePicture();"></i>
-	  <i ng-if="!cameraSnap" class="fa fa-user" style="font-size:150px;"></i>
-	  <web-cam-div ng-if="cameraSnap" cancel-take-picture="cancelTakePicture()"></web-cam-div>
+	  <i ng-if="!editImage" class="fa fa-edit fa-2x absolute pointer" style="right:0;top:0;" ng-click="editPicture();"></i>
+	  <i ng-if="!editImage" class="fa fa-user" style="font-size:150px;"></i>
+	  <div ng-if="editImage" class="text-left" style="padding-top:15%">
+	    <form name="form">
+	      <div class="btn btn-primary" ngf-select ng-model="file" name="file" ngf-pattern="'.doc,.docx,.pdf,.jpg,video/*'"
+		   accept=".png,.jpg,.jpeg" ngf-max-size="1MB" ng-change="selectUploadFile(file);">
+		<i class="fa fa-image fa-2x pointer"></i>
+	      </div>
+	      <span>{{fileName}}</span>
+	      <span ng-class="uploadMeaasgeClass" ng-if="uploadingFile">{{uploadingMessage}}</span>
+	      <button type="submit" ng-click="submit()" ng-if="!uploadingFile" class="btn btn-default" ng-disabled="requestLoading">
+		<i class="fa fa-upload fa-2x pointer"></i>
+	      </button>
+	    </form>
+	    
+	    
+	  </div>
 	</div>
 	<div class="col-sm-12 padding0">
 	  <span class="pull-right mRight10"  is-role-visible='["toggle_student_sms"]' email="currentUser.email" ng-if="student">
@@ -78,12 +92,13 @@
 	  <strong class="col-sm-4 padding0">Hostel</strong>
 	  <span class="col-sm-8 padding0">
 	    {{student.hostel}}
-
-	    <span ng-if="student.hostel_id">
-	      &nbsp;&nbsp; <a class="pointer" style="font-size: 12px;" ng-click="allotmentHostel();">Change hostel</a>
-	    </span>
-	    <span ng-if="!student.hostel_id">
-	      <a class="pointer"  ng-click="allotmentHostel();">Allocate hostel</a>
+	    <span is-role-visible='["manage_hostel"]' email="currentUser.email" only_root="currentUser.is_root">
+	      <span ng-if="student.hostel_id">
+		&nbsp;&nbsp; <a class="pointer" style="font-size: 12px;" ng-click="allotmentHostel();">Change hostel</a>
+	      </span>
+	      <span ng-if="!student.hostel_id" >
+		<a class="pointer"  ng-click="allotmentHostel();">Allocate hostel</a>
+	      </span>
 	    </span>
 	  </span>
 	</div>

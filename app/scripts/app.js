@@ -41,8 +41,7 @@ angular
     'angularUtils.directives.dirPagination',
     'angular-confirm',
     'eracordUiApp.controller',
-    'eracordUiApp.directives',
-    'camera'
+    'eracordUiApp.directives'
   ])
 
   .config(function ($routeProvider, RestangularProvider, AuthProvider, ChartJsProvider) {

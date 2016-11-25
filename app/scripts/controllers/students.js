@@ -146,7 +146,7 @@ angular.module('eracordUiApp.controller')
       $scope.selectedTimeZone = 'month';
       $scope.selectedGraphType = 'all';
       $scope.studentLoading = true;
-      $scope.cameraSnap = false;
+      $scope.editImage = false;
       
       var loadStudent = function() {
 	student.get().then(function(data){
@@ -175,12 +175,47 @@ angular.module('eracordUiApp.controller')
 	});
       }
 
-      $scope.takePicture = function() {
-	$scope.cameraSnap = true;
+      $scope.editPicture = function() {
+	$scope.editImage = true;
       }
 
+
+      $scope.submit = function() {
+	if ($scope.file) {
+	  $scope.uploadingFile = true;
+	  $scope.uploadMeaasgeClass = "alert-warning";
+	  $scope.uploadingMessage = "Uploading";
+          $scope.upload($scope.file);
+	}
+      };
+
+      $scope.upload = function (file) {
+	$scope.requestLoading = true;
+        Upload.upload({
+          url: "api/jkci_classes/" + $routeParams.class_id + "/exams/" + $routeParams.exam_id + "/upload_paper",
+          data: {file: file, 'exam_id': $routeParams.exam_id}
+        }).then(function (resp) {
+	  $scope.requestLoading = false;
+	  if(resp.data.success) {
+	    $scope.uploadMeaasgeClass = "alert-success";
+	    $scope.uploadingMessage = "Completed Successfully";
+	    $scope.fileName = "";
+	    $scope.file = null;
+	  }else {
+	    $scope.uploadMeaasgeClass = "alert-danger";
+	    $scope.uploadingMessage = resp.data.message;
+	  }
+        }, function (resp) {
+	  $scope.requestLoading = false;
+	  $scope.uploadingFile = false;
+        }, function (evt) {
+	  $scope.requestLoading = false;
+          //var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        });
+      };
+
       $scope.cancelTakePicture = function() {
-	$scope.cameraSnap = false;
+	$scope.editImage = false;
       }
 
       $scope.loadGraphByType = function(type) {
