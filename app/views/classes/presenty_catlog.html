@@ -1,26 +1,24 @@
-<div>
-  <h5>Filter</h5>
-  <div class="col-md-4 padding0">
-    <label class="btn active btn-default" ng-repeat="catlogFilter in ['class_catlogs', 'exams']">
-      <input name="cssPre" id="css1" type="radio" ng-value="catlogFilter" ng-model="selectedCatlogFilter" ng-click="getResultsPage(catlogFilter);">
-      {{catlogFilter}}
-    </label>
-  </div>
-  <div class="col-md-8 padding0">
+<div class="col-sm-12 padding0 marginT20">
+  <div class="col-md-8">
     <strong  class="">
-      Download Excel Report
+      <div class="col-sm-12 padding0">Download Excel Report</div>
       <br />
-      Start Date 
-      <p class="input-group">
-	<input type="text" class="form-control" datetime-picker="dd/MM/yyyy" ng-model="start_date" is-open="isOpen" ng-click="openCalendar($event, prop);" ng-focus="openCalendar($event, prop);" enable-time="false" readonly required/>
-      </p>
-      End Date
-      <p class="input-group">
-	<input type="text" class="form-control" datetime-picker="dd/MM/yyyy" ng-model="end_date" is-open="isOpenEnd" ng-click="openCalendarEnd($event, prop);" ng-focus="openCalendarEnd($event, prop);" enable-time="false" readonly required/>
-      </p>
+      <div class="col-sm-3 paddingLeft0">
+	<label>Start Date </label>
+	<input type="text" class="form-control" datetime-picker="dd/MM/yyyy" ng-model="start_date" is-open="isOpen" ng-click="openCalendar($event, prop);" ng-focus="openCalendar($event, prop);" enable-time="false" readonly/>
+      </div>
+      <div class="col-sm-3 paddingLeft0">
+	<label>End Date</label>
+	<input type="text" class="form-control" datetime-picker="dd/MM/yyyy" ng-model="end_date" is-open="isOpenEnd" ng-click="openCalendarEnd($event, prop);" ng-focus="openCalendarEnd($event, prop);" enable-time="false" readonly/>
+      </div>
       <br />
-      <a href="{{hostUrl}}/jkci_classes/{{classId}}/download_presenty_catlog.xlsx?&start_date={{start_date}}&end_date={{end_date}}&filter={{selectedCatlogFilter}}&authorization_token={{token}}" class="btn btn-primary">Download</a>
+      <a href="{{hostUrl}}/jkci_classes/{{classId}}/download_presenty_catlog.xlsx?&start_date={{start_date}}&end_date={{end_date}}&filter={{selectedCatlogFilter}}&authorization_token={{token}}" class="btn btn-primary marginT5">Download</a>
     </strong>
+  </div>
+  <div class="col-md-2 paddingLeft0 pull-right paddingTop20">
+    <label><strong>Filter</strong></label>
+    <select class="form-control ng-touched" ng-model="selectedCatlogFilter" ng-change="getResultsPage(selectedCatlogFilter);" ng-options="value.id as value.name for value in [{id: 'class_catlogs', name: 'Class catalogs'}, {id: 'exams', name: 'Exams'}]" >
+    </select>
   </div>
 </div>
 <div class="col-md-12 table-responsive"  style="min-height:200px;margin-top:20px;">

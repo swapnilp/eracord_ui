@@ -248,7 +248,6 @@ app.directive('classDailyTeaches', function(Restangular) {
         current: $routeParams.page || 1
       };
       scope.requestLoading = true;
-
       
       var getDailyResultsPage = function(pageNumber) {
 	scope.requestLoading = true;
@@ -688,6 +687,8 @@ app.directive('classCatlogs', function(Restangular) {
       scope.isOpenEnd = false;
       scope.selectedCatlogFilter = 'class_catlogs';
       scope.requestLoading = true;
+      scope.start_date = moment().subtract(1, 'months')._d;
+      scope.end_date = moment()._d;
       
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       

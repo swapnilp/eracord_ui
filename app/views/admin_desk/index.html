@@ -11,10 +11,9 @@
     <table st-table="rowCollection" class="table organisationCoursesTable">
       <thead>
 	<tr>
-	  <th st-sort="firstName">Name</th>
-	  <th st-sort="lastName">Students</th>
-	  <th st-sort="lastName">Create</th>
-	  <th st-sort="balance">Notifications</th>
+	  <th st-sort="firstName">Classes</th>
+	  <th st-sort="lastName">Number of students</th>
+	  <th st-sort="lastName">Actions</th>
 	</tr>
       </thead>
       <tbody>
@@ -24,18 +23,17 @@
 	  <td>
 	    <span ng-if="row.is_student_verified"> 
 	      <span is-role-visible='["create_daily_teach"]' email="currentUser.email" >
-		<a ng-href="#/classes/{{row.id}}/daily_catlogs/new" uib-tooltip="Catlog"><i class="fa fa-table fa-2x"></i></a>
+		<a ng-href="#/classes/{{row.id}}/daily_catlogs/new" uib-tooltip="Create catlog"><i class="fa fa-table fa-2x"></i></a>
 	      </span>
 	      <span is-role-visible='["create_exam"]' email="currentUser.email">
-		<a ng-href="#/classes/{{row.id}}/exams/new" uib-tooltip="Exam"><i class="fa fa-file-o fa-2x"></i></a>
-		<a ng-href="#/classes/{{row.id}}/exams/new?&isGroup=true" uib-tooltip="Group Exam"><i class="fa fa-files-o fa-2x"></i></a>
+		<a ng-href="#/classes/{{row.id}}/exams/new" uib-tooltip="Create exam"><i class="fa fa-file-o fa-2x"></i></a>
+		<a ng-href="#/classes/{{row.id}}/exams/new?&isGroup=true" uib-tooltip="Create group exam"><i class="fa fa-files-o fa-2x"></i></a>
 	      </span>
 	    </span>
 	    <span ng-if="!row.is_student_verified">
 	      <a ng-href="#/classes/{{row.id}}/manage_class?&verify=true" uib-tooltip="Verify Class Students"><i class="fa fa-check-square fa-2x"></i></a>
 	    </span>
 	  </td>
-	  <td>{{row.remaining_activity}}</td>
 	</tr>
       </tbody>
     </table>
@@ -48,8 +46,8 @@
       <table st-table="rowCollection" class="table organisationCoursesTable">
 	<thead>
 	  <tr>
-	    <th st-sort="firstName">Name</th>
-	    <th st-sort="firstName">Sub Organisation</th>
+	    <th st-sort="firstName">Classes</th>
+	    <th st-sort="firstName">Department</th>
 	    <th>Email</th>
 	    <th>Mobile</th>
 	  </tr>

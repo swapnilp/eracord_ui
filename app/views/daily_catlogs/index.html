@@ -1,15 +1,10 @@
 <div style="margin:20px 0;">
   <div request-loading is-loading="requestLoading"></div>
-  <div class="alert alert-warning col-sm-12">
-    <span ng-if="dtps.length > 0" ng-show="!requestLoading">
-      Total Count are - {{dtps.length}}
-    </span>
-    <span ng-if="dtps.length === 0">
-      No data found
-    </span>
+  <div class="col-sm-12">
+      Rocords - {{dtps.length}}
   </div>
-  <figure class="highlight col-sm-12" ng-show="!requestLoading" ng-if="dtps.length > 0">
-    <table st-table="rowCollection" class="table dailyTeachesTable">
+  <figure class="col-sm-12" ng-show="!requestLoading" ng-if="dtps.length > 0">
+    <table st-table="rowCollection" class="table dailyTeachesTable table-striped">
       <thead>
 	<tr>
 	  <th st-sort="firstName">Subject</th>
@@ -36,6 +31,6 @@
       </tbody>
     </table>
   </figure>
-  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)" class="text-center col-sm-12 padding0"></dir-pagination-controls>
 </div>
 

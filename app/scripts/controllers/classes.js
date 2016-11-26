@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('ClassesCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$route', '$cookieStore', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window, $route, $cookieStore) {
+  .controller('ClassesCtrl',['$rootScope', '$scope', 'Flash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$route', '$cookieStore', '$timeout', function ($rootScope, $scope, Flash, $location, Auth, Restangular, $routeParams, Upload, $window, $route, $cookieStore, $timeout) {
 
 
     if(!Auth.isAuthenticated()){
@@ -76,6 +76,8 @@ angular.module('eracordUiApp.controller')
 	  if(data.success) {
 	  }else {
 	    $scope.class.enable_class_sms = !$scope.class.enable_class_sms;
+	    $scope.catlogSmsError = true;
+	    $timeout(function(){$scope.catlogSmsError = false;}, 5000);
 	  }
 	});
       };
@@ -85,6 +87,8 @@ angular.module('eracordUiApp.controller')
 	  if(data.success) {
 	  }else {
 	    $scope.class.enable_exam_sms = !$scope.class.enable_exam_sms;
+	    $scope.examSmsError = true;
+	    $timeout(function(){$scope.examSmsError = false;}, 5000);
 	  }
 	});
       };

@@ -120,11 +120,12 @@
       </div>
       <label class="pull-right marginT5">Type&nbsp;&nbsp;:&nbsp;</label>
     </div>
-    <div class="studentInfo paddingTop20" style="position:relative;">
+    <div class="studentInfo paddingTop20" style="position:relative;" ng-show="labels.length > 0">
       <canvas id="line" height="70" class="chart chart-line " chart-data="data"
 	      chart-labels="labels" chart-legend="true" chart-series="series"
 	      chart-click="onClick">
       </canvas> 
     </div>
+    <h3 class="text-center text-warning"  ng-show="labels.length === 0">No graph data found </h3>
   </div>
 </div>
