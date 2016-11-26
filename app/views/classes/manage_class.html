@@ -1,50 +1,51 @@
-<h3><a href="#/classes/{{class_id}}">{{jk_class.class_name}}</a> > Manage class</h3>
-<div class="col-sm-12 textLeft">
-  <span class="col-sm-2"><h5>Class Name</h5> </span>
-  <span class="col-sm-6 paddingTop10"><a href="#/classes/{{class_id}}">{{jk_class.class_name}}</a></span>
-</div>
-<div class="col-sm-12 textLeft">
-  <span class="col-sm-2"><h5>Subjects</h5> </span>
-  <span class="col-sm-6 paddingTop10">{{jk_class.subjects}}</span>
-</div>
-<a class="btn btn-default" href="#/classes/{{class_id}}">Back</a>
-<div class="col-sm-12 textLeft paddingTop20">
-  <uib-tabset justified="true" active="activeTab">
-    <uib-tab index="0" ng-attr-active="classStudentVerificationTab" >
-      <uib-tab-heading><i class="icon-bell"></i> Verify</uib-tab-heading>
-      <div style="margin:20px 0;">
-	<h3>Please verify class</h3>
-	<div class-duplicate-students class-id="{{class_id}}" class-student-verification-tab="{{classStudentVerificationTab}}" update-url="updateTabParams(tabName)" change-duplicate-remaining="changeDuplicateRemaining(remainingValue);" recheck-students="dirRecheckStudents(theDirFn);"></div>
-	<button class="btn btn-primary" ng-disabled="(remainingDuplicateCount > 0) || dataLoading || jk_class.is_student_verified" ng-click="verifyDuplicateStudent();">
-	  Verify Class
-	</button>
-	<span button-req-load is-loading="dataLoading"></span>
-      </div>
-    </uib-tab>
-    <uib-tab index="1" ng-attr-active="classStudentTab">
-      <uib-tab-heading><i class="icon-bell"></i> Student</uib-tab-heading>
-      <div class-students class-id="{{class_id}}" class-students-tab="{{classStudentTab}}" update-url="updateTabParams(tabName)" is-remove="true" host_url="{{hostUrl}}"></div>
-    </uib-tab>
-    <uib-tab index="2" ng-attr-active="classDivisionTab">
-      <uib-tab-heading><i class="icon-bell"></i> Division</uib-tab-heading>
-      <div>
-	<div class-divisions class-id="{{class_id}}" class-division-tab="{{classDivisionTab}}" update-url="updateTabParams(tabName)"></div>
-      </div>
-    </uib-tab>
-    <uib-tab index="3" ng-attr-active="classTimeTableTab">
-      <uib-tab-heading><i class="icon-bell"></i> Time Table</uib-tab-heading>
-      <div>
-	<div class-time-table class-id="{{class_id}}" class-time-table-tab="{{classTimeTableTab}}" update-url="updateTabParams(tabName)"></div>
-      </div>
-    </uib-tab>
-    <uib-tab  index="3" ng-attr-active="classNotificationTab" ng-if="jk_class.has_upgrade_batch">
-      <uib-tab-heading><i class="icon-bell"></i> Upgrade batch</uib-tab-heading>
-      <div style="margin:20px 0;">
-	<h3>Please click upgrade batch</h3>
-	<span is-role-visible='["upgrade_batch"]' email="currentUser.email" ng-if="jk_class.has_upgrade_batch">
-	  <a href="#/classes/{{jk_class.id}}/get_batch" class="btn btn-primary">Upgrade Batch</a>
-	</span>
-      </div>
-    </uib-tab>
-  </uib-tabset>
+<div request-loading is-loading="classLoading"></div>
+<div class="col-sm-12 padding0" ng-show="!classLoading">
+  <div class="col-sm-12 padding0">
+    <h3 class="pull-left">Manage <a href="#/classes/{{class_id}}" class="linkOverwite">{{jk_class.class_name}}</a> class</h3>
+      <a class="btn btn-primary pull-right marginT15" href="#/classes/{{class_id}}" uib-tooltip="Back"><i class="fa fa-arrow-circle-left"></i></a>
+  </div>
+  <div class="col-sm-12 textLeft marginB20 padding0">
+    <span class="tag label label-primary" style="display:inline-table; margin: 0 10px 0 0;" ng-repeat="subject in jk_class.subjects">{{subject}}</span>
+  </div>
+
+  <div class="col-sm-12 textLeft marginT20 padding0">
+    <uib-tabset justified="true" active="activeTab">
+      <uib-tab index="0" ng-attr-active="classStudentVerificationTab" >
+	<uib-tab-heading><i class="icon-bell"></i> Verify</uib-tab-heading>
+	<div style="margin:20px 0;">
+	  <h3>Please verify class</h3>
+	  <div class-duplicate-students class-id="{{class_id}}" class-student-verification-tab="{{classStudentVerificationTab}}" update-url="updateTabParams(tabName)" change-duplicate-remaining="changeDuplicateRemaining(remainingValue);" recheck-students="dirRecheckStudents(theDirFn);"></div>
+	  <button class="btn btn-primary" ng-disabled="(remainingDuplicateCount > 0) || dataLoading || jk_class.is_student_verified" ng-click="verifyDuplicateStudent();">
+	    Verify Class
+	  </button>
+	  <span button-req-load is-loading="dataLoading"></span>
+	</div>
+      </uib-tab>
+      <uib-tab index="1" ng-attr-active="classStudentTab">
+	<uib-tab-heading><i class="icon-bell"></i> Student</uib-tab-heading>
+	<div class-students class-id="{{class_id}}" class-students-tab="{{classStudentTab}}" update-url="updateTabParams(tabName)" is-remove="true" host_url="{{hostUrl}}"></div>
+      </uib-tab>
+      <uib-tab index="2" ng-attr-active="classDivisionTab">
+	<uib-tab-heading><i class="icon-bell"></i> Division</uib-tab-heading>
+	<div>
+	  <div class-divisions class-id="{{class_id}}" class-division-tab="{{classDivisionTab}}" update-url="updateTabParams(tabName)"></div>
+	</div>
+      </uib-tab>
+      <uib-tab index="3" ng-attr-active="classTimeTableTab">
+	<uib-tab-heading><i class="icon-bell"></i> Time Table</uib-tab-heading>
+	<div>
+	  <div class-time-table class-id="{{class_id}}" class-time-table-tab="{{classTimeTableTab}}" update-url="updateTabParams(tabName)"></div>
+	</div>
+      </uib-tab>
+      <uib-tab  index="3" ng-attr-active="classNotificationTab" ng-if="jk_class.has_upgrade_batch">
+	<uib-tab-heading><i class="icon-bell"></i> Upgrade batch</uib-tab-heading>
+	<div style="margin:20px 0;">
+	  <h3>Please click upgrade batch</h3>
+	  <span is-role-visible='["upgrade_batch"]' email="currentUser.email" ng-if="jk_class.has_upgrade_batch">
+	    <a href="#/classes/{{jk_class.id}}/get_batch" class="btn btn-primary">Upgrade Batch</a>
+	  </span>
+	</div>
+      </uib-tab>
+    </uib-tabset>
+  </div>
 </div>

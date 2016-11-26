@@ -219,6 +219,7 @@ angular.module('eracordUiApp.controller')
       jkci_classes = Restangular.one("jkci_classes", $scope.class_id);
       $scope.remainingDuplicateCount = 0;
       $scope.dataLoading = false;
+      $scope.classLoading = true;
       
       if($routeParams.verify) {
 	$scope.classStudentVerificationTab = true;
@@ -248,6 +249,7 @@ angular.module('eracordUiApp.controller')
 	} else {
 	  $location.path("/admin_desk");
 	}
+	$scope.classLoading = false;
       });
 
       $scope.changeDuplicateRemaining = function(remainingDuplicateCount) {

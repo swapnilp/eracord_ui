@@ -53,8 +53,8 @@
 	<div ng-show="examSmsError" class="red">You don't have sufficient privileges</div>
       </div>
     </div>
-    <div class="col-sm-12 textLeft padding0 marginT10 red" ng-if="!(class.self_organisation && class.is_current_active)">
-      Class is Not active or you don't have sufficient privileges to manage this class
+    <div class="col-sm-12 textLeft padding0 marginT10 red text-center" ng-if="!(class.self_organisation && class.is_current_active)">
+      <strong>Class is Not active or you don't have sufficient privileges to manage this class</strong>
     </div>
     <div class="col-sm-12 textLeft padding0 marginT20 ">
       <uib-tabset justified="true" active="activeTab">
