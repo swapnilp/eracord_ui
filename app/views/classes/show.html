@@ -37,21 +37,9 @@
       <span class="tag label label-primary" style="display:inline-table; margin: 0 10px 0 0;" ng-repeat="subject in class.subjects">{{subject}}</span>
     </div>
     
-    <div class="col-sm-12 textLeft padding0 marginT20 marginB10">
-      <div class="col-sm-6 padding0" style="height:80px;">
-	<div style="display:inline-grid;"><strong>Daily Absentee SMS</strong></div>
-	<toggle-switch ng-model="class.enable_class_sms"
-		       knob-label="ENABLE" ng-click="toggleClassAbsentSms()">
-	</toggle-switch>
-	<div ng-show="catlogSmsError" class="red">You don't have sufficient privileges</div>
-      </div>
-      <div class="col-sm-6 padding0" style="height:80px;">
-	<div style="display:inline-grid;"><strong>Exam SMS</strong></div>
-	<toggle-switch ng-model="class.enable_exam_sms"
-		       knob-label="ENABLE" ng-click="toggleExamClassSms()">
-	</toggle-switch>
-	<div ng-show="examSmsError" class="red">You don't have sufficient privileges</div>
-      </div>
+    <div class="col-sm-12 textLeft padding0 marginT10 marginB10">
+      <h5>Daily SMS {{class.enable_class_sms ?  'Enabled' : 'Disabled'}}</h5>
+      <h5>Exam SMS {{class.enable_exam_sms ?  'Enabled' : 'Disabled'}}</h5>
     </div>
     <div class="col-sm-12 textLeft padding0 marginT10 red text-center" ng-if="!(class.self_organisation && class.is_current_active)">
       <strong>Class is Not active or you don't have sufficient privileges to manage this class</strong>

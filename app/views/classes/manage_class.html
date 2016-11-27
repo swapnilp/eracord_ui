@@ -8,6 +8,23 @@
     <span class="tag label label-primary" style="display:inline-table; margin: 0 10px 0 0;" ng-repeat="subject in jk_class.subjects">{{subject}}</span>
   </div>
 
+  <div class="col-sm-12 textLeft padding0 marginT20 marginB10">
+    <div class="col-sm-6 padding0" style="height:80px;">
+      <div style="display:inline-grid;"><strong>Daily Absentee SMS</strong></div>
+      <toggle-switch ng-model="jk_class.enable_class_sms"
+		     knob-label="ENABLE" ng-click="toggleClassAbsentSms()">
+      </toggle-switch>
+      <div ng-show="catlogSmsError" class="red">You don't have sufficient privileges</div>
+    </div>
+    <div class="col-sm-6 padding0" style="height:80px;">
+      <div style="display:inline-grid;"><strong>Exam SMS</strong></div>
+      <toggle-switch ng-model="jk_class.enable_exam_sms"
+		     knob-label="ENABLE" ng-click="toggleExamClassSms()">
+      </toggle-switch>
+      <div ng-show="examSmsError" class="red">You don't have sufficient privileges</div>
+    </div>
+  </div>
+  
   <div class="col-sm-12 textLeft marginT20 padding0">
     <uib-tabset justified="true" active="activeTab">
       <uib-tab index="0" ng-attr-active="classStudentVerificationTab" >

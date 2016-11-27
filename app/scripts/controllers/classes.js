@@ -71,27 +71,7 @@ angular.module('eracordUiApp.controller')
 	$location.path("/admin_desk").replace();
       });
       
-      $scope.toggleClassAbsentSms = function() {
-	jkci_classes.customGET("toggle_class_sms", {value: $scope.class.enable_class_sms}).then(function(data){
-	  if(data.success) {
-	  }else {
-	    $scope.class.enable_class_sms = !$scope.class.enable_class_sms;
-	    $scope.catlogSmsError = true;
-	    $timeout(function(){$scope.catlogSmsError = false;}, 5000);
-	  }
-	});
-      };
-
-      $scope.toggleExamClassSms = function() {
-	jkci_classes.customGET("toggle_exam_sms", {value: $scope.class.enable_exam_sms}).then(function(data){
-	  if(data.success) {
-	  }else {
-	    $scope.class.enable_exam_sms = !$scope.class.enable_exam_sms;
-	    $scope.examSmsError = true;
-	    $timeout(function(){$scope.examSmsError = false;}, 5000);
-	  }
-	});
-      };
+      
     }
     // end of class show if path
 
@@ -254,6 +234,28 @@ angular.module('eracordUiApp.controller')
 
       $scope.changeDuplicateRemaining = function(remainingDuplicateCount) {
 	$scope.remainingDuplicateCount = remainingDuplicateCount;
+      };
+
+      $scope.toggleClassAbsentSms = function() {
+	jkci_classes.customGET("toggle_class_sms", {value: $scope.jk_class.enable_class_sms}).then(function(data){
+	  if(data.success) {
+	  }else {
+	    $scope.jk_class.enable_class_sms = !$scope.jk_class.enable_class_sms;
+	    $scope.catlogSmsError = true;
+	    $timeout(function(){$scope.catlogSmsError = false;}, 5000);
+	  }
+	});
+      };
+
+      $scope.toggleExamClassSms = function() {
+	jkci_classes.customGET("toggle_exam_sms", {value: $scope.jk_class.enable_exam_sms}).then(function(data){
+	  if(data.success) {
+	  }else {
+	    $scope.jk_class.enable_exam_sms = !$scope.jk_class.enable_exam_sms;
+	    $scope.examSmsError = true;
+	    $timeout(function(){$scope.examSmsError = false;}, 5000);
+	  }
+	});
       };
 
       $scope.recheckDuplicateStudent = function() {
