@@ -178,7 +178,14 @@ angular.module('eracordUiApp.controller')
       $scope.editPicture = function() {
 	$scope.editImage = true;
       }
-
+      
+      $scope.selectUploadFile = function(newVal){
+	if(newVal){
+	  $scope.file = newVal;
+	  $scope.uploadingFile = false;
+	  $scope.fileName  = newVal.name;
+	}
+      };
 
       $scope.submit = function() {
 	if ($scope.file) {
@@ -192,7 +199,7 @@ angular.module('eracordUiApp.controller')
       $scope.upload = function (file) {
 	$scope.requestLoading = true;
         Upload.upload({
-          url: "api/jkci_classes/" + $routeParams.class_id + "/exams/" + $routeParams.exam_id + "/upload_paper",
+          url: "api/students/" + $routeParams.student_id + "/upload_photo",
           data: {file: file, 'exam_id': $routeParams.exam_id}
         }).then(function (resp) {
 	  $scope.requestLoading = false;

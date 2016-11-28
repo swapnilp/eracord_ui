@@ -24,13 +24,13 @@
 	  <i ng-if="!editImage" class="fa fa-user" style="font-size:150px;"></i>
 	  <div ng-if="editImage" class="text-left" style="padding-top:15%">
 	    <form name="form">
-	      <div class="btn btn-primary" ngf-select ng-model="file" name="file" ngf-pattern="'.doc,.docx,.pdf,.jpg,video/*'"
+	      <div class="btn btn-primary" ngf-select ng-model="file" name="file" ngf-pattern="'.png,.jpg,.jpeg'"
 		   accept=".png,.jpg,.jpeg" ngf-max-size="1MB" ng-change="selectUploadFile(file);">
 		<i class="fa fa-image fa-2x pointer"></i>
 	      </div>
 	      <span>{{fileName}}</span>
 	      <span ng-class="uploadMeaasgeClass" ng-if="uploadingFile">{{uploadingMessage}}</span>
-	      <button type="submit" ng-click="submit()" ng-if="!uploadingFile" class="btn btn-default" ng-disabled="requestLoading">
+	      <button ng-click="submit()" ng-if="!uploadingFile" class="btn btn-primary" ng-disabled="!fileName">
 		<i class="fa fa-upload fa-2x pointer"></i>
 	      </button>
 	    </form>

@@ -93,6 +93,7 @@ app.directive('divisionStudents', function(Restangular) {
       };
 
       scope.resetFilter = function() {
+	scope.pagination.current = 1;
 	scope.filter = {};
 	getResultsPage(1);
       };
