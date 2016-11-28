@@ -1,7 +1,6 @@
 <div>
   <div request-loading is-loading="requestLoading"></div>
   <div class="col-sm-12 padding0 textLeft" ng-show="!requestLoading">
-
     <div class="col-sm-12 row">
       <h2 class="pull-left">{{class.class_name}}</h2>
       <div class="pull-right paddingTop20">
@@ -33,13 +32,14 @@
 	</div>
       </div>
     </div>
-    <div class="textLeft">
-      <span class="tag label label-primary" style="display:inline-table; margin: 0 10px 0 0;" ng-repeat="subject in class.subjects">{{subject}}</span>
-    </div>
-    
-    <div class="col-sm-12 textLeft padding0 marginT10 marginB10">
-      <h5>Daily SMS {{class.enable_class_sms ?  'Enabled' : 'Disabled'}}</h5>
-      <h5>Exam SMS {{class.enable_exam_sms ?  'Enabled' : 'Disabled'}}</h5>
+    <div class="col-sm-12 padding0">
+      <div class="pull-left">
+	<span class="tag label label-primary" style="display:inline-table; margin: 0 10px 0 0;" ng-repeat="subject in class.subjects">{{subject}}</span>
+      </div>
+      <div class="pull-right">
+	<span>Daily SMS  &nbsp;&nbsp;<span class="tag label" ng-class="{'label-success': class.enable_class_sms, 'label-danger': !class.enable_class_sms}">{{class.enable_class_sms ?  'Enabled' : 'Disabled'}}</span></span>
+	<span class="marginLeft10">Exam SMS &nbsp;&nbsp;<span class="tag label" ng-class="{'label-success': class.enable_exam_sms, 'label-danger': !class.enable_exam_sms}">{{class.enable_exam_sms ?  'Enabled' : 'Disabled'}}</span></span>
+      </div>
     </div>
     <div class="col-sm-12 textLeft padding0 marginT10 red text-center" ng-if="!(class.self_organisation && class.is_current_active)">
       <strong>Class is Not active or you don't have sufficient privileges to manage this class</strong>
