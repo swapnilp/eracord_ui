@@ -21,6 +21,7 @@
       <div class="col-sm-4 paddingLeft0">
 	<div class="col-sm-12 padding0 text-center borderBottom marginB10 relative" style="min-height:151px;">
 	  <i ng-if="!editImage" class="fa fa-edit fa-2x absolute pointer" style="right:0;top:0;" ng-click="editPicture();"></i>
+	  <i ng-if="editImage" class="fa fa-times-circle-o fa-2x absolute pointer" style="right:0;top:0;" ng-click="closeEditPicture();"></i>
 	  <i ng-if="!editImage" class="fa fa-user" style="font-size:150px;"></i>
 	  <div ng-if="editImage" class="text-left" style="padding-top:15%">
 	    <form name="form">

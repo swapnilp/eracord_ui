@@ -177,7 +177,11 @@ angular.module('eracordUiApp.controller')
 
       $scope.editPicture = function() {
 	$scope.editImage = true;
-      }
+      };
+
+      $scope.closeEditPicture = function() {
+	$scope.editImage = false;
+      };
       
       $scope.selectUploadFile = function(newVal){
 	if(newVal){

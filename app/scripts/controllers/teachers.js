@@ -233,7 +233,10 @@ angular.module('eracordUiApp.controller')
 	  if(data.success){
 	    $scope.teachers = data.teachers;
 	    if(teacher_id) {
-	      $scope.selectedTeacher = _.findWhere($scope.teachers, {id: teacher_id}).id;
+	      $scope.sTeacher = _.findWhere($scope.teachers, {id: teacher_id});
+	      if($scope.sTeacher) {
+		$scope.selectedTeacher = $scope.sTeacher.id 
+	      }
 	    }
 	  }
 	  $scope.requestLoading = false;
