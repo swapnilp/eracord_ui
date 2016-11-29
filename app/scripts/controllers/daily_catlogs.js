@@ -142,6 +142,7 @@ angular.module('eracordUiApp.controller')
 	  $scope.points = data.chapters_points;
 	  $scope.selectedPoints = $scope.vm.daily_teachs.chapters_point_id;
 	  $scope.class_name = $scope.vm.daily_teachs.jkci_class;
+	  $scope.vm.daily_teachs.date = moment($scope.vm.daily_teachs.date)._d;
 	} else {
 	  
 	}
