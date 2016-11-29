@@ -30,7 +30,7 @@ angular.module('eracordUiApp.controller')
       $scope.chapterLoading = false;
       $scope.chapterPointsLoading = false;
       $scope.dataLoading = false;
-      $scope.subjectId = $routeParams.subject_id;
+      $scope.ttcId = $routeParams.ttc_id;
       
       var maxDate = moment().format("'MM-DD-YY'");
       var minDate = moment().subtract(7, 'days').format("'MM-DD-YY'");
@@ -59,20 +59,22 @@ angular.module('eracordUiApp.controller')
       
       var loadInfo = function() {
 	$scope.requestLoading = true;
-	jkci_classes.customGET('get_dtp_info').then(function(data) {
-	  $scope.class_name = data.data.class_exam_data.class_name;
-	  $scope.divisions = data.data.class_exam_data.sub_classes;
-	  $scope.subjects = data.data.class_exam_data.subjects;
+	jkci_classes.customGET('get_dtp_info', {ttc_id: $scope.ttcId}).then(function(data) {
+	  $scope.class_name = data.data.class_dtp_data.class_name;
+	  $scope.divisions = data.data.sub_classes;
+	  $scope.subjects = data.data.class_dtp_data.subjects;
 	  $scope.requestLoading = false;
+
+	  if($scope.ttcId) {
+	    $scope.subjectId = data.data.subject_id;
+	    $scope.vm.daily_teachs.subject_id = parseInt($scope.subjectId);
+	    $scope.vm.daily_teachs.subject_id = parseInt($scope.subjectId);
+	    $scope.getChapters();
+	  }
 	});
       };
       
       loadInfo();
-      
-      if($scope.subjectId) {
-	$scope.vm.daily_teachs.subject_id = parseInt($scope.subjectId);
-	$scope.getChapters();
-      }
       
       if($routeParams.date) {
 	if(new Date($routeParams.date) < new Date){
