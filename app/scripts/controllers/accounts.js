@@ -100,14 +100,45 @@ angular.module('eracordUiApp.controller')
 	$scope.filterAmount.remaining = true;
 	loadPayments(0);
       };
-	
 
-      
       loadAmountFilters();
       loadPayments(1);
     };
-
     //end of index action
+
+
+    if($location.path() === '/accounts/logs') {
+      $scope.payments = [];
+      $scope.pagination = {current: 1};
+      $scope.requestLoading = false;
+      $scope.filter = {}
+      
+      var loadPayments = function(pageNumber) {
+	$scope.requestLoading = true;
+	payment_fee.customGET("get_logs", {filter: $scope.filter, page: pageNumber}).then(function(data) {
+	  if(data.success) {
+	    $scope.logs = data.logs;
+	    $scope.totalLogs = data.count;
+	  } else {
+	    lazyFlash.warning(data.message);
+	    $location.path("/admin_desk").replace();
+	  }
+	  $scope.requestLoading = false;
+	});
+      };
+
+      $scope.pageChanged = function(newPage, checkFilter) {
+	loadPayments(newPage);
+      };
+
+      $scope.resetFilter = function() {
+	$scope.filter = {};
+	loadPayments(1);
+      };
+      loadPayments();
+    }
+    //end of logs
+
     if($location.path() === '/accounts/graphs') {
       $scope.showFilter = true;
       $scope.length = 1;

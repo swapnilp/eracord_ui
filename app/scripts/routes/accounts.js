@@ -10,6 +10,11 @@ app.config(function($routeProvider) {
       controller: 'AccountsCtrl',
       controllerAs: 'accounts'
     })
+    .when('/accounts/logs', {
+      templateUrl: 'views/accounts/logs.html',
+      controller: 'AccountsCtrl',
+      controllerAs: 'accounts'
+    })
     .when('/accounts/graphs', {
       templateUrl: 'views/accounts/graphs.html',
       controller: 'AccountsCtrl',
