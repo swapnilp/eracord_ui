@@ -1,5 +1,5 @@
-<div class="col-sm-12" style="margin:20px 0;">
-  <div class="col-sm-5">
+<div class="col-sm-12 padding0" style="margin:20px 0;">
+  <div class="col-sm-5 paddingLeft0">
     <form name="form" ng-submit="getClassRooms()" role="form">
       <div class="form-group">
 	<label for="cwday">Day</label>
@@ -28,11 +28,10 @@
       </div>
     </form>
   </div>
-  
       
   <div request-loading is-loading="requestLoading"></div>
-  <figure class="highlight col-sm-12" ng-show="length > 0 && !requestLoading">
-    <table st-table="rowCollection" class="table classExamsTable col-sm-12" >
+  <figure class="col-sm-12 padding0" ng-show="length > 0 && !requestLoading">
+    <table st-table="rowCollection" class="table classExamsTable col-sm-12 table-striped" >
       <thead>
 	<tr>
 	  <th st-sort="firstName">Class Room</th>

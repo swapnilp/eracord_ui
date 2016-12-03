@@ -1,52 +1,50 @@
 <div style="margin:20px 0;">
-  <div class="examFilterDiv col-sm-12 padding0" ng-if="showFilter"> 
-    <div class="col-sm-2 paddingLeft0">
-      <label for="standard_id">Batch</label>
-      <select class="form-control ng-touched" ng-model="filterAmount.batch" ng-options="std.id as std.name for std in batches">
-	<option value="" class="hide" >Select Batch</option>
-      </select>
-    </div>
-    <div class="col-sm-2 paddingLeft0">
-      <label for="standard_id">Standard</label>
-      <select class="form-control ng-touched" ng-model="filterAmount.standard" ng-options="std.standard_id as std.name for std in standards">
-	<option value="">All Standards</option>
-      </select>
-    </div>
-    <div class="col-sm-2 paddingLeft0">
-      <label for="exam_type">Payment Type</label>
-      <select class="form-control ng-touched" ng-model="filterAmount.payment_type" ng-options="values for values in ['Cash', 'Cheque']">
-	<option value="">All</option>
-      </select>
-    </div>
-    <div class="col-sm-2 paddingLeft0">
-      <label for="exam_type">Account Type</label>
-      <select class="form-control ng-touched" ng-model="filterAmount.account_type" ng-options="values for values in ['Cash', 'Cheque']">
-	<option value="">All</option>
-      </select>
-    </div>
-    
-    <div class="examFilterDiv col-sm-12 paddingLeft0 mTop15"> 
-      Filter : <input type="text" ng-model="filterAmount.name" dl-key-code="pageChanged(1);" code="13" placeholder="Type name or mobile and  enter" style="width:230px;" value="{{filterAmount.name}}">
-      <button class="btn btn-primary" ng-click="pageChanged(1, false);">Filter</button>
-      <button class="btn btn-primary" ng-click="resetFilter();">Reset</button>
-      <a href="#/accounts/print_account?&filter={{filterAmount}}" class="btn btn-primary"><i class="fa fa-print"></i>&nbsp;&nbsp;Print</a>
-      <a href="{{hostUrl}}/student_fees/download_excel.xlsx?&authorization_token={{token}}" class="btn btn-primary" target="_blank"> <i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;Download </a>
-    </div>
-    <div class="col-sm-12 padding0" style="margin-top:20px;" ng-show="length > 0">
-      <div class="alert alert-warning">Collected amount are - {{totalAmount}} &nbsp;&nbsp;&nbsp;<a href="#/accounts/graphs" class="btn btn-primary">Show Graphical </a>
-
-	<br/><br/>
-	Service tax are - {{totalTax}}
-	<br/><br/>
-	<span class="pointer" ng-class="{'red': isRemained}" ng-click="getRemainingStudents()" >Expected collection  amount are - <strong>{{expectedAmount}}</strong> &nbsp;&nbsp;&nbsp;</span>
-	<br/><br/>
-	Total students are - <strong>{{totalStudents}}</strong> &nbsp;&nbsp;&nbsp;
-      </div>
+  <div class="row col-sm-12">
+    <h3 class="pull-left">Accounts</h3> 
+    <div class="pull-right marginT20">
+      <a href="#/accounts/graphs" class="btn btn-primary" uib-tooltip="Show graphical"> <i class="fa fa-line-chart"></i> </a>
+      <a href="#/accounts/print_account?&filter={{filterAmount}}" class="btn btn-primary" uib-tooltip="Print"><i class="fa fa-print"></i></a>
+      <a href="{{hostUrl}}/student_fees/download_excel.xlsx?&authorization_token={{token}}" class="btn btn-primary" target="_blank" uib-tooltip="Download excel"> <i class="fa fa-file-excel-o"></i></a>
     </div>
   </div>
+  <div class="examFilterDiv col-sm-12 padding0" ng-if="showFilter"> 
+    <div class="col-sm-12 padding0 marginT10" ng-show="length > 0">
+      <span class="col-sm-6"> Collected amount - {{totalAmount}}</span>
+      <span class="col-sm-6">Service tax - {{totalTax}}</span>
+      <span class="pointer col-sm-6" ng-class="{'red': isRemained}" ng-click="getRemainingStudents()" >Expected collection  amount  - <strong>{{expectedAmount}}</strong></span>
+      <span class="col-sm-6">Total students - <strong>{{totalStudents}}</strong></span>
+    </div>
+    <div class="col-sm-12 padding0 mTop15 marginB15 accountFilter">
+      <div class="col-sm-2 paddingLeft0">
+	<select class="form-control ng-touched" ng-model="filterAmount.batch" ng-options="std.id as std.name for std in batches" uib-tooltip="Filter Batch">
+	  <option value="" class="hide" >Select Batch</option>
+	</select>
+      </div>
+
+      <div class="col-sm-2 paddingLeft0">
+	<select class="form-control ng-touched" ng-model="filterAmount.standard" ng-options="std.standard_id as std.name for std in standards" uib-tooltip="Filter Standard">
+	  <option value="">All</option>
+	</select>
+      </div>
+      <div class="col-sm-2 paddingLeft0">
+	<select class="form-control ng-touched" ng-model="filterAmount.payment_type" ng-options="values for values in ['Cash', 'Cheque']" uib-tooltip="Filter payment">
+	  <option value="">All</option>
+	</select>
+      </div>
+      <div class="col-sm-2 paddingLeft0">
+	<input type="text" class="form-control" ng-model="filterAmount.name" dl-key-code="pageChanged(1);" code="13" placeholder="Enter name or mobile"  value="{{filterAmount.name}}">
+      </div>
+      <button class="btn btn-primary  marginR10" ng-click="pageChanged(1, false);"><i class="fa fa-filter"></i></button>
+      <button class="btn btn-primary" ng-click="resetFilter();"><i class="fa fa-refresh"></i></button>
+    </div>
+      
+      
+      
+    
+  </div>
   <div request-loading is-loading="requestLoading"></div>
-  <figure class="highlight col-sm-12" ng-show="length > 0 && !requestLoading">
-    <table st-table="rowCollection" class="table classExamsTable col-sm-12" >
+  <figure class="col-sm-12 padding0" ng-show="length > 0 && !requestLoading">
+    <table st-table="rowCollection" class="table classExamsTable col-sm-12 table-striped" >
       <thead>
 	<tr>
 	  <th st-sort="firstName">Name</th>
@@ -159,7 +157,7 @@
       </tbody>
     </table>
   </figure>
-  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)" class="col-sm-12" ng-show="length > 0"></dir-pagination-controls>
+  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)" class="col-sm-12 text-center" ng-show="length > 0"></dir-pagination-controls>
   <div ng-show="length == 0 && !requestLoading" class="col-sm-12 padding0" style="margin-top:20px;">
     <div class="alert alert-warning">
       No data found

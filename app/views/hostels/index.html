@@ -1,26 +1,29 @@
 <div request-loading is-loading="requestLoading"></div>
 <div style="margin:20px 0;" ng-show="!requestLoading">
-  <a href="#/hostels/new" class="btn btn-primary">Create Hostel</a>
-  <figure class="highlight col-sm-12"  ng-if="hostels.length > 0">
-    <table st-table="rowCollection" class="table organisationCoursesTable">
+  <div>
+    <h3>Hostels</h3>
+  </div>
+  <a href="#/hostels/new" class="btn btn-primary pull-right">Create Hostel</a>
+  <figure class="col-sm-12 padding0"  ng-if="hostels.length > 0">
+    <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
       <thead>
 	<tr>
 	  <th st-sort="firstName">Index</th>
 	  <th st-sort="lastName">Name</th>
 	  <th st-sort="lastName">Rooms</th>
 	  <th st-sort="lastName">Students</th>
-	  <th st-sort="balance">Actions</th>
 	</tr>
       </thead>
       <tbody>
 	<tr ng-repeat="row in hostels">
 	  <td>{{$index+1}}</td>
-	  <td>{{row.name}}</td>
+	  <td>
+	    <a href="#/hostels/{{row.id}}" class="linkOverwite">
+	      {{row.name}}
+	    </a>
+	  </td>
 	  <td>{{row.rooms}}</td>
 	  <td>{{row.student_occupancy}}</td>
-	  <td>
-	    <a href="#/hostels/{{row.id}}">Show</a>
-	  </td>
 	</tr>
       </tbody>
     </table>

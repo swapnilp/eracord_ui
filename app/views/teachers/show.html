@@ -1,42 +1,69 @@
-<div class="container">
-  <div class="col-sm-12 textLeft">
-    <div class="studentShow col-sm-12">
-      <p>&nbsp;</p>
+<div request-loading is-loading="studentLoading"></div>
+<div class="container" ng-show="!studentLoading">
+  <div class="col-sm-12 marginB20 padding0">
+    <div class="row">
       <div class="col-sm-12">
-	<h5>
-	  <span class="col-sm-2">Name :</span>
-	</h5>
-	<span style="font-size:20px;">{{teacher.name}}</span>
+	<h3 class="pull-left">Teacher Information</h3>
+	<div class="pull-right padding0" style="margin:15px 0px;">
+	  <div class="left mRight10">
+	    <button class="btn btn-primary" ng-click="goBack();" uib-tooltip="Back">
+	      <i class="fa fa-arrow-circle-o-left"></i>
+	    </button>
+	    <a class="btn btn-primary" href="#/organisations/teachers/{{teacher.id}}/edit" uib-tooltip="Edit">
+	      <i class="fa fa-edit"></i>
+	    </a>
+	    <button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openSubjects('lg', teacher.id)" uib-tooltip="Add Subject">
+	      <i class="fa fa-folder-o"></i>
+	    </button>
+	    <button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openTeacherTimeTable('lg', teacher.id)" uib-tooltip="Time Table">
+	      <i class="fa fa-clock-o"></i>
+	    </button>
+	    <button type="button" class="btn btn-danger buttonNoneBorder" ng-click="removeTeacher()" uib-tooltip="Delete">
+	      <i class="fa fa-trash-o"></i>
+	    </button>
+	  </div>
+	</div>
       </div>
-      <div class="col-sm-12">
-	<h5>
-	  <span class="col-sm-2">Mobile :</span> 
-	</h5>
-	<span style="font-size:20px;">{{teacher.mobile}}</span>
+      
+      <div class="col-sm-12 padding0">
+	<div class="col-sm-4 paddingLeft0">
+	  <div class="col-sm-12 padding0 text-center borderBottom marginB10 relative" style="min-height:151px;">
+	    <i ng-if="!editImage" class="fa fa-edit fa-2x absolute pointer" style="right:0;top:0;" ng-click="editPicture();"></i>
+	    <i ng-if="editImage" class="fa fa-times-circle-o fa-2x absolute pointer" style="right:0;top:0;" ng-click="closeEditPicture();"></i>
+	    <i ng-if="!editImage" class="fa fa-user" style="font-size:150px;"></i>
+	    <div ng-if="editImage" class="text-left" style="padding-top:15%">
+	      <form name="form">
+		<div class="btn btn-primary" ngf-select ng-model="file" name="file" ngf-pattern="'.png,.jpg,.jpeg'"
+		     accept=".png,.jpg,.jpeg" ngf-max-size="1MB" ng-change="selectUploadFile(file);">
+		  <i class="fa fa-image fa-2x pointer"></i>
+		</div>
+		<span>{{fileName}}</span>
+		<span ng-class="uploadMeaasgeClass" ng-if="uploadingFile">{{uploadingMessage}}</span>
+		<button ng-click="submit()" ng-if="!uploadingFile" class="btn btn-primary" ng-disabled="!fileName">
+		  <i class="fa fa-upload fa-2x pointer"></i>
+		</button>
+	      </form>
+	    </div>
+	  </div>
+	</div>
+	<div class="col-sm-8 paddingLeft0">
+	  <div class="col-sm-12 padding0">
+	    <h4><u>Personal Details</u></h4>
+	  </div>
+	  <div class="col-sm-6 paddingLeft0">
+	    <strong class="col-sm-4 padding0">Name</strong>
+	    <span class="col-sm-8 padding0">{{teacher.name}}</span>
+	  </div>
+	  <div class="col-sm-6 paddingLeft0">
+	    <strong class="col-sm-4 padding0">Mobile</strong>
+	    <span class="col-sm-8 padding0">{{teacher.mobile}}</span>
+	  </div>
+	  <div class="col-sm-6 paddingLeft0">
+	    <strong class="col-sm-4 padding0">Email</strong>
+	    <span class="col-sm-8 padding0">{{teacher.email}}</span>
+	  </div>
+	</div>
       </div>
-      <div class="col-sm-12">
-	<h5>
-	  <span class="col-sm-2">Email :</span>
-	</h5>
-	<span style="font-size:20px;">{{teacher.email}}</span>
-      </div>
-    </div>
-    <div class="col-sm-12 left padding0" style="margin:15px 0px;">
-      <a class="btn btn-primary" href="#/organisations/teachers/{{teacher.id}}/edit" uib-tooltip="Edit">
-	<i class="fa fa-edit"></i>
-      </a>
-      <button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openSubjects('lg', teacher.id)" uib-tooltip="Add Subject">
-	<i class="fa fa-folder-o"></i>
-      </button>
-      <button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openTeacherTimeTable('lg', teacher.id)" uib-tooltip="Time Table">
-	<i class="fa fa-clock-o"></i>
-      </button>
-      <button type="button" class="btn btn-danger buttonNoneBorder" ng-click="removeTeacher()" uib-tooltip="Delete">
-	<i class="fa fa-trash-o"></i>
-      </button>
-      <button class="btn btn-default" ng-click="goBack();" uib-tooltip="Back">
-	<i class="fa fa-arrow-circle-left"></i>
-      </button>
     </div>
   </div>
   <div ng-include src="'views/teachers/teacher_subjects.html'"></div>

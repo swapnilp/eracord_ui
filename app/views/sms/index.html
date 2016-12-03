@@ -17,8 +17,8 @@
     </span>
   </div>
   <div request-loading is-loading="requestLoading"></div>
-  <figure class="highlight col-sm-12" ng-show="!requestLoading && totalCount > 0">
-    <table st-table="rowCollection" class="table organisationCoursesTable">
+  <figure class="col-sm-12 padding0" ng-show="!requestLoading && totalCount > 0">
+    <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
       <thead>
 	<tr>
 	  <th st-sort="balance">#</th>
@@ -41,7 +41,7 @@
       </tbody>
     </table>
   </figure>
-  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)" pagination-id="sms_sent" ng-show="totalCount > 9"></dir-pagination-controls>
+  <dir-pagination-controls class="text-center col-sm-12" on-page-change="pageChanged(newPageNumber)" pagination-id="sms_sent" ng-show="totalCount > 9"></dir-pagination-controls>
 </div>
 
 
