@@ -6,6 +6,10 @@
 	<button class="btn btn-primary"  ng-click="pageChanged(1, false);" uib-tooltip="Filter"><i class="fa fa-filter"></i></button>
 	<button class="btn btn-primary"  ng-click="resetFilter();" uib-tooltip="Reset"><i class="fa fa-refresh"></i></button>
       </div>
+      <div class="marginLeft10 pull-right positionRelative">
+	<input date-range-picker id="rangeCalender" class="form-control date-picker calender pointer" type="text" ng-model="filterExam.dateRange" style="width:230px;display:inline;" placeholder="Enter date range" onkeypress="return false" options="{autoApply: true}" readonly/>
+	<label for="rangeCalender" class="rangeCalender pointer"><i class="fa fa-calendar marginT10"></i></label>
+      </div>
       <div class="marginLeft10 pull-right">
 	<select class="form-control ng-touched" ng-model="filterExam.filterExamStatus" ng-options="values for values in ['Published', 'Conducted', 'Verified', 'Created']">
 	  <option value="">All</option>
