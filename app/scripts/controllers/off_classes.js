@@ -65,6 +65,7 @@ angular.module('eracordUiApp.controller')
       
       $scope.resetFilter = function() {
 	$scope.filterOffClass ={}
+	$scope.filterOffClass.dateRange = {};
 	$scope.showResetFilter = false;
 	$scope.pagination = {current: 1};
 	getResultsPage(1, true);

@@ -44,6 +44,7 @@ angular.module('eracordUiApp.controller')
       
       $scope.resetFilter = function() {
 	$scope.filterExam = {};
+	$scope.filterExam.dateRange = {};
 	$scope.showResetFilter = false;
 	getResultsPage(1, true);
       };
