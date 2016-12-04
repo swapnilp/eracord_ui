@@ -179,13 +179,19 @@ app.directive('disabledLink', function() {
       element.bind('click', function(event) {
         if(scope.disabled) {
           event.preventDefault();
-        }
+        } else if(element.parent().hasClass('dropdown')) {
+	  if(element.parent().hasClass('open')){
+	    element.parent().removeClass('open');
+	  }else{
+	    element.parent().addClass('open');
+	  }
+	  
+	}
       });
       
     }
   };
 });
-
 
 app.filter('capitalize', function() {
     return function(input) {

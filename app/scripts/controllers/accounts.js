@@ -111,13 +111,15 @@ angular.module('eracordUiApp.controller')
       $scope.payments = [];
       $scope.pagination = {current: 1};
       $scope.requestLoading = false;
-      $scope.filter = {}
+      $scope.filter = {};
+      $scope.filter.dateRange = {startDate: null, endDate: null};
       
       var loadPayments = function(pageNumber) {
 	$scope.requestLoading = true;
 	payment_fee.customGET("get_logs", {filter: $scope.filter, page: pageNumber}).then(function(data) {
 	  if(data.success) {
 	    $scope.logs = data.logs;
+	    $scope.amount = data.amount;
 	    $scope.totalLogs = data.count;
 	  } else {
 	    lazyFlash.warning(data.message);
@@ -133,6 +135,7 @@ angular.module('eracordUiApp.controller')
 
       $scope.resetFilter = function() {
 	$scope.filter = {};
+	$scope.filter.dateRange = {startDate: null, endDate: null};
 	loadPayments(1);
       };
       loadPayments();

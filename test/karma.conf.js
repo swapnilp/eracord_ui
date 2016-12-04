@@ -53,6 +53,9 @@ module.exports = function(config) {
       'bower_components/Chart.js/Chart.js',
       'bower_components/angular-chart.js/dist/angular-chart.js',
       'bower_components/angular-confirm-modal/angular-confirm.js',
+      'bower_components/bootstrap/dist/js/bootstrap.js',
+      'bower_components/bootstrap-daterangepicker/daterangepicker.js',
+      'bower_components/angular-daterangepicker/js/angular-daterangepicker.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",
