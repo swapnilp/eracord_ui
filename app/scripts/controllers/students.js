@@ -47,7 +47,11 @@ angular.module('eracordUiApp.controller')
 
       $scope.resetFilter = function() {
 	$scope.filter = {};
-	getResultsPage(1);
+	if($scope.pagination.current == 1) {
+	  getResultsPage(1);
+	}else {
+	  $scope.pagination.current = 1
+	}
       };
 
       var getResultsPage = function(pageNumber) {
@@ -59,9 +63,6 @@ angular.module('eracordUiApp.controller')
 	    $scope.has_show_pay_info = data[2].has_show_pay_info;
 	    $scope.has_pay_fee = data[2].has_pay_fee;
 	  }
-	  $scope.pagination = {
-            current: pageNumber || 1
-	  };
 	  $scope.requestLoading = false;
 	});
       };

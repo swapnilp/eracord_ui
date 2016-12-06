@@ -36,7 +36,11 @@ app.directive('classStudents', function(Restangular) {
 
       scope.resetFilter = function() {
 	scope.filter = {};
-	getResultsPage(1);
+	if(scope.pagination.current == 1) {
+	  getResultsPage(1);
+	} else {
+	  scope.pagination.current = 1;
+	}
       };
 
       scope.openInfo = function(row) {
@@ -121,9 +125,6 @@ app.directive('classStudents', function(Restangular) {
 	  scope.totalStudents = data.count;
 	  scope.has_show_pay_info = data.has_show_pay_info;
 	  scope.has_pay_fee = data.has_pay_fee;
-	  scope.pagination = {
-            current: pageNumber || 1
-	  };
 	  scope.requestLoading = false;
 	});
       };
@@ -146,7 +147,7 @@ app.directive('classStudents', function(Restangular) {
       
       scope.$watch('classStudentsTab', function(){
 	if(scope.classStudentsTab === 'true') {
-	  scope.resetFilter();
+	  getResultsPage(1);
 	  scope.updateUrl({tabName: 'students'});
 	}
 	if(scope.classStudentsTab === 'true' && scope.studentLoaded == false){
@@ -187,7 +188,12 @@ app.directive('classExams', function(Restangular) {
 	scope.filterExam = {};
 	scope.filterExam.dateRange = {};
 	scope.showResetFilter = false;
-	getResultsPage(1, true);
+	if(scope.pagination.current == 1) {
+	  getResultsPage(1, true);
+	} else {
+	  scope.pagination.current = 1;
+	}
+	
       };
       
       var getResultsPage = function(pageNumber, checkFilter) {
@@ -203,7 +209,6 @@ app.directive('classExams', function(Restangular) {
 	  scope.exams = data.body;
 	  scope.totalExams = data.count;
 	  scope.length = data.count;
-	  scope.pagination = {current: pageNumber || 1};
 	  scope.requestLoading = false;
 	});
 
@@ -221,7 +226,7 @@ app.directive('classExams', function(Restangular) {
       scope.$watch('classExamsTab', function(){
 	if(scope.classExamsTab === 'true') {
 	  scope.updateUrl({tabName: 'exams'});
-	  scope.resetFilter();
+	  getResultsPage(1, true);
 	}
 	if(scope.classExamsTab === 'true' && scope.examsLoaded == false){
 	  scope.examsLoaded = true;
