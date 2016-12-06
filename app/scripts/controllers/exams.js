@@ -47,7 +47,12 @@ angular.module('eracordUiApp.controller')
 	$scope.filterExam = {};
 	$scope.filterExam.dateRange = {};
 	$scope.showResetFilter = false;
-	getResultsPage(1, true);
+	if($scope.pagination.current === 1) {
+	  getResultsPage(1, true);
+	} else {
+	  $scope.pagination.current = 1;
+	}
+	
       };
       
       var getResultsPage = function(pageNumber, checkFilter) {

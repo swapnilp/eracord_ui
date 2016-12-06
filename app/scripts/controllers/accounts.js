@@ -35,13 +35,6 @@ angular.module('eracordUiApp.controller')
       });
     };
     
-    $scope.resetFilter = function() {
-      $scope.filterAmount = {};
-      $scope.isRemained = false;
-      $scope.filterAmount.batch = _.findWhere($scope.batches, {is_active: true}).id;
-      loadPayments(1);
-    };
-    
     if($location.path() === '/accounts') {
       $scope.showFilter = true;
       $scope.payments = [];
@@ -75,6 +68,18 @@ angular.module('eracordUiApp.controller')
 	  get_transactions(row);
 	  row.expanded = true;
 	}
+      };
+
+      $scope.resetFilter = function() {
+	$scope.filterAmount = {};
+	$scope.isRemained = false;
+	$scope.filterAmount.batch = _.findWhere($scope.batches, {is_active: true}).id;
+	if($scope.pagination.current == 1) {
+	  loadPayments(1);
+	} else {
+	  $scope.pagination.current = 1
+	}
+
       };
 
       var get_transactions = function(row) {

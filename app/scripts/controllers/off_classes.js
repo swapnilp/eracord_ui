@@ -30,6 +30,7 @@ angular.module('eracordUiApp.controller')
       $scope.teachers = [];
       $scope.classes = [];
       $scope.filterOffClass = {};
+      $scope.filterOffClass.dateRange = {};
       $scope.requestLoading = true;
       $scope.pagination = {current: 1};
       $scope.totalOffClasses = 0;
@@ -67,8 +68,12 @@ angular.module('eracordUiApp.controller')
 	$scope.filterOffClass ={}
 	$scope.filterOffClass.dateRange = {};
 	$scope.showResetFilter = false;
-	$scope.pagination = {current: 1};
-	getResultsPage(1, true);
+	if($scope.pagination.current === 1) {
+	  getResultsPage(1, true);
+	} else {
+	  $scope.pagination.current = 1;
+	}
+	
       };
       
       $scope.pageChanged = function(newPage, checkFilter) {
