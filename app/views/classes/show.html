@@ -9,7 +9,7 @@
 	  <a href="#/classes/{{class.id}}/manage_class" class="btn btn-primary" uib-tooltip="Manage"><i class="fa fa-cogs"></i></a>
 	</span>
 	<div class="dropdown" style="display: inline-block;" uib-tooltip="Download">
-	  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-download"></i>
+	  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" manual-dropdown><i class="fa fa-download"></i>
 	    <span class="caret"></span></button>
 	  <ul class="dropdown-menu" style="right: 0; left: auto;">
 	    <li><a target="_blank" href="{{hostUrl}}/class/{{class.id}}/download_class_syllabus.pdf?&authorization_token={{token}}">Syllabus</a></li>
@@ -20,7 +20,7 @@
 	  </ul>
 	</div>
 	<div class="dropdown" style="display: inline-block;" uib-tooltip="Create" ng-if="class.is_student_verified && class.self_organisation && class.is_current_active">
-	  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-plus"></i>
+	  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" manual-dropdown><i class="fa fa-plus"></i>
 	    <span class="caret"></span></button>
 	  <ul class="dropdown-menu" style="right: 0; left: auto;">
 	    <li is-role-visible='["create_daily_teach"]' email="currentUser.email">

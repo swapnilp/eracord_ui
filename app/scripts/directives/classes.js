@@ -184,7 +184,7 @@ app.directive('classExams', function(Restangular) {
       
       scope.resetFilter = function() {
 	scope.filterExam = {};
-	$scope.filterExam.dateRange = {};
+	scope.filterExam.dateRange = {};
 	scope.showResetFilter = false;
 	getResultsPage(1, true);
       };
