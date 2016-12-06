@@ -77,16 +77,53 @@ angular.module('eracordUiApp.controller')
 	});
       };
       getHostel();
+      //end of edit hostel 
+    }else if($location.path() === "/hostels/" + $routeParams.id + "/logs") {
+      var hostels = Restangular.all("hostels");
+      $scope.pagination = {current: 1};
+      $scope.requestLoading = false;
+      $scope.filter = {};
+      $scope.filter.dateRange = {startDate: null, endDate: null};
+
+      var getHostelLogs = function(pageNumber){
+	hostels.customGET($routeParams.id+"/get_logs", {filter: $scope.filter, page: pageNumber}).then(function(data) {
+	  if(data.success) {
+	    $scope.logs = data.logs;
+	    $scope.totalLogs = data.total_count;
+	  }else {
+	    lazyFlash.warning(data.message);
+	    $location.path("/hostels").replace();
+	  }
+	  $scope.requestLoading = false;
+	});
+      };
+
+      $scope.pageChanged = function(newPage, checkFilter) {
+	getHostelLogs(newPage);
+      };
+
+      $scope.resetFilter = function() {
+	$scope.filter = {};
+	$scope.filter.dateRange = {startDate: null, endDate: null};
+	getHostelLogs(1);
+      };
+      
+      getHostelLogs();
+      
+      //end of  hostel logs
     }else if($location.path().search("^/hostels/"+$routeParams.id) >= 0 ) {
       var hostels = Restangular.all("hostels");
       $scope.hostel = {};
       $scope.hostelRooms = [];
       $scope.filterStudent = "";
       $scope.newHostelShow= $routeParams.add_hostel;
+      $scope.requestLoading = true;
+      
       var getHostel = function(){
 	hostels.customGET($routeParams.id).then(function(data) {
 	  if(data.success) {
 	    $scope.hostel = data.hostel;
+	    $scope.requestLoading = false;
 	  }else {
 	    lazyFlash.warning(data.message);
 	    $location.path("/hostels").replace();

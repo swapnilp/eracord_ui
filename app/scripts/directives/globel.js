@@ -193,6 +193,23 @@ app.directive('disabledLink', function() {
   };
 });
 
+app.directive('manualDropdown', function() {
+  return {
+    link: function(scope, element, attrs) {
+      element.bind('click', function(event) {
+	if(element.parent().hasClass('dropdown')) {
+	  if(element.parent().hasClass('open')){
+	    element.parent().removeClass('open');
+	  }else{
+	    element.parent().addClass('open');
+	  }
+	}
+      });
+      
+    }
+  };
+});
+
 app.filter('capitalize', function() {
     return function(input) {
       return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';

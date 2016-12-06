@@ -1,0 +1,67 @@
+<div>
+  <div class="row col-sm-12">
+    <h3 class="pull-left">Hostel</h3> 
+    <button class="btn btn-primary pull-right marginT15" ng-click="goBack();" uib-tooltip="Back">
+      <i class="fa fa-arrow-circle-o-left"></i>
+    </button>
+  </div>
+  
+  <div class="row col-sm-12 marginT10 marginB10">
+    <div class="pull-left paddingTop5">
+      Records : <strong>{{totalLogs}} </strong>
+    </div>
+    <div class="pull-right">
+      <span class="positionRelative">
+	<input date-range-picker id="rangeCalender" class="form-control date-picker calender pointer" type="text" ng-model="filter.dateRange" style="width:230px;display:inline;" placeholder="Enter date range" onkeypress="return false" options="{autoApply: true}" readonly/>
+	<label for="rangeCalender" class="rangeCalender pointer"><i class="fa fa-calendar"></i></label>
+      </span>
+      <input type="text" ng-model="filter.name" dl-key-code="pageChanged(1);" code="13" placeholder="Enter name or mobile" value="{{filter.name}}" style="width:230px;display:inline;" class="form-control">
+      <span class=""><button class="btn btn-primary " ng-click="pageChanged(1);" uib-tooltip="Filter"><i class="fa fa-filter"></i></button></span>
+      <button class="btn btn-primary" ng-click="resetFilter();" uib-tooltip="Reset"><i class="fa fa-refresh"></i></button>
+    </div>
+  </div>
+  <div request-loading is-loading="requestLoading"></div>
+  <div class="row col-sm-12" ng-show="!requestLoading">
+    
+    <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
+      <thead>
+	<tr>
+	  <th st-sort="date">Date</th>
+	  <th st-sort="name">Student</th>
+	  <th st-sort="class">Hostel</th>
+	  <th st-sort="class">Room</th>
+	  <th>Reason</th>
+	</tr>
+      </thead>
+      <tbody>
+	<tr dir-paginate="row in logs | itemsPerPage: 10" total-items="totalLogs" current-page="pagination.current" pagination-id="log">
+	  <td>
+	    {{row.date}}
+	  </td>
+	  <td>
+	    {{row.student_name}}
+	  </td>
+	  <td>{{row.hostel}}</td>
+	  <td>{{row.room}}</td>
+	  <td>
+	    {{row.reason}}
+	    <span uib-dropdown ng-if="row.is_param" class="paddingR10">
+	      <div class="btn-group" >
+		<a  id="simple-dropdown" class="pointer"  uib-dropdown-toggle>
+		  <i class="fa fa-info-circle"></i>
+		</a>
+		<ul uib-dropdown-menu aria-labelledby="simple-dropdown" class="padding10 parentInfo">
+		  <li ng-repeat="(key, value) in row.param">
+		    {{key}} <strong>{{value}}</strong>
+		  </li>
+		</ul>
+	      </div>
+	    </span>
+	  </td>
+	</tr>
+      </tbody>
+    </table>
+    <dir-pagination-controls on-page-change="pageChanged(newPageNumber)" pagination-id="log" ng-show="totalLogs > 9" class="col-sm-12 text-center"></dir-pagination-controls>
+  </div>
+</div>
+

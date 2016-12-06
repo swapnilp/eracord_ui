@@ -24,5 +24,10 @@ app.config(function($routeProvider) {
       templateUrl: 'views/hostels/new.html',
       controller: 'HostelsCtrl',
       controllerAs: 'hostels'
+    })
+    .when('/hostels/:id/logs', {
+      templateUrl: 'views/hostels/logs.html',
+      controller: 'HostelsCtrl',
+      controllerAs: 'hostels'
     });
 });

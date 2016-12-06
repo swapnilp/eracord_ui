@@ -2,11 +2,25 @@
 <div class="col-sm-12 textLeft padding0" style="margin:20px 0;">
   <div class="col-sm-12 textLeft padding0">
     <div class="col-sm-12">
-      <h3>{{hostel.name}} Hostel
-	<small ng-if="newHostelShow">
-	  <a href="#/hostels/new">Add new Hostel</a>
-	</small>
-      </h3>
+      <div class="pull-left">
+	<h3>{{hostel.name}} Hostel
+	  <small ng-if="newHostelShow">
+	    <a href="#/hostels/new">Add new Hostel</a>
+	  </small>
+	</h3>
+      </div>
+      <div class="pull-right paddingTop20">
+	<button class="btn btn-primary" ng-click="goBack();" uib-tooltip="Back">
+	  <i class="fa fa-arrow-circle-o-left"></i>
+	</button>
+	<a href="#/hostels/{{hostel.id}}/edit" class="btn btn-primary" ng-if="!requestLoading" uib-tooltip="Edit">
+	  <i class="fa fa-edit"></i>
+	</a>
+	<button class="btn btn-primary" ng-click="newRoom('lg');" ng-disabled="!(hostel.rooms > hostelRooms.length)" uib-tooltip="Add room">
+	  Add room
+	</button>
+	<a href="#/hostels/{{hostel.id}}/logs" class="btn btn-primary" ng-if="!requestLoading" uib-tooltip="Get logs"><i class="fa fa-list-alt"></i></a>
+      </div>
     </div>
   </div>
   <div class="col-sm-12 textLeft padding0">
@@ -39,19 +53,6 @@
     <span class="col-sm-6 paddingTop10">{{hostel.service_tax}}</span>
   </div>
   
-  <div class="col-sm-12 textLeft padding0">
-    <div class="col-sm-12 paddingTop10" style="">
-      <span ng-show="!exam.create_verification">
-	<a href="#/hostels/{{hostel.id}}/edit" class="btn btn-primary" ng-disabled="requestLoading">Edit</a>
-      </span>
-      <button class="btn btn-primary" ng-click="newRoom('lg');" ng-if="hostel.rooms > hostelRooms.length">
-	Add room
-      </button>
-      <button class="btn btn-default" ng-click="goBack();">
-	Back
-      </button>
-    </div>
-  </div>
   <div class="col-sm-12 mTop20">
     <input ng-model="filterStudent" placeholder="Search Student"/>&nbsp;<span class="padding5 pointer" ng-click="filterStudent = ''"><i class="fa fa-refresh"></i></span>
     
