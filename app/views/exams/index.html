@@ -48,7 +48,7 @@
 	</tr>
       </thead>
       <tbody>
-	<tr dir-paginate="row in exams | itemsPerPage: 10" total-items="totalExams" current-page="pagination.current" >
+	<tr dir-paginate="row in exams | itemsPerPage: 10" total-items="totalExams" current-page="pagination.current" pagination-id="examsPagination">
 	  <td>
 	    <i ng-if="row.is_group" class="bold fa fa-files-o fa-1x"></i>
 	    <i ng-if="!row.is_group" class="bold fa fa-file-o fa-1x"></i>
@@ -88,6 +88,6 @@
       </tbody>
     </table>
   </figure>
-  <dir-pagination-controls on-page-change="pageChanged(newPageNumber, true)" class="col-sm-12 text-center" ng-show="length > 0"></dir-pagination-controls>
+  <dir-pagination-controls on-page-change="pageChanged(newPageNumber, true)" class="col-sm-12 text-center" ng-show="length > 0" pagination-id="examsPagination"></dir-pagination-controls>
 </div>
 

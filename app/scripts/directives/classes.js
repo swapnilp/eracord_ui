@@ -177,6 +177,7 @@ app.directive('classExams', function(Restangular) {
       scope.showResetFilter = false;
       scope.requestLoading = true;
       scope.filterExam = {};
+      scope.filterExam.dateRange = {};
       
       scope.pagination = {
         current: $routeParams.page || 1

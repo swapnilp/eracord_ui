@@ -32,6 +32,7 @@ angular.module('eracordUiApp.controller')
       $scope.showResetFilter = false;
       $scope.requestLoading = true;
       $scope.filterExam = {};
+      $scope.filterExam.dateRange = {};
 
       var getFilterData = function() {
 	exams.customGET('get_filter_data').then(function(data){
