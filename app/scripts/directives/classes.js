@@ -255,10 +255,20 @@ app.directive('classDailyTeaches', function(Restangular) {
         current: $routeParams.page || 1
       };
       scope.requestLoading = true;
+      scope.subjects = [];
+      scope.filterDtp = {};
+      
+      var getFilterSubjects = function() {
+	jkci_classes.customGET("get_subjects").then(function(data) {
+	  if(data.success) {
+	    scope.subjects = data.subjects;
+	  }
+	});
+      };
       
       var getDailyResultsPage = function(pageNumber) {
 	scope.requestLoading = true;
-	jkci_classes.customGET('daily_teachs', {page: pageNumber}).then(function(data){
+	jkci_classes.customGET('daily_teachs', {filter: scope.filterDtp, page: pageNumber}).then(function(data){
 	  if(data.success) {
 	    scope.dtps = data.daily_teaching_points;
 	    scope.totalDtps = data.count;
@@ -267,6 +277,16 @@ app.directive('classDailyTeaches', function(Restangular) {
 	  }else {
 	  }
 	});
+      };
+      
+      scope.resetFilter = function() {
+	scope.filterDtp = {};
+	if(scope.pagination.current === 1) { 
+	  getDailyResultsPage(1);
+	} else {
+	  scope.pagination.current = 1;
+	}
+	
       };
       
       scope.pageChanged = function(newPage) {
@@ -280,6 +300,7 @@ app.directive('classDailyTeaches', function(Restangular) {
 	
 	if(scope.classDtpTab === 'true' && dailyCatlogLoaded === false) {
 	  dailyCatlogLoaded = true;
+	  getFilterSubjects();
 	  getDailyResultsPage($routeParams.page || 1);
 	}
 	

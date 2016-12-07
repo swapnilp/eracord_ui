@@ -141,7 +141,12 @@ angular.module('eracordUiApp.controller')
       $scope.resetFilter = function() {
 	$scope.filter = {};
 	$scope.filter.dateRange = {startDate: null, endDate: null};
-	loadPayments(1);
+	if($scope.pagination.current === 1) {
+	  loadPayments(1);
+	} else {
+	  $scope.pagination.current = 1;
+	}
+	
       };
       loadPayments();
     }

@@ -1,8 +1,20 @@
 <div style="margin:20px 0;">
   <div request-loading is-loading="requestLoading"></div>
   <div class="col-sm-12">
-      Rocords - {{dtps.length}}
+    <div class="pull-left">
+      Rocords - {{totalDtps}}
+    </div>
+    <div class="pull-right">
+      <select class="form-control ng-touched filterSelectRecord" ng-model="filterDtp.subject" ng-options="subject.id as subject.name for subject in subjects">
+	<option value="" >All subjects</option>
+      </select>
+      <button class="btn btn-primary" ng-click="pageChanged(1);" uib-tooltip="Filter"><i class="fa fa-filter" ></i></button>
+      <button class="btn btn-primary" ng-click="resetFilter();" uib-tooltip="Reset"><i class="fa fa-refresh"></i></button>
+    </div>
   </div>
+  <figure class="col-sm-12" ng-show="!requestLoading" ng-if="dtps.length === 0">
+    <h4 class="text-danger">No records found</h4>
+  </figure>
   <figure class="col-sm-12" ng-show="!requestLoading" ng-if="dtps.length > 0">
     <table st-table="rowCollection" class="table dailyTeachesTable table-striped">
       <thead>
