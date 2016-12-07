@@ -257,6 +257,7 @@ app.directive('classDailyTeaches', function(Restangular) {
       scope.requestLoading = true;
       scope.subjects = [];
       scope.filterDtp = {};
+      scope.filterDtp.dateRange = {};
       
       var getFilterSubjects = function() {
 	jkci_classes.customGET("get_subjects").then(function(data) {
@@ -281,6 +282,7 @@ app.directive('classDailyTeaches', function(Restangular) {
       
       scope.resetFilter = function() {
 	scope.filterDtp = {};
+	scope.filterDtp.dateRange = {};
 	if(scope.pagination.current === 1) { 
 	  getDailyResultsPage(1);
 	} else {
