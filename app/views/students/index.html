@@ -82,6 +82,9 @@
     <a class="btn btn-primary" href="#/classes/{{classId}}/students/new" ng-if="classId">New Student</a>
   </div>
   <div request-loading is-loading="requestLoading"></div>
+  <figure class=" col-sm-12 padding0" ng-show="!requestLoading && totalStudents === 0">
+    <h4 class="text-danger">No students found</h4>
+  </figure>
   <figure class=" col-sm-12 padding0" ng-show="!requestLoading && totalStudents > 0">
     <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
       <thead>

@@ -31,12 +31,14 @@
 	</select>
       </div>
     </div>
-    <div class="pull-left marginT5"  ng-show="length > 0">
-      <span class="" ng-show="length > 0">Records - <strong>{{totalExams}}</strong> </span>
-      <span ng-show="length == 0">No data found</span>
+    <div class="pull-left marginT5">
+      <span class="">Records - <strong>{{totalExams || 0}}</strong> </span>
     </div>
   </div>
   <div request-loading is-loading="requestLoading"></div>
+  <figure class="" ng-show="length == 0 && !requestLoading">
+    <h4 class="text-danger">No exams found</h4>
+  </figure>
   <figure class="" ng-show="length > 0 && !requestLoading">
     <table st-table="rowCollection" class="table classExamsTable col-sm-12 table-striped">
       <thead>

@@ -136,7 +136,7 @@ app.directive('classStudents', function(Restangular) {
 
       scope.removeStudent = function(student) {
 	if($window.confirm('Are you sure?')){
-	  jkci_classes.one('students', student.id).remove().then(function(data){
+	  jkci_classes.customDELETE('students/'+ student.id).then(function(data){
 	    if(data.success) {
 	      scope.students = _.reject(scope.students, function(obj){return obj.id == student.id});
 	    }else {
@@ -389,7 +389,7 @@ app.directive('classTimeTable', function(Restangular) {
       scope.deleteSlot = function(slot) {
 	scope.deleteLoading = true;
 	var time_table_rec = Restangular.one("time_tables", scope.time_table.id);
-	time_table_rec.one("time_table_classes", slot.id).remove().then(function(data){
+	time_table_rec.customDELETE("time_table_classes/"+ slot.id).then(function(data){
 	  if(data.success) {
 	    scope.events = _.reject(scope.events, function(d){ return d.id === slot.id; });
 	    scope.selectedSlot = null;
@@ -638,7 +638,7 @@ app.directive('classDuplicateStudents', function(Restangular) {
 
       scope.removeStudent = function(student) {
 	if($window.confirm('Are you sure?')){
-	  jkci_classes.one('students', student.student_id).remove().then(function(data){
+	  jkci_classes.customDELETE('students/'+ student.student_id).then(function(data){
 	    if(data.success) {
 	      scope.students = _.reject(scope.students, function(obj){return obj.student_id == student.student_id});
 	    }else {
