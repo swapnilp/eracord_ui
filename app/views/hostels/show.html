@@ -1,7 +1,7 @@
 <div request-loading is-loading="requestLoading1"></div>
-<div class="col-sm-12 textLeft padding0" style="margin:20px 0;">
+<div class="col-sm-12 textLeft padding0">
   <div class="col-sm-12 textLeft padding0">
-    <div class="col-sm-12">
+    <div class="col-sm-12 padding0">
       <div class="pull-left">
 	<h3>{{hostel.name}} Hostel
 	  <small ng-if="newHostelShow">
@@ -24,41 +24,43 @@
     </div>
   </div>
   <div class="col-sm-12 textLeft padding0">
-    <span class="col-sm-2"><h5>Owner</h5> </span>
+    <span class="col-sm-2 paddingLeft0"><h5>Owner</h5> </span>
     <span class="col-sm-6 paddingTop10">{{hostel.owner}}</span>
   </div>
   <div class="col-sm-12 textLeft padding0">
-    <span class="col-sm-2"><h5>Number of rooms</h5> </span>
+    <span class="col-sm-2 paddingLeft0"><h5>Number of rooms</h5> </span>
     <span class="col-sm-6 paddingTop10">{{hostel.rooms}}</span>
   </div>
   <div class="col-sm-12 textLeft padding0">
-    <span class="col-sm-2"><h5>Student occupancy</h5> </span>
+    <span class="col-sm-2 paddingLeft0"><h5>Student occupancy</h5> </span>
     <span class="col-sm-6 paddingTop10">
       <strong>{{hostel.occupied_students}}</strong> out of <strong>{{hostel.student_occupancy}}</strong>
     </span>
   </div>
 
   <div class="col-sm-12 textLeft padding0" ng-if="unallocatedStudents > 0">
-    <span class="col-sm-2"><h5>UnOccupied Students</h5> </span>
+    <span class="col-sm-2 paddingLeft0"><h5>UnOccupied Students</h5> </span>
     <span class="col-sm-6 paddingTop10">
       <strong>{{unallocatedStudents}}</strong>
     </span>
   </div>
   <div class="col-sm-12 textLeft padding0">
-    <span class="col-sm-2"><h5>Average fee</h5> </span>
+    <span class="col-sm-2 paddingLeft0"><h5>Average fee</h5> </span>
     <span class="col-sm-6 paddingTop10">{{hostel.average_fee}}</span>
   </div>
   <div class="col-sm-12 textLeft padding0" ng-if="hostel.is_service_tax">
-    <span class="col-sm-2"><h5>Service tax</h5> </span>
+    <span class="col-sm-2 paddingLeft0"><h5>Service tax</h5> </span>
     <span class="col-sm-6 paddingTop10">{{hostel.service_tax}}</span>
   </div>
   
-  <div class="col-sm-12 mTop20">
+  <div class="col-sm-12 mTop20 padding0">
     <input ng-model="filterStudent" placeholder="Search Student"/>&nbsp;<span class="padding5 pointer" ng-click="filterStudent = ''"><i class="fa fa-refresh"></i></span>
     
   </div>
-  <div ng-repeat="room in hostelRooms">
-    <div hostel-rooms hostel-id="{{hostel.id}}" room="room" edit-room="editRoom(roomId)" allocate-student="allocateStudent(roomId, roomName);" unallocated-students="{{unallocatedStudents}}" filter-student="filterStudent" deallocate-student-from-hostel="deallocateStudentFromHostel(student_id);">
+  <div class="row">
+    <div ng-repeat="room in hostelRooms">
+      <div hostel-rooms hostel-id="{{hostel.id}}" room="room" edit-room="editRoom(roomId)" allocate-student="allocateStudent(roomId, roomName);" unallocated-students="{{unallocatedStudents}}" filter-student="filterStudent" deallocate-student-from-hostel="deallocateStudentFromHostel(student_id);">
+      </div>
     </div>
   </div>
 </div>

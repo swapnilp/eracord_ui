@@ -30,7 +30,8 @@
       <uib-tab index="0" ng-attr-active="classStudentVerificationTab" >
 	<uib-tab-heading><i class="icon-bell"></i> Verify</uib-tab-heading>
 	<div style="margin:20px 0;">
-	  <h3>Please verify class</h3>
+	  <h3>Please verify class <small class="text-success" ng-if="jk_class.is_student_verified"><br/>Class allready verified</small></h3>
+	  
 	  <div class-duplicate-students class-id="{{class_id}}" class-student-verification-tab="{{classStudentVerificationTab}}" update-url="updateTabParams(tabName)" change-duplicate-remaining="changeDuplicateRemaining(remainingValue);" recheck-students="dirRecheckStudents(theDirFn);"></div>
 	  <button class="btn btn-primary" ng-disabled="(remainingDuplicateCount > 0) || dataLoading || jk_class.is_student_verified" ng-click="verifyDuplicateStudent();">
 	    Verify Class

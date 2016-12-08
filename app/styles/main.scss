@@ -12,8 +12,14 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
   padding: 0.2em 0;
 }
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   padding: 0;
+  margin: 0 0 65px;
 }
 
 input, select, option {
@@ -25,7 +31,7 @@ input, select, option {
 .marketing,
 .footer {
   padding-left: 15px;
-  padding-right: 15px;
+  padding-right: 15px;  
 }
 
 /* Custom page header */
@@ -47,6 +53,12 @@ input, select, option {
   padding-top: 19px;
   color: #777;
   border-top: 1px solid #e5e5e5;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 53px;
+  width: 100%;
+  overflow:hidden;
 }
 
 .container-narrow > hr {

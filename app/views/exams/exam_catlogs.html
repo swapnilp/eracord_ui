@@ -12,7 +12,7 @@
     <span ng-if="!addMarksFlag && remainingLength > 0">
       <button class="btn btn-primary" ng-click="addMarks()">Add Marks</button>
     </span>
-    <span ng-if="addMarksFlag">
+    <span ng-if="addMarksFlag" class="col-sm-12 padding0">
       <button class="btn btn-primary" ng-click="saveMarks()">Save Marks</button>
       <button class="btn btn-primary" ng-click="cancelAddMarks()">Cancel</button>
     </span>
@@ -35,7 +35,6 @@
 		<th st-sort="lastName">student</th>
 		<th st-sort="birthDate">p_mobile</th>
 		<th st-sort="balance">Add Absenty</th>	
-		<th st-sort="balance">Marks</th>
 		<th st-sort="balance">Ignore</th>
 	      </tr>
 	    </thead>
@@ -47,7 +46,6 @@
 		<td>
 		  <button class="btn btn-primary" ng-click="absentStudent(row);">add Absent</button>
 		</td>
-		<td>{{row.marks}}</td>
 		<td>
 		  <button class="btn btn-primary" ng-click="ignoreStudent(row);">Ignore</button>
 		</td>
@@ -136,7 +134,7 @@
     </uib-tabset>
 
   </div>
-  <div ng-if="addMarksFlag">
+  <div ng-if="addMarksFlag" class="col-sm-12 padding0">
     <h2>Remaining Students</h2>
     <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
       <thead>

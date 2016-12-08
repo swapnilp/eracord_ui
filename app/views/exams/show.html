@@ -1,10 +1,10 @@
 
 <div request-loading is-loading="requestLoading1"></div>
-<div class="col-sm-12 textLeftpadding0">
-  <div class="col-sm-12">
+<div class="col-sm-12 textLeftpadding0 padding0">
+  <div class="col-sm-12 padding0">
     <h3 class="pull-left">Exam</h3>
     
-    <div class="pull-right paddingTop10">
+    <div class="pull-right paddingTop15">
       <button ng-click="goBack();" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i></button>
       <span ng-show="!exam.create_verification" ng-if="exam">
 	<a href="#/classes/{{class_id}}/exams/{{exam.id}}/edit" class="btn btn-primary" ng-disabled="requestLoading">Edit</a>
@@ -12,40 +12,40 @@
     </div>
   </div>
   <div class="col-sm-6 textLeft padding0 marginB5">
-    <span class="col-sm-3"><strong>Name</strong> </span>
+    <span class="col-sm-3 paddingLeft0"><strong>Name</strong> </span>
     <span class="col-sm-9">{{exam.name | capitalize}}</span>
   </div>
   <div class="col-sm-6 textLeft padding0 marginB5">
-    <span class="col-sm-3"><strong>Date</strong></span>
+    <span class="col-sm-3 paddingLeft0"><strong>Date</strong></span>
     <span class="col-sm-9">{{exam.exam_date}}</span>
   </div>
   
   <div class="col-sm-6 textLeft padding0 marginB5">
-    <span class="col-sm-3"><strong>Class</strong> </span>
+    <span class="col-sm-3 paddingLeft0"><strong>Class</strong> </span>
     <span class="col-sm-9">
         <a href="#/classes/{{class_id}}">{{exam.jkci_class}}</a>
     </span>
   </div>
   <div class="col-sm-6 textLeft padding0 marginB5">
-    <span class="col-sm-3"><strong>Subject</strong></span>
+    <span class="col-sm-3 paddingLeft0"><strong>Subject</strong></span>
     <span class="col-sm-9">{{exam.subject}}</span>
   </div>
   <div class="col-sm-6 textLeft padding0 marginB5" ng-if="!exam.is_group">
-    <span class="col-sm-3"><strong>Conducted By</strong> </span>
+    <span class="col-sm-3 paddingLeft0"><strong>Conducted By</strong> </span>
     <span class="col-sm-9 ">{{exam.conducted_by | capitalize}}</span>
   </div>
   <div class="col-sm-6 textLeft padding0 marginB5" ng-if="!exam.is_group">
-    <span class="col-sm-3"><strong>Duration</strong></span>
+    <span class="col-sm-3 paddingLeft0"><strong>Duration</strong></span>
     <span class="col-sm-9">{{exam.duration}} Min</span>
   </div>
   <div class="col-sm-6 textLeft padding0 marginB5" ng-if="!exam.is_group">
-    <span class="col-sm-3"><strong>Total Marks</strong></span>
+    <span class="col-sm-3 paddingLeft0"><strong>Total Marks</strong></span>
     <span class="col-sm-9">{{exam.marks}}</span>
   </div>
   
   
   <div class="col-sm-6 textLeft padding0" ng-if="!exam.is_group">
-    <span class="col-sm-3"><strong>Papers</strong></span>
+    <span class="col-sm-3 paddingLeft0"><strong>Papers</strong></span>
     <span class="col-sm-9">
       <span ng-repeat="paper in exam.documents">
 	<a href="{{paper}}" class="pointer" target="_blank" >
@@ -56,7 +56,7 @@
     </span>
   </div>
   <div class="col-sm-6 textLeft padding0" ng-if="!exam.is_group">
-    <span class="col-sm-3 paddingTop5"><strong>Upload paper</strong></span>
+    <span class="col-sm-3 paddingTop5 paddingLeft0"><strong>Upload paper</strong></span>
     <span class="col-sm-9">
       <form name="form">
 	<div class="btn btn-primary" ngf-select ng-model="file" name="file" ngf-pattern="'.doc,.docx,.pdf,.jpg,video/*'"
@@ -68,11 +68,11 @@
     </span>
   </div>
   <div class="col-sm-12 textLeft padding0 marginT10" ng-if="exam.is_point_added">
-    <span class="col-sm-1"><strong>Points</strong></span>
+    <span class="col-sm-1 paddingLeft0"><strong>Points</strong></span>
     <div class="col-sm-11"><span class="tag label label-primary marginR5 marginB5" ng-repeat="p in exam.chapters_points" style="display: inline-block;">{{p}}</span> </div>
   </div>
   <div class="col-sm-12 textLeft padding0" ng-if="exam">
-    <div class="col-sm-12 paddingTop10" style="">
+    <div class="col-sm-12 paddingTop10 paddingLeft0" style="">
       
       <span ng-show="!exam.create_verification" ng-if="exam.root && (( exam.is_group && exam.descendants_count > 0) || !exam.is_group)">
 	<button class="btn btn-primary" ng-click="verifyExam(exam)" ng-disabled="requestLoading">Verify Exam</button>
@@ -92,15 +92,15 @@
       </span>
     </div>
   </div>
-  <div class="col-sm-12 textLeft" ng-if="exam && exam.is_completed && exam.is_result_decleared == null  && !exam.is_group">
+  <div class="col-sm-12 textLeft padding0" ng-if="exam && exam.is_completed && exam.is_result_decleared == null  && !exam.is_group">
     <exam-catlog exam="exam" class-id="{{class_id}}">
     </exam-catlog>
   </div>
-  <div class="col-sm-12 textLeft" ng-if="exam && exam.is_completed && exam.is_result_decleared  && !exam.is_group">
+  <div class="col-sm-12 textLeft padding0" ng-if="exam && exam.is_completed && exam.is_result_decleared  && !exam.is_group">
     <exam-results exam="exam" class-id="{{class_id}}">
     </exam-results>
   </div>
-  <div class="col-sm-12 textLeft" ng-if="exam && exam.is_group">
+  <div class="col-sm-12 textLeft padding0" ng-if="exam && exam.is_group">
     <new-group-exam exam="exam" class-id="{{class_id}}">
     </new-group-exam>
   </div>

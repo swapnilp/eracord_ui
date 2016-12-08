@@ -10,7 +10,7 @@ app.directive('classDailyTeachesCatlogs', function(Restangular) {
     scope: {
       classId: '@',
       dailyTeachesId: '@',
-      isVerifyAbsenty: '=',
+      isVerifyAbsenty: '@',
       isSmsSent: '=',
       enableSms: '='
       
@@ -20,12 +20,14 @@ app.directive('classDailyTeachesCatlogs', function(Restangular) {
       
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
       scope.publishEnable = true;
-            
+      scope.loadCatlogs = true;
+      
       scope.loadCatlog = function(){
 	jkci_classes.one("daily_teachs", scope.dailyTeachesId).customGET("get_catlogs").then(function(data){
 	  if(data.success){
 	    scope.dtpCatlogs = data.class_catlogs;
 	  }
+	  scope.loadCatlogs = false;
 	})
       };
 
