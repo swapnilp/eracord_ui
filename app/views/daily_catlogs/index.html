@@ -5,13 +5,13 @@
       Rocords - {{totalDtps}}
     </div>
     <div class="pull-right">
-      <select class="form-control ng-touched filterSelectRecord marginR5" ng-model="filterDtp.subject" ng-options="subject.id as subject.name for subject in subjects">
-	<option value="" >All subjects</option>
-      </select>
       <div class="positionRelative marginR5" style="display: inline-block;">
 	<input date-range-picker id="rangeCalender" class="form-control date-picker calender pointer" type="text" ng-model="filterDtp.dateRange" style="width:230px;display:inline;" placeholder="Enter date range" onkeypress="return false" options="{autoApply: true}" readonly/>
 	<label for="rangeCalender" class="rangeCalender pointer"><i class="fa fa-calendar marginT10"></i></label>
       </div>
+      <select class="form-control ng-touched filterSelectRecord marginR5" ng-model="filterDtp.subject" ng-options="subject.id as subject.name for subject in subjects">
+	<option value="" >All subjects</option>
+      </select>
       <button class="btn btn-primary" ng-click="pageChanged(1);" uib-tooltip="Filter"><i class="fa fa-filter" ></i></button>
       <button class="btn btn-primary" ng-click="resetFilter();" uib-tooltip="Reset"><i class="fa fa-refresh"></i></button>
     </div>
