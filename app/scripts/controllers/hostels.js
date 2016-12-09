@@ -36,7 +36,12 @@ angular.module('eracordUiApp.controller')
       var hostels = Restangular.all("hostels");
       $scope.requestLoading = false;
       $scope.isNew = true;
-      
+      $scope.vm = {hostel: {}};
+      $scope.months = [{id: 1, name: "Januery"}, {id: 2, name: "February"}, {id: 3, name: "March"},
+        {id: 4, name: "April"}, {id: 5, name: "May"}, {id: 6, name: "June"},
+        {id: 7, name: "July"}, {id: 7, name: "Auguest"}, {id: 9, name: "September"},
+        {id: 10, name: "October"}, {id: 11, name: "November"}, {id:12, name: "December"}]
+      $scope.vm.hostel.start_month = 6;
       $scope.registerHostel = function(){
 	hostels.customPOST({hostel: $scope.vm.hostel}).then(function(data) {
 	  if(data.success) {
@@ -51,6 +56,10 @@ angular.module('eracordUiApp.controller')
       var hostels = Restangular.all("hostels");
       $scope.vm = {};
       $scope.vm.hostel = {};
+      $scope.months = [{id: 1, name: "Januery"}, {id: 2, name: "February"}, {id: 3, name: "March"},
+        {id: 4, name: "April"}, {id: 5, name: "May"}, {id: 6, name: "June"},
+        {id: 7, name: "July"}, {id: 7, name: "Auguest"}, {id: 9, name: "September"},
+        {id: 10, name: "October"}, {id: 11, name: "November"}, {id:12, name: "December"}]
       $scope.requestLoading = true;
       $scope.isNew = false;
       
