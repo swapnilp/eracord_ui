@@ -1,24 +1,21 @@
-<div style="margin:20px 0;">
+<div>
   <div class="examFilterDiv col-sm-12 padding0"> 
-    <div class="pull-right">
-      <input type="text" ng-model="filterStudent" dl-key-code="pageChanged(1);" code="13" placeholder="Type mobile and enter" value="{{filterStudent}}" style="width:230px;display:inline;" class="form-control">
-      <button class="btn btn-primary" ng-click="pageChanged(1);">Filter</button>
-    </div>		  
-  </div>
-  <div class="examFilterDiv col-sm-12" style="padding:10px 0;"> 
-    <a href="#/meetings/new" class="btn btn-primary" >New</a>
-  </div>
-  <br /><br /><br />
-  <div class="alert alert-warning col-sm-12">
-    <span ng-if="totalCount > 0">
-      Total Meetings  are - {{totalCount}}
-    </span>
-    <span ng-if="totalCount === 0">
-      No data found
-    </span>
+    <h3 class="pull-left">Meetings</h3>
+    <div class="pull-right marginT15">
+      <a href="#/meetings/new" class="btn btn-primary" >New</a>
+    </div>
   </div>
   <div request-loading is-loading="requestLoading"></div>
-  <figure class="col-sm-12 padding0" ng-show="!requestLoading && totalCount > 0">
+  <figure class="col-sm-12 padding0 marginT20" ng-show="!requestLoading && totalCount > 0">
+    <div class="col-sm-12 padding0">
+      <div class="pull-left">
+	Records&nbsp;:&nbsp; <strong>{{totalCount}}</strong>
+      </div>
+      <div class="pull-right">
+	<input type="text" ng-model="filterStudent" dl-key-code="pageChanged(1);" code="13" placeholder="Type mobile and enter" value="{{filterStudent}}" style="width:230px;display:inline;" class="form-control">
+	<button class="btn btn-primary" ng-click="pageChanged(1);"><i class="fa fa-filter"></i></button>
+      </div>		  
+    </div>
     <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
       <thead>
 	<tr>

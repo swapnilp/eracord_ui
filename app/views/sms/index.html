@@ -1,23 +1,21 @@
-<div style="margin:20px 0;">
+<div class="col-sm-12 padding0">
   <div class="examFilterDiv col-sm-12 padding0"> 
     <div class="col-sm-12 padding0">
-      <div class="pull-right">
-	<input type="text" ng-model="filterStudent" dl-key-code="pageChanged(1);" code="13" placeholder="Enter mobile number" ng-maxlength="10" style="width:230px;display:inline;" value="{{filterStudent}}" class="form-control" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0">
-	<button class="btn btn-primary" ng-click="pageChanged(1);">Filter</button>
-      </div>
+      <h3>SMS</h3>
+      
     </div>		  
-  </div>
-  <br /><br /><br />
-  <div class="alert alert-warning col-sm-12">
-    <span ng-if="totalCount > 0">
-      Total Sent sms  are - {{totalCount}}
-    </span>
-    <span ng-if="totalCount === 0">
-      No data found
-    </span>
   </div>
   <div request-loading is-loading="requestLoading"></div>
   <figure class="col-sm-12 padding0" ng-show="!requestLoading && totalCount > 0">
+    <div class="col-sm-12 padding0">
+      <div class="pull-left marginT15">
+	Records&nbsp;:&nbsp;<strong>{{totalCount}}</strong>
+      </div>
+      <div class="pull-right marginT15">
+	<input type="text" ng-model="filterStudent" dl-key-code="pageChanged(1);" code="13" placeholder="Enter mobile number" ng-maxlength="10" style="width:230px;display:inline;" value="{{filterStudent}}" class="form-control" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0">
+	<button class="btn btn-primary" ng-click="pageChanged(1);"><i class="fa fa-filter"></i></button>
+      </div>
+    </div>
     <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
       <thead>
 	<tr>
