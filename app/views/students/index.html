@@ -125,7 +125,9 @@
 		</ul>
 	      </div>
 	    </span>
-	    <span ng-if="row.has_hostel" class="green paddingR10" uib-tooltip="Hostalite"><i class="fa fa-bed"></i></span>
+	    <span ng-if="row.hostel_id" class="green paddingR10" uib-tooltip="Hostalite">
+	      <a href="#/hostels/{{row.hostel_id}}"><i class="fa fa-bed green"></i></a>
+	    </span>
 	    <span ng-if="row.enable_sms" class="green" uib-tooltip="SMS Enabled" ><i class="fa fa-mobile-phone"></i></span>
 	  </td>
 	  <td>{{row.batch}}</td>
