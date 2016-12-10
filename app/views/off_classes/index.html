@@ -6,10 +6,6 @@
 	<button class="btn btn-primary" ng-click="pageChanged(1, false);" uib-tooltip="Filter"><i class="fa fa-filter" ></i></button>
 	<button class="btn btn-primary" ng-click="resetFilter();" uib-tooltip="Reset"><i class="fa fa-refresh"></i></button>
       </div>
-      <div class="marginLeft10 pull-right positionRelative">
-	<input date-range-picker id="rangeCalender" class="form-control date-picker calender pointer" type="text" ng-model="filterOffClass.dateRange" style="width:230px;display:inline;" placeholder="Enter date range" onkeypress="return false" options="{autoApply: true}" readonly/>
-	<label for="rangeCalender" class="rangeCalender pointer"><i class="fa fa-calendar marginT10"></i></label>
-      </div>
       <div class="marginLeft10 pull-right">
 	<select class="form-control ng-touched" ng-model="filterOffClass.filterClass" ng-options="std.id as std.name for std in classes">
 	  <option value="">All classes</option>
@@ -19,6 +15,10 @@
 	<select class="form-control ng-touched" ng-model="filterOffClass.filterTeacher" ng-options="std.id as std.name for std in teachers">
 	  <option value="" >All teachers</option>
 	</select>
+      </div>
+      <div class="marginLeft10 pull-right positionRelative">
+	<input date-range-picker id="rangeCalender" class="form-control date-picker calender pointer" type="text" ng-model="filterOffClass.dateRange" style="width:230px;display:inline;" placeholder="Enter date range" onkeypress="return false" options="{autoApply: true}" readonly/>
+	<label for="rangeCalender" class="rangeCalender pointer"><i class="fa fa-calendar marginT10"></i></label>
       </div>
     </div>
     <div class="pull-left marginT10">
@@ -46,5 +46,5 @@
       </tbody>
     </table>
   </figure>
-  <dir-pagination-controls on-page-change="pageChanged(newPageNumber, true)" class="col-sm-12" ng-show="off_classes.length > 0"></dir-pagination-controls>
+  <dir-pagination-controls on-page-change="pageChanged(newPageNumber, true)" class="col-sm-12 text-center" ng-show="off_classes.length > 0"></dir-pagination-controls>
 </div>
