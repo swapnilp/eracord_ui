@@ -140,7 +140,7 @@ angular.module('eracordUiApp.controller')
 	});
       };
 
-      var getHostelRooms = function(){
+      $scope.getHostelRooms = function(){
 	hostels.one($routeParams.id).customGET("hostel_rooms").then(function(data) {
 	  if(data.success) {
 	    //$scope.hostel = data.hostel;
@@ -166,7 +166,7 @@ angular.module('eracordUiApp.controller')
 	});
 
 	modalInstance.result.then(null, function () {
-	  getHostelRooms();
+	  $scope.getHostelRooms();
 	});
       };
 
@@ -187,7 +187,7 @@ angular.module('eracordUiApp.controller')
 	});
 
 	modalInstance.result.then(null, function () {
-	  getHostelRooms();
+	  $scope.getHostelRooms();
 	});
       };
 
@@ -211,7 +211,7 @@ angular.module('eracordUiApp.controller')
 	});
 
 	modalInstance.result.then(null, function () {
-	  getHostelRooms();
+	  $scope.getHostelRooms();
 	});
       };
 
@@ -226,7 +226,7 @@ angular.module('eracordUiApp.controller')
       };
       
       getHostel();
-      getHostelRooms();
+      $scope.getHostelRooms();
     }
 
     
@@ -335,7 +335,67 @@ angular.module('eracordUiApp.controller')
       };
 
       getStudents();
+    }])
+
+  .controller('ChangeHostelRoomCtrl',['$scope', '$uibModalInstance', 'Restangular', 'hostel_id', 'room_id', 'student_id',
+    function ($scope, $uibModalInstance, Restangular, hostel_id, room_id, student_id) {
+      var hostel = Restangular.one("hostels", hostel_id);
+      $scope.requestLoading = true;
+      $scope.formLoading = false;
+      //$scope.students = [];
+      //$scope.studentsList = [];
+      //$scope.roomName = room_name;
+      //$scope.remainingCount = 0;
+      $scope.isRoom = false;
+      $scope.vm = {};
+      
+      $scope.cancel = function () {
+	$uibModalInstance.dismiss('cancel');
+      };
+
+      $scope.students = [];
+      
+      var loadRooms = function() {
+	hostel.one("students", student_id).customGET("get_other_rooms").then(function(data) {
+	  if(data.success) {
+	    $scope.studentName = data.student;
+	    $scope.rooms = data.rooms;
+	    console.log($scope.rooms);
+	  } else {
+	    
+	  }
+	  $scope.requestLoading = false;
+	});
+      };
+
+      $scope.selectRoom = function(room_id) {
+	$scope.room = _.findWhere($scope.rooms, {id: room_id});
+	$scope.students = $scope.room.students;
+	if($scope.room && $scope.room.is_available) {
+	  $scope.isRoom = true;
+	} else {
+	  $scope.isRoom = false;
+	}
+      };
+
+      $scope.changeRoom = function (room_id) {
+	$scope.formLoading = true;
+	hostel.one("students", student_id).customPOST({student: $scope.vm}, "change_room", {}).then(function(data) {
+	  if(data.success) {
+	    $scope.cancel();
+	  } else {
+	    
+	  }
+	});
+      };
+      
+
+      loadRooms();
+
+     
     }]);
+
+
 
 
 

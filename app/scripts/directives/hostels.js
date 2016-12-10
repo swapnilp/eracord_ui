@@ -16,7 +16,8 @@ app.directive('hostelRooms', function(Restangular) {
       allocateStudent: '&',
       unallocatedStudents: '@',
       filterStudent: '=',
-      deallocateStudentFromHostel: '&'
+      deallocateStudentFromHostel: '&',
+      reloadRooms: '&'
     },
     templateUrl: 'views/hostels/rooms.html',
     controller: ['$scope', 'Restangular', 'Flash', 'hostelStudentsFilter', '$confirm', '$uibModal', function(scope, Restangular, Flash, hostelStudentsFilter, $confirm, $uibModal){
@@ -36,6 +37,30 @@ app.directive('hostelRooms', function(Restangular) {
             scope.deallocateStudentFromHostel({student_id: student_id});
           });
       };
+
+      scope.changeStudentRoom = function(student_id, room_id) {
+	var modalInstance = $uibModal.open({
+	  animation: true,
+	  templateUrl: 'views/hostels/change_room.html',
+	  controller: 'ChangeHostelRoomCtrl',
+	  size: 'lg',
+	  resolve: {
+	    student_id: function(){
+	      return student_id;
+	    },
+	    room_id: function(){
+	      return room_id;
+	    },
+	    hostel_id: function(){
+	      return scope.hostelId;
+	    }
+	  }
+	});
+
+	modalInstance.result.then(null, function () {
+	  scope.reloadRooms();
+	});
+      }
 
       scope.showStudentsInfo = function(student_id) {
 	var modalInstance = $uibModal.open({

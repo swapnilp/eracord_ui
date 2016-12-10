@@ -29,6 +29,9 @@
 	    <li class="text-right padding5" ng-if="students[n].dues < 0">
 	      Total Remaining : {{students[n].dues * -1}}
 	    </li>
+	    <li>
+	      <a class="pointer" ng-click="changeStudentRoom(students[n].id, room.id)">Change Room</a>
+	    </li>
 	    <li><a class="pointer" ng-click="removeStudentFromHostel(students[n].id);">Remove from hostel</a></li>
 	  </ul>
 	</span>

@@ -1,0 +1,47 @@
+<div class="modal-header bg-primary">
+  <h3 class="modal-title text-center">Change Room</h3>
+  <a ng-click="cancel()" class="textWhite" style="float: right;position: absolute;right: 15px;top: 19px;cursor:pointer;"><i class="fa fa-times"></i></a>
+</div>
+<div class="modal-body" style="min-height:300px;">
+  <div request-loading is-loading="requestLoading"></div>
+  <figure class="col-sm-12 padding0" ng-show="!requestLoading">
+    <div class="col-sm-12 padding0">
+      <h4>{{studentName}}</h4>
+    </div>
+    <div class="col-sm-12 padding0">
+      <select class="form-control ng-touched" ng-model="vm.hostel_room_id" ng-options="room.id as room.name for room in rooms" ng-change="selectRoom(vm.hostel_room_id);">
+	<option class="hide" value="">Select Room</option>
+      </select>
+    </div>
+    <div ng-show="room" class="col-sm-12 padding0 marginT20">
+      <span class="col-sm-4 paddingLeft0">Beds : {{room.beds}}</span>
+      <span class="col-sm-4 paddingLeft0">Students : {{room.students_count}}</span>
+      <span class="col-sm-4 paddingLeft0">Extra charge : {{room.extra_charges}}</span>
+      <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
+	<thead>
+	  <th>
+	    No
+	  </th>
+	  <th>
+	    Name
+	  </th>
+	  <th>
+	    Mobile
+	  </th>
+	</thead>
+	<tbody>
+	  <tr ng-repeat="student in students">
+	    <td>{{$index + 1}}</td>
+	    <td>{{student.name}}</td>
+	    <td>{{student.mobile}}</td>
+	  </tr>
+	</tbody>
+      </table>
+    </div>
+  </figure>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="changeRoom();" ng-disabled="requestLoading || !isRoom || formLoading">Save</button>
+  <a class="btn btn-default" ng-click="cancel();">Cancel</a>
+</div>
+
