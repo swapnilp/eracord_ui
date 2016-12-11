@@ -342,10 +342,6 @@ angular.module('eracordUiApp.controller')
       var hostel = Restangular.one("hostels", hostel_id);
       $scope.requestLoading = true;
       $scope.formLoading = false;
-      //$scope.students = [];
-      //$scope.studentsList = [];
-      //$scope.roomName = room_name;
-      //$scope.remainingCount = 0;
       $scope.isRoom = false;
       $scope.vm = {};
       
@@ -360,7 +356,6 @@ angular.module('eracordUiApp.controller')
 	  if(data.success) {
 	    $scope.studentName = data.student;
 	    $scope.rooms = data.rooms;
-	    console.log($scope.rooms);
 	  } else {
 	    
 	  }
@@ -389,10 +384,58 @@ angular.module('eracordUiApp.controller')
 	});
       };
       
-
       loadRooms();
+    }])
 
-     
+  .controller('SwapHostelRoomCtrl',['$scope', '$uibModalInstance', 'Restangular', 'hostel_id', 'room_id', 'student_id',
+    function ($scope, $uibModalInstance, Restangular, hostel_id, room_id, student_id) {
+      var hostel = Restangular.one("hostels", hostel_id);
+      $scope.requestLoading = true;
+      $scope.formLoading = false;
+      $scope.isRoom = false;
+      $scope.vm = {};
+      
+      $scope.cancel = function () {
+	$uibModalInstance.dismiss('cancel');
+      };
+
+      $scope.students = [];
+      
+      var loadStudents = function() {
+	hostel.one("students", student_id).customGET("get_hostel_students").then(function(data) {
+	  if(data.success) {
+	    $scope.studentName = data.student;
+	    $scope.students = data.students;
+	  } else {
+	    
+	  }
+	  $scope.requestLoading = false;
+	});
+      };
+
+      $scope.selectRoom = function(room_id) {
+	$scope.room = _.findWhere($scope.rooms, {id: room_id});
+	$scope.students = $scope.room.students;
+	if($scope.room && $scope.room.is_available) {
+	  $scope.isRoom = true;
+	} else {
+	  $scope.isRoom = false;
+	}
+      };
+
+      $scope.changeRoom = function (room_id) {
+	$scope.formLoading = true;
+	hostel.one("students", student_id).customPOST({student: $scope.vm}, "change_room", {}).then(function(data) {
+	  if(data.success) {
+	    $scope.cancel();
+	  } else {
+	    
+	  }
+	});
+      };
+      
+      loadStudents();
+      
     }]);
 
 

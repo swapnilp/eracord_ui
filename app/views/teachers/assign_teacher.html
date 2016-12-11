@@ -7,10 +7,10 @@
   <figure class=" col-sm-12" ng-show="!requestLoading">
     <div class="assignStudentsList ">
       <label class="checkBoxStyle col-md-6" ng-repeat="teacher in teachers">
-      <input name="selectTeacher" id="teacher_{{teacher.id}}" ng-value="{{teacher.id}}" class="active" type="radio" ng-model="selectedTeacher" ng-change="selectTeacher(teacher);">
+	<input name="selectTeacher" id="teacher_{{teacher.id}}" ng-value="{{teacher.id}}" class="active" type="radio" ng-model="selectedTeacher" ng-change="selectTeacher(teacher);">
       <label for="teacher_{{teacher.id}}"></label>
       {{teacher.name | capitalize}} - {{teacher.mobile}}
-    </label>
+      </label>
     </div>
   </figure>
 </div>

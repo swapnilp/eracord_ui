@@ -60,6 +60,30 @@ app.directive('hostelRooms', function(Restangular) {
 	modalInstance.result.then(null, function () {
 	  scope.reloadRooms();
 	});
+      };
+
+      scope.swapRoomStudents = function(student_id, room_id) {
+	var modalInstance = $uibModal.open({
+	  animation: true,
+	  templateUrl: 'views/hostels/swap_room_student.html',
+	  controller: 'SwapHostelRoomCtrl',
+	  size: 'lg',
+	  resolve: {
+	    student_id: function(){
+	      return student_id;
+	    },
+	    room_id: function(){
+	      return room_id;
+	    },
+	    hostel_id: function(){
+	      return scope.hostelId;
+	    }
+	  }
+	});
+
+	modalInstance.result.then(null, function () {
+	  scope.reloadRooms();
+	});
       }
 
       scope.showStudentsInfo = function(student_id) {
