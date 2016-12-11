@@ -402,7 +402,7 @@ angular.module('eracordUiApp.controller')
       $scope.students = [];
       
       var loadStudents = function() {
-	hostel.one("students", student_id).customGET("get_hostel_students").then(function(data) {
+	hostel.one("students", student_id).customGET("get_hostel_students", {room_id: room_id}).then(function(data) {
 	  if(data.success) {
 	    $scope.studentName = data.student;
 	    $scope.students = data.students;
