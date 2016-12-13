@@ -381,6 +381,7 @@ angular.module('eracordUiApp.controller')
 	  } else {
 	    
 	  }
+	  $scope.formLoading = false;
 	});
       };
       
@@ -392,8 +393,8 @@ angular.module('eracordUiApp.controller')
       var hostel = Restangular.one("hostels", hostel_id);
       $scope.requestLoading = true;
       $scope.formLoading = false;
-      $scope.isRoom = false;
       $scope.vm = {};
+      $scope.isSelected = false;
       
       $scope.cancel = function () {
 	$uibModalInstance.dismiss('cancel');
@@ -413,19 +414,15 @@ angular.module('eracordUiApp.controller')
 	});
       };
 
-      $scope.selectRoom = function(room_id) {
-	$scope.room = _.findWhere($scope.rooms, {id: room_id});
-	$scope.students = $scope.room.students;
-	if($scope.room && $scope.room.is_available) {
-	  $scope.isRoom = true;
-	} else {
-	  $scope.isRoom = false;
-	}
-      };
+      $scope.selectStudent = function(student_id){
+	$scope.isSelected = true;
+	$scope.selectedStudent = student_id;
+      }
 
-      $scope.changeRoom = function (room_id) {
+      $scope.swapRoom = function (room_id) {
+	console.log($scope.selectedStudent);
 	$scope.formLoading = true;
-	hostel.one("students", student_id).customPOST({student: $scope.vm}, "change_room", {}).then(function(data) {
+	hostel.one("students", student_id).customPOST({student: {}}, "swap_room_student", {swap_student_id: $scope.selectedStudent}).then(function(data) {
 	  if(data.success) {
 	    $scope.cancel();
 	  } else {

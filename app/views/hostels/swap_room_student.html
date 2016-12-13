@@ -9,9 +9,9 @@
       <h4>{{studentName}}</h4>
     </div>
     <div class="col-sm-12 padding0">
-      <div class="assignStudentsList ">
+      <div class="assignStudentsList">
 	<label class="checkBoxStyle col-md-6" ng-repeat="student in students">
-	  <input name="selectStudent" id="student_{{student.id}}" ng-value="{{student.id}}" class="active" type="radio" ng-model="selectedStudent" ng-change="selectStudent(student);">
+	  <input name="selectStudent" id="student_{{student.id}}" ng-value="{{student.id}}" class="active" type="radio" ng-model="selectedStudent" ng-click="selectStudent(student.id);">
 	  <label for="student_{{student.id}}"></label>
 	  {{student.name | capitalize}} - {{student.mobile}}
 	</label>
@@ -20,7 +20,7 @@
   </figure>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-primary" ng-click="changeRoom();" ng-disabled="requestLoading || !isRoom || formLoading">Save</button>
+  <button class="btn btn-primary" ng-click="swapRoom();" ng-disabled="requestLoading || !isSelected || formLoading">Save</button>
   <a class="btn btn-default" ng-click="cancel();">Cancel</a>
 </div>
 
