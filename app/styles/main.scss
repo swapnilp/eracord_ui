@@ -553,6 +553,14 @@ tr.pointer, td.pointer {
   width: 150px;
   display:inline-block;
 }
+
+.filterRight {
+  float: right;
+}
+
+.fixLayout {
+  table-layout: fixed;
+}
 	
 @media screen {
   #printSection {
@@ -1142,6 +1150,15 @@ a.disabled {
   }
   .accountFilter input {
     margin-bottom:5px;
+  }
+  
+  .filterRight {
+    float: left;
+    width: 100%;
+  }
+  
+  .daterangepicker.show-calendar .calendar {
+    display: inline-block;
   }
 }
 

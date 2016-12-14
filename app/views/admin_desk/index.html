@@ -43,11 +43,11 @@
       <h3>Assigned classes</h3>
     </div>
     <figure class="highlight">
-      <table st-table="rowCollection" class="table organisationCoursesTable">
+      <table st-table="rowCollection" class="table organisationCoursesTable fixLayout">
 	<thead>
 	  <tr>
 	    <th st-sort="firstName">Classes</th>
-	    <th st-sort="firstName">Department</th>
+	    <th st-sort="firstName" style="word-break: break-all;">Department</th>
 	    <th>Email</th>
 	    <th>Mobile</th>
 	  </tr>
@@ -56,8 +56,8 @@
 	  <tr ng-repeat="row in us_jkci_classes">
 	    <td><a href="#/classes/{{row.id}}">{{row.name}}</a></td>
 	    <td>{{row.organisation_name}}</td>
-	    <td>{{row.email}}</td>
-	    <td>{{row.mobile}}</td>
+	    <td style="word-break: break-all;">{{row.email}}</td>
+	    <td style="word-break: break-all;">{{row.mobile}}</td>
 	  </tr>
 	</tbody>
       </table>

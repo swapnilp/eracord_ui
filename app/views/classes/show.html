@@ -3,7 +3,7 @@
   <div class="col-sm-12 padding0 textLeft" ng-show="!requestLoading">
     <div class="col-sm-12 row">
       <h2 class="pull-left">{{class.class_name}}</h2>
-      <div class="pull-right paddingTop20">
+      <div class="filterRight paddingTop20 marginB20">
 	<a class="btn btn-primary" href="#/admin_desk" uib-tooltip="Back"><i class="fa fa-arrow-circle-left"></i></a>
 	<span is-role-visible='["manage_class_student"]' email="currentUser.email" ng-if="has_manage_class">
 	  <a href="#/classes/{{class.id}}/manage_class" class="btn btn-primary" uib-tooltip="Manage"><i class="fa fa-cogs"></i></a>
@@ -32,11 +32,11 @@
 	</div>
       </div>
     </div>
-    <div class="col-sm-12 padding0">
+    <div class="col-sm-12 padding0" style="display: inline-block;">
       <div class="pull-left">
 	<span class="tag label label-primary" style="display:inline-table; margin: 0 10px 0 0;" ng-repeat="subject in class.subjects">{{subject}}</span>
       </div>
-      <div class="pull-right">
+      <div class="filterRight">
 	<span>Daily SMS  &nbsp;&nbsp;<span class="tag label" ng-class="{'label-success': class.enable_class_sms, 'label-danger': !class.enable_class_sms}">{{class.enable_class_sms ?  'Enabled' : 'Disabled'}}</span></span>
 	<span class="marginLeft10">Exam SMS &nbsp;&nbsp;<span class="tag label" ng-class="{'label-success': class.enable_exam_sms, 'label-danger': !class.enable_exam_sms}">{{class.enable_exam_sms ?  'Enabled' : 'Disabled'}}</span></span>
       </div>
@@ -47,17 +47,17 @@
     <div class="col-sm-12 textLeft padding0 marginT20 ">
       <uib-tabset justified="true" active="activeTab">
 	<uib-tab  index="0" select="selectTabs();">
-	  <uib-tab-heading><i class="icon-bell"></i> Class catalog</uib-tab-heading>
+	  <uib-tab-heading> Catalog</uib-tab-heading>
 	  <div>
 	    <div class-catlogs class-id="{{class_id}}" class-catlog-tab="{{classCatlogTab}}" update-url="updateTabParams(tabName)" host-url="{{hostUrl}}"></div>
 	  </div>
 	</uib-tab>
 	<uib-tab index="1" select="selectTabs();">
-	  <uib-tab-heading><i class="icon-bell"></i> Students</uib-tab-heading>
+	  <uib-tab-heading> Students</uib-tab-heading>
 	  <div class-students class-id="{{class_id}}" class-students-tab="{{classStudentTab}}" update-url="updateTabParams(tabName)" show-options="true"></div>
 	</uib-tab>
 	<uib-tab index="2" select="selectTabs();">
-	  <uib-tab-heading><i class="icon-bell"></i> Exams</uib-tab-heading>
+	  <uib-tab-heading>Exams</uib-tab-heading>
 	  <div>
 	    <div class-exams class-id="{{class_id}}" class-exams-tab="{{classExamsTab}}" update-url="updateTabParams(tabName)"></div>
 	  </div>
