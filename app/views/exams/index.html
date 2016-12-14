@@ -1,42 +1,42 @@
 <div>
   <h3 class="" ng-if="showClassFilter">Exams</h3>
   <div class="examFilterDiv col-sm-12 marginB20 marginT20 padding0" ng-if="showFilter"> 
-    <div class="pull-right">
-      <div class="marginLeft10 pull-right">
-	<button class="btn btn-primary"  ng-click="pageChanged(1, false);" uib-tooltip="Filter"><i class="fa fa-filter"></i></button>
-	<button class="btn btn-primary"  ng-click="resetFilter();" uib-tooltip="Reset"><i class="fa fa-refresh"></i></button>
-      </div>
-      <div class="marginLeft10 pull-right positionRelative">
-	<input date-range-picker id="rangeCalender" class="form-control date-picker calender pointer" type="text" ng-model="filterExam.dateRange" style="width:230px;display:inline;" placeholder="Enter date range" onkeypress="return false" options="{autoApply: true}" readonly/>
-	<label for="rangeCalender" class="rangeCalender pointer"><i class="fa fa-calendar marginT10"></i></label>
-      </div>
-      <div class="marginLeft10 pull-right">
-	<select class="form-control ng-touched" ng-model="filterExam.filterExamStatus" ng-options="values for values in ['Published', 'Conducted', 'Verified', 'Created']">
-	  <option value="">All</option>
-	</select>
-      </div>
-      <div class="marginLeft10 pull-right">
-	<select class="form-control ng-touched" ng-model="filterExam.filterExamType" ng-options="values for values in ['Single', 'Grouped']">
-	  <option value="">Type</option>
-	</select>
-      </div>
-      <div class="marginLeft10 pull-right" ng-if="showClassFilter">
-	<select class="form-control ng-touched" ng-model="filterExam.filterStandard" ng-options="std.id as std.name for std in standards">
-	  <option value="">Standard</option>
-	</select>
-      </div>
-      <div class="marginLeft10 pull-right" ng-if="showClassFilter">
+    <div class="pull-left marginT5">
+      <span class="">Records - <strong>{{totalExams || 0}}</strong> </span>
+    </div>
+    <div class="filterRight examFilter">
+      <div class="marginR10" ng-if="showClassFilter">
 	<select class="form-control ng-touched" ng-model="filterExam.filterBatch" ng-options="std.id as std.name for std in batches">
 	  <option value="">Batch</option>
 	</select>
       </div>
-    </div>
-    <div class="pull-left marginT5">
-      <span class="">Records - <strong>{{totalExams || 0}}</strong> </span>
+      <div class="marginR10" ng-if="showClassFilter">
+	<select class="form-control ng-touched" ng-model="filterExam.filterStandard" ng-options="std.id as std.name for std in standards">
+	  <option value="">Standard</option>
+	</select>
+      </div>
+      <div class="marginR10">
+	<select class="form-control ng-touched" ng-model="filterExam.filterExamType" ng-options="values for values in ['Single', 'Grouped']">
+	  <option value="">Type</option>
+	</select>
+      </div>
+      <div class="marginR10">
+	<select class="form-control ng-touched" ng-model="filterExam.filterExamStatus" ng-options="values for values in ['Published', 'Conducted', 'Verified', 'Created']">
+	  <option value="">All</option>
+	</select>
+      </div>
+      <div class="marginR10 positionRelative" style="width:230px;">
+	<input date-range-picker id="rangeCalender" class="form-control date-picker calender pointer" type="text" ng-model="filterExam.dateRange" style="width:230px;display:inline;" placeholder="Enter date range" onkeypress="return false" options="{autoApply: true}" readonly/>
+	<label for="rangeCalender" class="rangeCalender pointer"><i class="fa fa-calendar marginT10"></i></label>
+      </div>
+      <div class="">
+	<button class="btn btn-primary"  ng-click="pageChanged(1, false);" uib-tooltip="Filter"><i class="fa fa-filter"></i></button>
+	<button class="btn btn-primary"  ng-click="resetFilter();" uib-tooltip="Reset"><i class="fa fa-refresh"></i></button>
+      </div>
     </div>
   </div>
   <div request-loading is-loading="requestLoading"></div>
-  <figure class="" ng-show="length == 0 && !requestLoading">
+  <figure class="fullWidth" ng-show="length == 0 && !requestLoading">
     <h4 class="text-danger">No exams found</h4>
   </figure>
   <figure class="" ng-show="length > 0 && !requestLoading">

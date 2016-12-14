@@ -144,6 +144,10 @@ input, select, option {
   padding:10px;
 }
 
+.paddingB10 {
+  padding-bottom:10px;
+}
+
 .remainingStudentsList > label {
   margin-bottom:6px;
   -webkit-user-select: none;
@@ -556,6 +560,16 @@ tr.pointer, td.pointer {
 
 .filterRight {
   float: right;
+}
+
+.filterRight.examFilter > div {
+  width:100px;
+  display: inline-block;
+}
+
+.fullWidth {
+  width: 100%;
+  display: inline-block;
 }
 
 .fixLayout {
@@ -1155,6 +1169,10 @@ a.disabled {
   .filterRight {
     float: left;
     width: 100%;
+  }
+
+  .filterRight.examFilter > div {
+    margin-top: 10px;
   }
   
   .daterangepicker.show-calendar .calendar {

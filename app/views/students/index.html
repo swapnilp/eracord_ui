@@ -1,7 +1,7 @@
 <div>
   <h3 class="" ng-if="!classId">Students</h3>
   <div ng-if="!showOptions">
-    <div class="pull-right">
+    <div class="filterRight paddingB10">
       <span is-role-visible='["manage_roll_number"]' email="currentUser.email">
 	<a href="#/classes/{{classId}}/manage_student_rollnumber" class="btn btn-primary" ng-if="classId" uib-tooltip="Manage Roll Number">
 	  <i class="fa fa-sort-numeric-asc"></i>
@@ -51,7 +51,7 @@
     
   </div>
   
-  <div class="examFilterDiv col-sm-12 padding0 marginT20"> 
+  <div class="examFilterDiv col-sm-12 padding0 marginT20 fullWidth"> 
     <div class="pull-left marginT10" ng-show="!requestLoading">
       <span ng-if="totalStudents > 0">
 	Records : <strong> {{totalStudents}}</strong>
@@ -61,7 +61,7 @@
       </span>
     </div>
     
-    <div class="pull-right marginB15">
+    <div class="marginB15 filterRight">
       <input type="text" ng-model="filter.name" dl-key-code="pageChanged(1);" code="13" placeholder="Enter name or mobile" value="{{filter.name}}" style="width:230px;display:inline;" class="form-control">
       <span  ng-if="isFilter">
 	<select class="form-control ng-touched" ng-model="filter.class" ng-options="cls.id as cls.name for cls in classes" style="width:200px;display:inline;">
@@ -82,7 +82,7 @@
     <a class="btn btn-primary" href="#/classes/{{classId}}/students/new" ng-if="classId">New Student</a>
   </div>
   <div request-loading is-loading="requestLoading"></div>
-  <figure class=" col-sm-12 padding0" ng-show="!requestLoading && totalStudents === 0">
+  <figure class=" col-sm-12 padding0 fullWidth" ng-show="!requestLoading && totalStudents === 0">
     <h4 class="text-danger">No students found</h4>
   </figure>
   <figure class=" col-sm-12 padding0" ng-show="!requestLoading && totalStudents > 0">
