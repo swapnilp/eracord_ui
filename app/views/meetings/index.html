@@ -1,5 +1,5 @@
 <div>
-  <div class="examFilterDiv col-sm-12 padding0"> 
+  <div class="examFilterDiv col-sm-12 padding0 row margin0"> 
     <h3 class="pull-left">Meetings</h3>
     <div class="pull-right marginT15">
       <a href="#/meetings/new" class="btn btn-primary" >New</a>
@@ -8,10 +8,10 @@
   <div request-loading is-loading="requestLoading"></div>
   <figure class="col-sm-12 padding0 marginT20" ng-show="!requestLoading && totalCount > 0">
     <div class="col-sm-12 padding0">
-      <div class="pull-left">
+      <div class="pull-left paddingTop10">
 	Records&nbsp;:&nbsp; <strong>{{totalCount}}</strong>
       </div>
-      <div class="pull-right">
+      <div class="filterRight">
 	<input type="text" ng-model="filterStudent" dl-key-code="pageChanged(1);" code="13" placeholder="Type mobile and enter" value="{{filterStudent}}" style="width:230px;display:inline;" class="form-control">
 	<button class="btn btn-primary" ng-click="pageChanged(1);"><i class="fa fa-filter"></i></button>
       </div>		  
