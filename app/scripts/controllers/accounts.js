@@ -40,6 +40,7 @@ angular.module('eracordUiApp.controller')
       $scope.payments = [];
       $scope.pagination = {current: 1};
       $scope.token = $cookieStore.get('currentUser').token;
+      $scope.requestLoading = true;
       
       var loadPayments = function(pageNumber) {
 	$scope.requestLoading = true;

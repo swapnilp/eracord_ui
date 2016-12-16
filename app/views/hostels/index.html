@@ -1,10 +1,10 @@
-<div request-loading is-loading="requestLoading"></div>
-<div style="margin:20px 0;" ng-show="!requestLoading">
+<div style="margin:20px 0;" >
   <div>
     <h3>Hostels</h3>
   </div>
   <a href="#/hostels/new" class="btn btn-primary pull-right">Create Hostel</a>
-  <figure class="col-sm-12 padding0"  ng-if="hostels.length > 0">
+  <div request-loading is-loading="requestLoading"></div>
+  <figure class="col-sm-12 padding0"  ng-if="hostels.length > 0" ng-show="!requestLoading">
     <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
       <thead>
 	<tr>

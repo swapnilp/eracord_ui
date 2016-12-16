@@ -1,6 +1,6 @@
-<div request-loading is-loading="requestLoading1"></div>
-<div class="col-sm-12 textLeft padding0">
-  <div class="col-sm-12 textLeft padding0">
+<div request-loading is-loading="requestLoading"></div>
+<div class="col-sm-12 textLeft padding0" ng-show="!requestLoading">
+  <div class="col-sm-12 textLeft padding0 row margin0">
     <div class="col-sm-12 padding0">
       <div class="pull-left">
 	<h3>{{hostel.name}} Hostel
@@ -9,7 +9,7 @@
 	  </small>
 	</h3>
       </div>
-      <div class="pull-right paddingTop20">
+      <div class="filterRight paddingTop20">
 	<button class="btn btn-primary" ng-click="goBack();" uib-tooltip="Back">
 	  <i class="fa fa-arrow-circle-o-left"></i>
 	</button>
@@ -23,36 +23,27 @@
       </div>
     </div>
   </div>
-  <div class="col-sm-12 textLeft padding0">
-    <span class="col-sm-2 paddingLeft0"><h5>Owner</h5> </span>
-    <span class="col-sm-6 paddingTop10">{{hostel.owner}}</span>
+  <div class="col-sm-12 textLeft padding0 marginT20">
+    <span class=""><strong>Owner</strong>  &nbsp;&nbsp;&nbsp;{{hostel.owner}}</span>
   </div>
-  <div class="col-sm-12 textLeft padding0">
-    <span class="col-sm-2 paddingLeft0"><h5>Number of rooms</h5> </span>
-    <span class="col-sm-6 paddingTop10">{{hostel.rooms}}</span>
+  <div class="col-sm-12 textLeft padding0 marginT20">
+    <span><strong>Number of rooms</strong>&nbsp;&nbsp;&nbsp; {{hostel.rooms}}</span>
   </div>
-  <div class="col-sm-12 textLeft padding0">
-    <span class="col-sm-2 paddingLeft0"><h5>Student occupancy</h5> </span>
-    <span class="col-sm-6 paddingTop10">
-      <strong>{{hostel.occupied_students}}</strong> out of <strong>{{hostel.student_occupancy}}</strong>
+  <div class="col-sm-12 textLeft padding0 marginT20">
+    <span><strong>Student occupancy</strong>&nbsp;&nbsp;&nbsp;<strong>{{hostel.occupied_students}}</strong> out of <strong>{{hostel.student_occupancy}}</strong>
     </span>
   </div>
 
-  <div class="col-sm-12 textLeft padding0" ng-if="unallocatedStudents > 0">
-    <span class="col-sm-2 paddingLeft0"><h5>UnOccupied Students</h5> </span>
-    <span class="col-sm-6 paddingTop10">
-      <strong>{{unallocatedStudents}}</strong>
+  <div class="col-sm-12 textLeft padding0 marginT20" ng-if="unallocatedStudents > 0">
+    <span><strong>UnOccupied Students</strong>&nbsp;&nbsp;&nbsp <strong>{{unallocatedStudents}}</strong>
     </span>
   </div>
-  <div class="col-sm-12 textLeft padding0">
-    <span class="col-sm-2 paddingLeft0"><h5>Average fee</h5> </span>
-    <span class="col-sm-6 paddingTop10">{{hostel.average_fee}}</span>
+  <div class="col-sm-12 textLeft padding0 marginT20">
+    <span><strong>Average fee</strong> &nbsp;&nbsp;&nbsp;{{hostel.average_fee}}</span>
   </div>
-  <div class="col-sm-12 textLeft padding0" ng-if="hostel.is_service_tax">
-    <span class="col-sm-2 paddingLeft0"><h5>Service tax</h5> </span>
-    <span class="col-sm-6 paddingTop10">{{hostel.service_tax}}</span>
+  <div class="col-sm-12 textLeft padding0 marginT20" ng-if="hostel.is_service_tax">
+    <span><strong>Service tax</strong>&nbsp;&nbsp;&nbsp;{{hostel.service_tax}}</span>
   </div>
-  
   <div class="col-sm-12 mTop20 padding0">
     <input ng-model="filterStudent" placeholder="Search Student"/>&nbsp;<span class="padding5 pointer" ng-click="filterStudent = ''"><i class="fa fa-refresh"></i></span>
     

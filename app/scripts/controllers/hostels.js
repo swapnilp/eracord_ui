@@ -18,6 +18,7 @@ angular.module('eracordUiApp.controller')
 
     if($location.path() === "/hostels") {
       var hostels = Restangular.all("hostels");
+      $scope.requestLoading = true;
       
       hostels.customGET("").then(function(data){
 	if(data.success){
@@ -29,6 +30,7 @@ angular.module('eracordUiApp.controller')
 	  lazyFlash.warning(data.message);
 	  $location.path("/admin_desk").replace();
 	}
+	$scope.requestLoading = false;
       });
     }
 
@@ -132,11 +134,11 @@ angular.module('eracordUiApp.controller')
 	hostels.customGET($routeParams.id).then(function(data) {
 	  if(data.success) {
 	    $scope.hostel = data.hostel;
-	    $scope.requestLoading = false;
 	  }else {
 	    lazyFlash.warning(data.message);
 	    $location.path("/hostels").replace();
 	  }
+	  $scope.requestLoading = false;
 	});
       };
 
