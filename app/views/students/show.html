@@ -22,7 +22,9 @@
 	<div class="col-sm-12 padding0 text-center borderBottom marginB10 relative" style="min-height:151px;">
 	  <i ng-if="!editImage" class="fa fa-edit fa-2x absolute pointer" style="right:0;top:0;" ng-click="editPicture();"></i>
 	  <i ng-if="editImage" class="fa fa-times-circle-o fa-2x absolute pointer" style="right:0;top:0;" ng-click="closeEditPicture();"></i>
-	  <i ng-if="!editImage" class="fa fa-user" style="font-size:150px;"></i>
+	  <span ng-if="!editImage">
+	    <img style="max-width:160px;max-height:160px;" ng-src="{{student.image_url}}" >
+	  </span>
 	  <div ng-if="editImage" class="text-left" style="padding-top:15%">
 	    <form name="form">
 	      <div class="btn btn-primary" ngf-select ng-model="file" name="file" ngf-pattern="'.png,.jpg,.jpeg'"
@@ -35,8 +37,6 @@
 		<i class="fa fa-upload fa-2x pointer"></i>
 	      </button>
 	    </form>
-	    
-	    
 	  </div>
 	</div>
 	<div class="col-sm-12 padding0">

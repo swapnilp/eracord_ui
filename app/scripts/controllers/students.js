@@ -205,7 +205,7 @@ angular.module('eracordUiApp.controller')
 	$scope.requestLoading = true;
         Upload.upload({
           url: "api/students/" + $routeParams.student_id + "/upload_photo",
-          data: {file: file, 'exam_id': $routeParams.exam_id}
+          data: {student: {file: file}}
         }).then(function (resp) {
 	  $scope.requestLoading = false;
 	  if(resp.data.success) {
