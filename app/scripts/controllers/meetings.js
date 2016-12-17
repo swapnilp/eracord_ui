@@ -84,8 +84,8 @@ angular.module('eracordUiApp.controller')
 
 	parents_meetings.customPOST({parents_meeting: $scope.vm}, "", {student_list: $scope.studentList.join(',')}).then(function(data){
 	  if(data.success) {
-	    lazyFlash.success("Meeting Sms will send shortly");
-	    $location.path("/admin_desk").replace();
+	    lazyFlash.success("Meeting has been created");
+	    $location.path("/meetings").replace();
 	  }else {
 	    Flash.create('warning', "Something went wrong", 0, {}, true);
 	  }
