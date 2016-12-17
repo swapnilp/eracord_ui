@@ -98,10 +98,28 @@ angular.module('eracordUiApp.controller')
     if($location.path() === '/meetings/' + $routeParams.id + '/show') {
       
       $scope.meetingId = $routeParams.id;
-	
+      $scope.requestLoading = true;
+      
       Restangular.one("parents_meetings", $routeParams.id).get().then(function(data){
-	$scope.meeting = data.parents_meeting;
+	if(data.success) {
+	  $scope.meeting = data.parents_meeting;
+	} else {
+	  lazyFlash.warning("Record Not found");
+	  $location.path('/meetings').replace();
+	}
+	$scope.requestLoading = false;
       });
+
+      $scope.publishMeeting = function() {
+	Restangular.one("parents_meetings", $routeParams.id).customGET("publish_meeting").then(function(data){
+	  if(data.success) {
+	    $scope.meeting.sms_sent = true;
+	    Flash.create('success', "Meeting has been published", 0, {}, true);
+	  } else {
+	    Flash.create('warning', "Something went wrong", 0, {}, true);
+	  }
+	});
+      }
     }
     //end of meetings show method
   }

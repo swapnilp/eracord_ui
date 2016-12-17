@@ -1,39 +1,31 @@
-<div class="container">
-  <div class="col-sm-12 textLeft">
+<div request-loading is-loading="requestLoading"></div>
+<div ng-show="!requestLoading">
+  <div class="col-sm-12 textLeft padding0">
     <div class="studentShow col-sm-12 paddingLeft0">
-      <h2>
-	Meeting
-      </h2>
-      <div class="col-sm-12">
-	<h5>
-	  <span class="col-sm-2">Agenda :</span>
-	</h5>
-	<span style="font-size:20px;">{{meeting.agenda}}</span>
-      </div>
-      <div class="col-sm-12">
-	<h5>
-	  <span class="col-sm-2">Date :</span>
-	</h5>
-	<span style="font-size:20px;">{{meeting.date}}</span>
-      </div>
-      <div class="col-sm-12">
-	<h5>
-	  <span class="col-sm-2">Contact person :</span>
-	</h5>
-	<span style="font-size:20px;">{{meeting.contact_person}} &nbsp;</span>
-      </div>
-      <div class="col-sm-12">
-	<h5>
-	  <span class="col-sm-2">Sms Sent :</span>
-	</h5>
-	<span style="font-size:20px;">{{meeting.sms_sent}}</span>
-      </div>
-      <div class="col-sm-12" style="margin:15px 0;">
-	<a ng-click="goBack();" class="btn btn-default">Back</a>
+      <h3 class="pull-left">Meeting</h3>
+      <div class="filterRight marginT15">
+	<button class="btn btn-primary" ng-click="goBack();" uib-tooltip="Back">
+	  <i class="fa fa-arrow-circle-o-left"></i>
+	</button>
+	<button class="btn btn-primary" ng-click="publishMeeting();" uib-tooltip="Publish" ng-if="!meeting.sms_sent">
+	  <i class="fa fa-cloud-upload"></i>
+	</button>
       </div>
     </div>
+    <div class="col-sm-4 marginT10 paddingLeft0">
+      <span><strong>Agenda</strong>&nbsp;&nbsp;{{meeting.agenda}}</span>
+    </div>
+    <div class="col-sm-4 marginT10 paddingLeft0">
+      <span><strong>Date</strong>&nbsp;&nbsp;{{meeting.date}}</span>
+    </div>
+    <div class="col-sm-4 marginT10 paddingLeft0">
+      <span><strong>Contact person</strong>&nbsp;&nbsp;{{meeting.contact_person}} &nbsp;</span>
+    </div>
+    <div class="col-sm-4 marginT10 paddingLeft0">
+      <span><strong>Sms Sent</strong>&nbsp;&nbsp;{{meeting.sms_sent}}</span>
+    </div>
   </div>
-  <div meetings-student class="col-sm-12 textLeft" meeting-id="{{meetingId}}">
+  <div meetings-student class="col-sm-12 textLeft marginT10 padding0" meeting-id="{{meetingId}}">
   </div>
 </div>
 
