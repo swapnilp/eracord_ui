@@ -26,7 +26,7 @@
 	</tr>
       </thead>
       <tbody>
-	<tr dir-paginate="row in meetings | toArray:false | itemsPerPage: 10" total-items="totalCount" current-page="pagination.current" pagination-id="meetings" ng-click="openInfo(row);" class="pointer">
+	<tr dir-paginate="row in meetings | toArray:false | itemsPerPage: 10" total-items="totalCount" current-page="pagination.current" pagination-id="meetings">
 	  <td><span ng-if="!showRollNumber">{{ $index+1 + ((pagination.current - 1) * 10)}}</span></td>
 	  <td><a class="linkOverwite" href="#/meetings/{{row.id}}/show">{{row.agenda}}</a></td>
 	  <td>{{row.date}}</td>

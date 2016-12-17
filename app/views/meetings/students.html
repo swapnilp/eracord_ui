@@ -1,5 +1,15 @@
 <h4>Students</h4>
 <div class="col-sm-12 padding0">
+  <div class="col-sm-12 padding0">
+    <div class="pull-left paddingTop10">
+      Records : <strong> {{totalCount}}</strong>
+    </div>
+    <div class="filterRight">
+      <input type="text" ng-model="filter.name" dl-key-code="pageChanged(1);" code="13" placeholder="Enter name or mobile" value="{{filter.name}}" style="width:230px;display:inline;" class="form-control">
+      <button class="btn btn-primary" ng-click="filterData();" uib-tooltip="Filter"><i class="fa fa-filter"></i></button>
+      <button class="btn btn-primary" ng-click="resetFilter();" uib-tooltip="Reset"><i class="fa fa-refresh"></i></button>
+    </div>
+  </div>
   <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
     <thead>
       <tr>
@@ -10,12 +20,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr dir-paginate="row in meetings | toArray:false | itemsPerPage: 10" total-items="totalCount" current-page="pagination.current" pagination-id="meetings" ng-click="openInfo(row);" class="pointer">
+      <tr dir-paginate="row in students | toArray:false | itemsPerPage: 10" total-items="totalCount" current-page="pagination.current" pagination-id="meetingsStudent">
 	<td><span ng-if="!showRollNumber">{{ $index+1 + ((pagination.current - 1) * 10)}}</span></td>
-	<td><a class="linkOverwite" href="#/meetings/{{row.id}}/show">{{row.agenda}}</a></td>
-	<td>{{row.date}}</td>
-	<td>{{row.sms_sent}}</td>
+	<td>{{row.name}}</td>
+	<td>{{row.mobile}}</td>
+	<td>{{row.sent_sms}}</td>
       </tr>
     </tbody>
   </table>
+  <dir-pagination-controls class="col-sm-12 padding0 text-center" on-page-change="pageChanged(newPageNumber)" pagination-id="meetingsStudent" ng-show="totalCount > 9"></dir-pagination-controls>
 </div>

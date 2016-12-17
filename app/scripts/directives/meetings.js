@@ -13,10 +13,49 @@ app.directive('meetingsStudent', function(Restangular) {
     templateUrl: 'views/meetings/students.html',
     controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', '$route', 'Upload', '$cookieStore', function(scope, Restangular, Flash, $location, $window, $routeParams, $route, Upload, $cookieStore){
 
-      scope.requestLoading = true;
-      scope.studentLoaded = false;
-      var jkci_classes = Restangular.one("parents_meetings", scope.meetingId);
+      scope.studentLoading = true;
+      //scope.studentLoaded = false;
+      var meeting = Restangular.one("parents_meetings", scope.meetingId);
+      scope.pagination = {
+        current: $routeParams.page || 1
+      };
 
+      scope.filter = {};
+      
+      scope.pageChanged = function(newPage) {
+        loadStudents(newPage);
+      };
+
+      scope.resetFilter = function() {
+	scope.filter = {};
+	if(scope.pagination.current == 1) {
+	  loadStudents(1);
+	} else {
+	  scope.pagination.current = 1;
+	}
+      };
+
+      scope.filterData = function() {
+	if(scope.pagination.current == 1) {
+	  loadStudents(1);
+	} else {
+	  scope.pagination.current = 1;
+	}
+      }
+
+      var loadStudents = function(page) {
+	meeting.customGET("get_meeting_students", {page: page, filter: scope.filter}).then(function(data) {
+	  if(data.success) {
+	    scope.students = data.students;
+	    scope.totalCount = data.total_count;
+	  } else {
+	    
+	  }
+	  scope.studentLoading = false;
+	});
+      }
+
+      loadStudents(1);
     }]
   };
 });
