@@ -41,6 +41,7 @@ angular
     'angularUtils.directives.dirPagination',
     'daterangepicker',
     'angular-confirm',
+    'angularLazyImg',
     'eracordUiApp.controller',
     'eracordUiApp.directives'
   ])
