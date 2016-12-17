@@ -62,7 +62,7 @@
     </div>
     
     <div class="marginB15 filterRight">
-      <input type="text" ng-model="filter.name" dl-key-code="pageChanged(1);" code="13" placeholder="Enter name or mobile" value="{{filter.name}}" style="width:230px;display:inline;" class="form-control">
+      <input type="text" ng-model="filter.name" dl-key-code="filterData();" code="13" placeholder="Enter name or mobile" value="{{filter.name}}" style="width:230px;display:inline;" class="form-control">
       <span  ng-if="isFilter">
 	<select class="form-control ng-touched" ng-model="filter.class" ng-options="cls.id as cls.name for cls in classes" style="width:200px;display:inline;">
 	  <option value="">All</option>
@@ -73,7 +73,7 @@
 	</select>
 	</span>
       </span>
-      <button class="btn btn-primary" ng-click="pageChanged(1);" uib-tooltip="Filter"><i class="fa fa-filter"></i></button>
+      <button class="btn btn-primary" ng-click="filterData();" uib-tooltip="Filter"><i class="fa fa-filter"></i></button>
       <button class="btn btn-primary" ng-click="resetFilter();" uib-tooltip="Reset"><i class="fa fa-refresh"></i></button>
     </div>		  
   </div>

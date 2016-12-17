@@ -77,6 +77,9 @@ app.directive('divisionStudents', function(Restangular) {
       scope.showOptions = true;
       scope.isRemove = true;
       scope.filter = {};
+      scope.pagination = {
+        current: $routeParams.page || 1
+      };
       
       var getResultsPage = function(pageNumber) {
 	scope.requestLoading = true;
@@ -93,9 +96,20 @@ app.directive('divisionStudents', function(Restangular) {
       };
 
       scope.resetFilter = function() {
-	scope.pagination.current = 1;
 	scope.filter = {};
-	getResultsPage(1);
+	if(scope.pagination.current == 1) {
+	  getResultsPage(1);
+	} else {
+	  scope.pagination.current = 1;
+	}
+      };
+
+      scope.filterData = function() {
+	if(scope.pagination.current == 1) {
+	  getResultsPage(1);
+	} else {
+	  scope.pagination.current = 1;
+	}
       };
 
       scope.openInfo = function(row) {

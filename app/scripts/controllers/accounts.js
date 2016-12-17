@@ -83,6 +83,15 @@ angular.module('eracordUiApp.controller')
 
       };
 
+      $scope.filterData = function() {
+	if($scope.pagination.current == 1) {
+	  loadPayments(1);
+	} else {
+	  $scope.pagination.current = 1
+	}
+
+      };
+
       var get_transactions = function(row) {
 	row.is_loading = true;
 	payment_fee.customGET(row.jkci_class_id+"/get_transactions/"+row.student_id).then(function(data) {
@@ -147,8 +156,16 @@ angular.module('eracordUiApp.controller')
 	} else {
 	  $scope.pagination.current = 1;
 	}
-	
       };
+
+      $scope.filterData = function() {
+	if($scope.pagination.current === 1) {
+	  loadPayments(1);
+	} else {
+	  $scope.pagination.current = 1;
+	}
+      };
+      
       loadPayments();
     }
     //end of logs

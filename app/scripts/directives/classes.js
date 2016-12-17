@@ -43,6 +43,14 @@ app.directive('classStudents', function(Restangular) {
 	}
       };
 
+      scope.filterData = function() {
+	if(scope.pagination.current == 1) {
+	  getResultsPage(1);
+	}else {
+	  scope.pagination.current = 1
+	}
+      };
+
       scope.openInfo = function(row) {
 	if(row.expanded === true) {
 	  _.map(scope.students, function(student){ student.expanded = false;})
@@ -195,6 +203,14 @@ app.directive('classExams', function(Restangular) {
 	}
 	
       };
+
+      scope.filterData = function() {
+	if(scope.pagination.current == 1) {
+	  getResultsPage(1);
+	}else {
+	  scope.pagination.current = 1
+	}
+      };
       
       var getResultsPage = function(pageNumber, checkFilter) {
 	//$route.updateParams({ page: pageNumber});
@@ -289,6 +305,14 @@ app.directive('classDailyTeaches', function(Restangular) {
 	  scope.pagination.current = 1;
 	}
 	
+      };
+
+      scope.filterData = function() {
+	if(scope.pagination.current == 1) {
+	  getResultsPage(1);
+	}else {
+	  scope.pagination.current = 1
+	}
       };
       
       scope.pageChanged = function(newPage) {

@@ -33,9 +33,9 @@
 	</select>
       </div>
       <div class="col-sm-2 paddingLeft0">
-	<input type="text" class="form-control" ng-model="filterAmount.name" dl-key-code="pageChanged(1);" code="13" placeholder="Enter name or mobile"  value="{{filterAmount.name}}">
+	<input type="text" class="form-control" ng-model="filterAmount.name" dl-key-code="filterData();" code="13" placeholder="Enter name or mobile"  value="{{filterAmount.name}}">
       </div>
-      <button class="btn btn-primary  marginR10" ng-click="pageChanged(1, false);"><i class="fa fa-filter"></i></button>
+      <button class="btn btn-primary  marginR10" ng-click="filterData();"><i class="fa fa-filter"></i></button>
       <button class="btn btn-primary" ng-click="resetFilter();"><i class="fa fa-refresh"></i></button>
     </div>
       

@@ -54,6 +54,14 @@ angular.module('eracordUiApp.controller')
 	}
       };
 
+      $scope.filterData = function() {
+	if($scope.pagination.current == 1) {
+	  getResultsPage(1);
+	}else {
+	  $scope.pagination.current = 1
+	}
+      };
+
       var getResultsPage = function(pageNumber) {
 	$scope.requestLoading = true;
 	students.getList({page: pageNumber, filter: $scope.filter}).then(function(data){

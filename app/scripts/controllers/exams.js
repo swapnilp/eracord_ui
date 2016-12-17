@@ -54,6 +54,14 @@ angular.module('eracordUiApp.controller')
 	}
 	
       };
+
+      $scope.filterData = function() {
+	if($scope.pagination.current == 1) {
+	  getResultsPage(1);
+	}else {
+	  $scope.pagination.current = 1
+	}
+      };
       
       var getResultsPage = function(pageNumber, checkFilter) {
 	if(!checkFilter && _.size($scope.filterExam) === 0) {
@@ -67,7 +75,6 @@ angular.module('eracordUiApp.controller')
 	  $scope.exams = data[0];
 	  $scope.totalExams = data[1];
 	  $scope.length = data.length;
-	  $scope.pagination = {current: pageNumber || 1};
 	  $scope.requestLoading = false;
 	});
       };
