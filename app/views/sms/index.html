@@ -16,25 +16,38 @@
 	<button class="btn btn-primary" ng-click="pageChanged(1);"><i class="fa fa-filter"></i></button>
       </div>
     </div>
-    <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
+    <table st-table="rowCollection" class="table organisationCoursesTable table-striped fixLayout">
       <thead>
 	<tr>
-	  <th st-sort="balance">#</th>
+	  <th>#</th>
+	  <th>Time </th>
 	  <th st-sort="firstName">Type</th>
-	  <th st-sort="firstName">Message</th>
-	  <th st-sort="lastName">Is Parent</th>
 	  <th st-sort="balance">Student Name</th>
 	  <th st-sort="balance">Number</th>
+	  
 	</tr>
       </thead>
       <tbody>
 	<tr dir-paginate="row in sms_sents | toArray:false | itemsPerPage: 10" total-items="totalCount" current-page="pagination.current" pagination-id="sms_sent" ng-click="openInfo(row);">
-	  <td><span ng-if="!showRollNumber">{{ $index+1 + ((pagination.current - 1) * 10)}}</span></td>
-	  <td><span>{{row.obj_type}}</span></td>
-	  <td>{{row.message}}</td>
-	  <td>{{row.is_parent}}</td>
-	  <td>{{row.student_name}}</td>
-	  <td>{{row.number}}</td>
+	  <td>{{ $index+1 + ((pagination.current - 1) * 10)}}</td>
+	  <td>{{row.time}}</td>
+	  <td>
+	    <span>{{row.obj_type}}</span> &nbsp;&nbsp;
+	    <span uib-dropdown class="paddingR10">
+	      <div class="btn-group" >
+		<a  id="simple-dropdown" class="pointer"  uib-dropdown-toggle>
+		  <i class="fa fa-info-circle"></i>
+		</a>
+		<ul uib-dropdown-menu aria-labelledby="simple-dropdown" class="padding10 parentInfo">
+		  <li>
+		    {{row.message}}
+		  </li>
+		</ul>
+	      </div>
+	    </span>
+	  </td>
+	  <td style="word-break: break-all;">{{row.student_name}}<span ng-if="row.is_parent"> (P)</span></td>
+	  <td style="word-break: break-all;">{{row.number}}</td>
 	</tr>
       </tbody>
     </table>
