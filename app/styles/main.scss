@@ -575,6 +575,14 @@ tr.pointer, td.pointer {
 .fixLayout {
   table-layout: fixed;
 }
+
+.editStudentBtn {
+  display: none;
+}
+
+.studentPhoto:hover .editStudentBtn {
+  display: block;
+}
 	
 @media screen {
   #printSection {
