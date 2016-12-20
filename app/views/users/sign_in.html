@@ -16,7 +16,7 @@
       <div id="remember" class="checkbox">
       </div>
       
-      <button class="signBtn btn-lg btn-primary pointer " type="submit" ng-disabled="form.$invalid || dataLoading">Login</button>
+      <button class="signBtn btn-lg btn-primary pointer " type="submit" ng-disabled="form.$invalid || dataLoading">Login <i class="fa fa-spinner fa-spin" ng-if="dataLoading"></i></button>
       <p class="text-center capitalisation"><a href="#/user/forgot_password" class="input_title blueColor">Forgot password?</a></p>
     </form><!-- /form -->
   </div><!-- /card-container -->

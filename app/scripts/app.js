@@ -42,6 +42,7 @@ angular
     'daterangepicker',
     'angular-confirm',
     'angularLazyImg',
+    'filereader',
     'eracordUiApp.controller',
     'eracordUiApp.directives'
   ])

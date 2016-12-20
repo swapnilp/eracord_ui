@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('StudentsCtrl',['$rootScope', '$scope', 'Flash', 'lazyFlash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$cookieStore', '$uibModal', function ($rootScope, $scope, Flash, lazyFlash, $location, Auth, Restangular, $routeParams, Upload, $window, $cookieStore, $uibModal) {
+  .controller('StudentsCtrl',['$rootScope', '$scope', 'Flash', 'lazyFlash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '$cookieStore', '$uibModal', 'FileReader', function ($rootScope, $scope, Flash, lazyFlash, $location, Auth, Restangular, $routeParams, Upload, $window, $cookieStore, $uibModal, FileReader) {
     
     if(!Auth.isAuthenticated()){
       $location.path('/user/sign_in').replace();
@@ -156,6 +156,7 @@ angular.module('eracordUiApp.controller')
       $scope.selectedGraphType = 'all';
       $scope.studentLoading = true;
       $scope.editImage = false;
+      $scope.afterUpload = false;
       
       var loadStudent = function() {
 	student.get().then(function(data){
@@ -210,6 +211,7 @@ angular.module('eracordUiApp.controller')
       };
 
       $scope.upload = function (file) {
+	
 	$scope.requestLoading = true;
         Upload.upload({
           url: "api/students/" + $routeParams.student_id + "/upload_photo",
@@ -220,7 +222,12 @@ angular.module('eracordUiApp.controller')
 	    $scope.uploadMeaasgeClass = "alert-success";
 	    $scope.uploadingMessage = "Completed Successfully";
 	    $scope.fileName = "";
-	    $scope.file = null;
+	    FileReader.readAsDataURL(file, $scope).then(function(result) {
+	      $scope.uploadedImg = result;
+	      $scope.afterUpload = true;
+	      $scope.file = null;
+	      $scope.editImage = false;
+            });
 	  }else {
 	    $scope.uploadMeaasgeClass = "alert-danger";
 	    $scope.uploadingMessage = resp.data.message;
