@@ -26,15 +26,35 @@ angular.module('eracordUiApp.controller')
       $scope.pagination = {
         current: 1
       };
-      $scope.filterStudent = "";
+      $scope.filter = {};
+      $scope.filter.dateRange = {};
       
       var getResultsPage = function(pageNumber){
-	sms_sent.customGET("", {page: pageNumber, filter: $scope.filterStudent}).then(function(data){
+	sms_sent.customGET("", {page: pageNumber, filter: $scope.filter}).then(function(data){
 	  $scope.sms_sents = data.sms_sents;
 	  $scope.totalCount = data.count;
 	  $scope.requestLoading = false;
 	});
+      };
+
+      $scope.resetFilter = function() {
+	$scope.filter = {};
+	$scope.filter.dateRange = {};
+	if($scope.pagination.current === 1) {
+	  getResultsPage(1, true);
+	} else {
+	  $scope.pagination.current = 1;
+	}
+      };
+
+      $scope.filterData = function() {
+	if($scope.pagination.current == 1) {
+	  getResultsPage(1);
+	}else {
+	  $scope.pagination.current = 1
+	}
       }
+      
 
       $scope.pageChanged = function(newPage) {
         getResultsPage(newPage);

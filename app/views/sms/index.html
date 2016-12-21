@@ -6,17 +6,24 @@
     </div>		  
   </div>
   <div request-loading is-loading="requestLoading"></div>
-  <figure class="col-sm-12 padding0" ng-show="!requestLoading && totalCount > 0">
+  <figure class="col-sm-12 padding0" ng-show="!requestLoading">
     <div class="col-sm-12 padding0">
       <div class="pull-left marginT15">
 	Records&nbsp;:&nbsp;<strong>{{totalCount}}</strong>
       </div>
       <div class="filterRight marginT15">
-	<input type="text" ng-model="filterStudent" dl-key-code="pageChanged(1);" code="13" placeholder="Enter mobile number" ng-maxlength="10" style="width:230px;display:inline;" value="{{filterStudent}}" class="form-control" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0">
-	<button class="btn btn-primary" ng-click="pageChanged(1);"><i class="fa fa-filter"></i></button>
+	<div class="marginR10 positionRelative " style="width:230px;display:inline-block;">
+	  <input date-range-picker id="rangeCalender" class="form-control date-picker calender pointer" type="text" ng-model="filter.dateRange" style="width:230px;display:inline;" placeholder="Enter date range" onkeypress="return false" options="{autoApply: true}" readonly/>
+	  <label for="rangeCalender" class="rangeCalender pointer"><i class="fa fa-calendar marginT10"></i></label>
+	</div>
+	<span>
+	  <input type="text" dl-key-code="filterData();" code="13" ng-model="filter.student" dl-key-code="pageChanged(1);" code="13" placeholder="Enter mobile number" ng-maxlength="10" style="width:230px;display:inline;" value="{{filter.student}}" class="form-control" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0 || event.charCode === 13">
+	</span>
+	<button class="btn btn-primary" ng-click="filterData(1);"><i class="fa fa-filter"></i></button>
+	<button class="btn btn-primary"  ng-click="resetFilter();" uib-tooltip="Reset"><i class="fa fa-refresh"></i></button>
       </div>
     </div>
-    <table st-table="rowCollection" class="table organisationCoursesTable table-striped fixLayout">
+    <table st-table="rowCollection" class="table organisationCoursesTable table-striped fixLayout" ng-show="totalCount > 0">
       <thead>
 	<tr>
 	  <th>#</th>
