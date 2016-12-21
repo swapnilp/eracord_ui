@@ -5,18 +5,24 @@
       <a href="#/meetings/new" class="btn btn-primary" >New</a>
     </div>
   </div>
-  <div request-loading is-loading="requestLoading"></div>
-  <figure class="col-sm-12 padding0 marginT20" ng-show="!requestLoading && totalCount > 0">
+  
+  <figure class="col-sm-12 padding0 marginT20">
     <div class="col-sm-12 padding0">
       <div class="pull-left paddingTop10">
 	Records&nbsp;:&nbsp; <strong>{{totalCount}}</strong>
       </div>
       <div class="filterRight">
+	<div class="marginR10 positionRelative " style="width:230px;display:inline-block;">
+	  <input date-range-picker id="rangeCalender" class="form-control date-picker calender pointer" type="text" ng-model="filter.dateRange" style="width:230px;display:inline;" placeholder="Enter date range" onkeypress="return false" options="{autoApply: true}" readonly/>
+	  <label for="rangeCalender" class="rangeCalender pointer"><i class="fa fa-calendar marginT10"></i></label>
+	</div>
 	<input type="text" ng-model="filterStudent" dl-key-code="pageChanged(1);" code="13" placeholder="Type mobile and enter" value="{{filterStudent}}" style="width:230px;display:inline;" class="form-control">
-	<button class="btn btn-primary" ng-click="pageChanged(1);"><i class="fa fa-filter"></i></button>
+	<button class="btn btn-primary" ng-click="filterData();"><i class="fa fa-filter"></i></button>
+	<button class="btn btn-primary"  ng-click="resetFilter();" uib-tooltip="Reset"><i class="fa fa-refresh"></i></button>
       </div>		  
     </div>
-    <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
+    <div request-loading is-loading="requestLoading"></div>
+    <table st-table="rowCollection" class="table organisationCoursesTable table-striped" ng-show="!requestLoading && totalCount > 0">
       <thead>
 	<tr>
 	  <th st-sort="balance">#</th>

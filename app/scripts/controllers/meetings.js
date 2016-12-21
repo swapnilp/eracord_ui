@@ -21,19 +21,44 @@ angular.module('eracordUiApp.controller')
       return true;
     }
     var parents_meetings = Restangular.all("parents_meetings");
+    
     if($location.path() === '/meetings') {
       $scope.requestLoading = true;
+      $scope.filter = {};
+      $scope.filter.dateRange = {};
       $scope.pagination = {
         current: 1
       };
       
       var getResultsPage = function(pageNumber){
+	$scope.requestLoading = true;
 	parents_meetings.customGET("", {page: pageNumber}).then(function(data){
-	  $scope.meetings = data.parents_meetings;
-	  $scope.totalCount = data.count;
-	  $scope.requestLoading = false;
+	  if(data.success){
+	    $scope.meetings = data.parents_meetings;
+	    $scope.totalCount = data.count;
+	    $scope.requestLoading = false;
+	  }
 	});
-      }
+      };
+
+      $scope.resetFilter = function() {
+	$scope.filter = {};
+	$scope.filter.dateRange = {};
+	if($scope.pagination.current === 1) {
+	  getResultsPage(1, true);
+	} else {
+	  $scope.pagination.current = 1;
+	}
+      };
+
+      $scope.filterData = function() {
+
+	if($scope.pagination.current == 1) {
+	  getResultsPage(1);
+	}else {
+	  $scope.pagination.current = 1
+	}
+      };
 
       $scope.pageChanged = function(newPage) {
         getResultsPage(newPage);

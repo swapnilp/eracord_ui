@@ -53,7 +53,7 @@ angular.module('eracordUiApp.controller')
 	}else {
 	  $scope.pagination.current = 1
 	}
-      }
+      };
       
 
       $scope.pageChanged = function(newPage) {

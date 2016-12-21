@@ -19,7 +19,7 @@
 	<span>
 	  <input type="text" dl-key-code="filterData();" code="13" ng-model="filter.student" dl-key-code="pageChanged(1);" code="13" placeholder="Enter mobile number" ng-maxlength="10" style="width:230px;display:inline;" value="{{filter.student}}" class="form-control" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0 || event.charCode === 13">
 	</span>
-	<button class="btn btn-primary" ng-click="filterData(1);"><i class="fa fa-filter"></i></button>
+	<button class="btn btn-primary" ng-click="filterData();"><i class="fa fa-filter"></i></button>
 	<button class="btn btn-primary"  ng-click="resetFilter();" uib-tooltip="Reset"><i class="fa fa-refresh"></i></button>
       </div>
     </div>
