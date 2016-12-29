@@ -3,7 +3,7 @@
   <div class="marginB10 col-sm-12 padding0">
     <div class="pull-left marginT10">
       <span ng-show="totalOffClasses > 0 && !requestLoading">Records - <strong>{{totalOffClasses}}</strong> </span>
-      <span ng-show="totalOffClasses == 0 && !requestLoading">No data found</span>
+      <h4 ng-show="totalOffClasses == 0 && !requestLoading" class="text-danger">No data found</h4>
     </div>
     
     <div class="examFilterDiv filterRight examFilter"> 

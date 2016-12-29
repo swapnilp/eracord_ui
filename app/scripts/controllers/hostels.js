@@ -165,6 +165,17 @@ angular.module('eracordUiApp.controller')
 	  }
 	});
       };
+      
+      $scope.deleteRoom = function(room_id) {
+	if(confirm("Are you sure ?? ")) {
+	  hostels.one($routeParams.id).customDELETE("hostel_rooms/"+room_id).then(function(data) {
+	    if(data.success) {
+	      $scope.getHostelRooms();
+	    } else {
+	    }
+	  });
+	}
+      };
 
       $scope.newRoom = function(size) {
 	var modalInstance = $uibModal.open({

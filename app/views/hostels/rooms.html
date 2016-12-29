@@ -9,7 +9,9 @@
       </span>
       <a class="pointer" ng-click="allocateRoomStudent();" ng-if="unallocatedStudents > 0">Allocate Student</a>
       &nbsp;&nbsp;
-      <a class="pointer" ng-click="editHostelRoom();">Edit</a>
+      <a class="pointer pull-right marginLeft10" ng-click="deleteHostelRoom();" uib-tooltip="Delete room"><i class="fa fa-trash red"></i></a>
+      <a class="pointer pull-right" ng-click="editHostelRoom();" uib-tooltip="Edit"><i class="fa fa-edit"></i></a>
+
     </div>
     <div class="col-sm-12 padding0">
       <span ng-repeat="n in [] | range:room.beds">

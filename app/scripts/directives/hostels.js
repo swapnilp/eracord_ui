@@ -13,6 +13,7 @@ app.directive('hostelRooms', function(Restangular) {
       roomId: '@',
       room: '=',
       editRoom: '&',
+      deleteRoom: '&',
       allocateStudent: '&',
       unallocatedStudents: '@',
       filterStudent: '=',
@@ -25,6 +26,10 @@ app.directive('hostelRooms', function(Restangular) {
       scope.students = scope.room.students;
       scope.editHostelRoom = function(){
 	scope.editRoom({roomId: scope.room.id});
+      };
+
+      scope.deleteHostelRoom = function(){
+	scope.deleteRoom({roomId: scope.room.id});
       };
 
       scope.allocateRoomStudent = function() {

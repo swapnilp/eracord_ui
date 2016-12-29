@@ -50,7 +50,7 @@
   </div>
   <div class="row">
     <div ng-repeat="room in hostelRooms">
-      <div hostel-rooms hostel-id="{{hostel.id}}" room="room" edit-room="editRoom(roomId)" allocate-student="allocateStudent(roomId, roomName);" unallocated-students="{{unallocatedStudents}}" filter-student="filterStudent" deallocate-student-from-hostel="deallocateStudentFromHostel(student_id);" reload-rooms="getHostelRooms();">
+      <div hostel-rooms hostel-id="{{hostel.id}}" room="room" edit-room="editRoom(roomId)" delete-room="deleteRoom(roomId)" allocate-student="allocateStudent(roomId, roomName);" unallocated-students="{{unallocatedStudents}}" filter-student="filterStudent" deallocate-student-from-hostel="deallocateStudentFromHostel(student_id);" reload-rooms="getHostelRooms();">
       </div>
     </div>
   </div>
