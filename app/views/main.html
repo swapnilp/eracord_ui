@@ -4,7 +4,7 @@
     A graphical representation is a visual display of data and statistical results. It is often more effective than presenting data in tabular form.
   </p>
   <div class="col-md-12 padding0">
-    <label class="btn active btn-default pull-right" ng-repeat="chartType in ['month', 'week', 'day']">
+    <label class="btn active btn-default pull-right" ng-repeat="chartType in ['day', 'week', 'month']">
       <input name="cssPre" id="css1" type="radio" ng-value="selectedChartType" ng-model="selectedChartType" ng-click="reloadReport(chartType);">
       {{chartType}}
     </label>

@@ -22,7 +22,7 @@ angular.module('eracordUiApp.controller')
       return true;
     }
     
-    $scope.selectedChartType = 'day';
+    $scope.selectedChartType = 'month';
     $scope.off_class_labels = $scope.exam_labels = $scope.labels = [];
     $scope.off_class_series = $scope.exam_series = $scope.series = [];
     $scope.off_class_data = $scope.exam_data = $scope.data = [];
@@ -62,7 +62,7 @@ angular.module('eracordUiApp.controller')
       });
     };
 
-    loadData('day');
+    loadData('month');
 
     $scope.reloadReport = function(chartType) {
       loadData(chartType);
