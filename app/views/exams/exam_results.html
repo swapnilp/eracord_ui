@@ -17,7 +17,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="row in examCatlogs| filter:search">
+      <tr ng-repeat="row in examCatlogs | filter:search track by $index">
 	<td>{{$index + 1}}</td>
 	<td>{{row.student}}</td>
 	<td>{{row.p_mobile}}</td>
