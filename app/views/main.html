@@ -1,8 +1,5 @@
 <div class=" col-md-12">
-  <h2 class="text-center">eraCord</h2>
-  <p class="text-center">
-    A graphical representation is a visual display of data and statistical results. It is often more effective than presenting data in tabular form.
-  </p>
+  
   <div class="col-md-12 padding0">
     <label class="btn active btn-default pull-right" ng-repeat="chartType in ['day', 'week', 'month']">
       <input name="cssPre" id="css1" type="radio" ng-value="selectedChartType" ng-model="selectedChartType" ng-click="reloadReport(chartType);">
@@ -10,9 +7,9 @@
     </label>
   </div>
   <br /><br />
-  <div class="col-md-12 jumbotron" ng-if="classAbsentyData">
+  <div class="col-md-12 jumbotron bgWhite" ng-if="classAbsentyData">
     <p>
-      Class absenty chart
+      <strong><u>Class absenty chart</i></strong>
     </p>
     <div class="col-md-6">
       <p>
@@ -32,9 +29,9 @@
       </canvas> 
     </div>
   </div>
-  <div class="col-md-12 jumbotron" ng-if="examsData">
+  <div class="col-md-12 jumbotron bgWhite" ng-if="examsData">
     <p>
-      Exams chart
+      <strong><u>Exams chart</u></strong>
     </p>
     <div class="col-md-6">
       <p>
@@ -54,9 +51,9 @@
       </canvas> 
     </div>
   </div>
-  <div class="col-md-12 jumbotron" ng-if="offClassData">
+  <div class="col-md-12 jumbotron bgWhite" ng-if="offClassData">
     <p>
-      OffClass chart
+      <strong><u>OffClass chart</u></strong>
     </p>
     <div class="col-md-6">
       <p>
