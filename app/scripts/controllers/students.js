@@ -211,34 +211,35 @@ angular.module('eracordUiApp.controller')
       };
 
       $scope.upload = function (file) {
-	
-	$scope.requestLoading = true;
-        Upload.upload({
-          url: "api/students/" + $routeParams.student_id + "/upload_photo",
-          data: {student: {file: file}}
-        }).then(function (resp) {
-	  $scope.requestLoading = false;
-	  if(resp.data.success) {
-	    $scope.uploadMeaasgeClass = "alert-success";
-	    $scope.uploadingMessage = "Completed Successfully";
-	    $scope.fileName = "";
-	    FileReader.readAsDataURL(file, $scope).then(function(result) {
-	      $scope.uploadedImg = result;
-	      $scope.afterUpload = true;
-	      $scope.file = null;
-	      $scope.editImage = false;
-            });
-	  }else {
-	    $scope.uploadMeaasgeClass = "alert-danger";
-	    $scope.uploadingMessage = resp.data.message;
-	  }
-        }, function (resp) {
-	  $scope.requestLoading = false;
-	  $scope.uploadingFile = false;
-        }, function (evt) {
-	  $scope.requestLoading = false;
-          //var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-        });
+	Flash.clear();
+	Flash.create('warning', "Uploading Photo is deprecated" , 0, {}, true);
+	//$scope.requestLoading = true;
+        //Upload.upload({
+        //  url: "api/students/" + $routeParams.student_id + "/upload_photo",
+        //  data: {student: {file: file}}
+        //}).then(function (resp) {
+	//  $scope.requestLoading = false;
+	//  if(resp.data.success) {
+	//    $scope.uploadMeaasgeClass = "alert-success";
+	//    $scope.uploadingMessage = "Completed Successfully";
+	//    $scope.fileName = "";
+	//    FileReader.readAsDataURL(file, $scope).then(function(result) {
+	//      $scope.uploadedImg = result;
+	//      $scope.afterUpload = true;
+	//      $scope.file = null;
+	//      $scope.editImage = false;
+        //    });
+	//  }else {
+	//    $scope.uploadMeaasgeClass = "alert-danger";
+	//    $scope.uploadingMessage = resp.data.message;
+	//  }
+        //}, function (resp) {
+	//  $scope.requestLoading = false;
+	//  $scope.uploadingFile = false;
+        //}, function (evt) {
+	//  $scope.requestLoading = false;
+        //  //var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        //});
       };
 
       $scope.cancelTakePicture = function() {
