@@ -16,7 +16,7 @@ angular.module('eracordUiApp.controller')
       $scope.class_id = class_id;      
       var jkci_classes = Restangular.one("jkci_classes", class_id);
 
-      $scope.days = ["Monday", "Tuesday", "Wednesday", "Thusday", "Friday", "Saturday"]
+      $scope.days = ["Monday", "Tuesday", "Wednesday", "Thusday", "Friday", "Saturday", "Sunday"]
       jkci_classes.one("sub_classes", $scope.divisionId).customGET("get_time_table").then(function(data){
 	if(data.success) {
 	  $scope.timetable = data.timetable;
@@ -40,7 +40,7 @@ angular.module('eracordUiApp.controller')
       
       var jkci_classes = Restangular.one("/organisations/teachers", teacher_id);
 
-      $scope.days = ["Monday", "Tuesday", "Wednesday", "Thusday", "Friday", "Saturday"]
+      $scope.days = ["Monday", "Tuesday", "Wednesday", "Thusday", "Friday", "Saturday", "Sunday"]
       
       jkci_classes.customGET("get_time_table").then(function(data){
 	if(data.success) {

@@ -417,7 +417,8 @@ app.directive('classTimeTable', function(Restangular) {
 	3: 'Wednesday',
 	4: 'Thusday',
 	5: 'Friday',
-	6: 'Saturday'
+	6: 'Saturday',
+	7: 'Sunday'
       };
       scope.events = [];
 
