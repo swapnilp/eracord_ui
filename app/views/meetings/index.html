@@ -28,7 +28,7 @@
 	  <th st-sort="balance">#</th>
 	  <th st-sort="firstName">Agenda</th>
 	  <th st-sort="firstName">Date</th>
-	  <th st-sort="lastName">SMS Sent</th>
+	  <th st-sort="lastName">Status</th>
 	</tr>
       </thead>
       <tbody>
@@ -36,7 +36,7 @@
 	  <td><span ng-if="!showRollNumber">{{ $index+1 + ((pagination.current - 1) * 10)}}</span></td>
 	  <td><a class="linkOverwite" href="#/meetings/{{row.id}}/show">{{row.agenda}}</a></td>
 	  <td>{{row.date}}</td>
-	  <td>{{row.sms_sent}}</td>
+	  <td>{{row.sms_sent ? 'Published' : 'Created'}}</td>
 	</tr>
       </tbody>
     </table>

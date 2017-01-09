@@ -4,7 +4,7 @@
   <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
   <form name="form" ng-submit="registerMeeting()" role="form" ng-show="!requestLoading" autocomplete="off">
     <div class="form-group">
-      <label for="agenda">Agenda <span class="textRed"> *</span></label>
+      <label for="agenda">Type <span class="textRed"> *</span></label>
       <select class="form-control ng-touched" ng-model="vm.agenda" style="" ng-options="values for values in ['parent Meeting']"  required>
       </select>
     </div>
