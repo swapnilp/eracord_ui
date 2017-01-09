@@ -127,7 +127,7 @@ angular.module('eracordUiApp.controller')
 	if(data.success) {
 	  var timeTableEvents = [];
 	  var time_table_slot = null;
-	  for(var i=1; i< 8;i += 1) {
+	  for(var i=0; i< 7;i += 1) {
 	    time_table_slot = _.where(data.time_table_classes, {cwday: i});
 	    _.each(time_table_slot, function(tts){
 	      timeTableEvents.push({
