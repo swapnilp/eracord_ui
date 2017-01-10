@@ -587,6 +587,12 @@ tr.pointer, td.pointer {
 .bgWhite {
   background-color: #FFF;
 }
+
+.timeTableBorder{
+  border: 1px solid;
+  padding: 1px 6px;
+  border-radius: 8px;
+}
 	
 @media screen {
   #printSection {

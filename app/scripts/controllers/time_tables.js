@@ -55,5 +55,41 @@ angular.module('eracordUiApp.controller')
       $scope.cancel = function () {
 	$uibModalInstance.dismiss('cancel');
       };
+    }])
+
+  .controller('ClassTimeTableCtrl',['$scope', '$uibModalInstance', 'Restangular', 'class_id',
+    function ($scope, $uibModalInstance, Restangular, class_id)  {
+      $scope.requestLoading = true;
+
+      $scope.class_id = class_id;
+      $scope.isClass = true;
+      
+      var jkci_classes = Restangular.one("/jkci_classes", class_id);
+
+      $scope.days = ["Monday", "Tuesday", "Wednesday", "Thusday", "Friday", "Saturday", "Sunday"]
+
+      $scope.resetFilter = function() {
+	$scope.subClassFilter = {};
+      };
+      
+      jkci_classes.customGET("sub_classes").then(function(data){
+	if(data.success) {
+	  $scope.divisions = data.sub_classes;
+	}
+      })
+      
+      jkci_classes.customGET("get_time_table").then(function(data){
+	if(data.success) {
+	  $scope.timetable = data.slots;
+	  $scope.count = data.count;
+	}else {
+	  $uibModalInstance.dismiss('cancel');
+	}
+	$scope.requestLoading = false;
+      });
+      
+      $scope.cancel = function () {
+	$uibModalInstance.dismiss('cancel');
+      };
     }]);
 

@@ -309,7 +309,7 @@ app.directive('classDailyTeaches', function(Restangular) {
 
       scope.filterData = function() {
 	if(scope.pagination.current == 1) {
-	  getResultsPage(1);
+	  getDailyResultsPage(1)
 	}else {
 	  scope.pagination.current = 1
 	}

@@ -28,10 +28,12 @@
 	      <span is-role-visible='["create_exam"]' email="currentUser.email">
 		<a ng-href="#/classes/{{row.id}}/exams/new" uib-tooltip="Create exam"><i class="fa fa-file-o fa-2x"></i></a>
 		<a ng-href="#/classes/{{row.id}}/exams/new?&isGroup=true" uib-tooltip="Create group exam"><i class="fa fa-files-o fa-2x"></i></a>
+		<a ng-click="openClassTimeTable('lg', row.id)"  class="pointer" uib-tooltip="Time table"><i class="fa fa-clock-o fa-2x timeTableBorder"></i></a>
 	      </span>
 	    </span>
 	    <span ng-if="!row.is_student_verified">
 	      <a ng-href="#/classes/{{row.id}}/manage_class?&verify=true" uib-tooltip="Verify Class Students"><i class="fa fa-check-square fa-2x"></i></a>
+
 	    </span>
 	  </td>
 	</tr>

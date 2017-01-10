@@ -2,47 +2,56 @@
   <h3 class="modal-title text-center ">Time Table</h3>
   <a ng-click="cancel()" class="textWhite" style="float: right;position: absolute;right: 15px;top: 19px;cursor:pointer;"><i class="fa fa-times"></i></a>
 </div>
-<div class="modal-body" style="min-height:300px;overflow-y: auto; overflow-x: hidden;" id="printRecipt">
+<div class="modal-body" style="min-height:300px;overflow-y: auto; overflow-x: hidden;">
   <button ng-if="count > 0" class="btn btn-link pull-right userColor" ng-print print-element-id="printRecipt" uib-tooltip="Print" tooltip-placement="bottom"><i class="fa fa-print fa-2x"></i></button>
+  <button ng-if="count > 0 && isClass" class="btn btn-link pull-right userColor" class="pull-right" ng-click="resetFilter();"><i class="fa fa-refresh"></i></button>
+  <div class="col-sm-4 padding0 pull-right" ng-show="isClass">
+    <select class="form-control ng-touched pull-right" ng-model="subClassFilter.sub_class_name" ng-options="division.name as division.name for division in divisions">
+      <option>Filter Sub Class</option>
+    </select>
+  </div>
+
   <div request-loading is-loading="requestLoading"></div>
   <div ng-if="count == 0" class="text-center">
     <h2 class="text-warning">Timetable not yet available.</h2>
   </div>
-  <div ng-repeat="day in days" ng-if="timetable[day].length > 0">
-    <h4><strong>{{day}}</strong></h4>
-    <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
-      <thead>
-	<tr>
-	  <th st-sort="firstName">Class</th>
-	  <th st-sort="firstName">Division</th>
-	  <th st-sort="firstName">Subject</th>
-	  <th st-sort="firstName">Duration</th>
-	  <th st-sort="balance">Teacher</th>
-	  <th st-sort="balance">Location / Room</th>
-	</tr>
-      </thead>
-      <tbody>
-	<tr ng-repeat="slot in timetable[day]">
-	  <td>
-	    {{slot.class_name}}
-	  </td>
-	  <td>
-	    {{slot.sub_class_name}}
-	  </td>
-	  <td>
-	    {{slot.subject}}
-	  </td>
-	  <td>
-	    {{slot.start_time}} - {{slot.end_time}}
-	  </td>
-	  <td>
-	    {{slot.teacher_name}}
-	  </td>
-	  <td>
-	    {{slot.class_room}}
-	  </td>
-	</tr>
-      </tbody>
-    </table>
+  <div id="printRecipt">
+    <div ng-repeat="day in days" ng-show="(timetable[day] | filter:subClassFilter).length > 0" class="col-sm-12 padding0">
+      <h4><strong>{{day}}</strong></h4>
+      <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
+	<thead>
+	  <tr>
+	    <th st-sort="firstName">Class</th>
+	    <th st-sort="firstName">Division</th>
+	    <th st-sort="firstName">Subject</th>
+	    <th st-sort="firstName">Duration</th>
+	    <th st-sort="balance">Teacher</th>
+	    <th st-sort="balance">Location / Room</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <tr ng-repeat="slot in timetable[day] | filter:subClassFilter">
+	    <td>
+	      {{slot.class_name}}
+	    </td>
+	    <td>
+	      {{slot.sub_class_name}}
+	    </td>
+	    <td>
+	      {{slot.subject}}
+	    </td>
+	    <td>
+	      {{slot.start_time}} - {{slot.end_time}}
+	    </td>
+	    <td>
+	      {{slot.teacher_name}}
+	    </td>
+	    <td>
+	      {{slot.class_room}}
+	    </td>
+	  </tr>
+	</tbody>
+      </table>
+    </div>
   </div>
 </div>
