@@ -7,7 +7,7 @@
   <button ng-if="count > 0 && isClass" class="btn btn-link pull-right userColor" class="pull-right" ng-click="resetFilter();"><i class="fa fa-refresh"></i></button>
   <div class="col-sm-4 padding0 pull-right" ng-show="isClass">
     <select class="form-control ng-touched pull-right" ng-model="subClassFilter.sub_class_name" ng-options="division.name as division.name for division in divisions">
-      <option>Filter Sub Class</option>
+      <option value='' disabled selected>Filter Divisions</option>
     </select>
   </div>
 
@@ -16,7 +16,7 @@
     <h2 class="text-warning">Timetable not yet available.</h2>
   </div>
   <div id="printRecipt">
-    <div ng-repeat="day in days" ng-show="(timetable[day] | filter:subClassFilter).length > 0" class="col-sm-12 padding0">
+    <div ng-repeat="day in days" ng-show="(timetable[day] | filter:subClassFilter).length > 0" class="col-sm-12 padding0"> 
       <h4><strong>{{day}}</strong></h4>
       <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
 	<thead>
@@ -54,4 +54,6 @@
       </table>
     </div>
   </div>
+  
+  
 </div>
