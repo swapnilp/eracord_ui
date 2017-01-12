@@ -126,10 +126,10 @@
 	      </div>
 	    </span>
 	    <span ng-if="row.hostel_id" class="green paddingR10" uib-tooltip="Hostalite">
-	      <a href="#/hostels/{{row.hostel_id}}" is-role-visible-link='["manage_hostel"]' email="currentUser.email"><i class="fa fa-bed green"></i></a>
-	      
+	      <i class="fa fa-bed green"></i>
 	    </span>
 	    <span ng-if="row.enable_sms" class="green" uib-tooltip="SMS Enabled" ><i class="fa fa-mobile-phone"></i></span>
+	    <span ng-if="!row.enable_sms" class="red" uib-tooltip="SMS Enabled" ><i class="fa fa-mobile-phone"></i></span>
 	  </td>
 	  <td>{{row.batch}}</td>
 	  <td>{{row.standard}}</td>
