@@ -133,6 +133,11 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
       $scope.dropDowmMenu = 'academic';
       $rootScope.disableNav = false;
     }
+    if($location.path().search("^/organisations/teachers") >= 0 ){
+      $scope.topMenu = "teachers";
+      $scope.dropDowmMenu = 'academic';
+      $rootScope.disableNav = false;
+    }
     if($location.path().search("^/off_classes") >= 0 ){
       $scope.topMenu = "off_classes";
       $scope.dropDowmMenu = 'academic';
@@ -151,7 +156,6 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
     if($location.path().search("^/user/verify_mobile") >= 0 ){
       $rootScope.disableNav = true;
     }
-    
     if($location.path().search("^/class_rooms") >= 0 ){
       $scope.topMenu = "class_rooms";
       $scope.dropDowmMenu = 'non_academic';
