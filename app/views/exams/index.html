@@ -5,6 +5,10 @@
       <span class="">Records - <strong>{{totalExams || 0}}</strong> </span>
     </div>
     <div class="filterRight examFilter">
+      <div class="marginR10 positionRelative" style="width:230px;">
+	<input date-range-picker id="rangeCalender" class="form-control date-picker calender pointer" type="text" ng-model="filterExam.dateRange" style="width:230px;display:inline;" placeholder="Enter date range" onkeypress="return false" options="{autoApply: true}" readonly/>
+	<label for="rangeCalender" class="rangeCalender pointer"><i class="fa fa-calendar marginT10"></i></label>
+      </div>
       <div class="marginR10" ng-if="showClassFilter">
 	<select class="form-control ng-touched" ng-model="filterExam.filterBatch" ng-options="std.id as std.name for std in batches">
 	  <option value="">Batch</option>
@@ -25,10 +29,7 @@
 	  <option value="">All</option>
 	</select>
       </div>
-      <div class="marginR10 positionRelative" style="width:230px;">
-	<input date-range-picker id="rangeCalender" class="form-control date-picker calender pointer" type="text" ng-model="filterExam.dateRange" style="width:230px;display:inline;" placeholder="Enter date range" onkeypress="return false" options="{autoApply: true}" readonly/>
-	<label for="rangeCalender" class="rangeCalender pointer"><i class="fa fa-calendar marginT10"></i></label>
-      </div>
+      
       <span class="">
 	<button class="btn btn-primary"  ng-click="filterData(1, false);" uib-tooltip="Filter"><i class="fa fa-filter"></i></button>
 	<button class="btn btn-primary"  ng-click="resetFilter();" uib-tooltip="Reset"><i class="fa fa-refresh"></i></button>

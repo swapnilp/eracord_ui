@@ -174,7 +174,7 @@ app.directive('classExams', function(Restangular) {
     scope: {
       classId: '@',
       classExamsTab: '@',
-       updateUrl: '&'
+      updateUrl: '&'
     },
     templateUrl: 'views/exams/index.html',
     controller: ['$scope', 'Restangular', 'Flash', '$location', '$window', '$routeParams', '$route', function(scope, Restangular, Flash, $location, $window, $routeParams, $route){

@@ -105,6 +105,7 @@ angular.module('eracordUiApp.controller')
       $scope.teacherId = $routeParams.teacher_id;;
       $scope.requestLoading = false;
       $scope.subjects = [];
+      $scope.teacherDtpTab = false;
       
       var getTeacher = function(){
 	base_organisation.customGET('teachers/'+$routeParams.teacher_id).then(function(data){
@@ -131,6 +132,14 @@ angular.module('eracordUiApp.controller')
 	  })
 	}
       };
+
+      $scope.$watch('activeTab', function() {
+	if($scope.activeTab == 1) {
+	  $scope.teacherDtpTab = true;
+	}else {
+	  $scope.teacherDtpTab = false;
+	}
+      });
 
 
       $scope.removeTeacher = function() {

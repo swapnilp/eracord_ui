@@ -66,5 +66,19 @@
       </div>
     </div>
   </div>
-  <div ng-include src="'views/teachers/teacher_subjects.html'"></div>
+  <uib-tabset justified="true" active="activeTab">
+    <uib-tab index="0">
+      <uib-tab-heading> Subject</uib-tab-heading>
+      <div>
+	<div ng-include src="'views/teachers/teacher_subjects.html'"></div>
+      </div>
+    </uib-tab>
+    <uib-tab index="1">
+      <uib-tab-heading> Catlog</uib-tab-heading>
+      <div>
+	<div teacher-daily-teaches teacher-id="{{teacherId}}" teacher-dtp-tab="{{teacherDtpTab}}"></div>
+      </div>
+    </uib-tab>
+  </uib-tabset>
+
 </div>
