@@ -185,8 +185,11 @@ angular.module('eracordUiApp.controller')
     };
     
     load_standards();
-    var roles = $cookieStore.get('currentUser').roles.split(',');
-    if(!_.include(roles, 'organisation') && _.include(roles, 'teacher')){
+    var roles = undefined;
+    if($cookieStore.get('currentUser').roles){
+      roles = $cookieStore.get('currentUser').roles.split(',');
+    }
+    if(roles && !_.include(roles, 'organisation') && _.include(roles, 'teacher')){
       load_teacher_classes();
     } else {
       load_desk_classes();
