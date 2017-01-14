@@ -75,10 +75,13 @@ angular.module('eracordUiApp.controller')
       $scope.vm = {};
       $scope.isNew = false;
       $scope.vm.user = {}
+      $scope.requestLoading = false;
       
       var getTeacher = function(){
+	$scope.requestLoading = true;
 	base_organisation.customGET('teachers/'+$routeParams.teacher_id+'/edit').then(function(data){
 	  $scope.vm.user = data.teacher;
+	  $scope.requestLoading = false;
 	})
       };
       
