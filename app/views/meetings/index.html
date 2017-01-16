@@ -16,7 +16,6 @@
 	  <input date-range-picker id="rangeCalender" class="form-control date-picker calender pointer" type="text" ng-model="filter.dateRange" style="width:230px;display:inline;" placeholder="Enter date range" onkeypress="return false" options="{autoApply: true}" readonly/>
 	  <label for="rangeCalender" class="rangeCalender pointer"><i class="fa fa-calendar marginT10"></i></label>
 	</div>
-	<input type="text" ng-model="filterStudent" dl-key-code="pageChanged(1);" code="13" placeholder="Type mobile and enter" value="{{filterStudent}}" style="width:230px;display:inline;" class="form-control">
 	<button class="btn btn-primary" ng-click="filterData();"><i class="fa fa-filter"></i></button>
 	<button class="btn btn-primary"  ng-click="resetFilter();" uib-tooltip="Reset"><i class="fa fa-refresh"></i></button>
       </div>		  
@@ -41,7 +40,7 @@
       </tbody>
     </table>
   </figure>
-  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)" pagination-id="meetings" ng-show="totalCount > 9"></dir-pagination-controls>
+  <dir-pagination-controls class="text-center col-sm-12" on-page-change="pageChanged(newPageNumber)" pagination-id="meetings" ng-show="totalCount > 9"></dir-pagination-controls>
 </div>
 
 

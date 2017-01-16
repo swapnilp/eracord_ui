@@ -32,7 +32,7 @@ angular.module('eracordUiApp.controller')
       
       var getResultsPage = function(pageNumber){
 	$scope.requestLoading = true;
-	parents_meetings.customGET("", {page: pageNumber}).then(function(data){
+	parents_meetings.customGET("", {page: pageNumber, filter: $scope.filter}).then(function(data){
 	  if(data.success){
 	    $scope.meetings = data.parents_meetings;
 	    $scope.totalCount = data.count;
