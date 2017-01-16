@@ -20,7 +20,6 @@
 	</p>
       </div>
       <div class="form-group">
-	<label for="class_time">Get class rooms</label>
 	<p class="input-group">
 	  <button class="btn btn-primary">Get class rooms</button>
 	  &nbsp;&nbsp;
@@ -58,11 +57,9 @@
     </table>
   </figure>
   
-  <div ng-show="length == 0" class="col-sm-12 padding0" style="margin-top:20px;">
-    <div class="alert alert-warning">
-      No data found
-    </div>
-  </div>
+  <figure class="col-sm-12 padding0 fullWidth" ng-show="!requestLoading && length === 0" style="">
+    <h4 class="text-danger">No data found</h4>
+  </figure>
 </div>
 
 

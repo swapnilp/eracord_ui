@@ -60,6 +60,9 @@
     </table>
   </figure>
   <dir-pagination-controls class="text-center col-sm-12" on-page-change="pageChanged(newPageNumber)" pagination-id="sms_sent" ng-show="totalCount > 9"></dir-pagination-controls>
+  <figure class="col-sm-12 padding0 fullWidth" ng-show="!requestLoading && totalCount  === 0" style="">
+    <h4 class="text-danger">No data found</h4>
+  </figure>
 </div>
 
 

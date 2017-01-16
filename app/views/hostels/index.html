@@ -29,8 +29,7 @@
     </table>
   </figure>
 </div>
-<div class="alert alert-warning col-sm-12" ng-if="divisions.length  < 1">
-  <span >
-    No data found
-  </span>
+<figure class="col-sm-12 padding0 fullWidth" ng-show="!requestLoading && hostels.length  === 0" style="">
+  <h4 class="text-danger">No data found</h4>
+</figure>
 </div>

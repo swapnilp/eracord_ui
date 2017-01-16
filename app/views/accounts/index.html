@@ -159,10 +159,9 @@
     </table>
   </figure>
   <dir-pagination-controls on-page-change="pageChanged(newPageNumber)" class="col-sm-12 text-center" ng-show="length > 0"></dir-pagination-controls>
-  <div ng-show="length == 0 && !requestLoading" class="col-sm-12 padding0" style="margin-top:20px;">
-    <div class="alert alert-warning">
-      No data found
-    </div>
-  </div>
+  
+  <figure class="col-sm-12 padding0 fullWidth" ng-show="length == 0 && !requestLoading" style="">
+    <h4 class="text-danger">No data found</h4>
+  </figure>
 </div>
 
