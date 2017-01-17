@@ -57,6 +57,9 @@
 	      <li is-role-visible='["manage_hostel"]' email="currentUser.email" ng-class="{active: topMenu==='hostels', 'disabled': disableNav}" only_root="currentUser.is_root">
 		<a ng-href="#/hostels" disabled-link="disableNav">Hostels</a>
 	      </li>
+	      <li ng-class="{active: topMenu=== 'holidays', 'disabled': disableNav}">
+		<a ng-href="#/holidays" disabled-link="disableNav">Holidays</a>
+	      </li>
 	    </ul>
 	  </li>
           <li ng-class="{active: topMenu==='contacts', 'disabled': disableNav}"><a ng-href="#/contact" disabled-link="disableNav">Contact</a></li>

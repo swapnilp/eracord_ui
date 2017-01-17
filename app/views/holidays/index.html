@@ -1,0 +1,47 @@
+<div class="col-sm-12 padding0">
+  <div class="examFilterDiv col-sm-12 padding0"> 
+    <div class="col-sm-12 padding0">
+      <h3>Holidays</h3>
+      
+    </div>		  
+  </div>
+  <div request-loading is-loading="requestLoading"></div>
+  <figure class="col-sm-12 padding0" ng-show="!requestLoading">
+    <div class="col-sm-12 padding0">
+      <div class="pull-left marginT15">
+	Records&nbsp;:&nbsp;<strong>{{totalCount}}</strong>
+      </div>
+      <div class="filterRight marginT15">
+	<div class="marginR10 positionRelative " style="width:230px;display:inline-block;">
+	  <input date-range-picker id="rangeCalender" class="form-control date-picker calender pointer" type="text" ng-model="filter.dateRange" style="width:230px;display:inline;" placeholder="Enter date range" onkeypress="return false" options="{autoApply: true}" readonly/>
+	  <label for="rangeCalender" class="rangeCalender pointer"><i class="fa fa-calendar marginT10"></i></label>
+	</div>
+	<button class="btn btn-primary" ng-click="filterData();"><i class="fa fa-filter"></i></button>
+	<button class="btn btn-primary"  ng-click="resetFilter();" uib-tooltip="Reset"><i class="fa fa-refresh"></i></button>
+      </div>
+    </div>
+    <table st-table="rowCollection" class="table organisationCoursesTable table-striped fixLayout" ng-show="totalCount > 0">
+      <thead>
+	<tr>
+	  <th>Date </th>
+	  <th st-sort="firstName">Reason</th>
+	  <th st-sort="balance">Is Goverment</th>
+	</tr>
+      </thead>
+      <tbody>
+	<tr dir-paginate="row in holidays | toArray:false | itemsPerPage: 10" total-items="totalCount" current-page="pagination.current" pagination-id="holidays">
+	  <td>{{row.date}}</td>
+	  <td>{{row.reason}}</td>
+	  <td>{{row.is_goverment}}</td>
+	</tr>
+      </tbody>
+    </table>
+  </figure>
+  <dir-pagination-controls class="text-center col-sm-12" on-page-change="pageChanged(newPageNumber)" pagination-id="holidays" ng-show="totalCount > 9"></dir-pagination-controls>
+  <figure class="col-sm-12 padding0 fullWidth" ng-show="!requestLoading && totalCount  === 0" style="">
+    <h4 class="text-danger">No data found</h4>
+  </figure>
+</div>
+
+
+
