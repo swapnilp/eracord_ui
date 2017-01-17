@@ -64,4 +64,32 @@ angular.module('eracordUiApp.controller')
 
       getResultsPage(1);
     }
+    //end of index route
+
+    if($location.path() === "/holidays/new") {
+      var holidays = Restangular.all("holidays");
+      
+
+      $scope.isOpen = false;
+      $scope.dataLoading = false;
+      $scope.vm = {};
+      $scope.openCalendar = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $scope.isOpen = true;
+      };
+
+      $scope.registerHoliday = function() {
+	$scope.vm.date = moment($scope.vm.date).format('DD/MM/YYYY');
+	holidays.customPOST({holiday: $scope.vm}, "", {}).then(function(data) {
+	  if(data.success) {
+	    lazyFlash.success("Holiday has been created");
+	    $location.path("/holidays").replace();
+	  } else {
+	    Flash.create('warning', "Something went wrong", 0, {}, true);
+	  }
+	});
+      };
+    }
+    
   }])
