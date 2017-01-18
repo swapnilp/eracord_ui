@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('HolidaysCtrl',['$rootScope', '$scope', 'Flash', 'lazyFlash', '$location', 'Auth', 'Restangular', '$routeParams', '$uibModal', function ($rootScope, $scope, Flash, lazyFlash, $location, Auth, Restangular, $routeParams, $uibModal) {
+  .controller('HolidaysCtrl',['$rootScope', '$scope', 'Flash', 'lazyFlash', '$location', 'Auth', 'Restangular', '$routeParams', '$uibModal', '$window', function ($rootScope, $scope, Flash, lazyFlash, $location, Auth, Restangular, $routeParams, $uibModal, $window) {
     
     
     if(!Auth.isAuthenticated()){
@@ -60,6 +60,18 @@ angular.module('eracordUiApp.controller')
       
       $scope.pageChanged = function(newPage) {
         getResultsPage(newPage);
+      };
+
+      $scope.removeHoliday = function(row) {
+	if($window.confirm('Are you sure?')){
+	  holidays.customDELETE(row.id).then(function(data){
+	    if(data.success) {
+	      $scope.filterData();
+	    } else {
+	      Flash.create('warning', data.message, 0, {}, true);
+	    }
+	  });
+	}
       };
 
       getResultsPage(1);

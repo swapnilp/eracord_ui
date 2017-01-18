@@ -7,8 +7,7 @@
       </div> 
     </div>		  
   </div>
-  <div request-loading is-loading="requestLoading"></div>
-  <figure class="col-sm-12 padding0" ng-show="!requestLoading">
+  <figure class="col-sm-12 padding0">
     <div class="col-sm-12 padding0">
       <div class="pull-left marginT15">
 	Records&nbsp;:&nbsp;<strong>{{totalCount}}</strong>
@@ -22,12 +21,15 @@
 	<button class="btn btn-primary"  ng-click="resetFilter();" uib-tooltip="Reset"><i class="fa fa-refresh"></i></button>
       </div>
     </div>
-    <table st-table="rowCollection" class="table organisationCoursesTable table-striped fixLayout" ng-show="totalCount > 0">
+    <div request-loading is-loading="requestLoading"></div>
+      
+    <table st-table="rowCollection" class="table organisationCoursesTable table-striped fixLayout" ng-show="totalCount > 0 && !requestLoading" >
       <thead>
 	<tr>
 	  <th>Date </th>
 	  <th st-sort="firstName">Reason</th>
 	  <th st-sort="balance">Is Goverment</th>
+	  <th>Action</th>
 	</tr>
       </thead>
       <tbody>
@@ -35,6 +37,7 @@
 	  <td>{{row.date}}</td>
 	  <td>{{row.reason}}</td>
 	  <td>{{row.is_goverment}}</td>
+	  <td><span ng-click="removeHoliday(row);" ng-if="!row.is_goverment" class="pointer red" uib-tooltip="Remove Holiday"><i class="fa fa-trash"></i></span></td>
 	</tr>
       </tbody>
     </table>
