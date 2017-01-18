@@ -185,6 +185,11 @@ app.controller('ApplicationCtrl', function($rootScope, $scope, $location, $route
       $scope.dropDowmMenu = 'non_academic';
       $rootScope.disableNav = false;
     }
+    if($location.path().search("^/holidays") >= 0){
+      $scope.topMenu = "holidays";
+      $scope.dropDowmMenu = 'non_academic';
+      $rootScope.disableNav = false;
+    }
     if($location.path() === "/"){
       $scope.topMenu = "home";
       $scope.dropDowmMenu = null;
