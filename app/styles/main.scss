@@ -593,7 +593,13 @@ tr.pointer, td.pointer {
   padding: 1px 6px;
   border-radius: 8px;
 }
-	
+
+.form-group {
+  .halfWidth {
+    width: 50%;
+    float: left;
+  }
+}	
 @media screen {
   #printSection {
     display: none;

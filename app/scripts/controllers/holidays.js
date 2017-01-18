@@ -69,10 +69,11 @@ angular.module('eracordUiApp.controller')
     if($location.path() === "/holidays/new") {
       var holidays = Restangular.all("holidays");
       
-
       $scope.isOpen = false;
       $scope.dataLoading = false;
       $scope.vm = {};
+      $scope.dateRange = {};
+      $scope.vm.isMultiDate = false;
       $scope.openCalendar = function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -80,8 +81,10 @@ angular.module('eracordUiApp.controller')
       };
 
       $scope.registerHoliday = function() {
-	$scope.vm.date = moment($scope.vm.date).format('DD/MM/YYYY');
-	holidays.customPOST({holiday: $scope.vm}, "", {}).then(function(data) {
+	if($scope.vm.isMultiDate === false) {
+	  $scope.vm.date = moment($scope.vm.date).format('DD/MM/YYYY');
+	}
+	holidays.customPOST({holiday: $scope.vm}, "", {dateRange: $scope.dateRange}).then(function(data) {
 	  if(data.success) {
 	    lazyFlash.success("Holiday has been created");
 	    $location.path("/holidays").replace();
