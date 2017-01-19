@@ -83,19 +83,46 @@ angular.module('eracordUiApp.controller')
       
       $scope.isOpen = false;
       $scope.dataLoading = false;
+      $scope.classLoading = false;
       $scope.vm = {};
       $scope.dateRange = {};
       $scope.vm.isMultiDate = false;
+      $scope.vm.classList = [];
+      $scope.allOrganisation = true;
       $scope.openCalendar = function(e) {
         e.preventDefault();
         e.stopPropagation();
         $scope.isOpen = true;
       };
 
+
+      $scope.$watch('allOrganisation', function(){
+	if(!$scope.allOrganisation) {
+	  loadClasses();
+	} else{
+	  $scope.vm.classList = [];
+	}
+      });
+
+      var loadClasses = function() {
+	$scope.classes = [];
+	$scope.classLoading = true;
+	holidays.customGET("get_classes").then(function(data) {
+	  if(data.success) {
+	    $scope.classes = data.classes;
+	  } else {
+	  }
+	  $scope.classLoading = false;
+	});
+      };
+
       $scope.registerHoliday = function() {
 	if($scope.vm.isMultiDate === false) {
 	  $scope.vm.date = moment($scope.vm.date).format('DD/MM/YYYY');
 	}
+	$scope.vm.allOrganisation = $scope.allOrganisation;
+	$scope.vm.classList = $scope.vm.classList.join(',');
+	
 	holidays.customPOST({holiday: $scope.vm}, "", {dateRange: $scope.dateRange}).then(function(data) {
 	  if(data.success) {
 	    lazyFlash.success("Holiday has been created");

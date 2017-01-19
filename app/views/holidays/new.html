@@ -3,7 +3,7 @@
   <div request-loading is-loading="requestLoading"></div>
   <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
   <form name="form" ng-submit="registerHoliday()" role="form" ng-show="!requestLoading" autocomplete="off">
-    <div class="form-group">
+    <div class="form-group col-sm-12 padding0">
       <label class="form-control halfWidth pointer" for="isMultiDate">
 	<input type="radio" name="isMultiDate" id="isMultiDate"  ng-model="vm.isMultiDate"  ng-value="false" />
 	Single day
@@ -30,9 +30,29 @@
     </div>
     <div class="form-group" ng-class="{ 'has-error': form.reason.$dirty && form.reason.$error.required }">
       <label for="reason">Reason </label>
-      <input type="text" name="reason" id="reason" class="form-control" ng-model="vm.reason"  />
+      <input type="text" name="reason" id="reason" class="form-control" ng-model="vm.reason"  required/>
     </div>
-    <div class="form-actions" style="padding-bottom:20px;">
+    <div class="form-group col-sm-12 padding0 marginT20">
+      <label class="form-control halfWidth pointer" for="allOrganisationTrue">
+	<input type="radio" name="allOrganisationTrue" id="allOrganisationTrue"  ng-model="allOrganisation"  ng-value="true" />
+	All organisation 
+      </label>
+      <label class="form-control halfWidth pointer" for="allOrganisation">
+	<input type="radio" name="allOrganisation" id="allOrganisation"  ng-model="allOrganisation"  ng-value="false" />
+	Specific Organisation
+      </label>
+
+      <div class="assignStudentsList col-lg-12 padding0 marginT20" ng-if="allOrganisation == false">
+	<div request-loading is-loading="classLoading"></div>
+	<label ng-repeat="jkci_class in classes" class="checkBoxStyle col-lg-6">
+	  <input id="class_{{jkci_class.id}}" type="checkbox" checklist-model="vm.classList" checklist-value="jkci_class.id" ng-model="jkci_class.checked"> 
+	  <label for="class_{{jkci_class.id}}"></label>
+	  {{jkci_class.class_name}}
+	</label>
+      </div>
+      
+    </div>
+    <div class="form-actions marginTop20" style="padding-bottom:20px;">
       <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">New</button>
       <span button-req-load is-loading="dataLoading"></span>
       <a ng-click="goBack();" class="btn btn-default">Cancel</a>
