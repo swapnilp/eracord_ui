@@ -68,6 +68,7 @@ angular.module('eracordUiApp.controller')
 	    if(data.success) {
 	      $scope.filterData();
 	    } else {
+	      Flash.clear();
 	      Flash.create('warning', data.message, 0, {}, true);
 	    }
 	  });
@@ -89,6 +90,7 @@ angular.module('eracordUiApp.controller')
       $scope.vm.isMultiDate = false;
       $scope.vm.classList = [];
       $scope.allOrganisation = true;
+      $scope.vm.date = moment();
       $scope.openCalendar = function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -122,12 +124,22 @@ angular.module('eracordUiApp.controller')
 	}
 	$scope.vm.allOrganisation = $scope.allOrganisation;
 	$scope.vm.classList = $scope.vm.classList.join(',');
+	if($scope.vm.allOrganisation === false && $scope.vm.classList === "") {
+	  Flash.clear();
+	  Flash.create('warning', "Must select class for specific class", 10000, {}, true);
+	  $scope.vm.classList = [];
+	  if($scope.vm.isMultiDate === false){
+	    $scope.vm.date = moment($scope.vm.date, 'DD/MM/YYYY');
+	  }
+	  return 0
+	}
 	
 	holidays.customPOST({holiday: $scope.vm}, "", {dateRange: $scope.dateRange}).then(function(data) {
 	  if(data.success) {
 	    lazyFlash.success("Holiday has been created");
 	    $location.path("/holidays").replace();
 	  } else {
+	    Flash.clear();
 	    Flash.create('warning', "Something went wrong", 0, {}, true);
 	  }
 	});

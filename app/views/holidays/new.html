@@ -29,7 +29,7 @@
       <span ng-show="form.marks.$dirty && form.marks.$error.required" class="help-block">Meeting Date is required</span>
     </div>
     <div class="form-group" ng-class="{ 'has-error': form.reason.$dirty && form.reason.$error.required }">
-      <label for="reason">Reason </label>
+      <label for="reason">Reason <span class="textRed"> *</span></label>
       <input type="text" name="reason" id="reason" class="form-control" ng-model="vm.reason"  required/>
     </div>
     <div class="form-group col-sm-12 padding0 marginT20">
@@ -39,7 +39,7 @@
       </label>
       <label class="form-control halfWidth pointer" for="allOrganisation">
 	<input type="radio" name="allOrganisation" id="allOrganisation"  ng-model="allOrganisation"  ng-value="false" />
-	Specific Organisation
+	Selected Class
       </label>
 
       <div class="assignStudentsList col-lg-12 padding0 marginT20" ng-if="allOrganisation == false">
