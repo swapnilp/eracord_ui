@@ -710,6 +710,42 @@ app.directive('classDuplicateStudents', function(Restangular) {
 	  row.dataLoading = false;
 	});
       };
+
+      scope.openSelectTeacher = function (size, row) {
+	console.log(row);
+	var modalInstance = $uibModal.open({
+	  animation: true,
+	  templateUrl: 'views/teachers/assign_teacher.html',
+	  controller: 'AssignTeacherCtrl',
+	  size: size,
+	  resolve: {
+	    class_id: function(){
+	      return scope.classId;
+	    },
+	    time_table_id: function(){
+	      return 0;
+	    },
+	    teacher_id: function(){
+	      return 0;
+	    }
+	  }
+	});
+	
+	modalInstance.result.then(function (selectedTeacher) {
+	  if(selectedTeacher) {
+	    Restangular.one("time_tables", row.time_table_id).one("time_table_classes", row.id).customPOST({teacher_id: selectedTeacher.id},"assign_teacher", {}).then(function(data){
+	      if(data.success) {
+		scope.slots = _.reject(scope.slots, function(obj){return obj.id == row.id});
+	      }
+	    });
+	  }
+	  
+	  //Restangular.one("jkci_classes", scope.classId);
+	  
+	  //scope.vm.teacher_name = selectedTeacher.name;
+	  //scope.vm.teacher_id = selectedTeacher.id;
+	}, null);
+      }
       
       scope.$watch('classStudentVerificationTab', function(){
 	if(scope.classStudentVerificationTab === 'true') {

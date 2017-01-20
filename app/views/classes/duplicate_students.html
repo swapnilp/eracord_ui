@@ -101,13 +101,13 @@
 	    {{row.name}}
 	  </td>
 	  <td>
-	    {{}}
+	    {{row.day}}
 	  </td>
 	  <td>
 	    {{row.start_time}} - {{row.end_time}} 
 	  </td>
 	  <td>
-	    Assign teacher
+	    <a ng-click="openSelectTeacher('lg', row)" class="pointer">Assign teacher</a>
 	  </td>
 	</tr>
       </tbody>
