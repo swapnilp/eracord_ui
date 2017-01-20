@@ -17,6 +17,11 @@
 	  <input date-range-picker id="rangeCalender" class="form-control date-picker calender pointer" type="text" ng-model="filter.dateRange" style="width:230px;display:inline;" placeholder="Enter date range" onkeypress="return false" options="{autoApply: true}" readonly/>
 	  <label for="rangeCalender" class="rangeCalender pointer"><i class="fa fa-calendar marginT10"></i></label>
 	</div>
+	<div class="marginR10" style="display:inline-block;">
+	  <select class="form-control ng-touched" ng-model="filter.type" ng-options="values for values in ['All']">
+	    <option value="">Upcomming</option>
+	  </select>
+	</div>
 	<button class="btn btn-primary" ng-click="filterData();"><i class="fa fa-filter"></i></button>
 	<button class="btn btn-primary"  ng-click="resetFilter();" uib-tooltip="Reset"><i class="fa fa-refresh"></i></button>
       </div>
