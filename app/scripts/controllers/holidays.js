@@ -98,7 +98,7 @@ angular.module('eracordUiApp.controller')
       };
 
       $scope.maxDate = moment().add(5, 'months').format("'MM-DD-YY'");
-      $scope.minDate = moment().add(1, 'day').format("'MM-DD-YY'");
+      $scope.minDate = moment().format("'MM-DD-YY'");
       $scope.dateOptions = {
       	maxDate: $scope.maxDate,
 	minDate: $scope.minDate
