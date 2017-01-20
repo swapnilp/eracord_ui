@@ -41,7 +41,7 @@
 	<tr dir-paginate="row in holidays | toArray:false | itemsPerPage: 10" total-items="totalCount" current-page="pagination.current" pagination-id="holidays">
 	  <td>{{row.date}}</td>
 	  <td>{{row.reason}}</td>
-	  <td>{{row.is_goverment}}</td>
+	  <td>{{row.is_goverment ? 'Goverment Holiday' : 'Local Holiday'}}</td>
 	  <td><span ng-click="removeHoliday(row);" ng-if="!row.is_goverment" class="pointer red" uib-tooltip="Remove Holiday"><i class="fa fa-trash"></i></span></td>
 	</tr>
       </tbody>
