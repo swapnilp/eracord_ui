@@ -1,0 +1,76 @@
+<div class="modal-header bg-primary">
+  <h3 class="modal-title text-center">Create Slot</h3>
+  <a ng-click="cancel()" class="textWhite" style="float: right;position: absolute;right: 15px;top: 19px;cursor:pointer;"><i class="fa fa-times"></i></a>
+</div>
+<div class="modal-body" style="min-height:300px;overflow: auto;">
+  <div class="col-md-12 col-md-offset-0">
+    <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
+    <form name="form" ng-submit="registorTimeTableSlot()" role="form" autocomplete="off">
+      
+      <div class="form-group" ng-class="{ 'has-error': form.cwday.$dirty && form.cwday.$error.required }">
+	<label for="cwday">Day</label>
+	<select class="form-control ng-touched" ng-model="vm.cwday" ng-options="k as v for (k, v) in days" required>
+	</select>
+	<span ng-show="form.cwday.$dirty && form.cwday.$error.required" class="help-block">Type is required</span>
+      </div>
+      
+      <div class="form-group" ng-class="{ 'has-error': form.cwday.$dirty && form.cwday.$error.required }">
+	<label for="cwday">Division</label>
+	<select class="form-control ng-touched" ng-model="vm.sub_class_id" ng-options="sub_class.id as sub_class.name for sub_class in sub_classes" >
+	</select>
+	<span ng-show="form.cwday.$dirty && form.cwday.$error.required" class="help-block">Type is required</span>
+      </div>
+      
+      <div class="form-group" ng-class="{ 'has-error': form.slot_type.$dirty && form.slot_type.$error.required }">
+	<label for="slot_type">Type</label>
+	<select class="form-control ng-touched" ng-model="vm.slot_type" ng-options="values for values in ['Class']" required>
+	</select>
+	<span ng-show="form.slot_type.$dirty && form.slot_type.$error.required" class="help-block">Type is required</span>
+      </div>
+      
+      <div class="form-group" ng-class="{ 'has-error': form.subject_id.$dirty && form.subject_id.$error.required }" ng-if="vm.slot_type === 'Class'">
+	<label for="subject_id">Subject</label>
+	<select class="form-control ng-touched" ng-model="vm.subject_id" ng-options="values.id as values.name for values in subjects" required>
+	</select>
+	<span ng-show="form.subject_id.$dirty && form.subject_id.$error.required" class="help-block">Subject is required</span>
+      </div>
+      
+      <div class="form-group">
+	<label for="subject_id">Teacher</label>
+	<button type="button" class="btn btn-link" ng-click="openSelectTeacher('lg')" uib-tooltip="Help">
+	  {{vm.teacher_name ? 'Change teacher' : 'Assign teacher'}}
+	</button>
+	<div ng-if="vm.teacher_name">
+	  {{vm.teacher_name}}
+	  <input type="hidden" name="teacher_id" value="{{vm.teacher_id}}" />
+	</div>
+      </div>
+      
+      <div class="form-group" ng-class="{ 'has-error': form.start_time.$dirty && form.start_time.$error.required }">
+	<label for="start_time">Start Time</label>
+	<p class="input-group">
+	  <input type="text" class="form-control" datetime-picker="HH:mm" ng-model="start_time" is-open="isOpen" ng-click="openCalendar($event, prop);" enable-date="false" readonly required/>
+	</p>
+	<span ng-show="form.start_time.$dirty && form.start_time.$error.required" class="help-block">Start Time is required</span>
+      </div>
+      
+      <div class="form-group" ng-class="{ 'has-error': form.end_time.$dirty && form.end_time.$error.required }">
+	<label for="end_time">End Time</label>
+	<p class="input-group">
+	  <input type="text" class="form-control" datetime-picker="HH:mm" ng-model="end_time" is-open="isOpenEndDate" ng-click="openEndCalendar($event, prop);" enable-date="false"  readonly required/>
+	</p>
+	<span class="alert alert-warning">End Time must be greater then start Time</span>
+	<span ng-show="form.end_time.$dirty && form.end_time.$error.required" class="help-block">End Time is required</span>
+      </div>
+      <div class="form-group">
+	<label for="class_room">Class Room</label>
+	<input type="text" name="class_room" id="class_room" class="form-control" ng-model="vm.class_room" />
+      </div>
+      <div class="form-actions">
+	<button type="submit" ng-disabled="(form.$invalid || dataLoading) || (end_time < start_time) " class="btn btn-primary">Save</button>
+	<span button-req-load is-loading="dataLoading"></span>
+	<a class="btn btn-default" ng-click="cancelTimeTableSlotManage();">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>

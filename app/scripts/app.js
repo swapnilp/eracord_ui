@@ -43,6 +43,7 @@ angular
     'angular-confirm',
     'angularLazyImg',
     'filereader',
+    'ngDragDrop',
     'eracordUiApp.controller',
     'eracordUiApp.directives'
   ])

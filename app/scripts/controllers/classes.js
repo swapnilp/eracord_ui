@@ -332,4 +332,49 @@ angular.module('eracordUiApp.controller')
       $scope.cancel = function () {
 	$uibModalInstance.dismiss('cancel');
       };
+    }])
+
+  .controller('TimeTableClassModelCtrl',['$scope', '$uibModalInstance', '$timeout',  'Restangular', 'time_table_id', 'cwday', 'slot', 
+    'subject_id', 'subjects', 'divisions', function ($scope, $uibModalInstance, $timeout, Restangular, time_table_id, cwday, slot, subject_id, subjects, divisions)  {
+      $scope.days = {
+	1: 'Monday',
+	2: 'Tuesday',
+	3: 'Wednesday',
+	4: 'Thusday',
+	5: 'Friday',
+	6: 'Saturday',
+	7: 'Sunday'
+      };
+
+      $scope.subjects = subjects;
+      $scope.sub_classes = divisions;
+      
+      $scope.vm = {};
+      $scope.vm.cwday = ""+cwday;
+      $scope.vm.slot_type = "Class";
+      $scope.vm.subject_id = subject_id;
+      $scope.start_time = moment(slot+":00", "HH:mm").toDate();
+      $scope.end_time = moment((slot+1)+":00", "HH:mm").toDate();
+      
+      
+      $scope.openCalendar = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $scope.isOpen = true;
+      };
+      
+      $scope.openEndCalendar = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $scope.isOpenEndDate = true;
+      };
+      
+      $scope.cancel = function () {
+	$uibModalInstance.dismiss('cancel');
+      };
+      
+      $scope.cancelTimeTableSlotManage = function () {
+	$uibModalInstance.dismiss('cancel');
+      };
+      
     }]);

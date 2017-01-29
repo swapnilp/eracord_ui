@@ -90,24 +90,24 @@
   </div>
   <div class="col-sm-12 textLeft" ng-show="!requestLoading">
     <div class="timeTableSubjects">
-      <span ng-repeat="subject in subjects" ng-style='{"background-color": subject.color, "color": subject.text_color }'>
+      <span ng-repeat="subject in subjects" ng-style='{"background-color": subject.color, "color": subject.text_color }' data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="subject" jqyoui-draggable="{animate:true,placeholder:'keep'}">
 	{{subject.name}}
       </span>
     </div>
     <div dispaly-times time-slots="timeSlots" class="left col-md-1 textCenter" >
     </div>
-    <div day-slots day="Monday" events="events" time-slots="timeSlots" selected-slot="selectedSlot" show-slot-form="showSlotForm" class="left col-lg-1 textCenter padding0" cwday="1">
+    <div day-slots day="Monday" events="events" time-slots="timeSlots" selected-slot="selectedSlot" show-slot-form="showSlotForm" class="left col-lg-1 textCenter padding0" cwday="1" time-table-id="time_table.id" subjects="subjects" divisions="sub_classes">
     </div>
-    <div day-slots day="Tuesday" events="events" time-slots="timeSlots" selected-slot="selectedSlot" show-slot-form="showSlotForm" class="left col-lg-1 textCenter padding0" cwday="2">
+    <div day-slots day="Tuesday" events="events" time-slots="timeSlots" selected-slot="selectedSlot" show-slot-form="showSlotForm" class="left col-lg-1 textCenter padding0" cwday="2" time-table-id="time_table.id" subjects="subjects" divisions="sub_classes">
     </div>
-    <div day-slots day="Wednesday" events="events" time-slots="timeSlots" selected-slot="selectedSlot" show-slot-form="showSlotForm" class="left col-lg-1 textCenter padding0" cwday="3">
+    <div day-slots day="Wednesday" events="events" time-slots="timeSlots" selected-slot="selectedSlot" show-slot-form="showSlotForm" class="left col-lg-1 textCenter padding0" cwday="3" time-table-id="time_table.id" subjects="subjects" divisions="sub_classes">
     </div>
-    <div day-slots day="Thusday" events="events" time-slots="timeSlots" selected-slot="selectedSlot" show-slot-form="showSlotForm" class="left col-lg-1 textCenter padding0" cwday="4">
+    <div day-slots day="Thusday" events="events" time-slots="timeSlots" selected-slot="selectedSlot" show-slot-form="showSlotForm" class="left col-lg-1 textCenter padding0" cwday="4" time-table-id="time_table.id" subjects="subjects" divisions="sub_classes">
     </div>
-    <div day-slots day="Friday" events="events" time-slots="timeSlots" selected-slot="selectedSlot" show-slot-form="showSlotForm" class="left col-lg-1 textCenter padding0" cwday="5">
+    <div day-slots day="Friday" events="events" time-slots="timeSlots" selected-slot="selectedSlot" show-slot-form="showSlotForm" class="left col-lg-1 textCenter padding0" cwday="5" time-table-id="time_table.id" subjects="subjects" divisions="sub_classes">
     </div>
-    <div day-slots day="Saturday" events="events" time-slots="timeSlots" selected-slot="selectedSlot" show-slot-form="showSlotForm" class="left col-lg-1 textCenter padding0" cwday="6">
+    <div day-slots day="Saturday" events="events" time-slots="timeSlots" selected-slot="selectedSlot" show-slot-form="showSlotForm" class="left col-lg-1 textCenter padding0" cwday="6" time-table-id="time_table.id" subjects="subjects" divisions="sub_classes">
     </div>
-    <div day-slots day="Sunday" events="events" time-slots="timeSlots" selected-slot="selectedSlot" show-slot-form="showSlotForm" class="left col-lg-1 textCenter padding0" cwday="7">
+    <div day-slots day="Sunday" events="events" time-slots="timeSlots" selected-slot="selectedSlot" show-slot-form="showSlotForm" class="left col-lg-1 textCenter padding0" cwday="7" time-table-id="time_table.id" subjects="subjects" divisions="sub_classes">
   </div>
 </div>

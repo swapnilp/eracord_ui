@@ -24,15 +24,18 @@ app.directive('daySlots', function() {
     restrict: 'AE',
     transclude: true,
     scope: {
+      subjects: '=',
+      timeTableId: '=',
       day: '@',
       events: '=',
       timeSlots: "=",
       selectedSlot: "=",
       showSlotForm: '=',
-      cwday: '='
+      cwday: '=',
+      divisions: '='
     },
     templateUrl: 'views/time_tables/day_slots.html',
-    controller: ['$scope',function(scope){
+    controller: ['$scope', '$uibModal', function(scope, $uibModal){
 
       
       scope.timeEvents = {};
@@ -55,12 +58,43 @@ app.directive('daySlots', function() {
 	scope.selectedSlot = slot;
 	scope.showSlotForm = false;
       }
-      
+
+      scope.dropCallback = function(event, ui, dropSubject, slot) {
+	var modalInstance = $uibModal.open({
+	  animation: true,
+	  templateUrl: 'views/time_tables/new_time_slot_model.html',
+	  controller: 'TimeTableClassModelCtrl',
+	  size: 'lg',
+	  resolve: {
+	    time_table_id: function(){
+	      return scope.timeTableId;
+	    },
+	    cwday: function(){
+	      return scope.cwday;
+	    },
+	    slot: function(){
+	      return slot;
+	    },
+	    subject_id: function(){
+	      return dropSubject.id;
+	    },
+	    subjects: function(){
+	      return scope.subjects;
+	    },
+	    divisions: function(){
+	      return scope.divisions;
+	    }
+	  }
+	});
+	
+	modalInstance.result.then(null, function () {
+	  //getResultsPage(1);
+	});
+      };
+
       scope.$watch('events', function(){
 	createEventSlot();
       }, true)
-      
-      
     }]
   }
 });

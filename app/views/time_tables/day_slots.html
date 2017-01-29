@@ -1,5 +1,5 @@
 <span>{{day}}</span>
-<div ng-repeat="timeslot in timeSlots" class="timeSlot border" >
+<div ng-repeat="timeslot in timeSlots" class="timeSlot border" data-drop="true" data-jqyoui-options="{helper:'clone'}" ng-model="dropSubject" jqyoui-droppable="{onDrop:'dropCallback(dropSubject, timeslot)'}">
   <div ng-if="timeEvents[timeslot].length > 0" style="display:flex;width:100%;height:100%;">
     <div ng-repeat="slots in timeEvents[timeslot]" class="slot{{timeEvents[timeslot].length}}" ng-style="{'background-color': '{{slots.color}}'}" style="border:1px solid #000;"  ng-class="{height10: checkHeight(timeslot, slots.end_time), mTop10: checkTop(timeslot, slots.start_time)}" uib-tooltip="{{slots.name}}-{{slots.class_room}}- {{slots.start_time}} to {{slots.end_time}} - {{slots.teacher_name}}" ng-click="selectSlot(slots);" tooltip-placement="bottom">
     </div>
