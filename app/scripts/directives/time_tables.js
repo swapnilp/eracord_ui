@@ -32,7 +32,8 @@ app.directive('daySlots', function() {
       selectedSlot: "=",
       showSlotForm: '=',
       cwday: '=',
-      divisions: '='
+      divisions: '=',
+      addIntoSlot: '&'
     },
     templateUrl: 'views/time_tables/day_slots.html',
     controller: ['$scope', '$uibModal', function(scope, $uibModal){
@@ -87,9 +88,11 @@ app.directive('daySlots', function() {
 	  }
 	});
 	
-	modalInstance.result.then(null, function () {
-	  //getResultsPage(1);
-	});
+	modalInstance.result.then(function (result) {
+	  if(result) {
+	    scope.addIntoSlot({slot:result});
+	  }
+	}, null);
       };
 
       scope.$watch('events', function(){

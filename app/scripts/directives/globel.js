@@ -231,3 +231,25 @@ app.directive("uibTime", function(){
     }
   };
 });
+
+
+app.directive('timeChange', function(){
+  return {
+    scope: {
+      ngModel: '=',
+      operation: '@',
+      time: '@'
+    },
+    link: function(scope, element, attrs) {
+      $(element).on('click', function(e) {
+	if(scope.operation === "+"){
+	  scope.ngModel = new Date(scope.ngModel.setMinutes(scope.ngModel.getMinutes() + parseInt(scope.time)));
+	} else {
+	  scope.ngModel = new Date(scope.ngModel.setMinutes(scope.ngModel.getMinutes() - parseInt(scope.time)));
+	}
+	scope.$apply();
+      });
+      
+    }
+  };
+});

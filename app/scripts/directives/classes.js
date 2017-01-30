@@ -543,7 +543,15 @@ app.directive('classTimeTable', function(Restangular) {
 	}
       };
 
-      
+      scope.addIntoSlot = function(slot) {
+	scope.events.push(slot);
+	scope.cancelTimeTableSlotManage();
+	calculateTimeSlotes();
+	scope.dataLoading = false;
+
+      };
+
+
       var calculateTimeSlotes = function() {
 	if(scope.events.length > 0){
 	  var min_time = Math.floor(_.min(_.pluck(scope.events, 'start_time')));
@@ -712,7 +720,6 @@ app.directive('classDuplicateStudents', function(Restangular) {
       };
 
       scope.openSelectTeacher = function (size, row) {
-	console.log(row);
 	var modalInstance = $uibModal.open({
 	  animation: true,
 	  templateUrl: 'views/teachers/assign_teacher.html',

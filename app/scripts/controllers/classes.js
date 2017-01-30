@@ -334,8 +334,9 @@ angular.module('eracordUiApp.controller')
       };
     }])
 
-  .controller('TimeTableClassModelCtrl',['$scope', '$uibModalInstance', '$timeout',  'Restangular', 'time_table_id', 'cwday', 'slot', 
-    'subject_id', 'subjects', 'divisions', function ($scope, $uibModalInstance, $timeout, Restangular, time_table_id, cwday, slot, subject_id, subjects, divisions)  {
+  .controller('TimeTableClassModelCtrl',['$scope', '$filter',  '$uibModalInstance', '$timeout',  'Restangular', 'time_table_id', 
+    'cwday', 'slot', 'subject_id', 'subjects', 'divisions', function ($scope, filter, $uibModalInstance, $timeout, Restangular, 
+    time_table_id, cwday, slot, subject_id, subjects, divisions)  {
       $scope.days = {
 	1: 'Monday',
 	2: 'Tuesday',
@@ -355,6 +356,24 @@ angular.module('eracordUiApp.controller')
       $scope.vm.subject_id = subject_id;
       $scope.start_time = moment(slot+":00", "HH:mm").toDate();
       $scope.end_time = moment((slot+1)+":00", "HH:mm").toDate();
+
+      $scope.registorTimeTableSlot = function() {
+	$scope.dataLoading = true;
+	$scope.vm.time_table_id = time_table_id;
+	$scope.vm.start_time = filter('date')($scope.start_time, "HH:mm").replace(":", ".");
+	$scope.vm.end_time = filter('date')($scope.end_time, "HH:mm").replace(":", ".");
+	var millisecondsPerHour = 1000 * 60;
+	$scope.vm.durations = Math.round(($scope.end_time - $scope.start_time)/millisecondsPerHour);
+	if($scope.vm.slot_type !== 'Class') {
+	  $scope.vm.subject_id = null;
+	}
+	var time_tables = Restangular.one("time_tables", time_table_id);
+	
+	time_tables.customPOST({time_table_class: $scope.vm}, "time_table_classes", {}).then(function(data) {
+	  $uibModalInstance.close(data.slot);
+	});
+	
+      };
       
       
       $scope.openCalendar = function(e) {
@@ -372,7 +391,7 @@ angular.module('eracordUiApp.controller')
       $scope.cancel = function () {
 	$uibModalInstance.dismiss('cancel');
       };
-      
+
       $scope.cancelTimeTableSlotManage = function () {
 	$uibModalInstance.dismiss('cancel');
       };
