@@ -38,13 +38,26 @@
       <div class="form-group col-md-12 padding0">
 	<label for="subject_id">Teacher</label>
 	<button type="button" class="btn btn-link" ng-click="openSelectTeacher('lg')" uib-tooltip="Help">
-	  {{vm.teacher_name ? 'Change teacher' : 'Assign teacher'}}
+	  
 	</button>
 	<div ng-if="vm.teacher_name">
-	  {{vm.teacher_name}}
+	  
 	  <input type="hidden" name="teacher_id" value="{{vm.teacher_id}}" />
 	</div>
-	
+	<uib-accordion>
+	  <div uib-accordion-group class="panel-default" heading="{{vm.teacher_name ? 'Change '+ vm.teacher_name + ' teacher' : 'Assign teacher'}}" is-open="status.teacherOpen">
+	    <figure class="col-sm-12 padding0">
+	      <div request-loading is-loading="teacherLoading"></div>
+	      <div class="assignStudentsList" ng-show="!teacherLoading">
+		<label class="checkBoxStyle col-md-6" ng-repeat="teacher in teachers">
+		  <input name="selectTeacher" id="teacher_{{teacher.id}}" ng-value="{{teacher.id}}" class="active" type="radio" ng-model="selectedTeacher" ng-click="selectTeacher(teacher);">
+		  <label for="teacher_{{teacher.id}}"></label>
+		  {{teacher.name | capitalize}} - {{teacher.mobile}}
+		</label>
+	      </div>
+	    </figure>
+	  </div>
+	</uib-accordion>
       </div>
       
       <div class="form-group col-md-6 padding0" ng-class="{ 'has-error': form.start_time.$dirty && form.start_time.$error.required }">

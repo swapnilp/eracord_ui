@@ -372,9 +372,7 @@ angular.module('eracordUiApp.controller')
 	time_tables.customPOST({time_table_class: $scope.vm}, "time_table_classes", {}).then(function(data) {
 	  $uibModalInstance.close(data.slot);
 	});
-	
       };
-      
       
       $scope.openCalendar = function(e) {
         e.preventDefault();
@@ -395,5 +393,21 @@ angular.module('eracordUiApp.controller')
       $scope.cancelTimeTableSlotManage = function () {
 	$uibModalInstance.dismiss('cancel');
       };
+
+      $scope.selectTeacher = function(teacher) {
+	$scope.vm.teacher_id =  teacher.id;
+	$scope.vm.teacher_name = teacher.name;
+      };
+
+      $scope.$watch('status.teacherOpen', function(){
+	$scope.teacherLoading = true;
+	var base_organisation = Restangular.all("organisations");
+	base_organisation.customGET("teachers").then(function(data){
+	  if(data.success){
+	    $scope.teachers = data.teachers;
+	  }
+	  $scope.teacherLoading = false;
+	});
+      });
       
     }]);
