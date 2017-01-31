@@ -3,7 +3,9 @@
     <div class="col-sm-12 padding0">
       <h3 class="pull-left">Holidays</h3>
       <div class="pull-right marginT15">
-	<a href="#/holidays/new" class="btn btn-primary" >New</a>
+	<span is-role-visible='["holidays"]' email="currentUser.email">
+	  <a href="#/holidays/new" class="btn btn-primary" >New</a>
+	</span>
       </div> 
     </div>		  
   </div>

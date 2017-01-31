@@ -4,7 +4,7 @@
   <label ng-repeat="clerks_role in clerks_roles" class="checkBoxStyle">
     <input id="{{clerks_role}}" type="checkbox" checklist-model="rolesList" checklist-value="clerks_role"> 
     <label for="{{clerks_role}}"></label>
-    {{clerks_role}}
+    {{clerks_role | capitalize }}
   </label>
   
   <!--<div ng-repeat="(key, value) in roles">
