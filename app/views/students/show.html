@@ -47,7 +47,9 @@
 			   knob-label="SMS" ng-click="toggleStudentSms()">
 	    </toggle-switch>
 	  </span>
-	  <a class="btn btn-primary" href="#/students/{{student.id}}/edit" ng-if="student" uib-tooltip="Edit"><i class="fa fa-edit"></i></a>
+	  <span is-role-visible='["add_student"]' email="currentUser.email">
+	    <a class="btn btn-primary" href="#/students/{{student.id}}/edit" ng-if="student" uib-tooltip="Edit"><i class="fa fa-edit"></i></a>
+	  </span>
 	  <a class="btn btn-primary" href="#/students/{{student.id}}/payment_info" ng-if="has_show_pay_info && student" uib-tooltip="Payment Info"><i class="fa fa-inr"></i></a>
 	  <a class="btn btn-primary" href="#/students/{{student.id}}/pay_fee" ng-if="has_pay_fee && student && remaining_fee > 0" uib-tooltip="Pay Now">Pay Fee</a>
 	  <a class="btn btn-primary " ng-if="remaining_fee == 0" disabled> Pay Fee</a>
@@ -90,11 +92,11 @@
 	</div>
 	
 	
-	<div class="col-sm-6 paddingLeft0">
+	<div class="col-sm-6 paddingLeft0" is-role-visible='["manage_hostel"]' email="currentUser.email" only_root="currentUser.is_root">
 	  <strong class="col-sm-4 padding0">Hostel</strong>
 	  <span class="col-sm-8 padding0">
 	    {{student.hostel}}
-	    <span is-role-visible='["manage_hostel"]' email="currentUser.email" only_root="currentUser.is_root">
+	    <span >
 	      <span ng-if="student.hostel_id">
 		&nbsp;&nbsp; <a class="pointer" style="font-size: 12px;" ng-click="allotmentHostel();">Change hostel</a>
 	      </span>
