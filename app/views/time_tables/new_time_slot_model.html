@@ -45,7 +45,7 @@
 	  <input type="hidden" name="teacher_id" value="{{vm.teacher_id}}" />
 	</div>
 	<uib-accordion>
-	  <div uib-accordion-group class="panel-default" heading="{{vm.teacher_name ? 'Change '+ vm.teacher_name + ' teacher' : 'Assign teacher'}}" is-open="status.teacherOpen">
+	  <div uib-accordion-group class="panel-default" heading="{{vm.teacher_name ? 'Change '+ vm.teacher_name + ' teacher' : 'Assign teacher'}}" is-open="status.teacherOpen" style="max-height: 150px;">
 	    <figure class="col-sm-12 padding0">
 	      <div request-loading is-loading="teacherLoading"></div>
 	      <div class="assignStudentsList" ng-show="!teacherLoading">
