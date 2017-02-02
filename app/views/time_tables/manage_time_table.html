@@ -90,7 +90,7 @@
   </div>
   <div class="col-sm-12 textLeft" ng-show="!requestLoading">
     <div class="timeTableSubjects">
-      <span ng-repeat="subject in subjects" ng-style='{"background-color": subject.color, "color": subject.text_color }' data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="subject" jqyoui-draggable="{animate:true,placeholder:'keep'}">
+      <span ng-repeat="subject in subjects" ng-style='{"background-color": subject.color, "color": subject.text_color }' data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="subject" jqyoui-draggable="{animate:true,placeholder:'keep'}" class="pointer" uib-tooltip="Drag and drop into time table">
 	{{subject.name}}
       </span>
     </div>
