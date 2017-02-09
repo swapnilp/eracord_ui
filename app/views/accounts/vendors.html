@@ -1,0 +1,48 @@
+<div>
+  <div class="col-sm-12 padding0 row margin0">
+    <h3 class="pull-left">Vendors</h3> 
+    <div class="pull-right marginT20">
+      <button class="btn btn-primary" ng-click="goBack();" uib-tooltip="Back">
+	<i class="fa fa-arrow-circle-o-left"></i>
+      </button>
+      <button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openNewVendorModel('lg')" uib-tooltip="New Vendor">
+	<i class="fa fa-plus-circle"></i>
+      </button>
+      
+    </div>
+  </div>
+  <div request-loading is-loading="requestLoading"></div>
+  <figure class="col-sm-12 padding0" ng-show="vendors.length > 0 && !requestLoading">
+    <table st-table="rowCollection" class="table classExamsTable col-sm-12 table-striped" >
+      <thead>
+	<tr>
+	  <th st-sort="firstName">Name</th>
+	  <th st-sort="firstName">Bank</th>
+	  <th st-sort="firstName">Reason</th>
+	  <th st-sort="firstName">Address</th>
+	</tr>
+      </thead>
+      <tbody>
+	<tr dir-paginate="row in vendors | itemsPerPage: 10" total-items="totalVendors" current-page="pagination.current">
+	  <td>
+	    <a href="#/accounts/vendors/{{row.id}}" class="linkOverwite">{{row.name}}</a>
+	  </td>
+	  <td>{{row.bank}}</td>
+	  <td>
+	    {{row.reason}}
+	  </td>
+	  <td>
+	    {{row.address}}
+	  </td>
+	</tr>
+      </tbody>
+    </table>
+  </figure>
+  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)" class="col-sm-12 text-center" ng-show="vendors.length > 0"></dir-pagination-controls>
+  
+  <figure class="col-sm-12 padding0 fullWidth" ng-show="vendors.length == 0 && !requestLoading" style="">
+    <h4 class="text-danger">No data found</h4>
+  </figure>
+</div>
+
+

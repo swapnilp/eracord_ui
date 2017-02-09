@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('AccountsCtrl',['$scope', 'lazyFlash', '$location', 'Auth', 'Restangular', '$routeParams', '$window', '_', '$cookieStore', function ( $scope, lazyFlash, $location, Auth, Restangular, $routeParams, $window, _, $cookieStore) {
+  .controller('AccountsCtrl',['$scope', 'lazyFlash', '$location', 'Auth', 'Restangular', '$routeParams', '$window', '_', '$cookieStore', '$uibModal', function ( $scope, lazyFlash, $location, Auth, Restangular, $routeParams, $window, _, $cookieStore, $uibModal) {
 
     if(!Auth.isAuthenticated()){
       $location.path('/user/sign_in').replace();
@@ -231,6 +231,90 @@ angular.module('eracordUiApp.controller')
 	$scope.reqLoading = false;
       });
     }
+
+    if($location.path() === '/accounts/vendors') {
+      $scope.requestLoading = true;
+      
+      var vendor = Restangular.all("vendors");
+      
+      var loadVendors = function() {
+	$scope.requestLoading = true;
+	vendor.customGET("").then(function(data) {
+	  if(data.success) {
+	    $scope.vendors = data.vendors;
+	    $scope.totalVendors = data.total_count;
+	    $scope.requestLoading = false;
+	  } else {
+	    $location.path("/admin_desk").replace();
+	  }
+	});
+      }
+
+      $scope.openNewVendorModel = function(size) {
+	var modalInstance = $uibModal.open({
+	  animation: true,
+	  templateUrl: 'views/accounts/new_vendor.html',
+	  controller: 'NewVendorModelCtrl',
+	  size: size,
+	  resolve: {}
+	});
+
+	modalInstance.result.then( function () {
+	  loadVendors();
+	}, null);
+      };
+
+      loadVendors();
+    }
+    //Vendor Index END
+
+    if($location.path() === '/accounts/vendors/' + $routeParams.vendor_id) {
+      $scope.requestLoading = true;
+      
+      var vendor = Restangular.all("vendors");
+      var loadVendor = function() {
+	vendor.customGET(""+ $routeParams.vendor_id).then(function(data) {
+	  if(data.success) {
+	    $scope.vendor = data.vendor;
+	    $scope.requestLoading = false;
+	  } else {
+	    $location.path("/accounts/vendors").replace();
+	  }
+	}, function(){
+	  $location.path("/accounts/vendors").replace();
+	});
+      }
+      loadVendor();
+    }
+    //Vendor show END
+
+  }])
+
+  .controller('NewVendorModelCtrl',['$scope', '$filter',  '$uibModalInstance', 'Restangular',  function ($scope, filter, $uibModalInstance, Restangular) {
+      
+    $scope.vm = {};
+    
+    $scope.text= "New";
+    var vendor = Restangular.all("vendors");
+
+    $scope.registerVendor = function() {
+      vendor.customPOST({vendor: $scope.vm}, "", {}).then(function(data) {
+	if(data.success) {
+	  $uibModalInstance.close(true);
+	} else {
+	  $scope.cancel();
+	}
+      })
+    };
+    
+    $scope.cancel = function () {
+      $uibModalInstance.dismiss('cancel');
+    };
+    
+    $scope.cancelTimeTableSlotManage = function () {
+      $uibModalInstance.dismiss('cancel');
+    };
+    
   }]);
 
 

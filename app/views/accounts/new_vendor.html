@@ -1,0 +1,61 @@
+<div class="modal-header bg-primary">
+  <h3 class="modal-title text-center">Add Vendor</h3>
+  <a ng-click="cancel()" class="textWhite" style="float: right;position: absolute;right: 15px;top: 19px;cursor:pointer;"><i class="fa fa-times"></i></a>
+</div>
+<div class="modal-body inlineBlock" style="min-height:300px;">
+  <form name="form" ng-submit="registerVendor()" role="form" ng-show="!requestLoading" autocomplete="off" class="absoluteForm">
+    <div class="form-group col-sm-6" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
+      <label for="name">Name <span class="textRed"> *</span></label>
+      <input type="text" name="name" id="name" class="form-control" ng-model="vm.name" only-text required />
+      <span ng-show="form.name.$dirty && form.name.$error.required" class=" absolute red">Name is required</span>
+    </div>
+    <div class="form-group col-sm-6" ng-class="{ 'has-error': form.nick_name.$dirty && form.nick_name.$error.required }">
+      <label for="nick_name">Nick Name <span class="textRed"> *</span></label>
+      <input type="text" name="nick_name" id="nick_name" class="form-control" ng-model="vm.nick_name" only-text required />
+      <span ng-show="form.nick_name.$dirty && form.nick_name.$error.required" class="absolute red">Name is required</span>
+    </div>
+    <div class="form-group col-sm-6" ng-class="{ 'has-error': form.cheque_name.$dirty && form.cheque_name.$error.required }">
+      <label for="cheque_name">On cheque Name <span class="textRed"> *</span></label>
+      <input type="text" name="cheque_name" id="cheque_name" class="form-control" ng-model="vm.cheque_name" only-text required />
+      <span ng-show="form.cheque_name.$dirty && form.cheque_name.$error.required" class="absolute red">Name is required</span>
+    </div>
+    <div class="col-sm-12 padding0">
+      <div class="form-group col-sm-6" ng-class="{ 'has-error': form.bank.$dirty && form.bank.$error.required }">
+	<label for="bank">Bank Name <span class="textRed"> *</span></label>
+	<input type="text" name="bank" id="bank" class="form-control" ng-model="vm.bank" only-text required />
+	<span ng-show="form.bank.$dirty && form.bank.$error.required" class="absolute red">Bank is required</span>
+      </div>
+      <div class="form-group col-sm-6" ng-class="{ 'has-error': form.ac_no.$dirty && form.ac_no.$error.required }">
+	<label for="ac_no">Account Number <span class="textRed"> *</span></label>
+	<input type="text" name="ac_no" id="ac_no" class="form-control" ng-model="vm.ac_no" required />
+	<span ng-show="form.ac_no.$dirty && form.ac_no.$error.required" class="absolute red">Account number is required</span>
+      </div>
+    </div>
+    <div class="col-sm-12 padding0">
+      <div class="form-group col-sm-6">
+	<label for="mobile">Mobile <span class="textRed"> *</span></label>
+	<input type="text" name="mobile" id="mobile" class="form-control" ng-model="vm.mobile"  ng-minlength="10"  ng-maxlength="10" placeholder="must be present in 10 digit" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 0"/>
+	<div class="absolute red" ng-show="form.mobile.$error.minlength || form.mobile.$error.maxlength">
+	  <span class="textRed">Must be a valid 10 digit phone number</span>
+	</div>
+      </div>
+      <div class="form-group col-sm-6" ng-class="{ 'has-error': form.reason.$dirty && form.reason.$error.required }">
+	<label for="reason">Reason <span class="textRed"> *</span></label>
+	<input type="text" name="reason" id="reason" class="form-control" ng-model="vm.reason" only-text required />
+	<span ng-show="form.reason.$dirty && form.reason.$error.required" class="absolute red">Reason is required</span>
+      </div>
+      <div class="form-group col-sm-6" ng-class="{ 'has-error': form.address.$dirty && form.address.$error.required }">
+	<label for="address">Address <span class="textRed"> *</span></label>
+	<input type="text" name="address" id="address" class="form-control" ng-model="vm.address" required />
+	<span ng-show="form.address.$dirty && form.address.$error.required" class="absolute red">Address is required</span>
+      </div>
+    </div>
+    <div class="form-actions col-sm-12 marginT20" style="padding-bottom:20px;">
+      <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">{{text === 'New' ? 'Save': 'Update'}}</button>
+      <span button-req-load is-loading="dataLoading"></span>
+      <a ng-click="cancel()" class="btn btn-default">Cancel</a>
+    </div>
+  </form>
+</div>
+
+

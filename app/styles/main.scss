@@ -611,7 +611,11 @@ tr.pointer, td.pointer {
   user-select: none; /* Non-prefixed version, currently
   supported by Chrome and Opera */
 }
-	
+
+.inlineBlock {
+  display: inline-block;
+}
+
 @media screen {
   #printSection {
     display: none;

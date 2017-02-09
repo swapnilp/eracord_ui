@@ -1,0 +1,41 @@
+<div class="col-sm-12 textLeftpadding0 padding0" >
+  <div class="col-sm-12 padding0">
+    <h3 class="pull-left">Vendor</h3>
+    <div class="pull-right paddingTop15">
+      <button ng-click="goBack();" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i></button>
+      <span ng-show="!exam.create_verification" ng-if="exam">
+	<a href="#/classes/{{class_id}}/exams/{{exam.id}}/edit" class="btn btn-primary" ng-disabled="requestLoading">Edit</a>
+      </span>
+    </div>
+  </div>
+  <div request-loading is-loading="requestLoading"></div>
+  <div class="col-sm-12 textLeftpadding0 padding0"  ng-show="!requestLoading">
+    <div class="col-sm-6 textLeft padding0 marginB5">
+      <span class="col-sm-3 paddingLeft0"><strong>Name</strong> </span>
+      <span class="col-sm-9">{{vendor.name | capitalize}}</span>
+    </div>
+    <div class="col-sm-6 textLeft padding0 marginB5">
+      <span class="col-sm-3 paddingLeft0"><strong>Nick Name</strong></span>
+      <span class="col-sm-9">{{vendor.nick_name}}</span>
+    </div>
+    <div class="col-sm-6 textLeft padding0 marginB5">
+      <span class="col-sm-3 paddingLeft0"><strong>Cheque Name</strong> </span>
+      <span class="col-sm-9">
+        {{vendor.cheque_name}}
+      </span>
+    </div>
+    <div class="col-sm-6 textLeft padding0 marginB5">
+      <span class="col-sm-3 paddingLeft0"><strong>Bank</strong></span>
+      <span class="col-sm-9">{{vendor.bank}}</span>
+    </div>
+    <div class="col-sm-6 textLeft padding0 marginB5">
+      <span class="col-sm-3 paddingLeft0"><strong>Ac No</strong> </span>
+      <span class="col-sm-9 ">{{vendor.ac_no | capitalize}}</span>
+    </div>
+    <div class="col-sm-6 textLeft padding0 marginB5">
+      <span class="col-sm-3 paddingLeft0"><strong>Reason</strong> </span>
+      <span class="col-sm-9 ">{{vendor.reason | capitalize}}</span>
+    </div>
+  </div>
+</div>
+

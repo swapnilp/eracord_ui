@@ -29,6 +29,16 @@ app.config(function($routeProvider) {
       templateUrl: 'views/accounts/print_account.html',
       controller: 'AccountsCtrl',
       controllerAs: 'accounts'
-    });;
+    })
+    .when('/accounts/vendors', {
+      templateUrl: 'views/accounts/vendors.html',
+      controller: 'AccountsCtrl',
+      controllerAs: 'accounts'
+    })
+    .when('/accounts/vendors/:vendor_id', {
+      templateUrl: 'views/accounts/vendor_show.html',
+      controller: 'AccountsCtrl',
+      controllerAs: 'accounts'
+    });
 });
 

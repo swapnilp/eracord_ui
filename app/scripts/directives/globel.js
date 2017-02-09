@@ -157,7 +157,7 @@ app.directive('onlyText', function(){
         link: function(scope, element, attrs, modelCtrl) {
 
             modelCtrl.$parsers.push(function (inputValue) {
-                var transformedInput = inputValue ? inputValue.replace(/[^A-Za-z_ ]/,'') : null;
+                var transformedInput = inputValue ? inputValue.replace(/[^A-Za-z_, ]/,'') : null;
 
                 if (transformedInput!=inputValue) {
                     modelCtrl.$setViewValue(transformedInput);
