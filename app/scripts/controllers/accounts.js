@@ -234,12 +234,13 @@ angular.module('eracordUiApp.controller')
 
     if($location.path() === '/accounts/vendors') {
       $scope.requestLoading = true;
-      
+      $scope.pagination = {current: 1};
+      $scope.filter = {};
       var vendor = Restangular.all("vendors");
       
-      var loadVendors = function() {
+      var loadVendors = function(page) {
 	$scope.requestLoading = true;
-	vendor.customGET("").then(function(data) {
+	vendor.customGET("", {page: page, filter: $scope.filter}).then(function(data) {
 	  if(data.success) {
 	    $scope.vendors = data.vendors;
 	    $scope.totalVendors = data.total_count;
@@ -260,11 +261,33 @@ angular.module('eracordUiApp.controller')
 	});
 
 	modalInstance.result.then( function () {
-	  loadVendors();
+	  loadVendors(1);
 	}, null);
       };
+      
+      $scope.resetFilter = function() {
+	$scope.filter = {};
+	if($scope.pagination.current == 1) {
+	  loadVendors(1);
+	} else {
+	  $scope.pagination.current = 1
+	}
 
-      loadVendors();
+      };
+
+      $scope.filterData = function() {
+	if($scope.pagination.current == 1) {
+	  loadVendors(1);
+	} else {
+	  $scope.pagination.current = 1
+	}
+      };
+
+      $scope.pageChanged = function(newPage, checkFilter) {
+	loadVendors(newPage);
+      };
+      
+      loadVendors(1);
     }
     //Vendor Index END
 
@@ -284,6 +307,7 @@ angular.module('eracordUiApp.controller')
 	  $location.path("/accounts/vendors").replace();
 	});
       }
+      
       loadVendor();
     }
     //Vendor show END

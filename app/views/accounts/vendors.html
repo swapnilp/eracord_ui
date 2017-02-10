@@ -8,17 +8,31 @@
       <button type="button" class="btn btn-primary buttonNoneBorder" ng-click="openNewVendorModel('lg')" uib-tooltip="New Vendor">
 	<i class="fa fa-plus-circle"></i>
       </button>
-      
     </div>
   </div>
+
+  <div class="examFilterDiv col-sm-12 marginB20 marginT20 padding0" > 
+    <div class="pull-left marginT5">
+      <span class="">Records - <strong>{{vendors.length || 0}}</strong> </span>
+    </div>
+    <div class="filterRight examFilter">
+      <input type="text" ng-model="filter.name" dl-key-code="filterData();" code="13" placeholder="Enter name or mobile" value="{{filter.name}}" style="width:230px;display:inline;" class="form-control">
+      <span class="">
+	<button class="btn btn-primary"  ng-click="filterData(1, false);" uib-tooltip="Filter"><i class="fa fa-filter"></i></button>
+	<button class="btn btn-primary"  ng-click="resetFilter();" uib-tooltip="Reset"><i class="fa fa-refresh"></i></button>
+      </span>
+    </div>
+  </div>
+
   <div request-loading is-loading="requestLoading"></div>
   <figure class="col-sm-12 padding0" ng-show="vendors.length > 0 && !requestLoading">
     <table st-table="rowCollection" class="table classExamsTable col-sm-12 table-striped" >
       <thead>
 	<tr>
 	  <th st-sort="firstName">Name</th>
-	  <th st-sort="firstName">Bank</th>
 	  <th st-sort="firstName">Reason</th>
+	  <th st-sort="firstName">Mobile</th>
+	  <th st-sort="firstName">Bank</th>
 	  <th st-sort="firstName">Address</th>
 	</tr>
       </thead>
@@ -27,10 +41,13 @@
 	  <td>
 	    <a href="#/accounts/vendors/{{row.id}}" class="linkOverwite">{{row.name}}</a>
 	  </td>
-	  <td>{{row.bank}}</td>
 	  <td>
 	    {{row.reason}}
 	  </td>
+	  <td>
+	    {{row.mobile}}
+	  </td>
+	  <td>{{row.bank}}</td>
 	  <td>
 	    {{row.address}}
 	  </td>
