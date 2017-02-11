@@ -257,7 +257,11 @@ angular.module('eracordUiApp.controller')
 	  templateUrl: 'views/accounts/new_vendor.html',
 	  controller: 'NewVendorModelCtrl',
 	  size: size,
-	  resolve: {}
+	  resolve: {
+	    vendor_id: function(){
+	      return null;
+	    }
+	  }
 	});
 
 	modalInstance.result.then( function () {
@@ -307,6 +311,24 @@ angular.module('eracordUiApp.controller')
 	  $location.path("/accounts/vendors").replace();
 	});
       }
+
+      $scope.openEditVendorModel = function(size) {
+	var modalInstance = $uibModal.open({
+	  animation: true,
+	  templateUrl: 'views/accounts/new_vendor.html',
+	  controller: 'NewVendorModelCtrl',
+	  size: size,
+	  resolve: {
+	    vendor_id: function(){
+	      return $scope.vendor.id;
+	    }
+	  }
+	});
+
+	modalInstance.result.then( function () {
+	  loadVendor();
+	}, null);
+      };
       
       loadVendor();
     }
@@ -314,21 +336,46 @@ angular.module('eracordUiApp.controller')
 
   }])
 
-  .controller('NewVendorModelCtrl',['$scope', '$filter',  '$uibModalInstance', 'Restangular',  function ($scope, filter, $uibModalInstance, Restangular) {
+  .controller('NewVendorModelCtrl',['$scope', '$filter',  '$uibModalInstance', 'Restangular', 'vendor_id', function ($scope, filter, $uibModalInstance, Restangular, vendor_id) {
       
     $scope.vm = {};
     
     $scope.text= "New";
     var vendor = Restangular.all("vendors");
 
-    $scope.registerVendor = function() {
-      vendor.customPOST({vendor: $scope.vm}, "", {}).then(function(data) {
+    var loadVendor = function() {
+      vendor.customGET(""+vendor_id+"/edit").then(function(data) {
 	if(data.success) {
-	  $uibModalInstance.close(true);
+	  $scope.vm = data.vendor;
 	} else {
 	  $scope.cancel();
 	}
-      })
+      });
+    }
+    if( vendor_id) {
+      $scope.text= "Edit";
+      loadVendor();
+    }
+
+    $scope.registerVendor = function() {
+      if(vendor_id) {
+	vendor.customPUT({vendor: $scope.vm}, ""+ vendor_id, {}).then(function(data) {
+	  if(data.success) {
+	    $uibModalInstance.close(true);
+	  } else {
+	    $scope.cancel();
+	  }
+	});
+	
+      } else {
+	vendor.customPOST({vendor: $scope.vm}, "", {}).then(function(data) {
+	  if(data.success) {
+	    $uibModalInstance.close(true);
+	  } else {
+	    $scope.cancel();
+	  }
+	})
+      }
     };
     
     $scope.cancel = function () {
