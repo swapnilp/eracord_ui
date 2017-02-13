@@ -329,6 +329,24 @@ angular.module('eracordUiApp.controller')
 	  loadVendor();
 	}, null);
       };
+
+      $scope.openVendorTransactionModel = function(size) {
+	var modalInstance = $uibModal.open({
+	  animation: true,
+	  templateUrl: 'views/accounts/new_vendor_transaction.html',
+	  controller: 'VendorTransactionModelCtrl',
+	  size: size,
+	  resolve: {
+	    vendor_id: function(){
+	      return $scope.vendor.id;
+	    }
+	  }
+	});
+
+	modalInstance.result.then( function () {
+	  loadVendor();
+	}, null);
+      };
       
       loadVendor();
     }
@@ -376,6 +394,43 @@ angular.module('eracordUiApp.controller')
 	  }
 	})
       }
+    };
+    
+    $scope.cancel = function () {
+      $uibModalInstance.dismiss('cancel');
+    };
+    
+    $scope.cancelTimeTableSlotManage = function () {
+      $uibModalInstance.dismiss('cancel');
+    };
+    
+  }])
+
+  .controller('VendorTransactionModelCtrl',['$scope', '$filter',  '$uibModalInstance', 'Restangular', 'vendor_id', function ($scope, filter, $uibModalInstance, Restangular, vendor_id) {
+    
+    $scope.vm = {};
+    $scope.text= "New";
+    $scope.vm.isOpen = false; //for calender 
+    $scope.vm.transaction_type= "Debit";
+    var vendor = Restangular.one("vendors", vendor_id);
+    
+    
+    $scope.registerVendorTransaction = function() {
+      $scope.vm.issue_date = moment($scope.vm.date).format('DD/MM/YYYY');
+      
+      vendor.customPOST({vendor_transaction: $scope.vm}, "vendor_transactions", {}).then(function(data) {
+      	if(data.success) {
+      	  $uibModalInstance.close(true);
+      	} else {
+      	  $scope.cancel();
+      	}
+      })
+    };
+    
+    $scope.openCalendar = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      $scope.vm.isOpen = true;
     };
     
     $scope.cancel = function () {
