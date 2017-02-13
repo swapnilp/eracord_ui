@@ -1,0 +1,43 @@
+<div class="modal-header bg-primary">
+  <h3 class="modal-title text-center">New Transaction</h3>
+  <a ng-click="cancel()" class="textWhite" style="float: right;position: absolute;right: 15px;top: 19px;cursor:pointer;"><i class="fa fa-times"></i></a>
+</div>
+<div class="modal-body inlineBlock" style="min-height:300px;">
+  <form name="form" ng-submit="registerVendorTransaction()" role="form" ng-show="!requestLoading" autocomplete="off" class="absoluteForm">
+    <div class="col-sm-12 padding0">
+      <div class="form-group col-sm-6">
+	<label for="transaction_type">Type</label>
+	<select class="form-control ng-touched" ng-model="vm.transaction_type" style="" ng-options="values for values in ['Debit', 'Cridit']" >
+	</select>
+      </div>
+      <div class="form-group col-sm-6" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
+	<label for="amount">Amount <span class="textRed"> *</span></label>
+	<input type="text" name="amount" id="amount" class="form-control" ng-model="vm.amount" only-number required />
+	<span ng-show="form.amount.$dirty && form.amount.$error.required" class=" absolute red">Amount is required</span>
+      </div>
+
+      <div class="form-group col-sm-6" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
+	<label for="cheque_number">Cheque number <span class="textRed"> *</span></label>
+	<input type="text" name="cheque_number" id="cheque_number" class="form-control" ng-model="vm.cheque_number" only-number required />
+	<span ng-show="form.cheque_number.$dirty && form.cheque_number.$error.required" class=" absolute red">Cheque Number is required</span>
+      </div>
+      <div class="form-group col-md-4" ng-class="{ 'has-error': form.date.$dirty && form.date.$error.required }">
+	<!--datetimepicker data-ng-model="data.date"></datetimepicker-->
+	<label for="date">Issue Date <span class="textRed"> *</span></label>
+	<p class="input-group">
+	  <input type="text" class="form-control" datetime-picker="dd/MM/yyyy" ng-model="vm.date" is-open="vm.isOpen" ng-click="openCalendar($event, prop);" ng-focus="openCalendar($event, prop);"  datepicker-options="dateOptions" readonly-time="true" enable-time="false" readonly required/>
+	</p>
+	<span ng-show="form.date.$dirty && form.date.$error.required" class="help-block">Exam Date is required</span>
+      </div>
+    </div>
+    
+    <div class="form-actions col-sm-12 marginT20" style="padding-bottom:20px;">
+      <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">Create</button>
+      <span button-req-load is-loading="dataLoading"></span>
+      <a ng-click="cancel()" class="btn btn-default">Cancel</a>
+    </div>
+  </form>
+</div>
+
+
+
