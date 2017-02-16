@@ -403,6 +403,7 @@ angular.module('eracordUiApp.controller')
 	jkci_classes.one("exams", $routeParams.exam_id).customGET("edit").then(function(data){
 	  if(data.success){
 	    $scope.vm = data.exam;
+	    $scope.vm.exam_date = moment(data.exam.exam_date).toDate();
 	    $scope.vm.isOpen = false;
 	    //$scope.class_name = data.data.class_exam_data.class_name;
 	    $scope.divisions = data.sub_classes;

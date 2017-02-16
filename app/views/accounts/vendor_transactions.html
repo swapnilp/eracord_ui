@@ -4,7 +4,10 @@
 <div id="printResult">
   <div class="col-sm-12 padding0">
     <h2 class="pull-left">Transactions</h2>
-    <span class=" pull-right marginT20">Filter <input ng-model="search"> </span>
+    <span class=" pull-right marginT20"><input type="text" ng-model="filter.name" dl-key-code="filterData();" code="13" placeholder="Enter filter data" value="{{filter.name}}" style="width:230px;display:inline;" class="form-control">
+      <button class="btn btn-primary" ng-click="filterData();" uib-tooltip="Filter"><i class="fa fa-filter"></i></button>
+      <button class="btn btn-primary" ng-click="resetFilter();" uib-tooltip="Reset"><i class="fa fa-refresh"></i></button>
+    </span>
   </div>
   <table st-table="rowCollection" class="table organisationCoursesTable">
     <thead>
@@ -16,7 +19,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="row in transactions | filter:search">
+      
+      <tr dir-paginate="row in transactions | itemsPerPage: 10" total-items="totalTransactions" current-page="pagination.current">
 	<td>{{row.issue_date}}</td>
 	<td>{{row.amount}}</td>
 	<td>{{row.transaction_type}}</td>
@@ -24,4 +28,5 @@
       </tr>
     </tbody>
   </table>
+  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)" class="col-sm-12 text-center" ng-show="transactions.length > 0"></dir-pagination-controls>
 </div>
