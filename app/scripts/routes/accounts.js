@@ -35,6 +35,11 @@ app.config(function($routeProvider) {
       controller: 'AccountsCtrl',
       controllerAs: 'accounts'
     })
+    .when('/accounts/vendors/logs', {
+      templateUrl: 'views/accounts/vendors_logs.html',
+      controller: 'AccountsCtrl',
+      controllerAs: 'accounts'
+    })
     .when('/accounts/vendors/:vendor_id', {
       templateUrl: 'views/accounts/vendor_show.html',
       controller: 'AccountsCtrl',

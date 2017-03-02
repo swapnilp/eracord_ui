@@ -1,0 +1,56 @@
+<div>
+  <div class="row col-sm-12">
+    <h3 class="pull-left">Vendors logs</h3> 
+    <button class="btn btn-primary pull-right marginT15" ng-click="goBack();" uib-tooltip="Back">
+      <i class="fa fa-arrow-circle-o-left"></i>
+    </button>
+  </div>
+  
+  <div class="row col-sm-12 marginT10 marginB10">
+    <div class="pull-left paddingTop5">
+      Records : <strong>{{totalLogs}} </strong>
+    </div>
+    <div class="pull-right">
+      <span class="positionRelative">
+	<input date-range-picker id="rangeCalender" class="form-control date-picker calender pointer" type="text" ng-model="filter.dateRange" style="width:230px;display:inline;" placeholder="Enter date range" onkeypress="return false" options="{autoApply: true}" readonly/>
+	<label for="rangeCalender" class="rangeCalender pointer"><i class="fa fa-calendar"></i></label>
+      </span>
+      <input type="text" ng-model="filter.name" dl-key-code="filterData();" code="13" placeholder="Enter name or mobile" value="{{filter.name}}" style="width:230px;display:inline;" class="form-control">
+      <span class=""><button class="btn btn-primary " ng-click="filterData();" uib-tooltip="Filter"><i class="fa fa-filter"></i></button></span>
+      <button class="btn btn-primary" ng-click="resetFilter();" uib-tooltip="Reset"><i class="fa fa-refresh"></i></button>
+    </div>
+  </div>
+  <div request-loading is-loading="requestLoading"></div>
+  <div class="row col-sm-12" ng-show="!requestLoading">
+    
+    <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
+      <thead>
+	<tr>
+	  <th st-sort="date">Date</th>
+	  <th st-sort="name">Vendor</th>
+	  <th st-sort="class">Amount</th>
+	  <th st-sort="class">Checque no</th>
+	  <th>Issue Date</th>
+	</tr>
+      </thead>
+      <tbody>
+	<tr dir-paginate="row in logs | itemsPerPage: 10" total-items="totalLogs" current-page="pagination.current" pagination-id="log">
+	  <td>
+	    {{row.issue_date}}
+	  </td>
+	  <td>
+	    {{row.vender}}
+	  </td>
+	  <td ng-class="{'green': row.transaction_type === 'Debit', 'red': row.transaction_type !== 'Debit'}">{{row.amount}}</td>
+	  <td>{{row.cheque_number}}</td>
+	  <td>
+	    {{row.issue_date}}
+	  </td>
+	</tr>
+      </tbody>
+    </table>
+    <dir-pagination-controls on-page-change="pageChanged(newPageNumber)" pagination-id="log" ng-show="totalLogs > 9" class="col-sm-12 text-center"></dir-pagination-controls>
+  </div>
+</div>
+
+

@@ -295,6 +295,54 @@ angular.module('eracordUiApp.controller')
     }
     //Vendor Index END
 
+    if($location.path() === '/accounts/vendors/logs') {
+      $scope.requestLoading = true;
+      $scope.filter = {};
+      $scope.logs = [];
+      $scope.filter.dateRange = {startDate: null, endDate: null};
+      
+      var vendor = Restangular.all("vendors");
+      var loadVendorsLogs = function(page) {
+	$scope.requestLoading = true;
+	vendor.customGET("get_logs", {page: page, filter: $scope.filter}).then(function(data) {
+	  if(data.success) {
+	    $scope.logs = data.logs;
+	    $scope.totalLogs = data.total_logs;
+	    $scope.requestLoading = false;
+	  } else {
+	    $location.path("/accounts/vendors").replace();
+	  }
+	}, function(){
+	  $location.path("/accounts/vendors").replace();
+	});
+      }
+      loadVendorsLogs(1);
+
+      $scope.pageChanged = function(newPage, checkFilter) {
+	loadVendorsLogs(newPage);
+      };
+
+      $scope.resetFilter = function() {
+	$scope.filter = {};
+	$scope.filter.dateRange = {startDate: null, endDate: null};
+	if($scope.pagination.current === 1) {
+	  loadVendorsLogs(1);
+	} else {
+	  $scope.pagination.current = 1;
+	}
+      };
+
+      $scope.filterData = function() {
+	if($scope.pagination.current === 1) {
+	  loadVendorsLogs(1);
+	} else {
+	  $scope.pagination.current = 1;
+	}
+      };
+    }
+    //Vendors logs END
+
+
     if($location.path() === '/accounts/vendors/' + $routeParams.vendor_id) {
       $scope.requestLoading = true;
       
