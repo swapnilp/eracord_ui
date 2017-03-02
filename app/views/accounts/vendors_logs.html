@@ -23,7 +23,7 @@
   <div request-loading is-loading="requestLoading"></div>
   <div class="row col-sm-12" ng-show="!requestLoading">
     
-    <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
+    <table st-table="rowCollection" class="table organisationCoursesTable table-striped" ng-show="totalLogs > 0">
       <thead>
 	<tr>
 	  <th st-sort="date">Date</th>

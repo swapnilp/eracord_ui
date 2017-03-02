@@ -299,6 +299,8 @@ angular.module('eracordUiApp.controller')
       $scope.requestLoading = true;
       $scope.filter = {};
       $scope.logs = [];
+      $scope.pagination = {current: 1};
+      $scope.totalLogs = 0;
       $scope.filter.dateRange = {startDate: null, endDate: null};
       
       var vendor = Restangular.all("vendors");
