@@ -80,7 +80,7 @@
       <span ng-if="exam.create_verification && !exam.is_completed && !exam.is_group">
 	<button class="btn btn-primary" ng-click="conductExam(exam);" ng-disabled="requestLoading">Conduct Exam</button>
       </span>
-      <span ng-if="!exam.create_verification">
+      <span ng-if="!exam.is_result_decleared">
 	<button class="btn btn-primary" ng-click="deleteExam(exam);" ng-disabled="requestLoading">Remove Exam</button>
       </span>
       
