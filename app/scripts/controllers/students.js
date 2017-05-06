@@ -614,6 +614,7 @@ angular.module('eracordUiApp.controller')
 	student.customGET("get_absentee").then(function(data) {
 	  if(data.success) {
 	    $scope.absentee = data.absentee;
+	    $scope.exams = data.exam_absentee;
 	  }
 	  $scope.absenteeRequestLoading = false;
 	  //$scope.requestLoading = false;

@@ -35,7 +35,7 @@
 	    <ul class="dropdown-menu">
 	      <li ng-class="{active: topMenu==='exams', 'disabled': disableNav}"><a ng-href="#/exams" disabled-link="disableNav">Exams</a></li>
 	      <li ng-class="{active: topMenu==='students', 'disabled': disableNav}"><a ng-href="#/students" disabled-link="disableNav">Students</a></li>
-	      <li is-role-visible='["manage_organiser"]' email="currentUser.email" ng-class="{active: topMenu==='teachers', 'disabled': disableNav}" only_root="currentUser.is_root"><a ng-href="#/teachers" disabled-link="disableNav">Teachers</a></li>
+	      <li is-role-visible='["manage_organiser"]' email="currentUser.email" ng-class="{active: topMenu==='teachers', 'disabled': disableNav}" only-root="currentUser.is_root"><a ng-href="#/teachers" disabled-link="disableNav">Teachers</a></li>
 	      <li ng-class="{active: topMenu==='off_classes', 'disabled': disableNav}"><a ng-href="#/off_classes" disabled-link="disableNav">Off Classes</a></li>
 	    </ul>
 	  </li>
@@ -54,7 +54,7 @@
 	      <li is-role-visible='["manage_organiser"]' email="currentUser.email" ng-class="{active: topMenu==='meetings', 'disabled': disableNav}">
 		<a ng-href="#/meetings" disabled-link="disableNav">Meetings</a>
 	      </li>
-	      <li is-role-visible='["manage_hostel"]' email="currentUser.email" ng-class="{active: topMenu==='hostels', 'disabled': disableNav}" only_root="currentUser.is_root">
+	      <li is-role-visible='["manage_hostel"]' email="currentUser.email" ng-class="{active: topMenu==='hostels', 'disabled': disableNav}" only-root="currentUser.is_root">
 		<a ng-href="#/hostels" disabled-link="disableNav">Hostels</a>
 	      </li>
 	      <li ng-class="{active: topMenu=== 'holidays', 'disabled': disableNav}">

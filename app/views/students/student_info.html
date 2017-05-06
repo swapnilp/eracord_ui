@@ -74,6 +74,12 @@
       <div class="alert alert-success mTop20" ng-if="absentee.length == 0">
 	Regular student in all class
       </div>
+      <div class="alert alert-warning mTop20" ng-if="exams.length > 0">
+	<h4 class="mTop0"> <strong>Last Month Exams</strong></h4>
+	<div ng-repeat="exam in exams">
+	  {{$index+1}}- {{exam.name}} <strong>{{exam.date}}</strong>  {{exam.is_present === false ? 'Absent' : exam.marks}}
+	</div>
+      </div>
     </div>
   </div>
 </div>

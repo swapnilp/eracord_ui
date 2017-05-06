@@ -13,12 +13,12 @@
       </div>
       <div class="form-group col-md-4" ng-class="{ 'has-error': form.marks.$dirty && form.marks.$error.required }" ng-if="!isGroup">
 	<label for="marks">Marks <span class="textRed"> *</span></label>
-	<input type="text" name="marks" id="marks" class="form-control" ng-model="vm.marks" onkeypress="return event.charCode >= 48 && event.charCode <= 57" placeholder="Marks" required />
+	<input only-number type="text" name="marks" id="marks" class="form-control" ng-model="vm.marks"  placeholder="Marks" required />
 	<span ng-show="form.marks.$dirty && form.marks.$error.required" class="help-block">Marks are required</span>
       </div>
       <div class="form-group col-md-4" ng-if="!isGroup">
 	<label for="duration">Duration</label>
-	<input type="text" name="duration" id="duration" class="form-control" ng-model="vm.duration" onkeypress="return event.charCode >= 48 && event.charCode <= 57" placeholder="Duration in MIN"/>
+	<input only-number type="text" name="duration" id="duration" class="form-control" ng-model="vm.duration" placeholder="Duration in MIN"/>
       </div>
     </div>
     <div class="col-md-12 padding0">

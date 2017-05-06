@@ -55,7 +55,7 @@
       </span>
     </span>
   </div>
-  <div class="col-sm-6 textLeft padding0" ng-if="!exam.is_group">
+  <div class="col-sm-6 textLeft padding0" ng-if="!exam.is_group && exam.self_exam">
     <span class="col-sm-3 paddingTop5 paddingLeft0"><strong>Upload paper</strong></span>
     <span class="col-sm-9">
       <form name="form">
@@ -71,7 +71,7 @@
     <span class="col-sm-1 paddingLeft0"><strong>Points</strong></span>
     <div class="col-sm-11"><span class="tag label label-primary marginR5 marginB5" ng-repeat="p in exam.chapters_points track by $index" style="display: inline-block;">{{p}}</span> </div>
   </div>
-  <div class="col-sm-12 textLeft padding0" ng-if="exam">
+  <div class="col-sm-12 textLeft padding0" ng-if="exam && exam.self_org">
     <div class="col-sm-12 paddingTop10 paddingLeft0" style="">
       
       <span ng-show="!exam.create_verification" ng-if="exam.root && (( exam.is_group && exam.descendants_count > 0) || !exam.is_group)">

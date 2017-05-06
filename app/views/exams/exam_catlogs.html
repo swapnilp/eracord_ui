@@ -1,12 +1,12 @@
 <div style="margin:20px 0;border-top:1px solid #e2e2e2;" class="paddingTop20">
-  <div class="pull-left">
-    <button ng-if="!addMarksFlag && publishEnable && remainingLength == 0 && exam.verify_result && exam.verify_absenty" class="btn btn-primary" ng-click="publishExam()">
+  <div class="pull-left" ng-if="exam.self_org">
+    <button ng-if="!addMarksFlag && publishEnable && remainingLength == 0 && exam.verify_result && exam.verify_absenty" class="btn btn-primary" ng-click="publishExam()" is-role-visible='["publish_exam"]' email="currentUser.email">
       Publish Exam
     </button>
-    <button class="btn btn-primary" ng-if="!exam.verify_result && !addMarksFlag && exam.verify_absenty" ng-click="verifyResult();">
+    <button is-role-visible='["verify_exam_result"]' email="currentUser.email" class="btn btn-primary" ng-if="!exam.verify_result && !addMarksFlag && exam.verify_absenty" ng-click="verifyResult();">
       Verify Result
     </button>
-    <button class="btn btn-primary" ng-if="!exam.verify_absenty && !addMarksFlag" ng-click="verifyAbsenty();">
+    <button is-role-visible='["verify_exam_absenty"]' email="currentUser.email" class="btn btn-primary" ng-if="!exam.verify_absenty && !addMarksFlag" ng-click="verifyAbsenty();">
       Verify Absenty
     </button>
     <span ng-if="!addMarksFlag && remainingLength > 0">
@@ -44,10 +44,10 @@
 		<td>{{row.student}}</td>
 		<td>{{row.p_mobile}}</td>
 		<td>
-		  <button class="btn btn-primary" ng-click="absentStudent(row);">add Absent</button>
+		  <button class="btn btn-primary" ng-if="exam.self_org" ng-click="absentStudent(row);">add Absent</button>
 		</td>
 		<td>
-		  <button class="btn btn-primary" ng-click="ignoreStudent(row);">Ignore</button>
+		  <button class="btn btn-primary" ng-if="exam.self_org" ng-click="ignoreStudent(row);">Ignore</button>
 		</td>
 	      </tr>
 	    </tbody>
@@ -74,7 +74,7 @@
 		<td>{{row.student}}</td>
 		<td>{{row.p_mobile}}</td>
 		<td>{{row.marks}}</td>
-		<td><button class="btn btn-link" ng-click="removeMarks(row);">Remove</button></td>
+		<td><button ng-if="exam.self_org" class="btn btn-link" ng-click="removeMarks(row);">Remove</button></td>
 	      </tr>
 	    </tbody>
 	  </table>
@@ -99,7 +99,7 @@
 		<td>{{row.student}}</td>
 		<td>{{row.p_mobile}}</td>
 		<td>
-		  <button class="btn btn-link" ng-click="removeAbsent(row);" ng-if="!row.absent_sms_sent"> Remove</button>
+		  <button class="btn btn-link" ng-click="removeAbsent(row);" ng-if="!row.absent_sms_sent && exam.self_org"> Remove</button>
 		</td>
 	      </tr>
 	    </tbody>
@@ -124,7 +124,7 @@
 		<td>{{row.student}}</td>
 		<td>{{row.p_mobile}}</td>
 		<td>
-		  <button class="btn btn-link" ng-click="removeIgnored(row);" ng-if="!row.absent_sms_sent"> Remove</button>
+		  <button class="btn btn-link" ng-click="removeIgnored(row);" ng-if="!row.absent_sms_sent && exam.self_org"> Remove</button>
 		</td>
 	      </tr>
 	    </tbody>
