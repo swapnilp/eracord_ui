@@ -8,7 +8,7 @@
  * Controller of the eracordUiApp
  */
 angular.module('eracordUiApp.controller')
-  .controller('ExamsCtrl',['$scope', 'Flash', 'lazyFlash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '_', '$cookieStore', function ( $scope, Flash, lazyFlash, $location, Auth, Restangular, $routeParams, Upload, $window, _, $cookieStore) {
+  .controller('ExamsCtrl',['$scope', 'Flash', 'lazyFlash', '$location', 'Auth', 'Restangular', '$routeParams', 'Upload', '$window', '_', '$cookieStore', '$uibModal', function ( $scope, Flash, lazyFlash, $location, Auth, Restangular, $routeParams, Upload, $window, _, $cookieStore, $uibModal) {
 
     var jkci_classes;
     var jkci_class;
@@ -258,6 +258,23 @@ angular.module('eracordUiApp.controller')
 	  $scope.uploadingFile = false;
 	  $scope.fileName  = newVal.name;
 	}
+      };
+
+      $scope.openLogs = function(size, exam_id) {
+	var modalInstance = $uibModal.open({
+	  animation: true,
+	  templateUrl: 'views/exams/logs.html',
+	  controller: 'ExamsLogsCtrl',
+	  size: size,
+	  resolve: {
+	    class_id: function() {
+	      return $scope.class_id;
+	    },
+	    exam_id: function(){
+	      return exam_id;
+	    }
+	  }
+	});
       };
       
       loadExam();

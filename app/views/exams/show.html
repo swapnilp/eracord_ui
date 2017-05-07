@@ -9,6 +9,9 @@
       <span ng-show="!exam.create_verification" ng-if="exam">
 	<a href="#/classes/{{class_id}}/exams/{{exam.id}}/edit" class="btn btn-primary" ng-disabled="requestLoading">Edit</a>
       </span>
+      <button type="button" class="btn btn-primary buttonNoneBorder mLeft5" ng-click="openLogs('lg', exam.id)" uib-tooltip="Logs">
+	<i class="fa fa-list-alt"></i>
+      </button>
     </div>
   </div>
   <div class="col-sm-6 textLeft padding0 marginB5">
