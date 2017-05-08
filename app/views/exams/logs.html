@@ -16,6 +16,7 @@
     <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
       <thead>
 	<tr>
+	  <th st-sort="firstName">Name</th>
 	  <th st-sort="firstName">Activity</th>
 	  <th st-sort="firstName">Date</th>
 	  <th st-sort="firstName">User</th>
@@ -24,6 +25,9 @@
       </thead>
       <tbody>
 	<tr ng-repeat="slot in activities">
+	  <td>
+	    {{slot.name}}
+	  </td>
 	  <td>
 	    {{slot.key}}
 	  </td>
