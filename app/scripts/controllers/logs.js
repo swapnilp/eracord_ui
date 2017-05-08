@@ -7,15 +7,16 @@ angular.module('eracordUiApp.controller')
       $scope.class_id = class_id;      
       var jkci_classes = Restangular.one("jkci_classes", class_id);
 
-      //jkci_classes.one("sub_classes", $scope.divisionId).customGET("get_time_table").then(function(data){
-      //	if(data.success) {
-      //	  $scope.timetable = data.timetable;
-      //	  $scope.count = data.count;
-      //	}else {
-      //	  $uibModalInstance.dismiss('cancel');
-      //	}
-      //	$scope.requestLoading = false;
-      //});
+      
+      jkci_classes.one("exams", $scope.examId).customGET("get_activities").then(function(data){
+	if(data.success) {
+	  $scope.activities = data.activities;
+	  //	  $scope.count = data.count;
+	} else {
+	  $uibModalInstance.dismiss('cancel');
+      	}
+      	$scope.requestLoading = false;
+      });
       
       
       $scope.cancel = function () {

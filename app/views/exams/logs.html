@@ -12,49 +12,33 @@
   </div>
 
   <div request-loading is-loading="requestLoading"></div>
-  <div ng-if="count == 0" class="text-center">
-    <h2 class="text-warning">Timetable not yet available.</h2>
+  <div ng-show="!requestLoading">
+    <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
+      <thead>
+	<tr>
+	  <th st-sort="firstName">Activity</th>
+	  <th st-sort="firstName">Date</th>
+	  <th st-sort="firstName">User</th>
+	  <th st-sort="firstName">Mobile</th>
+	</tr>
+      </thead>
+      <tbody>
+	<tr ng-repeat="slot in activities">
+	  <td>
+	    {{slot.key}}
+	  </td>
+	  <td>
+	    {{slot.date}}
+	  </td>
+	  <td>
+	    {{slot.owner}}
+	  </td>
+	  <td>
+	    {{slot.owner_mobile}}
+	  </td>
+	</tr>
+      </tbody>
+    </table>
   </div>
-  <div id="printRecipt">
-    <div ng-repeat="day in days" ng-show="(timetable[day] | filter:subClassFilter).length > 0" class="col-sm-12 padding0"> 
-      <h4><strong>{{day}}</strong></h4>
-      <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
-	<thead>
-	  <tr>
-	    <th st-sort="firstName">Class</th>
-	    <th st-sort="firstName">Division</th>
-	    <th st-sort="firstName">Subject</th>
-	    <th st-sort="firstName">Duration</th>
-	    <th st-sort="balance">Teacher</th>
-	    <th st-sort="balance">Location / Room</th>
-	  </tr>
-	</thead>
-	<tbody>
-	  <tr ng-repeat="slot in timetable[day] | filter:subClassFilter">
-	    <td>
-	      {{slot.class_name}}
-	    </td>
-	    <td>
-	      {{slot.sub_class_name}}
-	    </td>
-	    <td>
-	      {{slot.subject}}
-	    </td>
-	    <td>
-	      {{slot.start_time}} - {{slot.end_time}}
-	    </td>
-	    <td>
-	      {{slot.teacher_name}}
-	    </td>
-	    <td>
-	      {{slot.class_room}}
-	    </td>
-	  </tr>
-	</tbody>
-      </table>
-    </div>
-  </div>
-  
-  
 </div>
 
