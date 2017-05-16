@@ -1,5 +1,5 @@
 <div class="col-sm-12">
-  <h3 class="pull-left">{{obj.class_name}} <small>{{obj.students}} Students</small></h3>
+  <h3 class="pull-left"><a href="#/classes/{{obj.id}}?tab=students" class="pointer">{{obj.class_name}}</a> <small>{{obj.students}} Students</small></h3>
   <div class="pull-right">
     <span ng-if="obj.is_student_verified"> 
       <span is-role-visible='["create_daily_teach"]' email="currentUser.email" >
