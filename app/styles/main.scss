@@ -616,7 +616,45 @@ tr.pointer, td.pointer {
   display: inline-block;
   width: 100%;
 }
-	
+
+.hitmap {
+  float:left;
+  display: inline-block;
+  padding-right: 10px;
+  
+  .day_0 {
+    position: absolute;
+    top :0px;
+  }
+  .day_1 {
+    position: absolute;
+    top :20px;
+  }
+  .day_2 {
+    position: absolute;
+    top :40px;
+  }
+  .day_3 {
+    position: absolute;
+    top :60px;
+  }
+  .day_4 {
+    position: absolute;
+    top :80px;
+  }
+  .day_5 {
+    position: absolute;
+    top :100px;
+  }
+  .day_6 {
+    position: absolute;
+    top :120px;
+  }
+  .height180 {
+    height: 150px;
+    width: 15px;
+  }
+}	
 @media screen {
   #printSection {
     display: none;

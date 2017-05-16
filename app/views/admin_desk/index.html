@@ -12,29 +12,12 @@
       <thead>
 	<tr>
 	  <th st-sort="firstName">Classes</th>
-	  <th st-sort="lastName">Number of students</th>
-	  <th st-sort="lastName">Actions</th>
 	</tr>
       </thead>
       <tbody>
 	<tr ng-repeat="row in jkci_classes">
-	  <td><a href="#/classes/{{row.id}}">{{row.class_name}}</a></td>
-	  <td>{{row.students}}</td>
 	  <td>
-	    <span ng-if="row.is_student_verified"> 
-	      <span is-role-visible='["create_daily_teach"]' email="currentUser.email" >
-		<a ng-href="#/classes/{{row.id}}/daily_catlogs/new" uib-tooltip="Create catlog"><i class="fa fa-table fa-2x"></i></a>
-	      </span>
-	      <span is-role-visible='["create_exam"]' email="currentUser.email">
-		<a ng-href="#/classes/{{row.id}}/exams/new" uib-tooltip="Create exam"><i class="fa fa-file-o fa-2x"></i></a>
-		<a ng-href="#/classes/{{row.id}}/exams/new?&isGroup=true" uib-tooltip="Create group exam"><i class="fa fa-files-o fa-2x"></i></a>
-		<a ng-click="openClassTimeTable('lg', row.id)"  class="pointer" uib-tooltip="Time table"><i class="fa fa-clock-o fa-2x timeTableBorder"></i></a>
-	      </span>
-	    </span>
-	    <span ng-if="!row.is_student_verified">
-	      <a ng-href="#/classes/{{row.id}}/manage_class?&verify=true" uib-tooltip="Verify Class Students"><i class="fa fa-check-square fa-2x"></i></a>
-
-	    </span>
+	    <div months start-from="{{row.created_at}}" class-id="{{row.id}}" obj="row" show-actions="true"></div>
 	  </td>
 	</tr>
       </tbody>
@@ -65,6 +48,8 @@
       </table>
     </figure>
   </div>
+
+  
   <hr>
   <div class="col-md-12 padding0">
     <h2>Time Tables</h2>

@@ -410,4 +410,40 @@ angular.module('eracordUiApp.controller')
 	});
       });
       
+    }])
+
+  .controller('ClassActivitiesCtrl',['$scope', '$uibModalInstance', 'Restangular', 'day', 'class_id',
+    function ($scope, $uibModalInstance, Restangular, day, class_id)  {
+      $scope.requestLoading = true;
+      $scope.day = moment(day, "DD-MM-YYYY");
+      var jkci_classes = Restangular.one("jkci_classes", class_id);
+      
+      var get_activity =  function(given_day) {
+	$scope.requestLoading = true;
+	jkci_classes.customGET("get_activity", {date: given_day}).then(function(data) {
+	  if(data.success) {
+	    $scope.activities = data.activities;
+	    $scope.class_name = data.class_name;
+	  } else {
+	    $scope.cancel();
+	  }
+	  $scope.requestLoading = false;
+	});
+      };
+
+      $scope.next = function() {
+	$scope.day = $scope.day.add(1, 'day');
+	get_activity($scope.day.format("DD-MM-YYYY"));
+      };
+
+      $scope.previous = function() {
+	$scope.day = $scope.day.subtract(1, 'day');	
+	get_activity($scope.day.format("DD-MM-YYYY"));
+      };
+      
+      get_activity($scope.day.format("DD-MM-YYYY"));
+      
+      $scope.cancel = function () {
+	$uibModalInstance.dismiss('cancel');
+      };
     }]);

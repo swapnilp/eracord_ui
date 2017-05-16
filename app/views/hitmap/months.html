@@ -1,0 +1,26 @@
+<div class="col-sm-12">
+  <h3 class="pull-left">{{obj.class_name}} <small>{{obj.students}} Students</small></h3>
+  <div class="pull-right">
+    <span ng-if="obj.is_student_verified"> 
+      <span is-role-visible='["create_daily_teach"]' email="currentUser.email" >
+	<a ng-href="#/classes/{{obj.id}}/daily_catlogs/new" uib-tooltip="Create catlog"><i class="fa fa-table fa-2x"></i></a>
+      </span>
+      <span is-role-visible='["create_exam"]' email="currentUser.email">
+	<a ng-href="#/classes/{{obj.id}}/exams/new" uib-tooltip="Create exam"><i class="fa fa-file-o fa-2x"></i></a>
+	<a ng-href="#/classes/{{obj.id}}/exams/new?&isGroup=true" uib-tooltip="Create group exam"><i class="fa fa-files-o fa-2x"></i></a>
+	<a ng-click="openClassTimeTable('lg', obj.id)"  class="pointer" uib-tooltip="Time table"><i class="fa fa-clock-o fa-2x timeTableBorder"></i></a>
+      </span>
+    </span>
+    <span ng-if="!obj.is_student_verified">
+      <a ng-href="#/classes/{{obj.id}}/manage_class?&verify=true" uib-tooltip="Verify Class Students"><i class="fa fa-check-square fa-2x"></i></a>
+    </span>
+  </div>
+</div>
+<div class="hitmap" ng-repeat="(monthName, weeks) in months">
+  <h5>{{monthName}}</h5>
+  <div class="pull-left relative height180" ng-repeat="(weekName, days) in weeks">
+    <div ng-repeat="(wday, day) in days" class="day_{{wday}}">
+      <i class="fa fa-circle pointer" uib-tooltip="{{day[0]}}- {{day[2]}}" style="color: rgb({{255-day[1]}},{{day[1]}}, {{day[1] == 0 ? 255 : 0}});" tooltip-placement="bottom" ng-click="openDay(day[0]);"></i>
+    </div>
+  </div>
+</div>

@@ -52,6 +52,7 @@ angular
     AuthProvider.loginPath('/api/users/sign_in.json');
     AuthProvider.logoutPath('/api/users/sign_out.json');
     
+    window['moment-range'].extendMoment(moment);
     ChartJsProvider.setOptions({ colors : [ '#803690', '#00ADF9', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'] });
     
     // Intercept 401 Unauthorized everywhere

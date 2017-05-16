@@ -1,0 +1,49 @@
+<div class="modal-header bg-primary">
+  <h3 class="modal-title text-center noselect">{{class_name}} Activities</h3>
+  <h4 class="text-center noselect"><i ng-click="previous();" class="fa fa-angle-double-left fa-2x pointer"></i> &nbsp;&nbsp;<span style="width:240px; display:inline-block;">{{day.format("DD-MMM-YYYY | dddd")}}</span> &nbsp;&nbsp<i ng-click="next();" class="fa fa-angle-double-right fa-2x pointer"></i></h4>
+  <a ng-click="cancel()" class="textWhite" style="float: right;position: absolute;right: 15px;top: 19px;cursor:pointer;"><i class="fa fa-times"></i></a>
+</div>
+<div class="modal-body" style="min-height:300px;overflow-y: auto; overflow-x: hidden;">
+  <button ng-if="count > 0" class="btn btn-link pull-right userColor" ng-print print-element-id="printRecipt" uib-tooltip="Print" tooltip-placement="bottom"><i class="fa fa-print fa-2x"></i></button>
+  <button ng-if="count > 0 && isClass" class="btn btn-link pull-right userColor" class="pull-right" ng-click="resetFilter();"><i class="fa fa-refresh"></i></button>
+  <div class="col-sm-4 padding0 pull-right" ng-show="isClass">
+    <select class="form-control ng-touched pull-right" ng-model="subClassFilter.sub_class_name" ng-options="division.name as division.name for division in divisions">
+      <option value='' disabled selected>Filter Divisions</option>
+    </select>
+  </div>
+
+  <div request-loading is-loading="requestLoading"></div>
+  <div ng-show="!requestLoading">
+    <table st-table="rowCollection" class="table organisationCoursesTable table-striped">
+      <thead>
+	<tr>
+	  <th st-sort="firstName">Activity</th>
+	  <th st-sort="firstName">Date</th>
+	  <th st-sort="firstName">User</th>
+	  <th st-sort="firstName">Mobile</th>
+	  <th>Url</th>
+	</tr>
+      </thead>
+      <tbody>
+	<tr ng-repeat="slot in activities">
+	  <td>
+	    {{slot.key}}
+	  </td>
+	  <td>
+	    {{slot.date}}
+	  </td>
+	  <td>
+	    {{slot.owner}}
+	  </td>
+	  <td>
+	    {{slot.owner_mobile}}
+	  </td>
+	  <td>
+	    <span class="pointer link" ng-click="openLink(slot.url);">Open</span>
+	  </td>
+	</tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
