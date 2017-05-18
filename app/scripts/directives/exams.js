@@ -10,13 +10,19 @@ app.directive('examCatlog', function(Restangular) {
     templateUrl: 'views/exams/exam_catlogs.html',
     scope: {
       exam: '=',
-      classId: '@'
+      classId: '@',
+      elem: '@' 
+    },
+    link: function(scope, element, attrs) {
+      scope.elem = element;
     },
     controller: ['$scope', 'Restangular', 'Flash', '$location',  '$window', 'remainingStudentsFilter', function(scope, Restangular, Flash, $location, $window, remainingStudentsFilter){
       var jkci_classes = Restangular.one("jkci_classes", scope.classId);
+      
       scope.addMarksFlag = false;
       scope.publishEnable = true;
       scope.savedAlert = false;
+      //console.log(element);
       
       scope.loadCatlog = function(){
 	jkci_classes.one("exams", scope.exam.id).customGET("get_catlogs").then(function(data){
@@ -51,6 +57,8 @@ app.directive('examCatlog', function(Restangular) {
 	if(catlog.temp_marks !== '' && catlog.temp_marks !== undefined && catlog.temp_marks <= maxMarks) {
 	  catlog.hasError = false;
 	  catlog.marks = catlog.temp_marks;
+	  scope.search = "";
+	  scope.elem.find("#seatchStudent").focus();
 	}else{
 	  catlog.marks = null;
 	  if(catlog.temp_marks !== '' && catlog.temp_marks !== undefined){
@@ -59,6 +67,17 @@ app.directive('examCatlog', function(Restangular) {
 	}
 	scope.publishEnable = false;
       };
+
+      scope.saveMarkKayUp = function(catlog, keyCode){
+	if((catlog.temp_marks == "" || catlog.temp_marks == undefined ) && keyCode == 13) {
+	  if(scope.elem.find("#catlog_"+catlog.id).hasClass("last")) {
+	    scope.elem.find("#seatchStudent").focus();
+	  } else{
+	    scope.elem.find("#catlog_"+catlog.id).next(".addMarksRow").find("input").focus();
+	  }
+	}
+	
+      }
 
       scope.removeMarks = function(catlog) {
 	catlog.marks = null;
@@ -74,6 +93,22 @@ app.directive('examCatlog', function(Restangular) {
 	  });
 	}
       };
+
+      scope.checkTempMarks = function(catlog, maxMarks) {
+	if(catlog.marks == '' || catlog.marks == undefined || catlog.marks > maxMarks) {
+	  catlog.marks = null;
+	  catlog.temp_marks = null;
+	  scope.search = "";
+	  scope.elem.find("#seatchStudent").focus();
+	}
+      }
+
+      scope.searchForMarks = function(keyCode) {
+	if(scope.search !== "" && keyCode == 13 && scope.addMarksFlag) {
+	  scope.elem.find('.studentMark')[0].focus();
+	}
+
+      }
 
       scope.saveMarks = function() {
 	var validMarks = _.filter(scope.examCatlogs, function(catlog){ return catlog.marks !== null});
@@ -289,12 +324,17 @@ app.directive('validNumber', function() {
       });
 
       element.bind('keypress', function(event) {
-        if(event.keyCode === 32) {
-          event.preventDefault();
-        }else if(event.keyCode === 13) {
+	if(!_.include([48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 13], event.keyCode)) {
+	  event.preventDefault();
+	}
+	
+	if(event.keyCode === 13) {
 	  if(ngModelCtrl.$modelValue !== '' && ngModelCtrl.$modelValue !== undefined){ 
 	    event.target.blur();
 	  }
+	}else if(event.keyCode < 48 && event.keyCode > 57) {
+	  console.log("@######");
+	  event.preventDefault();
 	}
       });
     }

@@ -27,6 +27,7 @@ app.directive('months', function() {
       }
       scope.startDate = moment(scope.startFrom, "YYYY-MM").startOf('month')
       scope.endDate = moment(scope.endTo, "YYYY-MM").endOf('month')
+      scope.requestLoading = true;
 
       var monthRange = moment.range(scope.startDate, scope.endDate)
       scope.months = {};
@@ -54,11 +55,13 @@ app.directive('months', function() {
       };
       
       var get_activities = function() {
+	scope.requestLoading = true;
 	var jkci_class = Restangular.one("jkci_classes", scope.classId);
 	jkci_class.customGET("get_activities").then(function(data) {
 	  scope.activities = data.activities;
 	  scope.max_activities = data.max_activities;
 	  calculate_hitmap();
+	  scope.requestLoading = false;
 	});
       };
 

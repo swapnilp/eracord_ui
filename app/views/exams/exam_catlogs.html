@@ -21,7 +21,7 @@
     </span>
   </div>
   <div class="pull-right paddingTop15">
-    Filter Student <input ng-model="search"> 
+    Filter Student <input id="seatchStudent" ng-model="search" ng-keyup="searchForMarks($event.keyCode);"> 
   </div>
   <div class="col-sm-12 padding0 marginT20" ng-if="!addMarksFlag">
     <uib-tabset justified="true" active="activeTab">
@@ -146,13 +146,13 @@
 	</tr>
       </thead>
       <tbody>
-	<tr ng-repeat="row in examCatlogs| filter:search | remainingStudents">
+	<tr ng-repeat="row in examCatlogs| filter:search | remainingStudents" id="catlog_{{row.id}}" class="addMarksRow" ng-class="{'last': $last}">
 	  <td>{{$index + 1}}</td>
 	  <td>{{row.student}}</td>
 	  <td>{{row.p_mobile}}</td>
 	  <td>
 	    <div class="form-group marginB0" ng-class="{'has-error': row.hasError}" >
-	      <input type="text" class="form-control" ng-model="row.temp_marks" ng-blur="saveTempMarks(row, exam.marks)" ng-focus="row.hasError = false;" valid-number>
+	      <input type="text" class="form-control studentMark" ng-model="row.temp_marks" ng-blur="saveTempMarks(row, exam.marks, this)" ng-keyup="saveMarkKayUp(row, $event.keyCode);" ng-focus="row.hasError = false;" valid-number>
 	  </td>
 	</tr>
       </tbody>
@@ -173,7 +173,11 @@
 	  <td>{{$index + 1}}</td>
 	  <td>{{row.student}}</td>
 	  <td>{{row.p_mobile}}</td>
-	  <td><input tept="text" ng-model="row.marks" class="form-control"></td>
+	  <td>
+	    <div class="form-group marginB0" ng-class="{'has-error': row.hasError}" >
+	      <input tept="text" ng-model="row.marks" class="form-control" valid-number ng-blur="checkTempMarks(row, exam.marks)">
+	    </div>
+	  </td>
 	  <td><button class="btn btn-link" ng-click="removeMarks(row);"> Remove</button></td>
 	</tr>
       </tbody>

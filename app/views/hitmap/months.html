@@ -16,7 +16,8 @@
     </span>
   </div>
 </div>
-<div class="hitmap" ng-repeat="(monthName, weeks) in months">
+<div request-loading is-loading="requestLoading"></div>
+<div class="hitmap" ng-repeat="(monthName, weeks) in months" ng-show="!requestLoading">
   <h5>{{monthName}}</h5>
   <div class="pull-left relative height180" ng-repeat="(weekName, days) in weeks">
     <div ng-repeat="(wday, day) in days" class="day_{{wday}}">
