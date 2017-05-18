@@ -75,6 +75,9 @@ app.directive('examCatlog', function(Restangular) {
 	  } else{
 	    scope.elem.find("#catlog_"+catlog.id).next(".addMarksRow").find("input").focus();
 	  }
+	}else if(catlog.temp_marks !== "" && catlog.temp_marks !== undefined && keyCode == 13) {
+	  scope.search = "";
+	  scope.elem.find("#seatchStudent").focus();
 	}
 	
       }
@@ -321,21 +324,6 @@ app.directive('validNumber', function() {
           ngModelCtrl.$render();
         }
         return clean;
-      });
-
-      element.bind('keypress', function(event) {
-	if(!_.include([48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 13], event.keyCode)) {
-	  event.preventDefault();
-	}
-	
-	if(event.keyCode === 13) {
-	  if(ngModelCtrl.$modelValue !== '' && ngModelCtrl.$modelValue !== undefined){ 
-	    event.target.blur();
-	  }
-	}else if(event.keyCode < 48 && event.keyCode > 57) {
-	  console.log("@######");
-	  event.preventDefault();
-	}
       });
     }
   };
