@@ -412,8 +412,8 @@ angular.module('eracordUiApp.controller')
       
     }])
 
-  .controller('ClassActivitiesCtrl',['$scope', '$uibModalInstance', 'Restangular', 'day', 'class_id',
-    function ($scope, $uibModalInstance, Restangular, day, class_id)  {
+  .controller('ClassActivitiesCtrl',['$scope', '$uibModalInstance', 'Restangular', '$location', 'day', 'class_id',
+    function ($scope, $uibModalInstance, Restangular, $location, day, class_id)  {
       $scope.requestLoading = true;
       $scope.day = moment(day, "DD-MM-YYYY");
       var jkci_classes = Restangular.one("jkci_classes", class_id);
@@ -435,6 +435,13 @@ angular.module('eracordUiApp.controller')
 	$scope.day = $scope.day.add(1, 'day');
 	get_activity($scope.day.format("DD-MM-YYYY"));
       };
+
+      $scope.openLink = function(url) {
+	if(url){
+	  $scope.cancel();
+	  $location.path(""+url);
+	}
+      }
 
       $scope.previous = function() {
 	$scope.day = $scope.day.subtract(1, 'day');	
