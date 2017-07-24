@@ -64,7 +64,21 @@ app.directive('months', function() {
 	  scope.requestLoading = false;
 	});
       };
-
+      
+      scope.openClassTimeTable = function (size, class_id) {
+	var modalInstance = $uibModal.open({
+	  animation: true,
+	  templateUrl: 'views/time_tables/model_time_table.html',
+	  controller: 'ClassTimeTableCtrl',
+	  size: size,
+	  resolve: {
+	    class_id: function(){
+	      return class_id;
+	    }
+	  }
+	});
+      };
+      
       scope.openDay = function(day) {
 	var modalInstance = $uibModal.open({
 	  animation: true,

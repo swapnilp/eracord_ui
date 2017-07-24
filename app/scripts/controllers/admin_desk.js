@@ -67,20 +67,6 @@ angular.module('eracordUiApp.controller')
       });
     };
 
-    $scope.openClassTimeTable = function (size, class_id) {
-      var modalInstance = $uibModal.open({
-	animation: true,
-	templateUrl: 'views/time_tables/model_time_table.html',
-	controller: 'ClassTimeTableCtrl',
-	size: size,
-	resolve: {
-	  class_id: function(){
-	    return class_id;
-	  }
-	}
-      });
-    };
-
     var load_standards = function() {
       Restangular.all("organisations").customGET("cources").then(function(data) {
 	$scope.org_standards = _.filter(data.body, function(num){ return num.is_active; });

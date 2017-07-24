@@ -4,30 +4,30 @@
     <div class="col-sm-12 row">
       <h2 class="pull-left">{{class.class_name}}</h2>
       <div class="filterRight paddingTop20 marginB20">
-	<a class="btn btn-primary" href="#/admin_desk" uib-tooltip="Back"><i class="fa fa-arrow-circle-left"></i></a>
+	<a class="btn btn-primary" href="#/admin_desk" uib-tooltip="{{'back' | translate}}"><i class="fa fa-arrow-circle-left"></i></a>
 	<span is-role-visible='["manage_class_student"]' email="currentUser.email" ng-if="has_manage_class">
-	  <a href="#/classes/{{class.id}}/manage_class" class="btn btn-primary" uib-tooltip="Manage"><i class="fa fa-cogs"></i></a>
+	  <a href="#/classes/{{class.id}}/manage_class" class="btn btn-primary" uib-tooltip="{{'manage' | translate}}"><i class="fa fa-cogs"></i></a>
 	</span>
-	<div class="dropdown" style="display: inline-block;" uib-tooltip="Download">
+	<div class="dropdown" style="display: inline-block;" uib-tooltip="{{ 'download' | translate}}">
 	  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" manual-dropdown><i class="fa fa-download"></i>
 	    <span class="caret"></span></button>
 	  <ul class="dropdown-menu" style="right: 0; left: auto;">
-	    <li><a target="_blank" href="{{hostUrl}}/class/{{class.id}}/download_class_syllabus.pdf?&authorization_token={{token}}">Syllabus</a></li>
-	    <li><a target="_blank" href="{{hostUrl}}/class/{{class.id}}/download_class_catlog.pdf?&authorization_token={{token}}">Catalog</a></li>
-	    <li><a target="_blank" href="{{hostUrl}}/class/{{class.id}}/download_class_student_list.pdf?&authorization_token={{token}}">Student Info</a></li>
-	    <li><a href="{{hostUrl}}/class/{{class.id}}/sub_class_students_report.pdf?&authorization_token={{token}}" target="_blank">Division Students</a></li>
-	    <li><a href="{{hostUrl}}/sub_organisation/{{class.organisation_id}}/class/{{class.id}}/get_report.pdf?&authorization_token={{token}}" target="_blank">Report</a></li>
+	    <li><a target="_blank" href="{{hostUrl}}/class/{{class.id}}/download_class_syllabus.pdf?&authorization_token={{token}}" translate="syllabus"></a></li>
+	    <li><a target="_blank" href="{{hostUrl}}/class/{{class.id}}/download_class_catlog.pdf?&authorization_token={{token}}" translate="catalog"></a></li>
+	    <li><a target="_blank" href="{{hostUrl}}/class/{{class.id}}/download_class_student_list.pdf?&authorization_token={{token}}" translate="student_info"></a></li>
+	    <li><a href="{{hostUrl}}/class/{{class.id}}/sub_class_students_report.pdf?&authorization_token={{token}}" target="_blank" translate="division_students"></a></li>
+	    <li><a href="{{hostUrl}}/sub_organisation/{{class.organisation_id}}/class/{{class.id}}/get_report.pdf?&authorization_token={{token}}" target="_blank" translate="report"></a></li>
 	  </ul>
 	</div>
-	<div class="dropdown" style="display: inline-block;" uib-tooltip="Create" ng-if="class.is_student_verified && class.self_organisation && class.is_current_active">
+	<div class="dropdown" style="display: inline-block;" uib-tooltip="{{'create' | translate}}" ng-if="class.is_student_verified && class.self_organisation && class.is_current_active">
 	  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" manual-dropdown><i class="fa fa-plus"></i>
 	    <span class="caret"></span></button>
 	  <ul class="dropdown-menu" style="right: 0; left: auto;">
 	    <li is-role-visible='["create_daily_teach"]' email="currentUser.email">
-	      <a href="#/classes/{{class.id}}/daily_catlogs/new">Daily Catlog</a>
+	      <a href="#/classes/{{class.id}}/daily_catlogs/new" translate="daily_catlog"></a>
 	    </li>
-	    <li is-role-visible='["create_exam"]' email="currentUser.email"><a href="#/classes/{{class.id}}/exams/new">Exam</a></li>
-	    <li is-role-visible='["create_exam"]' email="currentUser.email"><a href="#/classes/{{class.id}}/exams/new?&isGroup=true">Group Exam</a></li>
+	    <li is-role-visible='["create_exam"]' email="currentUser.email"><a href="#/classes/{{class.id}}/exams/new" translate="exam"></a></li>
+	    <li is-role-visible='["create_exam"]' email="currentUser.email"><a href="#/classes/{{class.id}}/exams/new?&isGroup=true" translate="group_exam"></a></li>
 	  </ul>
 	</div>
       </div>
@@ -37,8 +37,8 @@
 	<span class="tag label label-primary" style="display:inline-table; margin: 0 10px 0 0;" ng-repeat="subject in class.subjects">{{subject}}</span>
       </div>
       <div class="filterRight">
-	<span>Daily SMS  &nbsp;&nbsp;<span class="tag label" ng-class="{'label-success': class.enable_class_sms, 'label-danger': !class.enable_class_sms}">{{class.enable_class_sms ?  'Enabled' : 'Disabled'}}</span></span>
-	<span class="marginLeft10">Exam SMS &nbsp;&nbsp;<span class="tag label" ng-class="{'label-success': class.enable_exam_sms, 'label-danger': !class.enable_exam_sms}">{{class.enable_exam_sms ?  'Enabled' : 'Disabled'}}</span></span>
+	<span>{{"daily_sms" | translate }}  &nbsp;&nbsp;<span class="tag label" ng-class="{'label-success': class.enable_class_sms, 'label-danger': !class.enable_class_sms}">{{class.enable_class_sms ?  'Enabled' : 'Disabled'}}</span></span>
+	<span class="marginLeft10">{{"exam_sms" | translate }} &nbsp;&nbsp;<span class="tag label" ng-class="{'label-success': class.enable_exam_sms, 'label-danger': !class.enable_exam_sms}">{{class.enable_exam_sms ?  'Enabled' : 'Disabled'}}</span></span>
       </div>
     </div>
     <div class="col-sm-12 textLeft padding0 marginT10 red text-center" ng-if="!(class.self_organisation && class.is_current_active)">
@@ -47,23 +47,23 @@
     <div class="col-sm-12 textLeft padding0 marginT20 ">
       <uib-tabset justified="true" active="activeTab">
 	<uib-tab  index="0" select="selectTabs();">
-	  <uib-tab-heading> Catalog</uib-tab-heading>
+	  <uib-tab-heading> {{"catalog" | translate }}</uib-tab-heading>
 	  <div>
 	    <div class-catlogs class-id="{{class_id}}" class-catlog-tab="{{classCatlogTab}}" update-url="updateTabParams(tabName)" host-url="{{hostUrl}}"></div>
 	  </div>
 	</uib-tab>
 	<uib-tab index="1" select="selectTabs();">
-	  <uib-tab-heading> Students</uib-tab-heading>
+	  <uib-tab-heading> {{ "students" | translate}}</uib-tab-heading>
 	  <div class-students class-id="{{class_id}}" class-students-tab="{{classStudentTab}}" update-url="updateTabParams(tabName)" show-options="true"></div>
 	</uib-tab>
 	<uib-tab index="2" select="selectTabs();">
-	  <uib-tab-heading>Exams</uib-tab-heading>
+	  <uib-tab-heading>{{"exams" | translate }} </uib-tab-heading>
 	  <div>
 	    <div class-exams class-id="{{class_id}}" class-exams-tab="{{classExamsTab}}" update-url="updateTabParams(tabName)"></div>
 	  </div>
 	</uib-tab>
 	<uib-tab index="3"  select="selectTabs();">
-	  <uib-tab-heading><i class="icon-bell"></i> Daily Teaches</uib-tab-heading>
+	  <uib-tab-heading><i class="icon-bell"></i> {{"daily_teaches" | translate}}</uib-tab-heading>
 	  <div>
 	    <div class-daily-teaches class-id="{{class_id}}" class-dtp-tab="{{classDtpTab}}" update-url="updateTabParams(tabName)"></div>
 	  </div>

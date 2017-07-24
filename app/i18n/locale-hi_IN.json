@@ -1,0 +1,27 @@
+{
+  "views.main.Splendid!": "Splendid!",
+  "directives.language-select.Language": "भाषा",
+  "classes": "कक्षाएं",
+  "students": "छात्रों",
+  "time table": "टाइम टेबल",
+  "exams": "परीक्षा", 
+  "time_table": "टाइम टेबल", 
+  "off_class": "ऑफ क्लास ",
+  "off_classes": "ऑफ क्लासेस ",
+  "admin_desk": "व्यवस्थापक डेस्क ",
+  "manage_organisation": "संस्था व्यवस्था",
+  "academic": "शैक्षिक",
+  "non academic": "अशैक्षिक",
+  "contact": "संपर्क",
+  "home": "होम ",
+  "teachers": "शिक्षक",
+  "class_rooms": "क्लास रूम्स ",
+  "accounts": "हिसाब",
+  "sms": "SMS",
+  "meetings": "सभा",
+  "hostels": "छात्रावास",
+  "holidays": "छुट्टियां",
+  "back": "पीछे जाना"
+  
+
+}

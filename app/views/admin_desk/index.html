@@ -1,7 +1,7 @@
 <div>
   <div style="width:100%;display:inline-block;">
-    <h3 class="pull-left">Classes</h3>
-    <button type="button" class="btn btn-primary buttonNoneBorder pull-right mTop15" ng-click="openTeacherTimeTable('lg', teacherId)" uib-tooltip="Time Table" ng-if="teacherId">
+    <h3 class="pull-left" translate="classes"></h3>
+    <button type="button" class="btn btn-primary buttonNoneBorder pull-right mTop15" ng-click="openTeacherTimeTable('lg', teacherId)" uib-tooltip="{{'time_table'| translate}}" ng-if="teacherId">
       <i class="fa fa-clock-o"></i>
     </button>
   </div>
@@ -11,13 +11,13 @@
     <table st-table="rowCollection" class="table organisationCoursesTable">
       <thead>
 	<tr>
-	  <th st-sort="firstName">Classes</th>
+	  <th st-sort="firstName" translate="classes"></th>
 	</tr>
       </thead>
       <tbody>
 	<tr ng-repeat="row in jkci_classes">
 	  <td>
-	    <div months start-from="{{row.created_at}}" class-id="{{row.id}}" obj="row" show-actions="true"></div>
+	    <div months start-from="{{row.created_at}}" class-id="{{row.id}}" obj="row" show-actions="true" ></div>
 	  </td>
 	</tr>
       </tbody>
@@ -52,11 +52,11 @@
   
   <hr>
   <div class="col-md-12 padding0">
-    <h2>Time Tables</h2>
+    <h2 translate="time_table"></h2>
     <div class="col-md-4 padding0">
       <label class="btn active btn-default" ng-repeat="calenderType in ['exams', 'time_table', 'off_class']" style="display: inline-flex;">
 	<input name="cssPre" id="css1" type="radio" ng-value="calenderType" ng-model="selectedCalenderType" ng-click="reloadCalenderEvent(calenderType);">
-	{{calenderType}}
+	{{calenderType | translate}}
       </label>
     </div>
     <div class="col-md-3 padding0">

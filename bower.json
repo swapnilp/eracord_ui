@@ -31,7 +31,11 @@
     "angular-daterangepicker": "^0.2.2",
     "angular-lazy-img": "^1.2.2",
     "angular-fileupload": "angular-filereader#^1.0.4",
-    "angular-dragdrop": "^1.0.13"
+    "angular-dragdrop": "^1.0.13",
+    "angular-translate": "^2.15.1",
+    "angular-translate-storage-local": "^2.15.1",
+    "angular-translate-loader-static-files": "^2.15.1",
+    "angular-dynamic-locale": "^0.1.32"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

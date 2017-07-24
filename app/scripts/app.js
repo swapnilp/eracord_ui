@@ -44,11 +44,21 @@ angular
     'angularLazyImg',
     'filereader',
     'ngDragDrop',
+    'pascalprecht.translate',// angular-translate
+    'tmh.dynamicLocale',// angular-dynamic-locale
     'eracordUiApp.controller',
     'eracordUiApp.directives'
   ])
 
-  .config(function ($routeProvider, RestangularProvider, AuthProvider, ChartJsProvider) {
+  .constant('LOCALES', {
+    'locales': {
+      'hi_IN': 'हिंदी',
+      'en_US': 'English'
+    },
+    'preferredLocale': 'en_US'
+  })
+
+  .config(function ($routeProvider, RestangularProvider, AuthProvider, ChartJsProvider, $translateProvider, tmhDynamicLocaleProvider) {
     AuthProvider.loginPath('/api/users/sign_in.json');
     AuthProvider.logoutPath('/api/users/sign_out.json');
     
@@ -79,6 +89,14 @@ angular
       }
       return extractedData;
     });
+    
+    $translateProvider.useStaticFilesLoader({
+      prefix: 'i18n/locale-',// path to translations files
+      suffix: '.json'// suffix, currently- extension of the translations
+    });
+    //$translateProvider.preferredLanguage('en_US');// is applied on first load
+    //$translateProvider.useLocalStorage();// saves selected language to localStorage
+    //tmhDynamicLocaleProvider.localeLocationPattern('i18n/locale-{{locale}}.json');
 
     $routeProvider
       .when('/', {

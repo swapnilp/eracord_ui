@@ -1,22 +1,22 @@
 <div class="col-sm-12 padding0 marginT20">
   <div class="col-md-8">
     <strong  class="">
-      <div class="col-sm-12 padding0">Download Excel Report</div>
+      <div class="col-sm-12 padding0">{{"download_excel_report" | translate}}</div>
       <br />
       <div class="col-sm-3 paddingLeft0">
-	<label>Start Date </label>
+	<label translate="start_date"></label>
 	<input type="text" class="form-control" datetime-picker="dd/MM/yyyy" ng-model="start_date" is-open="isOpen" ng-click="openCalendar($event, prop);" ng-focus="openCalendar($event, prop);" enable-time="false" readonly/>
       </div>
       <div class="col-sm-3 paddingLeft0">
-	<label>End Date</label>
+	<label translate="end_date"></label>
 	<input type="text" class="form-control" datetime-picker="dd/MM/yyyy" ng-model="end_date" is-open="isOpenEnd" ng-click="openCalendarEnd($event, prop);" ng-focus="openCalendarEnd($event, prop);" enable-time="false" readonly/>
       </div>
       <br />
-      <a href="{{hostUrl}}/jkci_classes/{{classId}}/download_presenty_catlog.xlsx?&start_date={{start_date}}&end_date={{end_date}}&filter={{selectedCatlogFilter}}&authorization_token={{token}}" class="btn btn-primary marginT5">Download</a>
+      <a href="{{hostUrl}}/jkci_classes/{{classId}}/download_presenty_catlog.xlsx?&start_date={{start_date}}&end_date={{end_date}}&filter={{selectedCatlogFilter}}&authorization_token={{token}}" class="btn btn-primary marginT5" translate="download"></a>
     </strong>
   </div>
   <div class="col-md-2 paddingLeft0 pull-right paddingTop20">
-    <label><strong>Filter</strong></label>
+    <label><strong>{{"Filter" | translate}}</strong></label>
     <select class="form-control ng-touched" ng-model="selectedCatlogFilter" ng-change="getResultsPage(selectedCatlogFilter);" ng-options="value.id as value.name for value in [{id: 'class_catlogs', name: 'Class catalogs'}, {id: 'exams', name: 'Exams'}]" >
     </select>
   </div>
